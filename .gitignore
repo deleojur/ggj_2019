@@ -40,3 +40,4 @@ sysinfo.txt
 *.unitypackage
 package-lock.json
 manifest.json
+dist
