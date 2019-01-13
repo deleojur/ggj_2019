@@ -39,4 +39,19 @@ io.on('connection', function(socket)
             io.to(socket.id).emit('message', 'master lives');
         }
     });
+
+    socket.on('disconnect', function()
+    {
+        if (socket.id === master)
+        {
+            io.emit('close_game');
+            master = null;
+            clients = [];
+        } else
+        {
+            //remove the specific client.
+            //figure out a way to reconnect to previous session with the same ID.
+            clients.splice(clients.indexOf(socket.id), 1);
+        }
+    })
 });

@@ -9,9 +9,14 @@ socket.on('connect', function (data) {
   console.log('Connected!');
 });
 
+socket.on('close_game', function()
+{
+  console.log('You need to reconnect!');
+});
+
 socket.on('message', function (data) 
 {
-    console.log('some data has arrived:', data);
+    console.log('some data arrived: ', data);
 });
 
 export default class extends Phaser.State {

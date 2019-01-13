@@ -34,22 +34,24 @@ public class TestSocketIO : MonoBehaviour
 {
 	private SocketIOComponent socket;
 
-	public void Start() 
-	{
-		GameObject go = GameObject.Find("SocketIO");
-		socket = go.GetComponent<SocketIOComponent>();
+    public void Start()
+    {
+        GameObject go = GameObject.Find("SocketIO");
+        socket = go.GetComponent<SocketIOComponent>();
 
-		socket.On("open", TestOpen);
-        socket.On("join_game", TestPlayerConnected);
-		socket.On("error", TestError);
-		socket.On("close", TestClose);
+        socket.On("open", TestOpen);
+        socket.On("join_game", PlayerConnected);
+        socket.On("error", TestError);
+        socket.On("close", TestClose);
 
-        StartCoroutine(CreateRoom());
-	}
+        StartCoroutine(CreateGame());
+    }
 
-	private IEnumerator CreateRoom()
+    private IEnumerator CreateGame()
     {
         yield return new WaitForSeconds(1);
+        //close the previous game, if it was still running.
+        socket.Emit("close_game");
         socket.Emit("create_game");
     }
 
@@ -58,9 +60,10 @@ public class TestSocketIO : MonoBehaviour
 		Debug.Log("[SocketIO] Open received: " + e.name + " " + e.data);
 	}
 
-    public void TestPlayerConnected(SocketIOEvent e)
+    public void PlayerConnected(SocketIOEvent e)
     {
         Debug.Log("[SocketIO] Player Connected " + e.name + " " + e.data );
+        //Create a new player instance. ID and player name can be found in e.data.
     }
 
     public void TestError(SocketIOEvent e)
