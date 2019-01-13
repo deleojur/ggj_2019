@@ -40,38 +40,21 @@ public class TestSocketIO : MonoBehaviour
 		socket = go.GetComponent<SocketIOComponent>();
 
 		socket.On("open", TestOpen);
-		socket.On("boop", TestBoop);
+		socket.On("create_service", TestBoop);
+        socket.On("join_game", TestPlayerConnected);
 		socket.On("error", TestError);
 		socket.On("close", TestClose);
-		
-		StartCoroutine("BeepBoop");
+
+        StartCoroutine(CreateRoom());
 	}
 
-	private IEnumerator BeepBoop()
-	{
-		// wait 1 seconds and continue
-		yield return new WaitForSeconds(1);
-		
-		socket.Emit("beep");
-		
-		// wait 3 seconds and continue
-		yield return new WaitForSeconds(3);
-		
-		socket.Emit("beep");
-		
-		// wait 2 seconds and continue
-		yield return new WaitForSeconds(2);
-		
-		socket.Emit("beep");
-		
-		// wait ONE FRAME and continue
-		yield return null;
-		
-		socket.Emit("beep");
-		socket.Emit("beep");
-	}
+	private IEnumerator CreateRoom()
+    {
+        yield return new WaitForSeconds(1);
+        socket.Emit("create", JSONObject.StringObject("room_1"));
+    }
 
-	public void TestOpen(SocketIOEvent e)
+    public void TestOpen(SocketIOEvent e)
 	{
 		Debug.Log("[SocketIO] Open received: " + e.name + " " + e.data);
 	}
@@ -88,8 +71,13 @@ public class TestSocketIO : MonoBehaviour
 			"#####################################################"
 		);
 	}
-	
-	public void TestError(SocketIOEvent e)
+
+    public void TestPlayerConnected(SocketIOEvent e)
+    {
+        Debug.Log("[SocketIO] Player Connected " + e.name + " " + e.data );
+    }
+
+    public void TestError(SocketIOEvent e)
 	{
 		Debug.Log("[SocketIO] Error received: " + e.name + " " + e.data);
 	}
