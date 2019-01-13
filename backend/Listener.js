@@ -5,6 +5,8 @@ var path = require('path');
 var io = require('socket.io')({
     transports: ['websocket']
 });
+var clients = [];
+var master = null;
 
 app.use(express.static('./'));
 
@@ -17,14 +19,24 @@ server.listen(4568, "127.0.0.1");
 io.on('connection', function(socket)
 {
     //this is where Unity connects to the server.
-    socket.on('beep', function()
+    socket.on('create_game', function()
     {
         io.isInitialized = true;
-		socket.emit('boop');
+        master = socket.id;
     });
 
-    socket.on('join_game', function(somedata)
+    socket.on('join_game', function(client_name)
     {
-        socket.broadcast.emit('join_game', somedata);
+        if (master === null)
+        {
+            io.to(socket.id).emit('message', 'no master lives');
+        }
+        else if (clients.indexOf(socket.id) < 0)
+        {
+            clients.push(socket.id);
+            let client = {name: client_name, id: socket.id};
+            io.to(master).emit('join_game', client);
+            io.to(socket.id).emit('message', 'master lives');
+        }
     });
 });

@@ -9,6 +9,11 @@ socket.on('connect', function (data) {
   console.log('Connected!');
 });
 
+socket.on('message', function (data) 
+{
+    console.log('some data has arrived:', data);
+});
+
 export default class extends Phaser.State {
 
   init() { }
@@ -42,19 +47,5 @@ export default class extends Phaser.State {
   {
       var name = document.getElementById('player_name').value;
       socket.emit('join_game', {message:name});
-      /*var xmlHttp = new XMLHttpRequest();
-      xmlHttp.onreadystatechange = function()
-      { 
-          if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            console.log('celebrate!');
-      }
-      xmlHttp.open("GET", 'http://localhost:4568/join_game?player_name=' + name, true); // true for asynchronous 
-      xmlHttp.send(null);*/
-  }
-
-  render() {
-    if (__DEV__) {
-      this.game.debug.spriteInfo(this.mushroom, 32, 32)
-    }
   }
 }

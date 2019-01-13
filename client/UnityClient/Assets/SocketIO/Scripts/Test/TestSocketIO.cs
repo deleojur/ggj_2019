@@ -40,7 +40,6 @@ public class TestSocketIO : MonoBehaviour
 		socket = go.GetComponent<SocketIOComponent>();
 
 		socket.On("open", TestOpen);
-		socket.On("create_service", TestBoop);
         socket.On("join_game", TestPlayerConnected);
 		socket.On("error", TestError);
 		socket.On("close", TestClose);
@@ -51,25 +50,12 @@ public class TestSocketIO : MonoBehaviour
 	private IEnumerator CreateRoom()
     {
         yield return new WaitForSeconds(1);
-        socket.Emit("create", JSONObject.StringObject("room_1"));
+        socket.Emit("create_game");
     }
 
     public void TestOpen(SocketIOEvent e)
 	{
 		Debug.Log("[SocketIO] Open received: " + e.name + " " + e.data);
-	}
-	
-	public void TestBoop(SocketIOEvent e)
-	{
-		Debug.Log("[SocketIO] Boop received: " + e.name + " " + e.data);
-
-		if (e.data == null) { return; }
-
-		Debug.Log(
-			"#####################################################" +
-			"THIS: " + e.data.GetField("this").str +
-			"#####################################################"
-		);
 	}
 
     public void TestPlayerConnected(SocketIOEvent e)
