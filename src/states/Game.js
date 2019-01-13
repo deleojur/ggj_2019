@@ -2,8 +2,15 @@
 import Phaser from 'phaser'
 import Mushroom from '../sprites/Mushroom'
 import lang from '../lang'
+import io from 'socket.io-client';
+let socket = io('http://localhost:4567');
+
+socket.on('connect', function (data) {
+  console.log('Connected!');
+});
 
 export default class extends Phaser.State {
+
   init() { }
   preload() { }
 
@@ -25,7 +32,24 @@ export default class extends Phaser.State {
       asset: 'mushroom'
     })
 
-    this.game.add.existing(this.mushroom)
+    document.getElementById('player_connect').addEventListener('click',this.connectToGame);
+
+    this.game.add.existing(this.mushroom);
+    
+  }
+
+  connectToGame()
+  {
+      var name = document.getElementById('player_name').value;
+      socket.emit('join_game', {message:name});
+      /*var xmlHttp = new XMLHttpRequest();
+      xmlHttp.onreadystatechange = function()
+      { 
+          if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            console.log('celebrate!');
+      }
+      xmlHttp.open("GET", 'http://localhost:4568/join_game?player_name=' + name, true); // true for asynchronous 
+      xmlHttp.send(null);*/
   }
 
   render() {
