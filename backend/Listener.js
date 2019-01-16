@@ -8,14 +8,9 @@ var io = require('socket.io')({
 var clients = [];
 var master = null;
 
-app.use(express.static('./'));
-
 //listen to Unity events on port 4567
 io.attach(4567);
-
-//Listen for clients on port 4568
-server.listen(4568, "127.0.0.1");
-
+console.log('listening!');
 io.on('connection', function(socket)
 {
     //this is where Unity connects to the server.

@@ -3,30 +3,28 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Phaser - ES6 - Webpack</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <meta http-equiv="cleartype" content="on">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="manifest" href="/manifest.json">
+    <title>Phaser3 - ES6 - Webpack</title>
+    <meta content="user-scalable=0, initial-scale=1,minimum-scale=1, maximum-scale=1, width=device-width, minimal-ui=1" name="viewport"/>
     <style>
         html,
         body {
-            margin: 0;
-            padding: 0;
+          margin: 0;
+          padding: 0;
+             image-rendering: optimizeSpeed;              /* Older versions of FF */
+          image-rendering: -moz-crisp-edges;           /* FF 6.0+ */
+          image-rendering: -webkit-optimize-contrast;  /* Webkit (non standard naming) */
+          image-rendering: -o-crisp-edges;             /* OS X & Windows Opera (12.02+) */
+          image-rendering: crisp-edges;                /* Possible future browsers. */
+          -ms-interpolation-mode: nearest-neighbor;    /* IE (non standard naming) */
+          image-rendering: pixelated;                  /* Chrome 41 */
         }
     </style>
+    <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 
 <body>
-
-    <div id="content"></div>
-    <input type="text" id="player_name"/>
-    <input type="button" id="player_connect" value="Join Game!" />
-    <!-- uncomment the line bellow for cordova feature -->
-    <!-- <script type="text/javascript" src="cordova.js"></script> -->
+    <div id="content" style="display: block; width: 100%; text-align: center"></div>
+    <h2 id="username_label" style="text-align:center">Fill in your name to join game!</h2>
+    <input type="text" name="name" id="username_input" value="" placeholder="Name">
+    <input type="submit" value="Join Game!" id="username_submit">
 </body>
-
-</html>
