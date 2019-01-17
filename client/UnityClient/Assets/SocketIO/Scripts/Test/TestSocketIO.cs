@@ -41,6 +41,7 @@ public class TestSocketIO : MonoBehaviour
 
         socket.On("open", TestOpen);
         socket.On("join_game", PlayerConnected);
+        socket.On("exit_game", PlayerDisconnected);
         socket.On("error", TestError);
         socket.On("close", TestClose);
 
@@ -60,10 +61,14 @@ public class TestSocketIO : MonoBehaviour
 		Debug.Log("[SocketIO] Open received: " + e.name + " " + e.data);
 	}
 
+    public void PlayerDisconnected(SocketIOEvent e)
+    {
+        Debug.Log(string.Format("Player Disconnected: {0}", e.data));
+    }
+
     public void PlayerConnected(SocketIOEvent e)
     {
-        Debug.Log("[SocketIO] Player Connected " + e.name + " " + e.data );
-        //Create a new player instance. ID and player name can be found in e.data.
+        Debug.Log(string.Format("Player Connected {0}", e.data));
     }
 
     public void TestError(SocketIOEvent e)
