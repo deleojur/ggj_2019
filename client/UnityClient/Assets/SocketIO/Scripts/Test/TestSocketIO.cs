@@ -29,6 +29,7 @@
 using System.Collections;
 using UnityEngine;
 using SocketIO;
+using System.Collections.Generic;
 
 public class TestSocketIO : MonoBehaviour
 {
@@ -63,12 +64,14 @@ public class TestSocketIO : MonoBehaviour
 
     public void PlayerDisconnected(SocketIOEvent e)
     {
-        Debug.Log(string.Format("Player Disconnected: {0}", e.data));
+        Dictionary<string, string> data = e.data.ToDictionary();
+        //data contains a dictionary with the values: name, id and address.
     }
 
     public void PlayerConnected(SocketIOEvent e)
-    {
-        Debug.Log(string.Format("Player Connected {0}", e.data));
+    { 
+        Dictionary<string, string> data = e.data.ToDictionary();
+        //data contains a dictionary with the values: name, id and address.
     }
 
     public void TestError(SocketIOEvent e)
