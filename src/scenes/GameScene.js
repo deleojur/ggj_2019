@@ -22,7 +22,8 @@ class GameScene extends Phaser.Scene
         });
     }
 
-    preload() {
+    preload()
+    {
         this.load.scenePlugin('animatedTiles', AnimatedTiles, 'animatedTiles', 'animatedTiles');
     }
 

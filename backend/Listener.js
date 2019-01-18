@@ -36,6 +36,11 @@ io.on('connection', function(socket)
             for (let i = clients.length - 1; i >= 0; i--)
             {
                 let e = clients[i];
+                if (address === e.address)
+                {
+                    clients.splice(i, 1);
+                    io.to(master).emit('exit_game', e);
+                }
                 if (e.id === socket.id)
                 {
                     //already joined
@@ -47,11 +52,6 @@ io.on('connection', function(socket)
                     //name already used.
                     io.to(socket.id).emit('error_usernameTaken');
                     return false;
-                }
-                if (address === e.address)
-                {
-                    clients.splice(i, 1);
-                    io.to(master).emit('exit_game', e);
                 }
             }
             let client = {name: client_name, id: socket.id, address: socket.handshake.address};

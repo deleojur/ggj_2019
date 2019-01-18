@@ -16,16 +16,9 @@ class BootScene extends Phaser.Scene {
             progress.fillRect(0, this.sys.game.config.height / 2, this.sys.game.config.width * value, 60);
         });
 
-        // Register a load complete event to launch the title screen when all files are loaded
-        this.load.on('complete', () => {
-            // prepare all animations, defined in a separate file
-            makeAnimations(this);
-            progress.destroy();
-            this.scene.start('TitleScene');
-        });
-
-        // This json contain recorded gamep
-        this.load.json('attractMode', 'assets/json/attractMode.json');
+        makeAnimations(this);
+        progress.destroy();
+        this.scene.start('TitleScene');
     }
 }
 
