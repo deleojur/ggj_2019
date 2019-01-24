@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Networking;
 using System.Collections.Generic;
+using InControl;
 
 namespace Entities
 {
@@ -18,9 +19,16 @@ namespace Entities
         // Use this for initialization
         private void Start()
         {
+
             _clients = new Dictionary<string, PlayerHandler>();
             SocketManager.PlayerConnected += SocketManager_PlayerConnected;
             SocketManager.PlayerDisconnected += SocketManager_PlayerDisconnected;
+        }
+
+        private void FixedUpdate()
+        {
+            InputDevice activeDevice = InputManager.ActiveDevice;
+            Debug.Log(activeDevice.LeftStickX.Value + " " + activeDevice.LeftStickY.Value);
         }
 
         private void SocketManager_PlayerConnected(ConnectionPackage package)
