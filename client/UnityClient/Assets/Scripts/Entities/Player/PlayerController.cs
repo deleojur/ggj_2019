@@ -31,6 +31,11 @@ public class PlayerController : MonoBehaviour
     public bool machineGun;
     public float fireRate;
 
+    internal Tile prevTile;
+    internal Tile currentTile;
+
+    internal bool dead = false;
+
     private Color _color;
     internal Color Color
     {
@@ -53,7 +58,6 @@ public class PlayerController : MonoBehaviour
         m_Rigidbody = GetComponent<Rigidbody>();
     }
 
-
     private void OnEnable()
     {
         // When the tank is turned on, make sure it's not kinematic.
@@ -73,7 +77,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     private void OnDisable()
     {
         // When the tank is turned off, set it to kinematic so it stops moving.
@@ -84,6 +87,35 @@ public class PlayerController : MonoBehaviour
         {
             m_particleSystems[i].Stop();
         }
+    }
+
+    internal void FixedUpdate()
+    {
+        prevTile = currentTile;
+        currentTile = Main.Instance.worldManager.worldMap.GetTileAt(gameObject.transform.position);
+
+        currentTile.render.material.color = Color.red;
+
+        if (DeathByGap())
+            return;
+    }
+
+    private bool DeathByGap()
+    {
+        if (currentTile.faction >= 1.0f)
+        {
+            dead = true;
+            StartCoroutine("Die");
+            return true;
+        }
+            
+        return false;
+    }
+
+    private void Die()
+    {
+        // todo: wait for dying, do a funny animation
+        Destroy(gameObject);
     }
 
     private void EngineAudio()

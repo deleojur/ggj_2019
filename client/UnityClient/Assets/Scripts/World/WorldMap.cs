@@ -12,7 +12,6 @@ public class WorldMap
     internal int mapWidth;
     internal int mapHeight;
 
-
     internal PhRandom random;
 
     private GameObject mapParent;
@@ -191,13 +190,44 @@ public class WorldMap
         return tile;
     }
 
-    #region MAP COORDS
+    #region MAP COORDS AND FINDERS
     private Vector3 XYPositionToMapPosition(double x, double y, float newY = 0)
     {
         Vector3 result = new Vector3((float)x, 0, worldMapData.Height - (float)y);
         result *= Main.Instance.worldScale;
         result.y = newY;
         return result;
+    }
+
+    internal Tile GetTileAt(Vector3 position)
+    {
+        Tile tile = GetTileQuick(position);
+        float dx = tile.transform.position.x - position.x;
+        float dz = tile.transform.position.z - position.z;
+        float dist = (dx * dx) + (dz * dz);
+        Tile best = tile;
+        for (int i = 0; i < tile.neighbors.Count; i++)
+        {
+            dx = tile.neighbors[i].transform.position.x - position.x;
+            dz = tile.neighbors[i].transform.position.z - position.z;
+            float d = (dx * dx) + (dz * dz);
+            if (d < dist)
+            {
+                dist = d;
+                best = tile.neighbors[i];
+            }
+        }
+
+        return best;
+    }
+
+    internal Tile GetTileQuick(Vector3 position)
+    {
+        int tx = Mathf.RoundToInt(position.x / Main.Instance.worldScale);
+        tx = Mathf.Min(Mathf.Max(tx, 0), mapWidth - 1);
+        int ty = Mathf.RoundToInt(mapHeight - position.z / Main.Instance.worldScale);
+        ty = Mathf.Min(Mathf.Max(ty, 0), mapHeight - 1);
+        return tiles[tx + ty * mapWidth];
     }
     #endregion
 
