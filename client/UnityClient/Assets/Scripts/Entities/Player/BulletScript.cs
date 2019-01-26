@@ -7,7 +7,7 @@ public class BulletScript : MonoBehaviour
     public GameObject impactPrefab;
     private Rigidbody rb;
     private Color color; 
-    private const float HEAL = 0.25f;
+    private const float HEAL = 0.5f;
 
     internal Tile prevTile;
     internal Tile currentTile;
@@ -26,7 +26,7 @@ public class BulletScript : MonoBehaviour
     {
         prevTile = currentTile;
         currentTile = Main.Instance.worldManager.worldMap.GetTileAt(gameObject.transform.position);
-        currentTile.color = color;
+        currentTile.SetColor(color);
         Impact();
     }
 

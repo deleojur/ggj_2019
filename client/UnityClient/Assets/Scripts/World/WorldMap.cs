@@ -212,6 +212,19 @@ public class WorldMap
         return result;
     }
 
+    internal Tile GetValidPowerUpTile()
+    {
+        List<Tile> options = new List<Tile>();
+
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            if (tiles[i].faction == 0 && !tiles[i].NeighborOfType(1f))
+                options.Add(tiles[i]);
+        }
+
+        return options[Random.Range(0, options.Count - 1)];
+    }
+
     internal Tile GetTileAt(Vector3 position)
     {
         Tile tile = GetTileQuick(position);
