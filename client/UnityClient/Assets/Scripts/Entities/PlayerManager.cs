@@ -119,15 +119,7 @@ namespace Entities
             PlayerController player;
             if (_clients.TryGetValue(package.sender, out player))
             {
-                if (package.shooting)
-                {
-                    player.Fire();
-                }
-                if (package.moving)
-                {
-                    player.Move();
-                }
-                player.Turn(package.beta);
+                player.SetPackageInfo(package);
             }
         }
     }

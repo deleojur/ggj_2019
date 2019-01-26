@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChangeFireMode : PowerupBaseClass
+public class ActivateTripleShot : PowerupBaseClass
 {
-
-    public bool changeToTriple;
 
     void Start()
     {
@@ -16,26 +14,12 @@ public class ChangeFireMode : PowerupBaseClass
     public override void ActivatePowerup()
     {
         base.ActivatePowerup();
-        if (changeToTriple)
-        {
-            player.tripleShot = true;
-        }
-        else
-        {
-            player.machineGun = true;
-        }
+        player.tripleShot = true;
     }
 
     public override void StopPowerup()
     {
         base.StopPowerup();
-        if (changeToTriple)
-        {
-            player.tripleShot = false;
-        }
-        else
-        {
-            player.machineGun = false;
-        }
+        player.tripleShot = false;
     }
 }

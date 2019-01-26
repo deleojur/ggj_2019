@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Entities;
+using Networking;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,10 +33,14 @@ public class PlayerController : MonoBehaviour
     public bool canFire = true;
     public bool tripleShot = false;
     public bool machineGun = false;
+    public bool rocketLauncher = false;
     public float fireRate;
 
     public float expPower;
     public float expRadius;
+
+    public float threshold = 10f;
+    public float rotationSpeed = 1f;
 
     internal Tile prevTile;
     internal Tile currentTile;
@@ -43,6 +49,9 @@ public class PlayerController : MonoBehaviour
 
     private bool _isDebugging;
     internal PlayerManager.DebugKeys _debugKeys;
+
+    private float _beta;
+    private bool _isMoving, _isShooting;
 
     private Color _color;
     internal Color Color
@@ -97,8 +106,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    internal void SetPackageInfo(PlayerInputPackage package)
+    {
+        _isMoving = package.moving;
+        _beta = package.beta;
+        _isShooting = package.shooting;
+    }
+
     internal void FixedUpdate()
     {
+        if (_isMoving)
+            Move();
+        if (_isShooting)
+            Fire();
+        Turn(_beta);
+
+        _isMoving = _isShooting = false;
+
         if (_isDebugging)
         {
             if (Input.GetKey(_debugKeys.Forward))
@@ -151,7 +175,7 @@ public class PlayerController : MonoBehaviour
             {
                 // ... change the clip to idling and play it.
                 m_MovementAudio.clip = m_EngineIdling;
-                m_MovementAudio.pitch = Random.Range(m_OriginalPitch - m_PitchRange, m_OriginalPitch + m_PitchRange);
+                m_MovementAudio.pitch = UnityEngine.Random.Range(m_OriginalPitch - m_PitchRange, m_OriginalPitch + m_PitchRange);
                 m_MovementAudio.Play();
             }
         }
@@ -162,7 +186,7 @@ public class PlayerController : MonoBehaviour
             {
                 // ... change the clip to driving and play.
                 m_MovementAudio.clip = m_EngineDriving;
-                m_MovementAudio.pitch = Random.Range(m_OriginalPitch - m_PitchRange, m_OriginalPitch + m_PitchRange);
+                m_MovementAudio.pitch = UnityEngine.Random.Range(m_OriginalPitch - m_PitchRange, m_OriginalPitch + m_PitchRange);
                 m_MovementAudio.Play();
             }
         }
@@ -186,9 +210,24 @@ public class PlayerController : MonoBehaviour
 
     internal void Turn(float beta)
     {
-        // Determine the number of degrees to be turned based on the input, speed and time between frames.
-        float turn = beta * m_TurnSpeed * Time.fixedDeltaTime;
+        float turn;
+        
 
+        //Beta threshold values: -20 to 20
+        if (beta >= threshold)
+        {
+            turn = rotationSpeed;
+        }
+        else if (beta <= -threshold)
+        {
+            turn = -rotationSpeed;
+        }
+        else
+        {
+            turn = 0;
+        }
+        // Determine the number of degrees to be turned based on the input, speed and time between frames.
+        //float turn = beta * m_TurnSpeed * Time.fixedDeltaTime;
         // Make this into a rotation in the y axis.
         Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
 
@@ -206,6 +245,10 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(MachineGun());
         }
+        else if(rocketLauncher && canFire)
+        {
+            StartCoroutine(RocketLauncher());
+        }
         else if (canFire)
         {
             StartCoroutine(NormalShot());
@@ -219,11 +262,8 @@ public class PlayerController : MonoBehaviour
         float offSet = -20;
         for (int i = 0; i < 3; i++)
         {
-            GameObject muzzleClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(-90, rotation.y, rotation.z + offSet));
-            bulletClone = Instantiate(bullet, firePoint.transform.position, Quaternion.Euler(
-                90,
-                rotation.y,
-                rotation.z + offSet));
+            GameObject muzzleClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(rotation.x, rotation.y - offSet, rotation.z));
+            bulletClone = Instantiate(bullet, firePoint.transform.position, Quaternion.Euler(rotation.x, rotation.y + offSet, rotation.z));
 
             bulletClone.GetComponent<BulletScript>().Initialize(Color);
 
@@ -240,7 +280,7 @@ public class PlayerController : MonoBehaviour
     {
         canFire = false;
         Vector3 rotation = firePoint.transform.rotation.eulerAngles;
-        float offSet = Random.Range(-30, 30);
+        float offSet = UnityEngine.Random.Range(-30, 30);
         muzzleFlashClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(-90, rotation.y, rotation.z));
         bulletClone = Instantiate(bullet, firePoint.transform.position, Quaternion.Euler(rotation.x, rotation.y + offSet, rotation.z));
         bulletClone.GetComponent<BulletScript>().Initialize(Color);
@@ -248,6 +288,19 @@ public class PlayerController : MonoBehaviour
         Destroy(bulletClone, 3f);
 
         yield return new WaitForSeconds(fireRate/5);
+        canFire = true;
+    }
+
+    IEnumerator RocketLauncher()
+    {
+        canFire = false;
+        muzzleFlashClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(-90, firePoint.transform.rotation.y, firePoint.transform.rotation.z));
+        bulletClone = Instantiate(bullet, firePoint.transform.position, firePoint.transform.rotation);
+        bulletClone.transform.localScale = new Vector3(3f, 3f, 3f);
+        bulletClone.GetComponent<BulletScript>().Initialize(Color);
+        Destroy(muzzleFlashClone, 1f);
+        Destroy(bulletClone, 3f);
+        yield return new WaitForSeconds(fireRate);
         canFire = true;
     }
 
