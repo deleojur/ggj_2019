@@ -36,6 +36,9 @@ public class PlayerController : MonoBehaviour
     public float expPower;
     public float expRadius;
 
+    public float threshold = 10f;
+    public float rotationSpeed = 1f;
+
     internal Tile prevTile;
     internal Tile currentTile;
 
@@ -181,9 +184,25 @@ public class PlayerController : MonoBehaviour
 
     internal void Turn(float beta)
     {
-        // Determine the number of degrees to be turned based on the input, speed and time between frames.
-        float turn = beta * m_TurnSpeed * Time.fixedDeltaTime;
+        float turn;
+        
 
+        //Beta threshold values: -20 to 20
+        if (beta >= threshold)
+        {
+            turn = rotationSpeed;
+        }
+        else if (beta <= -threshold)
+        {
+            turn = -rotationSpeed;
+        }
+        else
+        {
+            turn = 0;
+        }
+        // Determine the number of degrees to be turned based on the input, speed and time between frames.
+        //float turn = beta * m_TurnSpeed * Time.fixedDeltaTime;
+        Debug.Log(beta);
         // Make this into a rotation in the y axis.
         Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
 
