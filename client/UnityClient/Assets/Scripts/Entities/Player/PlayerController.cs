@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     private float m_OriginalPitch;              // The pitch of the audio source at the start of the scene.
     private ParticleSystem[] m_particleSystems; // References to all the particles systems used by the Tanks
 
+
+    internal float Speed { get { return m_Speed; } set { m_Speed = value; } }
     private Color _color;
     internal Color Color 
     {
@@ -120,7 +122,7 @@ public class PlayerController : MonoBehaviour
     {
         // Determine the number of degrees to be turned based on the input, speed and time between frames.
         float turn = beta * m_TurnSpeed * Time.deltaTime;
-
+        Debug.Log(beta);
         // Make this into a rotation in the y axis.
         Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
 
