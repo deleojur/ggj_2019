@@ -283,8 +283,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54d4c8ac6d30146d2986b492427ddf03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPrefab: {fileID: 0}
+  _playerPrefab: {fileID: 466132095368391872, guid: 15932f2fbee10481590d124a7e17ed34,
+    type: 3}
   _factory: {fileID: 603458874}
+  _colors:
+  - {r: 0.3199733, g: 0.7830189, b: 0.23268957, a: 0}
+  - {r: 0.12927197, g: 0.28065842, b: 0.7830189, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &761725934
 Transform:
   m_ObjectHideFlags: 0
