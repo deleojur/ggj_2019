@@ -42,9 +42,10 @@ namespace Networking
 
         #region NetworkEvents
         internal delegate void MessageReceived<T>(T package) where T : NetworkPackage;
-        internal static event MessageReceived<NetworkPackage>       MessageReceivedEvent;
+
         internal static event MessageReceived<ConnectionPackage>    PlayerConnected;
         internal static event MessageReceived<NetworkPackage>       PlayerDisconnected;
+        internal static event MessageReceived<PlayerInputPackage>   PlayerInputUpdated;
         #endregion
 
         public void Start()
@@ -55,8 +56,8 @@ namespace Networking
 
             _socket.On("join_game", OnPlayerConnected);
             _socket.On("exit_game", OnPlayerDisconnected);
-            _socket.On("message", OnMessageReceived);
-           
+            _socket.On("player_input", OnPlayerInputReceived);
+
             StartCoroutine(CreateGame());
         }
 
@@ -66,6 +67,12 @@ namespace Networking
             _socket.Emit("create_game");
         }
 
+        private void OnPlayerInputReceived(SocketIOEvent e)
+        {
+            PlayerInputPackage p = new PlayerInputPackage(e);
+            PlayerInputUpdated?.Invoke(p);
+        }
+
         public void ConnectionOpen(SocketIOEvent e)
         {
 
@@ -73,23 +80,15 @@ namespace Networking
 
         public void OnPlayerDisconnected(SocketIOEvent e)
         {
-            NetworkPackage p = new NetworkPackage();
-            e.data.GetField(ref p.sender, "id");
+            NetworkPackage p = new NetworkPackage(e);
             PlayerDisconnected?.Invoke(p);
         }
 
         public void OnPlayerConnected(SocketIOEvent e)
         {
-            ConnectionPackage p = new ConnectionPackage();
-            e.data.GetField(ref p.sender, "id");
-            e.data.GetField(ref p.name, "name");
-
+            ConnectionPackage p = new ConnectionPackage(e);
+            Debug.Log(p.name +  " " + p.sender);
             PlayerConnected?.Invoke(p);
-        }
-
-        public void OnMessageReceived(SocketIOEvent e)
-        {
-
         }
 
         public void OnErrorReceived(SocketIOEvent e)

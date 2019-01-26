@@ -399,6 +399,7 @@ namespace SocketIO
 				try{
 					handler(ev);
 				} catch(Exception ex){
+                    Debug.Log(ex.Message);
 					#if SOCKET_IO_DEBUG
 					debugMethod.Invoke(ex.ToString());
 					#endif

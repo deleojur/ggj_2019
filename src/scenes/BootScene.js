@@ -16,6 +16,7 @@ class BootScene extends Phaser.Scene {
             progress.fillRect(0, this.sys.game.config.height / 2, this.sys.game.config.width * value, 60);
         });
 
+        this.load.image('red_button', 'assets/images/button.png');
         makeAnimations(this);
         progress.destroy();
         this.scene.start('TitleScene');

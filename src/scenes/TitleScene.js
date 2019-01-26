@@ -39,7 +39,6 @@ class TitleScene extends Phaser.Scene {
         this.formUtil.placeElementAt(71, 'username_submit', true);
 
         var button = document.getElementById('username_submit');
-        
         button.addEventListener("click", function()
         {
             if (input.value == '')
@@ -50,7 +49,6 @@ class TitleScene extends Phaser.Scene {
             {
                 error.innerHTML = '';
                 socket.emit('join_game', input.value);
-          
             }
         });
 

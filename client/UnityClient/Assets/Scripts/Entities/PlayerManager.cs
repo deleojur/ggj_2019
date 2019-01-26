@@ -19,16 +19,10 @@ namespace Entities
         // Use this for initialization
         private void Start()
         {
-
             _clients = new Dictionary<string, PlayerHandler>();
+            SocketManager.PlayerInputUpdated += SocketManager_PlayerInputUpdated;
             SocketManager.PlayerConnected += SocketManager_PlayerConnected;
             SocketManager.PlayerDisconnected += SocketManager_PlayerDisconnected;
-        }
-
-        private void FixedUpdate()
-        {
-            InputDevice activeDevice = InputManager.ActiveDevice;
-            Debug.Log(activeDevice.LeftStickX.Value + " " + activeDevice.LeftStickY.Value);
         }
 
         private void SocketManager_PlayerConnected(ConnectionPackage package)
@@ -45,6 +39,26 @@ namespace Entities
             {
                 _factory.ReturnGameObject(_clients[package.sender].transform);
                 _clients.Remove(package.sender);
+            }
+        }
+
+        private void SocketManager_PlayerInputUpdated(PlayerInputPackage package)
+        {
+            PlayerHandler client;
+            if (_clients.TryGetValue(package.sender, out client))
+            {
+                client.UpdateRotation(package.beta);
+                if (package.shooting)
+                {
+                    client.Shoot();
+                }
+                if (package.moving)
+                {
+                    client.MoveForward();
+                }
+                /*Vector3 direction = new Vector3(package.y, 0, package.y);
+                if (Vector3.SqrMagnitude(direction) > 1)
+                    client.UpdatePosition(direction.normalized * .01f);*/
             }
         }
     }

@@ -24,6 +24,12 @@ io.on('connection', function(socket)
         master = socket.id;
     });
 
+    socket.on('player_input', function(o)
+    {
+        o.id = socket.id;
+        io.to(master).emit('player_input', o);
+    });
+
     socket.on('join_game', function(client_name)
     {
         let address = socket.handshake.address;
