@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Entities;
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public bool canFire = true;
     public bool tripleShot = false;
     public bool machineGun = false;
+    public bool rocketLauncher = false;
     public float fireRate;
 
     public float expPower;
@@ -146,7 +148,7 @@ public class PlayerController : MonoBehaviour
             {
                 // ... change the clip to idling and play it.
                 m_MovementAudio.clip = m_EngineIdling;
-                m_MovementAudio.pitch = Random.Range(m_OriginalPitch - m_PitchRange, m_OriginalPitch + m_PitchRange);
+                m_MovementAudio.pitch = UnityEngine.Random.Range(m_OriginalPitch - m_PitchRange, m_OriginalPitch + m_PitchRange);
                 m_MovementAudio.Play();
             }
         }
@@ -157,7 +159,7 @@ public class PlayerController : MonoBehaviour
             {
                 // ... change the clip to driving and play.
                 m_MovementAudio.clip = m_EngineDriving;
-                m_MovementAudio.pitch = Random.Range(m_OriginalPitch - m_PitchRange, m_OriginalPitch + m_PitchRange);
+                m_MovementAudio.pitch = UnityEngine.Random.Range(m_OriginalPitch - m_PitchRange, m_OriginalPitch + m_PitchRange);
                 m_MovementAudio.Play();
             }
         }
@@ -201,6 +203,10 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(MachineGun());
         }
+        else if(rocketLauncher && canFire)
+        {
+            StartCoroutine(RocketLauncher());
+        }
         else if (canFire)
         {
             StartCoroutine(NormalShot());
@@ -235,7 +241,7 @@ public class PlayerController : MonoBehaviour
     {
         canFire = false;
         Vector3 rotation = firePoint.transform.rotation.eulerAngles;
-        float offSet = Random.Range(-30, 30);
+        float offSet = UnityEngine.Random.Range(-30, 30);
         muzzleFlashClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(-90, rotation.y, rotation.z));
         bulletClone = Instantiate(bullet, firePoint.transform.position, Quaternion.Euler(rotation.x, rotation.y + offSet, rotation.z));
         bulletClone.GetComponent<BulletScript>().Initialize(Color);
@@ -243,6 +249,22 @@ public class PlayerController : MonoBehaviour
         Destroy(bulletClone, 3f);
 
         yield return new WaitForSeconds(fireRate/5);
+        canFire = true;
+    }
+
+    IEnumerator RocketLauncher()
+    {
+        Debug.Log("TODO IMPLEMENT ROCKETLAUNCHER");
+        canFire = false;
+        Vector3 rotation = firePoint.transform.rotation.eulerAngles;
+        float offSet = UnityEngine.Random.Range(-30, 30);
+        muzzleFlashClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(-90, rotation.y, rotation.z));
+        bulletClone = Instantiate(bullet, firePoint.transform.position, Quaternion.Euler(rotation.x, rotation.y + offSet, rotation.z));
+        bulletClone.GetComponent<BulletScript>().Initialize(Color);
+        Destroy(muzzleFlashClone, 1f);
+        Destroy(bulletClone, 3f);
+
+        yield return new WaitForSeconds(fireRate / 5);
         canFire = true;
     }
 
