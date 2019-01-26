@@ -28,7 +28,7 @@ namespace Entities
         private void FixedUpdate()
         {
             InputDevice activeDevice = InputManager.ActiveDevice;
-            Debug.Log(activeDevice.LeftStickX.Value + " " + activeDevice.LeftStickY.Value);
+            //Debug.Log(activeDevice.LeftStickX.Value + " " + activeDevice.LeftStickY.Value);
         }
 
         private void SocketManager_PlayerConnected(ConnectionPackage package)
