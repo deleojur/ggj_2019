@@ -100,7 +100,6 @@ namespace Networking
 
         public void OnPlayerConnected(SocketIOEvent e)
         {
-            Debug.Log("Blaat");
             ConnectionPackage p = new ConnectionPackage(e);
             PlayerConnected?.Invoke(p);
         }

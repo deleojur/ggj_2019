@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float m_PitchRange = 0.2f;           // The amount by which the pitch of the engine noises can vary.
     [SerializeField] private Rigidbody m_Rigidbody;              // Reference used to move the tank.
     [SerializeField] private Renderer[] _renderers;
+    [SerializeField] private Image _colorWheel;
+    [SerializeField] private Image _colorWheelOutline;
+    [SerializeField] private float _colorChangeDuration = 3;
 
     internal float Speed { get { return m_Speed; } set { m_Speed = value; } }
     internal Rigidbody Rigidbody { get { return m_Rigidbody; } set { m_Rigidbody = value; } }
@@ -53,6 +56,7 @@ public class PlayerController : MonoBehaviour
     private float _beta;
     private bool _isMoving, _isShooting;
 
+    private Color _fireColor;
     private Color _color;
     internal Color Color
     {
@@ -62,6 +66,7 @@ public class PlayerController : MonoBehaviour
         }
         set
         {
+            _fireColor = value;
             _color = value;
             for (int i = 0; i < _renderers.Length; i++)
             {
@@ -137,6 +142,17 @@ public class PlayerController : MonoBehaviour
 
         prevTile = currentTile;
         currentTile = Main.Instance.worldManager.worldMap.GetTileAt(gameObject.transform.position);
+
+        if (_colorWheel.fillAmount > 0)
+        {
+            _colorWheel.fillAmount -= (1 / _colorChangeDuration) * Time.fixedDeltaTime;
+            _colorWheelOutline.fillAmount -= (1 / _colorChangeDuration) * Time.fixedDeltaTime;
+        } else
+        {
+            ChangeFireColor(_color);
+            _colorWheel.fillAmount = 0;
+            _colorWheelOutline.fillAmount = 0;
+        }
 
         if (DeathByGap())
             return;
@@ -265,7 +281,7 @@ public class PlayerController : MonoBehaviour
             GameObject muzzleClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(rotation.x, rotation.y - offSet, rotation.z));
             bulletClone = Instantiate(bullet, firePoint.transform.position, Quaternion.Euler(rotation.x, rotation.y + offSet, rotation.z));
 
-            bulletClone.GetComponent<BulletScript>().Initialize(Color);
+            bulletClone.GetComponent<BulletScript>().Initialize(_fireColor);
 
             offSet += 20;
 
@@ -283,7 +299,7 @@ public class PlayerController : MonoBehaviour
         float offSet = UnityEngine.Random.Range(-30, 30);
         muzzleFlashClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(-90, rotation.y, rotation.z));
         bulletClone = Instantiate(bullet, firePoint.transform.position, Quaternion.Euler(rotation.x, rotation.y + offSet, rotation.z));
-        bulletClone.GetComponent<BulletScript>().Initialize(Color);
+        bulletClone.GetComponent<BulletScript>().Initialize(_fireColor);
         Destroy(muzzleFlashClone, 1f);
         Destroy(bulletClone, 3f);
 
@@ -298,7 +314,7 @@ public class PlayerController : MonoBehaviour
         muzzleFlashClone = Instantiate(muzzleFlash, firePoint.transform.position + offset, Quaternion.Euler(-90, firePoint.transform.rotation.y, firePoint.transform.rotation.z));
         bulletClone = Instantiate(bullet, firePoint.transform.position + offset, firePoint.transform.rotation);
         bulletClone.transform.localScale = new Vector3(3f, 3f, 3f);
-        bulletClone.GetComponent<BulletScript>().Initialize(Color);
+        bulletClone.GetComponent<BulletScript>().Initialize(_fireColor);
         Destroy(muzzleFlashClone, 1f);
         Destroy(bulletClone, 3f);
         yield return new WaitForSeconds(fireRate);
@@ -310,7 +326,7 @@ public class PlayerController : MonoBehaviour
         canFire = false;
         muzzleFlashClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(-90, firePoint.transform.rotation.y, firePoint.transform.rotation.z));
         bulletClone = Instantiate(bullet, firePoint.transform.position, firePoint.transform.rotation);
-        bulletClone.GetComponent<BulletScript>().Initialize(Color);
+        bulletClone.GetComponent<BulletScript>().Initialize(_fireColor);
         Destroy(muzzleFlashClone, 1f);
         Destroy(bulletClone, 3f);
 
@@ -320,7 +336,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Bullet"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             ContactPoint contact = collision.contacts[0];
             Vector3 pos = contact.point;
@@ -334,5 +350,13 @@ public class PlayerController : MonoBehaviour
                     rb.AddExplosionForce(expPower, pos, expRadius);
             }
         }
+    }
+
+    internal void ChangeFireColor(Color color)
+    {
+        _fireColor = color;
+        _colorWheel.fillAmount = 1;
+        _colorWheelOutline.fillAmount = 1;
+        _colorWheel.color = color;
     }
 }
