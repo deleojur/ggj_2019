@@ -26,8 +26,6 @@ public class Main : MonoBehaviour
 
     internal PlayerManager playerManager;
 
-    // TODO: is false you are not allowed to join
-    internal bool canJoin = false;
     internal int state = 0;
 
     // powerup legacy system
