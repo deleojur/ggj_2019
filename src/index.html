@@ -15,7 +15,6 @@
           image-rendering: -webkit-optimize-contrast;  /* Webkit (non standard naming) */
           image-rendering: -o-crisp-edges;             /* OS X & Windows Opera (12.02+) */
           image-rendering: crisp-edges;                /* Possible future browsers. */
-          -ms-interpolation-mode: nearest-neighbor;    /* IE (non standard naming) */
           image-rendering: pixelated;                  /* Chrome 41 */
         }
     </style>
@@ -25,9 +24,7 @@
 <body>
     <div id="content" style="display: block; width: 100%; text-align: center"></div>
     <div id="username_container">
-        <h2 id="username_label" style="text-align:center">Fill in your name to join the game!</h2>
-        <input type="text" name="name" id="username_input" value="" placeholder="Name">
-        <input type="submit" value="Join Game!" id="username_submit">
+        <input type="button" value="Join Game!" id="username_submit">
         <h3 id="username_error" style="text-align:center"></h3>
     </div>
 </body>

@@ -81,6 +81,7 @@ public class WorldMap
                 Symbol tile = worldMapData.Symbols[x + (mapHeight - 1 - y) * mapWidth];
                 int index = x + y * mapWidth;
 
+                //so many magic numbers smh
                 float a = 0.4f;
                 xs[index] = (Mathf.PerlinNoise((float)x * a + 123.1f, (float)y * a + 765.1f) - 0.5f) * 1f;
                 ys[index] = (Mathf.PerlinNoise((float)x * a + 932.1f, (float)y * a - 497.1f) - 0.5f) * 1f;
@@ -96,7 +97,6 @@ public class WorldMap
 
                 //xs[index] = Mathf.Clamp(xs[index], -0.9f, mapWidth - 0.1f);
                 //ys[index] = Mathf.Clamp(ys[index], -0.9f, mapHeight - 0.1f);
-                Debug.Log(xs[index] + ", " + ys[index]);
 
                 // add the vertex
                 vertices.Add(new Vertex(xs[index], ys[index], x + y * mapWidth));

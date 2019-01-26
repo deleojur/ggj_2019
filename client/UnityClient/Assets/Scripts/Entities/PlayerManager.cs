@@ -14,6 +14,9 @@ namespace Entities
         };
 
         [SerializeField]
+        private SocketManager _socketManager;
+
+        [SerializeField]
         private GameObject _playerPrefab;
 
         [SerializeField]
@@ -64,6 +67,7 @@ namespace Entities
 
             p.Color = _colors[_clients.Count];
             _clients.Add(package.sender, p);
+            string data = string.Format("{{\"sender\":\"{0}\"}}", package.sender);
         }
 
         private void SocketManager_PlayerDisconnected(NetworkPackage package)

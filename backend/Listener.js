@@ -6,6 +6,7 @@ var io = require('socket.io')({
     transports: ['websocket']
 });
 var clients = [];
+var colors = [0x52C83B, 0x2148C8, 0xCB2020, 0xFF008B, 0xFFF100, 0x662E9F, 0xFF9200];
 var master = null;
 
 require('dns').lookup(require('os').hostname(), function (err, add, fam)
@@ -30,7 +31,12 @@ io.on('connection', function(socket)
         io.to(master).emit('player_input', o);
     });
 
-    socket.on('join_game', function(client_name)
+    socket.on('set_color', function(data)
+    {
+        
+    });
+
+    socket.on('join_game', function()
     {
         let address = socket.handshake.address;
         if (master === null)
@@ -53,17 +59,11 @@ io.on('connection', function(socket)
                     io.to(socket.id).emit('error_alreadyJoined');
                     return false;
                 }
-                if (client_name === e.name)
-                {
-                    //name already used.
-                    io.to(socket.id).emit('error_usernameTaken');
-                    return false;
-                }
             }
-            let client = {name: client_name, id: socket.id, address: socket.handshake.address};
+            let client = {id: socket.id, address: socket.handshake.address};
             clients.push(client);
             io.to(master).emit('join_game', client);
-            io.to(socket.id).emit('success_joinedGame');
+            io.to(socket.id).emit('success_joinedGame', colors[clients.length - 1]);
         }
     });
 
