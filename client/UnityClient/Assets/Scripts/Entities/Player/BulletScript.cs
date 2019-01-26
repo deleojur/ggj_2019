@@ -2,20 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BulletType { Small, Normal, Big }
+
 public class BulletScript : MonoBehaviour
 {
     public GameObject impactPrefab;
     private Rigidbody rb;
     private Color color; 
-    private const float HEAL = 0.5f;
+    private const float HEAL = 1f;
 
     internal Tile prevTile;
     internal Tile currentTile;
 
-    internal void Initialize(Color color)
+    internal BulletType type;
+
+    internal void Initialize(Color color, BulletType type)
     {
         rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * 5000);
+
+        this.type = type;
 
         this.color = color;
         transform.Find("Sphere").GetComponent<MeshRenderer>().material.color = color;
@@ -35,7 +41,12 @@ public class BulletScript : MonoBehaviour
         // something to change about this tile!
         if (currentTile.faction > 0.0f)
         {
-            currentTile.DealDamage(-HEAL);
+            if (type == BulletType.Big)
+                currentTile.Heal(HEAL, 3);
+            else if (type == BulletType.Normal)
+                currentTile.Heal(HEAL);
+            else if (type == BulletType.Small)
+                currentTile.Heal(HEAL, 0);
             Die();
         }
     }
@@ -46,14 +57,12 @@ public class BulletScript : MonoBehaviour
         Destroy(gameObject);
     }
 
-    /*private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
-            explosionClone = Instantiate(explosionObject, transform.position, Quaternion.identity);
-            Destroy(explosionClone, .5f);
-            Destroy(gameObject);            
+            collision.gameObject.GetComponent<PlayerController>().ChangeFireColor(color);
+            Die();
         }
-    }*/
+    }
 }

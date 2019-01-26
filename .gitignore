@@ -45,3 +45,4 @@ dist
 index.html
 worldmap.xpr
 websocket-sharp.csproj.meta
+ip_address.js

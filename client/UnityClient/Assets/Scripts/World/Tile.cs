@@ -23,6 +23,8 @@ public class Tile : MonoBehaviour
     internal PowerUpType powerUpType = PowerUpType.None;
     internal float faction = 0f;
 
+    private Coroutine routine;
+
     internal void Initialize(VoronoiCell cell, Symbol symbol, Vector3[] poly)
     {
         this.cell = cell;
@@ -47,7 +49,29 @@ public class Tile : MonoBehaviour
     internal void DealDamage(float damage)
     {
         StartCoroutine(LerpColor(faction, faction + damage));
+
         faction += damage;
+    }
+
+    internal void Heal(float heal, int maxDepth = 1, int depth = 0)
+    {
+        if (routine != null)
+            StopCoroutine(routine);
+
+        routine = StartCoroutine(LerpColor(faction, faction - heal));
+
+        if(depth < maxDepth)
+        {
+            for (int i = 0; i < neighbors.Count; i++)
+            {
+                if (neighbors[i].faction > 0)
+                {
+                    neighbors[i].Heal(heal * 0.5f, maxDepth, depth + 1);
+                }
+            }
+        }
+        
+        faction -= heal;
     }
 
     private IEnumerator LerpColor(float start, float end)

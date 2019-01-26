@@ -186,8 +186,6 @@ public class Main : MonoBehaviour
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
 
-        //NextState();
-
         yield return null;
     }
 
