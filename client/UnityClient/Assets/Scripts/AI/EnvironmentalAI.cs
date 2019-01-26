@@ -9,7 +9,7 @@ public class EnvironmentalAI
     private float maxPower = 300f;
     private float powerPercent { get { return power / MAX_POWER; } }
 
-    private const float START_TIMER = 1f;
+    private const float START_TIMER = 1.7f;
     private const float END_TIMER = 0.02f;
     private float maxTimer = 5f;                 // recalculated when required based on power
     private float timer = 0;
@@ -21,8 +21,8 @@ public class EnvironmentalAI
     private float minDamage = 0.5f;            // the amount of damage dealt to a tile per attack
     private float maxDamage = 0.5f;
 
-    private const float START_EFFECT = 30f;
-    private const float END_EFFECT = 80f;
+    private const float START_EFFECT = 10f;
+    private const float END_EFFECT = 30f;
     private int effect = 1;                 // the amount of tiles that can be attacked
 
     private List<Tile> options;
