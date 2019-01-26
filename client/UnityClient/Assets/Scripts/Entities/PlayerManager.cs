@@ -9,17 +9,17 @@ namespace Entities
     public class PlayerManager : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _clientHandler;
+        private GameObject _playerPrefab;
 
         [SerializeField]
         private Factory _factory;
 
-        private Dictionary<string, PlayerHandler> _clients;
+        private Dictionary<string, PlayerController> _clients;
 
         // Use this for initialization
         private void Start()
         {
-            _clients = new Dictionary<string, PlayerHandler>();
+            _clients = new Dictionary<string, PlayerController>();
             SocketManager.PlayerInputUpdated += SocketManager_PlayerInputUpdated;
             SocketManager.PlayerConnected += SocketManager_PlayerConnected;
             SocketManager.PlayerDisconnected += SocketManager_PlayerDisconnected;
@@ -27,9 +27,8 @@ namespace Entities
 
         private void SocketManager_PlayerConnected(ConnectionPackage package)
         {
-            Transform t = _factory.BorrowGameObject(_clientHandler);
-            PlayerHandler p = t.gameObject.GetComponent<PlayerHandler>();
-            p.Initialize(package.name, package.sender);
+            Transform t = _factory.BorrowGameObject(_playerPrefab);
+            PlayerController p = t.gameObject.GetComponent<PlayerController>();
             _clients.Add(package.sender, p);
         }
 
@@ -44,18 +43,19 @@ namespace Entities
 
         private void SocketManager_PlayerInputUpdated(PlayerInputPackage package)
         {
-            PlayerHandler client;
-            if (_clients.TryGetValue(package.sender, out client))
+            PlayerController player;
+            if (_clients.TryGetValue(package.sender, out player))
             {
-                client.UpdateRotation(package.beta);
                 if (package.shooting)
                 {
-                    client.Shoot();
+                    player.Fire();
                 }
                 if (package.moving)
                 {
-                    client.MoveForward();
+                    player.Move();
                 }
+                else player.StopMoving();
+                player.UpdateRotation(package.beta);
                 /*Vector3 direction = new Vector3(package.y, 0, package.y);
                 if (Vector3.SqrMagnitude(direction) > 1)
                     client.UpdatePosition(direction.normalized * .01f);*/

@@ -45,6 +45,10 @@ class GameScene extends Phaser.Scene
         this.move_button.scaleY = 0.3;
         this.move_button.y = 125;
 
+        console.log(this.input);
+        this.input.addPointer();
+        this.input.addPointer();
+
         this.shoot_button = this.add.image(window.innerWidth / 2, 0, 'red_button', 0).setInteractive();
         this.shoot_button.on('pointerdown', function()
         {
