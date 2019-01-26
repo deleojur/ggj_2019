@@ -36,7 +36,6 @@ public class PowerupBaseClass : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Collided with player");
             player = other.gameObject.GetComponent<PlayerController>();
             ActivatePowerup();
 
