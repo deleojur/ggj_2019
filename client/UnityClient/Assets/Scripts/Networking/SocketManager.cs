@@ -67,6 +67,11 @@ namespace Networking
             _socket.Emit("create_game");
         }
 
+        internal void EmitMessage(string emissionName, JSONObject data)
+        {
+            _socket.Emit(emissionName, data);
+        }
+
         private void OnPlayerInputReceived(SocketIOEvent e)
         {
             PlayerInputPackage p = new PlayerInputPackage(e);
@@ -87,7 +92,6 @@ namespace Networking
         public void OnPlayerConnected(SocketIOEvent e)
         {
             ConnectionPackage p = new ConnectionPackage(e);
-            Debug.Log(p.name +  " " + p.sender);
             PlayerConnected?.Invoke(p);
         }
 

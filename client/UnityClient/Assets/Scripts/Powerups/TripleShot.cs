@@ -13,13 +13,11 @@ public class TripleShot : PowerupBaseClass
     public override void ActivatePowerup()
     {
         base.ActivatePowerup();
-        Debug.Log("Triple Shot Powerup Activated");
         player.tripleShot = true;
     }
 
     public override void StopPowerup()
     {
-        Debug.Log("Triple Shot Powerup Finished");
         base.StopPowerup();
         player.tripleShot = false;
     }
