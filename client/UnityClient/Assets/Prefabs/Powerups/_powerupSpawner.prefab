@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4536295622877866071}
   - component: {fileID: 2781593595256587310}
   m_Layer: 0
-  m_Name: PowerupSpawner
+  m_Name: _powerupSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d35117b621adfdc4c962730c6849b127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnTime: 8
   powerups:
   - {fileID: 1152729449, guid: 207d8cdb710a3164a8e5dbff13432624, type: 3}
   - {fileID: 1356678136, guid: ac0b6bb2de2125e4d94d987a30606a37, type: 3}

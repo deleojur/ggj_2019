@@ -7,6 +7,7 @@ public class PowerupSpawner : MonoBehaviour
     public float spawnTime = 3f;            // How long between each spawn.
     public GameObject[] powerups;           // List of all powerups.
     private int index;
+    private Tile tile;
 
     void Start()
     {
@@ -16,8 +17,10 @@ public class PowerupSpawner : MonoBehaviour
 
     void Spawn()
     {
+        Debug.Log("Spawn powerup");
         index = Random.Range(0, powerups.Length);
-      //  Instantiate(powerups[index], );
+        tile = Main.Instance.worldManager.worldMap.GetValidPowerUpTile();
+        Instantiate(powerups[index], tile.transform.position, tile.transform.rotation);
     }
 
 }
