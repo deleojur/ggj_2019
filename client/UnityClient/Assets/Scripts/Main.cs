@@ -98,9 +98,6 @@ public class Main : MonoBehaviour
     {
         state++;
 
-        //if (state > 3)
-        //    state = 0;
-
         // end prev, start current
         switch ((GameState)state)
         {
@@ -134,7 +131,7 @@ public class Main : MonoBehaviour
 
         for (int i = 0; i < maxPlayers; i++)
         {
-            scores[i] = worldManager.worldMap.TilesWithColor(playerManager._colors[i]);
+            scores[i] = worldManager.worldMap.TilesWithColor(playerManager._colors[i], 0.4f);
 
             if(scores[i] > highest)
             {
@@ -177,12 +174,12 @@ public class Main : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
 
-        endText.text = "Weh that was exciting wasn't it?";
+        endText.text = "Wew that was exciting wasn't it?";
         yield return new WaitForSeconds(1);
         endText.text = "Thank you for playing and see you next round!";
         yield return new WaitForSeconds(1);
         endText.text = "DE STEKKERDOOS";
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
 
         playerManager.RemoveAllClients();
         OnGameRoundEnded?.Invoke();
