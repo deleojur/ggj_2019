@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Powerup : MonoBehaviour
 {
-
     public PlayerController player;
     public float seconds = 5f;
 
@@ -37,6 +36,7 @@ public class Powerup : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Collided with player");
             player = other.gameObject.GetComponent<PlayerController>();
             ActivatePowerup();
 

@@ -8,6 +8,7 @@ public class SpeedDown : Powerup {
 
     public override void ActivatePowerup() {
         base.ActivatePowerup();
+        Debug.Log("ActivatePowerup");
         defaultSpeed = player.Speed;
         modifiedSpeed = player.Speed *= 0.5f;
         player.Speed = modifiedSpeed;
