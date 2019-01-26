@@ -26,7 +26,7 @@ public class BulletScript : MonoBehaviour
     {
         prevTile = currentTile;
         currentTile = Main.Instance.worldManager.worldMap.GetTileAt(gameObject.transform.position);
-        currentTile.color = color;
+        currentTile.SetColor(color);
         Impact();
     }
 

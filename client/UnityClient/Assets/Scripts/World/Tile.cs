@@ -81,6 +81,12 @@ public class Tile : MonoBehaviour
             color = Color.white;
     }
 
+    internal void SetColor(Color color)
+    {
+        this.color = color;
+        SetColor();
+    }
+
     internal void AddNeighbor(Tile neighbor)
     {
         neighborsIncludingNull.Add(neighbor);
