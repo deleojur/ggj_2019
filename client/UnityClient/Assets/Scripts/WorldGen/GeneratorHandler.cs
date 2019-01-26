@@ -8,7 +8,8 @@ public delegate void GeneratorCallback(Expression world);
 
 public class GeneratorHandler : MonoBehaviour
 {
-    // TODO: generation UI
+    public GameObject progressBar;
+    private BarScript bs;
 
     private float progress;
 
@@ -18,7 +19,7 @@ public class GeneratorHandler : MonoBehaviour
 
     internal void Initialize()
     {
-        // TODO: UI
+        bs = progressBar.GetComponentInChildren<BarScript>();
 
         generator = new Generator();
     }
@@ -62,15 +63,6 @@ public class GeneratorHandler : MonoBehaviour
                 Done();
             }
         }
-        /*else
-        {
-            progress += Time.unscaledDeltaTime;
-            if (progress < 1f)
-                SetProgress(progress);
-            else
-                Done();
-
-        }*/
     }
 
     public void Done()
@@ -81,12 +73,10 @@ public class GeneratorHandler : MonoBehaviour
 
     private void SetProgress(float p)
     {
-        Debug.Log(p);
         if ((p > progress || progress == 1) && p <= 1f && p >= 0f)
         {
             progress = p;
-
-            // TODO: ui!!
+            bs.SetValue(p, 1f);
         }
     }
 }

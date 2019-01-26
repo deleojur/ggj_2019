@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Main : MonoBehaviour
@@ -15,6 +16,16 @@ public class Main : MonoBehaviour
 
     internal GeneratorHandler generatorHandler;
     internal WorldManager worldManager;
+
+    // TODO: is false you are not allowed to join
+    internal bool canJoin = false;
+
+    // powerup legacy system
+    List<Powerup> currentRoundPowerUps;
+
+    // UI
+    public GameObject roundSequenceUI;
+    public TextMeshProUGUI roundSequenceText;
 
     private static Main instance;
     internal static Main Instance
@@ -39,7 +50,7 @@ public class Main : MonoBehaviour
         worldManager = this.gameObject.GetComponent<WorldManager>();
         worldManager.Initialize();
 
-        generatorHandler.StartGenerating(worldManager.ProcessWorldMap);
+        StartRound();
     }
 
     // idem Start() comments!!
@@ -47,6 +58,52 @@ public class Main : MonoBehaviour
     {
         generatorHandler.DoUpdate();
         worldManager.DoUpdate();
+    }
+
+    internal void StartRound()
+    {
+        // show introduction round UI
+        roundSequenceUI.SetActive(true);
+        roundSequenceText.text = "Generating problematic worlds... ";
+
+        currentRoundPowerUps = new List<Powerup>();
+        generatorHandler.StartGenerating(worldManager.ProcessWorldMap);
+    }
+
+    internal void IntroduceRound()
+    {
+        StartCoroutine("WaitForActivateRound");
+    }
+
+    private IEnumerator WaitForActivateRound()
+    {
+        roundSequenceText.text = "Ready?!";
+
+        for (int i = 3; i > 0; i--)
+        {
+            yield return new WaitForSeconds(1);
+            roundSequenceText.text = i.ToString();
+        }
+
+        yield return new WaitForSeconds(1);
+        roundSequenceText.text = "GO!";
+
+        yield return new WaitForSeconds(1);
+        roundSequenceUI.SetActive(false);
+
+        // players may join now!
+        canJoin = true;
+
+        yield return null;
+    }
+
+    internal void EndRound()
+    {
+        // TODO: call when AI beats the freaking game
+
+        // TODO: process powerups, prepare registers.
+
+        // Reload the scene
     }
 }
 

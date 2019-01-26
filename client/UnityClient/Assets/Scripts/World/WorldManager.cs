@@ -30,9 +30,6 @@ public class WorldManager : MonoBehaviour
 
         worldMap.Build(worldMapData);
 
-        // TODO: activate game state
-
-        // TODO: enable joining the world and placing units
-
+        Main.Instance.IntroduceRound();
     }
 }
