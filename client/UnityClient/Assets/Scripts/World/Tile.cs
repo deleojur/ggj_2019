@@ -22,8 +22,6 @@ public class Tile : MonoBehaviour
     internal PowerUpType powerUpType = PowerUpType.None;
     internal float faction = 0f;
 
-    internal float hp;
-
     internal void Initialize(VoronoiCell cell, Symbol symbol, Vector3[] poly)
     {
         this.cell = cell;
@@ -41,34 +39,26 @@ public class Tile : MonoBehaviour
             faction = 0f;
         else if (symbol.Label == "closed")
             faction = 1f;
-
-        hp = 1f;
     }
 
-    // TODO: damage methodes!
     internal void DealDamage(float damage)
     {
-        Debug.LogError("Deal damage!");
-        hp -= damage;
-        StartCoroutine("LerpColor");
+        StartCoroutine(LerpColor(faction, faction + damage));
+        faction += damage;
     }
 
-    private IEnumerator LerpColor()
+    private IEnumerator LerpColor(float start, float end)
     {
-        float start = faction;
-        float end = 1 - hp;
-
         float elapsed = 0.0f;
-        float total = 1.0f;
+        float total = 0.5f;
+
         while (elapsed < total)
         {
             elapsed += Time.deltaTime;
-            SetColor((end - start) + end * elapsed);
+            SetColor(Mathf.Lerp(start, end, elapsed / total));
             yield return new WaitForEndOfFrame();
         }
 
-        faction = 1 - hp;
-        Debug.LogError("new faction: " + faction);
         yield return null;
     }
 
