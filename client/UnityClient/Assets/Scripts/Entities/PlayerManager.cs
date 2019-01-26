@@ -53,8 +53,8 @@ namespace Entities
                     PlayerController p = t.gameObject.GetComponentInChildren<PlayerController>();
                     t.position = Main.Instance.worldManager.worldMap.spawnLocation;
                     p.ActivateDebugMode(_debugKeys[_debugIndex++]);
-                    _clients.Add(string.Format("debug_tank_{0}", _debugIndex), p);
                     p.Color = _colors[_clients.Count];
+                    _clients.Add(string.Format("debug_tank_{0}", _debugIndex), p);
                 }
             }
         }
@@ -67,7 +67,6 @@ namespace Entities
 
             p.Color = _colors[_clients.Count];
             _clients.Add(package.sender, p);
-            string data = string.Format("{{\"sender\":\"{0}\"}}", package.sender);
         }
 
         private void SocketManager_PlayerDisconnected(NetworkPackage package)
