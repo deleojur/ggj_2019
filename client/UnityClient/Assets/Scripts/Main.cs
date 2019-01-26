@@ -21,7 +21,7 @@ public class Main : MonoBehaviour
     internal bool canJoin = false;
 
     // powerup legacy system
-    List<Powerup> currentRoundPowerUps;
+    List<PowerupBaseClass> currentRoundPowerUps;
 
     // UI
     public GameObject roundSequenceUI;
@@ -66,7 +66,7 @@ public class Main : MonoBehaviour
         roundSequenceUI.SetActive(true);
         roundSequenceText.text = "Generating problematic worlds... ";
 
-        currentRoundPowerUps = new List<Powerup>();
+        currentRoundPowerUps = new List<PowerupBaseClass>();
         generatorHandler.StartGenerating(worldManager.ProcessWorldMap);
     }
 
