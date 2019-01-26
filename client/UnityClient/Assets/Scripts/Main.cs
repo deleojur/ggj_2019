@@ -1,3 +1,4 @@
+using Entities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ public class Main : MonoBehaviour
     internal GeneratorHandler generatorHandler;
     internal WorldManager worldManager;
     internal EnvironmentalAI environmentalAI;
+
+    internal PlayerManager playerManager;
 
     // TODO: is false you are not allowed to join
     internal bool canJoin = false;
@@ -120,6 +123,37 @@ public class Main : MonoBehaviour
         // Reload the scene
 
         OnGameRoundEnded?.Invoke();
+    }
+
+    internal static Color ChangeColorBrightness(Color color, float correctionFactor)
+    {
+        float red = color.r;
+        float green = color.g;
+        float blue = color.b;
+
+        if (correctionFactor < 0)
+        {
+            correctionFactor = 1 + correctionFactor;
+            red *= correctionFactor;
+            green *= correctionFactor;
+            blue *= correctionFactor;
+        }
+        else
+        {
+            red = (1 - red) * correctionFactor + red;
+            green = (1 - green) * correctionFactor + green;
+            blue = (1 - blue) * correctionFactor + blue;
+        }
+
+        return new Color(red, green, blue, color.a);
+    }
+
+    internal void PlayerUpdate()
+    {
+        if (playerManager == null)
+            playerManager = FindObjectOfType<PlayerManager>();
+
+        environmentalAI.PlayerUpdate();
     }
 }
 

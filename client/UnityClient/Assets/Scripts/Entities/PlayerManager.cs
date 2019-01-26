@@ -26,6 +26,7 @@ namespace Entities
         private Color[] _colors;
 
         private Dictionary<string, PlayerController> _clients;
+        public int PlayerAmount { get { return _clients.Count; } }
 
         private DebugKeys[] _debugKeys = new DebugKeys[2]
         {
@@ -55,6 +56,7 @@ namespace Entities
                     p.ActivateDebugMode(_debugKeys[_debugIndex++]);
                     p.Color = _colors[_clients.Count];
                     _clients.Add(string.Format("debug_tank_{0}", _debugIndex), p);
+                    Main.Instance.PlayerUpdate();
                 }
             }
         }
@@ -67,6 +69,7 @@ namespace Entities
 
             p.Color = _colors[_clients.Count];
             _clients.Add(package.sender, p);
+            Main.Instance.PlayerUpdate();
         }
 
         private void SocketManager_PlayerDisconnected(NetworkPackage package)
@@ -75,6 +78,8 @@ namespace Entities
             {
                 _factory.ReturnGameObject(_clients[package.sender].transform);
                 _clients.Remove(package.sender);
+                Main.Instance.PlayerUpdate();
+
             }
         }
 

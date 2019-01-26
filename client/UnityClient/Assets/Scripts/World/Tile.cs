@@ -83,7 +83,7 @@ public class Tile : MonoBehaviour
 
     internal void SetColor(Color color)
     {
-        this.color = color;
+        this.color = Main.ChangeColorBrightness(color, 0.6f);
         SetColor();
     }
 
