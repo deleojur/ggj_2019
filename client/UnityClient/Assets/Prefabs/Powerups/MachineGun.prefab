@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1079450418}
   - component: {fileID: 1079450417}
   - component: {fileID: 1079450416}
-  - component: {fileID: 2423886854921013103}
+  - component: {fileID: 1079450415}
   m_Layer: 0
   m_Name: MachineGun
   m_TagString: Untagged
@@ -92,7 +92,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2423886854921013103
+--- !u!114 &1079450415
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,8 +101,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1079450414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34efd92eccb9cc1499b34fe5a81de6cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b90297a3a828eb47918d705760e90d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  seconds: 4
+  seconds: 5
+  particles: {fileID: 5945189500770799998, guid: 05075122d7a0742438032e4a2923d11c,
+    type: 3}
+  changeToTriple: 0
