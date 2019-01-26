@@ -70,8 +70,8 @@ public class WorldMap
         {
             for (int x = 0; x < mapWidth; x++)
             {
-                xs.Add(x);
-                ys.Add(y);
+                xs.Add(0);
+                ys.Add(0);
             }
         }
 
@@ -83,28 +83,22 @@ public class WorldMap
                 Symbol tile = worldMapData.Symbols[x + (mapHeight - 1 - y) * mapWidth];
                 int index = x + y * mapWidth;
 
-                float a = 0.1f;
-                xs[index] = Mathf.PerlinNoise((float)x * a, (float)y * a);
-                ys[index] = Mathf.PerlinNoise((float)x * a, (float)y * a);
+                float a = 0.4f;
+                xs[index] = (Mathf.PerlinNoise((float)x * a + 123.1f, (float)y * a + 765.1f) - 0.5f) * 1f;
+                ys[index] = (Mathf.PerlinNoise((float)x * a + 932.1f, (float)y * a - 497.1f) - 0.5f) * 1f;
 
-                xs[index] = x + Mathf.Clamp(xs[index], -0.1f, 0.1f);
-                ys[index] = y + Mathf.Clamp(ys[index], -0.1f, 0.1f);
+                //xs[index] += (random.NextFloat() - 0.5f) * 0.2f;
+                //ys[index] += (random.NextFloat() - 0.5f) * 0.2f;
 
-                /*float a = 0.4f;
-                xs[index] = (Mathf.PerlinNoise((float)x * a, (float)y * a) - 0.5f) * 1f;
-                ys[index] = (Mathf.PerlinNoise((float)x * a, (float)y * a) - 0.5f) * 1f;
-                
-                 //xs[index] += (random.NextFloat() - 0.5f) * 0.2f;
-                 //ys[index] += (random.NextFloat() - 0.5f) * 0.2f;
+                xs[index] = x + Mathf.Clamp(xs[index], -0.4f, 0.4f);
+                ys[index] = y + Mathf.Clamp(ys[index], -0.4f, 0.4f);
 
-                 xs[index] = x + Mathf.Clamp(xs[index], -0.4f, 0.4f);
-                 ys[index] = y + Mathf.Clamp(ys[index], -0.4f, 0.4f);
+                //xs[index] += (random.NextFloat() - 0.5f) * 0.01f;
+                //ys[index] += (random.NextFloat() - 0.5f) * 0.01f;
 
-                 xs[index] += (random.NextFloat() - 0.5f) * 0.01f;
-                 ys[index] += (random.NextFloat() - 0.5f) * 0.01f;
-
-                 xs[index] = Mathf.Clamp(xs[index], -0.9f, mapWidth - 0.1f);
-                 ys[index] = Mathf.Clamp(ys[index], -0.9f, mapHeight - 0.1f);*/
+                //xs[index] = Mathf.Clamp(xs[index], -0.9f, mapWidth - 0.1f);
+                //ys[index] = Mathf.Clamp(ys[index], -0.9f, mapHeight - 0.1f);
+                Debug.Log(xs[index] + ", " + ys[index]);
 
                 // add the vertex
                 vertices.Add(new Vertex(xs[index], ys[index], x + y * mapWidth));
@@ -129,10 +123,18 @@ public class WorldMap
     {
         tiles = new Tile[mapWidth * mapHeight];
 
-        // create all poly's
-        for (int i = 0; i < cells.Count; i++)
+        VoronoiCell[] orderedCells = new VoronoiCell[cells.Count];
+        for(int i = 0; i < cells.Count; i++)
         {
-            CreateBasePolygon(cells[i], worldMapData, i);
+            if (cells[i].NodeIndex >= 0)
+                orderedCells[cells[i].NodeIndex] = cells[i];
+        }
+
+
+        // create all poly's
+        for (int i = 0; i < orderedCells.Length; i++)
+        {
+            CreateBasePolygon(orderedCells[i], worldMapData, i);
         }
 
         // find all neighbours
