@@ -57,14 +57,12 @@ public class BulletScript : MonoBehaviour
         Destroy(gameObject);
     }
 
-    /*private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
-            explosionClone = Instantiate(explosionObject, transform.position, Quaternion.identity);
-            Destroy(explosionClone, .5f);
-            Destroy(gameObject);            
+            collision.gameObject.GetComponent<PlayerController>().ChangeFireColor(color);
+            Die();
         }
-    }*/
+    }
 }
