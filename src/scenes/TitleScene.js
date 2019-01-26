@@ -24,15 +24,10 @@ class TitleScene extends Phaser.Scene {
         this.formUtil.placeElementAt(93, "username_error", true);
         var error = document.getElementById('username_error');
 
-        this.formUtil.scaleToGameW("username_submit", .5);
-        this.formUtil.scaleToGameH("username_submit", .1);
-        this.formUtil.placeElementAt(71, 'username_submit', true);
-
-        var button = document.getElementById('username_submit');
-        button.addEventListener("click", function()
+        setTimeout(function()
         {
-            socket.emit('join_game');   
-        });
+            socket.emit('join_game');
+        }, 1000);
 
         socket.on('error_alreadyJoined', function()
         {
@@ -53,7 +48,6 @@ class TitleScene extends Phaser.Scene {
         {
             window.background_color = bg_color;
             error.innerHTML = 'Joining game...';
-            container.removeChild(button);
             container.removeChild(error);
             game.scene.start('GameScene');
         });

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -26,6 +27,9 @@ public class Main : MonoBehaviour
     // UI
     public GameObject roundSequenceUI;
     public TextMeshProUGUI roundSequenceText;
+
+    internal static event Action OnGameRoundStarted;
+    internal static event Action OnGameRoundEnded;
 
     private static Main instance;
     internal static Main Instance
@@ -94,6 +98,8 @@ public class Main : MonoBehaviour
         // players may join now!
         canJoin = true;
 
+        OnGameRoundStarted?.Invoke();
+
         yield return null;
     }
 
@@ -104,6 +110,8 @@ public class Main : MonoBehaviour
         // TODO: process powerups, prepare registers.
 
         // Reload the scene
+
+        OnGameRoundEnded?.Invoke();
     }
 }
 

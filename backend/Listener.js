@@ -31,9 +31,16 @@ io.on('connection', function(socket)
         io.to(master).emit('player_input', o);
     });
 
-    socket.on('set_color', function(data)
+    socket.on('waiting_for_game', function()
     {
-        
+        console.log('waiting for game');
+        io.to(clients[0].id).emit('client_waiting_for_game');
+    });
+
+    socket.on('start_game', function()
+    {
+        console.log('start game');
+        io.to(clients[0].id).emit('client_start_game');
     });
 
     socket.on('join_game', function()
