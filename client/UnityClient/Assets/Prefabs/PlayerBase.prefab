@@ -10258,6 +10258,7 @@ MonoBehaviour:
   m_EngineIdling: {fileID: 0}
   m_EngineDriving: {fileID: 0}
   m_PitchRange: 0.2
+  m_Rigidbody: {fileID: 0}
   _renderers:
   - {fileID: 2365458}
   - {fileID: 2365156}
@@ -10273,7 +10274,7 @@ MonoBehaviour:
   tripleShot: 0
   machineGun: 0
   fireRate: 0.2
-  expPower: 500
+  expPower: 250
   expRadius: 1
 --- !u!1 &8327942647911223629
 GameObject:
