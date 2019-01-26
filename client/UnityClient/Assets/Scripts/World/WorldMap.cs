@@ -257,12 +257,12 @@ public class WorldMap
     }
     #endregion
 
-    internal int TilesWithColor(Color color)
+    internal int TilesWithColor(Color color, float correctionFactor = 0)
     {
         int c = 0;
         for(int i = 0; i < tiles.Length; i++)
         {
-            if (tiles[i].color == color)
+            if (tiles[i].color == Main.ChangeColorBrightness(color, correctionFactor))
                 c++;
         }
         return c;
