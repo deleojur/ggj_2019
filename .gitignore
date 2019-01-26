@@ -45,5 +45,3 @@ dist
 index.html
 worldmap.xpr
 websocket-sharp.csproj.meta
-client/UnityClient/Assets/StreamingAssets/Grammars/WorldMap/SeedTerrain.grm
-client/UnityClient/Assets/StreamingAssets/Grammars/WorldMap/SeedTerrain.rcp
