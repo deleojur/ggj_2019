@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Entities;
+using Networking;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -46,6 +47,9 @@ public class PlayerController : MonoBehaviour
 
     private bool _isDebugging;
     internal PlayerManager.DebugKeys _debugKeys;
+
+    private float _beta;
+    private bool _isMoving, _isShooting;
 
     private Color _color;
     internal Color Color
@@ -100,8 +104,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    internal void SetPackageInfo(PlayerInputPackage package)
+    {
+        _isMoving = package.moving;
+        _beta = package.beta;
+        _isShooting = package.shooting;
+    }
+
     internal void FixedUpdate()
     {
+        if (_isMoving)
+            Move();
+        if (_isShooting)
+            Fire();
+        Turn(_beta);
+
+        _isMoving = _isShooting = false;
+
         if (_isDebugging)
         {
             if (Input.GetKey(_debugKeys.Forward))
@@ -202,7 +221,6 @@ public class PlayerController : MonoBehaviour
         }
         // Determine the number of degrees to be turned based on the input, speed and time between frames.
         //float turn = beta * m_TurnSpeed * Time.fixedDeltaTime;
-        Debug.Log(beta);
         // Make this into a rotation in the y axis.
         Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
 
