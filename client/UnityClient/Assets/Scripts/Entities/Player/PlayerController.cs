@@ -294,8 +294,9 @@ public class PlayerController : MonoBehaviour
     IEnumerator RocketLauncher()
     {
         canFire = false;
-        muzzleFlashClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(-90, firePoint.transform.rotation.y, firePoint.transform.rotation.z));
-        bulletClone = Instantiate(bullet, firePoint.transform.position, firePoint.transform.rotation);
+        Vector3 offset = new Vector3 (-0.5f,1f,0f);
+        muzzleFlashClone = Instantiate(muzzleFlash, firePoint.transform.position + offset, Quaternion.Euler(-90, firePoint.transform.rotation.y, firePoint.transform.rotation.z));
+        bulletClone = Instantiate(bullet, firePoint.transform.position + offset, firePoint.transform.rotation);
         bulletClone.transform.localScale = new Vector3(3f, 3f, 3f);
         bulletClone.GetComponent<BulletScript>().Initialize(Color);
         Destroy(muzzleFlashClone, 1f);
