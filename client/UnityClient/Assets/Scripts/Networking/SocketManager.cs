@@ -60,7 +60,6 @@ namespace Networking
             _socket.On("exit_game", OnPlayerDisconnected);
             _socket.On("player_input", OnPlayerInputReceived);
 
-            Main.OnGameRoundStarted += Main_OnGameRoundStarted;
             Main.OnGameRoundEnded += Main_OnGameRoundEnded;
 
             StartCoroutine(CreateGame());
@@ -93,20 +92,6 @@ namespace Networking
 
         }
 
-        private IEnumerator ConnectWaitingPlayers()
-        { 
-            while (_waitingPlayers.Count > 0)
-            {
-                yield return new WaitForSeconds(1);
-                PlayerConnected?.Invoke(_waitingPlayers.Dequeue());
-            }
-        }
-
-        private void Main_OnGameRoundStarted()
-        {
-            StartCoroutine(ConnectWaitingPlayers());
-        }
-
         public void OnPlayerDisconnected(SocketIOEvent e)
         {
             NetworkPackage p = new NetworkPackage(e);
@@ -115,14 +100,9 @@ namespace Networking
 
         public void OnPlayerConnected(SocketIOEvent e)
         {
+            Debug.Log("Blaat");
             ConnectionPackage p = new ConnectionPackage(e);
-            if (Main.Instance.canJoin)
-            {
-                PlayerConnected?.Invoke(p);
-            } else
-            {
-                _waitingPlayers.Enqueue(p);
-            }
+            PlayerConnected?.Invoke(p);
         }
 
         public void OnErrorReceived(SocketIOEvent e)
