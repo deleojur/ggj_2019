@@ -13,6 +13,7 @@ public class Tile : MonoBehaviour
     
     internal Vector3[] poly;
     internal MeshRenderer render;
+    internal Color color;
 
     internal VoronoiCell cell;
     internal Symbol symbol;
@@ -39,12 +40,12 @@ public class Tile : MonoBehaviour
             faction = 0f;
         else if (symbol.Label == "closed")
             faction = 1f;
+
+        color = Color.white;
     }
 
     internal void DealDamage(float damage)
     {
-        if(damage < 0)
-            Debug.Log(damage);
         StartCoroutine(LerpColor(faction, faction + damage));
         faction += damage;
     }
@@ -66,12 +67,18 @@ public class Tile : MonoBehaviour
 
     internal void SetColor()
     {
-        render.material.color = Color.Lerp(Color.white, Color.black, faction);
+        render.material.color = Color.Lerp(color, Color.black, faction);
+
+        if (faction >= 1)
+            color = Color.white;
     }
 
     internal void SetColor(float value)
     {
-        render.material.color = Color.Lerp(Color.white, Color.black, value);
+        render.material.color = Color.Lerp(color, Color.black, value);
+
+        if (faction >= 1)
+            color = Color.white;
     }
 
     internal void AddNeighbor(Tile neighbor)
