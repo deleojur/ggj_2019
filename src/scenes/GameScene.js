@@ -43,7 +43,8 @@ class GameScene extends Phaser.Scene
         graphics.fillRectShape(square);
         graphics.fillRectShape(rect);
 
-        this.move_button = this.add.image(window.innerWidth / 2, 0, 'red_button', 0).setInteractive();
+        this.move_button = this.add.image(window.innerWidth / 2, 125, 'red_button', 0).setInteractive();
+        this.move_icon = this.add.image(window.innerWidth / 2, 125, 'move', 0).setInteractive();
         this.move_button.on('pointerdown', function()
         {
             self.moving = true;
@@ -52,28 +53,46 @@ class GameScene extends Phaser.Scene
         {
             self.moving = false;
         });
+        this.move_icon.on('pointerdown', function()
+        {
+            self.moving = true;
+        });
+        this.move_icon.on('pointerup', function()
+        {
+            self.moving = false;
+        });
         
         this.move_button.scaleX = 0.3;
         this.move_button.scaleY = 0.3;
-        this.move_button.y = 125;
+        this.move_icon.scaleX = 0.3;
+        this.move_icon.scaleY = 0.3;
 
         this.input.addPointer();
         this.input.addPointer();
 
-        this.shoot_button = this.add.image(window.innerWidth / 2, 0, 'red_button', 0).setInteractive();
+        this.shoot_button = this.add.image(window.innerWidth / 2, window.innerHeight - 125, 'red_button', 0).setInteractive();
+        this.shoot_icon = this.add.image(window.innerWidth / 2, window.innerHeight - 125, 'shoot', 0).setInteractive();
         this.shoot_button.on('pointerdown', function()
         {
             self.shooting = true;
         });
-
         this.shoot_button.on('pointerup', function()
+        {
+            self.shooting = false;
+        });
+        this.shoot_icon.on('pointerdown', function()
+        {
+            self.shooting = true;
+        });
+        this.shoot_icon.on('pointerup', function()
         {
             self.shooting = false;
         });
 
         this.shoot_button.scaleX = 0.3;
         this.shoot_button.scaleY = 0.3;
-        this.shoot_button.y = window.innerHeight - 125;
+        this.shoot_icon.scaleX = 0.3;
+        this.shoot_icon.scaleY = 0.3;
 
         gyro.frequency = 10;
 		// start gyroscope detection

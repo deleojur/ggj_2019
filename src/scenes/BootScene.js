@@ -17,6 +17,8 @@ class BootScene extends Phaser.Scene {
         });
 
         this.load.image('red_button', 'assets/images/button.png');
+        this.load.image('move', 'assets/images/move_icon.png');
+        this.load.image('shoot', 'assets/images/shoot_icon.png');
         makeAnimations(this);
         progress.destroy();
         this.scene.start('TitleScene');
