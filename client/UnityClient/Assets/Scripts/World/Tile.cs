@@ -19,6 +19,7 @@ public class Tile : MonoBehaviour
     internal Symbol symbol;
     internal List<Tile> neighbors;
     internal List<Tile> neighborsIncludingNull;
+    internal bool outerCell;
 
     internal PowerUpType powerUpType = PowerUpType.None;
     internal float faction = 0f;
@@ -55,6 +56,9 @@ public class Tile : MonoBehaviour
 
     internal void Heal(float heal, int maxDepth = 1, int depth = 0)
     {
+        if (outerCell)
+            return;
+
         if (routine != null)
             StopCoroutine(routine);
 
@@ -90,7 +94,7 @@ public class Tile : MonoBehaviour
     }
 
     internal void SetColor()
-    {
+    {          
         render.material.color = Color.Lerp(color, Color.black, faction);
 
         if (faction >= 1)

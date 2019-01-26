@@ -16,9 +16,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float m_PitchRange = 0.2f;           // The amount by which the pitch of the engine noises can vary.
     [SerializeField] private Rigidbody m_Rigidbody;              // Reference used to move the tank.
     [SerializeField] private Renderer[] _renderers;
-    [SerializeField] private Image _colorWheel;
-    [SerializeField] private Image _colorWheelOutline;
-    [SerializeField] private float _colorChangeDuration = 3;
+    //[SerializeField] private Image _colorWheel;
+    //[SerializeField] private Image _colorWheelOutline;
+    //[SerializeField] private float _colorChangeDuration = 3;
 
     internal float Speed { get { return m_Speed; } set { m_Speed = value; } }
     internal Rigidbody Rigidbody { get { return m_Rigidbody; } set { m_Rigidbody = value; } }
@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour
         prevTile = currentTile;
         currentTile = Main.Instance.worldManager.worldMap.GetTileAt(gameObject.transform.position);
 
-        if (_colorWheel.fillAmount > 0)
+        /*if (_colorWheel.fillAmount > 0)
         {
             _colorWheel.fillAmount -= (1 / _colorChangeDuration) * Time.fixedDeltaTime;
             _colorWheelOutline.fillAmount -= (1 / _colorChangeDuration) * Time.fixedDeltaTime;
@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour
             ChangeFireColor(_color);
             _colorWheel.fillAmount = 0;
             _colorWheelOutline.fillAmount = 0;
-        }
+        }*/
 
         if (DeathByGap())
             return;
@@ -181,7 +181,7 @@ public class PlayerController : MonoBehaviour
         killParticleClone = Instantiate(killParticle, transform.position, Quaternion.identity);
         Destroy(killParticleClone, 1f);
 
-
+        gameObject.SetActive(false);
         // Destroy when starting new round!
         // Destroy(gameObject);
     }
@@ -366,8 +366,8 @@ public class PlayerController : MonoBehaviour
     internal void ChangeFireColor(Color color)
     {
         _fireColor = color;
-        _colorWheel.fillAmount = 1;
+        /*_colorWheel.fillAmount = 1;
         _colorWheelOutline.fillAmount = 1;
-        _colorWheel.color = color;
+        _colorWheel.color = color;*/
     }
 }

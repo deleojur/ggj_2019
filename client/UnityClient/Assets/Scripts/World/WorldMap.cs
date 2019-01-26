@@ -160,8 +160,18 @@ public class WorldMap
                         tiles[index].AddNeighbor(tiles[tiles[index].cell.HalfEdges[i].NeighbourCell.NodeIndex]);
                     else
                         tiles[index].AddNeighbor(null);
+
+                    tiles[index].tx = x;
+                    tiles[index].tz = z;
                 }
             }
+        }
+
+        for(int i = 0; i < tiles.Length; i++)
+        {
+            if ((tiles[i].tx == 0 || tiles[i].tx == mapWidth - 1) ||
+                (tiles[i].tz == 0 || tiles[i].tz == mapHeight - 1))
+                tiles[i].outerCell = true;
         }
     }
 
