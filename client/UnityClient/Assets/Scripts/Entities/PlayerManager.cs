@@ -8,6 +8,11 @@ namespace Entities
 {
     public class PlayerManager : MonoBehaviour
     {
+        internal struct DebugKeys
+        {
+            public KeyCode Forward, Shoot, MoveLeft, MoveRight;
+        };
+
         [SerializeField]
         private GameObject _playerPrefab;
 
@@ -19,6 +24,12 @@ namespace Entities
 
         private Dictionary<string, PlayerController> _clients;
 
+        private DebugKeys[] _debugKeys = new DebugKeys[2]
+        {
+            new DebugKeys{Forward = KeyCode.W, Shoot = KeyCode.Q, MoveLeft = KeyCode.A, MoveRight = KeyCode.D},
+            new DebugKeys{Forward = KeyCode.UpArrow, Shoot = KeyCode.RightShift, MoveLeft = KeyCode.LeftArrow, MoveRight = KeyCode.RightArrow}
+        };
+
         // Use this for initialization
         private void Start()
         {
@@ -26,6 +37,23 @@ namespace Entities
             SocketManager.PlayerInputUpdated += SocketManager_PlayerInputUpdated;
             SocketManager.PlayerConnected += SocketManager_PlayerConnected;
             SocketManager.PlayerDisconnected += SocketManager_PlayerDisconnected;
+        }
+
+        private int _debugIndex = 0;
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (_debugIndex < _debugKeys.Length)
+                {
+                    Transform t = _factory.BorrowGameObject(_playerPrefab);
+                    PlayerController p = t.gameObject.GetComponentInChildren<PlayerController>();
+                    t.position = Main.Instance.worldManager.worldMap.spawnLocation;
+                    p.ActivateDebugMode(_debugKeys[_debugIndex++]);
+                    _clients.Add(string.Format("debug_tank_{0}", _debugIndex), p);
+                    p.Color = _colors[_clients.Count];
+                }
+            }
         }
 
         private void SocketManager_PlayerConnected(ConnectionPackage package)

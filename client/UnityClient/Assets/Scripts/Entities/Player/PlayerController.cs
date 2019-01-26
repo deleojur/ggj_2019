@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Entities;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,6 +31,9 @@ public class PlayerController : MonoBehaviour
     public bool tripleShot;
     public bool machineGun;
     public float fireRate;
+
+    private bool _isDebugging;
+    internal PlayerManager.DebugKeys _debugKeys;
 
     private Color _color;
     internal Color Color
@@ -113,6 +117,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    internal void ActivateDebugMode(PlayerManager.DebugKeys keys)
+    {
+        _debugKeys = keys;
+        _isDebugging = true;
+    }
+
+    private void FixedUpdate()
+    {
+        if (_isDebugging)
+        {
+            if (Input.GetKey(_debugKeys.Forward))
+                Move();
+            if (Input.GetKey(_debugKeys.MoveLeft))
+                Turn(-10);
+            if (Input.GetKey(_debugKeys.MoveRight))
+                Turn(10);
+            if (Input.GetKey(_debugKeys.Shoot))
+                Fire();
+        }
+    }
+
     internal void Move()
     {
         // Create a vector in the direction the tank is facing with a magnitude based on the input, speed and the time between frames.
@@ -126,10 +151,10 @@ public class PlayerController : MonoBehaviour
     internal void Turn(float beta)
     {
         // Determine the number of degrees to be turned based on the input, speed and time between frames.
-        float turn = beta * m_TurnSpeed * Time.deltaTime;
+        float turn = beta * m_TurnSpeed * Time.fixedDeltaTime;
 
         // Make this into a rotation in the y axis.
-        Quaternion turnRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y + turn, 0f);
+        Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
 
         // Apply this rotation to the rigidbody's rotation.
         m_Rigidbody.MoveRotation(m_Rigidbody.rotation * turnRotation);
