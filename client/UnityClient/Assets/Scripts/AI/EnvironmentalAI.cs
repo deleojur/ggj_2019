@@ -9,20 +9,20 @@ public class EnvironmentalAI
     private float maxPower = 300f;
     private float powerPercent { get { return power / MAX_POWER; } }
 
-    private const float START_TIMER = 2f;
-    private const float END_TIMER = 0.1f;
+    private const float START_TIMER = 1f;
+    private const float END_TIMER = 0.02f;
     private float maxTimer = 5f;                 // recalculated when required based on power
     private float timer = 0;
 
-    private const float START_MIN_DMG = 0.1f;
+    private const float START_MIN_DMG = 0.2f;
     private const float START_MAX_DMG = 0.6f;
     private const float END_MIN_DMG = 0.8f;
-    private const float END_MAX_DMG = 0.9f;
+    private const float END_MAX_DMG = 1.0f;
     private float minDamage = 0.5f;            // the amount of damage dealt to a tile per attack
     private float maxDamage = 0.5f;
 
-    private const float START_EFFECT = 10f;
-    private const float END_EFFECT = 50f;
+    private const float START_EFFECT = 30f;
+    private const float END_EFFECT = 80f;
     private int effect = 1;                 // the amount of tiles that can be attacked
 
     private List<Tile> options;
@@ -59,11 +59,14 @@ public class EnvironmentalAI
         // TODO: enable different kinds of attacks omg so cool
         FindOptions();
 
+        if (options == null)
+            return;
+
         // for as much effect as I have
         for (int i = 0; i < effect; i++)
         {
             // pick one and remove it from the options
-            Tile toAttack = options[Random.Range(0, options.Count)];
+            Tile toAttack = options[Random.Range(0, options.Count - 1)];
             options.Remove(toAttack);
 
             toAttack.DealDamage(Random.Range(minDamage, maxDamage + 0.1f));

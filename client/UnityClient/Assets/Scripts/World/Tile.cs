@@ -83,7 +83,7 @@ public class Tile : MonoBehaviour
 
     internal void SetColor(Color color)
     {
-        this.color = Main.ChangeColorBrightness(color, 0.6f);
+        this.color = Main.ChangeColorBrightness(color, 0.4f);
         SetColor();
     }
 
@@ -99,7 +99,7 @@ public class Tile : MonoBehaviour
     {
         for(int i = 0; i < neighbors.Count; i++)
         {
-            if (neighbors[i].faction == faction)
+            if (neighbors[i].faction >= faction)
                 return true;
         }
 
