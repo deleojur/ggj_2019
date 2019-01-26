@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,7 +10,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip m_EngineIdling;            // Audio to play when the tank isn't moving.
     [SerializeField] private AudioClip m_EngineDriving;           // Audio to play when the tank is moving.
     [SerializeField] private float m_PitchRange = 0.2f;           // The amount by which the pitch of the engine noises can vary.
-    [SerializeField] private Renderer[] _renderers;
 
     private string m_MovementAxisName;          // The name of the input axis for moving forward and back.
     private string m_TurnAxisName;              // The name of the input axis for turning.
@@ -21,26 +19,19 @@ public class PlayerController : MonoBehaviour
     private float m_OriginalPitch;              // The pitch of the audio source at the start of the scene.
     private ParticleSystem[] m_particleSystems; // References to all the particles systems used by the Tanks
 
-    private Color _color;
-    internal Color Color 
-    {
-        get
-        {
-            return _color;
-        } set
-        {
-            _color = value;
-            for (int i = 0; i < _renderers.Length; i++)
-            {
-                _renderers[i].material.color = value;
-            }
-        } 
-    }
+    public GameObject muzzleFlash, muzzleFlashClone;
+    public GameObject bullet, bulletClone;
+    public Transform firePoint;
+    public bool canFire = true;
+    public bool tripleShot;
+    public bool machineGun;
+    public float fireRate;
 
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
     }
+
 
     private void OnEnable()
     {
@@ -101,11 +92,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-       
-    }
-
     internal void Move()
     {
         // Create a vector in the direction the tank is facing with a magnitude based on the input, speed and the time between frames.
@@ -126,5 +112,71 @@ public class PlayerController : MonoBehaviour
 
         // Apply this rotation to the rigidbody's rotation.
         m_Rigidbody.MoveRotation(m_Rigidbody.rotation * turnRotation);
+    }
+
+    public void Fire()
+    {
+        if (tripleShot && canFire)
+        {
+            StartCoroutine(TripleShot());
+        }
+        else if (machineGun && canFire)
+        {
+            StartCoroutine(MachineGun());
+        }
+        else if (canFire)
+        {
+            StartCoroutine(NormalShot());
+        }
+    }
+
+    IEnumerator TripleShot()
+    {
+        canFire = false;
+        Vector3 rotation = firePoint.transform.rotation.eulerAngles;
+        float offSet = -20;
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject muzzleClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(-90, rotation.y, rotation.z + offSet));
+            bulletClone = Instantiate(bullet, firePoint.transform.position, Quaternion.Euler(
+                90,
+                rotation.y,
+                rotation.z + offSet));
+
+            offSet += 20;
+
+            Destroy(muzzleClone, 1f);
+            Destroy(bulletClone, 3f);
+        }
+        yield return new WaitForSeconds(fireRate);
+        canFire = true;
+    }
+
+    IEnumerator MachineGun()
+    {
+        canFire = false;
+        Vector3 rotation = firePoint.transform.rotation.eulerAngles;
+        float offSet = Random.Range(-30, 30);
+        muzzleFlashClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(-90, rotation.y, rotation.z));
+        bulletClone = Instantiate(bullet, firePoint.transform.position, Quaternion.Euler(90, rotation.y, rotation.z + offSet));
+
+        Destroy(muzzleFlashClone, 1f);
+        Destroy(bulletClone, 3f);
+
+        yield return new WaitForSeconds(fireRate/5);
+        canFire = true;
+    }
+
+    IEnumerator NormalShot()
+    {
+        canFire = false;
+        muzzleFlashClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(-90, firePoint.transform.rotation.y, firePoint.transform.rotation.z));
+        bulletClone = Instantiate(bullet, firePoint.transform.position, firePoint.transform.rotation);
+
+        Destroy(muzzleFlashClone, 1f);
+        Destroy(bulletClone, 3f);
+
+        yield return new WaitForSeconds(fireRate);
+        canFire = true;
     }
 }

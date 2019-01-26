@@ -52,7 +52,7 @@ namespace Entities
             {
                 if (package.shooting)
                 {
-                    //player.Fire();
+                    player.Fire();
                 }
                 if (package.moving)
                 {
