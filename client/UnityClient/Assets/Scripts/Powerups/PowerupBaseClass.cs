@@ -19,7 +19,7 @@ public class PowerupBaseClass : MonoBehaviour
             if (timer > seconds)
             {
                 StopPowerup();
-                timer = 0;
+                timer = 0f;
             }
         }
         else
@@ -28,7 +28,7 @@ public class PowerupBaseClass : MonoBehaviour
             if (timer > 10f)
             {
                 Destroy(gameObject);
-                timer = 0;
+                timer = 0f;
             }
         }
     }
@@ -49,6 +49,7 @@ public class PowerupBaseClass : MonoBehaviour
             ActivatePowerup();
 
             startTimer = true;
+            timer = 0f;
         }
     }
 
