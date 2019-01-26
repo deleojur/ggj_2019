@@ -553,7 +553,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -606,7 +606,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -10273,6 +10273,8 @@ MonoBehaviour:
   tripleShot: 0
   machineGun: 0
   fireRate: 0.2
+  expPower: 500
+  expRadius: 1
 --- !u!1 &8327942647911223629
 GameObject:
   m_ObjectHideFlags: 0
@@ -10297,7 +10299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8327942647911223629}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.61, z: 1.38}
+  m_LocalPosition: {x: 0, y: 1.61, z: 6.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3608949698409687847}

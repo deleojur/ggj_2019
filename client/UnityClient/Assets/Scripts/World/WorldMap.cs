@@ -99,17 +99,17 @@ public class WorldMap
                 xs[index] = (Mathf.PerlinNoise((float)x * a + 123.1f, (float)y * a + 765.1f) - 0.5f) * 1f;
                 ys[index] = (Mathf.PerlinNoise((float)x * a + 932.1f, (float)y * a - 497.1f) - 0.5f) * 1f;
 
-                //xs[index] += (random.NextFloat() - 0.5f) * 0.2f;
-                //ys[index] += (random.NextFloat() - 0.5f) * 0.2f;
+                xs[index] += (random.NextFloat() - 0.5f) * 0.2f;
+                ys[index] += (random.NextFloat() - 0.5f) * 0.2f;
 
                 xs[index] = x + Mathf.Clamp(xs[index], -0.4f, 0.4f);
                 ys[index] = y + Mathf.Clamp(ys[index], -0.4f, 0.4f);
 
-                //xs[index] += (random.NextFloat() - 0.5f) * 0.01f;
-                //ys[index] += (random.NextFloat() - 0.5f) * 0.01f;
+                xs[index] += (random.NextFloat() - 0.5f) * 0.01f;
+                ys[index] += (random.NextFloat() - 0.5f) * 0.01f;
 
-                //xs[index] = Mathf.Clamp(xs[index], -0.9f, mapWidth - 0.1f);
-                //ys[index] = Mathf.Clamp(ys[index], -0.9f, mapHeight - 0.1f);
+                xs[index] = Mathf.Clamp(xs[index], -0.9f, mapWidth - 0.1f);
+                ys[index] = Mathf.Clamp(ys[index], -0.9f, mapHeight - 0.1f);
 
                 // add the vertex
                 vertices.Add(new Vertex(xs[index], ys[index], x + y * mapWidth));
