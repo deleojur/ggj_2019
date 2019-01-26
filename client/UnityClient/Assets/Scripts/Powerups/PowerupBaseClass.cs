@@ -22,6 +22,15 @@ public class PowerupBaseClass : MonoBehaviour
                 timer = 0;
             }
         }
+        else
+        {
+            timer += Time.deltaTime;
+            if (timer > 10f)
+            {
+                Destroy(gameObject);
+                timer = 0;
+            }
+        }
     }
 
     public virtual void StopPowerup()
