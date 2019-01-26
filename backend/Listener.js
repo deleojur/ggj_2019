@@ -6,6 +6,7 @@ var io = require('socket.io')({
     transports: ['websocket']
 });
 var clients = [];
+var colors = [0x52C83B, 0x2148C8, 0xCB2020, 0xFF008B, 0xFFF100, 0x662E9F, 0xFF9200];
 var master = null;
 
 require('dns').lookup(require('os').hostname(), function (err, add, fam)
@@ -30,9 +31,13 @@ io.on('connection', function(socket)
         io.to(master).emit('player_input', o);
     });
 
+    socket.on('set_color', function(data)
+    {
+        
+    });
+
     socket.on('join_game', function()
     {
-        console.log('joined game!');
         let address = socket.handshake.address;
         if (master === null)
         {
@@ -58,7 +63,7 @@ io.on('connection', function(socket)
             let client = {id: socket.id, address: socket.handshake.address};
             clients.push(client);
             io.to(master).emit('join_game', client);
-            io.to(socket.id).emit('success_joinedGame');
+            io.to(socket.id).emit('success_joinedGame', colors[clients.length - 1]);
         }
     });
 

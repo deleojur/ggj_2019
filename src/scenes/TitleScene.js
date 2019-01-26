@@ -49,8 +49,9 @@ class TitleScene extends Phaser.Scene {
             error.innerHTML = 'The game has not started yet.';
         });
 
-        socket.on('success_joinedGame', function()
+        socket.on('success_joinedGame', function(bg_color)
         {
+            window.background_color = bg_color;
             error.innerHTML = 'Joining game...';
             container.removeChild(button);
             container.removeChild(error);

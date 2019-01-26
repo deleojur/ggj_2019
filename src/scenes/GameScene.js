@@ -9,10 +9,10 @@ socket.on('connect', function (data)
     console.log('Connected!');
 });
   
-  socket.on('close_game', function()
-  {
+socket.on('close_game', function()
+{
     console.log('You need to reconnect!');
-  });
+});
 
 class GameScene extends Phaser.Scene
 {
@@ -32,6 +32,17 @@ class GameScene extends Phaser.Scene
     create()
     {
         var self = this;
+
+        var graphics = this.add.graphics({ lineStyle: { width: 2, color: window.background_color }, fillStyle: { color: window.background_color } });
+        var rect = new Phaser.Geom.Rectangle();
+        var square = new Phaser.Geom.Rectangle();
+        rect.width = 1000;
+        rect.height = 1000;
+        var area = Phaser.Geom.Rectangle.Area(rect);
+        square.width = square.height = Math.sqrt(area);
+        graphics.fillRectShape(square);
+        graphics.fillRectShape(rect);
+
         this.move_button = this.add.image(window.innerWidth / 2, 0, 'red_button', 0).setInteractive();
         this.move_button.on('pointerdown', function()
         {
@@ -41,11 +52,11 @@ class GameScene extends Phaser.Scene
         {
             self.moving = false;
         });
+        
         this.move_button.scaleX = 0.3;
         this.move_button.scaleY = 0.3;
         this.move_button.y = 125;
 
-        console.log(this.input);
         this.input.addPointer();
         this.input.addPointer();
 
