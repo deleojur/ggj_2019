@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip m_EngineIdling;            // Audio to play when the tank isn't moving.
     [SerializeField] private AudioClip m_EngineDriving;           // Audio to play when the tank is moving.
     [SerializeField] private float m_PitchRange = 0.2f;           // The amount by which the pitch of the engine noises can vary.
+    [SerializeField] private Renderer[] _renderers;
 
     private string m_MovementAxisName;          // The name of the input axis for moving forward and back.
     private string m_TurnAxisName;              // The name of the input axis for turning.
@@ -19,11 +21,26 @@ public class PlayerController : MonoBehaviour
     private float m_OriginalPitch;              // The pitch of the audio source at the start of the scene.
     private ParticleSystem[] m_particleSystems; // References to all the particles systems used by the Tanks
 
+    private Color _color;
+    internal Color Color 
+    {
+        get
+        {
+            return _color;
+        } set
+        {
+            _color = value;
+            for (int i = 0; i < _renderers.Length; i++)
+            {
+                _renderers[i].material.color = value;
+            }
+        } 
+    }
+
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
     }
-
 
     private void OnEnable()
     {
@@ -82,6 +99,11 @@ public class PlayerController : MonoBehaviour
                 m_MovementAudio.Play();
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
+       
     }
 
     internal void Move()
