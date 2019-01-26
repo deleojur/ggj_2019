@@ -14,6 +14,9 @@ namespace Entities
         [SerializeField]
         private Factory _factory;
 
+        [SerializeField]
+        private Color[] _colors;
+
         private Dictionary<string, PlayerController> _clients;
 
         // Use this for initialization
@@ -28,7 +31,8 @@ namespace Entities
         private void SocketManager_PlayerConnected(ConnectionPackage package)
         {
             Transform t = _factory.BorrowGameObject(_playerPrefab);
-            PlayerController p = t.gameObject.GetComponent<PlayerController>();
+            PlayerController p = t.gameObject.GetComponentInChildren<PlayerController>();
+            p.Color = _colors[_clients.Count];
             _clients.Add(package.sender, p);
         }
 
@@ -52,7 +56,6 @@ namespace Entities
                 }
                 if (package.moving)
                 {
-                    Debug.Log("move da player");
                     player.Move();
                 }
                 player.Turn(package.beta);
