@@ -28,8 +28,8 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet, bulletClone;
     public Transform firePoint;
     public bool canFire = true;
-    public bool tripleShot;
-    public bool machineGun;
+    public bool tripleShot = false;
+    public bool machineGun = false;
     public float fireRate;
 
     internal Tile prevTile;

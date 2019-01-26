@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TripleShot : PowerupBaseClass
+public class ChangeFireMode : PowerupBaseClass
 {
+
+    public bool changeToTriple;
+
     void Start()
     {
         //Set the main Color of the Material to green
@@ -13,12 +16,26 @@ public class TripleShot : PowerupBaseClass
     public override void ActivatePowerup()
     {
         base.ActivatePowerup();
-        player.tripleShot = true;
+        if (changeToTriple)
+        {
+            player.tripleShot = true;
+        }
+        else
+        {
+            player.machineGun = true;
+        }
     }
 
     public override void StopPowerup()
     {
         base.StopPowerup();
-        player.tripleShot = false;
+        if (changeToTriple)
+        {
+            player.tripleShot = false;
+        }
+        else
+        {
+            player.machineGun = false;
+        }
     }
 }
