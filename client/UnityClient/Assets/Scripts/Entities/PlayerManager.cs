@@ -32,6 +32,8 @@ namespace Entities
         {
             Transform t = _factory.BorrowGameObject(_playerPrefab);
             PlayerController p = t.gameObject.GetComponentInChildren<PlayerController>();
+            t.position = Main.Instance.worldManager.worldMap.spawnLocation;
+
             p.Color = _colors[_clients.Count];
             _clients.Add(package.sender, p);
         }
@@ -52,7 +54,7 @@ namespace Entities
             {
                 if (package.shooting)
                 {
-                    //player.Fire();
+                    player.Fire();
                 }
                 if (package.moving)
                 {
