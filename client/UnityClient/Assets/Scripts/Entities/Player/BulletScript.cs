@@ -14,8 +14,9 @@ public class BulletScript : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log(transform.rotation);
         rb = GetComponent<Rigidbody>();
-        rb.AddForce(transform.up * 1000);
+        rb.AddForce(transform.forward * 1000);
     }
 
     private void Update()
@@ -45,8 +46,9 @@ public class BulletScript : MonoBehaviour
 
     /*private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
+            Destroy(gameObject);
             explosionClone = Instantiate(explosionObject, transform.position, Quaternion.identity);
             Destroy(explosionClone, .5f);
             Destroy(gameObject);            
