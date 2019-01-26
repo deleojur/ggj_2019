@@ -6,25 +6,27 @@ public class BulletScript : MonoBehaviour
 {
     public GameObject impactPrefab;
     private Rigidbody rb;
-
+    private Color color; 
     private const float HEAL = 0.25f;
 
     internal Tile prevTile;
     internal Tile currentTile;
 
-    private void Start()
+    internal void Initialize(Color color)
     {
-        Debug.Log(transform.rotation);
         rb = GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * 1000);
+        rb.AddForce(transform.forward * 5000);
+
+        this.color = color;
+        transform.Find("Sphere").GetComponent<MeshRenderer>().material.color = color;
+        transform.Find("ExtraGlow").GetComponent<ParticleSystem>().startColor = color;
     }
 
     private void Update()
     {
         prevTile = currentTile;
         currentTile = Main.Instance.worldManager.worldMap.GetTileAt(gameObject.transform.position);
-        Debug.Log(currentTile.faction);
-        currentTile.render.material.color = Color.red;
+        currentTile.color = color;
         Impact();
     }
 
