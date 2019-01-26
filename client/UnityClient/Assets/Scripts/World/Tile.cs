@@ -43,6 +43,8 @@ public class Tile : MonoBehaviour
 
     internal void DealDamage(float damage)
     {
+        if(damage < 0)
+            Debug.Log(damage);
         StartCoroutine(LerpColor(faction, faction + damage));
         faction += damage;
     }

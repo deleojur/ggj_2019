@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    public GameObject explosionObject, explosionClone;
+    public GameObject impactPrefab;
     private Rigidbody rb;
+
+    private const float HEAL = 0.25f;
+
+    internal Tile prevTile;
+    internal Tile currentTile;
 
     private void Start()
     {
@@ -13,7 +18,32 @@ public class BulletScript : MonoBehaviour
         rb.AddForce(transform.up * 1000);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
+    {
+        prevTile = currentTile;
+        currentTile = Main.Instance.worldManager.worldMap.GetTileAt(gameObject.transform.position);
+        Debug.Log(currentTile.faction);
+        currentTile.render.material.color = Color.red;
+        Impact();
+    }
+
+    private void Impact()
+    {
+        // something to change about this tile!
+        if (currentTile.faction > 0.0f)
+        {
+            currentTile.DealDamage(-HEAL);
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Instantiate(impactPrefab, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
+
+    /*private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -21,5 +51,5 @@ public class BulletScript : MonoBehaviour
             Destroy(explosionClone, .5f);
             Destroy(gameObject);            
         }
-    }
+    }*/
 }
