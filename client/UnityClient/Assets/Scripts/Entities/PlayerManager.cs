@@ -48,17 +48,14 @@ namespace Entities
             {
                 if (package.shooting)
                 {
-                    player.Fire();
+                    //player.Fire();
                 }
                 if (package.moving)
                 {
+                    Debug.Log("move da player");
                     player.Move();
                 }
-                else player.StopMoving();
-                player.UpdateRotation(package.beta);
-                /*Vector3 direction = new Vector3(package.y, 0, package.y);
-                if (Vector3.SqrMagnitude(direction) > 1)
-                    client.UpdatePosition(direction.normalized * .01f);*/
+                player.Turn(package.beta);
             }
         }
     }
