@@ -30,8 +30,9 @@ io.on('connection', function(socket)
         io.to(master).emit('player_input', o);
     });
 
-    socket.on('join_game', function(client_name)
+    socket.on('join_game', function()
     {
+        console.log('joined game!');
         let address = socket.handshake.address;
         if (master === null)
         {
@@ -53,14 +54,8 @@ io.on('connection', function(socket)
                     io.to(socket.id).emit('error_alreadyJoined');
                     return false;
                 }
-                if (client_name === e.name)
-                {
-                    //name already used.
-                    io.to(socket.id).emit('error_usernameTaken');
-                    return false;
-                }
             }
-            let client = {name: client_name, id: socket.id, address: socket.handshake.address};
+            let client = {id: socket.id, address: socket.handshake.address};
             clients.push(client);
             io.to(master).emit('join_game', client);
             io.to(socket.id).emit('success_joinedGame');
