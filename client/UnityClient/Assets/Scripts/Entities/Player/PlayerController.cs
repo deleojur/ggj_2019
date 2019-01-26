@@ -265,7 +265,7 @@ public class PlayerController : MonoBehaviour
             GameObject muzzleClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(rotation.x, rotation.y - offSet, rotation.z));
             bulletClone = Instantiate(bullet, firePoint.transform.position, Quaternion.Euler(rotation.x, rotation.y + offSet, rotation.z));
 
-            bulletClone.GetComponent<BulletScript>().Initialize(Color);
+            bulletClone.GetComponent<BulletScript>().Initialize(Color, BulletType.Normal);
 
             offSet += 20;
 
@@ -283,7 +283,8 @@ public class PlayerController : MonoBehaviour
         float offSet = UnityEngine.Random.Range(-30, 30);
         muzzleFlashClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(-90, rotation.y, rotation.z));
         bulletClone = Instantiate(bullet, firePoint.transform.position, Quaternion.Euler(rotation.x, rotation.y + offSet, rotation.z));
-        bulletClone.GetComponent<BulletScript>().Initialize(Color);
+        bulletClone.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+        bulletClone.GetComponent<BulletScript>().Initialize(Color, BulletType.Small);
         Destroy(muzzleFlashClone, 1f);
         Destroy(bulletClone, 3f);
 
@@ -298,10 +299,10 @@ public class PlayerController : MonoBehaviour
         muzzleFlashClone = Instantiate(muzzleFlash, firePoint.transform.position + offset, Quaternion.Euler(-90, firePoint.transform.rotation.y, firePoint.transform.rotation.z));
         bulletClone = Instantiate(bullet, firePoint.transform.position + offset, firePoint.transform.rotation);
         bulletClone.transform.localScale = new Vector3(3f, 3f, 3f);
-        bulletClone.GetComponent<BulletScript>().Initialize(Color);
+        bulletClone.GetComponent<BulletScript>().Initialize(Color, BulletType.Big);
         Destroy(muzzleFlashClone, 1f);
         Destroy(bulletClone, 3f);
-        yield return new WaitForSeconds(fireRate);
+        yield return new WaitForSeconds(fireRate*2);
         canFire = true;
     }
 
@@ -310,7 +311,7 @@ public class PlayerController : MonoBehaviour
         canFire = false;
         muzzleFlashClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(-90, firePoint.transform.rotation.y, firePoint.transform.rotation.z));
         bulletClone = Instantiate(bullet, firePoint.transform.position, firePoint.transform.rotation);
-        bulletClone.GetComponent<BulletScript>().Initialize(Color);
+        bulletClone.GetComponent<BulletScript>().Initialize(Color, BulletType.Normal);
         Destroy(muzzleFlashClone, 1f);
         Destroy(bulletClone, 3f);
 
