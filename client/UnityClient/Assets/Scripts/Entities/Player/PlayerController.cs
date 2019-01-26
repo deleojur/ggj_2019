@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip m_EngineIdling;            // Audio to play when the tank isn't moving.
     [SerializeField] private AudioClip m_EngineDriving;           // Audio to play when the tank is moving.
     [SerializeField] private float m_PitchRange = 0.2f;           // The amount by which the pitch of the engine noises can vary.
+    [SerializeField] private Renderer[] _renderers;
 
     private string m_MovementAxisName;          // The name of the input axis for moving forward and back.
     private string m_TurnAxisName;              // The name of the input axis for turning.
@@ -26,6 +28,23 @@ public class PlayerController : MonoBehaviour
     public bool tripleShot;
     public bool machineGun;
     public float fireRate;
+
+    private Color _color;
+    internal Color Color
+    {
+        get
+        {
+            return _color;
+        }
+        set
+        {
+            _color = value;
+            for (int i = 0; i < _renderers.Length; i++)
+            {
+                _renderers[i].material.color = value;
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -108,10 +127,11 @@ public class PlayerController : MonoBehaviour
         float turn = beta * m_TurnSpeed * Time.deltaTime;
 
         // Make this into a rotation in the y axis.
-        Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
-
+        Quaternion turnRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y + turn, 0f);
+        Debug.LogError("turn: " + beta);
         // Apply this rotation to the rigidbody's rotation.
-        m_Rigidbody.MoveRotation(m_Rigidbody.rotation * turnRotation);
+        m_Rigidbody.rotation = turnRotation;
+        //m_Rigidbody.MoveRotation(m_Rigidbody.rotation * turnRotation);
     }
 
     public void Fire()

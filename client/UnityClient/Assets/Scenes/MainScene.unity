@@ -283,15 +283,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54d4c8ac6d30146d2986b492427ddf03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPrefab: {fileID: 466132095368391872, guid: 15932f2fbee10481590d124a7e17ed34,
+  _playerPrefab: {fileID: 3608949698409687869, guid: 15932f2fbee10481590d124a7e17ed34,
     type: 3}
   _factory: {fileID: 603458874}
   _colors:
   - {r: 0.3199733, g: 0.7830189, b: 0.23268957, a: 0}
   - {r: 0.12927197, g: 0.28065842, b: 0.7830189, a: 0}
-  - {r: 0, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 1, g: 0, b: 0, a: 0}
+  - {r: 1, g: 0, b: 0.54690456, a: 0}
+  - {r: 1, g: 0.9456897, b: 0, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
@@ -499,7 +499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seed: 100
-  worldScale: 1
+  worldScale: 3
   infected: 0.1
   width: 10
   height: 7
@@ -681,7 +681,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 18
+  orthographic size: 50
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -705,7 +705,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2055889949}
   m_LocalRotation: {x: 0.61902535, y: 0, z: 0, w: 0.78537107}
-  m_LocalPosition: {x: 32.1, y: 14.3, z: 25.9}
+  m_LocalPosition: {x: 86.8, y: 22.5, z: 60.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
