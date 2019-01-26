@@ -29,6 +29,19 @@ public class WorldMap
         mapMaterial = Resources.Load<Material>("Materials/BaseMaterial");
     }
 
+    internal List<Tile> PotentialTilesToDestory()
+    {
+        List<Tile> options = new List<Tile>();
+
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            if (tiles[i].faction < 1f && tiles[i].NeighborOfType(1f))
+                options.Add(tiles[i]);
+        }
+
+        return options;
+    }
+
     internal void Build(Expression worldMapData)
     {
         this.worldMapData = worldMapData;

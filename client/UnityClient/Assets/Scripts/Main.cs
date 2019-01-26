@@ -16,6 +16,7 @@ public class Main : MonoBehaviour
 
     internal GeneratorHandler generatorHandler;
     internal WorldManager worldManager;
+    internal EnvironmentalAI environmentalAI;
 
     // TODO: is false you are not allowed to join
     internal bool canJoin = false;
@@ -50,6 +51,8 @@ public class Main : MonoBehaviour
         worldManager = this.gameObject.GetComponent<WorldManager>();
         worldManager.Initialize();
 
+        environmentalAI = new EnvironmentalAI();
+
         StartRound();
     }
 
@@ -58,6 +61,9 @@ public class Main : MonoBehaviour
     {
         generatorHandler.DoUpdate();
         worldManager.DoUpdate();
+
+        if(canJoin)
+            environmentalAI.DoUpdate();
     }
 
     internal void StartRound()
@@ -99,6 +105,8 @@ public class Main : MonoBehaviour
 
     internal void EndRound()
     {
+        canJoin = false;
+
         // TODO: call when AI beats the freaking game
 
         // TODO: process powerups, prepare registers.

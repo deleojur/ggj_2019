@@ -46,11 +46,40 @@ public class Tile : MonoBehaviour
     }
 
     // TODO: damage methodes!
+    internal void DealDamage(float damage)
+    {
+        Debug.LogError("Deal damage!");
+        hp -= damage;
+        StartCoroutine("LerpColor");
+    }
 
+    private IEnumerator LerpColor()
+    {
+        float start = faction;
+        float end = 1 - hp;
+
+        float elapsed = 0.0f;
+        float total = 1.0f;
+        while (elapsed < total)
+        {
+            elapsed += Time.deltaTime;
+            SetColor((end - start) + end * elapsed);
+            yield return new WaitForEndOfFrame();
+        }
+
+        faction = 1 - hp;
+        Debug.LogError("new faction: " + faction);
+        yield return null;
+    }
 
     internal void SetColor()
     {
         render.material.color = Color.Lerp(Color.white, Color.black, faction);
+    }
+
+    internal void SetColor(float value)
+    {
+        render.material.color = Color.Lerp(Color.white, Color.black, value);
     }
 
     internal void AddNeighbor(Tile neighbor)
@@ -59,5 +88,16 @@ public class Tile : MonoBehaviour
 
         if (neighbor != null)
             neighbors.Add(neighbor);
+    }
+
+    internal bool NeighborOfType(float faction)
+    {
+        for(int i = 0; i < neighbors.Count; i++)
+        {
+            if (neighbors[i].faction == faction)
+                return true;
+        }
+
+        return false;
     }
 }
