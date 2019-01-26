@@ -3,3 +3,5 @@ start: TILEMAP 10 10 0:undefined 1:undefined 2:undefined 3:undefined 4:undefined
 rule: Do45 = TILEMAP 1 1 0:open(neighbors(closed)>4) > {0 = TILEMAP 1 1 0:closed}
 rule: Do45 = TILEMAP 1 1 0:closed(neighbors(open)>4) > {0 = TILEMAP 1 1 0:open}
 rule: Clear = TILEMAP 1 1 0:closed > {0 = TILEMAP 1 1 0:open} | {1(prob=2f) = TILEMAP 1 1 0:closed}
+rule: Clear = TILEMAP 1 1 0:open > {0 = TILEMAP 1 1 0:closed} | {1(prob=3f) = TILEMAP 1 1 0:open}
+rule: GrowClosed = TILEMAP 1 1 0:open(neighbors(closed)>3) > {0 = TILEMAP 1 1 0:closed} | {1 = TILEMAP 1 1 0:open}
