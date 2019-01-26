@@ -32,6 +32,9 @@ public class PlayerController : MonoBehaviour
     public bool machineGun;
     public float fireRate;
 
+    public float expPower;
+    public float expRadius;
+
     internal Tile prevTile;
     internal Tile currentTile;
 
@@ -231,7 +234,7 @@ public class PlayerController : MonoBehaviour
         Vector3 rotation = firePoint.transform.rotation.eulerAngles;
         float offSet = Random.Range(-30, 30);
         muzzleFlashClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(-90, rotation.y, rotation.z));
-        bulletClone = Instantiate(bullet, firePoint.transform.position, Quaternion.Euler(90, rotation.y, rotation.z + offSet));
+        bulletClone = Instantiate(bullet, firePoint.transform.position, Quaternion.Euler(rotation.x, rotation.y + offSet, rotation.z));
 
         Destroy(muzzleFlashClone, 1f);
         Destroy(bulletClone, 3f);
@@ -251,5 +254,23 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(fireRate);
         canFire = true;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Bullet"))
+        {
+            ContactPoint contact = collision.contacts[0];
+            Vector3 pos = contact.point;
+
+            Collider[] colliders = Physics.OverlapSphere(pos, expRadius);
+            foreach (Collider hit in colliders)
+            {
+                Rigidbody rb = hit.GetComponent<Rigidbody>();
+
+                if (rb != null)
+                    rb.AddExplosionForce(expPower, pos, expRadius);
+            }
+        }
     }
 }

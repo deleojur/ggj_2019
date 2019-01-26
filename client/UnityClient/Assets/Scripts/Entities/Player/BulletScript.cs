@@ -4,22 +4,20 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    public GameObject explosionObject, explosionClone;
     private Rigidbody rb;
 
     private void Start()
     {
+        Debug.Log(transform.rotation);
         rb = GetComponent<Rigidbody>();
-        rb.AddForce(transform.up * 1000);
+        rb.AddForce(transform.forward * 1000);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            explosionClone = Instantiate(explosionObject, transform.position, Quaternion.identity);
-            Destroy(explosionClone, .5f);
-            Destroy(gameObject);            
+            Destroy(gameObject);
         }
     }
 }

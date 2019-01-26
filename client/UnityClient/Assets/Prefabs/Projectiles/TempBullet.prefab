@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8781319734269811488}
   - component: {fileID: 8727774578907360266}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 2
   m_Range: 7
   m_SpotAngle: 30
@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 1604805443474810121}
   - component: {fileID: 2202085156597917937}
   - component: {fileID: 6414809712947665142}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ExtraGlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.37254903}
+      maxColor: {r: 1, g: 0, b: 0, a: 0.37254903}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -387,7 +387,7 @@ ParticleSystem:
         m_RotationOrder: 0
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -440,7 +440,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -4760,10 +4760,10 @@ GameObject:
   - component: {fileID: 3850311491570838397}
   - component: {fileID: 7151212622503030629}
   - component: {fileID: 60810741683072169}
-  - component: {fileID: 3916253979531641099}
   - component: {fileID: 47874894257368578}
   - component: {fileID: 3727998577559481483}
-  m_Layer: 0
+  - component: {fileID: 8282032211489747893}
+  m_Layer: 8
   m_Name: TempBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -4778,7 +4778,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6997316308104536956}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.733, y: 2.15, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1604805443474810121}
@@ -4940,7 +4940,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9299,20 +9299,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!136 &3916253979531641099
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6997316308104536956}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.00001001358
-  m_Height: 0.00002002716
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &47874894257368578
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9323,7 +9309,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -9341,5 +9327,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4306a447cfedc2a4685388a89a309b00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionObject: {fileID: 2845414284161153631, guid: d95065382f628e54fa71b9b927373ed5,
-    type: 3}
+--- !u!135 &8282032211489747893
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6997316308104536956}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
