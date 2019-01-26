@@ -220,11 +220,8 @@ public class PlayerController : MonoBehaviour
         float offSet = -20;
         for (int i = 0; i < 3; i++)
         {
-            GameObject muzzleClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(-90, rotation.y, rotation.z + offSet));
-            bulletClone = Instantiate(bullet, firePoint.transform.position, Quaternion.Euler(
-                90,
-                rotation.y,
-                rotation.z + offSet));
+            GameObject muzzleClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(rotation.x, rotation.y - offSet, rotation.z));
+            bulletClone = Instantiate(bullet, firePoint.transform.position, Quaternion.Euler(rotation.x, rotation.y + offSet, rotation.z));
 
             bulletClone.GetComponent<BulletScript>().Initialize(Color);
 
