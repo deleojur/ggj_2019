@@ -10069,9 +10069,9 @@ MonoBehaviour:
   - {fileID: 2365156}
   - {fileID: 2310222}
   - {fileID: 2342804}
-  _colorWheel: {fileID: 2607493291683813282}
-  _colorWheelOutline: {fileID: 7348564520556804481}
-  _colorChangeDuration: 3
+  playerCollisionParticle: {fileID: 499580706, guid: 933951a03b28f8f4eaed68bffd6d2f93,
+    type: 3}
+  killParticle: {fileID: 0}
   muzzleFlash: {fileID: 7997701881341948782, guid: 430cf2ce41cddb04e841ef22d835b376,
     type: 3}
   muzzleFlashClone: {fileID: 0}
