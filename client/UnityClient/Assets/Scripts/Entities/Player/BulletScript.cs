@@ -5,6 +5,13 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     public GameObject explosionObject, explosionClone;
+    private Rigidbody rb;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        rb.AddForce(transform.up * 1000);
+    }
 
     private void OnTriggerEnter(Collider other)
     {

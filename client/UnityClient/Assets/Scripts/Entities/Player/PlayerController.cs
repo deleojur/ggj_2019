@@ -19,6 +19,14 @@ public class PlayerController : MonoBehaviour
     private float m_OriginalPitch;              // The pitch of the audio source at the start of the scene.
     private ParticleSystem[] m_particleSystems; // References to all the particles systems used by the Tanks
 
+    public GameObject muzzleFlash, muzzleFlashClone;
+    public GameObject bullet, bulletClone;
+    public Transform firePoint;
+    public bool canFire = true;
+    public bool tripleShot;
+    public bool machineGun;
+    public float fireRate;
+
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -104,5 +112,71 @@ public class PlayerController : MonoBehaviour
 
         // Apply this rotation to the rigidbody's rotation.
         m_Rigidbody.MoveRotation(m_Rigidbody.rotation * turnRotation);
+    }
+
+    public void Fire()
+    {
+        if (tripleShot && canFire)
+        {
+            StartCoroutine(TripleShot());
+        }
+        else if (machineGun && canFire)
+        {
+            StartCoroutine(MachineGun());
+        }
+        else if (canFire)
+        {
+            StartCoroutine(NormalShot());
+        }
+    }
+
+    IEnumerator TripleShot()
+    {
+        canFire = false;
+        Vector3 rotation = firePoint.transform.rotation.eulerAngles;
+        float offSet = -20;
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject muzzleClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(-90, rotation.y, rotation.z + offSet));
+            bulletClone = Instantiate(bullet, firePoint.transform.position, Quaternion.Euler(
+                90,
+                rotation.y,
+                rotation.z + offSet));
+
+            offSet += 20;
+
+            Destroy(muzzleClone, 1f);
+            Destroy(bulletClone, 3f);
+        }
+        yield return new WaitForSeconds(fireRate);
+        canFire = true;
+    }
+
+    IEnumerator MachineGun()
+    {
+        canFire = false;
+        Vector3 rotation = firePoint.transform.rotation.eulerAngles;
+        float offSet = Random.Range(-30, 30);
+        muzzleFlashClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(-90, rotation.y, rotation.z));
+        bulletClone = Instantiate(bullet, firePoint.transform.position, Quaternion.Euler(90, rotation.y, rotation.z + offSet));
+
+        Destroy(muzzleFlashClone, 1f);
+        Destroy(bulletClone, 3f);
+
+        yield return new WaitForSeconds(fireRate/5);
+        canFire = true;
+    }
+
+    IEnumerator NormalShot()
+    {
+        canFire = false;
+        muzzleFlashClone = Instantiate(muzzleFlash, firePoint.transform.position, Quaternion.Euler(-90, firePoint.transform.rotation.y, firePoint.transform.rotation.z));
+        bulletClone = Instantiate(bullet, firePoint.transform.position, firePoint.transform.rotation);
+
+        Destroy(muzzleFlashClone, 1f);
+        Destroy(bulletClone, 3f);
+
+        yield return new WaitForSeconds(fireRate);
+        canFire = true;
     }
 }

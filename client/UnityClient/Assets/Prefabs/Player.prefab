@@ -10015,6 +10015,7 @@ Transform:
   - {fileID: 488814}
   - {fileID: 435794}
   - {fileID: 22459830}
+  - {fileID: 3932696671884064150}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10251,10 +10252,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c9d1ee0608ae6e47a9e6a30a8b73d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlayerNumber: 1
-  m_Speed: 12
+  m_Speed: 6
   m_TurnSpeed: 3
   m_MovementAudio: {fileID: 0}
   m_EngineIdling: {fileID: 0}
   m_EngineDriving: {fileID: 0}
   m_PitchRange: 0.2
+  muzzleFlash: {fileID: 7997701881341948782, guid: 430cf2ce41cddb04e841ef22d835b376,
+    type: 3}
+  muzzleFlashClone: {fileID: 0}
+  bullet: {fileID: 6997316308104536956, guid: 531dadd52720bd549b12819dc28a23df, type: 3}
+  bulletClone: {fileID: 0}
+  firePoint: {fileID: 3932696671884064150}
+  canFire: 1
+  tripleShot: 0
+  machineGun: 1
+  fireRate: 0.2
+--- !u!1 &8327942647911223629
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3932696671884064150}
+  m_Layer: 9
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3932696671884064150
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8327942647911223629}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.61, z: 1.38}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3608949698409687847}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
