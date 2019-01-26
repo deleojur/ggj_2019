@@ -1,0 +1,3 @@
+SplitTiles(5, 5)
+IterateRuleLSystem("Resolve*")
+TransformSymbols("undefined", "open")

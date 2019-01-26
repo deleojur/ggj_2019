@@ -1,0 +1,2 @@
+IterateRuleLSystem("Clear")
+ExecuteRuleCellular("Do45", D3+2)
