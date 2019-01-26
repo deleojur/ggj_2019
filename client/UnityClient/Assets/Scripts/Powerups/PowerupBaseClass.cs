@@ -11,6 +11,9 @@ public class PowerupBaseClass : MonoBehaviour
     private float timer;
     private bool startTimer;
 
+    public GameObject particles;
+    private GameObject particlesClone;
+
     private void Update()
     {
         if (startTimer)
@@ -45,6 +48,8 @@ public class PowerupBaseClass : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            particlesClone = Instantiate(particles, other.transform.position, Quaternion.Euler(-90, transform.rotation.y, transform.rotation.z));
+
             player = other.gameObject.GetComponent<PlayerController>();
             ActivatePowerup();
 

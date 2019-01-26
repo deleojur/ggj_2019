@@ -45,9 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnTime: 8
   powerups:
-  - {fileID: 1152729449, guid: 207d8cdb710a3164a8e5dbff13432624, type: 3}
-  - {fileID: 1356678136, guid: ac0b6bb2de2125e4d94d987a30606a37, type: 3}
   - {fileID: 1079450414, guid: 135b9c8b3f0f0b74aabd23e4538e6b0a, type: 3}
   - {fileID: 8972820865368865328, guid: 516e777af2f64044fbfcbdcf68c8170c, type: 3}
-  - {fileID: 4837702827535053469, guid: 96f213c24ebdf8840a2f0b8891a71b9d, type: 3}
-  - {fileID: 2321196717820516332, guid: d33ad2cae21b8d94fa4930f0d47a3565, type: 3}

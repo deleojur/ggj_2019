@@ -26,6 +26,11 @@ public class PlayerController : MonoBehaviour
     private float m_OriginalPitch;              // The pitch of the audio source at the start of the scene.
     private ParticleSystem[] m_particleSystems; // References to all the particles systems used by the Tanks
 
+    public GameObject playerCollisionParticle;
+    private GameObject playerCollisionParticleClone;
+    public GameObject killParticle;
+    private GameObject killParticleClone;
+
     public GameObject muzzleFlash, muzzleFlashClone;
     public GameObject bullet, bulletClone;
     public Transform firePoint;
@@ -155,6 +160,9 @@ public class PlayerController : MonoBehaviour
     private void Die()
     {
         // todo: wait for dying, do a funny animation
+        killParticleClone = Instantiate(killParticle, transform.position, Quaternion.identity);
+        Destroy(killParticleClone, 1f);
+
         Destroy(gameObject);
     }
 
@@ -311,6 +319,11 @@ public class PlayerController : MonoBehaviour
                 if (rb != null)
                     rb.AddExplosionForce(expPower, pos, expRadius);
             }
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                playerCollisionParticleClone = Instantiate(playerCollisionParticle, pos, Quaternion.identity);
+                Destroy(playerCollisionParticleClone, 1f);
+            }            
         }
     }
 }
