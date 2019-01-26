@@ -133,7 +133,12 @@ public class PlayerController : MonoBehaviour
     private void Die()
     {
         // todo: wait for dying, do a funny animation
-        Destroy(gameObject);
+
+        Main.Instance.PlayerDied();
+        this.gameObject.SetActive(false);
+
+        // Destroy when starting new round!
+        // Destroy(gameObject);
     }
 
     private void EngineAudio()

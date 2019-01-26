@@ -14,11 +14,6 @@ public class WorldManager : MonoBehaviour
         worldMap.Initialize();
     }
 
-    internal void DoUpdate()
-    {
-
-    }
-
     internal void ProcessWorldMap(Expression worldMapData)
     {
         // save map data

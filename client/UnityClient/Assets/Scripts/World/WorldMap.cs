@@ -257,4 +257,14 @@ public class WorldMap
     }
     #endregion
 
+    internal int TilesWithColor(Color color)
+    {
+        int c = 0;
+        for(int i = 0; i < tiles.Length; i++)
+        {
+            if (tiles[i].color == color)
+                c++;
+        }
+        return c;
+    }
 }

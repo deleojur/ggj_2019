@@ -23,10 +23,17 @@ namespace Entities
         private Factory _factory;
 
         [SerializeField]
-        private Color[] _colors;
+        internal Color[] _colors;
 
         private Dictionary<string, PlayerController> _clients;
         public int PlayerAmount { get { return _clients.Count; } }
+        public PlayerController GetPlayer(Color color)
+        {
+            foreach(KeyValuePair<string, PlayerController> client in _clients)
+                if (client.Value.Color == color)
+                    return client.Value;
+            return null;
+        }
 
         private DebugKeys[] _debugKeys = new DebugKeys[2]
         {
@@ -52,24 +59,25 @@ namespace Entities
                 {
                     Transform t = _factory.BorrowGameObject(_playerPrefab);
                     PlayerController p = t.gameObject.GetComponentInChildren<PlayerController>();
-                    t.position = Main.Instance.worldManager.worldMap.spawnLocation;
                     p.ActivateDebugMode(_debugKeys[_debugIndex++]);
                     p.Color = _colors[_clients.Count];
                     _clients.Add(string.Format("debug_tank_{0}", _debugIndex), p);
-                    Main.Instance.PlayerUpdate();
+                    p.gameObject.SetActive(false);
+                    Main.Instance.PlayerJoined();
                 }
             }
         }
 
         private void SocketManager_PlayerConnected(ConnectionPackage package)
         {
+            Debug.LogError("connection");
             Transform t = _factory.BorrowGameObject(_playerPrefab);
             PlayerController p = t.gameObject.GetComponentInChildren<PlayerController>();
-            t.position = Main.Instance.worldManager.worldMap.spawnLocation;
 
             p.Color = _colors[_clients.Count];
             _clients.Add(package.sender, p);
-            Main.Instance.PlayerUpdate();
+            p.gameObject.SetActive(false);
+            Main.Instance.PlayerJoined();
         }
 
         private void SocketManager_PlayerDisconnected(NetworkPackage package)
@@ -78,8 +86,31 @@ namespace Entities
             {
                 _factory.ReturnGameObject(_clients[package.sender].transform);
                 _clients.Remove(package.sender);
-                Main.Instance.PlayerUpdate();
+                Main.Instance.PlayerJoined();
+            }
+        }
 
+        internal void RemoveAllClients()
+        {
+            _debugIndex = 0;
+            _clients.Clear();
+        }
+
+        internal void RemoveClient(PlayerController remove)
+        {
+            foreach(KeyValuePair<string, PlayerController> client in _clients)
+            {
+                if (client.Value == remove)
+                    _clients.Remove(client.Key);
+            }
+        }
+
+        internal void ActivateClients()
+        {
+            foreach(KeyValuePair<string, PlayerController> client in _clients)
+            {
+                client.Value.gameObject.SetActive(true);
+                client.Value.gameObject.transform.position = Main.Instance.worldManager.worldMap.spawnLocation;
             }
         }
 

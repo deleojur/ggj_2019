@@ -17,6 +17,9 @@ public class PowerupSpawner : MonoBehaviour
 
     void Spawn()
     {
+        if (Main.Instance.state != (int)GameState.Game)
+            return;
+
         Debug.Log("Spawn powerup");
         index = Random.Range(0, powerups.Length);
         tile = Main.Instance.worldManager.worldMap.GetValidPowerUpTile();
