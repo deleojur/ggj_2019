@@ -29,7 +29,9 @@ public class GeneratorHandler : MonoBehaviour
 
         // set registers
         // TOOD: do we want to do this with a register or just some noise? noise huh?
-        generator.system.SetRegister("Infected", Main.Instance.infected);
+        generator.system.SetRegister("infected", Main.Instance.infected);
+        generator.system.SetRegister("width", Main.Instance.width);
+        generator.system.SetRegister("height", Main.Instance.height);
 
         generator.Prepare();
 
@@ -73,11 +75,8 @@ public class GeneratorHandler : MonoBehaviour
 
     public void Done()
     {
-        Debug.Log("Done");
         callback?.Invoke(generator.result);
         thread = null;
-        //if (this.gameObject.activeSelf)
-//           this.gameObject.SetActive(false);
     }
 
     private void SetProgress(float p)

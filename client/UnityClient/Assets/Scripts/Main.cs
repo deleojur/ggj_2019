@@ -10,6 +10,8 @@ public class Main : MonoBehaviour
 
     [Header("Registers")]
     [SerializeField] internal float infected = 0.1f;
+    [SerializeField] internal int width = 10;
+    [SerializeField] internal int height = 5;
 
     internal GeneratorHandler generatorHandler;
     internal WorldManager worldManager;
@@ -36,6 +38,8 @@ public class Main : MonoBehaviour
 
         worldManager = this.gameObject.GetComponent<WorldManager>();
         worldManager.Initialize();
+
+        generatorHandler.StartGenerating(worldManager.ProcessWorldMap);
     }
 
     // idem Start() comments!!
@@ -44,12 +48,5 @@ public class Main : MonoBehaviour
         generatorHandler.DoUpdate();
         worldManager.DoUpdate();
     }
-
-    public void ClickGenerate()
-    {
-        generatorHandler.StartGenerating(worldManager.ProcessWorldMap);
-    }
-
-
 }
 

@@ -35,5 +35,5 @@ grammar: true
 recipe: true
 showMembers: true
 
-register: width 5
-register: height 5
+register: width 10
+register: height 7

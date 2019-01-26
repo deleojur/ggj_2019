@@ -27,7 +27,6 @@ public class WorldMap
         random = new PhRandom(Main.Instance.seed);
 
         mapParent = Main.Instance.transform.Find("MapParent").gameObject;
-        Debug.Log(mapParent);
         mapMaterial = Resources.Load<Material>("Materials/BaseMaterial");
     }
 
