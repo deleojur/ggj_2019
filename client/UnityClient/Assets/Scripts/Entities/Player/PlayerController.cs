@@ -110,8 +110,6 @@ public class PlayerController : MonoBehaviour
         prevTile = currentTile;
         currentTile = Main.Instance.worldManager.worldMap.GetTileAt(gameObject.transform.position);
 
-        currentTile.render.material.color = Color.red;
-
         if (DeathByGap())
             return;
     }
