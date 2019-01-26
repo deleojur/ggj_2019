@@ -12,13 +12,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip m_EngineIdling;            // Audio to play when the tank isn't moving.
     [SerializeField] private AudioClip m_EngineDriving;           // Audio to play when the tank is moving.
     [SerializeField] private float m_PitchRange = 0.2f;           // The amount by which the pitch of the engine noises can vary.
+    [SerializeField] private Rigidbody m_Rigidbody;              // Reference used to move the tank.
     [SerializeField] private Renderer[] _renderers;
 
     internal float Speed { get { return m_Speed; } set { m_Speed = value; } }
+    internal Rigidbody Rigidbody { get { return m_Rigidbody; } set { m_Rigidbody = value; } }
 
     private string m_MovementAxisName;          // The name of the input axis for moving forward and back.
     private string m_TurnAxisName;              // The name of the input axis for turning.
-    private Rigidbody m_Rigidbody;              // Reference used to move the tank.
     private float m_MovementInputValue;         // The current value of the movement input.
     private float m_TurnInputValue;             // The current value of the turn input.
     private float m_OriginalPitch;              // The pitch of the audio source at the start of the scene.
