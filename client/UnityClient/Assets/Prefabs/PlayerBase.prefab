@@ -10252,8 +10252,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c9d1ee0608ae6e47a9e6a30a8b73d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Speed: 6
-  m_TurnSpeed: 12
+  m_Speed: 9
+  m_TurnSpeed: 6
   m_MovementAudio: {fileID: 0}
   m_EngineIdling: {fileID: 0}
   m_EngineDriving: {fileID: 0}
