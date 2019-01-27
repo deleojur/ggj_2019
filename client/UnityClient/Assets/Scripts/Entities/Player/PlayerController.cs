@@ -188,6 +188,7 @@ public class PlayerController : MonoBehaviour
 
     private void EngineAudio()
     {
+        return;
         // If there is no input (the tank is stationary)...
         if (Mathf.Abs(m_MovementInputValue) < 0.1f && Mathf.Abs(m_TurnInputValue) < 0.1f)
         {
