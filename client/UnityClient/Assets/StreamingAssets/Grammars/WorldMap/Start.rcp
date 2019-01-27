@@ -1,3 +1,4 @@
 CreateTileMap(width, height, "undefined")
-IterateRule("PlaceStart")
+//IterateRule("PlaceStart")
 IterateRuleCellular("BlockEdges")
+IterateRuleLSystem("BlockEdges")

@@ -35,5 +35,18 @@ grammar: true
 recipe: true
 showMembers: true
 
+module:
+name: "SpawnPositions"
+alphabet: "Alphabet"
+position: (212,-20)
+type: Recipe
+match: None
+inputs: "SeedTerrain"
+grammar: true
+recipe: true
+showMembers: true
+
 register: width 10
 register: height 7
+register: maxPlayers 4
+register: players 4
