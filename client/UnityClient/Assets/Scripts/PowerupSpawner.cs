@@ -20,10 +20,8 @@ public class PowerupSpawner : MonoBehaviour
         if (Main.Instance.state != (int)GameState.Game)
             return;
 
-        Debug.Log("Spawn powerup");
         index = Random.Range(0, powerups.Length);
         tile = Main.Instance.worldManager.worldMap.GetValidPowerUpTile();
         Instantiate(powerups[index], tile.transform.position, tile.transform.rotation);
     }
-
 }

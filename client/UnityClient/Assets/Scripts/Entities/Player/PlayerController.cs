@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody m_Rigidbody;              // Reference used to move the tank.
     [SerializeField] private Renderer[] _renderers;
     [SerializeField] private Image _colorWheel;
-    [SerializeField] private Image _colorWheelOutline;
     [SerializeField] private float _colorChangeDuration = 3;
 
     internal float Speed { get { return m_Speed; } set { m_Speed = value; } }
@@ -150,12 +149,10 @@ public class PlayerController : MonoBehaviour
         if (_colorWheel.fillAmount > 0)
         {
             _colorWheel.fillAmount -= (1 / _colorChangeDuration) * Time.fixedDeltaTime;
-            _colorWheelOutline.fillAmount -= (1 / _colorChangeDuration) * Time.fixedDeltaTime;
         } else
         {
             _fireColor = _color;
             _colorWheel.fillAmount = 0;
-            _colorWheelOutline.fillAmount = 0;
         }
 
         if (DeathByGap())
@@ -374,7 +371,6 @@ public class PlayerController : MonoBehaviour
 
         _fireColor = color;
         _colorWheel.fillAmount = 1;
-        _colorWheelOutline.fillAmount = 1;
-        _colorWheel.color = color;
+        _colorWheel.color = Main.ChangeColorBrightness(color, -0.3f);
     }
 }

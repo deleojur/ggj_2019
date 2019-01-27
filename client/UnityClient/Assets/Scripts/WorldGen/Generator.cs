@@ -19,9 +19,6 @@ public class Generator
 
         string fullPath = System.IO.Path.Combine(Application.streamingAssetsPath, file);
         system.OpenFromFile(fullPath);
-
-        Debug.Log(fullPath);
-        Debug.Log(system);
     }
 
     public virtual void Prepare()

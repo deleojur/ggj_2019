@@ -157,16 +157,16 @@ public class Main : MonoBehaviour
         {
             switch (playerManager._colors[winner].ToString())
             {
-                case "RGBA(1.000, 0.000, 0.046, 0.000)":
+                case "RGBA(1.000, 0.000, 0.046, 1.000)":
                     winnerName = "Red";
                     break;
-                case "RGBA(1.000, 0.925, 0.000, 0.000)":
+                case "RGBA(1.000, 0.925, 0.000, 1.000)":
                     winnerName = "Yellow";
                     break;
-                case "RGBA(0.000, 1.000, 0.101, 0.000)":
+                case "RGBA(0.000, 1.000, 0.101, 1.000)":
                     winnerName = "Green";
                     break;
-                case "RGBA(0.000, 0.980, 1.000, 0.000)":
+                case "RGBA(0.000, 0.980, 1.000, 1.000)":
                     winnerName = "Blue";
                     break;
             }
