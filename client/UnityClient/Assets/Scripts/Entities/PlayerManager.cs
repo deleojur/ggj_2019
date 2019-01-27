@@ -88,7 +88,7 @@ namespace Entities
             if (_clients.ContainsKey(package.sender))
             {
                 Main.Instance.PlayerDied();
-                Destroy(_clients[package.sender].transform);
+                Destroy(_clients[package.sender].gameObject);
                 _clients.Remove(package.sender);
                 Main.Instance.PlayerJoined();
             }
