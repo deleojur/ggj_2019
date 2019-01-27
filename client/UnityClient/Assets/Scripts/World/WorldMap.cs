@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class WorldMap
 {
-    internal Vector3 spawnLocation;
+    internal Vector3[] spawnLocations;
     internal int mapWidth;
     internal int mapHeight;
 
@@ -24,6 +24,8 @@ public class WorldMap
     internal void Initialize()
     {
         random = new PhRandom(Main.Instance.seed);
+
+        spawnLocations = new Vector3[Main.Instance.maxPlayers];
 
         mapParent = Main.Instance.transform.Find("MapParent").gameObject;
         mapMaterial = Resources.Load<Material>("Materials/BaseMaterial");
@@ -64,7 +66,11 @@ public class WorldMap
         for(int i = 0; i < tiles.Length; i++)
         {
             if (tiles[i].symbol.Label == "start")
-                spawnLocation = tiles[i].gameObject.transform.position;
+            {
+                int index = tiles[i].symbol.GetMemberValue<int>("id", -1);
+                if(index >= 0)
+                    spawnLocations[index] = tiles[i].gameObject.transform.position;
+            }
         }
     }
 

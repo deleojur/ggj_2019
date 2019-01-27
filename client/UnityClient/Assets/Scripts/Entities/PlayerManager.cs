@@ -61,6 +61,7 @@ namespace Entities
                     PlayerController p = t.gameObject.GetComponentInChildren<PlayerController>();
                     p.ActivateDebugMode(_debugKeys[_debugIndex++]);
                     p.Color = _colors[_clients.Count];
+                    p.id = PlayerAmount;
                     _clients.Add(string.Format("debug_tank_{0}", _debugIndex), p);
                     p.gameObject.SetActive(false);
                     Main.Instance.PlayerJoined();
@@ -75,6 +76,7 @@ namespace Entities
             PlayerController p = t.gameObject.GetComponentInChildren<PlayerController>();
 
             p.Color = _colors[_clients.Count];
+            p.id = PlayerAmount;
             _clients.Add(package.sender, p);
             p.gameObject.SetActive(false);
             Main.Instance.PlayerJoined();
@@ -110,7 +112,7 @@ namespace Entities
             foreach(KeyValuePair<string, PlayerController> client in _clients)
             {
                 client.Value.gameObject.SetActive(true);
-                client.Value.gameObject.transform.position = Main.Instance.worldManager.worldMap.spawnLocation;
+                client.Value.gameObject.transform.position = Main.Instance.worldManager.worldMap.spawnLocations[client.Value.id];
             }
         }
 
