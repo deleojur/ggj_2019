@@ -873,15 +873,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPlayers: 4
-  maxPower: 300
-  startTimer: 1.6
-  endTimer: 0.02
+  maxPower: 150
+  startTimer: 0.8
+  endTimer: 0.001
   startMinDmg: 0.1
   startMaxDmg: 0.6
-  endMinDmg: 0.8
+  endMinDmg: 1
   endMaxDmg: 1
   startEffect: 35
-  endEffect: 50
+  endEffect: 150
   seed: 100
   worldScale: 1.5
   width: 10
