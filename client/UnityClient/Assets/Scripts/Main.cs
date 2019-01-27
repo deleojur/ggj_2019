@@ -30,6 +30,9 @@ public class Main : MonoBehaviour
     [SerializeField] internal int width = 10;
     [SerializeField] internal int height = 5;
 
+    [Header("Awesomesauce")]
+    [SerializeField] private CameraShakes _shakes;
+
     internal GeneratorHandler generatorHandler;
     internal WorldManager worldManager;
     internal EnvironmentalAI environmentalAI;
@@ -81,6 +84,11 @@ public class Main : MonoBehaviour
 
         state = (int)GameState.Room;
         OpenRoom();
+    }
+
+    public void ShakeItLikeAPolaroid(float duration, float magnitude)
+    {
+        _shakes.Shake(duration, magnitude);
     }
 
     // idem Start() comments!!

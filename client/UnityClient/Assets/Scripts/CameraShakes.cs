@@ -5,9 +5,6 @@ using MEC;
 
 public class CameraShakes : MonoBehaviour
 {
-    [SerializeField]
-    private float _shakeMagnitude;
-
     private float _startTime;
 
     private Camera _camera;
@@ -22,12 +19,12 @@ public class CameraShakes : MonoBehaviour
         _originalPosition = _transform.localPosition;
     }
 
-    internal void Shake(float duration)
+    internal void Shake(float duration, float magnitude)
     {
-        Timing.RunCoroutine(ShakeCamera(duration));
+        Timing.RunCoroutine(ShakeCamera(duration, magnitude));
     }
 
-    private IEnumerator<float> ShakeCamera(float duration)
+    private IEnumerator<float> ShakeCamera(float duration, float magnitude)
     {
         float elapsedTime = 0f;
 
@@ -35,8 +32,8 @@ public class CameraShakes : MonoBehaviour
         {
             yield return 0;
 
-            float x = _originalPosition.x + Random.Range(-1f, 1f) * _shakeMagnitude;
-            float y = _originalPosition.y + Random.Range(-1f, 1f) * _shakeMagnitude;
+            float x = _originalPosition.x + Random.Range(-1f, 1f) * magnitude;
+            float y = _originalPosition.y + Random.Range(-1f, 1f) * magnitude;
 
             transform.localPosition = new Vector3(x, y, _originalPosition.z);
 

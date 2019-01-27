@@ -164,6 +164,7 @@ public class PlayerController : MonoBehaviour
         if (currentTile.faction >= 1.0f)
         {
             dead = true;
+            Main.Instance.ShakeItLikeAPolaroid(.65f, 2f);
             StartCoroutine("Die");
             return true;
         }
@@ -342,6 +343,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            Main.Instance.ShakeItLikeAPolaroid(.5f, 1f);
             ContactPoint contact = collision.contacts[0];
             Vector3 pos = contact.point;
 
@@ -363,6 +365,8 @@ public class PlayerController : MonoBehaviour
 
     internal void ChangeFireColor(Color color)
     {
+        Main.Instance.ShakeItLikeAPolaroid(.5f, .5f);
+
         if (color == _fireColor && _colorWheel.fillAmount > 0)
             return;
 
