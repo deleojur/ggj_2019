@@ -52,7 +52,7 @@ namespace Entities
 
         private void AddEntityToDictionary(GameObject g_obj, string name)
         {
-            string guid = GUID.Generate().ToString();
+            string guid = "";
             g_obj.name = string.Format("{0}@{1}", name, guid);
 
             Entity entity = g_obj.GetComponent<Entity>();

@@ -177,6 +177,7 @@ public class PlayerController : MonoBehaviour
         killParticleClone = Instantiate(killParticle, transform.position, Quaternion.identity);
         Destroy(killParticleClone, 1f);
 
+        Main.Instance.PlayerDied();
         gameObject.SetActive(false);
         // Destroy when starting new round!
         // Destroy(gameObject);
