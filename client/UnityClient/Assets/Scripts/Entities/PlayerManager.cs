@@ -53,7 +53,7 @@ namespace Entities
         private int _debugIndex = 0;
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && Main.Instance.state == (int)GameState.Room)
             {
                 if (_debugIndex < _debugKeys.Length)
                 {
@@ -61,6 +61,7 @@ namespace Entities
                     PlayerController p = t.gameObject.GetComponentInChildren<PlayerController>();
                     p.ActivateDebugMode(_debugKeys[_debugIndex++]);
                     p.Color = _colors[_clients.Count];
+                    p.id = PlayerAmount;
                     _clients.Add(string.Format("debug_tank_{0}", _debugIndex), p);
                     p.gameObject.SetActive(false);
                     Main.Instance.PlayerJoined();
@@ -70,11 +71,14 @@ namespace Entities
 
         private void SocketManager_PlayerConnected(ConnectionPackage package)
         {
-            Debug.LogError("connection");
+            if (Main.Instance.state != (int)GameState.Room)
+                return;
+            
             Transform t = _factory.BorrowGameObject(_playerPrefab);
             PlayerController p = t.gameObject.GetComponentInChildren<PlayerController>();
 
             p.Color = _colors[_clients.Count];
+            p.id = PlayerAmount;
             _clients.Add(package.sender, p);
             p.gameObject.SetActive(false);
             Main.Instance.PlayerJoined();
@@ -84,6 +88,7 @@ namespace Entities
         {
             if (_clients.ContainsKey(package.sender))
             {
+                Main.Instance.PlayerDied();
                 _factory.ReturnGameObject(_clients[package.sender].transform);
                 _clients.Remove(package.sender);
                 Main.Instance.PlayerJoined();
@@ -110,7 +115,7 @@ namespace Entities
             foreach(KeyValuePair<string, PlayerController> client in _clients)
             {
                 client.Value.gameObject.SetActive(true);
-                client.Value.gameObject.transform.position = Main.Instance.worldManager.worldMap.spawnLocation;
+                client.Value.gameObject.transform.position = Main.Instance.worldManager.worldMap.spawnLocations[client.Value.id];
             }
         }
 

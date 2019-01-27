@@ -6,7 +6,7 @@ var io = require('socket.io')({
     transports: ['websocket']
 });
 var clients = [];
-var colors = [0xFF0500, 0xFF6A00, 0xFFDA00, 0x5CFF00, 0xFFF100, 0x00FF8C, 0x00EEFF, 0x0055FF, 0x7500FF, 0xDF00FF, 0xFF0081];
+var colors = [0xFF000C, 0xFFEC00, 0x00FF1A, 0x00FAFF];
 var master = null;
 
 require('dns').lookup(require('os').hostname(), function (err, add, fam)
