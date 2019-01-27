@@ -10068,7 +10068,6 @@ MonoBehaviour:
   - {fileID: 2310222}
   - {fileID: 2342804}
   _colorWheel: {fileID: 2607493291683813282}
-  _colorWheelOutline: {fileID: 0}
   _colorChangeDuration: 3
   playerCollisionParticle: {fileID: 499580706, guid: 933951a03b28f8f4eaed68bffd6d2f93,
     type: 3}
@@ -10100,6 +10099,7 @@ GameObject:
   - component: {fileID: 6356656988203034429}
   - component: {fileID: 3184708673414180288}
   - component: {fileID: 2607493291683813282}
+  - component: {fileID: 4048084100115815072}
   m_Layer: 0
   m_Name: Health Wheel
   m_TagString: Untagged
@@ -10163,6 +10163,18 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &4048084100115815072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4590275485150562099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c2bcdb687a324f2498efb221fa0d190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8327942647911223629
 GameObject:
   m_ObjectHideFlags: 0
