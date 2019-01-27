@@ -53,7 +53,7 @@ namespace Entities
         private int _debugIndex = 0;
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && Main.Instance.state != (int)GameState.Room)
+            if (Input.GetKeyDown(KeyCode.Space) && Main.Instance.state == (int)GameState.Room)
             {
                 if (_debugIndex < _debugKeys.Length)
                 {
