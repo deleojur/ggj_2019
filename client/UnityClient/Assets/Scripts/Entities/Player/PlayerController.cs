@@ -165,7 +165,6 @@ public class PlayerController : MonoBehaviour
     {
         if (currentTile.faction >= 1.0f)
         {
-            dead = true;
             Main.Instance.ShakeItLikeAPolaroid(.65f, 2f);
             StartCoroutine("Die");
             return true;
@@ -181,6 +180,7 @@ public class PlayerController : MonoBehaviour
         Destroy(killParticleClone, 1f);
 
         Main.Instance.PlayerDied();
+        dead = true;
         gameObject.SetActive(false);
         // Destroy when starting new round!
         // Destroy(gameObject);
