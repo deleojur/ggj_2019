@@ -111,10 +111,13 @@ namespace Entities
 
         internal void ActivateClients()
         {
-            foreach(KeyValuePair<string, PlayerController> client in _clients)
+            foreach (KeyValuePair<string, PlayerController> client in _clients)
             {
-                client.Value.gameObject.SetActive(true);
-                client.Value.gameObject.transform.position = Main.Instance.worldManager.worldMap.spawnLocations[client.Value.id];
+                if (!client.Value.dead)
+                {
+                    client.Value.gameObject.SetActive(true);
+                    client.Value.gameObject.transform.position = Main.Instance.worldManager.worldMap.spawnLocations[client.Value.id];
+                }
             }
         }
 
