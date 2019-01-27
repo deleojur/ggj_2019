@@ -10069,6 +10069,9 @@ MonoBehaviour:
   - {fileID: 2365156}
   - {fileID: 2310222}
   - {fileID: 2342804}
+  _colorWheel: {fileID: 2607493291683813282}
+  _colorWheelOutline: {fileID: 7348564520556804481}
+  _colorChangeDuration: 3
   playerCollisionParticle: {fileID: 499580706, guid: 933951a03b28f8f4eaed68bffd6d2f93,
     type: 3}
   killParticle: {fileID: 0}
@@ -10113,7 +10116,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4590275485150562099}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.45}
+  m_LocalPosition: {x: 0, y: 0, z: -0.4499999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 22459830}
