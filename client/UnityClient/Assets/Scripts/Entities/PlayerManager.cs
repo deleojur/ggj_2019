@@ -88,7 +88,7 @@ namespace Entities
         {
             if (_clients.ContainsKey(package.sender))
             {
-                if (Main.Instance.state == (int)GameState.Game)
+                if (Main.Instance.state == (int)GameState.Game || Main.Instance.state == (int)GameState.Room)
                     Main.Instance.PlayerDied();
 
                 _factory.ReturnGameObject(_clients[package.sender].transform);
