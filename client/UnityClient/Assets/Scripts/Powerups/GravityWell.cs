@@ -7,11 +7,6 @@ public class GravityWell : PowerupBaseClass
     public float pullForce;
     private bool startPullForce;
 
-    void Start()
-    {
-        //Set the main Color of the Material to green
-        gameObject.GetComponent<Renderer>().material.color = Color.blue;
-    }
 
     void FixedUpdate()
     {

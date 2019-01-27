@@ -9,12 +9,6 @@ public class ChangeSpeed : PowerupBaseClass
     private float defaultSpeed;
     private float modifiedSpeed;
 
-    void Start()
-    {
-        //Set the main Color of the Material to green
-        gameObject.GetComponent<Renderer>().material.color = Color.red;
-    }
-
     public override void ActivatePowerup() {
         base.ActivatePowerup();
         defaultSpeed = player.Speed;

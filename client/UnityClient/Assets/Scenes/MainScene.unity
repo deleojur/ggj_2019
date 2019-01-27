@@ -229,6 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stepQuantity: 10
+  _objectParent: {fileID: 0}
 --- !u!4 &603458875
 Transform:
   m_ObjectHideFlags: 0
@@ -293,7 +294,6 @@ MonoBehaviour:
   _socketManager: {fileID: 0}
   _playerPrefab: {fileID: 3608949698409687869, guid: 15932f2fbee10481590d124a7e17ed34,
     type: 3}
-  _factory: {fileID: 603458874}
   _colors:
   - {r: 1, g: 0, b: 0.047058824, a: 1}
   - {r: 1, g: 0.9254902, b: 0, a: 1}

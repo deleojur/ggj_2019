@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class ActivateMachinegun : PowerupBaseClass
 {
-    void Start()
-    {
-        Material mymat = GetComponent<ParticleSystemRenderer>().material;
-        mymat.SetColor("_EmissionColor", Color.cyan);
-    }
-
     public override void ActivatePowerup()
     {
         base.ActivatePowerup();

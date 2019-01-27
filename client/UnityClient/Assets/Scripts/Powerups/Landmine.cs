@@ -7,11 +7,6 @@ public class Landmine : PowerupBaseClass
 
     public float expPower, expRadius;
 
-    void Start()
-    {
-        //Set the main Color of the Material to green
-        gameObject.GetComponent<Renderer>().material.color = Color.yellow;
-    }
 
     public override void ActivatePowerup()
     {

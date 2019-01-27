@@ -22,6 +22,6 @@ public class PowerupSpawner : MonoBehaviour
 
         index = Random.Range(0, powerups.Length);
         tile = Main.Instance.worldManager.worldMap.GetValidPowerUpTile();
-        Instantiate(powerups[index], tile.transform.position, tile.transform.rotation);
+        Instantiate(powerups[index], tile.transform.position, Quaternion.Euler(-50, 50, 0));
     }
 }

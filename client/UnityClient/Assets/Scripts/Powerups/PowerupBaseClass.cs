@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class PowerupBaseClass : MonoBehaviour
 {
+    public Color[] lerpColors;
+    private int currentColor;
+    private int nextColor;
+    private float colorTimer;
+
     public PlayerController player;
     public float seconds = 5f;
 
@@ -13,6 +18,15 @@ public class PowerupBaseClass : MonoBehaviour
 
     public GameObject particles;
     private GameObject particlesClone;
+    private Material mymat;
+
+    private void Start()
+    {
+        mymat = GetComponent<ParticleSystemRenderer>().material;
+
+        currentColor = 0;
+        nextColor = 1;
+    }
 
     private void Update()
     {
@@ -34,6 +48,20 @@ public class PowerupBaseClass : MonoBehaviour
                 timer = 0f;
             }
         }
+
+        // color lerp
+        mymat.SetColor("_EmissionColor", Color.Lerp(lerpColors[currentColor], lerpColors[nextColor], colorTimer));
+        colorTimer += Time.deltaTime;
+        if (colorTimer >= 1.0f)
+        {
+            colorTimer = 0;
+            currentColor++;
+            if (currentColor > lerpColors.Length - 1)
+                currentColor = 0;
+            nextColor++;
+            if (nextColor > lerpColors.Length - 1)
+                nextColor = 0;
+        }
     }
 
     public virtual void StopPowerup()
@@ -52,8 +80,6 @@ public class PowerupBaseClass : MonoBehaviour
 
             player = other.gameObject.GetComponent<PlayerController>();
             ActivatePowerup();
-
-
         }
     }
 
