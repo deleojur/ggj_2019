@@ -53,7 +53,8 @@ public class BulletScript : MonoBehaviour
 
     private void Die()
     {
-        Instantiate(impactPrefab, transform.position, Quaternion.identity);
+        GameObject impactClone = Instantiate(impactPrefab, transform.position, Quaternion.identity);
+        Destroy(impactClone, 1f);
         Destroy(gameObject);
     }
 
