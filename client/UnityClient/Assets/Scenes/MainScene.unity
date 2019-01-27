@@ -583,16 +583,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 1198008327876062112, guid: 0c0e7378ddf4ebd468ee12436c66d030,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1198008329480485140, guid: 0c0e7378ddf4ebd468ee12436c66d030,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1198008328925895326, guid: 0c0e7378ddf4ebd468ee12436c66d030,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -698,6 +688,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1198008327876062112, guid: 0c0e7378ddf4ebd468ee12436c66d030,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1198008329325543215, guid: 0c0e7378ddf4ebd468ee12436c66d030,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -707,6 +702,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -125
+      objectReference: {fileID: 0}
+    - target: {fileID: 1198008329480485140, guid: 0c0e7378ddf4ebd468ee12436c66d030,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c0e7378ddf4ebd468ee12436c66d030, type: 3}
@@ -741,7 +741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c7171a3c274b445923fc4e81fa1e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPlayers: 2
+  maxPlayers: 4
   maxPower: 300
   startTimer: 1.6
   endTimer: 0.02
