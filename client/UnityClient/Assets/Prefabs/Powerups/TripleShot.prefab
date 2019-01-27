@@ -9317,7 +9317,7 @@ MonoBehaviour:
   - {r: 0.84969294, g: 1, b: 0, a: 0}
   - {r: 0, g: 1, b: 0.6127057, a: 0}
   player: {fileID: 0}
-  seconds: 5
+  seconds: 3
   particles: {fileID: 5945189500770799998, guid: 05075122d7a0742438032e4a2923d11c,
     type: 3}
 --- !u!65 &3556977502297059215

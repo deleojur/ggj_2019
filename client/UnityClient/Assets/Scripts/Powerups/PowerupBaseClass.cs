@@ -44,6 +44,7 @@ public class PowerupBaseClass : MonoBehaviour
             timer += Time.deltaTime;
             if (timer > 10f)
             {
+                StopPowerup();
                 Destroy(gameObject);
                 timer = 0f;
             }

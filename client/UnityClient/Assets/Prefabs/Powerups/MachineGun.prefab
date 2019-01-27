@@ -55,7 +55,7 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0.86914873, a: 0}
   - {r: 0, g: 0.038090467, b: 1, a: 0}
   player: {fileID: 0}
-  seconds: 5
+  seconds: 3
   particles: {fileID: 5945189500770799998, guid: 05075122d7a0742438032e4a2923d11c,
     type: 3}
 --- !u!198 &2750643405242516254

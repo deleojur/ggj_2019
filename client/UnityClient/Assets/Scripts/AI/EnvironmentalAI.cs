@@ -50,7 +50,7 @@ public class EnvironmentalAI
         // TODO: enable different kinds of attacks omg so cool
         FindOptions();
 
-        if (options == null)
+        if (options == null || options.Count <= 0)
             return;
 
         // for as much effect as I have
