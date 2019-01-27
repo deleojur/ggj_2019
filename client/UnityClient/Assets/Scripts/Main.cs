@@ -298,7 +298,7 @@ public class Main : MonoBehaviour
     internal int playerDeaths = 0;
     internal void PlayerDied()
     {
-        if(state == (int)GameState.Game)
+        if(state != (int)GameState.Room)
         {
             playerDeaths++;
             if (playerDeaths == maxPlayers)
