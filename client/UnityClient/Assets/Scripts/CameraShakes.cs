@@ -1,7 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using MEC;
 
 public class CameraShakes : MonoBehaviour
 {
@@ -21,10 +19,10 @@ public class CameraShakes : MonoBehaviour
 
     internal void Shake(float duration, float magnitude)
     {
-        Timing.RunCoroutine(ShakeCamera(duration, magnitude));
+        StartCoroutine(ShakeCamera(duration, magnitude));
     }
 
-    private IEnumerator<float> ShakeCamera(float duration, float magnitude)
+    private IEnumerator ShakeCamera(float duration, float magnitude)
     {
         float elapsedTime = 0f;
 

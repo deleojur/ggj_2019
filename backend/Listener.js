@@ -74,6 +74,11 @@ io.on('connection', function(socket)
         }
     });
 
+    socket.on('game_round_ended', function()
+    {
+        clients = [];
+    });
+
     socket.on('disconnect', function()
     {
         if (socket.id === master)

@@ -20,9 +20,6 @@ namespace Entities
         private GameObject _playerPrefab;
 
         [SerializeField]
-        private Factory _factory;
-
-        [SerializeField]
         internal Color[] _colors;
 
         private Dictionary<string, PlayerController> _clients;
@@ -57,7 +54,8 @@ namespace Entities
             {
                 if (_debugIndex < _debugKeys.Length)
                 {
-                    Transform t = _factory.BorrowGameObject(_playerPrefab);
+                    GameObject player = Instantiate(_playerPrefab) as GameObject;
+                    Transform t = player.transform;
                     PlayerController p = t.gameObject.GetComponentInChildren<PlayerController>();
                     p.ActivateDebugMode(_debugKeys[_debugIndex++]);
                     p.Color = _colors[_clients.Count];
@@ -73,8 +71,9 @@ namespace Entities
         {
             if (Main.Instance.state != (int)GameState.Room)
                 return;
-            
-            Transform t = _factory.BorrowGameObject(_playerPrefab);
+
+            GameObject player = Instantiate(_playerPrefab) as GameObject;
+            Transform t = player.transform;
             PlayerController p = t.gameObject.GetComponentInChildren<PlayerController>();
 
             p.Color = _colors[_clients.Count];
@@ -89,7 +88,7 @@ namespace Entities
             if (_clients.ContainsKey(package.sender))
             {
                 Main.Instance.PlayerDied();
-                _factory.ReturnGameObject(_clients[package.sender].transform);
+                Destroy(_clients[package.sender].transform);
                 _clients.Remove(package.sender);
                 Main.Instance.PlayerJoined();
             }

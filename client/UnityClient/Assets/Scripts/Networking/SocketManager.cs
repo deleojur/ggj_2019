@@ -89,7 +89,7 @@ namespace Networking
 
         private void Main_OnGameRoundEnded()
         {
-
+            _socket.Emit("game_round_ended");
         }
 
         public void OnPlayerDisconnected(SocketIOEvent e)
