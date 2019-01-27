@@ -154,7 +154,7 @@ public class PlayerController : MonoBehaviour
             _colorWheelOutline.fillAmount -= (1 / _colorChangeDuration) * Time.fixedDeltaTime;
         } else
         {
-            ChangeFireColor(_color);
+            _fireColor = _color;
             _colorWheel.fillAmount = 0;
             _colorWheelOutline.fillAmount = 0;
         }
@@ -365,6 +365,13 @@ public class PlayerController : MonoBehaviour
 
     internal void ChangeFireColor(Color color)
     {
+        if (color == _fireColor && _colorWheel.fillAmount > 0)
+            return;
+
+        if (color == _color)
+            return;
+
+
         _fireColor = color;
         _colorWheel.fillAmount = 1;
         _colorWheelOutline.fillAmount = 1;
