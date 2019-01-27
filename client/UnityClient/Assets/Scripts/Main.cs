@@ -11,12 +11,22 @@ public class Main : MonoBehaviour
 {
     [SerializeField] internal int maxPlayers = 4;
 
+    [Header("AI")]
+    [SerializeField] internal float maxPower = 300f;
+    [SerializeField] internal float startTimer = 1.7f;
+    [SerializeField] internal float endTimer = 0.02f;
+    [SerializeField] internal float startMinDmg = .2f;
+    [SerializeField] internal float startMaxDmg = .6f;
+    [SerializeField] internal float endMinDmg = .8f;
+    [SerializeField] internal float endMaxDmg = 1f;
+    [SerializeField] internal float startEffect = 10f;
+    [SerializeField] internal float endEffect = 30f;
+
     [Header("World")]
     [SerializeField] internal int seed = 100;
     [SerializeField] internal float worldScale = 1f;
 
     [Header("Registers")]
-    [SerializeField] internal float infected = 0.1f;
     [SerializeField] internal int width = 10;
     [SerializeField] internal int height = 5;
 

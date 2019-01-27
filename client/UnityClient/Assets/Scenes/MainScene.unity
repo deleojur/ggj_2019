@@ -650,9 +650,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPlayers: 2
+  maxPower: 300
+  startTimer: 1.6
+  endTimer: 0.02
+  startMinDmg: 0.1
+  startMaxDmg: 0.6
+  endMinDmg: 0.8
+  endMaxDmg: 1
+  startEffect: 35
+  endEffect: 50
   seed: 100
   worldScale: 1.5
-  infected: 0.1
   width: 10
   height: 7
   roomUI: {fileID: 425560481}

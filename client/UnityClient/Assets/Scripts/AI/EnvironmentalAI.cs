@@ -5,24 +5,15 @@ using UnityEngine;
 public class EnvironmentalAI 
 {   
     private float power = 1f;                    // increases over time
-    private const float MAX_POWER = 300f;
     private float maxPower = 300f;
-    private float powerPercent { get { return power / MAX_POWER; } }
+    private float powerPercent { get { return power / Main.Instance.maxPower; } }
 
-    private const float START_TIMER = 1.7f;
-    private const float END_TIMER = 0.02f;
     private float maxTimer = 5f;                 // recalculated when required based on power
     private float timer = 0;
 
-    private const float START_MIN_DMG = 0.2f;
-    private const float START_MAX_DMG = 0.6f;
-    private const float END_MIN_DMG = 0.8f;
-    private const float END_MAX_DMG = 1.0f;
     private float minDamage = 0.5f;            // the amount of damage dealt to a tile per attack
     private float maxDamage = 0.5f;
 
-    private const float START_EFFECT = 10f;
-    private const float END_EFFECT = 30f;
     private int effect = 1;                 // the amount of tiles that can be attacked
 
     private List<Tile> options;
@@ -38,7 +29,7 @@ public class EnvironmentalAI
     {
         if(timer <= 0)
         {
-            maxTimer = Mathf.Lerp(START_TIMER, END_TIMER, powerPercent);
+            maxTimer = Mathf.Lerp(Main.Instance.startTimer, Main.Instance.endTimer, powerPercent);
             timer = maxTimer;
             Attack();
         }
@@ -46,10 +37,10 @@ public class EnvironmentalAI
         power += Time.deltaTime;
         power = Mathf.Clamp(power, 0, maxPower);
 
-        effect = Mathf.CeilToInt(Mathf.Lerp(START_EFFECT, END_EFFECT, powerPercent));
+        effect = Mathf.CeilToInt(Mathf.Lerp(Main.Instance.startEffect, Main.Instance.endEffect, powerPercent));
 
-        minDamage = Mathf.Lerp(START_MIN_DMG, END_MIN_DMG, powerPercent);
-        maxDamage = Mathf.Lerp(START_MAX_DMG, END_MAX_DMG, powerPercent);
+        minDamage = Mathf.Lerp(Main.Instance.startMinDmg, Main.Instance.endMinDmg, powerPercent);
+        maxDamage = Mathf.Lerp(Main.Instance.startMaxDmg, Main.Instance.endMaxDmg, powerPercent);
 
         timer -= Time.deltaTime;
     }

@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float m_Speed = 12f;                 // How fast the tank moves forward and back.
-    [SerializeField] private float m_TurnSpeed = 180f;            // How fast the tank turns in degrees per second.
     [SerializeField] private AudioSource m_MovementAudio;         // Reference to the audio source used to play engine sounds. NB: different to the shooting audio source.
     [SerializeField] private AudioClip m_EngineIdling;            // Audio to play when the tank isn't moving.
     [SerializeField] private AudioClip m_EngineDriving;           // Audio to play when the tank is moving.
