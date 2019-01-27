@@ -15,14 +15,15 @@ public class BulletScript : MonoBehaviour
     internal Tile currentTile;
 
     internal BulletType type;
+    internal GameObject owner;
 
-    internal void Initialize(Color color, BulletType type)
+    internal void Initialize(Color color, BulletType type, GameObject owner)
     {
         rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * 5000);
 
         this.type = type;
-
+        this.owner = owner;
         this.color = color;
         transform.Find("Sphere").GetComponent<MeshRenderer>().material.color = color;
         transform.Find("ExtraGlow").GetComponent<ParticleSystem>().startColor = color;
@@ -60,7 +61,7 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && collision.gameObject != owner)
         {
             collision.gameObject.GetComponent<PlayerController>().ChangeFireColor(color);
             Die();

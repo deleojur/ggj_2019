@@ -10058,12 +10058,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Speed: 9
-  m_TurnSpeed: 6
-  m_MovementAudio: {fileID: 0}
-  m_EngineIdling: {fileID: 0}
-  m_EngineDriving: {fileID: 0}
+  m_MovementAudio: {fileID: 8261418}
+  m_EngineIdling: {fileID: 8300000, guid: 4932ab25b84dd7649b80af68a9660ddc, type: 3}
+  m_EngineDriving: {fileID: 8300000, guid: d7ca9fb5aa30155449192b23d7fb3336, type: 3}
   m_PitchRange: 0.2
-  m_Rigidbody: {fileID: 0}
+  m_Rigidbody: {fileID: 3608949698409687840}
   _renderers:
   - {fileID: 2365458}
   - {fileID: 2365156}
@@ -10071,7 +10070,8 @@ MonoBehaviour:
   - {fileID: 2342804}
   playerCollisionParticle: {fileID: 499580706, guid: 933951a03b28f8f4eaed68bffd6d2f93,
     type: 3}
-  killParticle: {fileID: 0}
+  killParticle: {fileID: 5120752785649474170, guid: 5ad8bbff508a47b4ba261fe70184a7eb,
+    type: 3}
   muzzleFlash: {fileID: 7997701881341948782, guid: 430cf2ce41cddb04e841ef22d835b376,
     type: 3}
   muzzleFlashClone: {fileID: 0}
@@ -10086,7 +10086,7 @@ MonoBehaviour:
   expPower: 250
   expRadius: 1
   threshold: 10
-  rotationSpeed: 1
+  rotationSpeed: 2.5
 --- !u!1 &4590275485150562099
 GameObject:
   m_ObjectHideFlags: 0
