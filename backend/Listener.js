@@ -46,6 +46,7 @@ io.on('connection', function(socket)
     socket.on('join_game', function()
     {
         let address = socket.handshake.address;
+        let color = 0;
         if (master === null)
         {
             io.to(socket.id).emit('error_gameNotStarted');
@@ -57,20 +58,17 @@ io.on('connection', function(socket)
                 let e = clients[i];
                 if (address === e.address)
                 {
+                    color = colors[i];
                     clients.splice(i, 1);
                     io.to(master).emit('exit_game', e);
-                }
-                if (e.id === socket.id)
-                {
-                    //already joined
-                    io.to(socket.id).emit('error_alreadyJoined');
-                    return false;
                 }
             }
             let client = {id: socket.id, address: socket.handshake.address};
             clients.push(client);
             io.to(master).emit('join_game', client);
-            io.to(socket.id).emit('success_joinedGame', colors[clients.length - 1]);
+            if (color === 0)
+                color = colors[clients.length - 1];
+            io.to(socket.id).emit('success_joinedGame', color);
         }
     });
 
@@ -93,7 +91,6 @@ io.on('connection', function(socket)
                 let e = clients[i];
                 if (e.id === socket.id)
                 {
-                    clients.splice(i, 1);
                     io.to(master).emit('exit_game', e);
                 }
             }

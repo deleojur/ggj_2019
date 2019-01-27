@@ -56,6 +56,7 @@ namespace Networking
             _socket.On("error", OnErrorReceived);
             _socket.On("close", OnConnectionClosed);
 
+            _socket.On("message", OnPlayerMessageReceived);
             _socket.On("join_game", OnPlayerConnected);
             _socket.On("exit_game", OnPlayerDisconnected);
             _socket.On("player_input", OnPlayerInputReceived);
@@ -63,6 +64,11 @@ namespace Networking
             Main.OnGameRoundEnded += Main_OnGameRoundEnded;
 
             StartCoroutine(CreateGame());
+        }
+
+        private void OnPlayerMessageReceived(SocketIOEvent e)
+        {
+            Debug.LogError(e.data);
         }
 
         private IEnumerator CreateGame()
