@@ -6,8 +6,8 @@ public class ActivateRocketlauncher : PowerupBaseClass
 {
     void Start()
     {
-        //Set the main Color of the Material to green
-        gameObject.GetComponent<Renderer>().material.color = Color.yellow;
+        Material mymat = GetComponent<ParticleSystemRenderer>().material;
+        mymat.SetColor("_EmissionColor", Color.red);
     }
 
     public override void ActivatePowerup()

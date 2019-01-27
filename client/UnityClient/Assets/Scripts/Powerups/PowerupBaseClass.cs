@@ -53,13 +53,14 @@ public class PowerupBaseClass : MonoBehaviour
             player = other.gameObject.GetComponent<PlayerController>();
             ActivatePowerup();
 
-            startTimer = true;
-            timer = 0f;
+
         }
     }
 
     public virtual void ActivatePowerup()
     {
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        startTimer = true;
+        timer = 0f;
     }
 }

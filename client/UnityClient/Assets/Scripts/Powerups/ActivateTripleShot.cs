@@ -7,8 +7,8 @@ public class ActivateTripleShot : PowerupBaseClass
 
     void Start()
     {
-        //Set the main Color of the Material to green
-        gameObject.GetComponent<Renderer>().material.color = Color.green;
+        Material mymat = GetComponent<ParticleSystemRenderer>().material;
+        mymat.SetColor("_EmissionColor", Color.green);
     }
 
     public override void ActivatePowerup()
