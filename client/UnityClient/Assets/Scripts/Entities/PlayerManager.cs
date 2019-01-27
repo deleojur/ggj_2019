@@ -53,7 +53,7 @@ namespace Entities
         private int _debugIndex = 0;
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && Main.Instance.state != (int)GameState.Room)
             {
                 if (_debugIndex < _debugKeys.Length)
                 {
@@ -71,7 +71,9 @@ namespace Entities
 
         private void SocketManager_PlayerConnected(ConnectionPackage package)
         {
-            Debug.LogError("connection");
+            if (Main.Instance.state != (int)GameState.Room)
+                return;
+            
             Transform t = _factory.BorrowGameObject(_playerPrefab);
             PlayerController p = t.gameObject.GetComponentInChildren<PlayerController>();
 
@@ -86,6 +88,9 @@ namespace Entities
         {
             if (_clients.ContainsKey(package.sender))
             {
+                if (Main.Instance.state == (int)GameState.Game)
+                    Main.Instance.PlayerDied();
+
                 _factory.ReturnGameObject(_clients[package.sender].transform);
                 _clients.Remove(package.sender);
                 Main.Instance.PlayerJoined();
