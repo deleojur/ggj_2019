@@ -2,8 +2,7 @@
 import AnimatedTiles from 'phaser-animated-tiles/dist/AnimatedTiles.min.js';
 import io from 'socket.io-client';
 import gyro from '../helpers/gyro.min.js';
-import ip_address from '../ip_address';
-window.socket = io(window.ip_address);
+window.socket = io();
 
 socket.on('connect', function (data)
 {
