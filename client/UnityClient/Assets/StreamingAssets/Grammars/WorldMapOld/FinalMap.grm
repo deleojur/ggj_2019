@@ -1,4 +1,0 @@
-version: 0.6f
-start: GRAPH Start(x=0, y=0)
-rule: GrowImperial = GRAPH 0:*(x=-35, y=-8, children!="imperial") 1:*(x=35, y=8, id==0.id, children=="imperial") 2:edge(0, 1, d=false) > {0 = GRAPH 0:*(x=-38, y=-9, children+="imperial") 1:*(x=38, y=9) 2:edge(0, 1, d=false)}
-rule: GrowWeird = GRAPH 0:*(x=-35, y=-8, children!="weird") 1:*(x=35, y=8, id==0.id, children=="weird") 2:edge(0, 1, d=false) > {0 = GRAPH 0:*(x=-36, y=-9, children+="weird") 1:*(x=36, y=9) 2:edge(0, 1, d=false)}

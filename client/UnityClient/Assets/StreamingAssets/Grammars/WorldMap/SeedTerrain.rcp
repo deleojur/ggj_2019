@@ -1,3 +1,0 @@
-IterateRuleLSystem("Clear")
-ExecuteRuleCellular("Do45", D3+6)
-IterateRuleLSystem("BlockEdges")

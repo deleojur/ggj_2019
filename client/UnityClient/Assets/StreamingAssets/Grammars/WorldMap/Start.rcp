@@ -1,5 +1,0 @@
-SetRegister("players", 0)
-CreateTileMap(width, height, "undefined")
-//IterateRule("PlaceStart")
-IterateRuleCellular("BlockEdges")
-IterateRuleLSystem("BlockEdges")

@@ -1,1 +1,0 @@
-CreateVoronoiGraph("undefined", "edge", 80, 600, 400, 6, 2)
