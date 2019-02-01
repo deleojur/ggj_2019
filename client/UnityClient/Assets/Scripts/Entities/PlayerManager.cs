@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 using Networking;
 using System.Collections.Generic;
-using InControl;
 
 namespace Entities
 {
