@@ -24,7 +24,7 @@ module.exports = {
     devtool: 'cheap-source-map',
     output: {
       pathinfo: true,
-        path: path.resolve(__dirname, 'dev'),
+        path: path.resolve(__dirname, 'client/dev'),
         publicPath: './dev/',
         library: '[name]',
         libraryTarget: 'umd',
@@ -65,15 +65,5 @@ module.exports = {
             { test: /phaser-split\.js$/, use: ['expose-loader?Phaser'] },
             { test: [/\.vert$/, /\.frag$/], use: 'raw-loader' }
         ]
-    },
-   /* node: {
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty'
-    },
-    resolve: {
-        alias: {
-            'phaser': phaser,
-        }
-    }*/
+    }
 }

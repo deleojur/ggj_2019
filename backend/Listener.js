@@ -1,11 +1,18 @@
 var express = require('express');
 var app = express();
-var server = require('http').Server(app);
-var path = require('path');
-const PORT = process.env.PORT || 4567;
-var io = require('socket.io')({
-    transports: ['websocket']
+var PORT = process.env.PORT || 4567;
+
+var http = require('http');
+var server = http.Server(app);
+
+app.use(express.static('client'));
+
+server.listen(PORT, function()
+{
+    console.log('I gots something');
 });
+
+var io = require('socket.io')(server);
 var clients = [];
 var colors = [0xFF000C, 0xFFEC00, 0x00FF1A, 0x00FAFF];
 var master = null;
@@ -14,9 +21,6 @@ require('dns').lookup(require('os').hostname(), function (err, add, fam)
 {
     console.log('listening on ' + add + ' : ' + PORT);
 });
-
-//listen to Unity events on port PORT
-io.attach(PORT);
 io.on('connection', function(socket)
 {
     //this is where Unity connects to the server.

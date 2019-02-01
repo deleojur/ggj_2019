@@ -5,7 +5,7 @@
   "author": "niklas berg <me@niklasberg.se>",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon backend/Listener.js",
+    "postinstall": "webpack --mode=development",
     "dev": "concurrently --kill-others \"webpack --mode=development\" \"nodemon backend/Listener.js\"",
     "deploy": "webpack  --mode=production --config webpack.production.config.js",
     "test": "eslint ./src/**/**.js"
