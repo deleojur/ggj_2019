@@ -1,0 +1,17 @@
+{
+    "short_name": "Paint!",
+    "name": "World of Paint",
+    "icons": 
+    [
+        {
+            "src": "/assets/images/thumb_1.jpeg",
+            "type": "image/jpeg",
+            "sizes": "192x192"
+        }
+    ],
+    "start_url": "127.0.0.1:5000",
+    "background_color": "#3367D6",
+    "display": "standalone",
+    "orientation":  "landscape",
+    "theme_color": "#3367D6"
+}

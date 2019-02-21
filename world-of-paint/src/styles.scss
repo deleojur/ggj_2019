@@ -1,12 +1,77 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.css';
+@import '~@angular/material/theming';
 
-.carousel-inner img
+@include mat-core();
+$app-primary: mat-palette($mat-blue, 700, 600);
+$app-accent: mat-palette($mat-blue-grey, A200, 900, A100);
+$app-warn: mat-palette($mat-deep-orange);
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+@include angular-material-theme($app-theme);
+// Secondary Theme -- due to hue feature absent so this is also a work around for hue
+.app-alt-theme {
+    $app-alt-primary: mat-palette($mat-blue-grey, 500);
+    $app-alt-accent: mat-palette($mat-pink, 500);
+    $app-alt-warn: mat-palette($mat-deep-orange);
+    $app-alt-theme: mat-light-theme($app-alt-primary, $app-alt-accent, $app-alt-warn);
+    @include angular-material-theme($app-alt-theme);
+}
+
+#avatar-select
+{
+    top: 13px;
+    outline:none;
+}
+
+.button-box
+{
+    position: fixed;
+    bottom: 10px;
+    text-align:center;
+}
+
+.gear-thumb
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.btn-bottom
 {
     margin: auto;
+    margin-top: 10px;
+    width: 80%;
 }
 
-body
+.card-specs-outer
 {
-    overflow:hidden;
+    width: 95%;
+    position:relative;
+    margin:auto;
 }
+
+.card-specs-inner
+{
+    margin: 10px 10px 10px 10px;
+}
+
+.specs-bar
+{
+    margin: 0px 5px 0px 0px;
+}
+
+.info-text-small
+{
+    font-size: 13px;
+    position:inherit;
+}
+
+html, body {
+    overflow-x: hidden;
+  }
+  body {
+    position: relative;
+  }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

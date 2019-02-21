@@ -1,37 +1,21 @@
-<nav class="navbar">
-        <div class="navbar-brand">
-          <a class="navbar-item">
-            <h2>World of Paint!</h2>
-          </a>
-        </div>
-      </nav>
-<div class="container">
-    <div class="form-group">
-        <label for="playername">name</label>
-        <input type="text" [(ngModel)]="playername" class="form-control" id="playername" required>
+<div class="p-3 mb-2 bg-primary text-white text-center">
+    <h5>World of Paint</h5>
+</div>
+<div class="container-fluid" style="height: 100%;">
+    <div class="form-group" style="margin-top:-5px;">
+        <label for="playername" class="text-primary">name</label>
+        <input type="text" [(ngModel)]="playername" class="form-control text-primary" id="playername">
     </div>
-    <div *ngIf="name_taken">
-        <ngb-alert #playername_taken [dismissible]="true" type="warning" (close)="closeServerWarning('name_taken')">
-            <strong>Playername Taken</strong>
-        </ngb-alert>
+    <div class="form-group" style="margin-top:-5px;">
+        <label for="roomid" class="text-primary">roomid</label>
+        <input type="tel" [(ngModel)]="roomid" class="form-control text-primary" id="roomid">
     </div>
-
-    <div class="form-group">
-        <label for="roomid">roomid</label>
-        <input type="number" [(ngModel)]="roomid" class="form-control" id="roomid">
+    <ngb-alert *ngIf="room_invalid" #roomid_invalid [dismissible]="true" type="warning" (close)="closeServerWarning('room_invalid')">
+        <strong>Room Number Invalid</strong>
+    </ngb-alert>
+    <hr>
+    <h6 class="text-primary text-center">Enter your name and the roomid provided in the game room to play</h6>
+    <div class="col-md-1">  
+        <button type="button" class="btn btn-primary btn-lg btn-block btn-bottom" (click)="suscribeToRoom()">Join Game!</button>
     </div>
-    <div *ngIf="room_invalid">
-        <ngb-alert #roomid_invalid [dismissible]="true" type="warning" (close)="closeServerWarning('room_invalid')">
-            <strong>Room Number Invalid</strong>
-        </ngb-alert>
-    </div>
-
-<hr>
-<ngb-carousel #carousel *ngIf="images" style="outline:none;" [showNavigationArrows]="true" [showNavigationIndicators]="false" data-interval="false">
-    <ng-template ngbSlide *ngFor="let image of images">
-        <img class="w-50 h-50" [src]="image" alt="Random slide">
-    </ng-template>
-</ngb-carousel>
-<hr>
-<button type="button" class="btn btn-outline-primary btn-lg btn-block" (click)="suscribeToRoom()">Join Game!</button>
 </div>

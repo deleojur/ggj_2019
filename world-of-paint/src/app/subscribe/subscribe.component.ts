@@ -1,24 +1,18 @@
-import { Component, ViewChild, EventEmitter, Output, Injectable } from '@angular/core';
-import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
+import { Component } from '@angular/core';
 import { WebsocketService } from '../websocket.service';
+import { ConnectionService } from '../connection.service';
 
 @Component
 ({
     selector: 'app-subscribe',
     templateUrl: './subscribe.component.html'
 })
-@Injectable({ providedIn: 'root' })
 export class SubscribeComponent
 {
-    constructor(private websocket: WebsocketService)
+    constructor(private websocket: WebsocketService, private connection: ConnectionService)
     {
-        console.log('subscribecomponent');
         this.websocket.$error_msg.subscribe(this.displayServerWarning.bind(this));
-        this.websocket.$update_msg.subscribe();
     }
-
-    @ViewChild('carousel') carousel: NgbCarousel;
-    @Output() onSubscribeToRoom = new EventEmitter<any>();
 
     room_invalid: boolean = false;
     name_taken: boolean = false;
@@ -26,7 +20,6 @@ export class SubscribeComponent
     playername;
     roomid;
     serverResponse;
-    images = ['../assets/images/thumb_1.jpeg', '../../assets/images/thumb_2.jpg', '../../assets/images/thumb_3.jpeg'];
 
     displayServerWarning(msg)
     {
@@ -56,6 +49,6 @@ export class SubscribeComponent
 
     suscribeToRoom()
     {
-        this.onSubscribeToRoom.emit({ playername: this.playername, roomid: this.roomid, avatar: this.carousel.activeId });
+        this.connection.subscribeToRoom({ playername: this.playername, roomid: this.roomid });
     }
 }
