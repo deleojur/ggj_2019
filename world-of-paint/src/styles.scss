@@ -9,12 +9,49 @@ $app-warn: mat-palette($mat-deep-orange);
 $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 @include angular-material-theme($app-theme);
 // Secondary Theme -- due to hue feature absent so this is also a work around for hue
-.app-alt-theme {
+.app-alt-theme
+{
     $app-alt-primary: mat-palette($mat-blue-grey, 500);
     $app-alt-accent: mat-palette($mat-pink, 500);
     $app-alt-warn: mat-palette($mat-deep-orange);
     $app-alt-theme: mat-light-theme($app-alt-primary, $app-alt-accent, $app-alt-warn);
     @include angular-material-theme($app-alt-theme);
+}
+
+.btn-parent
+{
+    position:relative;
+    display: block;
+    margin-top: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50vw;
+}
+
+.btn-round 
+{
+    background-color: #4CAF50;
+    display: inline-block;
+    width:40vh;
+    height:40vh;
+    border-radius: 50%;
+}
+
+.btn-icon
+{
+    width:40vh;
+    height:40vh;
+    position: absolute;
+    top:0;
+    left:0;
+    pointer-events: none;
+}
+
+input:focus,
+button:focus,
+select:focus
+{
+  outline: none;
 }
 
 #avatar-select
@@ -74,4 +111,4 @@ html, body {
   body {
     position: relative;
   }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { -webkit-user-select: none; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

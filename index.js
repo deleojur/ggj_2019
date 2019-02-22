@@ -29,7 +29,7 @@ io.on('connection', function(socket)
     socket.on('client_gameroom_ready', (data)   => client_ready(socket, data));
     socket.on('client_start_countdown', ()          => client_startCountdown(socket));
     socket.on('client_cancel_countdown', () => client_cancelCountdown(socket));
-    socket.on('client_update_location', (roomid, data) => client_updateLocation(roomid, socket.id, data));
+    socket.on('client_update_location', (data) => client_updateLocation(socket, data));
 
     socket.on('master_create_room', ()      => master_createRoom(socket));
     socket.on('client_join_room', (data)    => client_joinRoom(socket, data));
@@ -198,16 +198,12 @@ function client_joinRoom(socket, data)
     }
 };
 
-function client_updateLocation(roomid, id, data)
+function client_updateLocation(socket, data)
 {
-    try
+    if (socket.roomid in rooms)
     {
-        let master  = rooms[roomid].master;
-        data.id     = id;
-        socket.to(master).emit('client_uddateLocation', data);
-    } catch(e)
-    {
-        //the room is most probably closed. Communicate this to the client.
+        let master  = rooms[socket.roomid].master;
+        io.to(master).emit('server_update', { 'msg': 'client_position', 'data' : data } );
     }
 }
 

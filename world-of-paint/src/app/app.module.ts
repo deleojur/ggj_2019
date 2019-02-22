@@ -37,7 +37,7 @@ import { MatchComponent } from './match/match.component';
         Ng2CarouselamosModule,
         RouterModule.forRoot(
         [
-            { path: '', component: SubscribeComponent,  },
+            { path: '', component: SubscribeComponent },
             { path: 'game_room', component: RoomComponent },
             { path: 'in_game', component: MatchComponent },
             { path: 'results', component: ResultsComponent }

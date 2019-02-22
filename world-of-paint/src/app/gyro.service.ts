@@ -10,12 +10,16 @@ export class GyroService
     constructor() 
     {
     }
-    addGyroListener(callback)
+    startTracking(callback)
     {
         gyro.frequency = 10;
         gyro.startTracking(function (o)
         {
             callback(o);
         });
+    }
+    stopTracking()
+    {
+        gyro.stopTracking();
     }
 }

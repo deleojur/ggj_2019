@@ -12,7 +12,9 @@ export class ConnectionService
     private _playername: string;
     private _roomid: number;
     private _isinroom: boolean;
-    
+    private _ismoving: boolean = false;
+    private _isshooting: boolean = false;
+
     public get $isinroom(): boolean
     {
         return this._isinroom;
@@ -32,19 +34,37 @@ export class ConnectionService
     {
         this.wsService = wsService;
         wsService.connect();
-        gyroService.addGyroListener(this.sendLocation.bind(this));
         wsService.$enterRoom.subscribe(this.enterRoom.bind(this));
         wsService.$startMatch.subscribe(this.startMatch.bind(this));
+        wsService.$endMatch.subscribe(this.endMatch.bind(this));
     }
 
+    set $isMoving(ismoving: boolean)
+    {
+        this._ismoving = ismoving;
+    }
+
+    set $isShooting(isshooting: boolean)
+    {
+        this._isshooting = isshooting;
+    }
+    
     sendLocation(data)
     {
+        data.ismoving = this._ismoving;
+        data.isshooting = this._isshooting;
         this.wsService.sendUpdatePlayerLocation(data);
     }
 
     private startMatch(): void
     {
+        this.gyroService.startTracking(this.sendLocation.bind(this));
         this.router.navigate(['in_game']);
+    }
+
+    private endMatch(): void
+    {
+        this.gyroService.stopTracking();
     }
 
     private enterRoom(data: any): void

@@ -15,7 +15,8 @@ export class WebsocketService
 
     private _enterRoom: EventEmitter<Object> = new EventEmitter<Object>();
     private _everyoneReady: EventEmitter<boolean> = new EventEmitter<boolean>();
-    private _startMatch : EventEmitter<null> = new EventEmitter<null>();
+    private _startMatch: EventEmitter<null> = new EventEmitter<null>();
+    private _endMatch: EventEmitter<Object> = new EventEmitter<Object>();
     private _startCountdown: EventEmitter<null> = new EventEmitter<null>();
     private _cancelCountdown: EventEmitter<null> = new EventEmitter<null>();
 
@@ -44,6 +45,11 @@ export class WebsocketService
         return this._startMatch;
     }
 
+    public get $endMatch(): EventEmitter<Object>
+    {
+        return this._endMatch;
+    }
+
     connect(): void
     {
         this.socket = io(environment.ws_url);
@@ -69,6 +75,9 @@ export class WebsocketService
             break;
             case 'match_started':
                 this._startMatch.emit();
+            break;
+            case 'match_ended':
+                this._endMatch.emit(data);
             break;
         }
     }
@@ -100,6 +109,7 @@ export class WebsocketService
 
     sendUpdatePlayerLocation(data): void
     {
+        data.id = this.socket.id;
         this.socket.emit('client_update_location', JSON.stringify(data));
     }
 }
