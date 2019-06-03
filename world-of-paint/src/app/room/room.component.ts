@@ -3,6 +3,7 @@ import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 import { ConnectionService } from '../connection.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { WebsocketService } from '../websocket.service';
+import { ModalService } from '../modal.service';
 
 @Component({
   selector: 'app-room',
@@ -34,8 +35,13 @@ export class RoomComponent implements OnInit
     title:             string  = 'Select Your Gear!';
     playername:        string;
     roomnumber:        number;
-    
-    constructor(private router: Router, private connection: ConnectionService, private wsService: WebsocketService)
+    color:             string;
+
+    constructor(
+        private router: Router, 
+        private connection: ConnectionService, 
+        private wsService: WebsocketService,
+        private modalThingy: ModalService)
     { 
         router.events.subscribe((val) => 
         {
@@ -45,6 +51,9 @@ export class RoomComponent implements OnInit
                 {
                     this.playername = this.connection.$playername;
                     this.roomnumber = this.connection.$roomnumber;
+                    this.color      = this.connection.$color;
+                    let self        = this;
+                    this.setProgressBarColor();
                 }
                 else
                 {
@@ -88,13 +97,27 @@ export class RoomComponent implements OnInit
 
     isEveryoneReady(ready: boolean): void
     {
-        this.everyoneReady = ready['data'];
+        this.everyoneReady = ready['ready'];
     }
     
+    setProgressBarColor()
+    {
+        let self = this;
+        setTimeout(() => 
+        {
+            let progressBars = document.getElementsByClassName('progress-bar');
+            for (var i = 0; i < progressBars.length; i++) 
+            {
+                progressBars[i]['style'].backgroundColor = self.color;
+            }
+        }, 0);
+    }
+
     playerReady(ready: boolean): void
     {
         this.title = ready ? 'Ready to Rumble!' : 'Select Your Gear!';
         this.isReady = ready;
         this.wsService.sendPlayerRoomReady({ 'ready': ready });
+        this.setProgressBarColor();
     }
 }

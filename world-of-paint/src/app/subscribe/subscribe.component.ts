@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { WebsocketService } from '../websocket.service';
 import { ConnectionService } from '../connection.service';
+import { ModalService } from '../modal.service';
 
 @Component
 ({
@@ -9,7 +10,7 @@ import { ConnectionService } from '../connection.service';
 })
 export class SubscribeComponent
 {
-    constructor(private websocket: WebsocketService, private connection: ConnectionService)
+    constructor(private websocket: WebsocketService, private connection: ConnectionService, private modalService: ModalService)
     {
         this.websocket.$error_msg.subscribe(this.displayServerWarning.bind(this));
     }

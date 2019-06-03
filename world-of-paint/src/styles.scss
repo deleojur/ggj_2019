@@ -2,48 +2,76 @@
 @import '~bootstrap/dist/css/bootstrap.css';
 @import '~@angular/material/theming';
 
-@include mat-core();
-$app-primary: mat-palette($mat-blue, 700, 600);
-$app-accent: mat-palette($mat-blue-grey, A200, 900, A100);
-$app-warn: mat-palette($mat-deep-orange);
-$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
-@include angular-material-theme($app-theme);
-// Secondary Theme -- due to hue feature absent so this is also a work around for hue
-.app-alt-theme
+.rotate-90
 {
-    $app-alt-primary: mat-palette($mat-blue-grey, 500);
-    $app-alt-accent: mat-palette($mat-pink, 500);
-    $app-alt-warn: mat-palette($mat-deep-orange);
-    $app-alt-theme: mat-light-theme($app-alt-primary, $app-alt-accent, $app-alt-warn);
-    @include angular-material-theme($app-alt-theme);
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.icon-small-text
+{
+    text-align: left;
+    font-family: Roboto;
+    font-size: 20px;
+}
+
+.icon-small
+{
+    position: absolute;
+    width: 10vw;
+    height: auto;
+}
+
+.btn-parent-small
+{
+    position: absolute;
+    margin-top: -7vh;
+    margin-left: 48vw;
+}
+
+.btn-round-small
+{
+    display: inline-block;
+    width: 20vh;
+    height: 20vh;
+    border-radius: 50%;
 }
 
 .btn-parent
 {
     position:relative;
     display: block;
-    margin-top: 5vh;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50vw;
+    width: 40vw;
 }
 
 .btn-round 
 {
-    background-color: #4CAF50;
     display: inline-block;
-    width:40vh;
-    height:40vh;
+    width:35vh;
+    height:35vh;
     border-radius: 50%;
 }
 
 .btn-icon
 {
-    width:40vh;
-    height:40vh;
+    width:35vh;
+    height:35vh;
     position: absolute;
     top:0;
     left:0;
+    pointer-events: none;
+}
+
+.btn-icon-small
+{
+    width: 20vh;
+    height: 20vh;
+    position: absolute;
+    top: 0;
+    left: 0;
     pointer-events: none;
 }
 

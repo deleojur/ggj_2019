@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, OnInit } from '@angular/core';
-import { RouterModule, NavigationStart } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +17,8 @@ import { RoomComponent } from './room/room.component';
 
 import * as scrollLock from '../../node_modules/body-scroll-lock';
 import { MatchComponent } from './match/match.component';
+import { InfomodalComponent } from './infomodal/infomodal.component';
+import { MenumodalComponent } from './menumodal/menumodal.component';
 
 @NgModule
 ({
@@ -26,7 +28,9 @@ import { MatchComponent } from './match/match.component';
         SubscribeComponent,
         RoomComponent,
         ResultsComponent,
-        MatchComponent
+        MatchComponent,
+        InfomodalComponent,
+        MenumodalComponent
     ],
     imports: 
     [
