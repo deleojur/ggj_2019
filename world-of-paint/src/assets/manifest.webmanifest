@@ -1,0 +1,22 @@
+{
+    "name": "World of Paint",
+    "short_name": "🎮 me",
+    "display": "fullscreen",
+    "orientation": "landscape",
+    "description": "Learn how to create and share something or other.",
+    "start_url": "/in_game",
+    "background_color": "#000000",
+    "theme_color": "#FF0000",
+    "icons": [
+    {
+      "src": "https://192.168.homescreen_256_256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+        "src": "./images/homescreen_192_192.jpeg",
+        "sizes": "192x192",
+        "type": "image/jpeg"
+    }]
+  
+}

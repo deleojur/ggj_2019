@@ -9,8 +9,14 @@ import { Component } from '@angular/core';
 
 export class AppComponent
 { 
+    appHeight()
+    {
+        const doc = document.documentElement
+        doc.style.setProperty('--app-height', `${window.innerHeight}px`)
+    }
     constructor()
     {
-        
+        window.addEventListener('resize', this.appHeight)
+        this.appHeight();
     }
 }

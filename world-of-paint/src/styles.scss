@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.css';
 @import '~@angular/material/theming';
+@import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC');
 
 .rotate-90
 {
@@ -133,10 +134,10 @@ select:focus
     position:inherit;
 }
 
+.wrapper { overscroll-behavior: none }
+
 html, body {
     overflow-x: hidden;
-  }
-  body {
-    position: relative;
+    overflow-y: hidden;
   }
 body { -webkit-user-select: none; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

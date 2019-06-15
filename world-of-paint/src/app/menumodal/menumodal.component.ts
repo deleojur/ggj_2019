@@ -11,7 +11,7 @@ import { ConnectionService } from '../connection.service';
 })
 export class MenumodalComponent implements OnInit 
 {
-    @ViewChild('content') content;
+    @ViewChild('content', {static: false}) content;
 
     buttons:    [];
     color:      string;

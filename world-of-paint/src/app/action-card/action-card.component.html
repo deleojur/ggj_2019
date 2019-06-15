@@ -1,0 +1,26 @@
+<div class="area" appMovableArea (click) = "closeDetailedCard($event)">
+    <div class="box" appMovable *ngFor="let card of cards; let i = index">
+        <div id="draggable-action-parent" 
+        [ngStyle]="{ 'transform': 'rotate('+getCardByIndex(i).deg+'deg) translate('+getCardByIndex(i).posX+'px, '+getCardByIndex(i).posY+'px)' }" 
+        class="action-card text-dark" (click) = "openDetailedCard($event, card)">
+            <img class="draggable-action-card animated bounceIn" src="../../assets/images/image_card_template.png">
+            <div class="card-img-overlay">
+                <h5 class="text-center action-name">{{card.name}}</h5>
+                <img src={{card.icon}} class="draggable-action-icon disable-pointer-events"/>
+            </div>
+        </div>
+    </div>
+    <div id="override-drag" class="override-drag"> <!--Overrides dragging cards when detailed view is open-->
+        <div
+        class="action-card text-dark detailed-action-card"
+        [@detailedCardTransition] = "{value: state, params: {position_x: positionX, position_y: positionY, to_position_x: toPositionX}}"
+        (@detailedCardTransition.done) = "detailedCardAnimationEnd($event)">
+            <img class="draggable-action-card" src="../../assets/images/image_card_template.png">
+            <div class="card-img-overlay">
+                <h5 class="text-center action-name">{{detailedCard.name}}</h5>
+                <img [@detailedCardIconTransition] = "{value: state}" src={{detailedCard.icon}} class="detailed-action-icon disable-pointer-events"/>
+                <h5 [@detailedCardExplanationTransition] = "{value: state}" class="text-center action-explanation">{{detailedCard.description}}</h5>
+            </div>
+        </div>
+    </div>
+</div>

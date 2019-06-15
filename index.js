@@ -18,10 +18,6 @@ app.use(express.static('world-of-paint/dist/world-of-paint'));
 //var server      = http.Server(app);
 var server = https.createServer(options, app).listen(PORT);
 io = io.listen(server);
-server.listen(PORT, function()
-{
-
-});
 io.on('connection', function(socket)
 {
     socket.on('master_enter_room',          master_enterRoom);

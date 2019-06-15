@@ -11,7 +11,7 @@ import { ConnectionService } from '../connection.service';
 })
 export class InfomodalComponent implements OnInit 
 {
-    @ViewChild('content') content;
+    @ViewChild('content', {static: false}) content;
 
     color:      string;
     header:     string;

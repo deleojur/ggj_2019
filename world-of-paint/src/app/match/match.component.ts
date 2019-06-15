@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ConnectionService } from '../connection.service';
 import { WebsocketService } from '../websocket.service';
 import { Router, NavigationEnd } from '@angular/router';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
 import { ModalService } from '../modal.service';
 
 @Component({
@@ -42,34 +41,6 @@ export class MatchComponent implements OnInit
     }
 
     ngOnInit() {}
-
-    moveDown()
-    {
-        this.connection.$isMoving = true;
-    }
-
-    moveUp()
-    {
-        this.connection.$isMoving = false;
-    }
-
-    shootDown()
-    {
-        this.connection.$isShooting = true;
-    }
-
-    shootUp()
-    {
-        this.connection.$isShooting = false;
-    }
-
-    pause()
-    {
-        let modal       = this.modalService.open('menu', () => { } );
-        modal.header    = 'Game Paused';
-        modal.color     = this.color;
-        modal.buttons   = this.buttons;
-    }
 
     updateStats(stats: Object) : void
     {

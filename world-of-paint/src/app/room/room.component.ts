@@ -12,7 +12,7 @@ import { ModalService } from '../modal.service';
 })
 export class RoomComponent implements OnInit
 {
-    @ViewChild('carousel') carousel: NgbCarousel;
+    @ViewChild('carousel', {static: false}) carousel: NgbCarousel;
 
     ngOnInit()
     {

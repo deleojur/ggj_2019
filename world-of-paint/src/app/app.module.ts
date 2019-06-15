@@ -1,3 +1,5 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -19,6 +21,8 @@ import * as scrollLock from '../../node_modules/body-scroll-lock';
 import { MatchComponent } from './match/match.component';
 import { InfomodalComponent } from './infomodal/infomodal.component';
 import { MenumodalComponent } from './menumodal/menumodal.component';
+import { ActionCardComponent } from './action-card/action-card.component';
+import { DraggableModule } from '../lib/draggable.module';
 
 @NgModule
 ({
@@ -30,13 +34,16 @@ import { MenumodalComponent } from './menumodal/menumodal.component';
         ResultsComponent,
         MatchComponent,
         InfomodalComponent,
-        MenumodalComponent
+        MenumodalComponent,
+        ActionCardComponent
     ],
     imports: 
     [
+        DraggableModule,
         FormsModule,
         NgbModule,
         BrowserModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         Ng2CarouselamosModule,
         RouterModule.forRoot(
