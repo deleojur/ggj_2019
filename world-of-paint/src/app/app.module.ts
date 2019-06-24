@@ -22,7 +22,7 @@ import { MatchComponent } from './match/match.component';
 import { InfomodalComponent } from './infomodal/infomodal.component';
 import { MenumodalComponent } from './menumodal/menumodal.component';
 import { ActionCardComponent } from './action-card/action-card.component';
-import { DraggableModule } from '../lib/draggable.module';
+import { MovableCardComponent } from './movable-card/movable-card.component';
 
 @NgModule
 ({
@@ -35,11 +35,11 @@ import { DraggableModule } from '../lib/draggable.module';
         MatchComponent,
         InfomodalComponent,
         MenumodalComponent,
-        ActionCardComponent
+        ActionCardComponent,
+        MovableCardComponent
     ],
     imports: 
     [
-        DraggableModule,
         FormsModule,
         NgbModule,
         BrowserModule,

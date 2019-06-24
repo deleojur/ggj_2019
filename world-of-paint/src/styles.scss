@@ -12,6 +12,113 @@
     transform: rotate(90deg);
 }
 
+@font-face {
+    font-family: BreatheFire;
+    src: url("./assets/fonts/BreatheFire.otf") format("opentype");
+}
+
+@mixin action-icon
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@mixin action-card 
+{
+    width:15vw;
+    border: none;
+}
+
+.background-card
+{
+    background-color: #00000000;
+    display: block;
+    position: absolute;
+}
+
+.draggable-action-card
+{
+    @include action-card();
+    height: 38vh;
+    width: auto;
+}
+
+.override-drag
+{
+    position: absolute; left: 0; right: 0; top: 0;
+    background-color: #00000000;
+}
+
+.detailed-action-card
+{
+    @include action-card();
+    position: absolute; left: 0; right: 0; top: 0;
+    pointer-events: none;
+}
+
+.card-img-overlay
+{
+    padding:    0;
+    top:        10%;
+}
+
+.disable-pointer-events
+{
+    pointer-events: none;
+}
+
+.draggable-action-icon
+{
+    @include action-icon();
+    width: 60%;
+}
+
+.detailed-action-icon
+{
+    @include action-icon();
+    width: 40%;
+}
+
+.action-name
+{
+    font-size:      2vw;
+    font-family:    'BreatheFire', sans-serif;
+}
+
+.card
+{
+    transform-origin: 50% 50%;
+}
+
+.action-explanation
+{
+    position: absolute; left:10%; right:10%; bottom: 10%;
+    font-size: 1.25vw;
+    font-family: 'BreatheFire', sans-serif;
+}
+  
+.box 
+{
+    display: inline-block;
+    position: absolute;
+}
+  
+  .area {
+    background: #C0FFEE;
+    display: inline-block;
+
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+
+    @media not all and (hover:hover) {
+        height: var(--app-height);
+    }
+  }  
+
 .icon-small-text
 {
     text-align: left;
@@ -141,3 +248,5 @@ html, body {
     overflow-y: hidden;
   }
 body { -webkit-user-select: none; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+

@@ -15,8 +15,14 @@ const options =
     cert: fs.readFileSync('./encryption/world-of-paint.crt', 'utf8')
 };
 app.use(express.static('world-of-paint/dist/world-of-paint'));
-//var server      = http.Server(app);
-var server = https.createServer(options, app).listen(PORT);
+
+/** HTTP server */
+var server      = http.Server(app);
+server.listen(PORT);
+
+/** HTTPS server */
+//var server = https.createServer(options, app).listen(PORT);
+
 io = io.listen(server);
 io.on('connection', function(socket)
 {

@@ -11,17 +11,17 @@ import { trigger, state, transition, style, animate, animateChild, group, query 
         [
             state('small', style
             ({
-                transform : 'translate3d({{position_x}}px, {{position_y}}px, 0) scale(1)'
-            }), {params: {position_x: 0, position_y: 0}}),
+                transform : 'translate({{position_x}}px, {{position_y}}px) scale(1) rotate({{rot}}deg)'
+            }), {params: {position_x: 0, position_y: 0, rot: 0}}),
             state('large', style(
             {
                 margin: '-10vh -5vw 10vh -5vw',
-                transform: 'translate3d({{to_position_x}}px, 40vh, 0) scale(2.5) rotate(5deg)',
+                transform: 'translate({{to_position_x}}px, 40vh) scale(2.5) rotate(0deg)',
 
-            }), {params: {to_position_x: 0}}),
+            }), {params: {to_position_x: 0, rot: 0}}),
             state('reset', style(
             {
-                transform : 'scale(0) rotate(15deg)'
+                transform : 'scale(0)'
             })),
             transition('small => large', 
             [
@@ -29,7 +29,7 @@ import { trigger, state, transition, style, animate, animateChild, group, query 
                 ([
                     query('@detailedCardIconTransition', animateChild()),
                     query('@detailedCardExplanationTransition', animateChild()),
-                    animate('333ms cubic-bezier(.95, -.23, 0, 1.35)')
+                    animate('175ms ease-out')
                 ])
             ]),
             transition('large => small', 
@@ -51,9 +51,9 @@ import { trigger, state, transition, style, animate, animateChild, group, query 
             })),
             state('large', style
             ({
-                width: '40%'
+                width: '50%'
             })),
-            transition('small => large', animate('333ms cubic-bezier(.95, -.23, 0, 1.35)')),
+            transition('small => large', animate('250ms ease-out')),
             transition('large => small', animate('333ms cubic-bezier(.92, -.43, .15, 1.03)'))
         ]),
         trigger('detailedCardExplanationTransition',
@@ -66,7 +66,7 @@ import { trigger, state, transition, style, animate, animateChild, group, query 
             ({
                 transform: 'scale(1)'
             })),
-            transition('small => large', animate('333ms cubic-bezier(.95, -.23, 0, 1.35)')),
+            transition('small => large', animate('250ms ease-out')),
             transition('large => small', animate('333ms cubic-bezier(.92, -.43, .15, 1.03)'))
         ])
   ]
@@ -78,8 +78,12 @@ export class ActionCardComponent implements OnInit
     cards = 
     [
         {deg: 0, posX: 0, posY: 0, name: 'Move Forward', icon: '../../assets/images/icon_score.svg', description: 'moves your tank one tile forward.'},
-        {deg: 0, posX: 0, posY: 0, name: 'Shoot', icon: '../../assets/images/icon_kills.svg', description: 'moves your tank one tile forward.'},
-       
+        {deg: 0, posX: 0, posY: 0, name: 'Move Forward', icon: '../../assets/images/icon_score.svg', description: 'moves your tank one tile forward.'},
+        {deg: 0, posX: 0, posY: 0, name: 'Move Forward', icon: '../../assets/images/icon_score.svg', description: 'moves your tank one tile forward.'},
+        {deg: 0, posX: 0, posY: 0, name: 'Move Forward', icon: '../../assets/images/icon_score.svg', description: 'moves your tank one tile forward.'},
+        {deg: 0, posX: 0, posY: 0, name: 'Move Forward', icon: '../../assets/images/icon_score.svg', description: 'moves your tank one tile forward.'},
+        {deg: 0, posX: 0, posY: 0, name: 'Move Forward', icon: '../../assets/images/icon_score.svg', description: 'moves your tank one tile forward.'},
+        {deg: 0, posX: 0, posY: 0, name: 'Move Forward', icon: '../../assets/images/icon_score.svg', description: 'moves your tank one tile forward.'}
     ];
 
     getCardByIndex(index): any 
@@ -93,6 +97,7 @@ export class ActionCardComponent implements OnInit
     toPositionX: number;
     positionX: number;
     positionY: number;
+    rotation: number;
     targetNode: any;
     animationNode: any;
     detailedCard: any = {name: '', description: '', icon: ''};
@@ -104,35 +109,41 @@ export class ActionCardComponent implements OnInit
         this.viewWidth = document.documentElement.clientWidth;
         this.viewHeight = document.documentElement.clientHeight;
 
+        let startPosition = 12;
+        let startDegrees = -12;
+
         for (let i = 0; i < this.cards.length; i++)
         {
             let c = this.cards[i];
-            //c.posX = this.viewWidth / 2;
+
+            c.posX = startPosition;
+            c.posY = this.viewHeight - 100;
+            c.deg = startDegrees;
+            startPosition += 50;
+            startDegrees += 2;
+
+            setInterval(() => 
+            {
+                //c.deg += 5;
+            }, 16);
         }
     }
 
-    openDetailedCard(event, card)
+    openDetailedCard(card)
     {
         if (this.state === 'reset')
         {
             this.detailedCard = card;
             this.animationNode.style.bottom = 0;
-            this.targetNode = event.target;
-
-            do 
-            {
-                if (this.targetNode.id === "draggable-action-parent")
-                    break;
-                else this.targetNode = this.targetNode.parentNode;
-            } while (true);
+            this.targetNode = card.target;
 
             this.targetNode.style.opacity = 0;
             let rect = this.targetNode.getBoundingClientRect();
             this.positionX = rect.x;
             this.positionY = rect.y;
+            this.rotation = card.deg;
             this.toPositionX = Math.min(Math.max(this.positionX, .2 * this.viewWidth), this.viewWidth - .25 * this.viewWidth);
             this.state = 'small';
-            event.stopPropagation();
         }
     }
 
