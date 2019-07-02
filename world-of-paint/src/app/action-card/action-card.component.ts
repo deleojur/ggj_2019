@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, HostListener, Output, EventEmitter, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { trigger, state, transition, style, animate, animateChild, group, query } from '@angular/animations';
+import { MovableCardComponent } from '../movable-card/movable-card.component';
 
 @Component({
   selector: 'app-action-card',
@@ -17,8 +18,15 @@ import { trigger, state, transition, style, animate, animateChild, group, query 
             {
                 margin: '-10vh -5vw 10vh -5vw',
                 transform: 'translate({{to_position_x}}px, 40vh) scale(2.5) rotate(0deg)',
-
             }), {params: {to_position_x: 0, rot: 0}}),
+            state('move', style(
+            {
+                transform : 'translate({{position_x}}px, {{position_y}}px) scale(1.1)'
+            }), {params: {position_x: 0, position_y: 0}}),
+            state('snap', style(
+            {
+                transform : 'translate({{position_x}}px, {{position_y}}px) scale(1)'
+            }), {params: {position_x: 0, position_y: 0}}),
             state('reset', style(
             {
                 transform : 'scale(0)'
@@ -32,16 +40,18 @@ import { trigger, state, transition, style, animate, animateChild, group, query 
                     animate('175ms ease-out')
                 ])
             ]),
-            transition('large => small', 
+            transition('none => snap, large => snap', animate('150ms ease-out')),
+            transition('large => small, none => small', 
             [
                 group
                 ([
                     query('@detailedCardIconTransition', animateChild()),
                     query('@detailedCardExplanationTransition', animateChild()),
-                    animate('333ms cubic-bezier(.92, -.43, .15, 1.03)')
+                    animate('150ms cubic-bezier(.92, -.43, .15, 1.03)')
                 ])
             ]),
-            transition('small <=> reset', animate('0ms'))
+            transition('large => move', animate('33ms ease-out')),
+            transition('small <=> reset, snap => reset', animate('0ms'))
         ]),
         trigger('detailedCardIconTransition',
         [
@@ -71,6 +81,7 @@ import { trigger, state, transition, style, animate, animateChild, group, query 
         ])
   ]
 })
+
 export class ActionCardComponent implements OnInit 
 {
     constructor() { }
@@ -86,32 +97,49 @@ export class ActionCardComponent implements OnInit
         {deg: 0, posX: 0, posY: 0, name: 'Move Forward', icon: '../../assets/images/icon_score.svg', description: 'moves your tank one tile forward.'}
     ];
 
+    slots = [];
+
     getCardByIndex(index): any 
     {
         return this.cards[index];
     }
 
-    state: String = 'reset';
-    viewWidth: number = 0;
-    viewHeight: number;
-    toPositionX: number;
-    positionX: number;
-    positionY: number;
-    rotation: number;
-    targetNode: any;
-    animationNode: any;
-    detailedCard: any = {name: '', description: '', icon: ''};
+    @ViewChildren('movableCard') private children: QueryList<MovableCardComponent>;
+
+    //animations
+    state:          String = 'reset';
+    animationNode:  any;
+    detailedCard:   any = {name: '', description: '', icon: ''};
+
+    viewWidth:      number = 0;
+    viewHeight:     number = 0;
+    
+    detailedPosX:   number;
+    positionX:      number;
+    positionY:      number;
+    startPosX:      number;
+    startPosY:      number;
+    rotation:       number;
+    
+    targetNode:     any;
+    overrideNode:   any;
 
     ngOnInit() 
     {
         document.addEventListener('contextmenu', event => event.preventDefault());
-        this.animationNode = document.getElementById('override-drag');
+        this.overrideNode = document.getElementById('override-drag');
+        this.animationNode = document.getElementById('action-card');
         this.viewWidth = document.documentElement.clientWidth;
         this.viewHeight = document.documentElement.clientHeight;
+      
+        this.calculateCardsTransform();
+        this.calculateSlotsTransform();
+    }
 
+    private calculateCardsTransform() : void
+    {
         let startPosition = 12;
         let startDegrees = -12;
-
         for (let i = 0; i < this.cards.length; i++)
         {
             let c = this.cards[i];
@@ -129,36 +157,114 @@ export class ActionCardComponent implements OnInit
         }
     }
 
+    onSlotCreated(slotElement, index): void
+    {
+        this.slots[index].rect = slotElement.getBoundingClientRect();
+    }
+
+    private calculateSlotsTransform() : void
+    {
+        let step = this.viewWidth / 5;
+        for (let i = 0; i < 5; i++)
+        {
+            this.slots[i] = { value: null, posX: step * i + 10, posY: 10 };
+        }
+    }
+
+    drag: boolean = false;
     openDetailedCard(card)
     {
+        this.drag = true;
         if (this.state === 'reset')
         {
             this.detailedCard = card;
-            this.animationNode.style.bottom = 0;
+            this.overrideNode.style.bottom = 0;
             this.targetNode = card.target;
 
             this.targetNode.style.opacity = 0;
             let rect = this.targetNode.getBoundingClientRect();
-            this.positionX = rect.x;
-            this.positionY = rect.y;
+            this.startPosX = rect.x;
+            this.startPosY = rect.y;
             this.rotation = card.deg;
-            this.toPositionX = Math.min(Math.max(this.positionX, .2 * this.viewWidth), this.viewWidth - .25 * this.viewWidth);
+            this.detailedPosX = Math.min(Math.max(this.startPosX, .2 * this.viewWidth), this.viewWidth - .25 * this.viewWidth);
             this.state = 'small';
         }
     }
 
-    closeDetailedCard(event)
+    move: boolean = false;
+    @HostListener('touchmove', ['$event'])
+    movable_ontouchmove(event: TouchEvent) 
     {
-        if (this.state === 'large')
+        if (!this.drag)
+            return;
+
+        if (!this.move)
+            this.state = 'move';
+        
+        this.move = true;
+        let startPos = this.detailedCard.startDragPosition;
+        let touch = event.touches[0];
+        this.positionX = touch.clientX - startPos.x;
+        this.positionY = touch.clientY - startPos.y;
+    }
+
+    @HostListener('touchend', ['$event'])
+    action_ontouchend(event: TouchEvent) 
+    {
+        if (!this.drag)
+            return;
+
+        this.drag = false;
+        let slot = this.trySnapToSlotPosition();
+
+        if (slot)
         {
+            this.state = 'snap';
+            this.startPosX = slot.x;
+            this.startPosY = slot.y;
+            this.detailedCard.snapToSlot(slot.x, slot.y, slot.id);
+        } else
+        {
+            this.detailedCard.snapToHand();
+            this.startPosX = this.detailedCard.posX;
+            this.startPosY = this.detailedCard.posY;
             this.state = 'small';
         }
-        event.stopPropagation();
+        this.move = false;
+    }
+
+    private trySnapToSlotPosition(): any
+    {
+        let rect1 = this.animationNode.getBoundingClientRect();
+        for (let i = 0; i < this.slots.length; i++)
+        {
+            let slot: any = this.slots[i];
+            let rect2: any = slot.rect;
+
+            let centerX = (rect1.right - rect2.right) + (rect1.left - rect2.left);
+            let centerY = (rect1.bottom - rect2.bottom) + (rect1.top - rect2.top);
+            
+            if (Math.abs(centerX) + Math.abs(centerY) < 125)
+            {
+                let xDif = rect2.width - rect1.width;
+                let yDif = rect2.height - rect1.height;
+                return { x: rect2.x + xDif / 2, y: rect2.y + yDif / 2, id: i };
+            }
+        }
+        if (!this.move)
+        {
+            let j = this.detailedCard.slotID;
+            if (j > -1)
+            {
+                let blaat = this.detailedCard.position;
+                return { x: blaat.x, y: blaat.y, id: j };
+            }
+        }
     }
 
     detailedCardAnimationEnd(event)
     {
-        if (event.toState === 'small')
+        if (event.toState === 'small' || event.toState === 'snap')
         {
             if (event.fromState === 'reset')
             {
@@ -166,10 +272,13 @@ export class ActionCardComponent implements OnInit
             }
             else
             {
-                this.animationNode.style.bottom = '';
+                this.overrideNode.style.bottom = '';
                 this.targetNode.style.opacity = 1;
                 this.state = 'reset';
             }
+        } else if (event.toState === 'move')
+        {
+            this.state = 'none';
         }
     }
 }

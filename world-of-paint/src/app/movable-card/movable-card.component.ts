@@ -1,105 +1,74 @@
 import { EventEmitter, Component, OnInit, Output, Input, HostListener, ElementRef } from '@angular/core';
-import { trigger, state, style, transition, group, query, animateChild, animate } from '@angular/animations';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
-interface Position {
+interface Position 
+{
     x: number;
     y: number;
-  }
+}
 
 @Component({
   selector: 'app-movable-card',
   templateUrl: './movable-card.component.html',
-  styleUrls: ['./movable-card.component.scss'],
-  animations:
-  [
-    trigger('returnToInitialPosition', 
-    [
-        state('default', style
-        ({
-            transform : 'translate({{x}}px, {{y}}px) rotate({{rot}}deg)'
-        }), {params: {x: 0, y: 0, rot: 0}}),
-        state('startPosition', style(
-        {
-            transform: 'translate({{to_x}}px, {{to_y}}px) rotate({{rot}}deg)'
-        }), {params: {to_x: 0, to_y: 0, rot: 0}}),
-        transition('default => startPosition', animate('333ms cubic-bezier(.95, -.23, 0, 1.35)')),
-        transition('startPosition => default', animate('0ms'))
-    ])
-]
+  styleUrls: ['./movable-card.component.scss']
 })
 
-export class MovableCardComponent implements OnInit {
+export class MovableCardComponent implements OnInit 
+{
+    position:       Position = {x: 0, y: 0};
+    startDragPos:   Position = {x: 0, y: 0};
 
-    state: String = 'default';
-    position: Position = {x: 0, y: 0};
-    startPosition: Position = {x: 0, y: 0};
-    startDragPosition: Position = {x: 0, y: 0};
-    rotation = 0;
-    dragging: boolean = false;
+    rotation:       number = 0;
+    dragging:       boolean = false;
+    slotID:         number = -1;
+    rect:           DOMRect;
+    target:         any;
 
-    @Output() detailedCardTapped = new EventEmitter<any>();
-
+    @Output() openDetailedCard  = new EventEmitter<any>();
     @Input('cardInfo') cardInfo: any;
 
-  constructor(private element: ElementRef) {  }
+    constructor(private element: ElementRef) { }
 
-  ngOnInit() 
-  {
-    this.position.x = this.cardInfo.posX;
-    this.position.y = this.cardInfo.posY;
-    this.startPosition.x = this.cardInfo.posX;
-    this.startPosition.y = this.cardInfo.posY;
+    ngOnInit() 
+    {
+        this.target = this.element.nativeElement.children[0];
 
-    this.rotation = this.cardInfo.deg;
-    this.cardInfo.target = this.element.nativeElement.children[0];
-  }
+        this.cardInfo.target = this.target;
+        this.cardInfo.snapToSlot = this.snapToSlot.bind(this);
+        this.cardInfo.snapToHand = this.snapToHand.bind(this);
+        this.snapToHand();
+    }
 
-  @HostListener('touchstart', ['$event'])
+    @HostListener('touchstart', ['$event'])
     movable_ontouchstart(event: TouchEvent) 
-    {  
+    {
         let touch = event.touches[0];
-        this.position.x = this.cardInfo.posX;
-        this.position.y = this.cardInfo.posY;
+        this.position = this.startDragPos;
         
-        this.startDragPosition = 
+        this.cardInfo.startDragPosition = 
         {
             x: touch.clientX - this.position.x,
             y: touch.clientY - this.position.y
         }
+        this.cardInfo.position = this.position;
+        this.cardInfo.slotID = this.slotID;
+        this.openDetailedCard.emit(this.cardInfo);
     }
 
-    @HostListener('touchmove', ['$event'])
-    movable_ontouchmove(event: TouchEvent) 
+    public snapToSlot(x: number, y: number, slot: number): void
     {
-        this.dragging = true;
-
-        let touch = event.touches[0];
-        this.position.x = touch.clientX - this.startDragPosition.x;
-        this.position.y = touch.clientY - this.startDragPosition.y;
-
-        this.element.nativeElement.style.transform = 'translate(100px, 100px, 0px);';
+        this.position       = {x: x, y: y};
+        this.startDragPos   = this.position;
+        this.slotID         = slot;
+        this.rotation       = 0;
     }
 
-    @HostListener('touchend', ['$event'])
-    mnovable_ontouchend(event: TouchEvent) 
+    public snapToHand(): void
     {
-        if (!this.dragging) 
-        {
-            return;
-        }
-        this.state = 'startPosition';
-        this.dragging = false;
-    }
-
-    movable_onclick(event: MouseEvent)
-    {
-        this.detailedCardTapped.emit(this.cardInfo);
-    }
-
-    returnToInitialPositionEnd(event)
-    {
-        this.state = 'default';
-        this.position.x = this.startPosition.x;
-        this.position.y = this.startPosition.y;
+        this.position.x     = this.cardInfo.posX;
+        this.position.y     = this.cardInfo.posY;
+        this.startDragPos   = this.position;
+        this.slotID           = -1;
+        this.rotation       = this.cardInfo.deg;
     }
 }

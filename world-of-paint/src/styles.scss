@@ -30,13 +30,6 @@
     border: none;
 }
 
-.background-card
-{
-    background-color: #00000000;
-    display: block;
-    position: absolute;
-}
-
 .draggable-action-card
 {
     @include action-card();

@@ -1,0 +1,25 @@
+@font-face 
+{
+    font-family: BreatheFire;
+    src: url("../../assets/fonts/BreatheFire.otf") format("opentype");
+}
+
+.empty-slot
+{
+    background:         url('../../assets/images/image_empty_slot.png');
+    background-repeat:  no-repeat;
+    background-size:    contain;
+    background-color:   transparent;
+    position:           absolute;
+    height:             45vh;
+    width:              18vw;
+}
+
+.slot-index
+{
+    font-size:          5vw;
+    font-family:        'BreatheFire', sans-serif;
+    position:           absolute;
+    margin:             50% 50%;
+    text-align:         center; 
+}

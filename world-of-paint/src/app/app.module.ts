@@ -23,6 +23,7 @@ import { InfomodalComponent } from './infomodal/infomodal.component';
 import { MenumodalComponent } from './menumodal/menumodal.component';
 import { ActionCardComponent } from './action-card/action-card.component';
 import { MovableCardComponent } from './movable-card/movable-card.component';
+import { OnCreate } from 'src/directives/OnCreate';
 
 @NgModule
 ({
@@ -36,7 +37,8 @@ import { MovableCardComponent } from './movable-card/movable-card.component';
         InfomodalComponent,
         MenumodalComponent,
         ActionCardComponent,
-        MovableCardComponent
+        MovableCardComponent,
+        OnCreate
     ],
     imports: 
     [
