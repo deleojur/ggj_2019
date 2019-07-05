@@ -35,7 +35,7 @@ export class MatchComponent implements OnInit
                     {
                         //router.navigate(['/']);
                     }
-                } else this.connection.stopTrackingGyro();
+                }
             }
         });
     }

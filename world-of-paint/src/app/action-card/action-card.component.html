@@ -7,7 +7,7 @@
     </div>
     <div *ngFor="let card of cards; let i = index">
         <app-movable-card #movableCard [cardInfo]=card
-        (openDetailedCard)="openDetailedCard(card)">
+        (on_touchstart)="touchstart(card)">
         </app-movable-card>
     </div>
     <div id="override-drag" class="override-drag">

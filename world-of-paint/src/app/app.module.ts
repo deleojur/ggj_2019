@@ -23,7 +23,8 @@ import { InfomodalComponent } from './infomodal/infomodal.component';
 import { MenumodalComponent } from './menumodal/menumodal.component';
 import { ActionCardComponent } from './action-card/action-card.component';
 import { MovableCardComponent } from './movable-card/movable-card.component';
-import { OnCreate } from 'src/directives/OnCreate';
+import { OnCreate } from 'src/directives/on-create';
+import { TouchMove, TouchEnd } from 'src/directives/touch';
 
 @NgModule
 ({
@@ -38,7 +39,8 @@ import { OnCreate } from 'src/directives/OnCreate';
         MenumodalComponent,
         ActionCardComponent,
         MovableCardComponent,
-        OnCreate
+        OnCreate,
+        TouchMove, TouchEnd
     ],
     imports: 
     [

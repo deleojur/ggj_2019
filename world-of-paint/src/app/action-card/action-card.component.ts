@@ -41,7 +41,7 @@ import { MovableCardComponent } from '../movable-card/movable-card.component';
                 ])
             ]),
             transition('none => snap, large => snap', animate('150ms ease-out')),
-            transition('large => small, none => small', 
+            transition('large => small, none => reset', 
             [
                 group
                 ([
@@ -50,8 +50,9 @@ import { MovableCardComponent } from '../movable-card/movable-card.component';
                     animate('150ms cubic-bezier(.92, -.43, .15, 1.03)')
                 ])
             ]),
-            transition('large => move', animate('33ms ease-out')),
-            transition('small <=> reset, snap => reset', animate('0ms'))
+            transition('large => move', animate('75ms ease-out')),
+            transition('small <=> reset, snap => reset', animate('0ms')),
+            transition('reset => move', animate('0ms'))
         ]),
         trigger('detailedCardIconTransition',
         [
@@ -109,7 +110,7 @@ export class ActionCardComponent implements OnInit
     //animations
     state:          String = 'reset';
     animationNode:  any;
-    detailedCard:   any = {name: '', description: '', icon: ''};
+    detailedCard:   any = {name: '', description: '', icon: '', card: null};
 
     viewWidth:      number = 0;
     viewHeight:     number = 0;
@@ -121,16 +122,22 @@ export class ActionCardComponent implements OnInit
     startPosY:      number;
     rotation:       number;
     
-    targetNode:     any;
+    targetCardElement:     any;
     overrideNode:   any;
+
+    move:           boolean = false;
+    open:           boolean = false;
+    hold:           boolean = false;
+    selected:       boolean = false;
+    touchStarted:   number;
 
     ngOnInit() 
     {
         document.addEventListener('contextmenu', event => event.preventDefault());
-        this.overrideNode = document.getElementById('override-drag');
-        this.animationNode = document.getElementById('action-card');
-        this.viewWidth = document.documentElement.clientWidth;
-        this.viewHeight = document.documentElement.clientHeight;
+        this.overrideNode   = document.getElementById('override-drag');
+        this.animationNode  = document.getElementById('action-card');
+        this.viewWidth      = document.documentElement.clientWidth;
+        this.viewHeight     = document.documentElement.clientHeight;
       
         this.calculateCardsTransform();
         this.calculateSlotsTransform();
@@ -167,74 +174,114 @@ export class ActionCardComponent implements OnInit
         let step = this.viewWidth / 5;
         for (let i = 0; i < 5; i++)
         {
-            this.slots[i] = { value: null, posX: step * i + 10, posY: 10 };
+            this.slots[i] = { card: null, posX: step * i + 10, posY: 10 };
         }
     }
 
-    drag: boolean = false;
-    openDetailedCard(card)
+    private setDetailedCard(card): void
     {
-        this.drag = true;
-        if (this.state === 'reset')
+        this.detailedCard       = card;
+        this.targetCardElement  = this.detailedCard.target;
+        let rect                = this.targetCardElement.getBoundingClientRect();
+        this.startPosX          = rect.x;
+        this.startPosY          = rect.y;
+        this.rotation           = card.deg;
+        this.detailedPosX       = Math.min(Math.max(this.startPosX, .2 * this.viewWidth), this.viewWidth - .25 * this.viewWidth);
+    }
+
+    private openOrCloseDetailedCard(): void
+    {
+        if (!this.open)
         {
-            this.detailedCard = card;
             this.overrideNode.style.bottom = 0;
-            this.targetNode = card.target;
-
-            this.targetNode.style.opacity = 0;
-            let rect = this.targetNode.getBoundingClientRect();
-            this.startPosX = rect.x;
-            this.startPosY = rect.y;
-            this.rotation = card.deg;
-            this.detailedPosX = Math.min(Math.max(this.startPosX, .2 * this.viewWidth), this.viewWidth - .25 * this.viewWidth);
-            this.state = 'small';
+            this.targetCardElement.style.opacity = 0;
+        } else 
+        { 
+            this.selected = false;
         }
+        this.state = 'small';
+        this.open = !this.open;
     }
 
-    move: boolean = false;
-    @HostListener('touchmove', ['$event'])
-    movable_ontouchmove(event: TouchEvent) 
+    touchstart(card)
     {
-        if (!this.drag)
+        this.selected = true;
+        this.hold = true;
+        this.touchStarted = Date.now();
+        this.setDetailedCard(card);
+        setTimeout(function()
+        {
+            if (!this.move && this.hold)
+                this.openOrCloseDetailedCard();
+        }.bind(this), 350);
+    }
+
+    @HostListener('touchmove', ['$event'])
+    movable_ontouchmove(event) 
+    {
+        if (!this.selected) 
             return;
 
+        let startPos    = this.detailedCard.startDragPosition;
+        let touch       = event.touches[0];
+        this.positionX  = touch.clientX - startPos.x;
+        this.positionY  = touch.clientY - startPos.y;
+
         if (!this.move)
+        {
             this.state = 'move';
-        
+            this.overrideNode.style.bottom = 0;
+            this.targetCardElement.style.opacity = 0;
+        }
         this.move = true;
-        let startPos = this.detailedCard.startDragPosition;
-        let touch = event.touches[0];
-        this.positionX = touch.clientX - startPos.x;
-        this.positionY = touch.clientY - startPos.y;
     }
 
     @HostListener('touchend', ['$event'])
     action_ontouchend(event: TouchEvent) 
     {
-        if (!this.drag)
-            return;
-
-        this.drag = false;
-        let slot = this.trySnapToSlotPosition();
-
-        if (slot)
+        if (this.selected)
         {
-            this.state = 'snap';
+            if (this.detailedCard.slotID != -1)
+                this.slots[this.detailedCard.slotID].card = null;
+
+            if (!this.move)
+                this.openOrCloseDetailedCard();
+            else 
+                this.snapToPosition();
+        }
+        this.move = false;
+        this.hold = false;
+    }
+
+    private snapToPosition(): void
+    {
+        let slot = this.trySnapToSlotPosition();
+        if (slot && (this.slots[slot.id].card === null || slot.id === this.detailedCard.slotID))
+        {
+            this.slots[slot.id].card = this.detailedCard;
             this.startPosX = slot.x;
             this.startPosY = slot.y;
             this.detailedCard.snapToSlot(slot.x, slot.y, slot.id);
         } else
         {
-            this.detailedCard.snapToHand();
             this.startPosX = this.detailedCard.posX;
             this.startPosY = this.detailedCard.posY;
-            this.state = 'small';
+            this.detailedCard.snapToHand();
         }
-        this.move = false;
+        this.state = 'snap';
     }
 
     private trySnapToSlotPosition(): any
     {
+        if (!this.move)
+        {
+            let j = this.detailedCard.slotID;
+            if (j > -1)
+            {
+                let oldPos = this.detailedCard.position;
+                return { x: oldPos.x, y: oldPos.y, id: j };
+            }
+        }
         let rect1 = this.animationNode.getBoundingClientRect();
         for (let i = 0; i < this.slots.length; i++)
         {
@@ -251,21 +298,14 @@ export class ActionCardComponent implements OnInit
                 return { x: rect2.x + xDif / 2, y: rect2.y + yDif / 2, id: i };
             }
         }
-        if (!this.move)
-        {
-            let j = this.detailedCard.slotID;
-            if (j > -1)
-            {
-                let blaat = this.detailedCard.position;
-                return { x: blaat.x, y: blaat.y, id: j };
-            }
-        }
     }
 
     detailedCardAnimationEnd(event)
     {
         if (event.toState === 'small' || event.toState === 'snap')
         {
+            this.selected = event.toState === 'small';
+            this.open = false;
             if (event.fromState === 'reset')
             {
                 this.state = 'large';
@@ -273,12 +313,15 @@ export class ActionCardComponent implements OnInit
             else
             {
                 this.overrideNode.style.bottom = '';
-                this.targetNode.style.opacity = 1;
+                this.targetCardElement.style.opacity = 1;
                 this.state = 'reset';
             }
         } else if (event.toState === 'move')
         {
             this.state = 'none';
+        } else if (event.toState === 'large')
+        {
+            this.open = true;
         }
     }
 }

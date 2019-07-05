@@ -9,7 +9,7 @@
     "theme_color": "#FF0000",
     "icons": [
     {
-      "src": "https://192.168.homescreen_256_256.png",
+      "src": "./images/homescreen_256_256.png",
       "sizes": "256x256",
       "type": "image/png"
     },

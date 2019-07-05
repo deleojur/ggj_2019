@@ -24,7 +24,7 @@ export class MovableCardComponent implements OnInit
     rect:           DOMRect;
     target:         any;
 
-    @Output() openDetailedCard  = new EventEmitter<any>();
+    @Output() on_touchstart     = new EventEmitter<any>();
     @Input('cardInfo') cardInfo: any;
 
     constructor(private element: ElementRef) { }
@@ -39,20 +39,23 @@ export class MovableCardComponent implements OnInit
         this.snapToHand();
     }
 
+    private setCardInfo(posX: number, posY: number): void
+    {
+        this.cardInfo.startDragPosition = 
+        {
+            x: posX - this.position.x,
+            y: posY - this.position.y
+        }
+        this.cardInfo.position  = this.position;
+        this.cardInfo.slotID    = this.slotID;
+    }
+
     @HostListener('touchstart', ['$event'])
     movable_ontouchstart(event: TouchEvent) 
     {
-        let touch = event.touches[0];
-        this.position = this.startDragPos;
-        
-        this.cardInfo.startDragPosition = 
-        {
-            x: touch.clientX - this.position.x,
-            y: touch.clientY - this.position.y
-        }
-        this.cardInfo.position = this.position;
-        this.cardInfo.slotID = this.slotID;
-        this.openDetailedCard.emit(this.cardInfo);
+        let touch = event.touches[0];        
+        this.setCardInfo(touch.clientX, touch.clientY);
+        this.on_touchstart.emit(this.cardInfo);
     }
 
     public snapToSlot(x: number, y: number, slot: number): void

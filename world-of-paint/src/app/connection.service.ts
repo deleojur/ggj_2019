@@ -1,6 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { WebsocketService } from './websocket.service';
-import { GyroService } from './gyro.service';
 import { Router } from '@angular/router';
 import { ModalService } from './modal.service';
 
@@ -58,7 +57,6 @@ export class ConnectionService
     constructor(
         private wsService: WebsocketService, 
         private router: Router, 
-        private gyroService: GyroService,
         private modalService: ModalService) 
     {
         this.wsService = wsService;
@@ -85,7 +83,6 @@ export class ConnectionService
     private startMatch(): void
     {
         this._isingame = true;
-        this.gyroService.startTracking(this.sendLocation.bind(this));
         this.router.navigate(['in_game']);
     }
 
@@ -98,16 +95,10 @@ export class ConnectionService
 
     private endMatch(data): void
     {
-        this.gyroService.stopTracking();
         this.router.navigate(["results"]);
         this._isingame = false;
         this._isinresults = true;
         this._winner = data.winner;
-    }
-
-    public stopTrackingGyro()
-    {
-        this.gyroService.startTracking(this.sendLocation.bind(this));
     }
 
     private enterRoom(data: any): void
