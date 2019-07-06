@@ -21,7 +21,7 @@ import { MovableCardComponent } from '../movable-card/movable-card.component';
             }), {params: {to_position_x: 0, rot: 0}}),
             state('move', style(
             {
-                transform : 'translate({{position_x}}px, {{position_y}}px) scale(1.1)'
+                transform : 'translate({{position_x}}px, {{position_y}}px) scale(1.25)'
             }), {params: {position_x: 0, position_y: 0}}),
             state('snap', style(
             {
@@ -40,7 +40,15 @@ import { MovableCardComponent } from '../movable-card/movable-card.component';
                     animate('175ms ease-out')
                 ])
             ]),
-            transition('none => snap, large => snap', animate('150ms ease-out')),
+            transition('none => snap, large => snap', 
+            [
+                group
+                ([
+                    query('@detailedCardIconTransition', animateChild()),
+                    query('@detailedCardExplanationTransition', animateChild()),
+                    animate('150ms cubic-bezier(.92, -.43, .15, 1.03)')
+                ])
+            ]),
             transition('large => small, none => reset', 
             [
                 group
@@ -50,12 +58,24 @@ import { MovableCardComponent } from '../movable-card/movable-card.component';
                     animate('150ms cubic-bezier(.92, -.43, .15, 1.03)')
                 ])
             ]),
-            transition('large => move', animate('75ms ease-out')),
+            transition('move => none', 
+            [
+                group
+                ([
+                    query('@detailedCardIconTransition', animateChild()),
+                    query('@detailedCardExplanationTransition', animateChild())
+                ])
+            ]),
+            transition('large => move', animate('0ms')),
             transition('small <=> reset, snap => reset', animate('0ms')),
             transition('reset => move', animate('0ms'))
         ]),
         trigger('detailedCardIconTransition',
         [
+            state('snap', style
+            ({
+                width: '60%'
+            })),
             state('small', style
             ({
                 width: '60%'
@@ -64,11 +84,20 @@ import { MovableCardComponent } from '../movable-card/movable-card.component';
             ({
                 width: '50%'
             })),
+            state('none', style
+            ({
+                width: '60%'
+            })),
+            transition('move => none', animate('0ms ease-out')),
             transition('small => large', animate('250ms ease-out')),
             transition('large => small', animate('333ms cubic-bezier(.92, -.43, .15, 1.03)'))
         ]),
         trigger('detailedCardExplanationTransition',
         [
+            state('snap', style
+            ({
+                transform: 'scale(0)'
+            })),
             state('small', style
             ({
                 transform: 'scale(0)'
@@ -77,6 +106,11 @@ import { MovableCardComponent } from '../movable-card/movable-card.component';
             ({
                 transform: 'scale(1)'
             })),
+            state('none', style
+            ({
+                transform: 'scale(0)'
+            })),
+            transition('move => none', animate('0ms ease-out')),
             transition('small => large', animate('250ms ease-out')),
             transition('large => small', animate('333ms cubic-bezier(.92, -.43, .15, 1.03)'))
         ])
@@ -291,7 +325,7 @@ export class ActionCardComponent implements OnInit
             let centerX = (rect1.right - rect2.right) + (rect1.left - rect2.left);
             let centerY = (rect1.bottom - rect2.bottom) + (rect1.top - rect2.top);
             
-            if (Math.abs(centerX) + Math.abs(centerY) < 125)
+            if (Math.abs(centerX) + Math.abs(centerY) < 150)
             {
                 let xDif = rect2.width - rect1.width;
                 let yDif = rect2.height - rect1.height;
@@ -304,7 +338,6 @@ export class ActionCardComponent implements OnInit
     {
         if (event.toState === 'small' || event.toState === 'snap')
         {
-            this.selected = event.toState === 'small';
             this.open = false;
             if (event.fromState === 'reset')
             {
@@ -322,6 +355,9 @@ export class ActionCardComponent implements OnInit
         } else if (event.toState === 'large')
         {
             this.open = true;
+        } else if (event.toState === 'reset')
+        {
+            this.selected = false;
         }
     }
 }
