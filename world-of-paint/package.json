@@ -2,7 +2,8 @@
   "name": "world-of-paint",
   "version": "0.0.0",
   "scripts": {
-    "start": "ng serve --host 0.0.0.0 --ssl --ssl-key ../encryption/private.key --ssl-cert ../encryption/world-of-paint.crt"
+    "start": "ng serve --host 0.0.0.0 --ssl --ssl-key ../encryption/private.key --ssl-cert ../encryption/world-of-paint.crt",
+    "test": "ng serve --host 0.0.0.0"
   },
   "private": true,
   "dependencies": {
