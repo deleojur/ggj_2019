@@ -25,6 +25,7 @@ import { ActionCardComponent } from './action-card/action-card.component';
 import { MovableCardComponent } from './movable-card/movable-card.component';
 import { OnCreate } from 'src/directives/on-create';
 import { TouchMove, TouchEnd } from 'src/directives/touch';
+import { GameComponent } from './game/game.component';
 
 @NgModule
 ({
@@ -40,7 +41,8 @@ import { TouchMove, TouchEnd } from 'src/directives/touch';
         ActionCardComponent,
         MovableCardComponent,
         OnCreate,
-        TouchMove, TouchEnd
+        TouchMove, TouchEnd,
+        GameComponent
     ],
     imports: 
     [
@@ -55,6 +57,7 @@ import { TouchMove, TouchEnd } from 'src/directives/touch';
             { path: '', component: SubscribeComponent },
             { path: 'game_room', component: RoomComponent },
             { path: 'in_game', component: MatchComponent },
+            { path: 'game', component: GameComponent },
             { path: 'results', component: ResultsComponent }
         ])
     ],
