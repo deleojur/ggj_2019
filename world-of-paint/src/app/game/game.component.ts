@@ -1,5 +1,5 @@
 import { Subject } from 'rxjs';
-import { GridManager } from './game-ts/grid';
+import { GridManager, iGrid } from './game-ts/grid';
 import { ViewportManager, iViewport } from './game-ts/viewport';
 import { Component, OnInit, AfterViewInit, ViewChild, HostListener } from '@angular/core';
 import * as PIXI from 'pixi.js';
@@ -13,6 +13,7 @@ export interface iGame
     readonly $graphics: PIXI.Graphics;
     readonly $pixi: PIXI.Application;
     readonly $viewport: iViewport;
+    readonly $grid: iGrid;
 }
 
 @Component({
@@ -43,6 +44,11 @@ export class GameComponent implements OnInit, AfterViewInit, iGame
     }
 
     private grid: GridManager;
+    public get $grid(): iGrid
+    {
+        return this.grid;
+    }
+
     private interactionStart: Vector;
 
     private onClick: Subject<Vector> = new Subject<Vector>();

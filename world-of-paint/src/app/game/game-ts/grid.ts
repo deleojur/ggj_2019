@@ -1,20 +1,40 @@
 import { Vector } from 'vector2d/src/Vec2D';
 import { iGame } from './../game.component';
-import { defineGrid, GridFactory, Hex } from 'honeycomb-grid';
+import { defineGrid, GridFactory, Hex, Point, Grid } from 'honeycomb-grid';
 import { Graphics } from 'pixi.js';
 
 class Hexagon
 {
-    selected?: boolean;
+    x? : number;
+    y? : number;
 }
 
-export class GridManager 
+export interface iGrid
 {
-    private gridFactory: GridFactory<Hex<any>>;
-    private grid: any;
-    private gridSize: number = 100;
+    readonly $width: number;
+    readonly $height: number;
+}
+
+export class GridManager implements iGrid
+{
+    private gridFactory: GridFactory<Hex<{ }>>;
+    private grid: Grid<Hex<{ }>>;
+    private hexagonSize: number = 100;
+    private radius: number = 5; //should be odd number.
     private graphics: Graphics;
     private selectedHex: Hexagon = new Hexagon();
+
+    private width: number;
+    public get $width(): number
+    {
+        return this.width;
+    }
+
+    private height: number;
+    public get $height(): number
+    {
+        return this.height;
+    }
 
     constructor(private game: iGame)
     {
@@ -26,7 +46,14 @@ export class GridManager
     initHexagonalGrid(): void
     {
         this.gridFactory = defineGrid();
-        this.grid = this.gridFactory.rectangle({ width: 4, height: 4 });
+        this.grid = this.gridFactory.hexagon({ radius: this.radius, center: { x: 5, y: 5 } });
+        
+        const r = this.hexagonSize;
+        const w = 1.732 * this.hexagonSize;
+        const h = r * 2;
+
+        this.width = w * (this.radius * 2 + 2);
+        this.height = h * (this.radius + 1) + r * this.radius;
         
         this.render();
     }
@@ -34,13 +61,14 @@ export class GridManager
     public render(): void
     {
         this.graphics.clear();
-        this.graphics.lineStyle(2, 0xffd900, 1);
+        this.graphics.lineStyle(7, 0xffd900, 1, 0.5);
         this.grid.forEach((hex: Hex<any>) => 
         {
-            this.graphics.beginFill(hex.selected ? 0x00ff00 : 0xe74c3c); // Red
+            const selected = this.selectedHex.x === hex.x && this.selectedHex.y === hex.y;
+            this.graphics.beginFill(selected ? 0x00ff00 : 0xe74c3c); // Red
 
             //set the size of hexagons
-            hex.size = { xRadius: this.gridSize, yRadius: this.gridSize };
+            hex.size = { xRadius: this.hexagonSize, yRadius: this.hexagonSize };           
 
             const point = hex.toPoint()
             // add the hex's position to each of its corner points
@@ -54,7 +82,7 @@ export class GridManager
             otherCorners.forEach(({ x, y }) => this.graphics.lineTo(x, y))
             // finish at the first corner
             this.graphics.lineTo(firstCorner.x, firstCorner.y);
-        });
+        });        
         this.graphics.endFill();
     }
     
@@ -62,20 +90,17 @@ export class GridManager
     {
         const viewportPos: Vector = this.game.$viewport.$position;
         const viewportScale: Vector = this.game.$viewport.$scale;
-        const x: number = (v.x - viewportPos.x) / (this.gridSize * viewportScale.x);
-        const y: number = (v.y - viewportPos.y) / (this.gridSize * viewportScale.y);
+        const x: number = (v.x - viewportPos.x) / (this.hexagonSize * viewportScale.x);
+        const y: number = (v.y - viewportPos.y) / (this.hexagonSize * viewportScale.y);
         const hexCoordinates = this.gridFactory.pointToHex([x, y]);
         const hex = this.grid.get(hexCoordinates);
-        console.log(hex);
         if (hex) 
         {
-            if (hex != this.selectedHex)
-            {
-                hex.selected = true;
-                this.selectedHex.selected = false;
-                this.selectedHex = hex;
-                this.render();
-            }
+            this.selectedHex.x = hex.x;
+            this.selectedHex.y = hex.y;
+            const snap: Point = hex.toPoint().add(hex.center());
+            this.game.$viewport.snapToPosition(snap.x, snap.y);
+            this.render();
         }
     }
 }
