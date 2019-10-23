@@ -17,7 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { ResultsComponent } from './results/results.component';
 import { RoomComponent } from './room/room.component';
 
-import * as scrollLock from '../../node_modules/body-scroll-lock';
+import * as scrollLock from 'body-scroll-lock';
 import { MatchComponent } from './match/match.component';
 import { InfomodalComponent } from './infomodal/infomodal.component';
 import { MenumodalComponent } from './menumodal/menumodal.component';
