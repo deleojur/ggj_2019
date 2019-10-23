@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ConnectionService } from '../connection.service';
-import { WebsocketService } from '../websocket.service';
+import { ConnectionService } from '../../services/connection.service';
+import { WebsocketService } from '../../services/websocket.service';
 import { Router, NavigationEnd } from '@angular/router';
-import { ModalService } from '../modal.service';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-match',

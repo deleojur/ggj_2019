@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { WebsocketService } from '../websocket.service';
-import { ConnectionService } from '../connection.service';
-import { ModalService } from '../modal.service';
+import { WebsocketService } from '../../services/websocket.service';
+import { ConnectionService } from '../../services/connection.service';
+import { ModalService } from '../../services/modal.service';
 
 @Component
 ({

@@ -1,9 +1,9 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
-import { ConnectionService } from '../connection.service';
+import { ConnectionService } from '../../services/connection.service';
 import { Router, NavigationEnd } from '@angular/router';
-import { WebsocketService } from '../websocket.service';
-import { ModalService } from '../modal.service';
+import { WebsocketService } from '../../services/websocket.service';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-room',

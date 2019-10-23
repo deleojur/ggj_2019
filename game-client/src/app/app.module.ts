@@ -7,8 +7,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ConnectionService } from './connection.service';
-import { WebsocketService } from './websocket.service';
+import { ConnectionService } from '../services/connection.service';
+import { WebsocketService } from '../services/websocket.service';
 
 import { Ng2CarouselamosModule } from 'ng2-carouselamos';
 import { SubscribeComponent } from './subscribe/subscribe.component';
