@@ -26,12 +26,14 @@
     "hammerjs": "^2.0.8",
     "honeycomb-grid": "^3.1.0",
     "ng2-carouselamos": "^3.2.0",
-    "pixi-viewport": "^4.3.1",
+    "pixi-viewport": "^4.3.2",
+    "pixi.js": "^5.1.5",
     "rxjs": "6.5.2",
     "rxjs-compat": "6.5.2",
     "socket.io-client": "^2.2.0",
     "tslib": "^1.10.0",
     "vector2d": "^3.0.0",
+    "web-animations-js": "^2.3.2",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
