@@ -19,8 +19,8 @@ export class WebsocketService
 
     connect(): void
     {
-        this.socket = io(environment.ws_url);
-        this.socket.emit('master_create_room');
+        this.socket = io(environment.ws_url, {} );
+        this.socket.emit('host_room_create');
 
         this.socket.on('server_room_created', data => 
         {           

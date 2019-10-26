@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ConnectionService } from '../../services/connection.service';
-import { WebsocketService } from '../../services/websocket.service';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component
@@ -16,14 +15,13 @@ export class ResultsComponent implements OnInit
 
     constructor(
         private router: Router,
-        private connection: ConnectionService,
-        private wsService: WebsocketService)
+        private connection: ConnectionService)
     {
         router.events.subscribe((val) => 
         {
             if (val instanceof NavigationEnd && val.url === '/results')
             {
-                if (this.connection.$isinresults)
+                /* if (this.connection.$isinresults)
                 {
                     this.color      = this.connection.$color;
                     this.winnerText = this.connection.$winner === this.connection.$playername ?
@@ -33,7 +31,7 @@ export class ResultsComponent implements OnInit
                 else
                 {
                     //router.navigate(['/']);
-                }
+                } */
             }
         });
     }
@@ -44,11 +42,11 @@ export class ResultsComponent implements OnInit
 
     playAgain()
     {
-        this.wsService.sendRestartMatch();
+        
     }
 
     returnToRoom()
     {
-        this.wsService.sendReturnToRoom();
+        
     }
 }

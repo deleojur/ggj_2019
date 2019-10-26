@@ -1,40 +1,67 @@
-var io        = require('socket.io')(server);
-const rand      = require('random-seed');
-var express     = require('express');
-var app         = express();
-var https       = require('https');
-var http        = require('http');
-const fs        = require('fs');
+const rand = require('random-seed');
+const hostListener      = require('./host-listener');
+const clientListener    = require('./client-listener');
 
-var rooms       = { };
-const PORT      = process.env.PORT || 5000;
+var rooms = { };
+/**
+     * Socket calls are formatted as follows:
+     *     1) who makes the call. Can be either client, host or server.
+     *     2) state where the call originated from. Can be either room, match, pause, finish or global.
+     *     3) the package type that will be delivered, this is always a verb.
+     * For example: client_room_enter, where the roomid will be in the body.
+     * Furher information will be in the json body of the message.
+     */
+listener =
+{    
+    onConnectionEstablished(io, socket)
+    {
+        hostListener.initialize(rooms);
+        hostListener.listen(io, socket);
 
-const options = 
+        clientListener.initialize(rooms);
+        clientListener.listen(io, socket);
+    },
+    onConnectionLost(socket)
+    {
+        const roomid = socket.roomid;
+        //if the socket id is the same as tne host id from the generated room, it must be 
+        if (rooms[roomid] && socket.id === rooms[roomid].host)
+        {
+            hostListener.host_connection_lost(roomid);            
+        //if the roomid of this socket exists and it is not the host, then it must be a client of that room. 
+        } else if (rooms[roomid] !== undefined)
+        {
+            clientListener.client_connection_lost(socket, roomid);
+        }
+    },
+    listen(io)
+    {
+        this.io = io;
+        io.on('connection', socket => 
+        { 
+            this.onConnectionEstablished(io, socket);
+            socket.once('disconnect', () => this.onConnectionLost(socket));
+        });
+    }
+}
+module.exports = listener;
+/*
+io.on('connection', socket =>
 {
-    key: fs.readFileSync('./encryption/private.key', 'utf8'),
-    cert: fs.readFileSync('./encryption/world-of-paint.crt', 'utf8')
-};
-app.use(express.static('world-of-paint/dist/world-of-paint'));
+    //called by a connected client when in room state. Triggers a countdown before the match starts.
+    socket.on('client_start_countdown', () => client_startCountdown(socket));
+    //called by the client when countdown has been triggered. Causes the countdown to cease and return to default room state.
+    socket.on('client_cancel_countdown', () => client_cancelCountdown(socket));
 
-/** HTTP server */
-var server      = http.Server(app);
-server.listen(PORT);
+    socket.on('host_enter_room',          host_enterRoom);
+    socket.on('host_close_room',          host_closeRoom);
 
-/** HTTPS server */
-//var server = https.createServer(options, app).listen(PORT);
-
-io = io.listen(server);
-io.on('connection', function(socket)
-{
-    socket.on('master_enter_room',          master_enterRoom);
-    socket.on('master_close_room',          master_closeRoom);
-
-    //called when the master actually starts the
-    socket.on('master_start_match', ()       => master_startMatch(socket));
-    socket.on('master_end_match', (data)           => master_endMatch(socket, data));
-    socket.on('master_client_joined', (data) => master_clientJoined(socket, data));
+    //called when the host actually starts the
+    socket.on('host_start_match', ()       => host_startMatch(socket));
+    socket.on('host_end_match', (data)           => host_endMatch(socket, data));
+    socket.on('host_client_joined', (data) => host_clientJoined(socket, data));
     
-    socket.on('master_update_client_stats', (data) => master_updateClientStats(socket, data));
+    socket.on('host_update_client_stats', (data) => host_updateClientStats(socket, data));
 
     socket.on('client_update_avatar', (data)    => client_updateAvatar(socket, data));
     socket.on('client_gameroom_ready', (data)   => client_ready(socket, data));
@@ -44,17 +71,14 @@ io.on('connection', function(socket)
     socket.on('client_restart_match', () => client_restartMatch(socket));
     
     socket.on('client_return_to_room', () => client_returnToRoom(socket));
-    socket.on('client_start_countdown', ()          => client_startCountdown(socket));
-    socket.on('client_cancel_countdown', () => client_cancelCountdown(socket));
     
     socket.on('client_update_location', (data) => client_updateLocation(socket, data));
 
-    socket.on('master_create_room', ()      => master_createRoom(socket));
     socket.on('client_join_room', (data)    => client_joinRoom(socket, data));
     socket.on('disconnect', ()              => onDisconnected(socket));
 });
 
-function master_clientJoined(socket, data)
+function host_clientJoined(socket, data)
 {
     if (rooms[socket.roomid] !== undefined)
     {
@@ -62,40 +86,40 @@ function master_clientJoined(socket, data)
     }
 }
 
-function master_createRoom(socket)
+function host_createRoom(socket)
 {
-    let master  = socket.id;
-    let gen     = rand(master);
+    let host  = socket.id;
+    let gen     = rand(host);
     let roomid  = -1;
     do
     {
         roomid  = gen.intBetween(11111, 99999);
     } while (rooms[roomid] !== undefined);
     
-    //create a new entry for the master that connected.
+    //create a new entry for the host that connected.
     rooms[roomid] = 
     { 
-        master: master, 
+        host: host, 
         clients: {}
     };
     console.log('create room', roomid);
 
     socket.roomid = roomid;
-    io.to(master).emit('server_room_created', {roomid: roomid});
+    io.to(host).emit('server_room_created', {roomid: roomid});
     socket.join(roomid);
 }
 
-function master_enterRoom(roomid)
+function host_enterRoom(roomid)
 {
 
 }
 
-function master_closeRoom()
+function host_closeRoom()
 {
 
 }
 
-function master_startMatch(socket)
+function host_startMatch(socket)
 {
     if (rooms[socket.roomid] !== undefined)
     {
@@ -103,7 +127,7 @@ function master_startMatch(socket)
     }
 }
 
-function master_endMatch(socket, data)
+function host_endMatch(socket, data)
 {
     if (rooms[socket.roomid] !== undefined)
     {
@@ -111,7 +135,7 @@ function master_endMatch(socket, data)
     }
 }
 
-function master_updateClientStats(socket, data)
+function host_updateClientStats(socket, data)
 {
     let roomid = socket.roomid;
     if (rooms[roomid] !== undefined)
@@ -170,7 +194,7 @@ function client_updateAvatar(socket, data)
         data        = JSON.parse(data);
         data.addr   = addr; 
         data.id     = socket.id;
-        io.to(rooms[roomid].master).emit('client_update_avatar', data);
+        io.to(rooms[roomid].host).emit('client_update_avatar', data);
     }
 }
 
@@ -185,7 +209,7 @@ function client_ready(socket, data)
         {
             clients[socket.addr].isready = data.ready;
         }
-        io.to(rooms[roomid].master).emit('client_gameroom_ready', { 'addr': socket.addr, 'ready': data.ready });
+        io.to(rooms[roomid].host).emit('client_gameroom_ready', { 'addr': socket.addr, 'ready': data.ready });
         sendEveryoneReady(roomid);
     }
 }
@@ -243,48 +267,6 @@ function client_cancelCountdown(socket)
     }
 }
 
-//sockets can be distincted by two values: id and address.
-//address is persistent through sessions, while id is session-dependent.
-//however, id is used to communicate using socket.io.
-function client_joinRoom(socket, data)
-{
-    console.log('client join room!');
-    data = JSON.parse(data);
-    let roomid = data.roomid;
-    if (!(roomid in rooms))
-    {
-        //send a message to the client that the roomnumber is not valid.
-        io.to(socket.id).emit('server_error', 'room_invalid');
-    }
-    else 
-    {
-        let clients = rooms[roomid].clients;
-        for (let property in clients)
-        { 
-            if (clients[property] !== undefined)
-            {
-                if (clients[property].playername === data.playername)
-                {
-                    io.to(data.id).emit('server_error', 'name_taken');
-                }
-            }
-        }
-
-        let room = rooms[roomid];
-        let addr = socket.handshake.address, master = room.master;
-        data.id = socket.id, data.addr  = addr;
-        room.clients[addr]              = data;
-        room.clients[addr].isready      = false;
-
-        io.to(master).emit('client_join_room', data);
-        sendEveryoneReady(roomid);
-
-        socket.join(roomid);
-        socket.roomid = roomid;
-        socket.addr = addr;
-    }
-};
-
 function client_updateLocation(socket, data)
 {
     let roomid = socket.roomid;
@@ -292,28 +274,9 @@ function client_updateLocation(socket, data)
     {
         data = JSON.parse(data);
 
-        let master = rooms[socket.roomid].master;
+        let host = rooms[socket.roomid].host;
         data.addr = socket.addr;
-        io.to(master).emit('client_update_input', data);
+        io.to(host).emit('client_update_input', data);
     }
 }
-
-function onDisconnected(socket)
-{
-    let gen     = rand(socket.id);
-    let roomid  = gen.intBetween(11111, 99999);
-    if (rooms[roomid] !== undefined)
-    {
-        if (socket.id === rooms[roomid].master)
-        {
-            io.to(roomid).emit('master_disconnected');
-            console.log('room', roomid, 'is no longer available.');
-            delete rooms[roomid];
-        }
-    } else if (rooms[socket.roomid] !== undefined)
-    {
-        delete rooms[socket.roomid].clients[socket.addr];
-        io.to(rooms[socket.roomid].master).emit('client_disconnected', { 'addr' : socket.addr });
-        socket.leave(socket.roomid);
-    }
-};
+*/

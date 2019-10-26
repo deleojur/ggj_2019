@@ -2,21 +2,33 @@
     <h5>World of Paint</h5>
 </div>
 <div class="container-fluid" style="height: 100%;">
-    <div class="form-group" style="margin-top:-5px;">
-        <label for="playername" class="text-primary">name</label>
-        <input type="text" [(ngModel)]="playername" class="form-control text-primary" id="playername">
-    </div>
-    <ngb-alert *ngIf="room_invalid" #roomid_invalid [dismissible]="true" type="warning" (close)="closeServerWarning('room_invalid')">
-        <strong>Username Taken</strong>
-    </ngb-alert>
-    <div class="form-group" style="margin-top:-5px;">
-        <label for="roomid" class="text-primary">roomid</label>
-        <input autocomplete="off" type="tel" [(ngModel)]="roomid" class="form-control text-primary" id="roomid">
-    </div>
-    <ngb-alert *ngIf="room_invalid" #roomid_invalid [dismissible]="true" type="warning" (close)="closeServerWarning('room_invalid')">
-        <strong>Room Number Invalid</strong>
-    </ngb-alert>
-    <div class="col-md-1">  
-        <button type="button" class="btn btn-primary btn-lg btn-block btn-bottom" (click)="suscribeToRoom()">Join Game!</button>
-    </div>
+    <form #f='ngForm' (ngSubmit)="joinRoom(f)">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label class="blaat" for="name" class="text-primary">name</label>
+                
+                <input #name="ngModel" autocomplete="off" type="text" ngModel
+                class="form-control text-primary" id="name"
+                required name="name">
+
+                <div [hidden]="!(name.invalid && name.touched)"
+                    class="alert alert-danger">
+                        name is required.
+                </div>
+            </div>
+            <div #roomid class="form-group" style="margin-top:-5px;">
+                <label for="roomid" class="text-primary">roomid</label>
+                
+                <input #roomid="ngModel" autocomplete="off" type="tel" ngModel
+                class="form-control text-primary" id="roomid"
+                required pattern="^[0-9]*$" minlength="5" maxlength="5" name="roomid">
+
+                <div [hidden]="!(roomid.invalid && roomid.touched)"
+                    class="alert alert-danger">
+                        roomid should be a 5-digit number.
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block btn-bottom">Join Game!</button>
+        </div>
+    </form>
 </div>

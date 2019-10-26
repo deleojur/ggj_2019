@@ -25,7 +25,6 @@ export class MenumodalComponent implements OnInit
 
     private open(callback: Function, params: any)
     {
-        this.color = this.connectionService.$color;
         this.buttons = params;
         this.ngbModal.open(this.content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => 
         {

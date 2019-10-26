@@ -2,7 +2,6 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 import { ConnectionService } from '../../services/connection.service';
 import { Router, NavigationEnd } from '@angular/router';
-import { WebsocketService } from '../../services/websocket.service';
 import { ModalService } from '../../services/modal.service';
 
 @Component({
@@ -16,9 +15,7 @@ export class RoomComponent implements OnInit
 
     ngOnInit()
     {
-        this.wsService.$everyoneReady.subscribe(this.isEveryoneReady.bind(this));
-        this.wsService.$startCountdown.subscribe(this.onCountdownStarted.bind(this));
-        this.wsService.$cancelCountdown.subscribe(this.onCountdownCancelled.bind(this));
+        
     }
 
     gears = 
@@ -39,15 +36,14 @@ export class RoomComponent implements OnInit
 
     constructor(
         private router: Router, 
-        private connection: ConnectionService, 
-        private wsService: WebsocketService,
+        private connection: ConnectionService,
         private modalThingy: ModalService)
     { 
         router.events.subscribe((val) => 
         {
             if (val instanceof NavigationEnd && val.url === '/game_room')
             {
-                if (this.connection.$isinroom)
+                /* if (this.connection.$isinroom)
                 {
                     this.playername = this.connection.$playername;
                     this.roomnumber = this.connection.$roomnumber;
@@ -58,7 +54,7 @@ export class RoomComponent implements OnInit
                 else
                 {
                     router.navigate(['/']);
-                }
+                } */
             }
         });
     }
@@ -71,33 +67,7 @@ export class RoomComponent implements OnInit
             let numberPattern = /\d+/g;
             let n = parseInt(self.carousel.activeId.match(numberPattern)[0]) % self.gears.length;
             self.selectedGear = self.gears[n];
-            self.wsService.sendUpdatePlayerAvatar({ 'avatar': n });
         }, 100);
-    }
-
-    onCountdownCancelled()
-    {
-        this.countdownStarted = false;
-    }
-
-    cancelCountdown()
-    {
-        this.wsService.sendCancelCountdown();
-    }
-
-    onCountdownStarted()
-    {
-        this.countdownStarted = true;
-    }
-
-    startCountdown()
-    {
-        this.wsService.sendStartCountdown();
-    }
-
-    isEveryoneReady(ready: boolean): void
-    {
-        this.everyoneReady = ready['ready'];
     }
     
     setProgressBarColor()
@@ -111,13 +81,5 @@ export class RoomComponent implements OnInit
                 progressBars[i]['style'].backgroundColor = self.color;
             }
         }, 0);
-    }
-
-    playerReady(ready: boolean): void
-    {
-        this.title = ready ? 'Ready to Rumble!' : 'Select Your Gear!';
-        this.isReady = ready;
-        this.wsService.sendPlayerRoomReady({ 'ready': ready });
-        this.setProgressBarColor();
     }
 }

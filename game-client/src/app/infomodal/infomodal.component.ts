@@ -24,7 +24,6 @@ export class InfomodalComponent implements OnInit
 
     private open(callback: Function)
     {
-        this.color = this.connectionService.$color;
         this.ngbModal.open(this.content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => 
         {
             callback();

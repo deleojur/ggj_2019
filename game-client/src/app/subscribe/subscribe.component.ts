@@ -1,55 +1,27 @@
+
 import { Component } from '@angular/core';
-import { WebsocketService } from '../../services/websocket.service';
 import { ConnectionService } from '../../services/connection.service';
 import { ModalService } from '../../services/modal.service';
+import { NgForm } from '@angular/forms';
 
 @Component
 ({
     selector: 'app-subscribe',
-    templateUrl: './subscribe.component.html'
+    templateUrl: './subscribe.component.html',
+    styleUrls: ['./subscribe.component.scss']
 })
 export class SubscribeComponent
 {
-    constructor(private websocket: WebsocketService, private connection: ConnectionService, private modalService: ModalService)
+    constructor(private connection: ConnectionService)
     {
-        this.websocket.$error_msg.subscribe(this.displayServerWarning.bind(this));
+        
     }
 
-    room_invalid: boolean = false;
-    name_taken: boolean = false;
-
-    playername;
-    roomid;
-    serverResponse;
-
-    displayServerWarning(msg)
+    joinRoom(f: NgForm): void
     {
-        switch (msg)
+        if (f.valid)
         {
-            case 'name_taken':
-                this.name_taken = true;
-                break;
-            case 'room_invalid':
-                this.room_invalid = true;
-                break;
+            this.connection.joinRoom(f.value.name, f.value.roomid);
         }
-    }
-
-    closeServerWarning(msg)
-    {
-        switch (msg)
-        {
-            case 'name_taken':
-                this.name_taken = false;
-                break;
-            case 'room_invalid':
-                this.room_invalid = false;
-                break;
-        }
-    }
-
-    suscribeToRoom()
-    {
-        this.connection.subscribeToRoom({ playername: this.playername, roomid: this.roomid });
     }
 }

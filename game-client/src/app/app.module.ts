@@ -8,7 +8,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ConnectionService } from '../services/connection.service';
-import { WebsocketService } from '../services/websocket.service';
 
 import { Ng2CarouselamosModule } from 'ng2-carouselamos';
 import { SubscribeComponent } from './subscribe/subscribe.component';
@@ -63,8 +62,7 @@ import { GameComponent } from './game/game.component';
     ],
     providers:
     [
-        ConnectionService,
-        WebsocketService
+        ConnectionService
     ],
     bootstrap: [AppComponent]
 })

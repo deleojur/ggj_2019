@@ -12,7 +12,7 @@
 <div class="cotainer-fluid">
     <div id="spec-selector" class="card card-specs-outer" >
         <div class="card-body card-specs-inner">
-            <div *ngIf="!isReady">
+            <!--<div *ngIf="!isReady">
                 <h5 id="gear-name" [style.color]=color class="card-title text-center">{{selectedGear.name}}</h5>
                 <h6 style="margin-top: -10px;" class="fas fa-envelope prefix text-muted text-center">{{selectedGear.description}}</h6>
                 <hr style="margin: 1px;">
@@ -54,7 +54,7 @@
                     <button type="button" [style.borderColor]=color [style.color]=color *ngIf="!countdownStarted" class="btn btn-outline btn-lg btn-block btn-bottom" [disabled]="!everyoneReady" (click)="startCountdown()">Start Game</button>
                     <button type="button" [style.borderColor]=color [style.color]=color *ngIf="!countdownStarted" class="btn btn-outline btn-lg btn-block btn-bottom" (click)="playerReady(false)">Select Different Gear</button>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>
