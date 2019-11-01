@@ -19,7 +19,8 @@ listener =
         this.rooms[roomid] = 
         { 
             host: host, 
-            clients: {}
+            clients: {},
+            connections: 0
         };
         socket.roomid = roomid;
         this.io.to(host).emit('server_room_created', {roomid: roomid});
@@ -28,7 +29,7 @@ listener =
     },
     host_connection_lost(roomid)
     {
-        this.io.to(roomid).emit('host_disconnected');
+        this.io.to(roomid).emit('server_global_disconnected');
         delete this.rooms[roomid];
         console.log('room', roomid, 'is no longer available.');
     },

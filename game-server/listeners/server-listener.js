@@ -86,39 +86,6 @@ function host_clientJoined(socket, data)
     }
 }
 
-function host_createRoom(socket)
-{
-    let host  = socket.id;
-    let gen     = rand(host);
-    let roomid  = -1;
-    do
-    {
-        roomid  = gen.intBetween(11111, 99999);
-    } while (rooms[roomid] !== undefined);
-    
-    //create a new entry for the host that connected.
-    rooms[roomid] = 
-    { 
-        host: host, 
-        clients: {}
-    };
-    console.log('create room', roomid);
-
-    socket.roomid = roomid;
-    io.to(host).emit('server_room_created', {roomid: roomid});
-    socket.join(roomid);
-}
-
-function host_enterRoom(roomid)
-{
-
-}
-
-function host_closeRoom()
-{
-
-}
-
 function host_startMatch(socket)
 {
     if (rooms[socket.roomid] !== undefined)
