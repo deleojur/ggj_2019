@@ -17,11 +17,8 @@ import { ResultsComponent } from './results/results.component';
 import { RoomComponent } from './room/room.component';
 
 import * as scrollLock from 'body-scroll-lock';
-import { MatchComponent } from './match/match.component';
 import { InfomodalComponent } from './infomodal/infomodal.component';
 import { MenumodalComponent } from './menumodal/menumodal.component';
-import { ActionCardComponent } from './action-card/action-card.component';
-import { MovableCardComponent } from './movable-card/movable-card.component';
 import { OnCreate } from 'src/directives/on-create';
 import { TouchMove, TouchEnd } from 'src/directives/touch';
 import { GameComponent } from './game/game.component';
@@ -34,11 +31,8 @@ import { GameComponent } from './game/game.component';
         SubscribeComponent,
         RoomComponent,
         ResultsComponent,
-        MatchComponent,
         InfomodalComponent,
         MenumodalComponent,
-        ActionCardComponent,
-        MovableCardComponent,
         OnCreate,
         TouchMove, TouchEnd,
         GameComponent
@@ -54,10 +48,9 @@ import { GameComponent } from './game/game.component';
         RouterModule.forRoot(
         [
             { path: '', component: SubscribeComponent },
-            { path: 'game_room', component: RoomComponent },
-            { path: 'in_game', component: MatchComponent },
-            { path: 'game', component: GameComponent },
-            { path: 'results', component: ResultsComponent }
+            { path: 'room', component: RoomComponent, canActivate: [ConnectionService] },           
+            { path: 'game', component: GameComponent, canActivate: [ConnectionService] },
+            { path: 'results', component: ResultsComponent, canActivate: [ConnectionService] }
         ])
     ],
     providers:
