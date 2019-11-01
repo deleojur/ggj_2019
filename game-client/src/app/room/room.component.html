@@ -1,60 +1,17 @@
-<div [style.backgroundColor]=color class="p-3 mb-2 text-white text-center">
-    <ngb-carousel #carousel id="avatar-select" *ngIf="!isReady" (slide)="carouselSlide()" [showNavigationArrows]="true" [showNavigationIndicators]="false" data-interval="false">
-        <div *ngFor="let gear of gears">
-            <ng-template ngbSlide>
-                <img class="" [src]="">
-            </ng-template>
-        </div>
-    </ngb-carousel>
-    <h5>{{title}}</h5>
+<div [style.backgroundColor]="playerData.color"
+class="p-3 mb-2 text-white text-center">
+    <h5>World of Paint</h5>
 </div>
-<app-infomodal></app-infomodal>
-<div class="cotainer-fluid">
-    <div id="spec-selector" class="card card-specs-outer" >
-        <div class="card-body card-specs-inner">
-            <!--<div *ngIf="!isReady">
-                <h5 id="gear-name" [style.color]=color class="card-title text-center">{{selectedGear.name}}</h5>
-                <h6 style="margin-top: -10px;" class="fas fa-envelope prefix text-muted text-center">{{selectedGear.description}}</h6>
-                <hr style="margin: 1px;">
-                <p class="specs-bar">
-                    <i class="fas fa-envelope prefix text-muted info-text-small">Move Speed</i>
-                    <ngb-progressbar [value]="selectedGear.movespeed" [max]="10">
-                    </ngb-progressbar>
-                </p>
-                <p class="specs-bar">
-                    <i class="fas fa-envelope prefix text-muted info-text-small">Turn Speed</i>
-                    <ngb-progressbar [value]="selectedGear.turnspeed" [max]="10">
-                    </ngb-progressbar>
-                </p>
-                <p class="specs-bar">
-                    <i class="fas fa-envelope prefix text-muted info-text-small">Attack Rate</i>
-                    <ngb-progressbar [value]="selectedGear.attackrate" [max]="10">
-                    </ngb-progressbar>
-                </p>
-                <p class="specs-bar">
-                    <i class="fas fa-envelope prefix text-muted info-text-small">Attack Damage</i>
-                    <ngb-progressbar [value]="selectedGear.attackdamage" [max]="10">
-                    </ngb-progressbar>
-                </p>
-                <p class="specs-bar">
-                    <i class="fas fa-envelope prefix text-muted info-text-small">Armor</i>
-                    <ngb-progressbar [value]="selectedGear.armor" [max]="10">
-                    </ngb-progressbar>
-                </p>
-                <button type="button" [style.borderColor]=color [style.color]=color class="btn btn-outline btn-lg btn-block btn-bottom" (click)="playerReady(true)">I'm Ready</button>
-            </div>
-            <div *ngIf="isReady">
-                <h5 id="gear-name" [style.color]=color class="card-title text-center">{{selectedGear.name}}</h5>
-                
-                <hr style="margin: 5px;">
-                <img class="gear-thumb" [src]="selectedGear.img">
-                <h6 style="margin-top: 10px;" class="fas fa-envelope prefix text-muted text-center">When everyone is ready, press Start Game to begin!</h6>
-                <div>
-                    <button type="button" [style.borderColor]=color [style.color]=color *ngIf="countdownStarted" class="btn btn-outline btn-lg btn-block btn-bottom" (click)="cancelCountdown()">Cancel</button>
-                    <button type="button" [style.borderColor]=color [style.color]=color *ngIf="!countdownStarted" class="btn btn-outline btn-lg btn-block btn-bottom" [disabled]="!everyoneReady" (click)="startCountdown()">Start Game</button>
-                    <button type="button" [style.borderColor]=color [style.color]=color *ngIf="!countdownStarted" class="btn btn-outline btn-lg btn-block btn-bottom" (click)="playerReady(false)">Select Different Gear</button>
-                </div>
-            </div>-->
-        </div>
+
+<div class="container-fluid" style="height: 100%;">
+    <div class="col-md-5">
+        <h5 p-3>Press "Start Game!" when all players have jonined.</h5>
+        <button 
+            type="button" 
+            [style.borderColor]="playerData.color" 
+            [style.color]="playerData.color" 
+            class="btn btn-outline btn-bottom btn-lg btn-block" 
+            (click)="startGame()">Start Game!</button>
     </div>
+    <app-infomodal></app-infomodal>
 </div>

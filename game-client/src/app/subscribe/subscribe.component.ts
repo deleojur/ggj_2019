@@ -21,7 +21,7 @@ export class SubscribeComponent
     {
         if (f.valid)
         {
-            this.connection.joinRoom(f.value.name, f.value.roomid);
+            this.connection.emit_joinRoom(f.value.name, f.value.roomid);
         }
     }
 }

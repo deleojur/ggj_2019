@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, CanActivate } from '@angular/router';
 import { ModalService } from './modal.service';
 import { environment } from '../environments/environment';
 import * as io from 'socket.io-client';
@@ -8,16 +8,36 @@ export interface PlayerData
 {
     name: string,
     roomid: string,
-    color: string
+    color: string,
+    id: string
 };
+
+export enum Path
+{
+    SUBSCRIBE = 'subscribe',
+    ROOM = 'room',
+    GAME = 'game',
+    RESULTS = 'results'
+}
 
 @Injectable
 ({
     providedIn: 'root'
 })
-export class ConnectionService
+export class ConnectionService implements CanActivate
 {
-    private playerData: PlayerData;
+    private playerData: PlayerData = null;
+    public get $playerData(): PlayerData
+    {
+        return this.playerData;
+    }
+    
+    private currentPath: Path = Path.SUBSCRIBE;
+    public get $currentPath(): Path
+    {
+        return this.currentPath;
+    }
+
     private socket: SocketIOClient.Socket;
 
     constructor(        
@@ -30,11 +50,48 @@ export class ConnectionService
     private connect(): void
     {
         this.socket = io(environment.ws_url);
-        this.socket.on('client_room_join', (data) => console.log('joined this room', data));
+        this.socket.on('server_room_validateJoin', (data) => this.server_room_validateJoin(data));
+        this.socket.on('server_room_validateStartGame', () => this.server_room_validateStartGame());
+        this.socket.on('server_global_disconnected', () => { this.server_global_disconnected(); });
     }
 
-    public joinRoom(name: string, roomid: string)
+    private server_global_disconnected(): void
+    {
+        const modal = this.modalService.open( 'info', () => { this.router.navigate(['']); } );
+        modal.color = '#ff0000';
+        modal.header = 'Host Disconnected';
+        modal.message = 'It appears that room ' + this.playerData.roomid + ' has closed.';
+    }
+
+    private server_room_validateJoin(data: PlayerData): void
+    {
+        this.playerData = data;
+        this.currentPath = Path.ROOM;
+        this.router.navigate(['room']);
+    }
+
+    private server_room_validateStartGame(): void
+    {
+        this.router.navigate(['game']);
+    }
+
+    public emit_joinRoom(name: string, roomid: string)
     {
         this.socket.emit('client_room_join', JSON.stringify({name: name, roomid: roomid}));
+    }
+
+    public emit_startGame(): void
+    {
+        this.socket.emit('client_room_startGame');
+    }
+
+    public canActivate(): boolean
+    {
+        if (this.playerData === null)
+        {
+            this.router.navigate(['']);
+            return false;
+        }
+        return true;
     }
 }

@@ -1,21 +1,30 @@
-import { WebsocketService } from './../../services/websocket.service';
-import { Component, OnInit } from '@angular/core';
+import { ConnectionService, ClientData, RoomData } from '../../services/connection.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-room',
   templateUrl: './room.component.html',
   styleUrls: ['./room.component.scss']
 })
-export class RoomComponent implements OnInit 
+export class RoomComponent implements OnInit, OnDestroy
 {
-    roomid: number;
-    constructor(private websocketService: WebsocketService) 
+    room: RoomData;
+    clients: ClientData[] = [];
+
+    constructor(private connection: ConnectionService) 
     {
-        this.websocketService.$onRoomCreated.subscribe(data => { this.roomid = data; });
-        this.websocketService.connect();
+        
     }
 
     ngOnInit() 
     {
+        this.connection.$onRoomCreated.subscribe((data: RoomData) => { this.room = data; });
+        this.connection.$onClientJoinedOrLeft.subscribe((clients: ClientData[]) => { this.clients = clients; });
+    }
+
+    ngOnDestroy()
+    {
+        this.connection.$onRoomCreated.unsubscribe();
+        this.connection.$onClientJoinedOrLeft.unsubscribe();
     }
 }

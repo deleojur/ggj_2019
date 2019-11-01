@@ -18,7 +18,7 @@ export class MenumodalComponent implements OnInit
     header:     string;
     message:    string;
 
-    constructor(private ngbModal: NgbModal, private modalService: ModalService, private connectionService: ConnectionService) 
+    constructor(private ngbModal: NgbModal, private modalService: ModalService) 
     {
         
     }
