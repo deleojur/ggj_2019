@@ -1,4 +1,4 @@
-import { iGrid } from './grid';
+import { iGrid } from './grid/grid';
 import { Vector } from 'vector2d/src/Vec2D';
 import { iGame } from './../game.component';
 import { Viewport } from 'pixi-viewport';
@@ -16,11 +16,11 @@ export class ViewportManager implements iViewport
     private pixi: PIXI.Application;
     private grid: iGrid;
 
-    constructor(private game: iGame)
+    constructor(private game: iGame, size: Vector)
     {
         this.pixi = game.$pixi;
         this.grid = game.$grid;
-        this.initViewport();
+        this.initViewport(size);
         this.game.$render.subscribe(() => this.render());
     }
 
@@ -29,14 +29,14 @@ export class ViewportManager implements iViewport
         return this.viewport;
     }
 
-    private initViewport(): void
+    private initViewport(size: Vector): void
     {
         const viewport = new Viewport
         ({
             screenWidth: window.innerWidth,
             screenHeight: window.innerHeight,
-            worldWidth: this.grid.$width,
-            worldHeight: this.grid.$height,         
+            worldWidth: size.x,
+            worldHeight: size.y,
             interaction: this.pixi.renderer.plugins.interaction // the interaction module is important for wheel to work properly when renderer.view is placed or scaled
         });
         this.pixi.stage.addChild(viewport);
@@ -47,9 +47,10 @@ export class ViewportManager implements iViewport
             .wheel()            
             .clamp({ direction: 'all' })
             .clampZoom({ 
-                minWidth: 500, maxWidth: 173.20508075688772 * 10 + 86, 
-                minHeight: 500, maxHeight: 1500 })
-            .decelerate({ friction: .00001, minSpeed: 0 });
+                minWidth: 500, maxWidth: 2500, 
+                minHeight: 500, maxHeight: 2500 })
+            .decelerate({ friction: .00001, minSpeed: 0 }).
+            zoom(2500, true);
 
         this.viewport = viewport;
     }

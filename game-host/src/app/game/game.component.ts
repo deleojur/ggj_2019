@@ -1,5 +1,7 @@
+import { ClientData } from './../../services/connection.service';
+import { ConnectionService } from 'src/services/connection.service';
 import { Subject } from 'rxjs';
-import { GridManager, iGrid } from './game-ts/grid';
+import { GridManager, iGrid } from './game-ts/grid/grid';
 import { ViewportManager, iViewport } from './game-ts/viewport';
 import { Component, OnInit, AfterViewInit, ViewChild, HostListener } from '@angular/core';
 import * as PIXI from 'pixi.js';
@@ -71,7 +73,10 @@ export class GameComponent implements OnInit, AfterViewInit, iGame
 
     private ratio: number;
 
-    constructor() { }
+    constructor(private connection: ConnectionService) 
+    {
+        
+    }
     
     private initPixi(): void
     {
@@ -100,13 +105,27 @@ export class GameComponent implements OnInit, AfterViewInit, iGame
         });
     }
 
+    generateDebuggerClients(): ClientData[]
+    {
+        const debugClients: ClientData[] =[];
+        const client1 = {roomid: '', id: '', addr: '', color: '0x0000ff', name: 'Jur'};
+        const client2 = {roomid: '', id: '', addr: '', color: '0x00ffff', name: 'Laura'};
+        const client3 = {roomid: '', id: '', addr: '', color: '0xff00ff', name: 'Alex'};
+        const client4 = {roomid: '', id: '', addr: '', color: '0xffff00', name: 'Sam'};
+        const client5 = {roomid: '', id: '', addr: '', color: '0xffff00', name: 'asdsad'};
+        const client6 = {roomid: '', id: '', addr: '', color: '0xffff00', name: 'Saad'};
+        debugClients.push(client1, client2, client3, /*client4, /*client5, client6 */);
+        return debugClients;
+    }
+
     ngOnInit() 
-    {        
+    {
         this.initPixi();
         this.grid = new GridManager(this);
-        this.viewport = new ViewportManager(this);
+        const size: Vector = this.grid.generateWorld(this.generateDebuggerClients());
+        this.viewport = new ViewportManager(this, size);
         this.viewport.$viewport.addChild(this.graphics);
-        this.initTicker();
+        this.initTicker();        
     }
 
     ngAfterViewInit()
