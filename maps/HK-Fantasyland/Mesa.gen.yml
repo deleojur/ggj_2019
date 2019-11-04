@@ -1,0 +1,18 @@
+type: perlin
+regions:
+- limit: 0.2577319587628866
+  generator:
+    type: tile
+    uri: HK-Fantasyland:/HK - Jungle
+- limit: 0.5051546391752578
+  generator:
+    type: tile
+    uri: HK-Fantasyland:/HK - Ocean
+- limit: 0.6391752577319588
+  generator:
+    type: tile
+    uri: HK-Fantasyland:/HK - Badland
+- limit: 1
+  generator:
+    type: tile
+    uri: HK-Fantasyland:/HK - Mountain

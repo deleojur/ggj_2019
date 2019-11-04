@@ -1,0 +1,34 @@
+type: perlin
+regions:
+- limit: 0.33
+  generator:
+    type: simplex
+    regions:
+    - limit: 0.5
+      generator:
+        type: tile
+        uri: HK-Fantasyland:/HK - Ocean
+    - limit: 1
+      generator:
+        type: tile
+        uri: HK-Fantasyland:/HK - Ice Flow
+- limit: 0.6
+  generator:
+    type: perlin
+    regions:
+    - limit: 0.8
+      generator:
+        type: tile
+        uri: HK-Fantasyland:/HK - Meadow
+    - limit: 1
+      generator:
+        type: tile
+        uri: HK-Fantasyland:/HK - Dead Forest
+- limit: 0.66
+  generator:
+    type: tile
+    uri: HK-Fantasyland:/HK - Coniferous Forest
+- limit: 1
+  generator:
+    type: tile
+    uri: HK-Fantasyland:/HK - Mountain
