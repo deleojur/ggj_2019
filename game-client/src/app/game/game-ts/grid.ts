@@ -19,7 +19,7 @@ export class GridManager implements iGrid
 {
     private gridFactory: GridFactory<Hex<{ }>>;
     private grid: Grid<Hex<{ }>>;
-    private hexagonSize: number = 100;
+    private hexagonSize: number = 220;
     private radius: number = 5; //should be odd number.
     private graphics: Graphics;
     private selectedHex: Hexagon = new Hexagon();

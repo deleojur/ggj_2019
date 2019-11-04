@@ -75,7 +75,7 @@ export class GameComponent implements OnInit, AfterViewInit, iGame
     
     private initPixi(): void
     {
-        this.pixi = new PIXI.Application({ backgroundColor: 0xffd900 });
+        this.pixi = new PIXI.Application({ backgroundColor: 0xffffff });
         this.graphics = new PIXI.Graphics();
         PIXI.autoDetectRenderer({width: window.innerWidth, height: window.innerHeight, antialias: true, transparent: true });
         this.ratio = window.innerWidth / window.innerHeight;    

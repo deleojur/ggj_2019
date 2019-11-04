@@ -80,9 +80,9 @@ export class GameComponent implements OnInit, AfterViewInit, iGame
     
     private initPixi(): void
     {
-        this.pixi = new PIXI.Application({ backgroundColor: 0xffd900 });
+        this.pixi = new PIXI.Application({ backgroundColor: 0x0 });
         this.graphics = new PIXI.Graphics();
-        PIXI.autoDetectRenderer({width: window.innerWidth, height: window.innerHeight, antialias: true, transparent: true });
+        PIXI.autoDetectRenderer({ width: window.innerWidth, height: window.innerHeight, antialias: true, transparent: true });
         this.ratio = window.innerWidth / window.innerHeight;    
     }   
 
@@ -122,10 +122,15 @@ export class GameComponent implements OnInit, AfterViewInit, iGame
     {
         this.initPixi();
         this.grid = new GridManager(this);
-        const size: Vector = this.grid.generateWorld(this.generateDebuggerClients());
-        this.viewport = new ViewportManager(this, size);
-        this.viewport.$viewport.addChild(this.graphics);
-        this.initTicker();        
+        this.viewport = new ViewportManager(this);
+        //this.generateDebuggerClients();
+        this.grid.generateWorld((width: number, height: number) => 
+        {
+            this.viewport.initViewport(width, height);
+            this.grid.initSprites();
+            this.viewport.$viewport.addChild(this.graphics);
+            this.initTicker();
+        });                
     }
 
     ngAfterViewInit()

@@ -1,9 +1,12 @@
+import { iViewport } from './../../../../../../game-client/src/app/game/game-ts/viewport';
+import { Viewport } from 'pixi-viewport';
+import { MapReader } from './map-reader';
 import { Cell } from './grid';
 import { ClientData } from '../../../../services/connection.service';
 import { Vector } from 'vector2d/src/Vec2D';
 import { iGame } from '../../game.component';
 import { defineGrid, GridFactory, Hex, Point, Grid, PointLike } from 'honeycomb-grid';
-import { Graphics } from 'pixi.js';
+import { Graphics, Sprite } from 'pixi.js';
 import { GridGenerator, iGridGenerator } from './grid-generator';
 
 export enum CellType
@@ -18,150 +21,75 @@ export interface Cell
     color?: string;
     type?: CellType; 
     isGenerated?: boolean;
+    sprites: PIXI.Sprite[];
 }
 
 export interface iGrid
 {
-    generateWorld(clients: ClientData[]): Vector;
+    generateWorld(onready: (width: number, height: number) => void): void;    
 }
 
 export class GridManager implements iGrid
 {
     private gridFactory: GridFactory<Hex<Cell>>;
     private grid: Grid<Hex<Cell>>;
-    private gridGen: iGridGenerator;
-    private hexagonSize: number = 100;
+    private hexagonSize: number = 95;
     private graphics: Graphics;
+    private mapReader: MapReader;
 
     private selectedHex: Hex<Cell>;
     constructor(private game: iGame)
     {
         this.graphics = game.$graphics;
-        this.gridGen = new GridGenerator();
+        this.mapReader = new MapReader();
         game.$onClick.subscribe(v => this.onClick(v));
     }
 
-    public initHexagonalGrid(radius: number): Vector
+    private initHexagonalGrid(onInitialized: (width: number, height: number) => void): void
     {
         this.gridFactory = defineGrid();
-        this.grid = this.gridFactory.hexagon({ radius: radius, center: { x: radius, y: radius } });
-
-        this.grid.forEach(hex =>
+        this.mapReader.loadWorldMap((width: number, height: number) =>
         {
-            hex.type = CellType.Empty;
-        });
+            this.grid = this.gridFactory.rectangle({ width: width, height: height });
 
-        const r = this.hexagonSize;
-        const w = 1.732 * this.hexagonSize;
-        const h = r * 2;
-        return new Vector(
-            w * (radius * 2 + 2), 
-            h * (radius + 1) + r * radius);
-    }
-
-    public generateWorld(clients: ClientData[]): Vector
-    {
-        const radius = clients.length + 2;
-        const size: Vector = this.initHexagonalGrid(radius);
-
-        const center = this.grid.get(Math.floor(this.grid.length / 2));
-        const playerPositions: Hex<Cell>[] = this.calculatePlayerPositions(clients, center, radius, clients.length);
-        this.calculateHexTileTypes(center, radius);
-        this.gridGen.generateLevel(this.grid, playerPositions).subscribe(() => 
-        {
-            this.render();
-        });
-        this.render();
-        return size;
-    }
-
-    private calculateDistanceBetweenHexes(hex1: Hex<Cell>, hex2: Hex<Cell>): number
-    {
-        const qDiff = Math.abs(hex1.q - hex2.q);
-        const rDiff = Math.abs(hex1.r - hex2.r);
-        const sDiff = Math.abs(hex2.s - hex2.s);
-        return (qDiff + rDiff + sDiff) / 2;
-    }
-
-    private rotatedHexAroundCenter(center: Hex<Cell>, point: Hex<Cell>, n: number = 0): Hex<Cell>
-    {
-        const difQ: number = point.q - center.q;
-        const difR: number = point.r - center.r;
-        const difS: number = point.s - center.s;
-        
-        const rotQ: number = -difR;
-        const rotR: number = -difS;
-        const rotS: number = -difQ;
-        
-        const transQ = center.q + rotQ;
-        const transR = center.r + rotR;
-        const transS = center.s + rotS;
-
-        const cartesian = center.toCartesian({q: transQ, r: transR, s: transS});
-        const r = this.grid.get(cartesian);
-        
-        if (--n > 0)
-        {
-            return this.rotatedHexAroundCenter(center, r, n);
-        }
-        return this.grid.get(r);        
-    }
-
-    private getPointAtDistFromCenter(center: Hex<Cell>, distToCenter: number): Hex<Cell>
-    {
-        const positionAsPoint: PointLike = center.toCartesian(
-        {
-            q: center.q + distToCenter, r: center.r - distToCenter, s: center.s
-        });
-        return this.grid.get(positionAsPoint);
-    }
-
-    private calculateRing(center: Hex<Cell>, radius: number): Hex<Cell>[]
-    {
-        const result: Hex<Cell>[] = [];
-        let hex: Hex<Cell> = this.grid.get(center.toCartesian
-        ({
-            q: center.q, r: center.r - radius, s: center.s
-        }));
-        for (let i = 0; i < 6; i++) //6 because there are 6 sides to any hexagon circle.
-        {
-            for (let j = 0; j < radius; j++)
+            this.grid.forEach(hex =>
             {
-                result.push(hex);
-                const n = this.grid.neighborsOf(hex)[i];
-        
-                //TODO: what kind of tile will this be?
-                if (n) hex = n;
-            }
-        }
-        return result;
+                hex.color = '0xffffff';
+                hex.type = CellType.Empty;
+                hex.sprites = [];
+            });
+    
+            const r = this.hexagonSize;
+            const w = 1.732 * this.hexagonSize;
+            const h = r * 2;  
+    
+            return onInitialized(w * (width * 2 + 2), h * (height + 1) + r * height);
+        });
     }
 
-    private 
-
-    private calculateHexTileTypes(center: Hex<Cell>, radius: number): Hex<Cell>[]
+    public generateWorld(onready: (width: number, height: number) => void): void
     {
-        const result: Hex<Cell>[] = [];
-        for (let i = 0; i <= radius; i++)
+        this.initHexagonalGrid((width: number, height: number) =>
         {
-            result.concat(this.calculateRing(center, i));
-        }
-        return result;
+            this.mapReader.parseWorldMap(this.grid);
+            return onready(width, height);
+        });
     }
 
-    private calculatePlayerPositions(clients: ClientData[], center: Hex<Cell>, radius: number, distToCenter: number): Hex<Cell>[]
+    public initSprites(): void
     {
-        const playerPositions: Hex<Cell>[] =  [];
-        const playerRotation: number[][] = [[0], [3], [2, 2], [2, 1, 2], [1, 1, 1, 1], [1, 1, 1, 1, 1]];
-        let p: Hex<Cell> = this.getPointAtDistFromCenter(center, distToCenter);
-        for (let i = 0; i < clients.length; i++)
+        this.grid.forEach((hex: Hex<Cell>) =>
         {
-            p.color = clients[i].color;
-            p.type = CellType.Player;
-            playerPositions.push(p);
-            p = this.rotatedHexAroundCenter(center, p, playerRotation[clients.length - 1][i]);
-        }
-        return playerPositions;
+            hex.size = { xRadius: this.hexagonSize, yRadius: this.hexagonSize };
+            const point = hex.toPoint();
+            
+            hex.sprites.forEach(sprite => 
+            {
+                sprite.x = point.x - 20;
+                sprite.y = point.y;
+                this.game.$viewport.addChild(sprite);
+            });
+        });
     }
 
     public render(): void

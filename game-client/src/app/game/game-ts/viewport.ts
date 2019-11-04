@@ -2,12 +2,14 @@ import { iGrid } from './grid';
 import { Vector } from 'vector2d/src/Vec2D';
 import { iGame } from './../game.component';
 import { Viewport } from 'pixi-viewport';
+import { ValueProvider } from 'node_modules/@angular/core/core';
 
 export interface iViewport
 {
     readonly $position: Vector;
     readonly $scale: Vector;
     snapToPosition(x: number, y: number): void;
+    addChild(c: any): void;
 }
 
 export class ViewportManager implements iViewport
@@ -57,6 +59,11 @@ export class ViewportManager implements iViewport
     public snapToPosition(x: number, y: number): void
     {
         this.viewport.snap(x, y, { time: 500, ease: 'easeInOutSine', removeOnComplete: true, removeOnInterrupt: true });
+    }
+
+    public addChild(c: any): void
+    {
+        this.viewport.addChild(c);
     }
     
     public get $position(): Vector

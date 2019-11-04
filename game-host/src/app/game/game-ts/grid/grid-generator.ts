@@ -5,65 +5,104 @@ import { Subject } from 'rxjs';
 
 export interface iGridGenerator
 {
-    generateLevel(grid: Grid, playerPositions: Hex<Cell>[]): Subject<Grid>;
+    //generateLevel(grid: Grid, playerPositions: number[]): Subject<Grid>;
 }
 
 export class GridGenerator implements iGridGenerator
 {
+    /*gridClone: Grid;
+    closedCells: Hex<Cell>[];
+    openCells: Hex<Cell>[]; //cells that have not been checked but have been opened and will check themselves still.
     constructor()
     {
+        
     }
 
-    private generateNoise(grid: Grid, initialPercentage: number)
+
+    private calculateDistanceBetweenHexes(hex1: Hex<Cell>, hex2: Hex<Cell>): number
     {
-        for (let i = 0; i < grid.length; i++)
+        const qDiff = Math.abs(hex1.q - hex2.q);
+        const rDiff = Math.abs(hex1.r - hex2.r);
+        const sDiff = Math.abs(hex2.s - hex2.s);
+        return (qDiff + rDiff + sDiff) / 2;
+    }
+
+    private rotatedHexAroundCenter(center: Hex<Cell>, point: Hex<Cell>, n: number = 0): Hex<Cell>
+    {
+        const difQ: number = point.q - center.q;
+        const difR: number = point.r - center.r;
+        const difS: number = point.s - center.s;
+        
+        const rotQ: number = -difR;
+        const rotR: number = -difS;
+        const rotS: number = -difQ;
+        
+        const transQ = center.q + rotQ;
+        const transR = center.r + rotR;
+        const transS = center.s + rotS;
+
+        const cartesian = center.toCartesian({q: transQ, r: transR, s: transS});
+        const r = this.grid.get(cartesian);
+        
+        if (--n > 0)
         {
-            const hex: Hex<Cell> = grid[i];
-            if (hex.type !== CellType.Player)
+            return this.rotatedHexAroundCenter(center, r, n);
+        }
+        return this.grid.get(r);        
+    }
+
+    private getPointAtDistFromCenter(center: Hex<Cell>, distToCenter: number): Hex<Cell>
+    {
+        const positionAsPoint: PointLike = center.toCartesian(
+        {
+            q: center.q + distToCenter, r: center.r - distToCenter, s: center.s
+        });
+        return this.grid.get(positionAsPoint);
+    }
+
+    private calculateRing(center: Hex<Cell>, radius: number): Hex<Cell>[]
+    {
+        const result: Hex<Cell>[] = [];
+        let hex: Hex<Cell> = this.grid.get(center.toCartesian
+        ({
+            q: center.q, r: center.r - radius, s: center.s
+        }));
+        for (let i = 0; i < 6; i++) //6 because there are 6 sides to any hexagon circle.
+        {
+            for (let j = 0; j < radius; j++)
             {
-                if (Math.random() < initialPercentage)
-                {
-                    hex.type = CellType.Resource;
-                    hex.color = '0xffffff';
-                } 
+                result.push(hex);
+                const n = this.grid.neighborsOf(hex)[i];
+        
+                //TODO: what kind of tile will this be?
+                if (n) hex = n;
             }
         }
+        return result;
     }
 
-    private inspectNeighbor(grid: Grid, checkedNodes: Hex<Cell>[], parent: Hex<Cell>, onDone: Subject<Grid>): void
+    private calculateHexTileTypes(center: Hex<Cell>, radius: number): Hex<Cell>[]
     {
-        //if the node has been checked, there is not need to check it again.
-        if (checkedNodes.indexOf(parent) < 0)
-        {            
-            checkedNodes.push(parent);
-            const neighbors: Hex<Cell>[] = grid.neighborsOf(parent);
-
-            setTimeout(() => 
-            {
-                neighbors.forEach((neighbor: Hex<Cell>) =>
-                {
-                    //only check neighbors that are not undefined.
-                    if (neighbor && checkedNodes.indexOf(neighbor) < 0)
-                    {
-                        this.inspectNeighbor(grid, checkedNodes, neighbor, onDone);
-                            neighbor.color = '0';
-                    }
-                });
-            onDone.next(grid);
-            }, 1000);
-        }        
-    }
-
-    public generateLevel(grid: Grid, playerPositions: Hex<Cell>[]): Subject<Grid>
-    {
-        this.generateNoise(grid, 0.4);
-        const onIterationDone: Subject<Grid> = new Subject<Grid>();
-        const checkedNodes: Hex<Cell>[] = [];
-        for (let i = 0; i < playerPositions.length; i++)
-        {           
-            const playerHex: Hex<Cell> = playerPositions[i];
-            this.inspectNeighbor(grid, checkedNodes, playerHex, onIterationDone);        
+        const result: Hex<Cell>[] = [];
+        for (let i = 0; i <= radius; i++)
+        {
+            result.concat(this.calculateRing(center, i));
         }
-        return onIterationDone;
+        return result;
     }
+
+    private calculatePlayerPositions(clients: ClientData[], center: Hex<Cell>, radius: number, distToCenter: number): number[]
+    {
+        const playerPositions: number[] =  [];
+        const playerRotation: number[][] = [[0], [3], [2, 2], [2, 1, 2], [1, 1, 1, 1], [1, 1, 1, 1, 1]];
+        let p: Hex<Cell> = this.getPointAtDistFromCenter(center, distToCenter);
+        for (let i = 0; i < clients.length; i++)
+        {
+            p.color = clients[i].color;
+            p.type = CellType.Player;
+            playerPositions.push(i);
+            p = this.rotatedHexAroundCenter(center, p, playerRotation[clients.length - 1][i]);
+        }
+        return playerPositions;
+    }*/
 }

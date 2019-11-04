@@ -7,20 +7,20 @@ export interface iViewport
 {
     readonly $position: Vector;
     readonly $scale: Vector;
+
+    initViewport(width: number, height: number): void;
     snapToPosition(x: number, y: number): void;
+    addChild(c: any): void;
 }
 
 export class ViewportManager implements iViewport
 {    
     private viewport: Viewport;
     private pixi: PIXI.Application;
-    private grid: iGrid;
 
-    constructor(private game: iGame, size: Vector)
+    constructor(private game: iGame)
     {
         this.pixi = game.$pixi;
-        this.grid = game.$grid;
-        this.initViewport(size);
         this.game.$render.subscribe(() => this.render());
     }
 
@@ -29,14 +29,14 @@ export class ViewportManager implements iViewport
         return this.viewport;
     }
 
-    private initViewport(size: Vector): void
+    public initViewport(width: number, height: number): void
     {
         const viewport = new Viewport
         ({
             screenWidth: window.innerWidth,
             screenHeight: window.innerHeight,
-            worldWidth: size.x,
-            worldHeight: size.y,
+            worldWidth: width,
+            worldHeight: height,
             interaction: this.pixi.renderer.plugins.interaction // the interaction module is important for wheel to work properly when renderer.view is placed or scaled
         });
         this.pixi.stage.addChild(viewport);
@@ -47,8 +47,8 @@ export class ViewportManager implements iViewport
             .wheel()            
             .clamp({ direction: 'all' })
             .clampZoom({ 
-                minWidth: 500, maxWidth: 2500, 
-                minHeight: 500, maxHeight: 2500 })
+                minWidth: 750, maxWidth: 2500, 
+                minHeight: 750, maxHeight: 2500 })
             .decelerate({ friction: .00001, minSpeed: 0 }).
             zoom(2500, true);
 
@@ -60,6 +60,11 @@ export class ViewportManager implements iViewport
         this.viewport.snap(x, y, { time: 500, ease: 'easeInOutSine', removeOnComplete: true, removeOnInterrupt: true });
     }
     
+    public addChild(c: any): void
+    {
+        this.viewport.addChild(c);
+    }
+
     public get $position(): Vector
     {
         const x: number = this.viewport.x;
