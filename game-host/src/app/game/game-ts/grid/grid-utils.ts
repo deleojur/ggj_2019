@@ -1,23 +1,47 @@
-import { Grid, Hex } from 'honeycomb-grid';
-import { CellType, Cell } from './grid';
+import { Grid, Hex, Point, PointLike } from 'honeycomb-grid';
+import { Cell } from './grid';
 import * as _ from 'lodash';
-import { Subject } from 'rxjs';
 
-export interface iGridGenerator
+export class GridUtils
 {
-    //generateLevel(grid: Grid, playerPositions: number[]): Subject<Grid>;
-}
-
-export class GridGenerator implements iGridGenerator
-{
-    /*gridClone: Grid;
-    closedCells: Hex<Cell>[];
-    openCells: Hex<Cell>[]; //cells that have not been checked but have been opened and will check themselves still.
-    constructor()
+    constructor(private grid: Grid<Hex<Cell>>)
     {
-        
-    }
+    
+    }    
 
+    /* public calculateOuterCorners(selection: Hex<Cell>[]): Point[]
+    {
+        const result: Point[] = [];
+        const blaat: {} = {};
+        selection.forEach(hex =>
+        {
+            const point: Point = hex.toPoint();
+            const corners = hex.corners().map(corner => corner.add(point));
+
+            corners.forEach(corner =>
+            {
+                const id = JSON.stringify(corner);
+                if (blaat[id])
+                {
+                    blaat[id]++;
+                } else blaat[id] = 1;
+            });
+        });
+
+        for (let id in blaat)
+        {
+            if (blaat.hasOwnProperty(id))
+            {
+                const amount = blaat[id];
+                if (amount < 3)
+                {
+                    result.push(JSON.parse(id));
+                }
+            }
+        }
+
+        return result;
+    } */
 
     private calculateDistanceBetweenHexes(hex1: Hex<Cell>, hex2: Hex<Cell>): number
     {
@@ -80,29 +104,4 @@ export class GridGenerator implements iGridGenerator
         }
         return result;
     }
-
-    private calculateHexTileTypes(center: Hex<Cell>, radius: number): Hex<Cell>[]
-    {
-        const result: Hex<Cell>[] = [];
-        for (let i = 0; i <= radius; i++)
-        {
-            result.concat(this.calculateRing(center, i));
-        }
-        return result;
-    }
-
-    private calculatePlayerPositions(clients: ClientData[], center: Hex<Cell>, radius: number, distToCenter: number): number[]
-    {
-        const playerPositions: number[] =  [];
-        const playerRotation: number[][] = [[0], [3], [2, 2], [2, 1, 2], [1, 1, 1, 1], [1, 1, 1, 1, 1]];
-        let p: Hex<Cell> = this.getPointAtDistFromCenter(center, distToCenter);
-        for (let i = 0; i < clients.length; i++)
-        {
-            p.color = clients[i].color;
-            p.type = CellType.Player;
-            playerPositions.push(i);
-            p = this.rotatedHexAroundCenter(center, p, playerRotation[clients.length - 1][i]);
-        }
-        return playerPositions;
-    }*/
 }

@@ -1,26 +1,23 @@
-import { iViewport } from './../../../../../../game-client/src/app/game/game-ts/viewport';
-import { Viewport } from 'pixi-viewport';
-import { MapReader } from './map-reader';
+import { MapReader, TileProperty, Icon } from './map-reader';
 import { Cell } from './grid';
 import { ClientData } from '../../../../services/connection.service';
 import { Vector } from 'vector2d/src/Vec2D';
 import { iGame } from '../../game.component';
 import { defineGrid, GridFactory, Hex, Point, Grid, PointLike } from 'honeycomb-grid';
-import { Graphics, Sprite } from 'pixi.js';
-import { GridGenerator, iGridGenerator } from './grid-generator';
+import { Graphics, Sprite, Texture } from 'pixi.js';
+import { GridUtils } from './grid-utils';
 
 export enum CellType
 {
     Resource = 1,
-    Player = 2,
-    Empty = 0
+    
 }
 
 export interface Cell
 {
-    color?: string;
-    type?: CellType; 
+    color?: string; 
     isGenerated?: boolean;
+    properties: TileProperty[];
     sprites: PIXI.Sprite[];
 }
 
@@ -33,11 +30,11 @@ export class GridManager implements iGrid
 {
     private gridFactory: GridFactory<Hex<Cell>>;
     private grid: Grid<Hex<Cell>>;
-    private hexagonSize: number = 95;
+    private tileWidth: number = 148;
+    private tileHeight: number = 129.5;
     private graphics: Graphics;
     private mapReader: MapReader;
 
-    private selectedHex: Hex<Cell>;
     constructor(private game: iGame)
     {
         this.graphics = game.$graphics;
@@ -54,13 +51,12 @@ export class GridManager implements iGrid
 
             this.grid.forEach(hex =>
             {
-                hex.color = '0xffffff';
-                hex.type = CellType.Empty;
                 hex.sprites = [];
+                hex.properties = [];
             });
     
-            const r = this.hexagonSize;
-            const w = 1.732 * this.hexagonSize;
+            const r = this.tileWidth;
+            const w = 1.732 * this.tileHeight;
             const h = r * 2;  
     
             return onInitialized(w * (width * 2 + 2), h * (height + 1) + r * height);
@@ -80,61 +76,63 @@ export class GridManager implements iGrid
     {
         this.grid.forEach((hex: Hex<Cell>) =>
         {
-            hex.size = { xRadius: this.hexagonSize, yRadius: this.hexagonSize };
+            hex.size = { xRadius: this.tileWidth, yRadius: this.tileHeight };
             const point = hex.toPoint();
             
             hex.sprites.forEach(sprite => 
             {
-                sprite.x = point.x - 20;
-                sprite.y = point.y;
+                sprite.x = point.x;
+                sprite.y = point.y - 125;
                 this.game.$viewport.addChild(sprite);
             });
         });
+
+        const icons: Icon[] = this.mapReader.icons;
+        icons.forEach(icon =>
+        {
+            const sprite: Sprite = icon.sprite;
+            sprite.x = icon.x;
+            sprite.y = icon.y - 125;
+            this.game.$viewport.addChild(sprite);
+        });
     }
 
-    public render(): void
+    private renderSelection(selection: Hex<Cell>[]): void
     {
         this.graphics.clear();
-        this.graphics.lineStyle(7, 0xffd900, 1, 0.5);        
-        this.grid.forEach((hex: Hex<Cell>) => 
-        {            
-            this.graphics.beginFill(parseInt(hex.color));
+        this.graphics.lineStyle(10, 0xffd900, 1, 0.5);
 
-            //set the size of hexagons
-            hex.size = { xRadius: this.hexagonSize, yRadius: this.hexagonSize };           
+        selection.forEach(hex =>
+        {
+            const point: Point = hex.toPoint();
+            const corners = hex.corners().map(corner => corner.add(point));
 
-            const point = hex.toPoint()
-            // add the hex's position to each of its corner points
-            const corners = hex.corners().map(corner => corner.add(point))
             // separate the first from the other corners
             const [firstCorner, ...otherCorners] = corners;
-        
+    
             // move the "pen" to the first corner
             this.graphics.moveTo(firstCorner.x, firstCorner.y)
             // draw lines to the other corners
             otherCorners.forEach(({ x, y }) => this.graphics.lineTo(x, y))
             // finish at the first corner
-            this.graphics.lineTo(firstCorner.x, firstCorner.y);
+            this.graphics.lineTo(firstCorner.x + 3, firstCorner.y + 3);
         });        
         this.graphics.endFill();
     }
-    
+
     onClick(v: Vector)
     {
         const viewportPos: Vector = this.game.$viewport.$position;
         const viewportScale: Vector = this.game.$viewport.$scale;
-        const x: number = (v.x - viewportPos.x) / (this.hexagonSize * viewportScale.x);
-        const y: number = (v.y - viewportPos.y) / (this.hexagonSize * viewportScale.y);
+        const x: number = (v.x - viewportPos.x) / (this.tileWidth * viewportScale.x);
+        const y: number = (v.y - viewportPos.y) / (this.tileHeight * viewportScale.y);
         const hexCoordinates = this.gridFactory.pointToHex([x, y]);
         const hex: Hex<Cell> = this.grid.get(hexCoordinates);
-        if (hex) 
+        if (hex)
         {
-            if (this.selectedHex) this.selectedHex.color = '';
-            this.selectedHex = hex;
-            this.selectedHex.color = '0x00ff00';
             const snap: Point = hex.toPoint().add(hex.center());
             this.game.$viewport.snapToPosition(snap.x, snap.y);
-            this.render();
+            this.renderSelection([hex]);
         }
     }
 }

@@ -1,18 +1,42 @@
+import { Viewport } from 'pixi-viewport';
+import { iViewport } from './../viewport';
 import * as PIXI from 'pixi.js';
 import { Grid, Hex } from 'honeycomb-grid';
 import { Cell } from './grid';
 
+export interface TileProperty
+{
+    name: string;
+    type: string;
+    value: any;
+};
+
 interface Tile
 {
     id: number;
-    imageUrl: string;
+    texture: PIXI.Texture;
+    properties?: TileProperty[];
 };
+
+export interface Icon
+{
+    gid: number;
+    sprite: PIXI.Sprite;
+    x: number;
+    y: number;
+}
 
 export class MapReader
 {
     private worldMap: any;
-    private worldMapTileIds: number[][] = [];
-    private worldTiles: Map<number, PIXI.Texture> = new Map<number, PIXI.Texture>();
+    private tileLayers: number[][] = [];
+    private objectLayer: Icon[] = [];
+    private worldTiles: Map<number, Tile> = new Map<number, Tile>();
+
+    public get icons(): Icon[]
+    {
+        return this.objectLayer;
+    }
 
     constructor()
     {
@@ -34,8 +58,7 @@ export class MapReader
     public parseWorldMap(grid: Grid<Hex<Cell>>): void
     {
         const uniqueTileIds: Set<number> = this.parseLayers();
-        const uniqueTiles: Set<Tile> = this.parseTilesets(uniqueTileIds);
-        this.loadImages(uniqueTiles);
+        this.parseTilesets(uniqueTileIds);
         this.mapGrid(grid);
     }
 
@@ -45,13 +68,13 @@ export class MapReader
         const uniqueTileIds: Set<number> = new Set<number>();
         layers.forEach(layer => 
         {
-            this.worldMapTileIds.push([]);
             if (layer.type === 'tilelayer')
             {
-                const index = this.worldMapTileIds.length - 1;
+                this.tileLayers.push([]);
+                const index = this.tileLayers.length - 1;
                 layer.data.forEach(id => 
                 {
-                    this.worldMapTileIds[index].push(id);
+                    this.tileLayers[index].push(id);
                 });
 
                 const imageIds: number[] = [...new Set<number>(layer.data)];
@@ -59,15 +82,21 @@ export class MapReader
                 {
                     uniqueTileIds.add(id);
                 });
-            }   
+            } else if (layer.type === 'objectgroup')
+            {
+                layer.objects.forEach(obj =>
+                {
+                    uniqueTileIds.add(obj.gid);
+                    this.objectLayer.push(obj);
+                });
+            }
         });
         return uniqueTileIds;
     }
 
-    private parseTilesets(uniqueTileIds: Set<number>): Set<Tile>
+    private parseTilesets(uniqueTileIds: Set<number>): void
     {        
         const tilesets = this.worldMap.tilesets;
-        const uniqueTiles: Set<Tile> = new Set<Tile>();
         tilesets.forEach(tileset => 
         {
             const firstgid = tileset.firstgid;
@@ -76,33 +105,41 @@ export class MapReader
                 const id: number = firstgid + tile.id;                
                 if (uniqueTileIds.has(id))
                 {
-                    uniqueTiles.add({ id: id, imageUrl: tile.image });
+                    const texture = PIXI.Texture.from('assets/' + tile.image);
+                    this.worldTiles.set(id, { id: id, texture: texture, properties: tile.properties || [] });
                 }
             });
-        });
-        return uniqueTiles;
-    };
-
-    private loadImages(uniqueTiles: Set<Tile>): void
-    {
-        uniqueTiles.forEach((e: Tile) => 
-        {
-            const texture = PIXI.Texture.from('assets/' + e.imageUrl);
-            this.worldTiles.set(e.id, texture);
         });
     };
 
     private mapGrid(grid: Grid<Hex<Cell>>): void
     {
-        for (let i: number = 0; i < this.worldMapTileIds.length; i++)
+        for (let i: number = 0; i < this.tileLayers.length; i++)
         {
-            const layers: number[] = this.worldMapTileIds[i];
-            for (let j: number = 0; j < layers.length; j++)
+            const layer: number[] = this.tileLayers[i];
+            for (let j: number = 0; j < layer.length; j++)
             {
-                const id = layers[j];
-                const sprite = new PIXI.Sprite(this.worldTiles.get(id));
-                grid[j].sprites.push(sprite);
+                const id = layer[j];
+                const tile: Tile = this.worldTiles.get(id);
+
+                if (tile)
+                {
+                    const sprite: PIXI.Sprite = new PIXI.Sprite(tile.texture);
+    
+                    grid[j].sprites.push(sprite);
+                    tile.properties.forEach((property: TileProperty) =>
+                    {
+                        grid[j].properties.push(property);
+                    });
+                }
             }
         }
+
+        this.objectLayer.forEach(obj =>
+        {
+            const tile: Tile = this.worldTiles.get(obj.gid);
+            const sprite: PIXI.Sprite = new PIXI.Sprite(tile.texture);
+            obj.sprite = sprite;
+        });
     }
 }
