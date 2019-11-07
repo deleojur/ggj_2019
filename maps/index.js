@@ -29,7 +29,13 @@ function parseLayers()
             {
                 uniqueTileIds.add(id);
             });
-        }   
+        } else if (layer.type === 'objectgroup')
+        {
+            layer.objects.forEach(obj =>
+            {
+                uniqueTileIds.add(obj.gid);
+            });
+        }
     });
     return uniqueTileIds;
 }
@@ -43,7 +49,7 @@ function parseTilesets(uniqueTileIds)
         const firstgid = tileset.firstgid;
         tileset.tiles.forEach(tile =>
         {
-            const id = firstgid + tile.id;                
+            const id = firstgid + tile.id;        
             if (uniqueTileIds.has(id))
             {
                 uniqueTiles.add({ id: id, imageUrl: tile.image });
