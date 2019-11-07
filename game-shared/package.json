@@ -1,0 +1,22 @@
+{
+  "name": "world-of-paint",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "ng serve --host 0.0.0.0 --ssl --ssl-key ../encryption/private.key --ssl-cert ../encryption/world-of-paint.crt",
+    "test": "ng serve --host 0.0.0.0"
+  },
+  "private": true,
+  "dependencies": {
+    "honeycomb-grid": "^3.1.0",
+    "vector2d": "^3.0.0",
+    "pixi-viewport": "^4.3.2",
+    "pixi.js": "^5.1.5",
+    "rxjs": "6.5.2",
+    "rxjs-compat": "6.5.2"
+  },
+  "devDependencies": {
+    "ts-node": "~8.2.0",
+    "tslint": "~5.17.0",
+    "typescript": "^3.4.5"
+  }
+}
