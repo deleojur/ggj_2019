@@ -7,7 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ConnectionService } from '../services/connection.service';
+import { ClientConnectionService } from '../services/connection.service';
 
 import { Ng2CarouselamosModule } from 'ng2-carouselamos';
 import { SubscribeComponent } from './subscribe/subscribe.component';
@@ -48,14 +48,14 @@ import { GameComponent } from './game/game.component';
         RouterModule.forRoot(
         [
             { path: '', component: SubscribeComponent },
-            { path: 'room', component: RoomComponent, canActivate: [ConnectionService] },           
-            { path: 'game', component: GameComponent, canActivate: [ConnectionService] },
-            { path: 'results', component: ResultsComponent, canActivate: [ConnectionService] }
+            { path: 'room', component: RoomComponent, canActivate: [ClientConnectionService] },           
+            { path: 'game', component: GameComponent, canActivate: [ClientConnectionService] },
+            { path: 'results', component: ResultsComponent, canActivate: [ClientConnectionService] }
         ])
     ],
     providers:
     [
-        ConnectionService
+        
     ],
     bootstrap: [AppComponent]
 })

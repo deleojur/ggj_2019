@@ -8,11 +8,13 @@
   "private": true,
   "dependencies": {
     "honeycomb-grid": "^3.1.0",
-    "vector2d": "^3.0.0",
     "pixi-viewport": "^4.3.2",
     "pixi.js": "^5.1.5",
     "rxjs": "6.5.2",
-    "rxjs-compat": "6.5.2"
+    "rxjs-compat": "6.5.2",
+    "stack-lifo": "^0.1.6",
+    "stack-simple": "^1.0.6",
+    "vector2d": "^3.0.0"
   },
   "devDependencies": {
     "ts-node": "~8.2.0",

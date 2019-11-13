@@ -36,11 +36,12 @@ listener =
             room.connections++;
 
             this.io.to(host).emit('server_room_clientJoined', data);
+            //tell the client that their request to join has been validated.
             this.io.to(data.id).emit('server_room_validateJoin', data);
             socket.join(roomid);
 
             socket.roomid = roomid;
-            console.log('room', roomid, 'joined by', data.name);
+            console.log('room', parseInt(roomid), 'joined by', data.name);
         }
     },
     client_room_startGame(socket)
@@ -50,11 +51,24 @@ listener =
             this.io.to(socket.roomid).emit('server_room_validateStartGame');
         }
     },
+    client_game_turnLockedIn(socket, data)
+    {
+        const roomid = socket.roomid;
+        const room = this.rooms[roomid];
+        if (room !== undefined)
+        {
+            data = JSON.parse(data);
+            data.id = socket.id;
+            const host = room.host;
+            this.io.to(host).emit('client_game_turnLockedIn', data);
+        }
+    },
     listen(io, socket)
     {
         this.io = io;
         socket.on('client_room_join', (data) => { this.client_room_join(socket, data); });
         socket.on('client_room_startGame', () => { this.client_room_startGame(socket); });
+        socket.on('client_game_turnLockedIn', (data) => this.client_game_turnLockedIn(socket, data));
     }
 };
 module.exports = listener;

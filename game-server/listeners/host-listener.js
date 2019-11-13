@@ -27,6 +27,17 @@ listener =
         socket.join(roomid);
         console.log('room', roomid, 'created.');
     },
+    host_startGame(data)
+    {
+        console.log(data);
+        data = JSON.parse(data);
+        const clients = data.clients;
+
+        clients.forEach(client =>
+        {
+            this.io.to(client.id).emit('host_game_startLocation', { startLocation: client.startLocation });
+        });
+    },
     host_connection_lost(roomid)
     {
         this.io.to(roomid).emit('server_global_disconnected');
@@ -36,7 +47,8 @@ listener =
     listen(io, socket)
     {
         this.io = io;
-        socket.on('host_room_create', () => this.host_createRoom(socket));
+        socket.on('host_room_createRoom', () => this.host_createRoom(socket));
+        socket.on('host_game_startLocation', (clients) => this.host_startGame(clients));
     }
 };
 module.exports = listener;

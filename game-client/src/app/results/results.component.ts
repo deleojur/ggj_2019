@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConnectionService } from '../../services/connection.service';
+import { ClientConnectionService } from '../../services/connection.service';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component
@@ -15,7 +15,7 @@ export class ResultsComponent implements OnInit
 
     constructor(
         private router: Router,
-        private connection: ConnectionService)
+        private connection: ClientConnectionService)
     {
         router.events.subscribe((val) => 
         {

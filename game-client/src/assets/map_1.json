@@ -213,6 +213,23 @@
                  "width":128,
                  "x":1983.17775905644,
                  "y":740.776186464476
+                }, 
+                {
+                 "height":50,
+                 "id":63,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Type",
+                         "type":"string",
+                         "value":"PlayerStartPosition"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":50,
+                 "x":2387.96956154125,
+                 "y":1624.5923420703
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -221,7 +238,7 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":63,
+ "nextobjectid":65,
  "orientation":"hexagonal",
  "renderorder":"right-up",
  "staggeraxis":"y",

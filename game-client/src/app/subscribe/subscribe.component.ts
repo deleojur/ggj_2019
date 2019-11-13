@@ -1,7 +1,6 @@
 
 import { Component } from '@angular/core';
-import { ConnectionService } from '../../services/connection.service';
-import { ModalService } from '../../services/modal.service';
+import { ClientConnectionService } from '../../services/connection.service';
 import { NgForm } from '@angular/forms';
 
 @Component
@@ -12,7 +11,7 @@ import { NgForm } from '@angular/forms';
 })
 export class SubscribeComponent
 {
-    constructor(private connection: ConnectionService)
+    constructor(private connection: ClientConnectionService)
     {
         
     }

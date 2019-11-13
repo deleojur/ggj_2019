@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from '../../services/modal.service';
-import { ConnectionService } from '../../services/connection.service';
+import { ClientConnectionService } from '../../services/connection.service';
 
 @Component
 ({
@@ -17,7 +17,7 @@ export class InfomodalComponent implements OnInit
     header:     string;
     message:    string;
 
-    constructor(private ngbModal: NgbModal, private modalService: ModalService, private connectionService: ConnectionService) 
+    constructor(private ngbModal: NgbModal, private modalService: ModalService, private connectionService: ClientConnectionService) 
     {
         
     }

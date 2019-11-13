@@ -4,19 +4,14 @@
     "display": "fullscreen",
     "orientation": "landscape",
     "description": "Learn how to create and share something or other.",
-    "start_url": "/in_game",
+    "start_url": "/game",
     "background_color": "#000000",
     "theme_color": "#FF0000",
     "icons": [
     {
-      "src": "./images/homescreen_256_256.png",
-      "sizes": "256x256",
-      "type": "image/png"
-    },
-    {
-        "src": "./images/homescreen_192_192.jpeg",
+        "src": "./castle.png",
         "sizes": "192x192",
-        "type": "image/jpeg"
+        "type": "image/png"
     }]
   
 }

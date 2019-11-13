@@ -1,12 +1,14 @@
+import { Hex } from 'honeycomb-grid';
+import { StateHandler } from './states/state-handling';
 import { ViewportManager } from './viewport';
-import { GridManager } from './grid/grid';
+import { GridManager, Cell } from './grid/grid';
 import { Subject } from 'rxjs';
 import * as PIXI from 'pixi.js';
 import { Vector } from 'vector2d/src/Vec2D';
 
 export interface iGame
 {
-    readonly $onClick: Subject<Vector>;
+    readonly $onHexSelected: Subject<Hex<Cell>>;
     readonly $update: Subject<number>;
     readonly $render: Subject<null>;
     readonly $graphics: PIXI.Graphics;
@@ -18,6 +20,7 @@ export interface iGame
 export class GameManager implements iGame
 {
     private pixi: PIXI.Application; // this will be our pixi application
+
     public get $pixi(): PIXI.Application
     {
         return this.pixi;
@@ -43,10 +46,10 @@ export class GameManager implements iGame
 
     private interactionStart: Vector;
 
-    private onClick: Subject<Vector> = new Subject<Vector>();
-    public get $onClick(): Subject<Vector>
+    private onHexSelected: Subject<Hex<Cell>> = new Subject<Hex<Cell>>();
+    public get $onHexSelected(): Subject<Hex<Cell>>
     {
-        return this.onClick;
+        return this.onHexSelected;
     }
 
     private update: Subject<number> = new Subject<number>();
@@ -63,9 +66,9 @@ export class GameManager implements iGame
 
     private ratio: number;
 
-    constructor(private pixiContainer: any) 
+    constructor(private pixiContainer: any)
     {
-        
+           
     }
     
     private initPixi(): void
@@ -76,23 +79,24 @@ export class GameManager implements iGame
         this.ratio = window.innerWidth / window.innerHeight;    
     } 
     
-    private initGrid(): void
+    private initGrid(cb: () => void): void
     {
         this.grid = new GridManager(this.viewport, this.graphics);
         //this.generateDebuggerClients();
         this.grid.generateWorld((width: number, height: number) => 
         {
             this.viewport.initViewport(width, height);
-            this.grid.initSprites();
+            this.grid.initLayers();
             this.viewport.$viewport.addChild(this.graphics);
+            return cb();
         });
     }
 
-    public init(): void
+    public init(cb: () => void): void
     {
         this.initPixi();
         this.viewport = new ViewportManager(this.pixi);
-        this.initGrid();
+        this.initGrid(cb);
         this.pixiContainer.nativeElement.appendChild(this.pixi.view);
         this.resizePixi();
     }
@@ -127,7 +131,8 @@ export class GameManager implements iGame
         
         if (dist < 2)
         {
-            this.grid.onClick(interactionEnd);
+            const hex: Hex<Cell> = this.grid.onClick(interactionEnd);
+            this.onHexSelected.next(hex);
         }
     }
 

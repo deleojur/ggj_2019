@@ -1,4 +1,4 @@
-import { MapReader, TileProperty, Icon } from './map-reader';
+import { MapReader, TileProperty, Object } from './map-reader';
 import { Cell } from './grid';
 import { Vector } from 'vector2d/src/Vec2D';
 import { defineGrid, GridFactory, Hex, Point, Grid } from 'honeycomb-grid';
@@ -32,6 +32,12 @@ export class GridManager
     private tileWidth: number = 148;
     private tileHeight: number = 129.5;
     private mapReader: MapReader;
+
+    private playerStartPositions: Hex<Cell>[] = [];
+    public get $playerPositions(): Hex<Cell>[]
+    {
+        return this.playerStartPositions;
+    }
 
     constructor(private viewport: ViewportManager, private graphics: Graphics)
     {
@@ -69,13 +75,13 @@ export class GridManager
         });
     }
 
-    public initSprites(): void
+    public initLayers(): void
     {
-        this.initTileLayerSprites();
-        this.initObjectLayerSprites();
+        this.initTileLayer();
+        this.initObjectLayer();
     }
 
-    private initTileLayerSprites(): void
+    private initTileLayer(): void
     {
         this.grid.forEach((hex: Hex<Cell>) =>
         {
@@ -91,15 +97,33 @@ export class GridManager
         });
     }
 
-    private initObjectLayerSprites(): void
+    private initObjectLayer(): void
     {
-        const icons: Icon[] = this.mapReader.icons;
-        icons.forEach(icon =>
+        const objects: Object[] = this.mapReader.icons;
+        objects.forEach(object =>
         {
-            const sprite: Sprite = icon.sprite;
-            sprite.x = icon.x;
-            sprite.y = icon.y - 125;
-            this.viewport.addChild(sprite);
+            const sprite: Sprite = object.sprite;
+
+            if (sprite)
+            {
+                sprite.x = object.x;
+                sprite.y = object.y - 125;
+                this.viewport.addChild(sprite);
+            }
+            if (object.properties)
+            {
+                const hexCoordinates = this.gridFactory.pointToHex([object.x / this.tileWidth, object.y / this.tileHeight]);
+                const hex: Hex<Cell> = this.grid.get(hexCoordinates);
+                hex.properties.push(...Array.from(object.properties));
+
+                hex.properties.forEach(properties =>
+                {
+                    if (properties.value === 'PlayerStartPosition')
+                    {
+                        this.playerStartPositions.push(hex);
+                    }
+                });
+            }
         });
     }
 
@@ -110,18 +134,18 @@ export class GridManager
         {
             let left: number = i - 1;
             if (left < 0) left = length - 1;
-
             const right: number = (i + 1) % length;
+
             const v1: Vector = new Vector(corners[i].x, corners[i].y);
             const v2: Vector = new Vector(corners[left].x, corners[left].y);
             const v3: Vector = new Vector(corners[right].x, corners[right].y);
     
-            const blaat1 = v1.clone().add(v2.clone().subtract(v1).normalize().multiplyByScalar(25))
-            const blaat2 = v1.clone().add(v3.clone().subtract(v1).normalize().multiplyByScalar(25))
+            const leftCorner = v1.clone().add(v2.clone().subtract(v1).normalize().multiplyByScalar(25))
+            const rightCorner = v1.clone().add(v3.clone().subtract(v1).normalize().multiplyByScalar(25))
 
-            this.graphics.moveTo(blaat1.x, blaat1.y);
+            this.graphics.moveTo(leftCorner.x, leftCorner.y);
             this.graphics.lineTo(v1.x, v1.y);
-            this.graphics.lineTo(blaat2.x, blaat2.y);
+            this.graphics.lineTo(rightCorner.x, rightCorner.y);
         }
     }
 
@@ -140,7 +164,7 @@ export class GridManager
         this.graphics.lineTo(firstCorner.x + 3, firstCorner.y + 3);
     }
 
-    private renderSelection(selection: Hex<Cell>[], renderMode: SelectionRenderMode = SelectionRenderMode.Solid): void
+    public renderSelection(selection: Hex<Cell>[], renderMode: SelectionRenderMode = SelectionRenderMode.Solid): void
     {
         selection.forEach(hex =>
         {
@@ -162,7 +186,7 @@ export class GridManager
         });
     }
 
-    onClick(v: Vector)
+    public getHexAt(v: Vector): Hex<Cell>
     {
         const viewportPos: Vector = this.viewport.$position;
         const viewportScale: Vector = this.viewport.$scale;
@@ -170,18 +194,22 @@ export class GridManager
         const y: number = (v.y - viewportPos.y) / (this.tileHeight * viewportScale.y);
         const hexCoordinates = this.gridFactory.pointToHex([x, y]);
         const hex: Hex<Cell> = this.grid.get(hexCoordinates);
+        return hex;
+    } 
+
+    public onClick(v: Vector): Hex<Cell>
+    {
+        const hex: Hex<Cell> = this.getHexAt(v);
         if (hex)
         {
             this.graphics.clear();
             this.graphics.lineStyle(10, 0x00ff00, 1, 0.5);
 
-            const snap: Point = hex.toPoint().add(hex.center());
-            this.viewport.snapToPosition(snap.x, snap.y);
-
             const neighbors: Hex<Cell>[] = this.grid.neighborsOf(hex);
             this.renderSelection(neighbors, SelectionRenderMode.Corners);
             this.renderSelection([hex], SelectionRenderMode.Solid);
             this.graphics.endFill();
-        }        
+        }
+        return hex;
     }
 }

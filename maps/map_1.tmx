@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.5" orientation="hexagonal" renderorder="right-up" width="13" height="13" tilewidth="256" tileheight="388" infinite="0" hexsidelength="0" staggeraxis="y" staggerindex="odd" nextlayerid="8" nextobjectid="63">
+<map version="1.2" tiledversion="1.2.5" orientation="hexagonal" renderorder="right-up" width="13" height="13" tilewidth="256" tileheight="388" infinite="0" hexsidelength="0" staggeraxis="y" staggerindex="odd" nextlayerid="8" nextobjectid="65">
  <tileset firstgid="1" name="Coldlands" tilewidth="256" tileheight="384" tilecount="67" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
@@ -1134,5 +1134,10 @@
   <object id="53" gid="380" x="2362.28" y="1324.88" width="128" height="128"/>
   <object id="54" gid="403" x="2370.71" y="942.967" width="128" height="128"/>
   <object id="55" gid="378" x="1983.18" y="740.776" width="128" height="128"/>
+  <object id="63" x="2387.97" y="1624.59" width="50" height="50">
+   <properties>
+    <property name="Type" value="PlayerStartPosition"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

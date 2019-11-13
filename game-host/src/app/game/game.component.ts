@@ -1,5 +1,8 @@
+import { state_conveyPlayerStartingPositions } from './client-interaction/turn-state-handling/state_convey-player-starting-positions';
+import { StateHandler } from './../../../../game-shared/src/states/state-handling';
 import { GameManager } from './../../../../game-shared/src/game-manager';
-import { ConnectionService } from 'src/services/connection.service';
+
+import { HostConnectionService } from 'src/services/connection.service';
 import { Component, AfterViewInit, ViewChild, HostListener, ElementRef } from '@angular/core';
 
 @Component({
@@ -11,16 +14,20 @@ export class GameComponent implements AfterViewInit
 {
     @ViewChild('pixiContainer', {static: false}) pixiContainer: ElementRef; // this allows us to reference and load stuff into the div container.
     private gameManager: GameManager;
-    constructor(private connection: ConnectionService) 
+    private stateHandler: StateHandler;
+    constructor(private connection: HostConnectionService) 
     {
-        
     }
     
-
     ngAfterViewInit()
     {
         this.gameManager = new GameManager(this.pixiContainer);
-        this.gameManager.init();
+        this.gameManager.init(() =>
+        {
+            this.stateHandler = new StateHandler();
+            this.stateHandler.init(this.gameManager, this.connection);
+            this.stateHandler.transitionToState(new state_conveyPlayerStartingPositions());
+        });        
     }
 
     @HostListener('window:resize', ['$event'])

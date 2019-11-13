@@ -43,6 +43,11 @@ export class GridUtils
         return result;
     } */
 
+    public static HexToPoint(hex: Hex<Cell>): Point
+    {
+        return hex.toPoint().add(hex.center());
+    } 
+
     private calculateDistanceBetweenHexes(hex1: Hex<Cell>, hex2: Hex<Cell>): number
     {
         const qDiff = Math.abs(hex1.q - hex2.q);

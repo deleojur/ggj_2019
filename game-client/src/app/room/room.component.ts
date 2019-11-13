@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
-import { ConnectionService, PlayerData } from '../../services/connection.service';
+import { ClientConnectionService, PlayerData } from '../../services/connection.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { ModalService } from '../../services/modal.service';
 
@@ -20,9 +20,12 @@ export class RoomComponent implements OnInit
 
     constructor(
         private router: Router, 
-        private connection: ConnectionService)
+        private connection: ClientConnectionService)
     { 
-        
+        this.connection.subscribeToIncomingEvent('host_game_startLocation', (data) => 
+        {
+            console.log(data);
+        });
     }
 
     startGame(): void

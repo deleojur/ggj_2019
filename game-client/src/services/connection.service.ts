@@ -1,3 +1,4 @@
+import { StateHandler, ConnectionService } from './../../../game-shared/src/states/state-handling';
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { ModalService } from './modal.service';
@@ -24,7 +25,7 @@ export enum Path
 ({
     providedIn: 'root'
 })
-export class ConnectionService implements CanActivate
+export class ClientConnectionService extends ConnectionService implements CanActivate
 {
     private playerData: PlayerData = null;
     public get $playerData(): PlayerData
@@ -40,10 +41,11 @@ export class ConnectionService implements CanActivate
 
     private socket: SocketIOClient.Socket;
 
-    constructor(        
+    constructor(
         private router: Router, 
         private modalService: ModalService) 
     {
+        super();
         this.connect();
     }
 
@@ -53,6 +55,16 @@ export class ConnectionService implements CanActivate
         this.socket.on('server_room_validateJoin', (data) => this.server_room_validateJoin(data));
         this.socket.on('server_room_validateStartGame', () => this.server_room_validateStartGame());
         this.socket.on('server_global_disconnected', () => { this.server_global_disconnected(); });
+    }
+
+    public subscribeToIncomingEvent(eventName: string, callback: (data) => void): SocketIOClient.Emitter
+    {
+        return this.socket.on(eventName, (data) => callback(data));
+    }
+
+    public emitOutgoingEvent(eventName: string, data: any): void
+    {
+        this.socket.emit(eventName, data);
     }
 
     private server_global_disconnected(): void

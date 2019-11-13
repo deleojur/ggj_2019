@@ -16,22 +16,24 @@ interface Tile
     properties?: TileProperty[];
 };
 
-export interface Icon
+export interface Object
 {
     gid: number;
-    sprite: PIXI.Sprite;
     x: number;
     y: number;
+
+    properties?: TileProperty[];
+    sprite?: PIXI.Sprite;
 }
 
 export class MapReader
 {
     private worldMap: any;
     private tileLayers: number[][] = [];
-    private objectLayer: Icon[] = [];
+    private objectLayer: Object[] = [];
     private worldTiles: Map<number, Tile> = new Map<number, Tile>();
 
-    public get icons(): Icon[]
+    public get icons(): Object[]
     {
         return this.objectLayer;
     }
@@ -135,9 +137,17 @@ export class MapReader
 
         this.objectLayer.forEach(obj =>
         {
+            if (obj.properties)
+            {
+                obj.properties = Array.from(obj.properties);
+            }
+
             const tile: Tile = this.worldTiles.get(obj.gid);
-            const sprite: PIXI.Sprite = new PIXI.Sprite(tile.texture);
-            obj.sprite = sprite;
+            if (tile)
+            {
+                const sprite: PIXI.Sprite = new PIXI.Sprite(tile.texture);
+                obj.sprite = sprite;
+            }
         });
     }
 }

@@ -1,4 +1,4 @@
-import { ConnectionService, ClientData, RoomData } from '../../services/connection.service';
+import { HostConnectionService, ClientData, RoomData } from '../../services/connection.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
@@ -9,9 +9,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class RoomComponent implements OnInit, OnDestroy
 {
     room: RoomData;
-    clients: ClientData[] = [];
+    public clients: ClientData[] = [];
 
-    constructor(private connection: ConnectionService) 
+    constructor(private connection: HostConnectionService) 
     {
         
     }
@@ -24,7 +24,7 @@ export class RoomComponent implements OnInit, OnDestroy
 
     ngOnDestroy()
     {
-        this.connection.$onRoomCreated.unsubscribe();
-        this.connection.$onClientJoinedOrLeft.unsubscribe();
+        //this.connection.$onRoomCreated.unsubscribe();
+        //this.connection.$onClientJoinedOrLeft.unsubscribe();
     }
 }
