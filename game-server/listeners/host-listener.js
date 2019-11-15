@@ -29,13 +29,12 @@ listener =
     },
     host_startGame(data)
     {
-        console.log(data);
         data = JSON.parse(data);
         const clients = data.clients;
 
         clients.forEach(client =>
         {
-            this.io.to(client.id).emit('host_game_startLocation', { startLocation: client.startLocation });
+            this.io.to(client.id).emit('host_game_startLocation', { x: client.x, y: client.y });
         });
     },
     host_connection_lost(roomid)

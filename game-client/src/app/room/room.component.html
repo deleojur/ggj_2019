@@ -1,17 +1,27 @@
-<div [style.backgroundColor]="playerData.color"
-class="p-3 mb-2 text-white text-center">
-    <h5>World of Paint</h5>
-</div>
-
-<div class="container-fluid" style="height: 100%;">
-    <div class="col-md-5">
-        <h5 p-3>Press "Start Game!" when all players have jonined.</h5>
-        <button 
-            type="button" 
-            [style.borderColor]="playerData.color" 
-            [style.color]="playerData.color" 
-            class="btn btn-outline btn-bottom btn-lg btn-block" 
-            (click)="startGame()">Start Game!</button>
+<div class="p-3 mb-2 bg-primary text-white text-center">
+    <div *ngIf="router.url !== '/room'">
+        <img (click)="goBack()" class="back-arrow" src="assets/UI/redo-arrow.svg">
     </div>
-    <app-infomodal></app-infomodal>
+    <h1>Civilization of Catan</h1>
+</div>
+<div class="container-fluid" style="height: 100%;">
+    <router-outlet></router-outlet>
+    <div *ngIf="router.url === '/room'" >
+        <div class="col-md-12">
+            <h2 class="p-3 mb-2 text-left">
+                When hosting a game, the device will be shared and used to 
+                resolve players' actions.
+                Use the biggest device you have for hosting games!
+            </h2>
+        </div>             
+        <button 
+            type="button"
+            class="btn btn-primary btn-bottom btn-lg btn-block" 
+            (click)="hostGame()">Host Game</button>
+
+        <button 
+            type="button"
+            class="btn btn-primary btn-outline btn-bottom btn-lg btn-block" 
+            (click)="joinGame()">Join Game</button>
+    </div>
 </div>

@@ -9,11 +9,12 @@ listener =
     client_connection_lost(socket, roomid)
     {
         const room = this.rooms[roomid];
-        this.io.to(this.rooms[roomid].host).emit('server_room_clientLeft', room.clients[socket.id] );
+        room.connections--;
+        const client = room.clients[socket.id];
+        client.status = 'left';
+        this.io.to(this.rooms[roomid].host).emit('server_room_clientConnection', client);
         socket.leave(roomid);
         delete room.clients[socket.id];
-        room.connections--;
-        console.log(socket.id, 'disconnected.');
     },
     client_room_join(socket, data)
     {
@@ -30,12 +31,12 @@ listener =
             const host = room.host;
 
             data.id = socket.id;
-            data.color = colors[room.connections];
+            data.color = colors[room.connections++];
             
             room.clients[data.id] = data;
-            room.connections++;
-
-            this.io.to(host).emit('server_room_clientJoined', data);
+            
+            data.status = 'joined';
+            this.io.to(host).emit('server_room_clientConnection', data);
             //tell the client that their request to join has been validated.
             this.io.to(data.id).emit('server_room_validateJoin', data);
             socket.join(roomid);

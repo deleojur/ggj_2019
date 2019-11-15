@@ -1,68 +1,34 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ClientConnectionService } from '../services/connection.service';
 
-import { Ng2CarouselamosModule } from 'ng2-carouselamos';
-import { SubscribeComponent } from './subscribe/subscribe.component';
-
-import { FormsModule } from '@angular/forms';
-import { ResultsComponent } from './results/results.component';
 import { RoomComponent } from './room/room.component';
+import { HostRoomComponent } from './room/host-room/host-room.component';
+import { ClientRoomComponent } from './room/client-room/client-room.component';
 
-import * as scrollLock from 'body-scroll-lock';
-import { InfomodalComponent } from './infomodal/infomodal.component';
-import { MenumodalComponent } from './menumodal/menumodal.component';
-import { OnCreate } from 'src/directives/on-create';
-import { TouchMove, TouchEnd } from 'src/directives/touch';
-import { GameComponent } from './game/game.component';
+import { GameComponent } from './game/components/game.component';
+import { ClientGameComponent } from './game/components/client-game/client-game.component';
+import { HostGameComponent } from './game/components/host-game/host-game.component';
 
-@NgModule
-({
-    declarations: 
-    [
-        AppComponent,
-        SubscribeComponent,
-        RoomComponent,
-        ResultsComponent,
-        InfomodalComponent,
-        MenumodalComponent,
-        OnCreate,
-        TouchMove, TouchEnd,
-        GameComponent
-    ],
-    imports: 
-    [
-        FormsModule,
-        NgbModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        Ng2CarouselamosModule,
-        RouterModule.forRoot(
-        [
-            { path: '', component: SubscribeComponent },
-            { path: 'room', component: RoomComponent, canActivate: [ClientConnectionService] },           
-            { path: 'game', component: GameComponent, canActivate: [ClientConnectionService] },
-            { path: 'results', component: ResultsComponent, canActivate: [ClientConnectionService] }
-        ])
-    ],
-    providers:
-    [
-        
-    ],
-    bootstrap: [AppComponent]
+@NgModule({
+  declarations: [
+    AppComponent,
+    GameComponent,
+    RoomComponent,
+    HostRoomComponent,
+    ClientRoomComponent,
+    ClientGameComponent,
+    HostGameComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
-export class AppModule
-{
-    constructor()
-    {
-        scrollLock.disableBodyScroll(document.body);
-    }
-}
+export class AppModule { }

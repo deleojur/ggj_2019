@@ -1,8 +1,6 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
-import { ClientConnectionService, PlayerData } from '../../services/connection.service';
-import { Router, NavigationEnd } from '@angular/router';
-import { ModalService } from '../../services/modal.service';
+import { Component, OnInit } from '@angular/core';
+import { StateHandlerService } from 'src/services/state-handler.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-room',
@@ -11,25 +9,32 @@ import { ModalService } from '../../services/modal.service';
 })
 export class RoomComponent implements OnInit
 {
-    playerData: PlayerData;
-
-    ngOnInit()
-    {
-        this.playerData = this.connection.$playerData;
-    }
-
+    router: Router;
     constructor(
-        private router: Router, 
-        private connection: ClientConnectionService)
-    { 
-        this.connection.subscribeToIncomingEvent('host_game_startLocation', (data) => 
-        {
-            console.log(data);
-        });
+        private stateHandler: StateHandlerService, 
+        private activatedRoute: ActivatedRoute,
+        router: Router)
+    {
+        this.router = router;
     }
 
-    startGame(): void
+    ngOnInit() 
     {
-        this.connection.emit_startGame();
+        
+    }
+
+    hostGame(): void
+    {
+        this.router.navigate(['host'], { relativeTo: this.activatedRoute });
+    }
+
+    joinGame(): void
+    {
+        this.router.navigate(['client'], { relativeTo: this.activatedRoute });
+    }
+
+    goBack(): void
+    {
+        this.router.navigate(['room']);
     }
 }

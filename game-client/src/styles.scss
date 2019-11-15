@@ -189,11 +189,43 @@ select:focus
     outline:none;
 }
 
+.button-box
+{
+    position: fixed;
+    bottom: 10px;
+    text-align:center;
+}
+
+.gear-thumb
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
 .btn-bottom
 {
     margin: auto;
     margin-top: 10px;
     width: 80%;
+}
+
+.card-specs-outer
+{
+    width: 95%;
+    position:relative;
+    margin:auto;
+}
+
+.card-specs-inner
+{
+    margin: 10px 10px 10px 10px;
+}
+
+.specs-bar
+{
+    margin: 0px 5px 0px 0px;
 }
 
 .info-text-small
@@ -209,3 +241,5 @@ html, body {
     overflow-y: hidden;
   }
 body { -webkit-user-select: none; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
