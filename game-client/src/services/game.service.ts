@@ -1,7 +1,10 @@
+import { Cell } from './../app/game/grid/grid';
 import { Injectable } from '@angular/core';
-import { ViewportManager } from '../app/game/grid/viewport';
-import { GridManager, Cell } from '../app/game/grid/grid';
+import { ViewportManager } from '../app/game/render/viewport';
+import { GridManager } from '../app/game/grid/grid';
 import * as PIXI from 'pixi.js';
+import { Subject } from 'rxjs';
+import { Hex } from 'honeycomb-grid';
 
 @Injectable({
     providedIn: 'root'
@@ -13,6 +16,12 @@ export class GameService
     private _viewport: ViewportManager;
     private _grid: GridManager;
     private ratio: number;
+    private _onCellSelected: Subject<Hex<Cell>> = new Subject<Hex<Cell>>();
+
+    public get onCellSelected(): Subject<Hex<Cell>>
+    {
+        return this._onCellSelected;
+    }
 
     public get grid(): GridManager
     {
@@ -28,8 +37,14 @@ export class GameService
     {
         this.pixi = new PIXI.Application({ backgroundColor: 0x0 });
         this.graphics = new PIXI.Graphics();
-        PIXI.autoDetectRenderer({ width: window.innerWidth, height: window.innerHeight, antialias: true, transparent: true });
-        this.ratio = window.innerWidth / window.innerHeight;    
+        
+        PIXI.autoDetectRenderer({ 
+            width: window.innerWidth,
+            height: window.innerHeight, 
+            antialias: true, 
+            transparent: true });
+
+        this.ratio = window.innerWidth / window.innerHeight;
     } 
     
     private initGrid(cb: () => void): void
@@ -79,5 +94,10 @@ export class GameService
         }
         this.pixi.renderer.resize(w, h);
         this.pixi.stage.scale.set(1, 1);
+    }
+
+    public selectHex(hex: Hex<Cell>): void
+    {
+        this._onCellSelected.next(hex);
     }
 }

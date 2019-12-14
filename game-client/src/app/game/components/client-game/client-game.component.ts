@@ -1,6 +1,6 @@
 import { ClientUtilsService } from './../../../../services/utils/client-utils.service';
 import { GridManager } from './../../grid/grid';
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { GameService } from 'src/services/game.service';
 import { Vector } from 'vector2d';
 import { Game } from '../game.component';
@@ -10,7 +10,7 @@ import { state_playerStartingPositions } from '../../states/turn-state-handling/
 import { PositionData } from '../../states/request-data';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from '../../grid/grid';
-import { ViewportManager } from '../../grid/viewport';
+import { ViewportManager } from '../../render/viewport';
 
 @Component({
   selector: 'app-client-game',
@@ -36,7 +36,6 @@ export class ClientGameComponent implements Game
     {
         this.grid = this.gameService.grid;
         this.viewport = this.gameService.viewport;
-        this.attachEventListeners();
         this.stateHandlerService.activateState<PositionData>(state_playerStartingPositions, (positionData) =>
         {
             const hex: Hex<Cell> = this.grid.getHex(positionData.x, positionData.y);
@@ -45,9 +44,9 @@ export class ClientGameComponent implements Game
         });
     }
 
-    private attachEventListeners(): void
+    private attachEventListeners(container: ElementRef): void
     {
-        window.addEventListener('touchstart', this.touchStart.bind(this));
+        container.nativeElement.addEventListener('touchstart', this.touchStart.bind(this));
         window.addEventListener('touchend', this.touchEnd.bind(this));
         
         window.addEventListener('mousedown', this.mouseDown.bind(this));
@@ -67,11 +66,13 @@ export class ClientGameComponent implements Game
         if (dist < 2)
         {
             //get the hex and do something with it.
-            
+            const hex = this.gameService.grid.getHexAt(interactionEnd);
+            this.gameService.grid.renderHex(hex, this.color);
+            this.gameService.selectHex(hex);
         }
     }
 
-    private touchStart(event: TouchEvent): void
+    touchStart(event: TouchEvent): void
     {
         const touch: Touch = event.changedTouches[0];
         const x = touch.clientX;
@@ -79,14 +80,14 @@ export class ClientGameComponent implements Game
         this.onDown(x, y);
     }
 
-    private mouseDown(event: MouseEvent): void
+    mouseDown(event: MouseEvent): void
     {
         const x: number = event.clientX;
         const y: number = event.clientY; 
         this.onDown(x, y);
     }
 
-    private touchEnd(event: TouchEvent): void
+    touchEnd(event: TouchEvent): void
     {
         const touch: Touch = event.changedTouches[0];
         const x = touch.clientX;
@@ -94,7 +95,7 @@ export class ClientGameComponent implements Game
         this.onUp(x, y);
     }
 
-    private mouseUp(event: MouseEvent): void
+    mouseUp(event: MouseEvent): void
     {
         const x: number = event.clientX;
         const y: number = event.clientY;

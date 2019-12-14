@@ -8,8 +8,7 @@ import { Game } from '../game.component';
 
 @Component({
   selector: 'app-host-game',
-  template: '',
-  styles: []
+  template: ''
 })
 export class HostGameComponent implements Game
 {
@@ -26,5 +25,31 @@ export class HostGameComponent implements Game
         this.stateHandlerService.getState(state_playerStartingPositions) as state_playerStartingPositions;
 
         statePlayerStartPosition.doRequestPlayerStartPositions({ clients: clients, roomid: roomid });
+    }
+
+    touchStart(event: TouchEvent): void
+    {
+        const touch: Touch = event.changedTouches[0];
+        const x = touch.clientX;
+        const y = touch.clientY;
+    }
+
+    mouseDown(event: MouseEvent): void
+    {
+        const x: number = event.clientX;
+        const y: number = event.clientY;
+    }
+
+    touchEnd(event: TouchEvent): void
+    {
+        const touch: Touch = event.changedTouches[0];
+        const x = touch.clientX;
+        const y = touch.clientY;
+    }
+
+    mouseUp(event: MouseEvent): void
+    {
+        const x: number = event.clientX;
+        const y: number = event.clientY;
     }
 }

@@ -4,18 +4,25 @@ import { Component, AfterViewInit, ViewChild, ElementRef, HostListener, Output, 
 export interface Game
 {
     onMapLoaded(): void;
+
+    touchStart(event: TouchEvent): void;
+    touchEnd(event: TouchEvent): void;
+
+    mouseDown(event: MouseEvent): void;
+    mouseUp(event: MouseEvent): void;
 }
 
 @Component({
   selector: 'app-game',
-  templateUrl: './game.component.html'
+  templateUrl: './game.component.html',
+  styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements AfterViewInit
 {
-    private game: Game;
+    game: Game;
 
-    @ViewChild('pixiContainer', {static: false}) pixiContainer: ElementRef; // this allows us to reference and load stuff into the div container.
-    @Output() onMapLoaded: EventEmitter<null> = new EventEmitter();
+    @ViewChild('pixiContainer', {static: false}) pixiContainer: ElementRef;
+    @ViewChild('uiContainer', {static: false}) uiContainer: ElementRef;
 
     constructor(private gameService: GameService) 
     {
@@ -27,6 +34,7 @@ export class GameComponent implements AfterViewInit
         {
             //the game has been initialized!
             this.game.onMapLoaded();
+            
             return this.pixiContainer.nativeElement.appendChild(canvas);
         });
     }

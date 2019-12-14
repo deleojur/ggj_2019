@@ -17,113 +17,15 @@
     src: url("./assets/fonts/BreatheFire.otf") format("opentype");
 }
 
-@mixin action-icon
-{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+@font-face {
+    font-family: FenwickWood;
+    src: url("./assets/fonts/FenwickWoodtype.ttf") format('truetype')
 }
 
-@mixin action-card 
-{
-    width:15vw;
-    border: none;
-}
-
-.draggable-action-card
-{
-    @include action-card();
-    height: 38vh;
-    width: auto;
-}
-
-.override-drag
-{
-    position: absolute; left: 0; right: 0; top: 0;
-    background-color: #00000000;
-}
-
-.detailed-action-card
-{
-    @include action-card();
-    position: absolute; left: 0; right: 0; top: 0;
-    pointer-events: none;
-}
-
-.card-img-overlay
-{
-    padding:    0;
-    top:        10%;
-}
 
 .disable-pointer-events
 {
     pointer-events: none;
-}
-
-.draggable-action-icon
-{
-    @include action-icon();
-    width: 60%;
-}
-
-.detailed-action-icon
-{
-    @include action-icon();
-    width: 40%;
-}
-
-.action-name
-{
-    font-size:      2vw;
-    font-family:    'BreatheFire', sans-serif;
-}
-
-.card
-{
-    transform-origin: 50% 50%;
-}
-
-.action-explanation
-{
-    position: absolute; left:10%; right:10%; bottom: 10%;
-    font-size: 1.25vw;
-    font-family: 'BreatheFire', sans-serif;
-}
-  
-.box 
-{
-    display: inline-block;
-    position: absolute;
-}
-  
-  .area {
-    background: #C0FFEE;
-    display: inline-block;
-
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-    width: 100vw;
-    height: 100vh;
-
-    @media not all and (hover:hover) {
-        height: var(--app-height);
-    }
-  }  
-
-.icon-small-text
-{
-    text-align: left;
-    font-family: Roboto;
-    font-size: 20px;
-}
-
-.icon-small
-{
-    position: absolute;
-    width: 10vw;
-    height: auto;
 }
 
 .btn-parent-small
@@ -133,75 +35,12 @@
     margin-left: 48vw;
 }
 
-.btn-round-small
-{
-    display: inline-block;
-    width: 20vh;
-    height: 20vh;
-    border-radius: 50%;
-}
-
-.btn-parent
-{
-    position:relative;
-    display: block;
-    width: 40vw;
-}
-
-.btn-round 
-{
-    display: inline-block;
-    width:35vh;
-    height:35vh;
-    border-radius: 50%;
-}
-
-.btn-icon
-{
-    width:35vh;
-    height:35vh;
-    position: absolute;
-    top:0;
-    left:0;
-    pointer-events: none;
-}
-
-.btn-icon-small
-{
-    width: 20vh;
-    height: 20vh;
-    position: absolute;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-}
 
 input:focus,
 button:focus,
 select:focus
 {
   outline: none;
-}
-
-#avatar-select
-{
-    top: 13px;
-    outline:none;
-}
-
-.button-box
-{
-    position: fixed;
-    bottom: 10px;
-    text-align:center;
-}
-
-.gear-thumb
-{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
 }
 
 .btn-bottom
@@ -211,28 +50,6 @@ select:focus
     width: 80%;
 }
 
-.card-specs-outer
-{
-    width: 95%;
-    position:relative;
-    margin:auto;
-}
-
-.card-specs-inner
-{
-    margin: 10px 10px 10px 10px;
-}
-
-.specs-bar
-{
-    margin: 0px 5px 0px 0px;
-}
-
-.info-text-small
-{
-    font-size: 13px;
-    position:inherit;
-}
 
 .wrapper { overscroll-behavior: none }
 
@@ -240,6 +57,15 @@ html, body {
     overflow-x: hidden;
     overflow-y: hidden;
   }
-body { -webkit-user-select: none; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { -webkit-user-select: none; margin: 0px; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+img
+{ 
+    user-drag: none; 
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
 

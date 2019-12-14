@@ -1,2 +1,8 @@
 <router-outlet (activate)="onActivate($event)"></router-outlet>
-<div #pixiContainer></div>
+<div #pixiContainer
+    (touchstart)="game.touchStart($event)"
+    (touchend)="game.touchEnd($event)"
+    (mousedown)="game.mouseDown($event)"
+    (mouseup)="game.mouseUp($event)">
+</div>
+<app-ui-window #uiContainer></app-ui-window>

@@ -3,7 +3,7 @@ import { Cell } from './grid';
 import { Vector } from 'vector2d/src/Vec2D';
 import { defineGrid, GridFactory, Hex, Point, Grid } from 'honeycomb-grid';
 import { Graphics, Sprite } from 'pixi.js';
-import { ViewportManager } from './viewport';
+import { ViewportManager } from '../render/viewport';
 
 export enum CellType
 {

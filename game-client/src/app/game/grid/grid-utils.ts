@@ -102,8 +102,6 @@ export class GridUtils
             {
                 result.push(hex);
                 const n = this.grid.neighborsOf(hex)[i];
-        
-                //TODO: what kind of tile will this be?
                 if (n) hex = n;
             }
         }
