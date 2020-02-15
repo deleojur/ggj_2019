@@ -1,7 +1,9 @@
 <div class="ui-container text-center"
     [ngClass]="{'animate-in': showWindow, 'animate-out': !showWindow}">
     <div class="ui-parent">
-        <img class="window-img" src="assets/UI/window/side_frame2.svg"> <!-- center this image within the column -->
+        <img class="banner" src="assets/UI/window/banner_red1.svg">
+        <h1 class="bannerText uiText">Doe iets</h1>
+        <img class="window-img" src="assets/UI/window/side_frame2.svg">
         <img class="close-btn" src="assets/UI/window/btn_n_cancel.svg"
             (click)="closeWindow()">
         <div *ngFor="let button of buttons, let i = index">
@@ -12,6 +14,4 @@
             </app-ui-button>
         </div>
     </div>
-        <!--<img class="window-img" src="assets/UI/window/side_frame2.svg">
-        <img class="close-button" src="assets/UI/window/btn_n_cancel.svg">-->
 </div>

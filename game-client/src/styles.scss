@@ -22,6 +22,10 @@
     src: url("./assets/fonts/FenwickWoodtype.ttf") format('truetype')
 }
 
+.font-fenwick_wood
+{
+    font-family: fenwickWood;
+}
 
 .disable-pointer-events
 {
@@ -54,10 +58,10 @@ select:focus
 .wrapper { overscroll-behavior: none }
 
 html, body {
-    overflow-x: hidden;
-    overflow-y: hidden;
+    //overflow-x: hidden;
+    //overflow-y: hidden;
   }
-body { -webkit-user-select: none; margin: 0px; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { -webkit-user-select: none; margin: 10px; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 img
 { 
@@ -69,3 +73,40 @@ img
     -ms-user-select: none;
 }
 
+@media screen and (min-width: 301px) and (max-width: 400px) 
+{
+    .uiText
+    {
+        margin-top: -28%;
+        font-size: 40px;
+    }
+}
+
+@media screen and (min-width: 401px) and (max-width: 600px) 
+{
+    .uiText
+    {
+        margin-top: -24%;
+        font-size: 40px;
+    }
+}
+
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+@media screen and (min-width: 601px) and (max-width: 900px)
+{
+    .uiText
+    {
+        font-size: 40px;
+        top: 30%;
+    }
+}
+  
+  /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (min-width: 901px)
+{
+    .uiText
+    {
+        font-size: 50px;
+        top: 50%;
+    }
+}

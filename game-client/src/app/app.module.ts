@@ -14,6 +14,7 @@ import { ClientGameComponent } from './game/components/client-game/client-game.c
 import { HostGameComponent } from './game/components/host-game/host-game.component';
 import { ButtonComponent } from './ui/button/button.component';
 import { WindowComponent } from './ui/window/window.component';
+import { CardComponent } from '../resource-cards/card/card.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { WindowComponent } from './ui/window/window.component';
     ClientGameComponent,
     HostGameComponent,
     ButtonComponent,
-    WindowComponent
+    WindowComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,

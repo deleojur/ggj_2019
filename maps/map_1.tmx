@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.5" orientation="hexagonal" renderorder="right-up" width="13" height="13" tilewidth="256" tileheight="388" infinite="0" hexsidelength="0" staggeraxis="y" staggerindex="odd" nextlayerid="8" nextobjectid="68">
+<map version="1.2" tiledversion="1.2.5" orientation="hexagonal" renderorder="right-up" width="13" height="13" tilewidth="256" tileheight="388" infinite="0" hexsidelength="0" staggeraxis="y" staggerindex="odd" nextlayerid="9" nextobjectid="143">
  <tileset firstgid="1" name="Coldlands" tilewidth="256" tileheight="384" tilecount="67" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
@@ -1080,74 +1080,66 @@
    <image width="128" height="128" source="Icons/wine_bottle.png"/>
   </tile>
  </tileset>
+ <objectgroup id="8" name="Object Layer 2">
+  <object id="102" gid="80" x="2816" y="2716" width="256" height="192"/>
+  <object id="103" gid="80" x="3072" y="2716" width="256" height="192"/>
+  <object id="114" gid="80" x="2560" y="2716" width="256" height="192"/>
+  <object id="115" gid="80" x="2304" y="2716" width="256" height="192"/>
+  <object id="116" gid="80" x="2048" y="2716" width="256" height="192"/>
+  <object id="120" gid="80" x="1024" y="2716" width="256" height="192"/>
+  <object id="121" gid="80" x="768" y="2716" width="256" height="192"/>
+  <object id="122" gid="80" x="512" y="2716" width="256" height="192"/>
+  <object id="123" gid="80" x="256" y="2716" width="256" height="192"/>
+  <object id="124" gid="80" x="0" y="2716" width="256" height="192"/>
+  <object id="126" gid="80" x="0" y="388" width="256" height="192"/>
+  <object id="127" gid="80" x="0" y="766" width="256" height="192"/>
+  <object id="128" gid="80" x="0" y="1164" width="256" height="192"/>
+  <object id="129" gid="80" x="0" y="1552" width="256" height="192"/>
+  <object id="130" gid="80" x="0" y="1940" width="256" height="192"/>
+  <object id="131" gid="80" x="0" y="2328" width="256" height="192"/>
+  <object id="132" gid="80" x="3200" y="572" width="256" height="192"/>
+  <object id="133" gid="80" x="3200" y="970" width="256" height="192"/>
+  <object id="134" gid="80" x="3200" y="1358" width="256" height="192"/>
+  <object id="135" gid="80" x="3200" y="1746" width="256" height="192"/>
+  <object id="136" gid="80" x="3200" y="2134" width="256" height="192"/>
+  <object id="137" gid="80" x="3200" y="2522" width="256" height="192"/>
+  <object id="140" gid="79" x="1280" y="2716" width="256" height="192"/>
+  <object id="141" gid="79" x="1536" y="2716" width="256" height="192"/>
+  <object id="142" gid="79" x="1792" y="2716" width="256" height="192"/>
+ </objectgroup>
  <layer id="3" name="Tile Layer 1" width="13" height="13" offsetx="0" offsety="-130">
   <data encoding="csv">
 76,76,76,76,76,76,76,76,76,76,76,76,76,
-76,76,76,102,103,102,75,70,74,76,76,76,76,
-76,76,76,0,83,70,77,103,70,74,76,76,76,
-76,76,102,69,5,103,114,75,102,77,76,76,76,
-76,76,113,49,111,71,114,49,9,75,113,76,76,
-76,102,78,108,77,78,6,77,69,77,113,76,76,
-76,102,49,3,78,78,78,114,77,75,77,115,76,
-76,113,77,103,114,4,8,108,103,113,77,76,76,
-76,76,1,114,1,114,77,5,103,69,113,76,76,
-76,76,102,77,49,69,78,77,78,78,76,76,76,
-76,76,76,2,102,3,103,115,77,103,76,76,76,
-76,76,76,74,102,102,102,77,1,76,76,76,76,
+76,76,76,77,77,77,76,76,77,77,77,76,76,
+76,76,76,76,76,77,77,77,77,77,77,77,76,
+76,76,77,76,76,77,77,77,77,77,77,77,76,
+76,76,77,77,77,77,77,77,77,77,76,76,76,
+76,76,77,77,77,77,77,77,77,77,76,76,76,
+76,76,76,77,77,77,77,77,77,77,76,77,77,
+76,76,77,77,77,77,77,77,77,77,77,77,76,
+76,76,77,77,77,76,76,76,77,77,77,77,76,
+76,77,77,77,77,76,76,77,77,77,77,77,76,
+76,76,77,77,77,77,76,77,77,77,77,77,76,
+76,76,76,77,77,76,77,77,77,77,77,76,76,
 76,76,76,76,76,76,76,2147483724,2147483724,76,76,76,76
 </data>
  </layer>
  <layer id="4" name="Tile Layer 2" width="13" height="13" offsetx="0" offsety="-130">
   <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,76,76,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,76,103,0,0,226,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,100,0,0,0,0,0,0,
-0,0,0,7,0,0,9,0,0,0,0,0,0,
-0,0,0,0,75,270,286,244,0,0,0,0,0,
-0,75,0,225,0,0,0,288,135,0,0,0,0,
-0,0,0,0,9,0,0,0,294,224,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,108,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,76,0,0,0,
-0,0,0,0,0,0,76,76,76,0,0,0,0
+0,0,0,248,251,243,0,0,0,0,0,0,0,
+0,0,0,0,0,0,285,0,0,252,251,235,0,
+0,0,0,0,0,275,251,251,271,0,0,0,0,
+0,0,248,243,0,264,0,0,270,0,0,0,0,
+0,0,0,293,271,0,0,264,294,236,0,0,0,
+0,0,0,0,264,293,251,269,0,0,0,0,0,
+0,0,0,264,0,0,0,294,257,251,251,239,0,
+0,0,0,270,0,0,0,0,0,291,0,268,77,
+0,248,263,289,0,0,0,0,264,288,0,282,0,
+0,0,0,0,289,0,0,249,263,0,294,235,77,
+0,0,0,0,282,0,0,0,0,0,0,77,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="7" name="Object Layer 1">
-  <object id="42" gid="385" x="2367.57" y="1794.28" width="128" height="128"/>
-  <object id="43" gid="385" x="961.449" y="1582.68" width="128" height="128"/>
-  <object id="44" gid="385" x="1612.75" y="606.108" width="128" height="128"/>
-  <object id="45" gid="404" x="2233.23" y="1545.8" width="128" height="128">
-   <properties>
-    <property name="location_x" type="int" value="9"/>
-    <property name="location_y" type="int" value="7"/>
-   </properties>
-  </object>
-  <object id="46" gid="393" x="1845.99" y="1726.66" width="128" height="128"/>
-  <object id="47" gid="393" x="1721.6" y="1541.8" width="128" height="128"/>
-  <object id="48" gid="393" x="1717.77" y="1164.41" width="128" height="128"/>
-  <object id="49" gid="393" x="2120.78" y="948.583" width="128" height="128"/>
-  <object id="50" gid="393" x="1239" y="768.858" width="128" height="128"/>
-  <object id="51" gid="393" x="1092.87" y="1775.02" width="128" height="128"/>
-  <object id="52" gid="393" x="944.144" y="1145.16" width="128" height="128"/>
-  <object id="53" gid="380" x="2362.28" y="1324.88" width="128" height="128"/>
-  <object id="54" gid="403" x="2370.71" y="942.967" width="128" height="128"/>
-  <object id="55" gid="378" x="1983.18" y="740.776" width="128" height="128"/>
-  <object id="63" x="2387.97" y="1624.59" width="50" height="50">
-   <properties>
-    <property name="Type" value="PlayerStartPosition"/>
-   </properties>
-  </object>
-  <object id="66" x="1636.47" y="483.319" width="50" height="50">
-   <properties>
-    <property name="Type" value="PlayerStartPosition"/>
-   </properties>
-  </object>
-  <object id="67" x="996.962" y="1462.31" width="50" height="50">
-   <properties>
-    <property name="Type" value="PlayerStartPosition"/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup id="7" name="Object Layer 1"/>
 </map>

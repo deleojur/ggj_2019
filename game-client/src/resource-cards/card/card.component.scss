@@ -1,0 +1,35 @@
+.card {
+    overflow: hidden;
+    padding: 0;
+    border: none;
+    border-radius: .4rem;
+    border: solid 2px #d4d4d5;
+}
+
+.card-title-block {
+    font-size: 1.28em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-block {
+    font-size: 1em;
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-img-top {
+    display: block;
+    width: auto;
+    height: 109.5px;
+    margin: 25px auto 25px auto;
+}
+
+.card-line-horizontal {
+    width: 80%;
+    margin-top: 0;
+    margin-right: auto;
+    margin-left: auto;
+    border: solid 1px #d4d4d5;
+}

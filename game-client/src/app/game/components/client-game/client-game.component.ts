@@ -67,7 +67,6 @@ export class ClientGameComponent implements Game
         {
             //get the hex and do something with it.
             const hex = this.gameService.grid.getHexAt(interactionEnd);
-            this.gameService.grid.renderHex(hex, this.color);
             this.gameService.selectHex(hex);
         }
     }

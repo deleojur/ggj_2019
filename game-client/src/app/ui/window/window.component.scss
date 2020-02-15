@@ -12,18 +12,18 @@
 {
     display:inline-block;
     position:relative;
-    margin-top: -75px;
+    margin-top: -50px;
 }
 
 .ui-container.animate-in
 {
-    transition: transform 0.8s cubic-bezier(.42, 0, .15, 1.4);
+    transition: transform 0.8s cubic-bezier(.42, 0, .15, 1.25);
     transform: translate(0, 0);
 }
 
 .ui-container.animate-out
 {
-    transition: transform .8s cubic-bezier(.85, -.42, .57, 1);
+    transition: transform .8s cubic-bezier(.85, -.25, .57, 1);
     transform: translate(0, -100%);
 }
 
@@ -34,14 +34,21 @@
     max-height: 95vh;
 }
 
+.banner
+{
+    position: absolute;
+    top: 21%;
+    left: 0;
+}
+
 .close-btn
 {
     position: absolute;
     width: 20%;
-    max-width: 50px;
+    max-width: 35px;
     min-width: 25px;
-    left: 65%;
-    top: 28%;
+    left: 70%;
+    top: 25%;
 }
 
 .clickable-btn
@@ -49,4 +56,14 @@
     position: absolute;
     width: 65%;
     left: 20%;
+}
+
+.bannerText
+{
+    width: 100%;
+    top: 42%;
+    font-family: FenwickWood;
+    color: beige;
+    pointer-events: none;
+    position: absolute;
 }

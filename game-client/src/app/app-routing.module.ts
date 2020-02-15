@@ -10,6 +10,7 @@ import { ClientRoomComponent } from './room/client-room/client-room.component';
 import { HostRoomComponent } from './room/host-room/host-room.component';
 import { ClientGameComponent } from './game/components/client-game/client-game.component';
 import { HostGameComponent } from './game/components/host-game/host-game.component';
+import { CardComponent } from 'src/resource-cards/card/card.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'room', pathMatch: 'full' },
@@ -22,7 +23,8 @@ const routes: Routes = [
     [
         { path: 'client', component: ClientGameComponent },
         { path: 'host', component: HostGameComponent }
-    ] } /* canActivate: [ConnectionService] */
+    ] },
+    { path: 'card', component: CardComponent } /* canActivate: [ConnectionService] */
 ];
 
 @NgModule({
