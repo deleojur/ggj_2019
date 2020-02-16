@@ -58,8 +58,8 @@ select:focus
 .wrapper { overscroll-behavior: none }
 
 html, body {
-    //overflow-x: hidden;
-    //overflow-y: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
   }
 body { -webkit-user-select: none; margin: 10px; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
