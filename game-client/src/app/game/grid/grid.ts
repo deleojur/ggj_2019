@@ -28,7 +28,7 @@ export class GridManager
 {
     private gridFactory: GridFactory<Hex<Cell>>;
     private grid: Grid<Hex<Cell>>;
-    private tileWidth: number = 148;
+    private tileWidth: number = 147.75;
     private tileHeight: number = 129.5;
     private mapReader: MapReader;
 
@@ -75,8 +75,9 @@ export class GridManager
 
     public initLayers(): void
     {
+        this.initObjectLayer(this.mapReader.hexUnderLayer);
         this.initTileLayer();
-        this.initObjectLayer();
+        this.initObjectLayer(this.mapReader.icons);
     }
 
     private initTileLayer(): void
@@ -89,15 +90,15 @@ export class GridManager
             hex.sprites.forEach((sprite: Sprite) =>
             {
                 sprite.x = point.x;
-                sprite.y = point.y - 125;
+                sprite.y = point.y - 128;
                 this.viewport.addChild(sprite);
             });
         });
     }
 
-    private initObjectLayer(): void
+    private initObjectLayer(objects: Object[]): void
     {
-        const objects: Object[] = this.mapReader.icons;
+        console.log(objects);
         objects.forEach(object =>
         {
             const sprite: Sprite = object.sprite;
@@ -105,7 +106,8 @@ export class GridManager
             if (sprite)
             {
                 sprite.x = object.x;
-                sprite.y = object.y - 125;
+                sprite.y = object.y;
+                sprite.anchor.set(0, 1);
                 this.viewport.addChild(sprite);
             }
             if (object.properties)

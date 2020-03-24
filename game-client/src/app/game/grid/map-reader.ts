@@ -30,12 +30,18 @@ export class MapReader
 {
     private worldMap: any;
     private tileLayers: number[][] = [];
-    private objectLayer: Object[] = [];
+    private iconLayer: Object[] = [];
+    private hexArtLayer: Object[] = [];
     private worldTiles: Map<number, Tile> = new Map<number, Tile>();
 
     public get icons(): Object[]
     {
-        return this.objectLayer;
+        return this.iconLayer;
+    }
+
+    public get hexUnderLayer(): Object[]
+    {
+        return this.hexArtLayer;
     }
 
     constructor()
@@ -83,14 +89,22 @@ export class MapReader
                     uniqueTileIds.add(id);
                 });
             } else if (layer.type === 'objectgroup')
-            {
+            {                
                 layer.objects.forEach(obj =>
                 {
                     uniqueTileIds.add(obj.gid);
-                    this.objectLayer.push(obj);
+                    
+                    if (layer.name === 'Hex Under Layer')
+                    {
+                        this.hexArtLayer.push(obj);
+                    } else 
+                    {
+                        this.iconLayer.push(obj);
+                    }
                 });
             }
         });
+        
         return uniqueTileIds;
     }
 
@@ -112,7 +126,7 @@ export class MapReader
         });
     };
 
-    private mapGrid(grid: Grid<Hex<Cell>>): void
+    private mapTileLayers(grid: Grid<Hex<Cell>>)
     {
         for (let i: number = 0; i < this.tileLayers.length; i++)
         {
@@ -134,8 +148,11 @@ export class MapReader
                 }
             }
         }
+    }
 
-        this.objectLayer.forEach(obj =>
+    private mapObjectLayers(layer: Object[]): void
+    {
+        layer.forEach(obj =>
         {
             if (obj.properties)
             {
@@ -149,5 +166,12 @@ export class MapReader
                 obj.sprite = sprite;
             }
         });
+    }
+
+    private mapGrid(grid: Grid<Hex<Cell>>): void
+    {
+        this.mapTileLayers(grid);
+        this.mapObjectLayers(this.iconLayer);
+        this.mapObjectLayers(this.hexArtLayer);
     }
 }

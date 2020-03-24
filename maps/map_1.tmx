@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.5" orientation="hexagonal" renderorder="right-up" width="13" height="13" tilewidth="256" tileheight="388" infinite="0" hexsidelength="0" staggeraxis="y" staggerindex="odd" nextlayerid="9" nextobjectid="143">
+<map version="1.2" tiledversion="1.2.5" orientation="hexagonal" renderorder="right-up" width="13" height="13" tilewidth="256" tileheight="388" infinite="0" hexsidelength="0" staggeraxis="y" staggerindex="odd" nextlayerid="9" nextobjectid="146">
  <tileset firstgid="1" name="Coldlands" tilewidth="256" tileheight="384" tilecount="67" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
@@ -1080,7 +1080,7 @@
    <image width="128" height="128" source="Icons/wine_bottle.png"/>
   </tile>
  </tileset>
- <objectgroup id="8" name="Object Layer 2">
+ <objectgroup id="8" name="Hex Under Layer">
   <object id="102" gid="80" x="2816" y="2716" width="256" height="192"/>
   <object id="103" gid="80" x="3072" y="2716" width="256" height="192"/>
   <object id="114" gid="80" x="2560" y="2716" width="256" height="192"/>
@@ -1092,7 +1092,7 @@
   <object id="123" gid="80" x="256" y="2716" width="256" height="192"/>
   <object id="124" gid="80" x="0" y="2716" width="256" height="192"/>
   <object id="126" gid="80" x="0" y="388" width="256" height="192"/>
-  <object id="127" gid="80" x="0" y="766" width="256" height="192"/>
+  <object id="127" gid="80" x="0" y="776" width="256" height="192"/>
   <object id="128" gid="80" x="0" y="1164" width="256" height="192"/>
   <object id="129" gid="80" x="0" y="1552" width="256" height="192"/>
   <object id="130" gid="80" x="0" y="1940" width="256" height="192"/>
@@ -1121,7 +1121,7 @@
 76,77,77,77,77,76,76,77,77,77,77,77,76,
 76,76,77,77,77,77,76,77,77,77,77,77,76,
 76,76,76,77,77,76,77,77,77,77,77,76,76,
-76,76,76,76,76,76,76,2147483724,2147483724,76,76,76,76
+76,76,76,76,76,77,77,77,76,76,76,76,76
 </data>
  </layer>
  <layer id="4" name="Tile Layer 2" width="13" height="13" offsetx="0" offsety="-130">
@@ -1141,5 +1141,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="7" name="Object Layer 1"/>
+ <objectgroup id="7" name="Icon Layer">
+  <object id="145" gid="229" x="1636.19" y="1212.68" width="256" height="384"/>
+ </objectgroup>
 </map>

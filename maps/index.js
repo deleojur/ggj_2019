@@ -11,11 +11,9 @@ const worldMap = JSON.parse(fs.readFileSync(fileName));
 const tileIds = parseLayers();
 const tiles = parseTilesets(tileIds);
 tiles.forEach(tile =>
-{    
-    fs.copySync(path.resolve(__dirname, tile.imageUrl), path.join(__dirname, '../game-host/src/assets', tile.imageUrl));
+{
     fs.copySync(path.resolve(__dirname, tile.imageUrl), path.join(__dirname, '../game-client/src/assets', tile.imageUrl));
 });
-fs.copySync(path.resolve(__dirname, fileName), path.join(__dirname, '../game-host/src/assets', fileName));
 fs.copySync(path.resolve(__dirname, fileName), path.join(__dirname, '../game-client/src/assets', fileName));
 
 function parseLayers()
