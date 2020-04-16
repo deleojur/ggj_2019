@@ -1,17 +1,20 @@
-<div class="ui-container text-center"
-    [ngClass]="{'animate-in': showWindow, 'animate-out': !showWindow}">
+<div class="close-ui-window ui-container text-center"
+    [ngClass]="{'animate-in': showWindow, 'animate-out': !showWindow}"
+    (click)="closeWindow($event)">
+
+<div style="width: 100%;">
     <div class="ui-parent">
         <img class="banner" src="assets/UI/window/banner_red1.svg">
-        <h1 class="bannerText uiText">Doe iets</h1>
+        <h1 class="bannerText uiText">Construct</h1>
+
         <img class="window-img" src="assets/UI/window/side_frame2.svg">
-        <img class="close-btn" src="assets/UI/window/btn_n_cancel.svg"
+        <img class="close-ui-window close-btn" src="assets/UI/window/btn_n_cancel.svg"
             (click)="closeWindow()">
-        <div *ngFor="let button of buttons, let i = index">
-            <app-ui-button 
-                [buttonStyle]="getButtonStyle(i)"
-                [buttonText]="button"
-                [textStyle]="getTextStyle(i)">
-            </app-ui-button>
-        </div>
+		
+        <mat-card class="scrollable-menu scrollbar-ripe-malinka">
+            <mat-card-content *ngFor="let button of buttons, let i = index">
+				<app-menu-item></app-menu-item>
+            </mat-card-content>
+        </mat-card>
     </div>
 </div>

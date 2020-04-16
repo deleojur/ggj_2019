@@ -15,6 +15,10 @@ import { HostGameComponent } from './game/components/host-game/host-game.compone
 import { ButtonComponent } from './ui/button/button.component';
 import { WindowComponent } from './ui/window/window.component';
 import { CardComponent } from '../resource-cards/card/card.component';
+import { MenuItemComponent } from './ui/menu-item/menu-item.component';
+
+import { MatCardModule } from '@angular/material/card';
+import { ResourceComponent } from './ui/resource/resource.component';
 
 @NgModule({
   declarations: [
@@ -27,12 +31,15 @@ import { CardComponent } from '../resource-cards/card/card.component';
     HostGameComponent,
     ButtonComponent,
     WindowComponent,
-    CardComponent
+    CardComponent,
+    MenuItemComponent,
+    ResourceComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

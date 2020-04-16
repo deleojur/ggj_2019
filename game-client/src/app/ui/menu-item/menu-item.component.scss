@@ -1,0 +1,100 @@
+.foreground
+{
+	margin: -25% 0 20% 0;
+}
+
+.resourceWrapper
+{
+	margin-top: 20%;
+	margin-left: 5px;
+	text-align: center;
+}
+
+.iconHolder
+{
+	position: absolute;
+	width: 150%;
+	left: 10%;
+}
+
+.icon
+{
+	position: absolute;
+    width: 100%;
+   	left: 40%;
+	top: -15%;
+}
+
+.title-background
+{
+	position: absolute;
+    width: 365%;
+    left: 75%;
+	margin-top: 13%;
+}
+
+.title
+{
+	position: absolute;
+    font-family: FenwickWood;
+    color: #0062cc;
+    left: 75%;
+    width: 365%;
+    text-align: center;
+    pointer-events: none;
+}
+
+.title-responsive
+{
+	font-size: 35px;
+	top: 10%;
+}
+
+@media screen and (max-width: 550px) and (min-width: 451px)
+{
+	.title-responsive
+	{
+		font-size: 32px;
+		top: 15%;
+	}
+}
+
+@media screen and (max-width: 450px) and (min-width: 401px)
+{
+	.title-responsive
+	{
+		font-size: 28px;
+		top: 12%;
+	}
+}
+
+@media screen and (max-width: 400px) and (min-width: 361px)
+{
+	.title-responsive
+	{
+		font-size: 1.7rem;
+		top: 10%;
+	}
+}
+
+@media screen and (max-width: 360px) and (min-width: 331px)
+{
+	.title-responsive
+	{
+		font-size: 20px;
+    	top: 15%;
+	}
+}
+
+@media screen and (max-width: 330px)
+{
+	.title-responsive
+	{
+		font-size: 15px;
+		top: 18%;
+	}
+}
+
+//clans -> mensen die samen een alliance vormen.
+//zowel online als fysiek bij elkaar.
+//wereldwonderen bouwen.

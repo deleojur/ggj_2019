@@ -1,0 +1,81 @@
+.resourceHolder
+{
+	position: absolute;
+	width: 100%;
+}
+
+.resourceIcon
+{
+	margin-left: 10%;
+    position: absolute;
+	width: 82%;
+}
+
+.amountHolder-background
+{
+	position: absolute;
+    margin: 72% 0 0 72%;
+    width: 40%;
+    z-index: 10;
+}
+
+.amountHolder
+{
+	position: absolute;
+    margin: 64% 0 0 65%;
+    width: 53%;
+    z-index: 11;
+}
+
+.amount
+{
+	font-family: FenwickWood;
+    color: red;
+    position: absolute;
+    pointer-events: none;
+    width: 33%;
+    text-align: center;
+	z-index: 12;
+}
+
+.amount-responsive
+{
+	font-size: 24px;
+    margin: 68% 0 0 95%;
+}
+
+@media screen and (max-width: 450px) and (min-width: 401px)
+{
+	.amount-responsive
+	{
+		font-size: 20px;
+		margin: 58% 0 0 103%;
+	}
+}
+
+@media screen and (max-width: 400px) and (min-width: 361px)
+{
+	.amount-responsive
+	{
+		font-size: 20px;
+    	margin: 66% 0 0 91%;
+	}
+}
+
+@media screen and (max-width: 360px) and (min-width: 331px)
+{
+	.amount-responsive
+	{
+		font-size: 15px;
+		margin: 70% 0 0 85%;
+	}
+}
+
+@media screen and (max-width: 330px)
+{
+	.amount-responsive
+	{
+		font-size: 13px;
+		margin: 70% 0 0 78%;
+	}
+}

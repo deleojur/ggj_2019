@@ -9,39 +9,15 @@ import { Hex } from 'honeycomb-grid';
   templateUrl: './window.component.html',
   styleUrls: ['./window.component.scss']
 })
-export class WindowComponent implements OnInit 
+export class WindowComponent implements OnInit
 {
-    buttons: string[] = ['Buy', 'Harvest', 'Invade'];
-    showWindow: boolean;
+    buttons: string[] = [''];
+    showWindow: boolean = true;
     constructor(private gameService: GameService) { }
 
-    ngOnInit() 
+    ngOnInit()
     {
-        this.gameService.onCellSelected.subscribe((hex: Hex<Cell>) => this.hexSelected(hex));
-    }
-
-    private getStyle(top: number): any
-    {
-        return {
-            width: '65%',
-            left: '20%', 
-            position: 'absolute',
-            top: top + '%'
-        };
-    }
-
-    getButtonStyle(index: number): any
-    {
-        return this.getStyle(38 + index * 16);
-    }
-
-    getTextStyle(index: number): any
-    {
-        const textStyle = this.getStyle(41 + index * 16);
-        textStyle.fontFamily = 'FenwickWood';
-        textStyle.color = 'orange';
-        textStyle.pointerEvents = 'none';
-        return textStyle;
+		this.gameService.onCellSelected.subscribe((hex: Hex<Cell>) => this.hexSelected(hex));
     }
 
     hexSelected(hex: Hex<Cell>): void
@@ -49,8 +25,12 @@ export class WindowComponent implements OnInit
         this.showWindow = true;
     }
 
-    closeWindow(): void
+    closeWindow($event): void
     {
-        this.showWindow = false;
+        const closeWindow = $event.target.classList.contains('close-ui-window');
+        if (closeWindow)
+        {
+            this.showWindow = false;
+        }
     }
 }
