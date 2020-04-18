@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { resource } from './buyableItem-model';
-import { merchandiseService } from 'src/services/merchandise.serevice';
+import { Component, OnInit, Input } from '@angular/core';
+import { resource, BuyableItemModel } from './buyableItem-model';
+import { merchandiseService } from 'src/services/merchandise.service';
 
 @Component({
   selector: 'app-menu-item',
@@ -9,11 +9,15 @@ import { merchandiseService } from 'src/services/merchandise.serevice';
 })
 export class MenuItemComponent implements OnInit
 {
-	merchandise: string[] = ['town', 'village', 'farm'];
-	constructor() { }
+	@Input()
+	public menuItemName;
+
+	item: BuyableItemModel;
+
+	constructor(private merchandiseService: merchandiseService) { }
 
     ngOnInit() 
     {
-
+		this.item = this.merchandiseService.merchandise(this.menuItemName);
     }
 }

@@ -1,6 +1,6 @@
 import { ClientUtilsService } from './../../../../services/utils/client-utils.service';
 import { GridManager } from './../../grid/grid';
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { GameService } from 'src/services/game.service';
 import { Vector } from 'vector2d';
 import { Game } from '../game.component';
@@ -11,22 +11,24 @@ import { PositionData } from '../../states/request-data';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from '../../grid/grid';
 import { ViewportManager } from '../../render/viewport';
+import { WindowComponent } from 'src/app/ui/window/window.component';
+import { WindowService, WindowType, WindowItem } from 'src/services/window.service';
 
 @Component({
   selector: 'app-client-game',
-  template: '',
-  styles: []
+  template: ''
 })
-export class ClientGameComponent implements Game
+export class ClientGameComponent implements Game, AfterViewInit
 {
     private grid: GridManager;
     private viewport: ViewportManager;
     private interactionStart: Vector;
-    private color: number;
+	private color: number;
 
     constructor(
         private stateHandlerService: StateHandlerService,
-        private clientUtilsService: ClientUtilsService,
+		private clientUtilsService: ClientUtilsService,
+		private windowService: WindowService,
         private gameService: GameService) 
         {
             
@@ -41,8 +43,13 @@ export class ClientGameComponent implements Game
             const hex: Hex<Cell> = this.grid.getHex(positionData.x, positionData.y);
             const color: number = this.clientUtilsService.colorRGB;
             this.grid.renderHex(hex, color);
-        });
-    }
+		});
+	}
+	
+	ngAfterViewInit()
+	{
+		
+	}
 
     private attachEventListeners(container: ElementRef): void
     {
@@ -67,7 +74,9 @@ export class ClientGameComponent implements Game
         {
             //get the hex and do something with it.
             const hex = this.gameService.grid.getHexAt(interactionEnd);
-            this.gameService.selectHex(hex);
+			this.gameService.selectHex(hex);
+			const window: WindowItem = this.windowService.openWindow(WindowType.ItemOverview);
+
         }
     }
 

@@ -9,6 +9,8 @@ import { state_clientConnection } from './../app/game/states/host-states/state_c
 import { state_startGame } from 'src/app/game/states/state_start-game';
 import { state_requestJoinRoom } from 'src/app/game/states/client-states/state_request-join-room';
 import { state_playerStartingPositions } from 'src/app/game/states/turn-state-handling/state_player-starting-positions';
+import { WindowService, WindowType, WindowItem } from './window.service';
+import { ItemOverviewWindowComponent } from 'src/app/ui/window/item-overview-window/item-overview-window.component';
 
 export interface RequestState
 {
@@ -23,11 +25,14 @@ export class StateHandlerService
     private states: Map<RequestState, PrimaryState<RequestData>>;
     private currentStates: PrimaryState<RequestData>[];
 
-    constructor(private connectionService: ConnectionService,
-        private gameService: GameService)
+    constructor(
+		private connectionService: ConnectionService,
+		private gameService: GameService,
+		private windowService: WindowService)
     {
         this.states = new Map<RequestState, PrimaryState<RequestData>>();
-        this.registerStates();
+		this.registerStates();
+		this.windowService.subscribeAsWindow(WindowType.ItemOverview, new WindowItem(ItemOverviewWindowComponent));
     }
 
     private registerStates(): void

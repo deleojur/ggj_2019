@@ -38,7 +38,7 @@ export class resource
 	}
 }
 
-export class buyableItemModel
+export class BuyableItemModel
 {
 	constructor(private name: string, private description: string, private resources: resource[])
 	{

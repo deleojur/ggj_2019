@@ -1,0 +1,65 @@
+import { Type, Injectable } from '@angular/core';
+import { WindowComponent } from 'src/app/ui/window/window.component';
+
+export class WindowItem
+{
+	constructor (public component: Type<any>) {	}
+}
+
+export enum WindowType
+{
+	ItemOverview,
+	ItemDetail,
+	Settings
+}
+
+@Injectable({
+  	providedIn: 'root'
+})
+export class WindowService
+{
+	private _windowComponent: WindowComponent;
+	private _currentWindow: WindowItem = null;
+	private windowTypes: Map<WindowType, WindowItem>;
+
+	constructor()
+	{
+		this.windowTypes = new Map<WindowType, WindowItem>();
+	}
+
+	public set windowComponent(val: WindowComponent)
+	{
+		this._windowComponent = val;
+	}
+
+	public subscribeAsWindow(windowType: WindowType, window: WindowItem)
+	{
+		this.windowTypes.set(windowType, window);
+	}
+
+	/**
+	 * Closes the currently active window, if one is open.
+	 */
+	public closeWindow()
+	{
+		if (this._currentWindow !== null)
+		{
+			this._windowComponent.closeWindow();
+
+			this._currentWindow = null;
+		}
+	}
+
+	public openWindow(windowType: WindowType): WindowItem
+	{
+		this._currentWindow = this.getWindow(windowType);
+		this._windowComponent.openWindow(this._currentWindow);
+		return this._currentWindow;
+	}
+
+	public getWindow(windowType: WindowType): WindowItem
+	{
+		return this.windowTypes.get(windowType);
+		//return new WindowItem(ItemWindowComponent);
+	}
+}

@@ -1,20 +1,18 @@
 <div class="close-ui-window ui-container text-center"
-    [ngClass]="{'animate-in': showWindow, 'animate-out': !showWindow}"
-    (click)="closeWindow($event)">
+	[ngClass]="{'animate-in': showWindow, 'animate-out': !showWindow}"
+	(transitionend)="transitionEnd($event)"
+    (click)="closeWindowEvent($event)">
 
 <div style="width: 100%;">
     <div class="ui-parent">
-        <img class="banner" src="assets/UI/window/banner_red1.svg">
-        <h1 class="bannerText uiText">Construct</h1>
+		<img class="banner" src="assets/UI/window/banner_red1.svg">
+		<!--this text should be dynamic-->
+		<h1 class="bannerText uiText">Construct</h1>
 
         <img class="window-img" src="assets/UI/window/side_frame2.svg">
         <img class="close-ui-window close-btn" src="assets/UI/window/btn_n_cancel.svg"
-            (click)="closeWindow()">
-		
-        <mat-card class="scrollable-menu scrollbar-ripe-malinka">
-            <mat-card-content *ngFor="let button of buttons, let i = index">
-				<app-menu-item></app-menu-item>
-            </mat-card-content>
-        </mat-card>
+			(click)="closeWindowEvent()">
+			
+		<ng-template window-host></ng-template>
     </div>
 </div>

@@ -3,14 +3,14 @@
 	<div class="row foreground">
 		<div class="col-2">
 			<img class="iconHolder" src="assets/UI/window/grid4L.svg">
-			<img class="icon" src="assets/Terrain_Medieval/Decor/villageSmall03.png">
+			<img class="icon" src={{item.$icon}}>
 		</div>
 		<div class="col-2">
 			<img class="title-background" src="assets/UI/window/banner2.svg">
-			<h1 class="title title-responsive">City</h1>
+			<h1 class="title title-responsive">{{item.$name}}</h1>
 		</div>
-		<div class="col-2 resourceWrapper" *ngFor="let merch of merchandise">
-			<app-resource></app-resource>
+		<div class="col-2 resourceWrapper" *ngFor="let resource of item.$resources">
+			<app-resource [(resource)]="resource"></app-resource>
 		</div>
 	</div>
 </div>

@@ -19,29 +19,40 @@ import { MenuItemComponent } from './ui/menu-item/menu-item.component';
 
 import { MatCardModule } from '@angular/material/card';
 import { ResourceComponent } from './ui/resource/resource.component';
+import { WindowDirective } from './ui/window/window-directive';
+import { ItemDetailWindowComponent } from './ui/window/item-detail-window/item-detail-window.component';
+import { ItemOverviewWindowComponent } from './ui/window/item-overview-window/item-overview-window.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    GameComponent,
-    RoomComponent,
-    HostRoomComponent,
-    ClientRoomComponent,
-    ClientGameComponent,
-    HostGameComponent,
-    ButtonComponent,
-    WindowComponent,
-    CardComponent,
-    MenuItemComponent,
-    ResourceComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    MatCardModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		WindowDirective,
+
+		AppComponent,
+		GameComponent,
+		RoomComponent,
+		HostRoomComponent,
+		ClientRoomComponent,
+		ClientGameComponent,
+		HostGameComponent,
+		ButtonComponent,
+		WindowComponent,
+		CardComponent,
+		MenuItemComponent,
+		ResourceComponent,
+		ItemOverviewWindowComponent,
+		ItemDetailWindowComponent
+	],
+  	entryComponents: [
+		ItemOverviewWindowComponent,
+		ItemDetailWindowComponent
+  	],
+  	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		FormsModule,
+		MatCardModule
+  	],
+  	providers: [],
+  	bootstrap: [AppComponent]
 })
 export class AppModule { }

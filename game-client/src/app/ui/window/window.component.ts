@@ -1,36 +1,57 @@
-import { Cell } from './../../game/grid/grid';
-import { Component, OnInit } from '@angular/core';
-import { GameService } from 'src/services/game.service';
-import { Subject } from 'rxjs';
-import { Hex } from 'honeycomb-grid';
+import { Component, OnInit, ComponentFactoryResolver, ComponentFactory, ViewChild, AfterViewInit } from '@angular/core';
+import { WindowDirective } from './window-directive';
+import { WindowItem } from 'src/services/window.service';
 
 @Component({
   selector: 'app-ui-window',
   templateUrl: './window.component.html',
   styleUrls: ['./window.component.scss']
 })
-export class WindowComponent implements OnInit
+export class WindowComponent implements OnInit, AfterViewInit
 {
-    buttons: string[] = [''];
-    showWindow: boolean = true;
-    constructor(private gameService: GameService) { }
+	showWindow: boolean = false;
+	currentWindow: WindowItem = null;
+
+	@ViewChild(WindowDirective, {static: true}) windowHost: WindowDirective;
+
+    constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
     ngOnInit()
     {
-		this.gameService.onCellSelected.subscribe((hex: Hex<Cell>) => this.hexSelected(hex));
-    }
+		
+	}
 
-    hexSelected(hex: Hex<Cell>): void
-    {
-        this.showWindow = true;
-    }
+	ngAfterViewInit(): void
+	{
+		
+	}
 
-    closeWindow($event): void
+	openWindow(windowItem: WindowItem): void
+	{
+		const componentFactory: ComponentFactory<any> = this.componentFactoryResolver.resolveComponentFactory(windowItem.component);
+		const viewContainerRef = this.windowHost.viewContainerRef;
+		viewContainerRef.clear();
+
+		const componentRef = viewContainerRef.createComponent(componentFactory);
+		this.showWindow = true;
+	}
+
+	transitionEnd(e: Event): void
+	{
+		
+	}
+
+	public closeWindow(): void
+	{
+		this.showWindow = false;
+	}
+
+    closeWindowEvent($event): void
     {
         const closeWindow = $event.target.classList.contains('close-ui-window');
         if (closeWindow)
         {
-            this.showWindow = false;
+            this.closeWindow();
         }
     }
 }

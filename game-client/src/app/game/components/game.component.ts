@@ -1,5 +1,7 @@
 import { GameService } from '../../../services/game.service';
-import { Component, AfterViewInit, ViewChild, ElementRef, HostListener, Output, EventEmitter } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { WindowComponent } from 'src/app/ui/window/window.component';
+import { WindowService } from 'src/services/window.service';
 
 export interface Game
 {
@@ -13,18 +15,18 @@ export interface Game
 }
 
 @Component({
-  selector: 'app-game',
-  templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss']
+	selector: 'app-game',
+  	templateUrl: './game.component.html',
+ 	styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements AfterViewInit
 {
     game: Game;
 
     @ViewChild('pixiContainer', {static: false}) pixiContainer: ElementRef;
-    @ViewChild('uiContainer', {static: false}) uiContainer: ElementRef;
+    @ViewChild(WindowComponent, {static: true}) windowContainer: WindowComponent;
 
-    constructor(private gameService: GameService) 
+    constructor(private gameService: GameService, private windowService: WindowService) 
     {
     }
     
@@ -36,7 +38,9 @@ export class GameComponent implements AfterViewInit
             this.game.onMapLoaded();
             
             return this.pixiContainer.nativeElement.appendChild(canvas);
-        });
+		});
+
+		this.windowService.windowComponent = this.windowContainer;
     }
 
     @HostListener('window:resize', ['$event'])

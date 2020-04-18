@@ -97,8 +97,7 @@ export class GridManager
     }
 
     private initObjectLayer(objects: Object[]): void
-    {
-        console.log(objects);
+    {        
         objects.forEach(object =>
         {
             const sprite: Sprite = object.sprite;
