@@ -1,5 +1,5 @@
-<mat-card class="scrollable-menu scrollbar-ripe-malinka">
-	<mat-card-content *ngFor="let merch of merchandise, let i = index">
+<div class="scrollable-menu scrollbar-ripe-malinka">
+	<div *ngFor="let merch of merchandise, let i = index">
 		<app-menu-item (click)="clickItem(merch)" menuItemName="{{merch}}"></app-menu-item>
-	</mat-card-content>
-</mat-card>
+	</div>
+</div>

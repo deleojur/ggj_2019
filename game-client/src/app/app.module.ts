@@ -17,7 +17,6 @@ import { WindowComponent } from './ui/window/window.component';
 import { CardComponent } from '../resource-cards/card/card.component';
 import { MenuItemComponent } from './ui/menu-item/menu-item.component';
 
-import { MatCardModule } from '@angular/material/card';
 import { ResourceComponent } from './ui/resource/resource.component';
 import { WindowDirective } from './ui/window/window-directive';
 import { ItemDetailWindowComponent } from './ui/window/item-detail-window/item-detail-window.component';
@@ -49,8 +48,7 @@ import { ItemOverviewWindowComponent } from './ui/window/item-overview-window/it
   	imports: [
 		BrowserModule,
 		AppRoutingModule,
-		FormsModule,
-		MatCardModule
+		FormsModule
   	],
   	providers: [],
   	bootstrap: [AppComponent]
