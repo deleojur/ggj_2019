@@ -7,11 +7,11 @@ import { GameService } from 'src/services/game.service';
 @Component({
   selector: 'app-item-window',
   templateUrl: './item-overview-window.component.html',
-  styleUrls: ['./item-overview-window.component.scss']
+  styleUrls: ['./item-overview-window.component.scss', '../window.component.scss']
 })
 export class ItemOverviewWindowComponent implements OnInit
 {
-	merchandise: string[] = ['town', 'village'];
+	merchandise: string[] = ['town', 'village', 'city'];
 
   	constructor(
 		private merchandiseService: merchandiseService,
@@ -26,7 +26,10 @@ export class ItemOverviewWindowComponent implements OnInit
 	  
 	clickItem(item: string)
 	{
-		const merchandise: BuyableItemModel = this.merchandiseService.merchandise(item);
-		this.windowService.closeWindow();
+		const merchandise: BuyableItemModel = this.merchandiseService.getMerchandise(item);
+		this.windowService.closeWindow(() =>
+		{
+			return this.windowService.openWindow(WindowType.ItemDetail, { name: merchandise.$name, data: merchandise });
+		});
 	}
 }

@@ -1,7 +1,8 @@
 import { GameService } from '../../../services/game.service';
 import { Component, AfterViewInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { WindowComponent } from 'src/app/ui/window/window.component';
-import { WindowService } from 'src/services/window.service';
+import { WindowService, WindowType } from 'src/services/window.service';
+import { merchandiseService as MerchandiseService } from 'src/services/merchandise.service';
 
 export interface Game
 {
@@ -26,7 +27,7 @@ export class GameComponent implements AfterViewInit
     @ViewChild('pixiContainer', {static: false}) pixiContainer: ElementRef;
     @ViewChild(WindowComponent, {static: true}) windowContainer: WindowComponent;
 
-    constructor(private gameService: GameService, private windowService: WindowService) 
+    constructor(private gameService: GameService, private windowService: WindowService, private merch: MerchandiseService) 
     {
     }
     
@@ -41,6 +42,7 @@ export class GameComponent implements AfterViewInit
 		});
 
 		this.windowService.windowComponent = this.windowContainer;
+		this.windowService.openWindow(WindowType.ItemDetail, { name: 'Build', data : this.merch.getMerchandise('town') });
     }
 
     @HostListener('window:resize', ['$event'])

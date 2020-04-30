@@ -15,7 +15,7 @@ export class resource
 		{
 			case ResourceType.Food:
 			default:
-				src = 'food.png';
+				src = 'wheat.png';
 				break;
 			case ResourceType.Gold:
 				src = 'gold.png';

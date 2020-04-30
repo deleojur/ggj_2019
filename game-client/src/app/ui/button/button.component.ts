@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, ɵCompiler_compileModuleSync__POST_R3__ } from '@angular/core';
 
 @Component({
   selector: 'app-ui-button',
@@ -7,13 +7,12 @@ import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '
 })
 export class ButtonComponent implements OnInit, AfterViewInit
 {
-    @Input() buttonStyle: any;
-    currentTextStyle: any;
+	@Input() text: string;
 
-    @Input() textStyle: any;
-    @Input() buttonText: string;
     @ViewChild('button', {static: false}) buttonimg: ElementRef;
-    private buttonElement: any;
+	private buttonElement: any;
+	
+	private isDragging: boolean = false;
 
     constructor() 
     {
@@ -22,23 +21,21 @@ export class ButtonComponent implements OnInit, AfterViewInit
 
     ngOnInit() 
     {
-        this.currentTextStyle = this.textStyle;
+        
     }
 
     ngAfterViewInit()
     {
         this.buttonElement = this.buttonimg.nativeElement;
-    }
+	}
 
     touchstart(): void
     {
-        this.buttonElement.src = 'assets/UI/window/btn_brown_hover.svg';
-        this.currentTextStyle.fontSize = '200%';
-    }
+		this.buttonElement.src = 'assets/UI/window/btn_brown_hover.svg';
+	}
 
     touchend(): void
     {
-        this.buttonElement.src = 'assets/UI/window/btn_brown_normal.svg';
-        this.currentTextStyle.fontSize = '250%';
+		this.buttonElement.src = 'assets/UI/window/btn_brown_normal.svg';
     }
 }

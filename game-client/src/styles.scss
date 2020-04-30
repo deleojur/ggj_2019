@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.css';
-@import '~@angular/material/theming';
 @import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC');
 
 .rotate-90
@@ -13,18 +12,17 @@
 }
 
 @font-face {
-    font-family: BreatheFire;
-    src: url("./assets/fonts/BreatheFire.otf") format("opentype");
+	font-family: Zolof;
+	src: url("./assets/fonts/Zolofn_.ttf") format('truetype');
+	font-weight: normal;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: FenwickWood;
-    src: url("./assets/fonts/FenwickWoodtype.ttf") format('truetype')
-}
-
-.font-fenwick_wood
-{
-    font-family: fenwickWood;
+	font-family: Zolof;
+	src: url("./assets/fonts/Zolofbi_.ttf") format('truetype');
+	font-weight: bold;
+	font-style: normal;
 }
 
 .btn-parent-small

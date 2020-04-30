@@ -18,6 +18,6 @@ export class MenuItemComponent implements OnInit
 
     ngOnInit() 
     {
-		this.item = this.merchandiseService.merchandise(this.menuItemName);
+		this.item = this.merchandiseService.getMerchandise(this.menuItemName);
     }
 }

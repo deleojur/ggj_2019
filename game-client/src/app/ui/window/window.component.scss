@@ -16,21 +16,20 @@
 
 .ui-container.animate-in
 {
-    transition: transform 0.8s cubic-bezier(.42, 0, .15, 1.25);
+    transition: transform 0.6s cubic-bezier(.42, 0, .15, 1.25);
     transform: translate(0, 0);
 }
 
 .ui-container.animate-out
 {
-    transition: transform .8s cubic-bezier(.85, -.25, .57, 1);
+    transition: transform .6s cubic-bezier(.85, -.25, .57, 1);
     transform: translate(0, -100%);
 }
 
 .window-img
 {
-    width: 90vw;
-    max-width: 66vh;
-    max-height: 95vh;
+	width: 90vw;
+    max-width: 45vh;
 }
 
 .banner
@@ -40,13 +39,30 @@
     left: 0;
 }
 
-.close-btn
+.window-btn-bg
 {
     position: absolute;
     max-width: 45px;
     min-width: 25px;
-    left: 73%;
-    top: 23%;
+    left: 72%;
+    top: 20%;
+}
+
+.window-btn-fg
+{
+	position: absolute;
+    max-width: 8%;
+    top: 22%;
+    left: 74%;
+}
+
+.window-btn
+{
+    position: absolute;
+    max-width: 45px;
+    min-width: 25px;
+    left: 72%;
+    top: 20%;
 }
 
 .clickable-btn
@@ -55,15 +71,41 @@
     width: 70vw;
     left: 20%;
 }
-
+	
 .bannerText
 {
     width: 100%;
     top: 23%;
-    font-family: FenwickWood;
-    color: #0062cc;
-	-webkit-text-stroke-width: 1px;
-  	-webkit-text-stroke-color: beige;
+    font-family: Zolof;
+    color: rgb(253, 234, 182);
     pointer-events: none;
     position: absolute;
 }
+
+.scrollable-menu
+{
+    position: absolute;
+    width: 82%;
+    padding: 5% 0% 0 0;
+    left: 10%;
+    top: 35%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 51%;
+}
+
+/* Handle */
+.scrollbar-ripe-malinka::-webkit-scrollbar-track {
+  background-color: #F5F5F500;
+  border-radius: 10px; }
+
+  .scrollbar-ripe-malinka::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F500; }
+
+  .scrollbar-ripe-malinka::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  max-height: 12px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-image: -webkit-linear-gradient(330deg, #290001 0%, #581011 33%, #b94c3e 66%, #e07c5f 100%);
+  background-image: linear-gradient(120deg, #290001 0%, #581011 33%, #b94c3e 66%, #e07c5f 100%); }

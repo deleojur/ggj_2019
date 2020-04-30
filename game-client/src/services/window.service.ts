@@ -1,5 +1,5 @@
 import { Type, Injectable } from '@angular/core';
-import { WindowComponent } from 'src/app/ui/window/window.component';
+import { WindowComponent, WindowOptions } from 'src/app/ui/window/window.component';
 
 export class WindowItem
 {
@@ -32,7 +32,7 @@ export class WindowService
 		this._windowComponent = val;
 	}
 
-	public subscribeAsWindow(windowType: WindowType, window: WindowItem)
+	public subscribeWindow(windowType: WindowType, window: WindowItem)
 	{
 		this.windowTypes.set(windowType, window);
 	}
@@ -40,20 +40,20 @@ export class WindowService
 	/**
 	 * Closes the currently active window, if one is open.
 	 */
-	public closeWindow()
+	public closeWindow(transitionEnded?: () => void)
 	{
 		if (this._currentWindow !== null)
 		{
-			this._windowComponent.closeWindow();
+			this._windowComponent.closeWindow(transitionEnded);
 
 			this._currentWindow = null;
 		}
 	}
 
-	public openWindow(windowType: WindowType): WindowItem
+	public openWindow(windowType: WindowType, windowOptions: WindowOptions, transitionEnded?: () => void): WindowItem
 	{
 		this._currentWindow = this.getWindow(windowType);
-		this._windowComponent.openWindow(this._currentWindow);
+		this._windowComponent.openWindow(this._currentWindow, windowOptions, transitionEnded);
 		return this._currentWindow;
 	}
 

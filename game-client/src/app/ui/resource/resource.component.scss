@@ -1,14 +1,28 @@
-.resourceHolder
+.resource-bg
 {
 	position: absolute;
 	width: 100%;
 }
 
-.resourceIcon
+.resource-fg
 {
-	margin-left: 10%;
+	margin-left: 15%;
+	margin-top: -40%;
     position: absolute;
-	width: 82%;
+	width: 75%;
+}
+
+.resource-fg-number
+{
+	margin-left: 15%;
+	margin-top: 10%;
+    position: absolute;
+	width: 75%;
+}
+
+.resource-container :not( :first-child)
+{
+	padding-top: 50%;
 }
 
 .amountHolder-background
@@ -29,8 +43,9 @@
 
 .amount
 {
-	font-family: FenwickWood;
-    color: red;
+	font-family: Zolof;
+	font-weight: bold;
+    color: beige;
     position: absolute;
     pointer-events: none;
     width: 33%;
@@ -40,16 +55,17 @@
 
 .amount-responsive
 {
-	font-size: 24px;
-    margin: 68% 0 0 95%;
+	font-size: 100%;
+    margin: 75% 0 0 95%;
 }
 
+/*
 @media screen and (max-width: 450px) and (min-width: 401px)
 {
 	.amount-responsive
 	{
-		font-size: 20px;
-		margin: 58% 0 0 103%;
+		font-size: 24px;
+		margin: 69% 0 0 99%;
 	}
 }
 
@@ -78,4 +94,4 @@
 		font-size: 13px;
 		margin: 70% 0 0 78%;
 	}
-}
+}*/

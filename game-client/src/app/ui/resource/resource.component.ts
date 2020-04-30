@@ -12,6 +12,16 @@ export class ResourceComponent implements OnInit
 	@Input()
 	resource: resource;
 
+	get showAmountAsPlural() : boolean
+	{
+		return false;// this.resource.$amount < 4;
+	}
+
+	get amountAsArray() : Array<number>
+	{
+		return Array<number>(this.resource.$amount).fill(0);
+	}
+
 	ngOnInit()
 	{
 		

@@ -11,6 +11,7 @@ import { state_requestJoinRoom } from 'src/app/game/states/client-states/state_r
 import { state_playerStartingPositions } from 'src/app/game/states/turn-state-handling/state_player-starting-positions';
 import { WindowService, WindowType, WindowItem } from './window.service';
 import { ItemOverviewWindowComponent } from 'src/app/ui/window/item-overview-window/item-overview-window.component';
+import { ItemDetailWindowComponent } from 'src/app/ui/window/item-detail-window/item-detail-window.component';
 
 export interface RequestState
 {
@@ -32,7 +33,9 @@ export class StateHandlerService
     {
         this.states = new Map<RequestState, PrimaryState<RequestData>>();
 		this.registerStates();
-		this.windowService.subscribeAsWindow(WindowType.ItemOverview, new WindowItem(ItemOverviewWindowComponent));
+
+		this.windowService.subscribeWindow(WindowType.ItemOverview, new WindowItem(ItemOverviewWindowComponent));
+		this.windowService.subscribeWindow(WindowType.ItemDetail, new WindowItem(ItemDetailWindowComponent));
     }
 
     private registerStates(): void
