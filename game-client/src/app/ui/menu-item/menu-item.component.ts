@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { resource, BuyableItemModel } from './buyableItem-model';
-import { merchandiseService } from 'src/services/merchandise.service';
+import { BuyableItemModel } from './buyableItem-model';
+import { WindowService, WindowType } from 'src/services/window.service';
 
 @Component({
   selector: 'app-menu-item',
@@ -10,14 +10,25 @@ import { merchandiseService } from 'src/services/merchandise.service';
 export class MenuItemComponent implements OnInit
 {
 	@Input()
-	public menuItemName;
+	public menuItem: BuyableItemModel;
 
-	item: BuyableItemModel;
-
-	constructor(private merchandiseService: merchandiseService) { }
+	constructor(private windowService: WindowService) { }
 
     ngOnInit() 
     {
-		this.item = this.merchandiseService.getMerchandise(this.menuItemName);
-    }
+		
+	}
+	
+	displayDetailsPage()
+	{
+		this.windowService.closeWindow(() =>
+		{
+			return this.windowService.openWindow(WindowType.ItemDetail, { name: this.menuItem.$name, data: this.menuItem });
+		});
+	}
+
+	buyItem()
+	{
+		this.windowService.closeWindow();
+	}
 }

@@ -11,7 +11,7 @@ import { GameService } from 'src/services/game.service';
 })
 export class ItemOverviewWindowComponent implements OnInit
 {
-	merchandise: string[] = ['town', 'village', 'city'];
+	merchandise: BuyableItemModel[];
 
   	constructor(
 		private merchandiseService: merchandiseService,
@@ -21,15 +21,6 @@ export class ItemOverviewWindowComponent implements OnInit
 
 	ngOnInit() 
 	{
-		
-	}
-	  
-	clickItem(item: string)
-	{
-		const merchandise: BuyableItemModel = this.merchandiseService.getMerchandise(item);
-		this.windowService.closeWindow(() =>
-		{
-			return this.windowService.openWindow(WindowType.ItemDetail, { name: merchandise.$name, data: merchandise });
-		});
+		this.merchandise = this.merchandiseService.getPlaceholderItems();
 	}
 }

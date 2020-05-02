@@ -75,7 +75,6 @@ export class WindowComponent implements OnInit, AfterViewInit
 
     closeWindowEvent($event): void
     {
-		console.log('blaat');
         const closeWindow = $event.target.classList.contains('close-ui-window');
         if (closeWindow)
         {

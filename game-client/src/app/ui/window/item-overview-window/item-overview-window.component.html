@@ -1,5 +1,5 @@
-<div class="scrollable-menu scrollbar-ripe-malinka">
-	<div *ngFor="let merch of merchandise, let i = index">
-		<app-menu-item (click)="clickItem(merch)" menuItemName="{{merch}}"></app-menu-item>
+<div class="scrollable-menu scrollbar-ripe-malinka" style="padding:8% 0 0 0;">
+	<div *ngFor="let merch of merchandise">
+		<app-menu-item [menuItem]="merch"></app-menu-item>
 	</div>
 </div>

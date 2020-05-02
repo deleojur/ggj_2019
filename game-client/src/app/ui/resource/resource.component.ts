@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { resource, ResourceType } from '../menu-item/buyableItem-model';
+import { Resource, ResourceType } from '../menu-item/buyableItem-model';
 
 @Component
 ({
@@ -10,7 +10,20 @@ import { resource, ResourceType } from '../menu-item/buyableItem-model';
 export class ResourceComponent implements OnInit
 {
 	@Input()
-	resource: resource;
+	resource: Resource;
+
+	@Input()
+	upkeep: boolean = false;
+
+	get amountAsText(): string
+	{
+		let amountAsText: string = this.resource.$amount.toString();
+		if (this.upkeep && this.resource.$amount > 0)
+		{
+			amountAsText = '+' + amountAsText;
+		}
+		return amountAsText;
+	}
 
 	get showAmountAsPlural() : boolean
 	{
@@ -24,6 +37,5 @@ export class ResourceComponent implements OnInit
 
 	ngOnInit()
 	{
-		
   	}
 }

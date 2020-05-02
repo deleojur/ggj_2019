@@ -1,19 +1,18 @@
 <div class="close-ui-window ui-container text-center"
 	[ngClass]="{'animate-in': showWindow, 'animate-out': !showWindow}"
-	(transitionend)="transitionEnd($event)"
-	(click)="closeWindowEvent($event)">
+	(transitionend)="transitionEnd($event)">
 
 <div style="width: 100%;">
     <div class="ui-parent">
 		<img class="banner" src="assets/UI/window/banner_red1.svg">
-		<!--this text should be dynamic-->
 		<h4 class="bannerText uiText">{{windowName}}</h4>
 
 		<img class="window-img" src="assets/UI/window/side_frame1.svg">
-		<div class="close-ui-wonp" (click)="closeWindowEvent($event)">
+		<div #buttonContainer>
 			<img class="window-btn-bg" src="assets/UI/button/r_bg_red.png" >
 			<img class="window-btn-bg" src="assets/UI/button/ring_frame.PNG">
-			<img class="buy-btn-fg window-btn-fg" src="assets/UI/window/btn_d_cancel.png">
+			<img class="buy-btn-fg window-btn-fg close-ui-window" src="assets/UI/window/btn_d_cancel.png"
+			(click)="closeWindowEvent($event)">
 		</div>
 		<ng-template window-host></ng-template>
     </div>

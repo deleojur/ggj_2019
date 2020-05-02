@@ -16,11 +16,16 @@ export class ItemDetailWindowComponent implements OnInit
 	{
 	}
 
-	returnToItemOverviewPage()
+	returnToItemOverviewWindow()
 	{
 		this.windowService.closeWindow(() =>
 		{
 			return this.windowService.openWindow(WindowType.ItemOverview, { name:"Buy" });
 		});
+	}
+
+	closeItemDetailWindow()
+	{
+		this.windowService.closeWindow();
 	}
 }

@@ -5,7 +5,7 @@ export enum ResourceType
 	Population
 }
 
-export class resource
+export class Resource
 {
 	public get resourceIconSrc(): string
 	{
@@ -32,15 +32,23 @@ export class resource
 		return this.amount;
 	}
 
+	public get $resourceType(): ResourceType
+	{
+		return this.resourceType;
+	}
+
 	constructor(private resourceType: ResourceType, private amount: number)
 	{
-
 	}
 }
 
 export class BuyableItemModel
 {
-	constructor(private name: string, private description: string, private resources: resource[])
+	constructor(
+		private name: string,
+		private description: string,
+		private cost: Resource[],
+		private upkeep: Resource[] = [])
 	{
 	}
 
@@ -59,9 +67,11 @@ export class BuyableItemModel
 		switch (this.name.toLowerCase())
 		{
 			case 'town':
-				return '';
-			case 'village':
 				return 'villageSmall03.png';
+			case 'village':
+				return 'village02.png';
+			case 'city':
+				return 'walledCity.png';
 		}
 	}
 
@@ -70,8 +80,13 @@ export class BuyableItemModel
 		return 'assets/Terrain_Medieval/Decor/' + this.path;
 	}
 
-	public get $resources(): resource[]
+	public get $cost(): Resource[]
 	{
-		return this.resources;
+		return this.cost;
+	}
+
+	public get $upkeep(): Resource[]
+	{
+		return this.upkeep;
 	}
 }

@@ -1,15 +1,40 @@
 <div class="container-fluid">
 	<img src="assets/UI/window/wood_plank1.svg">
-	<div class="row foreground">
+	<div class="row top-container">
 		<div class="col-2">
 			<img class="iconHolder" src="assets/UI/window/grid4L.svg">
-			<img class="icon" src={{item.$icon}}>
+			<img class="icon" src={{menuItem.$icon}}>
 		</div>
 		<div class="col-2">
-			<img class="title-background" src="assets/UI/window/banner1.svg">
-			<h1 class="title title-responsive">{{item.$name}}</h1>
+			<img class="title-background" src="assets/UI/window/banner_small_red2.svg">
+			<h1 class="title title-responsive">{{menuItem.$name}}</h1>
 		</div>
-		<div class="col-2 resourceWrapper" *ngFor="let resource of item.$resources">
+	</div>
+
+	<div class="row middle-container">
+		<div class="col-2" style="padding-left: 5px" (click)="buyItem()">
+			<img class="buy-btn" src="assets/UI/button/r_bg_green.png">
+			<img class="buy-btn" src="assets/UI/button/ring_frame.PNG">
+			<img class="buy-btn" src="assets/UI/button/r_bag.PNG">
+		</div>
+		<div class="col-2" (click)="displayDetailsPage()">
+			<img class="buy-btn" src="assets/UI/button/r_bg_blue.png">
+			<img class="buy-btn" src="assets/UI/button/ring_frame.PNG">
+			<img class="buy-btn" src="assets/UI/button/r_scroll.PNG">
+		</div>
+	</div>
+
+	<div class="row bottom-container">
+		<div class="col-2">
+		</div>
+		<div class="col-2"></div>
+		<!--
+		<div class="col-2">
+			<img class="buy-btn" src="assets/UI/button/r_bg_yellow.png">
+			<img class="buy-btn" src="assets/UI/button/ring_frame.PNG">
+			<img class="buy-btn" src="assets/UI/button/r_scroll.PNG">
+		</div>-->
+		<div class="col-2 resourceWrapper" *ngFor="let resource of menuItem.$cost">
 			<app-resource [(resource)]="resource"></app-resource>
 		</div>
 	</div>

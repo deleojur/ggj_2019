@@ -21,6 +21,7 @@ import { ResourceComponent } from './ui/resource/resource.component';
 import { WindowDirective } from './ui/window/window-directive';
 import { ItemDetailWindowComponent } from './ui/window/item-detail-window/item-detail-window.component';
 import { ItemOverviewWindowComponent } from './ui/window/item-overview-window/item-overview-window.component';
+import { ResourcesHudComponent } from './ui/resources-hud/resources-hud.component';
 
 @NgModule({
 	declarations: [
@@ -39,7 +40,8 @@ import { ItemOverviewWindowComponent } from './ui/window/item-overview-window/it
 		MenuItemComponent,
 		ResourceComponent,
 		ItemOverviewWindowComponent,
-		ItemDetailWindowComponent
+		ItemDetailWindowComponent,
+		ResourcesHudComponent
 	],
   	entryComponents: [
 		ItemOverviewWindowComponent,
