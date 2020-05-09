@@ -8,21 +8,21 @@
 <div class="container-fluid">
 	<div class="scrollable-menu scrollbar-ripe-malinka" style="height:47%">
 		<div class="row details">
-			<img class="col-12 icon" src="{{data.$icon}}">
+			<img class="col-12 icon" src="{{item.$icon}}">
 		</div>
 		<div class="row cost-container">
 			<div class="description col-4">
 				<h4>Cost</h4>
 			</div>
-			<div class="col-2 resourceWrapper" *ngFor="let resource of data.$cost">
+			<div class="col-2 resourceWrapper" *ngFor="let resource of item.$cost">
 				<app-resource [(resource)]="resource"></app-resource>
 			</div>
 		</div>
-		<div class="row cost-container" *ngIf="data.$upkeep.length > 0">
+		<div class="row cost-container" *ngIf="item.$upkeep.length > 0">
 			<div class="description col-4">
 				<h4>Upkeep</h4>
 			</div>
-			<div class="col-2 resourceWrapper" *ngFor="let resource of data.$upkeep">
+			<div class="col-2 resourceWrapper" *ngFor="let resource of item.$upkeep">
 				<app-resource [upkeep]="true" [(resource)]="resource"></app-resource>
 			</div>
 		</div>

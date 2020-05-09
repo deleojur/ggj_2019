@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BuyableItemModel } from './buyableItem-model';
 import { WindowService, WindowType } from 'src/services/window.service';
 import { ResourcesService } from 'src/services/resources.service';
+import { Hex } from 'honeycomb-grid';
+import { Cell } from 'src/app/game/grid/grid';
 
 @Component({
   selector: 'app-menu-item',
@@ -12,6 +14,9 @@ export class MenuItemComponent implements OnInit
 {
 	@Input()
 	public menuItem: BuyableItemModel;
+
+	@Input()
+	public origin: Hex<Cell>;
 
 	constructor(private windowService: WindowService, private resourcesService: ResourcesService) { }
 
@@ -24,7 +29,7 @@ export class MenuItemComponent implements OnInit
 	{
 		this.windowService.closeWindow(() =>
 		{
-			return this.windowService.openWindow(WindowType.ItemDetail, { name: this.menuItem.$name, data: this.menuItem });
+			return this.windowService.openWindow(WindowType.ItemDetail, { name: this.menuItem.$name, data: { origin: this.origin, item: this.menuItem } });
 		});
 	}
 
@@ -34,7 +39,7 @@ export class MenuItemComponent implements OnInit
 		{
 			this.windowService.closeWindow(() =>
 			{
-				this.resourcesService.tryPurchaseItem(this.menuItem);
+				this.resourcesService.tryPurchaseItem(this.origin, this.menuItem);
 			});
 		}
 	}

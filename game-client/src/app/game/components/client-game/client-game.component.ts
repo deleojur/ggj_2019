@@ -74,7 +74,7 @@ export class ClientGameComponent implements Game, AfterViewInit
             //get the hex and do something with it.
             const hex = this.gameService.grid.getHexAt(interactionEnd);
 			this.gameService.selectHex(hex);
-			const window: WindowItem = this.windowService.openWindow(WindowType.ItemOverview, { name: 'Build' });
+			const window: WindowItem = this.windowService.openWindow(WindowType.ItemOverview, { name: 'Tile Menu', data: { origin: hex } });
         }
     }
 
