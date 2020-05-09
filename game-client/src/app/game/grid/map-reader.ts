@@ -32,7 +32,7 @@ export class MapReader
     private tileLayers: number[][] = [];
     private iconLayer: Object[] = [];
     private hexArtLayer: Object[] = [];
-    private worldTiles: Map<number, Tile> = new Map<number, Tile>();
+	private worldTiles: Map<number, Tile> = new Map<number, Tile>();
 
     public get icons(): Object[]
     {
@@ -49,23 +49,31 @@ export class MapReader
         
     }
 
-    public loadWorldMap(onready: (width: number, height: number) => void): void
+    public loadWorldMap(): Promise<PIXI.Point>
     {
-        const loader: PIXI.Loader = new PIXI.Loader();
-        const worldMapUrl: string = 'assets/map_1.json';
-        loader.add(worldMapUrl);
-        loader.load((loader, resources) =>
-        {
-            this.worldMap = resources[worldMapUrl].data;
-            return onready(this.worldMap.width, this.worldMap.height);
-        });
+		return new Promise<PIXI.Point>(resolve =>
+		{
+			const loader: PIXI.Loader = new PIXI.Loader();
+			const worldMapUrl: string = 'assets/map_1.json';
+			loader.add(worldMapUrl);
+			loader.load((loader, resources) =>
+			{
+				this.worldMap = resources[worldMapUrl].data;
+				resolve(new PIXI.Point(this.worldMap.width, this.worldMap.height));
+			});
+		});
     }
 
-    public parseWorldMap(grid: Grid<Hex<Cell>>): void
+    public async parseWorldMap(grid: Grid<Hex<Cell>>): Promise<void>
     {
-        const uniqueTileIds: Set<number> = this.parseLayers();
-        this.parseTilesets(uniqueTileIds);
-        this.mapGrid(grid);
+		return new Promise(resolve => 
+		{
+			const uniqueTileIds: Set<number> = this.parseLayers();
+			this.parseTilesets(uniqueTileIds);
+			this.mapGrid(grid);
+			resolve();
+		});
+        
     }
 
     private parseLayers(): Set<number>

@@ -50,10 +50,11 @@ export class GameService
     private initGrid(cb: () => void): void
     {
         this._grid = new GridManager(this.viewport, this.graphics);
-        this._grid.generateWorld((width: number, height: number) => 
+        this._grid.generateWorld().then((size) =>
         {
-            this.viewport.initViewport(width, height);
-            this._grid.initLayers();
+			console.log(size);
+            this.viewport.initViewport(size.x, size.y);
+            this._grid.loadTextures();
             this.viewport.$viewport.addChild(this.graphics);
             return cb();
         });
@@ -94,7 +95,32 @@ export class GameService
         }
         this.pixi.renderer.resize(w, h);
         this.pixi.stage.scale.set(1, 1);
-    }
+	}
+	
+	public addIcon(origin: Hex<Cell>, src: string): void
+	{
+		
+	}
+
+	public removeIcon(origin: Hex<Cell>): void
+	{
+
+	}
+
+	public createEntity(origin: Hex<Cell>, playerId: string, entityName: string): void
+	{
+		this.grid.createEntity(origin, playerId, entityName);
+	}
+
+	public removeEntity(origin: Hex<Cell>): void
+	{
+
+	}
+
+	public moveEntity(): void
+	{
+
+	}
 
     public selectHex(hex: Hex<Cell>): void
     {

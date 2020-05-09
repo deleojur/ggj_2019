@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Resource, ResourceType } from '../menu-item/buyableItem-model';
+import { ResourcesService } from 'src/services/resources.service';
 
 @Component
 ({
@@ -14,6 +15,11 @@ export class ResourceComponent implements OnInit
 
 	@Input()
 	upkeep: boolean = false;
+
+	constructor(public resourceService: ResourcesService)
+	{
+
+	}
 
 	get amountAsText(): string
 	{

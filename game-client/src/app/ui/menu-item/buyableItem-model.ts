@@ -32,6 +32,11 @@ export class Resource
 		return this.amount;
 	}
 
+	public set $amount(value: number)
+	{
+		this.amount = value;
+	}
+
 	public get $resourceType(): ResourceType
 	{
 		return this.resourceType;

@@ -23,7 +23,6 @@ export class merchandiseService
 
 	public getPlaceholderItems(): BuyableItemModel[]
 	{
-		console.log(Array.from(this.merchandiseMap.values()));
 		return Array.from(this.merchandiseMap.values());
 	}
 }

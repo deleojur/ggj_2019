@@ -42,7 +42,6 @@ export class GameComponent implements AfterViewInit
 		});
 
 		this.windowService.windowComponent = this.windowContainer;
-		this.windowService.openWindow(WindowType.ItemOverview, { name: 'Build', data : this.merch.getMerchandise('town') });
     }
 
     @HostListener('window:resize', ['$event'])

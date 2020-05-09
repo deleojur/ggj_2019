@@ -1,0 +1,53 @@
+import { Injectable } from '@angular/core';
+import { TurnCommand } from 'src/app/game/turns/turn-command';
+import { Hex } from 'honeycomb-grid';
+import { Cell } from 'src/app/game/grid/grid';
+import { GameService } from './game.service';
+
+@Injectable
+({
+	providedIn: 'root'
+})
+export class TurnsService 
+{
+	private _turnCommands: Map<Hex<Cell>, TurnCommand> = new Map<Hex<Cell>, TurnCommand>();
+
+	constructor(private gameService: GameService) 
+	{
+		
+	}
+
+	public addTurnCommand(command: TurnCommand): void
+	{
+		this._turnCommands.set(command.origin, command);
+	}
+
+	public removeTurnCommand(command: TurnCommand): void
+	{
+		this.removeTurnCommandByOrigin(command.origin);
+	}
+
+	public removeTurnCommandByOrigin(origin: Hex<Cell>): void
+	{
+		this._turnCommands.delete(origin);
+	}
+
+	/**
+	 * This function is called when all data is send to the server. When it is called,
+	 * the functionCommands map is cleared. 
+	 */
+	public get exportCommands(): TurnCommand[]
+	{
+		const turnCommands: TurnCommand[] = Array.from(this._turnCommands.values());
+		this._turnCommands.clear();
+		return turnCommands;
+	}
+
+	public set importCommands(commands: TurnCommand[])
+	{
+		commands.forEach(e => 
+		{
+			this._turnCommands.set(e.origin, e);
+		});
+	}
+}

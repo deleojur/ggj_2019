@@ -15,5 +15,5 @@ export class UtilsService
     public set room(room: RoomData)
     {
         this._roomdata = room;
-    }
+	}
 }

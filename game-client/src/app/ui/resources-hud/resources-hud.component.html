@@ -1,34 +1,14 @@
 <div class="fixed">
 	<img class="background" src="assets/UI/window/wood_plank1.svg">
 	<div class="row resource-container">
-		<div class="col-4">
+		<div class="col-4" *ngFor="let resource of resourcesService.$resourcePool">
 			<div style="position: relative; z-index: 3;">
 				<img class="resource-icon" src="assets/UI/window/grid4L.svg">
-				<img class="resource-icon-fg" src="assets/Icons/gold.png">
+				<img class="resource-icon-fg" src="{{resource.resourceIconSrc}}">
 			</div>
 			<div style="position: relative; z-index: 2;">
 				<img class="resource-amount-bg" src="assets/UI/window/banner_sale_red.svg" >
-				<h2 class="resource-amount-fg">999</h2>
-			</div>
-		</div>
-		<div class="col-4">
-			<div style="position: relative; z-index: 3;">
-				<img class="resource-icon" src="assets/UI/window/grid4L.svg">
-				<img class="resource-icon-fg" src="assets/Icons/wheat.png">
-			</div>
-			<div style="position: relative; z-index: 2;">
-				<img class="resource-amount-bg" src="assets/UI/window/banner_sale_red.svg" >
-				<h2 class="resource-amount-fg">999</h2>
-			</div>
-		</div>
-		<div class="col-4">
-			<div style="position: relative; z-index: 3;">
-				<img class="resource-icon" src="assets/UI/window/grid4L.svg">
-				<img class="resource-icon-fg" src="assets/Icons/population.png">
-			</div>
-			<div style="position: relative; z-index: 2;">
-				<img class="resource-amount-bg" src="assets/UI/window/banner_sale_red.svg" >
-				<h2 class="resource-amount-fg">999</h2>
+				<h2 class="resource-amount-fg">{{resource.$amount}}</h2>
 			</div>
 		</div>
 	</div>

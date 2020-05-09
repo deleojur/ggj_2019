@@ -1,6 +1,6 @@
 import { ClientUtilsService } from './../../../../services/utils/client-utils.service';
 import { GridManager } from './../../grid/grid';
-import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, AfterViewInit } from '@angular/core';
 import { GameService } from 'src/services/game.service';
 import { Vector } from 'vector2d';
 import { Game } from '../game.component';
@@ -11,7 +11,6 @@ import { PositionData } from '../../states/request-data';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from '../../grid/grid';
 import { ViewportManager } from '../../render/viewport';
-import { WindowComponent } from 'src/app/ui/window/window.component';
 import { WindowService, WindowType, WindowItem } from 'src/services/window.service';
 
 @Component({
@@ -40,7 +39,7 @@ export class ClientGameComponent implements Game, AfterViewInit
         this.viewport = this.gameService.viewport;
         this.stateHandlerService.activateState<PositionData>(state_playerStartingPositions, (positionData) =>
         {
-            const hex: Hex<Cell> = this.grid.getHex(positionData.x, positionData.y);
+			const hex: Hex<Cell> = this.grid.getHex(positionData.x, positionData.y);
             const color: number = this.clientUtilsService.colorRGB;
             this.grid.renderHex(hex, color);
 		});

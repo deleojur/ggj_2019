@@ -1,0 +1,16 @@
+[
+	{
+		"name": "town",
+		"type": "community",
+		"textureUrl": "assets/entities/community/town.png",
+		"cost": { "gold": 3, "food": 0, "population": 2 },
+		"upkeep": { "gold": 1, "food": -1, "population": 1 }
+	},
+	{
+		"name": "village",
+		"type": "village",
+		"textureUrl": "assets/entities/community/village.png",
+		"cost": { "gold": 3, "food": 0, "population": 2 },
+		"upkeep": { "gold": 1, "food": -1, "population": 1 }
+	}
+]

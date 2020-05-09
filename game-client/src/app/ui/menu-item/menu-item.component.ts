@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BuyableItemModel } from './buyableItem-model';
 import { WindowService, WindowType } from 'src/services/window.service';
+import { ResourcesService } from 'src/services/resources.service';
 
 @Component({
   selector: 'app-menu-item',
@@ -12,7 +13,7 @@ export class MenuItemComponent implements OnInit
 	@Input()
 	public menuItem: BuyableItemModel;
 
-	constructor(private windowService: WindowService) { }
+	constructor(private windowService: WindowService, private resourcesService: ResourcesService) { }
 
     ngOnInit() 
     {
@@ -29,6 +30,12 @@ export class MenuItemComponent implements OnInit
 
 	buyItem()
 	{
-		this.windowService.closeWindow();
+		if (this.resourcesService.areResourcesConditionsMet(this.menuItem.$cost))
+		{
+			this.windowService.closeWindow(() =>
+			{
+				this.resourcesService.tryPurchaseItem(this.menuItem);
+			});
+		}
 	}
 }

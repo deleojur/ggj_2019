@@ -1,8 +1,9 @@
 import { MapReader, TileProperty, Object } from './map-reader';
 import { Vector } from 'vector2d/src/Vec2D';
 import { defineGrid, GridFactory, Hex, Point, Grid } from 'honeycomb-grid';
-import { Graphics, Sprite } from 'pixi.js';
+import { Graphics, Sprite, Point as pPoint } from 'pixi.js';
 import { ViewportManager } from '../render/viewport';
+import { EntityManager } from '../../game/entities/entity-manager';
 
 export enum CellType
 {
@@ -30,7 +31,8 @@ export class GridManager
     private grid: Grid<Hex<Cell>>;
     private tileWidth: number = 147.75;
     private tileHeight: number = 129.5;
-    private mapReader: MapReader;
+	private mapReader: MapReader;
+	private entityManager: EntityManager;
 
     private playerStartPositions: Hex<Cell>[] = [];
     public get $playerPositions(): Hex<Cell>[]
@@ -40,40 +42,57 @@ export class GridManager
 
     constructor(private viewport: ViewportManager, private graphics: Graphics)
     {
-        this.mapReader = new MapReader();
-    }
+		this.mapReader = new MapReader();
+		this.entityManager = new EntityManager();
+	}
+	
+	public createEntity(origin: Hex<Cell>, playerId: string, entityName: string): void
+	{
+		const entity = this.entityManager.createEntity(origin, playerId, entityName);
+		const pos = origin.toPoint();
+		entity.position = new pPoint(pos.x, pos.y);
+		this.viewport.addChild(entity);
+	}
 
-    private initHexagonalGrid(onInitialized: (width: number, height: number) => void): void
+    private initHexagonalGrid(): Promise<pPoint>
     {
-        this.gridFactory = defineGrid();
-        this.mapReader.loadWorldMap((width: number, height: number) =>
-        {
-            this.grid = this.gridFactory.rectangle({ width: width, height: height });
+		return new Promise<pPoint>((resolve) =>
+		{
+			this.gridFactory = defineGrid();
+			this.mapReader.loadWorldMap().then((size: pPoint) => 
+			{
+				this.grid = this.gridFactory.rectangle({ width: size.x, height: size.y });
 
-            this.grid.forEach(hex =>
-            {
-                hex.sprites = [];
-                hex.properties = [];
-            });
-    
-            const r = this.tileWidth;
-            const w = 1.732 * this.tileHeight;
-            const h = r * 2;  
-    
-            return onInitialized(w * (width * 2 + 2), h * (height + 1) + r * height);
-        });
+				this.grid.forEach(hex =>
+				{
+					hex.sprites = [];
+					hex.properties = [];
+				});
+		
+				const r = this.tileWidth;
+				const w = 1.732 * this.tileHeight;
+				const h = r * 2;
+				//TODO: Make sure the size is correct.
+				resolve(new pPoint(w * (size.x * 2), h * (size.y + 1)));
+			});			
+		});        
     }
 
-    public generateWorld(onready: (width: number, height: number) => void): void
+    public generateWorld(): Promise<pPoint>
     {
-        this.initHexagonalGrid((width: number, height: number) =>
-        {
-            this.mapReader.parseWorldMap(this.grid);
-            return onready(width, height);
-        });
+		return new Promise(resolve => 
+		{
+			this.initHexagonalGrid().then((size: pPoint) =>
+			{			
+				Promise.all([
+					this.entityManager.loadEntityPrototypes(),
+					this.mapReader.parseWorldMap(this.grid)
+				]).then(() => resolve(size));				
+			});
+		});
     }
 
-    public initLayers(): void
+    public loadTextures(): void
     {
         this.initObjectLayer(this.mapReader.hexUnderLayer);
         this.initTileLayer();
@@ -195,5 +214,5 @@ export class GridManager
             this.renderSelection(neighbors);
             this.graphics.endFill();
         }
-    }
+	}
 }

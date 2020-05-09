@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ResourcesService } from 'src/services/resources.service';
 
 @Component({
   selector: 'app-resources-hud',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResourcesHudComponent implements OnInit
 {
-	constructor() 
+	constructor(public resourcesService: ResourcesService)
 	{
 		
 	}
