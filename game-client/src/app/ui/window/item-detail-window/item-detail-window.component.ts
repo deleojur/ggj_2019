@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { WindowService, WindowType } from 'src/services/window.service';
 import { ResourcesService } from 'src/services/resources.service';
-import { BuyableItemModel } from '../../menu-item/buyableItem-model';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from 'src/app/game/grid/grid';
+import { EntityPrototype } from 'src/app/game/entities/entity';
 
 @Component({
   selector: 'app-item-detail-window',
@@ -14,7 +14,7 @@ export class ItemDetailWindowComponent implements OnInit
 {
 	@Input() data: any;
 
-	item: BuyableItemModel;
+	item: EntityPrototype;
 	private origin: Hex<Cell>;
 
 	constructor(private windowService: WindowService, private resourcesService: ResourcesService) { }
@@ -35,7 +35,7 @@ export class ItemDetailWindowComponent implements OnInit
 
 	buyItem()
 	{
-		if (this.resourcesService.areResourcesConditionsMet(this.item.$cost))
+		if (this.resourcesService.areResourcesConditionsMet(this.item.cost))
 		{
 			this.windowService.closeWindow(() =>
 			{

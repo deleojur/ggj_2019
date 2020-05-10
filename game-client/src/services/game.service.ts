@@ -5,6 +5,7 @@ import { GridManager } from '../app/game/grid/grid';
 import * as PIXI from 'pixi.js';
 import { Subject } from 'rxjs';
 import { Hex } from 'honeycomb-grid';
+import { EntityPrototype } from 'src/app/game/entities/entity';
 
 @Injectable({
     providedIn: 'root'
@@ -95,6 +96,11 @@ export class GameService
         }
         this.pixi.renderer.resize(w, h);
         this.pixi.stage.scale.set(1, 1);
+	}
+
+	public getBuyableItems(origin: Hex<Cell>): EntityPrototype[]
+	{
+		return this.grid.getEntityPrototype(origin);
 	}
 	
 	public addIcon(origin: Hex<Cell>, src: string): void

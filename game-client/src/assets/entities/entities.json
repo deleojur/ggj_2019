@@ -1,16 +1,34 @@
 [
 	{
-		"name": "town",
-		"type": "community",
+		"name": "Town",
+		"description": "A town.",
+		"type": "Community",
 		"textureUrl": "assets/entities/community/town.png",
-		"cost": { "gold": 3, "food": 0, "population": 2 },
-		"upkeep": { "gold": 1, "food": -1, "population": 1 }
+		"cost": [ 
+			{ "name": "Gold", "amount": 3 }, 
+			{ "name": "Food", "amount": 0 }, 
+			{ "name": "Population", "amount": 2 } 
+		],
+		"upkeep": [
+			{ "name": "Gold", "amount": 1 }, 
+			{ "name": "Food", "amount": -1 }, 
+			{ "name": "Population", "amount": 1 } 
+		]
 	},
 	{
-		"name": "village",
-		"type": "village",
+		"name": "Village",
+		"type": "Community",
+		"description": "A village.",
 		"textureUrl": "assets/entities/community/village.png",
-		"cost": { "gold": 3, "food": 0, "population": 2 },
-		"upkeep": { "gold": 1, "food": -1, "population": 1 }
+		"cost": [ 
+			{ "name": "Gold", "amount": 3 }, 
+			{ "name": "Food", "amount": 0 }, 
+			{ "name": "Population", "amount": 2 } 
+		],
+		"upkeep": [
+			{ "name": "Gold", "amount": 1 }, 
+			{ "name": "Food", "amount": -1 }, 
+			{ "name": "Population", "amount": 1 } 
+		]
 	}
 ]

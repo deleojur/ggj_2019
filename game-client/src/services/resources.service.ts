@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Resource, ResourceType, BuyableItemModel } from 'src/app/ui/menu-item/buyableItem-model';
+import { Resource, ResourceType} from 'src/app/ui/menu-item/buyableItem-model';
 import { Cell } from 'src/app/game/grid/grid';
 import { Hex } from 'honeycomb-grid';
 import { GameService } from './game.service';
+import { EntityPrototype } from 'src/app/game/entities/entity';
 
 @Injectable
 ({
@@ -74,14 +75,14 @@ export class ResourcesService
 		return true;
 	}
 
-	public tryPurchaseItem(origin: Hex<Cell>, item: BuyableItemModel): boolean
+	public tryPurchaseItem(origin: Hex<Cell>, item: EntityPrototype): boolean
 	{
-		if (!this.trySubtractResources(item.$cost))
+		if (!this.trySubtractResources(item.cost))
 		{
 			return false;
 		}
 
-		this.gameService.createEntity(origin, 'bob', item.$name);
+		this.gameService.createEntity(origin, 'bob', item.name);
 		return true;
 	}
 }

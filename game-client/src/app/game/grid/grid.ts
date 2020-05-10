@@ -4,6 +4,7 @@ import { defineGrid, GridFactory, Hex, Point, Grid } from 'honeycomb-grid';
 import { Graphics, Sprite, Point as pPoint } from 'pixi.js';
 import { ViewportManager } from '../render/viewport';
 import { EntityManager } from '../../game/entities/entity-manager';
+import { EntityPrototype } from '../entities/entity';
 
 export enum CellType
 {
@@ -46,11 +47,16 @@ export class GridManager
 		this.entityManager = new EntityManager();
 	}
 	
+	public getEntityPrototype(origin: Hex<Cell>): EntityPrototype[]
+	{
+		return this.entityManager.getEntityPrototype(origin);
+	}
+
 	public createEntity(origin: Hex<Cell>, playerId: string, entityName: string): void
 	{
 		const entity = this.entityManager.createEntity(origin, playerId, entityName);
 		const pos = origin.toPoint();
-		entity.position = new pPoint(pos.x, pos.y);
+		entity.position = new pPoint(pos.x, pos.y - 128);
 		this.viewport.addChild(entity);
 	}
 

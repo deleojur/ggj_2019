@@ -3,11 +3,11 @@
 	<div class="row top-container">
 		<div class="col-2">
 			<img class="iconHolder" src="assets/UI/window/grid4L.svg">
-			<img class="icon" src={{menuItem.$icon}}>
+			<img class="icon" src={{menuItem.textureUrl}}>
 		</div>
 		<div class="col-2">
 			<img class="title-background" src="assets/UI/window/banner_small_red2.svg">
-			<h1 class="title title-responsive">{{menuItem.$name}}</h1>
+			<h1 class="title title-responsive">{{menuItem.name}}</h1>
 		</div>
 	</div>
 
@@ -34,7 +34,7 @@
 			<img class="buy-btn" src="assets/UI/button/ring_frame.PNG">
 			<img class="buy-btn" src="assets/UI/button/r_scroll.PNG">
 		</div>-->
-		<div class="col-2 resourceWrapper" *ngFor="let resource of menuItem.$cost">
+		<div class="col-2 resourceWrapper" *ngFor="let resource of menuItem.cost">
 			<app-resource [(resource)]="resource"></app-resource>
 		</div>
 	</div>
