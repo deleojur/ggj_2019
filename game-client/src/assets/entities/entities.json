@@ -13,6 +13,10 @@
 			{ "name": "Gold", "amount": 1 }, 
 			{ "name": "Food", "amount": -1 }, 
 			{ "name": "Population", "amount": 1 } 
+		],
+		"icon": "build",
+		"actions": [
+			
 		]
 	},
 	{

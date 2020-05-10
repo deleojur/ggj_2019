@@ -98,7 +98,7 @@ export class GridManager
 		});
     }
 
-    public loadTextures(): void
+    public initLayers(): void
     {
         this.initObjectLayer(this.mapReader.hexUnderLayer);
         this.initTileLayer();

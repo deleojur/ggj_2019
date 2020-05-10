@@ -1,20 +1,48 @@
-import { Injectable } from '@angular/core';
 import { TurnCommand } from 'src/app/game/turns/turn-command';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from 'src/app/game/grid/grid';
-import { GameService } from './game.service';
+import { GameService } from '../../../services/game.service';
+import { Loader, Texture } from 'pixi.js';
 
-@Injectable
-({
-	providedIn: 'root'
-})
-export class TurnsService 
+export class TurnsSystem
 {
 	private _turnCommands: Map<Hex<Cell>, TurnCommand> = new Map<Hex<Cell>, TurnCommand>();
+	private _textures: Map<string, Texture> = new Map<string, Texture>();
 
 	constructor(private gameService: GameService) 
 	{
 		
+	}
+
+	public async loadIconTextures(): Promise<void>
+	{
+		return new Promise(resolve => 
+		{
+			const loader: Loader = new Loader();
+			const actionsUrl: string = 'assets/actions/actions.json';
+
+			loader.add(actionsUrl);
+			loader.load((loader, resources) =>
+			{
+				const actionProperties: any[] = resources[actionsUrl].data as any[];
+				loader.reset();
+
+				actionProperties.forEach(e =>
+				{
+					loader.add(e.textureUrl);
+				});
+
+				loader.load((loader, resources) =>
+				{
+					actionProperties.forEach(e => 
+					{
+						const texture: Texture = Texture.from(resources.data[e.textureUrl]);
+						this._textures.set(e.name, texture);
+					});					
+				});
+				resolve();
+			});			
+		});
 	}
 
 	public addTurnCommand(command: TurnCommand): void

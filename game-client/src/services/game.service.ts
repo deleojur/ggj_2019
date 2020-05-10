@@ -6,6 +6,8 @@ import * as PIXI from 'pixi.js';
 import { Subject } from 'rxjs';
 import { Hex } from 'honeycomb-grid';
 import { EntityPrototype } from 'src/app/game/entities/entity';
+import { TurnsSystem } from 'src/app/game/turns/turns-system';
+import { resolve } from 'dns';
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +17,8 @@ export class GameService
     private pixi: PIXI.Application; // this will be our pixi application
     private graphics: PIXI.Graphics;
     private _viewport: ViewportManager;
-    private _grid: GridManager;
+	private _grid: GridManager;
+	private _turnSystem: TurnsSystem;
     private ratio: number;
     private _onCellSelected: Subject<Hex<Cell>> = new Subject<Hex<Cell>>();
 
@@ -50,14 +53,16 @@ export class GameService
     
     private initGrid(cb: () => void): void
     {
-        this._grid = new GridManager(this.viewport, this.graphics);
+		this._grid = new GridManager(this.viewport, this.graphics);
         this._grid.generateWorld().then((size) =>
         {
-			console.log(size);
-            this.viewport.initViewport(size.x, size.y);
-            this._grid.loadTextures();
-            this.viewport.$viewport.addChild(this.graphics);
-            return cb();
+			this._turnSystem.loadIconTextures().then(() => 
+			{
+				this.viewport.initViewport(size.x, size.y);
+				this._grid.initLayers();
+				this.viewport.$viewport.addChild(this.graphics);
+				return cb();
+			});
         });
     }
 
