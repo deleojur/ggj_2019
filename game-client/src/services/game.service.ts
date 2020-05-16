@@ -5,9 +5,9 @@ import { GridManager } from '../app/game/grid/grid';
 import * as PIXI from 'pixi.js';
 import { Subject } from 'rxjs';
 import { Hex } from 'honeycomb-grid';
-import { EntityPrototype } from 'src/app/game/entities/entity';
+import { EntityPrototype, EntityInformation } from 'src/app/game/entities/entity';
 import { TurnsSystem } from 'src/app/game/turns/turns-system';
-import { resolve } from 'dns';
+import { AssetLoader } from 'src/app/asset-loader';
 
 @Injectable({
     providedIn: 'root'
@@ -54,16 +54,14 @@ export class GameService
     private initGrid(cb: () => void): void
     {
 		this._grid = new GridManager(this.viewport, this.graphics);
-        this._grid.generateWorld().then((size) =>
-        {
-			this._turnSystem.loadIconTextures().then(() => 
-			{
-				this.viewport.initViewport(size.x, size.y);
-				this._grid.initLayers();
-				this.viewport.$viewport.addChild(this.graphics);
-				return cb();
-			});
-        });
+		AssetLoader.instance.loadAssetsAsync().then(() => 
+		{			
+			const size: PIXI.Point = this._grid.generateWorld();
+			this.viewport.initViewport(size.x, size.y);
+			this._grid.initLayers();
+			this.viewport.$viewport.addChild(this.graphics);
+			return cb();
+		});
     }
 
     public init(cb: () => void): HTMLCanvasElement
@@ -103,7 +101,7 @@ export class GameService
         this.pixi.stage.scale.set(1, 1);
 	}
 
-	public getBuyableItems(origin: Hex<Cell>): EntityPrototype[]
+	public getBuyableItems(origin: Hex<Cell>): EntityInformation[]
 	{
 		return this.grid.getEntityPrototype(origin);
 	}

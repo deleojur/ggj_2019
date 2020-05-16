@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Resource, ResourceType } from '../menu-item/buyableItem-model';
+import { Resource } from '../../game/entities/resource';
 import { ResourcesService } from 'src/services/resources.service';
 
 @Component
@@ -23,8 +23,8 @@ export class ResourceComponent implements OnInit
 
 	get amountAsText(): string
 	{
-		let amountAsText: string = this.resource.$amount.toString();
-		if (this.upkeep && this.resource.$amount > 0)
+		let amountAsText: string = this.resource.amount.toString();
+		if (this.upkeep && this.resource.amount > 0)
 		{
 			amountAsText = '+' + amountAsText;
 		}
@@ -38,7 +38,7 @@ export class ResourceComponent implements OnInit
 
 	get amountAsArray() : Array<number>
 	{
-		return Array<number>(this.resource.$amount).fill(0);
+		return Array<number>(this.resource.amount).fill(0);
 	}
 
 	ngOnInit()

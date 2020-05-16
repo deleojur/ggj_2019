@@ -1,10 +1,11 @@
-import { MapReader, TileProperty, Object } from './map-reader';
+import { MapReader, TileProperty, Object, WorldMap } from './map-reader';
 import { Vector } from 'vector2d/src/Vec2D';
 import { defineGrid, GridFactory, Hex, Point, Grid } from 'honeycomb-grid';
 import { Graphics, Sprite, Point as pPoint } from 'pixi.js';
 import { ViewportManager } from '../render/viewport';
 import { EntityManager } from '../../game/entities/entity-manager';
-import { EntityPrototype } from '../entities/entity';
+import { EntityInformation } from '../entities/entity';
+import { AssetLoader } from 'src/app/asset-loader';
 
 export enum CellType
 {
@@ -47,7 +48,7 @@ export class GridManager
 		this.entityManager = new EntityManager();
 	}
 	
-	public getEntityPrototype(origin: Hex<Cell>): EntityPrototype[]
+	public getEntityPrototype(origin: Hex<Cell>): EntityInformation[]
 	{
 		return this.entityManager.getEntityPrototype(origin);
 	}
@@ -60,42 +61,33 @@ export class GridManager
 		this.viewport.addChild(entity);
 	}
 
-    private initHexagonalGrid(): Promise<pPoint>
+    private initHexagonalGrid(): pPoint
     {
-		return new Promise<pPoint>((resolve) =>
-		{
-			this.gridFactory = defineGrid();
-			this.mapReader.loadWorldMap().then((size: pPoint) => 
-			{
-				this.grid = this.gridFactory.rectangle({ width: size.x, height: size.y });
-
-				this.grid.forEach(hex =>
-				{
-					hex.sprites = [];
-					hex.properties = [];
-				});
+		this.gridFactory = defineGrid();
+		const worldMap: WorldMap = AssetLoader.instance.worldMap;
+		console.log(worldMap);
 		
-				const r = this.tileWidth;
-				const w = 1.732 * this.tileHeight;
-				const h = r * 2;
-				//TODO: Make sure the size is correct.
-				resolve(new pPoint(w * (size.x * 2), h * (size.y + 1)));
-			});			
-		});        
+		this.grid = this.gridFactory.rectangle({ width: worldMap.width, height: worldMap.height });
+
+		this.grid.forEach(hex =>
+		{
+			hex.sprites = [];
+			hex.properties = [];
+		});
+
+		const r = this.tileWidth;
+		const w = 1.732 * this.tileHeight;
+		const h = r * 2;
+		//TODO: Make sure the size is correct.
+		return new pPoint(w * (worldMap.width * 2), h * (worldMap.height + 1));
     }
 
-    public generateWorld(): Promise<pPoint>
+    public generateWorld(): pPoint
     {
-		return new Promise(resolve => 
-		{
-			this.initHexagonalGrid().then((size: pPoint) =>
-			{			
-				Promise.all([
-					this.entityManager.loadEntityPrototypes(),
-					this.mapReader.parseWorldMap(this.grid)
-				]).then(() => resolve(size));				
-			});
-		});
+		const size: pPoint = this.initHexagonalGrid();
+		this.mapReader.parseWorldMap(this.grid);
+
+		return size;
     }
 
     public initLayers(): void

@@ -3,7 +3,7 @@ import { WindowService, WindowType } from 'src/services/window.service';
 import { ResourcesService } from 'src/services/resources.service';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from 'src/app/game/grid/grid';
-import { EntityPrototype } from 'src/app/game/entities/entity';
+import { EntityInformation } from 'src/app/game/entities/entity';
 
 @Component({
   selector: 'app-item-detail-window',
@@ -14,7 +14,7 @@ export class ItemDetailWindowComponent implements OnInit
 {
 	@Input() data: any;
 
-	item: EntityPrototype;
+	item: EntityInformation;
 	private origin: Hex<Cell>;
 
 	constructor(private windowService: WindowService, private resourcesService: ResourcesService) { }
@@ -29,7 +29,7 @@ export class ItemDetailWindowComponent implements OnInit
 	{
 		this.windowService.closeWindow(() =>
 		{
-			return this.windowService.openWindow(WindowType.ItemOverview, { name: "Buy" });
+			return this.windowService.openWindow(WindowType.ItemOverview, { name: "Buy", data: { origin: this.origin } });
 		});
 	}
 

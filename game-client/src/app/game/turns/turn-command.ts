@@ -8,6 +8,7 @@ export class TurnCommand
 	//this is the place where the command originates.
 	protected _origin: Hex<Cell>;
 	protected _entity: Entity;
+	protected _owner: string;
 	protected _icon: Sprite;
 
 	public get origin(): Hex<Cell>

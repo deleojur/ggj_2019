@@ -1,12 +1,12 @@
 <div class="resource-container" *ngIf="showAmountAsPlural; else numberBadge">
 	<div *ngFor="let n of amountAsArray">
-		<img class="resource-fg" src={{resource.resourceIconSrc}}>
+		<img class="resource-fg" src={{resource.textureUrl}}>
 	</div>
 </div>
 
 <ng-template #numberBadge>
 	<img class="resource-bg" src="assets/UI/window/grid4L.svg">
-	<img class="resource-fg-number" src={{resource.resourceIconSrc}}>
+	<img class="resource-fg-number" src={{resource.textureUrl}}>
 
 	<div *ngIf="upkeep === false && resourceService.isResourceConditionMet(resource)">
 		<img class="amountHolder-background" src="assets/UI/button/r_bg_blue.png">
@@ -16,11 +16,11 @@
 		<img class="amountHolder-background" src="assets/UI/button/r_bg_red.png">
 	</div>
 
-	<div *ngIf="upkeep === true && resource.$amount > 0;">
+	<div *ngIf="upkeep === true && resource.amount > 0;">
 		<img class="amountHolder-background" src="assets/UI/button/r_bg_green.png">
 	</div>
 	
-	<div *ngIf="upkeep === true && resource.$amount < 0;">
+	<div *ngIf="upkeep === true && resource.amount < 0;">
 		<img class="amountHolder-background" src="assets/UI/button/r_bg_yellow.png">
 	</div>
 	

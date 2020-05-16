@@ -2,7 +2,7 @@ import { Component, OnInit, Injector } from '@angular/core';
 import { GameService } from 'src/services/game.service';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from 'src/app/game/grid/grid';
-import { EntityPrototype } from 'src/app/game/entities/entity';
+import { EntityPrototype, EntityInformation } from 'src/app/game/entities/entity';
 
 @Component({
   selector: 'app-item-window',
@@ -11,7 +11,7 @@ import { EntityPrototype } from 'src/app/game/entities/entity';
 })
 export class ItemOverviewWindowComponent implements OnInit
 {
-	merchandise: EntityPrototype[];
+	merchandise: EntityInformation[];
 	data: any;
 	origin: Hex<Cell>;
 

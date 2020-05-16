@@ -4,11 +4,11 @@
 		<div class="col-4" *ngFor="let resource of resourcesService.$resourcePool">
 			<div style="position: relative; z-index: 3;">
 				<img class="resource-icon" src="assets/UI/window/grid4L.svg">
-				<img class="resource-icon-fg" src="{{resource.resourceIconSrc}}">
+				<img class="resource-icon-fg" src="{{resource.textureUrl}}">
 			</div>
 			<div style="position: relative; z-index: 2;">
 				<img class="resource-amount-bg" src="assets/UI/window/banner_sale_red.svg" >
-				<h2 class="resource-amount-fg">{{resource.$amount}}</h2>
+				<h2 class="resource-amount-fg">{{resource.amount}}</h2>
 			</div>
 		</div>
 	</div>

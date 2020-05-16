@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js';
 import { Grid, Hex } from 'honeycomb-grid';
 import { Cell } from './grid';
+import { AssetLoader } from 'src/app/asset-loader';
 
 export interface TileProperty
 {
@@ -26,9 +27,17 @@ export interface Object
     sprite?: PIXI.Sprite;
 }
 
+export interface WorldMap
+{
+	width: number;
+	height: number;
+	tilesets: any[];
+	layers: any[];
+}
+
 export class MapReader
 {
-    private worldMap: any;
+    private worldMap: WorldMap;
     private tileLayers: number[][] = [];
     private iconLayer: Object[] = [];
     private hexArtLayer: Object[] = [];
@@ -49,35 +58,16 @@ export class MapReader
         
     }
 
-    public loadWorldMap(): Promise<PIXI.Point>
+    public parseWorldMap(grid: Grid<Hex<Cell>>): void
     {
-		return new Promise<PIXI.Point>(resolve =>
-		{
-			const loader: PIXI.Loader = new PIXI.Loader();
-			const worldMapUrl: string = 'assets/map_1.json';
-			loader.add(worldMapUrl);
-			loader.load((loader, resources) =>
-			{
-				this.worldMap = resources[worldMapUrl].data;
-				resolve(new PIXI.Point(this.worldMap.width, this.worldMap.height));
-			});
-		});
-    }
-
-    public async parseWorldMap(grid: Grid<Hex<Cell>>): Promise<void>
-    {
-		return new Promise(resolve => 
-		{
-			const uniqueTileIds: Set<number> = this.parseLayers();
-			this.parseTilesets(uniqueTileIds);
-			this.mapGrid(grid);
-			resolve();
-		});
-        
+		const uniqueTileIds: Set<number> = this.parseLayers();
+		this.parseTilesets(uniqueTileIds);
+		this.mapGrid(grid);
     }
 
     private parseLayers(): Set<number>
     {
+		this.worldMap = AssetLoader.instance.worldMap;
         const layers = this.worldMap.layers;
         const uniqueTileIds: Set<number> = new Set<number>();
         layers.forEach(layer => 
@@ -127,7 +117,8 @@ export class MapReader
                 const id: number = firstgid + tile.id;                
                 if (uniqueTileIds.has(id))
                 {
-                    const texture = PIXI.Texture.from('assets/' + tile.image);
+					const textureUrl: string = 'assets/' + tile.image;
+					const texture: PIXI.Texture = AssetLoader.instance.getTexture(textureUrl);
                     this.worldTiles.set(id, { id: id, texture: texture, properties: tile.properties || [] });
                 }
             });

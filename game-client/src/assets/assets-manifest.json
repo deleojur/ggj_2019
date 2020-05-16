@@ -1,0 +1,83 @@
+{
+	"textures": 
+	[
+		"assets/Terrain_Medieval/Base/hexOcean00.png",
+		"assets/Terrain_Medieval/Base/hexPlains00.png",
+		"assets/Terrain_Medieval/Base/hexUnderDirt00.png",
+		"assets/Terrain_Medieval/Base/hexUnderOcean00.png",
+
+		"assets/Terrain_Medieval/Decor/villageSmall03.png",
+
+		"assets/Terrain_Medieval/Roads/hexRoad-000001-00.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-000001-01.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-000011-00.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-000101-00.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-001000-01.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-001000-00.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-001001-01.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-001010-00.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-001101-00.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-010001-01.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-010010-00.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-010100-01.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-010101-00.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-010110-00.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-010111-00.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-011010-00.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-100000-01.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-100010-00.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-100100-00.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-100100-01.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-100110-00.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-101000-00.png",
+		"assets/Terrain_Medieval/Roads/hexRoad-101000-01.png"
+	],
+	"entities":
+	[
+		{
+			"name": "town",
+			"description": "a town.",
+			"type": "community",
+			"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
+			"cost": [ 
+				{ "type": "gold", "amount": 3 }, 
+				{ "type": "food", "amount": 0 }, 
+				{ "type": "population", "amount": 2 } 
+			],
+			"upkeep": [
+				{ "type": "gold", "amount": 1 }, 
+				{ "type": "food", "amount": -1 }, 
+				{ "type": "population", "amount": 1 } 
+			],
+			"icon": "build",
+			"actions": [
+				
+			]
+		},
+		{
+			"name": "village",
+			"type": "community",
+			"description": "a village.",
+			"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
+			"cost": [ 
+				{ "type": "gold", "amount": 3 }, 
+				{ "type": "food", "amount": 0 }, 
+				{ "type": "population", "amount": 2 } 
+			],
+			"upkeep": [
+				{ "type": "gold", "amount": 1 }, 
+				{ "type": "food", "amount": -1 }, 
+				{ "type": "population", "amount": 1 } 
+			], "actions" : [
+				
+			]
+		}
+	],
+	"actions":
+	[
+		{
+			"name": "build",
+			"textureUrl": "assets/actions/icons/build.png"
+		}
+	]
+}

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Resource, ResourceType} from 'src/app/ui/menu-item/buyableItem-model';
+import { Resource} from 'src/app/game/entities/resource';
 import { Cell } from 'src/app/game/grid/grid';
 import { Hex } from 'honeycomb-grid';
 import { GameService } from './game.service';
-import { EntityPrototype } from 'src/app/game/entities/entity';
+import { EntityInformation } from 'src/app/game/entities/entity';
 
 @Injectable
 ({
@@ -11,14 +11,14 @@ import { EntityPrototype } from 'src/app/game/entities/entity';
 })
 export class ResourcesService
 {
-	private resourcePool: Map<ResourceType, Resource>;
+	private resourcePool: Map<string, Resource>;
 
 	constructor(private gameService: GameService)
 	{
-		this.resourcePool = new Map<ResourceType, Resource>();
-		this.resourcePool.set(ResourceType.Gold, new Resource(ResourceType.Gold, 10));
-		this.resourcePool.set(ResourceType.Food, new Resource(ResourceType.Food, 10));
-		this.resourcePool.set(ResourceType.Population, new Resource(ResourceType.Population, 4));
+		this.resourcePool = new Map<string, Resource>();
+		this.resourcePool.set("gold", new Resource("gold", 10));
+		this.resourcePool.set("food", new Resource("food", 10));
+		this.resourcePool.set("population", new Resource("population", 4));
 	}
 
 	public get $resourcePool(): Resource[]
@@ -26,10 +26,9 @@ export class ResourcesService
 		return Array.from(this.resourcePool.values());
 	}
 
-	public getResourceAmount(resourceType: ResourceType): number
+	public getResourceAmount(type: string): number
 	{
-		return this.resourcePool.get(resourceType).$amount;
-
+		return this.resourcePool.get(type).amount;
 	}
 
 	public addResource(resources: Resource[]): void
@@ -37,7 +36,7 @@ export class ResourcesService
 		for (let i = 0; i < resources.length; i++)
 		{
 			const resource: Resource = resources[i];
-			this.resourcePool.get(resource.$resourceType).$amount += resource.$amount;
+			this.resourcePool.get(resource.type).amount += resource.amount;
 		}
 	}
 
@@ -48,7 +47,7 @@ export class ResourcesService
 			for (let i = 0; i < resources.length; i++)
 			{
 				const resource: Resource = resources[i];
-				this.resourcePool.get(resource.$resourceType).$amount -= resource.$amount;
+				this.resourcePool.get(resource.type).amount -= resource.amount;
 			}
 			return true;
 		}
@@ -57,8 +56,8 @@ export class ResourcesService
 
 	public isResourceConditionMet(resource: Resource): boolean
 	{
-		const pool = this.resourcePool.get(resource.$resourceType);
-		return pool.$amount >= resource.$amount;
+		const pool = this.resourcePool.get(resource.type);
+		return pool.amount >= resource.amount;
 	}
 
 	public areResourcesConditionsMet(resources: Resource[]): boolean
@@ -66,8 +65,8 @@ export class ResourcesService
 		for (let i: number = 0; i < resources.length; i++)
 		{
 			const resource = resources[i];
-			const pool = this.resourcePool.get(resource.$resourceType);
-			if (pool.$amount < resource.$amount)
+			const pool = this.resourcePool.get(resource.type);
+			if (pool.amount < resource.amount)
 			{
 				return false;
 			}
@@ -75,7 +74,7 @@ export class ResourcesService
 		return true;
 	}
 
-	public tryPurchaseItem(origin: Hex<Cell>, item: EntityPrototype): boolean
+	public tryPurchaseItem(origin: Hex<Cell>, item: EntityInformation): boolean
 	{
 		if (!this.trySubtractResources(item.cost))
 		{

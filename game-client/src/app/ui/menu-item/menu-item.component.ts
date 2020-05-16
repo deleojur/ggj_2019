@@ -3,7 +3,7 @@ import { WindowService, WindowType } from 'src/services/window.service';
 import { ResourcesService } from 'src/services/resources.service';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from 'src/app/game/grid/grid';
-import { EntityPrototype } from 'src/app/game/entities/entity';
+import { EntityInformation } from 'src/app/game/entities/entity';
 
 @Component({
   selector: 'app-menu-item',
@@ -13,7 +13,7 @@ import { EntityPrototype } from 'src/app/game/entities/entity';
 export class MenuItemComponent implements OnInit
 {
 	@Input()
-	public menuItem: EntityPrototype;
+	public menuItem: EntityInformation;
 
 	@Input()
 	public origin: Hex<Cell>;
