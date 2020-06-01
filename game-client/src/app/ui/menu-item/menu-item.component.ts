@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { WindowService, WindowType } from 'src/services/window.service';
-import { ResourcesService } from 'src/services/resources.service';
+import { WindowType } from 'src/app/ui/window/window-manager';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from 'src/app/game/grid/grid';
-import { EntityInformation, BehaviorInformation } from 'src/app/game/entities/entity';
+import { BehaviorInformation } from 'src/app/game/entities/entity';
+import { GameManager } from 'src/app/game/game-manager';
 
 @Component({
   selector: 'app-menu-item',
@@ -18,7 +18,7 @@ export class MenuItemComponent implements OnInit
 	@Input()
 	public origin: Hex<Cell>;
 
-	constructor(private windowService: WindowService, private resourcesService: ResourcesService) { }
+	constructor() { }
 
     ngOnInit() 
     {
@@ -27,11 +27,11 @@ export class MenuItemComponent implements OnInit
 	
 	displayDetailsPage()
 	{
-		this.windowService.openWindow(WindowType.ItemDetail, { name: this.menuItem.name, data: { origin: this.origin, item: this.menuItem } });
+		GameManager.instance.windowManager.openWindow(WindowType.ItemDetail, { name: this.menuItem.name, data: { origin: this.origin, item: this.menuItem } });
 	}
 
 	buyItem()
 	{
-		this.resourcesService.tryPurchaseItem(this.menuItem, this.origin);
+		GameManager.instance.resourceManager.tryPurchaseItem(this.menuItem, this.origin);
 	}
 }

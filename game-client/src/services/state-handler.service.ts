@@ -8,7 +8,7 @@ import { state_clientConnection } from './../app/game/states/host-states/state_c
 import { state_startGame } from 'src/app/game/states/state_start-game';
 import { state_requestJoinRoom } from 'src/app/game/states/client-states/state_request-join-room';
 import { state_playerStartingPositions } from 'src/app/game/states/turn-state-handling/state_player-starting-positions';
-import { WindowService, WindowType, WindowItem } from './window.service';
+import { WindowType, WindowItem } from '../app/ui/window/window-manager';
 import { ItemOverviewWindowComponent } from 'src/app/ui/window/item-overview-window/item-overview-window.component';
 import { ItemDetailWindowComponent } from 'src/app/ui/window/item-detail-window/item-detail-window.component';
 import { SelectCellComponent } from 'src/app/ui/window/select-cell/select-cell.component';
@@ -27,15 +27,10 @@ export class StateHandlerService
     private currentStates: PrimaryState<RequestData>[];
 
     constructor(
-		private connectionService: ConnectionService,
-		private windowService: WindowService)
+		private connectionService: ConnectionService)
     {
         this.states = new Map<RequestState, PrimaryState<RequestData>>();
 		this.registerStates();
-
-		this.windowService.subscribeWindow(WindowType.ItemOverview, new WindowItem(ItemOverviewWindowComponent));
-		this.windowService.subscribeWindow(WindowType.ItemDetail, new WindowItem(ItemDetailWindowComponent));
-		this.windowService.subscribeWindow(WindowType.SelectCell, new WindowItem(SelectCellComponent));
     }
 
     private registerStates(): void

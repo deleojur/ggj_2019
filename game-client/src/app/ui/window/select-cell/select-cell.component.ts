@@ -4,7 +4,6 @@ import { GridManager } from 'src/app/game/grid/grid';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from 'src/app/game/grid/grid';
 import { InnerWindowComponent } from '../window.component';
-import { WindowService } from 'src/services/window.service';
 
 @Component({
   selector: 'app-select-cell',
@@ -19,25 +18,24 @@ export class SelectCellComponent implements OnInit, InnerWindowComponent
 	data: any;
 	grid: GridManager;
 
-	constructor(private windowService: WindowService) 
+	constructor() 
 	{
 		this.grid = GameManager.instance.grid;
 	}
 
 	ngOnInit() 
 	{
-		const neighbors: Hex<Cell>[] = this.grid.getNeighbors(this.data.origin);
-		this.grid.renderValidCells(neighbors);
+		GameManager.instance.renderValidCells(this.data.origin);
 	}
 
 	backToPreviousMenu(): void
 	{
-		this.windowService.goToPreviousWindow();
+		GameManager.instance.windowManager.goToPreviousWindow();
 	}
 	  
 	beforeCloseWindow(n: number): void
 	{
-		this.grid.clearValidCells();
+		GameManager.instance.clearValidCells();
 		if (n == 0)
 		{
 			this.grid.clearSelectedCells();

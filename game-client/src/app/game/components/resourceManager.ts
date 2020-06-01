@@ -1,21 +1,14 @@
-import { Injectable } from '@angular/core';
 import { Resource} from 'src/app/game/entities/resource';
 import { Cell } from 'src/app/game/grid/grid';
 import { Hex } from 'honeycomb-grid';
-import { EntityInformation, BehaviorInformation } from 'src/app/game/entities/entity';
+import { BehaviorInformation } from 'src/app/game/entities/entity';
 import { GameManager } from 'src/app/game/game-manager';
-import { TurnInformation } from 'src/app/game/turns/turn-command';
-import { WindowService, WindowType } from './window.service';
 
-@Injectable
-({
-  providedIn: 'root'
-})
-export class ResourcesService
+export class ResourceManager
 {
 	private resourcePool: Map<string, Resource>;
 
-	constructor(private windowService: WindowService)
+	constructor()
 	{
 		this.resourcePool = new Map<string, Resource>();
 		this.resourcePool.set("gold", new Resource("gold", 10));
@@ -42,7 +35,7 @@ export class ResourcesService
 		}
 	}
 
-	private subtractResources(resources: Resource[]): void
+	public subtractResources(resources: Resource[]): void
 	{
 		for (let i = 0; i < resources.length; i++)
 		{
@@ -89,30 +82,7 @@ export class ResourcesService
 	{
 		if (this.areResourcesConditionsMet(item.cost))
 		{
-			//get some more information, like the target cell.
-			/*var blaat: TurnInformation = 
-			{
-				originCell: origin,
-				targetCell: null, //get the target cell, if applicable.
-				originEntity: this.origin.entity, //the entity before the command started.
-				targetEntity: null, //create a new entity if there is one in the item.
-				textureUrl: this.item.textureUrl,
-				destroysSelf: this.item.destroySelf
-			};*/
-			if (item.range > 0)
-			{
-				this.windowService.openWindow(WindowType.SelectCell, { name: '¿Que?', data: 
-				{
-					//get a list of possible tiles.
-					origin: origin
-				}});
-			} else
-			{
-				this.windowService.closeAllWindows(() =>
-				{
-					this.subtractResources(item.cost);
-				});
-			}
+			GameManager.instance.purchaseItem(item, origin);
 			return true;
 		}
 		return false;

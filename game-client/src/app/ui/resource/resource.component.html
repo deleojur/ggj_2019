@@ -8,11 +8,11 @@
 	<img class="resource-bg" src="assets/UI/window/grid4L.svg">
 	<img class="resource-fg-number" src={{resource.textureUrl}}>
 
-	<div *ngIf="upkeep === false && resourceService.isResourceConditionMet(resource)">
+	<div *ngIf="upkeep === false && isResourceMet()">
 		<img class="amountHolder-background" src="assets/UI/button/r_bg_blue.png">
 	</div>
 
-	<div *ngIf="upkeep === false && resourceService.isResourceConditionMet(resource) === false">
+	<div *ngIf="upkeep === false && isResourceMet() === false">
 		<img class="amountHolder-background" src="assets/UI/button/r_bg_red.png">
 	</div>
 

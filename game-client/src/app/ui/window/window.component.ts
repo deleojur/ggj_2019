@@ -1,7 +1,8 @@
 import { Component, OnInit, ComponentFactoryResolver, ComponentFactory, ViewChild, AfterViewInit } from '@angular/core';
 import { WindowDirective } from './window-directive';
-import { WindowItem, WindowService } from 'src/services/window.service';
+import { WindowItem, WindowManager } from 'src/app/ui/window/window-manager';
 import { Subject, Subscription } from 'rxjs';
+import { GameManager } from 'src/app/game/game-manager';
 
 export interface WindowOptions
 {
@@ -37,14 +38,16 @@ export class WindowComponent implements OnInit, AfterViewInit
 	
 	currentWindow: WindowItem = null;
 	private onTransitionEnd: Subject<null>;
+	private _windowManager: WindowManager;
 
 	@ViewChild(WindowDirective, {static: true}) windowHost: WindowDirective;
 
-    constructor(private windowService: WindowService, private componentFactoryResolver: ComponentFactoryResolver) { }
+    constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
     ngOnInit()
     {
 		this.onTransitionEnd = new Subject<null>();
+		this._windowManager = GameManager.instance.windowManager;
 	}
 
 	ngAfterViewInit(): void
@@ -107,7 +110,7 @@ export class WindowComponent implements OnInit, AfterViewInit
         const closeWindow = $event.target.classList.contains('close-ui-window');
         if (closeWindow)
         {
-            this.windowService.closeAllWindows();
+            this._windowManager.closeAllWindows();
         }
     }
 }

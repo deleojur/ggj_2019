@@ -21,10 +21,7 @@ export enum WindowType
 	Settings
 }
 
-@Injectable({
-  	providedIn: 'root'
-})
-export class WindowService
+export class WindowManager
 {
 	private _windowComponent: WindowComponent;
 	private _windows: Stack<WindowData>;
@@ -50,16 +47,13 @@ export class WindowService
 	{
 		if (this._windows.size > 0)
 		{
-			const window: WindowData = this._windows.pop();
-			if (this._windows.size > 0)
+			this._windows.pop();
+			const prev: WindowData = this._windows.head;
+			const n: number = this._windows.size;
+			this._windowComponent.closeWindow(n, () => 
 			{
-				const prev: WindowData = this._windows.head;
-				const n: number = this._windows.size;
-				this._windowComponent.closeWindow(n, () => 
-				{
-					this._windowComponent.openWindow(prev.windowItem, prev.data, n, transitionEnded);
-				});
-			}
+				this._windowComponent.openWindow(prev.windowItem, prev.data, n, transitionEnded);
+			});
 		}
 	}
 
@@ -76,6 +70,11 @@ export class WindowService
 				this._windows.pop();
 			}
 		}
+	}
+
+	public get isWindowOpen(): boolean
+	{
+		return this._windows.size > 0;
 	}
 
 	public openWindow(windowType: WindowType, windowOptions: WindowOptions, transitionEnded?: () => void): WindowItem

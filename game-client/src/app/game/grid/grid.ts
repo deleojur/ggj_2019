@@ -187,13 +187,14 @@ export class GridManager
 		this.selectedCellsGraphics.clear();
 	}
 
-	public fillBuildableSelection(selection: Hex<Cell>[]): void
+	public fillBuildableSelection(selection: Hex<Cell>[], validSelection: Hex<Cell>[]): void
 	{
 		for (let i = 0; i < selection.length; i++)
 		{
 			const cell: Hex<Cell> = selection[i];
 			const polygons: Polygon[] = this.getPolygon([cell]);
-			this.validCellsGraphics.beginFill((cell.buildable && !cell.entity) ? 0x00ff00 : 0xff0000, 0.45);
+			const isValid: boolean = validSelection.indexOf(cell) > -1;
+			this.validCellsGraphics.beginFill(isValid ? 0x00ff00 : 0xff0000, 0.45);
 			polygons.forEach(polygon => 
 			{
 				this.validCellsGraphics.drawPolygon(polygon);
@@ -224,7 +225,23 @@ export class GridManager
             }
         });
         return outline;
-    }
+	}
+	
+	//can move, can build, can move on entities?
+	public getListOfValidNeighbors(origin: Hex<Cell>): Hex<Cell>[]
+	{
+		const validNeighbors: Hex<Cell>[] = [];
+		const neighbors: Hex<Cell>[] = this.grid.neighborsOf(origin);
+
+		neighbors.forEach(e =>
+		{
+			if (e.buildable && !e.entity)
+			{
+				validNeighbors.push(e);
+			}
+		});
+		return validNeighbors;
+	}
 
 	private renderSelectedCellsOutline(selection: Hex<Cell>[]): void
 	{
@@ -273,12 +290,13 @@ export class GridManager
 		this.selectedCellsGraphics.lineStyle(0);
     }
 
-    public renderValidCells(selection: Hex<Cell>[]): void
+    public renderValidCells(origin: Hex<Cell>, validNeighbors: Hex<Cell>[]): void
     {
-		this.fillBuildableSelection(selection);
+		const neighbors: Hex<Cell>[] = this.grid.neighborsOf(origin);
+		this.fillBuildableSelection(neighbors, validNeighbors);
 
 		this.validCellsGraphics.lineStyle(5, 0xfada5e, 1, 0.5);
-		this.renderSelectedCellsOutline(selection);
+		this.renderSelectedCellsOutline(neighbors);
 		this.validCellsGraphics.lineStyle(0);
     }
 

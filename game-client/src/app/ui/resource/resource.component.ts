@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Resource } from '../../game/entities/resource';
-import { ResourcesService } from 'src/services/resources.service';
+import { GameManager } from 'src/app/game/game-manager';
 
 @Component
 ({
@@ -16,9 +16,14 @@ export class ResourceComponent implements OnInit
 	@Input()
 	upkeep: boolean = false;
 
-	constructor(public resourceService: ResourcesService)
+	constructor()
 	{
 
+	}
+
+	isResourceMet(): boolean
+	{
+		return GameManager.instance.resourceManager.isResourceConditionMet(this.resource);
 	}
 
 	get amountAsText(): string

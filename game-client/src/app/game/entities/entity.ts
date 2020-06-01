@@ -30,13 +30,14 @@ export interface BehaviorInformation extends PrototypeInformation
 	range: number;
 	destroySelf?: boolean;
 	creates?: string;
+	commandIconTextureUrl: string;
 }
 
 export class EntityPrototype
 {
 	constructor(public name: string, public texture: Texture, public behaviors: BehaviorInformation[])
 	{
-		//(<any>EntityType)[e.name]
+				
 	}
 }
 

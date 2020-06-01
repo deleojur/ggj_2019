@@ -8,6 +8,7 @@
 
 		"assets/Terrain_Medieval/Decor/villageSmall03.png",
 		"assets/Terrain_Medieval/Decor/farm00.png",
+		"assets/Terrain_Medieval/Decor/elvenLodge.png",
 
 		"assets/Terrain_Medieval/Roads/hexRoad-000001-00.png",
 		"assets/Terrain_Medieval/Roads/hexRoad-000001-01.png",
@@ -33,7 +34,7 @@
 		"assets/Terrain_Medieval/Roads/hexRoad-101000-00.png",
 		"assets/Terrain_Medieval/Roads/hexRoad-101000-01.png",
 
-		"assets/actions/icons/build.png"
+		"assets/actions/build.png"
 	],
 	"entities":
 	[
@@ -78,7 +79,8 @@
 					"name": "build monastery",
 					"type": "BuildBehavior",
 					"description": "upgrade to a village.",
-					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
+					"textureUrl": "assets/Terrain_Medieval/Decor/elvenLodge.png",
+					"commandIconTextureUrl": "assets/actions/build.png",
 					"creates": "monastery",
 					"range": 1,
 					"cost": 
@@ -156,7 +158,7 @@
 					"name": "build monastery",
 					"type": "BuildBehavior",
 					"description": "upgrade to a village.",
-					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
+					"textureUrl": "assets/Terrain_Medieval/Decor/elvenLodge.png",
 					"creates": "monastery",
 					"range": 1,
 					"cost": 
@@ -247,7 +249,7 @@
 		{
 			"name": "monastery",
 			"description": "a monastery.",
-			"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
+			"textureUrl": "assets/Terrain_Medieval/Decor/elvenLodge.png",
 			"cost": 
 			[ 
 				{ "type": "gold", "amount": 3 }, 

@@ -10,7 +10,7 @@ import { PositionData } from '../../states/request-data';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from '../../grid/grid';
 import { ViewportManager } from '../../render/viewport';
-import { WindowService, WindowType, WindowItem } from 'src/services/window.service';
+import { WindowType, WindowItem } from 'src/app/ui/window/window-manager';
 import { GameManager } from '../../game-manager';
 
 @Component({
@@ -26,8 +26,7 @@ export class ClientGameComponent implements Game, AfterViewInit
 
     constructor(
         private stateHandlerService: StateHandlerService,
-		private clientUtilsService: ClientUtilsService,
-		private windowService: WindowService) 
+		private clientUtilsService: ClientUtilsService) 
         {
             
         }
@@ -46,12 +45,12 @@ export class ClientGameComponent implements Game, AfterViewInit
 	
 	ngAfterViewInit()
 	{
-		
+		this.attachEventListeners();	
 	}
 
-    private attachEventListeners(container: ElementRef): void
+    private attachEventListeners(): void
     {
-        container.nativeElement.addEventListener('touchstart', this.touchStart.bind(this));
+        window.addEventListener('touchstart', this.touchStart.bind(this));
         window.addEventListener('touchend', this.touchEnd.bind(this));
         
         window.addEventListener('mousedown', this.mouseDown.bind(this));
@@ -65,18 +64,14 @@ export class ClientGameComponent implements Game, AfterViewInit
 
     private onUp(x: number, y: number): void
     {
-        const interactionEnd: Vector = new Vector(x, y);
-        const dist: number = this.interactionStart.distance(interactionEnd);
+        const interaction: Vector = new Vector(x, y);
+        const dist: number = this.interactionStart.distance(interaction);
         
         if (dist < 2)
         {
             //get the hex and do something with it.
-            const hex = GameManager.instance.grid.getHexAt(interactionEnd);
-			if (hex.entity)
-			{
-				const window: WindowItem = this.windowService.openWindow(WindowType.ItemOverview, { name: 'Select Action', data: { origin: hex, entity: hex.entity } });
-				GameManager.instance.grid.renderHexCorners([hex]);
-			}
+            const hex = GameManager.instance.grid.getHexAt(interaction);
+			GameManager.instance.hexClicked(hex);
         }
     }
 

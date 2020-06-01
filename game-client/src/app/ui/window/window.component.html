@@ -2,7 +2,7 @@
 	[ngClass]="{'animate-in': showWindow, 'animate-out': !showWindow}"
 	(transitionend)="transitionEnd($event)">
 
-<div style="width: 100%;">
+<div>
     <div class="ui-parent" [ngStyle]="{marginTop: top}">
 		<img class="banner" src="assets/UI/window/banner_red1.svg">
 		<h4 class="bannerText uiText">{{windowName}}</h4>

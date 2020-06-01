@@ -1,7 +1,7 @@
 <div class="fixed">
 	<img class="background" src="assets/UI/window/wood_plank1.svg">
 	<div class="row resource-container">
-		<div class="col-4" *ngFor="let resource of resourcesService.$resourcePool">
+		<div class="col-4" *ngFor="let resource of resourcePool">
 			<div style="position: relative; z-index: 3;">
 				<img class="resource-icon" src="assets/UI/window/grid4L.svg">
 				<img class="resource-icon-fg" src="{{resource.textureUrl}}">

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { WindowService, WindowType } from 'src/services/window.service';
-import { ResourcesService } from 'src/services/resources.service';
+import { WindowType } from 'src/app/ui/window/window-manager';
+import { ResourceManager } from 'src/app/game/components/resourceManager';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from 'src/app/game/grid/grid';
 import { BehaviorInformation } from 'src/app/game/entities/entity';
@@ -21,7 +21,7 @@ export class ItemDetailWindowComponent implements OnInit, InnerWindowComponent
 	menuItem: BehaviorInformation;
 	private origin: Hex<Cell>;
 
-	constructor(public windowService: WindowService, private resourcesService: ResourcesService) { }
+	constructor() { }
 
 	ngOnInit() 
 	{
@@ -31,7 +31,12 @@ export class ItemDetailWindowComponent implements OnInit, InnerWindowComponent
 
 	buyItem()
 	{
-		this.resourcesService.tryPurchaseItem(this.menuItem, this.origin);
+		GameManager.instance.resourceManager.tryPurchaseItem(this.menuItem, this.origin);
+	}
+
+	goToPreviousWindow(): void
+	{
+		GameManager.instance.windowManager.goToPreviousWindow();
 	}
 
 	beforeCloseWindow(n: number): void

@@ -1,12 +1,17 @@
 import * as PIXI from 'pixi.js';
 import { Subject } from 'rxjs';
 import { Hex } from 'honeycomb-grid';
-import { EntityInformation, Entity } from 'src/app/game/entities/entity';
+import { EntityInformation, Entity, BehaviorInformation } from 'src/app/game/entities/entity';
 import { TurnsSystem } from 'src/app/game/turns/turns-system';
 import { AssetLoader } from 'src/app/asset-loader';
 import { ViewportManager } from './render/viewport';
 import { GridManager, Cell } from './grid/grid';
 import { TurnCommand, TurnInformation } from './turns/turn-command';
+import { WindowManager, WindowType, WindowItem } from '../ui/window/window-manager';
+import { ResourceManager } from 'src/app/game/components/resourceManager';
+import { ItemOverviewWindowComponent } from '../ui/window/item-overview-window/item-overview-window.component';
+import { ItemDetailWindowComponent } from '../ui/window/item-detail-window/item-detail-window.component';
+import { SelectCellComponent } from '../ui/window/select-cell/select-cell.component';
 
 export class GameManager
 {
@@ -17,6 +22,13 @@ export class GameManager
 	private _turnSystem: TurnsSystem;
 	private ratio: number;
 
+	private _resourceManager: ResourceManager;
+	private _windowManager: WindowManager;
+
+	private _validCells: Hex<Cell>[] = null;
+	private _originCell: Hex<Cell>;
+	private _currentItem: BehaviorInformation = null;
+
 	private static _instance: GameManager = null;
 	public static get instance(): GameManager
 	{
@@ -25,6 +37,22 @@ export class GameManager
 			this._instance = new GameManager();
 		}
 		return this._instance;
+	}
+
+	private constructor()
+	{
+		this._resourceManager = new ResourceManager();
+		this.initWindowManager();
+	}
+
+	public get resourceManager(): ResourceManager
+	{
+		return this._resourceManager;
+	}
+
+	public get windowManager(): WindowManager
+	{
+		return this._windowManager;
 	}
 
     public get grid(): GridManager
@@ -54,13 +82,13 @@ export class GameManager
     private initGrid(cb: () => void): void
     {
 		this._grid = new GridManager(this.viewport, this.graphics);
+		this._turnSystem = new TurnsSystem(this.viewport);
 		AssetLoader.instance.loadAssetsAsync().then(() => 
 		{			
 			const size: PIXI.Point = this._grid.generateWorld();
 			this.viewport.initViewport(size.x, size.y);
 			this._grid.initLayers();
-			this._turnSystem = new TurnsSystem(this._viewport);
-			this.viewport.$viewport.addChild(this.graphics);			
+			this.viewport.$viewport.addChild(this.graphics);
 			return cb();
 		});
     }
@@ -68,11 +96,19 @@ export class GameManager
     public init(cb: () => void): HTMLCanvasElement
     {
         this.initPixi();
-        this._viewport = new ViewportManager(this.pixi);
+		this._viewport = new ViewportManager(this.pixi);
         this.initGrid(cb);
         this.resizePixi();
         return this.pixi.view;
     }
+
+	private initWindowManager(): void
+	{
+		this._windowManager = new WindowManager();
+		this.windowManager.subscribeWindow(WindowType.ItemOverview, new WindowItem(ItemOverviewWindowComponent));
+		this.windowManager.subscribeWindow(WindowType.ItemDetail, new WindowItem(ItemDetailWindowComponent));
+		this.windowManager.subscribeWindow(WindowType.SelectCell, new WindowItem(SelectCellComponent));
+	}
 
     generateDebuggerClients(): ClientData[]
     {
@@ -87,6 +123,49 @@ export class GameManager
         return debugClients;
 	}
 	
+	public hexClicked(hex: Hex<Cell>): void
+	{
+		if (this._validCells !== null)
+		{
+			const isHexValid: boolean = this._validCells.indexOf(hex) > -1;
+			if (isHexValid)
+			{
+				this._windowManager.closeAllWindows(() =>
+				{
+					this._resourceManager.subtractResources(this._currentItem.cost);
+					const entity: Entity = this._grid.createEntity(hex, 'someone', this._currentItem.creates);
+					console.log(this._currentItem);
+					const turnInformatioin: TurnInformation = 
+					{
+						originCell: this._originCell,
+						targetCell: hex, //get the target cell, if applicable.
+						originEntity: null, //the entity before the command started.
+						targetEntity: entity, //create a new entity if there is one in the item.
+						iconTextureUrl: this._currentItem.commandIconTextureUrl,
+						cost: this._currentItem.cost
+					};
+					this._turnSystem.addTurnCommand(turnInformatioin);									
+				});
+			}
+		} else if (hex.entity && !this.windowManager.isWindowOpen)
+		{
+			this.windowManager.openWindow(WindowType.ItemOverview, { name: 'Select Action', data: { origin: hex, entity: hex.entity } });
+			GameManager.instance.grid.renderHexCorners([hex]);
+		}
+	}
+
+	public renderValidCells(origin: Hex<Cell>): void
+	{
+		this._validCells = this.grid.getListOfValidNeighbors(origin);
+		this.grid.renderValidCells(origin, this._validCells);
+	}
+
+	public clearValidCells(): void
+	{
+		this._validCells = null;
+		this.grid.clearValidCells();
+	}
+
 	public getCells(origin: Hex<Cell>): Hex<Cell>[]
 	{
 		//TODO: temporary; get a list of hexes that is valid for an action.
@@ -108,25 +187,33 @@ export class GameManager
         this.pixi.stage.scale.set(1, 1);
 	}
 
-	public addTurnCommand(turnCommand: TurnInformation): void
-	{
-		//create a temporary turn command.
-		//when the player cancels, the state will return to what it was before.
-		this._turnSystem.addTurnCommand(turnCommand);
-	}
-
 	public removeTurnCommand(turnCommand: TurnCommand): void
 	{
 		
 	}
 
-	public createEntity(origin: Hex<Cell>, playerId: string, entityName: string): Entity
-	{
-		return this.grid.createEntity(origin, playerId, entityName);
-	}
-
 	public removeEntity(origin: Hex<Cell>): void
 	{
 
+	}
+
+	public purchaseItem(item: BehaviorInformation, origin: Hex<Cell>): void
+	{
+		if (item.range > 0)
+		{
+			this._windowManager.openWindow(WindowType.SelectCell, { name: '¿Que?', data: 
+			{
+				//get a list of possible tiles.
+				origin: origin
+			}});
+			this._originCell = origin;
+			this._currentItem = item;
+		} else
+		{
+			this._windowManager.closeAllWindows(() =>
+			{
+				this._resourceManager.subtractResources(item.cost);
+			});
+		}
 	}
 }

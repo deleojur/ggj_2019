@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ResourcesService } from 'src/services/resources.service';
+import { Resource } from 'src/app/game/entities/resource';
+import { GameManager } from 'src/app/game/game-manager';
 
 @Component({
   selector: 'app-resources-hud',
@@ -8,12 +9,14 @@ import { ResourcesService } from 'src/services/resources.service';
 })
 export class ResourcesHudComponent implements OnInit
 {
-	constructor(public resourcesService: ResourcesService)
+	resourcePool: Resource[];
+	constructor()
 	{
 		
 	}
 
 	ngOnInit() 
 	{
+		this.resourcePool = GameManager.instance.resourceManager.$resourcePool;
 	}
 }

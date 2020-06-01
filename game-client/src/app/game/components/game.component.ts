@@ -1,6 +1,5 @@
 import { Component, AfterViewInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { WindowComponent } from 'src/app/ui/window/window.component';
-import { WindowService, WindowType } from 'src/services/window.service';
 import { GameManager } from '../game-manager';
 
 export interface Game
@@ -26,7 +25,7 @@ export class GameComponent implements AfterViewInit
     @ViewChild('pixiContainer', {static: false}) pixiContainer: ElementRef;
     @ViewChild(WindowComponent, {static: true}) windowContainer: WindowComponent;
 
-    constructor(private windowService: WindowService)
+    constructor()
     {
     }
     
@@ -40,7 +39,7 @@ export class GameComponent implements AfterViewInit
             return this.pixiContainer.nativeElement.appendChild(canvas);
 		});
 
-		this.windowService.windowComponent = this.windowContainer;
+		GameManager.instance.windowManager.windowComponent = this.windowContainer;
     }
 
     @HostListener('window:resize', ['$event'])
