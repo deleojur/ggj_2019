@@ -1,8 +1,6 @@
-import { Sprite, Loader, Texture } from 'pixi.js';
 import { Cell } from '../grid/grid';
 import { Hex } from 'honeycomb-grid';
-import { Entity, EntityPrototype, EntityType, EntityInformation } from './entity';
-import { Resource } from 'src/app/game/entities/resource';
+import { Entity } from './entity';
 import { AssetLoader } from 'src/app/asset-loader';
 
 export class EntityManager
@@ -17,13 +15,15 @@ export class EntityManager
 		return entity;
 	}
 
+	public removeEntity(origin: Hex<Cell>): Entity
+	{
+		const entity: Entity = this._entities.get(origin);
+		this._entities.delete(origin);
+		return entity;
+	}
+
 	constructor()
 	{
 		this._entities = new Map<Hex<Cell>, Entity>();
-	}
-
-	public getEntityPrototype(origin: Hex<Cell>): EntityInformation[]
-	{
-		return Array.from(AssetLoader.instance.entityInformation.values());
 	}
 }

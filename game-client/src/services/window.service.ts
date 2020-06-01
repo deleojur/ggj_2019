@@ -10,6 +10,7 @@ export enum WindowType
 {
 	ItemOverview,
 	ItemDetail,
+	SelectCell,
 	Settings
 }
 

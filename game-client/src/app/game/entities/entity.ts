@@ -1,4 +1,3 @@
-import { EntityBehavior } from './entity-behavior/entity-behavior';
 import { Resource } from 'src/app/game/entities/resource';
 import { Sprite, Texture } from 'pixi.js';
 import { Hex } from 'honeycomb-grid';
@@ -11,32 +10,45 @@ export enum EntityType
 	Structure
 }
 
-export interface EntityInformation
+export interface PrototypeInformation
 {
 	name: string;
-	description: string;
 	textureUrl: string;
-	cost: Resource[];
+	description: string;
+	cost?: Resource[];
 	upkeep?: Resource[];
+}
+
+export interface EntityInformation extends PrototypeInformation
+{
+	behaviors?: BehaviorInformation[];
+}
+
+export interface BehaviorInformation extends PrototypeInformation
+{
+	type: string;
+	range: number;
+	destroySelf?: boolean;
+	creates?: string;
 }
 
 export class EntityPrototype
 {
-	constructor(public name: string, public texture: Texture, public behavior: EntityBehavior)
+	constructor(public name: string, public texture: Texture, public behaviors: BehaviorInformation[])
 	{
 		//(<any>EntityType)[e.name]
 	}
 }
 
-//TODO: implement the prototype pattern?
-
 export class Entity extends Sprite
 {	
-	private _behaviors: EntityBehavior[];
-
-	constructor(private prototype: EntityPrototype, private _location: Hex<Cell>, private _ownerId: string)
+	public get behaviors(): BehaviorInformation[]
 	{
-		super(prototype.texture);
-		console.log(prototype);
+		return this._prototype.behaviors;
+	}
+
+	constructor(private _prototype: EntityPrototype, private _location: Hex<Cell>, private _ownerId: string)
+	{
+		super(_prototype.texture);
 	}
 }

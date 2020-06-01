@@ -1,7 +1,6 @@
 import { ClientUtilsService } from './../../../../services/utils/client-utils.service';
 import { GridManager } from './../../grid/grid';
 import { Component, ElementRef, AfterViewInit } from '@angular/core';
-import { GameService } from 'src/services/game.service';
 import { Vector } from 'vector2d';
 import { Game } from '../game.component';
 import { StateHandlerService } from 'src/services/state-handler.service';
@@ -12,6 +11,7 @@ import { Hex } from 'honeycomb-grid';
 import { Cell } from '../../grid/grid';
 import { ViewportManager } from '../../render/viewport';
 import { WindowService, WindowType, WindowItem } from 'src/services/window.service';
+import { GameManager } from '../../game-manager';
 
 @Component({
   selector: 'app-client-game',
@@ -27,16 +27,15 @@ export class ClientGameComponent implements Game, AfterViewInit
     constructor(
         private stateHandlerService: StateHandlerService,
 		private clientUtilsService: ClientUtilsService,
-		private windowService: WindowService,
-        private gameService: GameService) 
+		private windowService: WindowService) 
         {
             
         }
 
     onMapLoaded(): void
     {
-        this.grid = this.gameService.grid;
-        this.viewport = this.gameService.viewport;
+        this.grid = GameManager.instance.grid;
+        this.viewport = GameManager.instance.viewport;
         this.stateHandlerService.activateState<PositionData>(state_playerStartingPositions, (positionData) =>
         {
 			const hex: Hex<Cell> = this.grid.getHex(positionData.x, positionData.y);
@@ -72,9 +71,11 @@ export class ClientGameComponent implements Game, AfterViewInit
         if (dist < 2)
         {
             //get the hex and do something with it.
-            const hex = this.gameService.grid.getHexAt(interactionEnd);
-			this.gameService.selectHex(hex);
-			const window: WindowItem = this.windowService.openWindow(WindowType.ItemOverview, { name: 'Tile Menu', data: { origin: hex } });
+            const hex = GameManager.instance.grid.getHexAt(interactionEnd);
+			if (hex.entity)
+			{
+				const window: WindowItem = this.windowService.openWindow(WindowType.ItemOverview, { name: 'Select Action', data: { origin: hex, entity: hex.entity } });
+			}
         }
     }
 

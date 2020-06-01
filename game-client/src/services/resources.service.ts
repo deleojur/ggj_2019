@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { Resource} from 'src/app/game/entities/resource';
 import { Cell } from 'src/app/game/grid/grid';
 import { Hex } from 'honeycomb-grid';
-import { GameService } from './game.service';
-import { EntityInformation } from 'src/app/game/entities/entity';
+import { EntityInformation, BehaviorInformation } from 'src/app/game/entities/entity';
+import { GameManager } from 'src/app/game/game-manager';
+import { TurnInformation } from 'src/app/game/turns/turn-command';
+import { WindowService, WindowType } from './window.service';
 
 @Injectable
 ({
@@ -13,7 +15,7 @@ export class ResourcesService
 {
 	private resourcePool: Map<string, Resource>;
 
-	constructor(private gameService: GameService)
+	constructor(private windowService: WindowService)
 	{
 		this.resourcePool = new Map<string, Resource>();
 		this.resourcePool.set("gold", new Resource("gold", 10));
@@ -37,6 +39,15 @@ export class ResourcesService
 		{
 			const resource: Resource = resources[i];
 			this.resourcePool.get(resource.type).amount += resource.amount;
+		}
+	}
+
+	private subtractResources(resources: Resource[]): void
+	{
+		for (let i = 0; i < resources.length; i++)
+		{
+			const resource: Resource = resources[i];
+			this.resourcePool.get(resource.type).amount -= resource.amount;
 		}
 	}
 
@@ -74,14 +85,35 @@ export class ResourcesService
 		return true;
 	}
 
-	public tryPurchaseItem(origin: Hex<Cell>, item: EntityInformation): boolean
+	public tryPurchaseItem(item: BehaviorInformation, origin: Hex<Cell>): boolean
 	{
-		if (!this.trySubtractResources(item.cost))
+		if (this.areResourcesConditionsMet(item.cost))
 		{
-			return false;
+			this.windowService.closeWindow(() =>
+			{
+				this.subtractResources(item.cost);
+				console.log(item);
+				if (item.range > 0)
+				{
+					this.windowService.openWindow(WindowType.SelectCell, { name: '¿Que?', data: 
+					{
+						//get a list of possible tiles.
+						origin: origin
+					}});
+				}
+				//get some more information, like the target cell.
+				/*var blaat: TurnInformation = 
+				{
+					originCell: origin,
+					targetCell: null, //get the target cell, if applicable.
+					originEntity: this.origin.entity, //the entity before the command started.
+					targetEntity: null, //create a new entity if there is one in the item.
+					textureUrl: this.item.textureUrl,
+					destroysSelf: this.item.destroySelf
+				};*/
+			});
+			return true;
 		}
-
-		this.gameService.createEntity(origin, 'bob', item.name);
-		return true;
+		return false;
 	}
 }

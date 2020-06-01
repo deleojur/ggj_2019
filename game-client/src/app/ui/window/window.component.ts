@@ -1,7 +1,7 @@
-import { Component, OnInit, ComponentFactoryResolver, ComponentFactory, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver, ComponentFactory, ViewChild, AfterViewInit, ComponentRef } from '@angular/core';
 import { WindowDirective } from './window-directive';
 import { WindowItem } from 'src/services/window.service';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 
 export interface WindowOptions
 {
@@ -16,8 +16,12 @@ export interface WindowOptions
 })
 export class WindowComponent implements OnInit, AfterViewInit
 {
+	currentComponent: any = undefined;
 	windowName: string = '';
 	showWindow: boolean = false;
+
+	width: string;
+	top: string;
 	
 	currentWindow: WindowItem = null;
 	private onTransitionEnd: Subject<null>;
@@ -60,8 +64,11 @@ export class WindowComponent implements OnInit, AfterViewInit
 		const viewContainerRef = this.windowHost.viewContainerRef;
 		viewContainerRef.clear();
 
-		const componentRef = viewContainerRef.createComponent(componentFactory);
-		componentRef.instance.data = options.data;
+		this.currentComponent = viewContainerRef.createComponent(componentFactory).instance;
+		this.currentComponent.data = options.data;
+
+		this.width = this.currentComponent.width || '45vh';
+		this.top = this.currentComponent.top || '-50px';
 
 		this.showWindow = true;	
 		this.waitForTransitionEnd(transitionEnded);		
@@ -70,6 +77,10 @@ export class WindowComponent implements OnInit, AfterViewInit
 	public closeWindow(transitionEnded?: () => void): void
 	{
 		this.showWindow = false;
+		if (this.currentComponent.closeWindow)
+		{
+			this.currentComponent.closeWindow();
+		}
 		this.waitForTransitionEnd(transitionEnded);	
 	}
 

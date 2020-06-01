@@ -1,31 +1,31 @@
-import { Cell } from './../app/game/grid/grid';
-import { Injectable } from '@angular/core';
-import { ViewportManager } from '../app/game/render/viewport';
-import { GridManager } from '../app/game/grid/grid';
 import * as PIXI from 'pixi.js';
 import { Subject } from 'rxjs';
 import { Hex } from 'honeycomb-grid';
-import { EntityPrototype, EntityInformation } from 'src/app/game/entities/entity';
+import { EntityInformation, Entity } from 'src/app/game/entities/entity';
 import { TurnsSystem } from 'src/app/game/turns/turns-system';
 import { AssetLoader } from 'src/app/asset-loader';
+import { ViewportManager } from './render/viewport';
+import { GridManager, Cell } from './grid/grid';
+import { TurnCommand, TurnInformation } from './turns/turn-command';
 
-@Injectable({
-    providedIn: 'root'
-})
-export class GameService
+export class GameManager
 {
     private pixi: PIXI.Application; // this will be our pixi application
     private graphics: PIXI.Graphics;
     private _viewport: ViewportManager;
 	private _grid: GridManager;
 	private _turnSystem: TurnsSystem;
-    private ratio: number;
-    private _onCellSelected: Subject<Hex<Cell>> = new Subject<Hex<Cell>>();
+	private ratio: number;
 
-    public get onCellSelected(): Subject<Hex<Cell>>
-    {
-        return this._onCellSelected;
-    }
+	private static _instance: GameManager = null;
+	public static get instance(): GameManager
+	{
+		if (this._instance === null)
+		{
+			this._instance = new GameManager();
+		}
+		return this._instance;
+	}
 
     public get grid(): GridManager
     {
@@ -59,7 +59,8 @@ export class GameService
 			const size: PIXI.Point = this._grid.generateWorld();
 			this.viewport.initViewport(size.x, size.y);
 			this._grid.initLayers();
-			this.viewport.$viewport.addChild(this.graphics);
+			this._turnSystem = new TurnsSystem(this._viewport);
+			this.viewport.$viewport.addChild(this.graphics);			
 			return cb();
 		});
     }
@@ -84,7 +85,13 @@ export class GameService
         const client6 = {roomid: '', id: '', addr: '', color: '0xffff00', name: 'Saad'};
         debugClients.push(client1, client2, client3, /*client4, client5, client6);*/
         return debugClients;
-    }
+	}
+	
+	public getCells(origin: Hex<Cell>): Hex<Cell>[]
+	{
+		//TODO: temporary; get a list of hexes that is valid for an action.
+		return this.grid.getNeighbors(origin);
+	}
 
     public resizePixi(): void
     {
@@ -101,38 +108,25 @@ export class GameService
         this.pixi.stage.scale.set(1, 1);
 	}
 
-	public getBuyableItems(origin: Hex<Cell>): EntityInformation[]
+	public addTurnCommand(turnCommand: TurnInformation): void
 	{
-		return this.grid.getEntityPrototype(origin);
+		//create a temporary turn command.
+		//when the player cancels, the state will return to what it was before.
+		this._turnSystem.addTurnCommand(turnCommand);
 	}
-	
-	public addIcon(origin: Hex<Cell>, src: string): void
+
+	public removeTurnCommand(turnCommand: TurnCommand): void
 	{
 		
 	}
 
-	public removeIcon(origin: Hex<Cell>): void
+	public createEntity(origin: Hex<Cell>, playerId: string, entityName: string): Entity
 	{
-
-	}
-
-	public createEntity(origin: Hex<Cell>, playerId: string, entityName: string): void
-	{
-		this.grid.createEntity(origin, playerId, entityName);
+		return this.grid.createEntity(origin, playerId, entityName);
 	}
 
 	public removeEntity(origin: Hex<Cell>): void
 	{
 
 	}
-
-	public moveEntity(): void
-	{
-
-	}
-
-    public selectHex(hex: Hex<Cell>): void
-    {
-        this._onCellSelected.next(hex);
-    }
 }

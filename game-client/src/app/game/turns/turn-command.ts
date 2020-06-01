@@ -1,23 +1,28 @@
 import { Hex } from 'honeycomb-grid';
 import { Cell } from '../grid/grid';
-import { Sprite } from 'pixi.js';
+import { Sprite, Container, Texture } from 'pixi.js';
 import { Entity } from '../entities/entity';
+import { AssetLoader } from 'src/app/asset-loader';
 
-export class TurnCommand
+export interface TurnInformation
 {
-	//this is the place where the command originates.
-	protected _origin: Hex<Cell>;
-	protected _entity: Entity;
-	protected _owner: string;
-	protected _icon: Sprite;
+	originEntity: Entity; //the entity before the turn was initiated.
+	targetEntity: Entity; //the entity after the turn was initiated.
+	textureUrl: string; //icon that appears when the move isn't final yet for indication.
+	destroysSelf: boolean;
+	originCell: Hex<Cell>;
+	targetCell: Hex<Cell>;
+}
 
-	public get origin(): Hex<Cell>
-	{
-		return this._origin;
-	}
+export class TurnCommand extends Sprite
+{
+	//this is the place where the command originates.	
+	private _owner: string;
+	private _actionIcon: Sprite;
 	
-	constructor(origin: Hex<Cell>)
-	{
-		this._origin = origin;
+	constructor(owner: string, public turnInformation: TurnInformation)
+	{		
+		super();
+		this.texture = AssetLoader.instance.getTexture(turnInformation.textureUrl);
 	}
 }

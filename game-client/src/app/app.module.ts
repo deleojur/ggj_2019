@@ -22,6 +22,7 @@ import { WindowDirective } from './ui/window/window-directive';
 import { ItemDetailWindowComponent } from './ui/window/item-detail-window/item-detail-window.component';
 import { ItemOverviewWindowComponent } from './ui/window/item-overview-window/item-overview-window.component';
 import { ResourcesHudComponent } from './ui/resources-hud/resources-hud.component';
+import { SelectCellComponent } from './ui/window/select-cell/select-cell.component';
 
 @NgModule({
 	declarations: [
@@ -41,11 +42,13 @@ import { ResourcesHudComponent } from './ui/resources-hud/resources-hud.componen
 		ResourceComponent,
 		ItemOverviewWindowComponent,
 		ItemDetailWindowComponent,
-		ResourcesHudComponent
+		ResourcesHudComponent,
+		SelectCellComponent
 	],
   	entryComponents: [
 		ItemOverviewWindowComponent,
-		ItemDetailWindowComponent
+		ItemDetailWindowComponent,
+		SelectCellComponent
   	],
   	imports: [
 		BrowserModule,

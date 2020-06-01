@@ -3,7 +3,7 @@ import { WindowService, WindowType } from 'src/services/window.service';
 import { ResourcesService } from 'src/services/resources.service';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from 'src/app/game/grid/grid';
-import { EntityInformation } from 'src/app/game/entities/entity';
+import { EntityInformation, BehaviorInformation } from 'src/app/game/entities/entity';
 
 @Component({
   selector: 'app-menu-item',
@@ -13,7 +13,7 @@ import { EntityInformation } from 'src/app/game/entities/entity';
 export class MenuItemComponent implements OnInit
 {
 	@Input()
-	public menuItem: EntityInformation;
+	public menuItem: BehaviorInformation;
 
 	@Input()
 	public origin: Hex<Cell>;
@@ -35,12 +35,6 @@ export class MenuItemComponent implements OnInit
 
 	buyItem()
 	{
-		if (this.resourcesService.areResourcesConditionsMet(this.menuItem.cost))
-		{
-			this.windowService.closeWindow(() =>
-			{
-				this.resourcesService.tryPurchaseItem(this.origin, this.menuItem);
-			});
-		}
+		this.resourcesService.tryPurchaseItem(this.menuItem, this.origin);
 	}
 }

@@ -1,7 +1,7 @@
-import { GameService } from '../../../services/game.service';
 import { Component, AfterViewInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { WindowComponent } from 'src/app/ui/window/window.component';
 import { WindowService, WindowType } from 'src/services/window.service';
+import { GameManager } from '../game-manager';
 
 export interface Game
 {
@@ -26,13 +26,13 @@ export class GameComponent implements AfterViewInit
     @ViewChild('pixiContainer', {static: false}) pixiContainer: ElementRef;
     @ViewChild(WindowComponent, {static: true}) windowContainer: WindowComponent;
 
-    constructor(private gameService: GameService, private windowService: WindowService)
+    constructor(private windowService: WindowService)
     {
     }
     
     ngAfterViewInit()
     {
-        const canvas: HTMLCanvasElement = this.gameService.init(() =>
+        const canvas: HTMLCanvasElement = GameManager.instance.init(() =>
         {
             //the game has been initialized!
             this.game.onMapLoaded();
@@ -46,7 +46,7 @@ export class GameComponent implements AfterViewInit
     @HostListener('window:resize', ['$event'])
     onResize(event)
     {
-        this.gameService.resizePixi();
+        GameManager.instance.resizePixi();
     }
 
     onActivate(gameComponentReference: Game) 

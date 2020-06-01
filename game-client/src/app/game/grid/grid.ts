@@ -1,10 +1,10 @@
 import { MapReader, TileProperty, Object, WorldMap } from './map-reader';
 import { Vector } from 'vector2d/src/Vec2D';
 import { defineGrid, GridFactory, Hex, Point, Grid } from 'honeycomb-grid';
-import { Graphics, Sprite, Point as pPoint } from 'pixi.js';
+import { Graphics, Sprite, Point as pPoint, Polygon } from 'pixi.js';
 import { ViewportManager } from '../render/viewport';
 import { EntityManager } from '../../game/entities/entity-manager';
-import { EntityInformation } from '../entities/entity';
+import { EntityInformation, Entity } from '../entities/entity';
 import { AssetLoader } from 'src/app/asset-loader';
 
 export enum CellType
@@ -22,9 +22,19 @@ export enum SelectionRenderMode
 export interface Cell
 {
     color?: string; 
-    isGenerated?: boolean;
+	isGenerated?: boolean;
+	entity?: Entity;
     properties: TileProperty[];
-    sprites: PIXI.Sprite[];
+	sprites: PIXI.Sprite[];
+	walkable: boolean;
+	buildable: boolean;
+}
+
+export interface Outline
+{
+	corner1: Point;
+	corner2: Point;
+	hex: Hex<Cell>;
 }
 
 export class GridManager
@@ -47,25 +57,28 @@ export class GridManager
 		this.mapReader = new MapReader();
 		this.entityManager = new EntityManager();
 	}
-	
-	public getEntityPrototype(origin: Hex<Cell>): EntityInformation[]
-	{
-		return this.entityManager.getEntityPrototype(origin);
-	}
 
-	public createEntity(origin: Hex<Cell>, playerId: string, entityName: string): void
+	public createEntity(origin: Hex<Cell>, playerId: string, entityName: string): Entity
 	{
-		const entity = this.entityManager.createEntity(origin, playerId, entityName);
+		const entity: Entity = this.entityManager.createEntity(origin, playerId, entityName);
+		origin.entity = entity;
 		const pos = origin.toPoint();
 		entity.position = new pPoint(pos.x, pos.y - 128);
 		this.viewport.addChild(entity);
+		return entity;
+	}
+
+	public removeEntity(origin: Hex<Cell>): void
+	{
+		const entity: Entity = this.entityManager.removeEntity(origin);
+		origin.entity = undefined;
+		this.viewport.removeChild(entity);
 	}
 
     private initHexagonalGrid(): pPoint
     {
 		this.gridFactory = defineGrid();
 		const worldMap: WorldMap = AssetLoader.instance.worldMap;
-		console.log(worldMap);
 		
 		this.grid = this.gridFactory.rectangle({ width: worldMap.width, height: worldMap.height });
 
@@ -101,7 +114,7 @@ export class GridManager
     {
         this.grid.forEach((hex: Hex<Cell>) =>
         {
-            hex.size = { xRadius: this.tileWidth, yRadius: this.tileHeight };
+			hex.size = { xRadius: this.tileWidth, yRadius: this.tileHeight };
             const point = hex.toPoint();
             
             hex.sprites.forEach((sprite: Sprite) =>
@@ -109,7 +122,18 @@ export class GridManager
                 sprite.x = point.x;
                 sprite.y = point.y - 128;
                 this.viewport.addChild(sprite);
-            });
+			});
+
+			hex.properties.forEach((property) =>
+			{
+				if (property.name === 'walkable')
+				{
+					hex.walkable = property.value;
+				} else if (property.name === 'buildable')
+				{
+					hex.buildable = property.value;
+				}
+			});
         });
     }
 
@@ -134,53 +158,102 @@ export class GridManager
 
                 hex.properties.forEach(properties =>
                 {
-                    if (properties.value === 'PlayerStartPosition')
+                    if (properties.name === 'playerStart')
                     {
-                        this.playerStartPositions.push(hex);
+						this.playerStartPositions.push(hex);
+						this.createEntity(hex, "1", properties.value);
                     }
                 });
             }
         });
+	}
+	
+	public clearRendering(): void
+	{
+		this.graphics.clear();
+	}
+
+	public fillSelection(selection: Hex<Cell>[], color: number): void
+	{
+		for (let i = 0; i < selection.length; i++)
+		{
+			const cell: Hex<Cell> = selection[i];
+			const polygons: Polygon[] = this.getPolygon([cell]);
+			this.graphics.beginFill((cell.buildable && !cell.entity) ? 0x00ff00 : 0xff0000, 0.45);
+			polygons.forEach(polygon => 
+			{
+				this.graphics.drawPolygon(polygon);
+			});		
+			this.graphics.endFill();
+		}		
+	}
+
+	private getEdgeCorners(hexagons: Hex<Cell>[]): Outline[]
+    {
+        const outline: Outline[] = [];
+        let neighbor: Hex<Cell> = null;
+        hexagons.forEach((hex) =>
+        {
+            const neighbors: Hex<Cell>[] = this.grid.neighborsOf(hex);
+            for(let n = 0; n < neighbors.length; n++)
+            {
+                neighbor = neighbors[n];
+				const point: Point = hex.toPoint();
+				const corners = hex.corners().map(corner => corner.add(point));
+				
+                if(hexagons.indexOf(neighbor) === -1)
+                {
+                    const p1 = corners[n];
+					const p2 = corners[(n + 1) % 6];
+                    outline.push({ hex: hex, corner1: p1, corner2: p2 });
+                }
+            }
+        });
+        return outline;
     }
 
-    private renderSelection(selection: Hex<Cell>[]): void
-    {
-        const corners: Point[] = this.getEdgeCorners(selection);
-        for (let i = 0; i < corners.length; i+= 2)
+	public renderSelectionOutline(selection: Hex<Cell>[], color: number): void
+	{
+		const outline: Outline[] = this.getEdgeCorners(selection);
+        for (let i = 0; i < outline.length; i++)
         {
-            const corner1 = corners[i];
-            const corner2 = corners[i + 1];
+			this.graphics.lineStyle(5, 0xfada5e, 1, 0.5);
+            const corner1 = outline[i].corner1;
+            const corner2 = outline[i].corner2;
             // move the "pen" to the first corner
             this.graphics.moveTo(corner1.x, corner1.y);
 
             // draw lines to the other corners
             this.graphics.lineTo(corner2.x, corner2.y);
-        }        
+		}
+		this.graphics.lineStyle(0);
+	}
+
+	//TODO: get the color from the network manager.
+    public renderSelection(selection: Hex<Cell>[], color: number): void
+    {
+		this.fillSelection(selection, color);
+		this.renderSelectionOutline(selection, color);
     }
 
-    private getEdgeCorners(hexagons: Hex<Cell>[]): Point[]
-    {
-        const edges: Point[] = [];
-        let neighbor: Hex<Cell> = null;
-        hexagons.forEach((hex) =>
-        {
-            const neighbors: Hex<Cell>[] = this.grid.neighborsOf(hex);
-            for(let dir = 0; dir < neighbors.length; dir++)
-            {
-                neighbor = neighbors[dir];
-                const point: Point = hex.toPoint();
-                const corners = hex.corners().map(corner => corner.add(point));
-               
-                if(hexagons.indexOf(neighbor) === -1)
-                {
-                    const p1 = corners[dir];
-                    const p2 = corners[(dir + 1) % 6];
-                    edges.push(p1, p2);
-                }
-            }
-        });
-        return edges;
-    }
+	private getPolygon(hexagons: Hex<Cell>[]): Polygon[]
+	{
+		const triangles: Polygon[] = [];
+		hexagons.forEach((hex) =>
+		{
+			const point: Point = hex.toPoint();
+			const corners = hex.corners().map(corner => corner.add(point));
+			const center = hex.center().add(point);
+
+			for(let dir = 0; dir < corners.length; dir++)
+			{
+				const p1 = corners[dir];
+				const p2 = corners[(dir + 1) % 6];
+				triangles.push(new Polygon([new pPoint(center.x, center.y), new pPoint(p1.x, p1.y), new pPoint(p2.x, p2.y)]));
+			}
+		});
+		return triangles;
+	}
 
     public getHexAt(v: Vector): Hex<Cell>
     {
@@ -209,8 +282,13 @@ export class GridManager
             const neighbors: Hex<Cell>[] = this.grid.neighborsOf(hex);
             neighbors.push(hex);
 
-            this.renderSelection(neighbors);
+            this.renderSelection(neighbors, 0x00ff00);
             this.graphics.endFill();
         }
+	}
+
+	public getNeighbors(hex: Hex<Cell>): Hex<Cell>[]
+	{
+		return this.grid.neighborsOf(hex);
 	}
 }

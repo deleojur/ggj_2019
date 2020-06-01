@@ -47,26 +47,26 @@
 .title-background
 {
 	position: absolute;
-    width: 365%;
-    left: 75%;
-	margin-top: 13%;
+    width: 500%;
+    left: 40%;
 }
 
 .title
 {
 	position: absolute;
     font-family: Zolof;
+    line-height: 17px;
     color: beige;
-    left: 75%;
-    width: 365%;
+    left: 148%;
+    width: 310%;
     text-align: center;
     pointer-events: none;
 }
 
 .title-responsive
 {
-	font-size: 35px;
-	margin-top: 17%;
+	font-size: 23px;
+	margin-top: 40%;
 }
 
 /*@media screen and (max-width: 550px) and (min-width: 451px)

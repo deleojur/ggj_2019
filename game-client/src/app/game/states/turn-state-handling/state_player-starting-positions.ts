@@ -3,6 +3,7 @@ import { GridManager } from '../../grid/grid';
 import { Hex } from 'honeycomb-grid';
 import { PrimaryState } from '../primary-state';
 import { Cell } from '../../grid/grid';
+import { GameManager } from '../../game-manager';
 
 export class state_playerStartingPositions extends PrimaryState<PositionData>
 {
@@ -29,7 +30,7 @@ export class state_playerStartingPositions extends PrimaryState<PositionData>
 
     getPlayerLocations(): Hex<Cell>[]
     {
-        const grid: GridManager = this.gameService.grid;
+        const grid: GridManager = GameManager.instance.grid;
         return grid.$playerPositions;
     }
 }

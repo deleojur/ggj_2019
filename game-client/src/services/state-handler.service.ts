@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { PrimaryState } from 'src/app/game/states/primary-state';
 import { RequestData } from 'src/app/game/states/request-data';
 import { ConnectionService } from './connection.service';
-import { GameService } from './game.service';
 
 import { state_requestRoom } from 'src/app/game/states/host-states/state_request-room';
 import { state_clientConnection } from './../app/game/states/host-states/state_client-connection';
@@ -12,6 +11,7 @@ import { state_playerStartingPositions } from 'src/app/game/states/turn-state-ha
 import { WindowService, WindowType, WindowItem } from './window.service';
 import { ItemOverviewWindowComponent } from 'src/app/ui/window/item-overview-window/item-overview-window.component';
 import { ItemDetailWindowComponent } from 'src/app/ui/window/item-detail-window/item-detail-window.component';
+import { SelectCellComponent } from 'src/app/ui/window/select-cell/select-cell.component';
 
 export interface RequestState
 {
@@ -28,7 +28,6 @@ export class StateHandlerService
 
     constructor(
 		private connectionService: ConnectionService,
-		private gameService: GameService,
 		private windowService: WindowService)
     {
         this.states = new Map<RequestState, PrimaryState<RequestData>>();
@@ -36,6 +35,7 @@ export class StateHandlerService
 
 		this.windowService.subscribeWindow(WindowType.ItemOverview, new WindowItem(ItemOverviewWindowComponent));
 		this.windowService.subscribeWindow(WindowType.ItemDetail, new WindowItem(ItemDetailWindowComponent));
+		this.windowService.subscribeWindow(WindowType.SelectCell, new WindowItem(SelectCellComponent));
     }
 
     private registerStates(): void
@@ -62,7 +62,7 @@ export class StateHandlerService
         const states = Array.from(this.states.values());
         states.forEach((state: PrimaryState<RequestData>) => 
         {
-            state.init(this.connectionService, this.gameService);
+            state.init(this.connectionService);
         });
     }
 

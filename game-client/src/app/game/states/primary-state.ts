@@ -1,21 +1,17 @@
 import { Stack } from 'stack-typescript'; 
 import { ConnectionService } from 'src/services/connection.service';
-import { GameService } from 'src/services/game.service';
 
 export abstract class PrimaryState<RequestData>
 {
     protected connectionService: ConnectionService;
-    protected gameService: GameService;
-
     protected requestStack: Stack<RequestData>;
 
     private isActiveState: boolean = false;
     private onStateDone: (data: RequestData) => void;
 
-    public init(connectionService: ConnectionService, gameService: GameService): void
+    public init(connectionService: ConnectionService): void
     {
         this.connectionService = connectionService;
-        this.gameService = gameService;
         this.requestStack = new Stack<RequestData>();
         this.subscribeToEvents();
     }

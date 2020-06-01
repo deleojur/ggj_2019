@@ -47,8 +47,13 @@ export class ViewportManager
     
     public addChild(c: any): void
     {
-        this.viewport.addChild(c);
-    }
+		this.viewport.addChild(c);
+	}
+	
+	public removeChild(c: any): void
+	{
+		this.viewport.removeChild(c);
+	}
 
     public get $position(): Vector
     {

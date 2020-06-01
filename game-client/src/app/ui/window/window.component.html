@@ -3,11 +3,11 @@
 	(transitionend)="transitionEnd($event)">
 
 <div style="width: 100%;">
-    <div class="ui-parent">
+    <div class="ui-parent" [ngStyle]="{marginTop: top}">
 		<img class="banner" src="assets/UI/window/banner_red1.svg">
 		<h4 class="bannerText uiText">{{windowName}}</h4>
 
-		<img class="window-img" src="assets/UI/window/side_frame1.svg">
+		<img [ngStyle]="{width: width}" src="assets/UI/window/side_frame1.svg">
 		<div #buttonContainer>
 			<img class="window-btn-bg" src="assets/UI/button/r_bg_red.png" >
 			<img class="window-btn-bg" src="assets/UI/button/ring_frame.PNG">

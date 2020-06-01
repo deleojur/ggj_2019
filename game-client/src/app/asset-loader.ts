@@ -1,8 +1,7 @@
 import { Loader, Texture } from 'pixi.js';
-import { EntityPrototype, EntityInformation } from './game/entities/entity';
+import { EntityPrototype, EntityInformation, PrototypeInformation, BehaviorInformation } from './game/entities/entity';
 import { WorldMap } from './game/grid/map-reader';
 import { Resource } from './game/entities/resource';
-import { EntityBehavior } from './game/entities/entity-behavior/entity-behavior';
 
 export class AssetLoader
 {
@@ -10,7 +9,6 @@ export class AssetLoader
 
 	private _entityPrototypes: Map<string, EntityPrototype>;
 	private _entityInformation: Map<string, EntityInformation>;
-
 
 	private _textures: Map<string, Texture>;
 	private _worldMap: WorldMap;
@@ -50,6 +48,26 @@ export class AssetLoader
 		return this._textures.get(url);
 	}
 
+	private setResourceClass(e: PrototypeInformation): void
+	{
+		[...e.cost || [], ...e.upkeep || []].forEach(res => 
+		{				
+			Object.setPrototypeOf(res, Resource.prototype);
+		});
+	}
+
+	private createEntityBehaviors(e: EntityInformation): BehaviorInformation[]
+	{
+		const behaviors: BehaviorInformation[] = [];
+		e.behaviors.forEach(b =>
+		{
+			this.setResourceClass(b);
+			behaviors.push(b);
+		});
+
+		return behaviors;
+	}
+
 	private createEntityPrototypes(entities: EntityInformation[])
 	{
 		this._entityPrototypes = new Map<string, EntityPrototype>();
@@ -58,14 +76,11 @@ export class AssetLoader
 		entities.forEach(e =>
 		{
 			const texture: Texture = this._textures.get(e.textureUrl);
-			[...e.cost, ...e.upkeep].forEach(res => 
-			{				
-				Object.setPrototypeOf(res, Resource.prototype);
-			});
+			this.setResourceClass(e);
 
 			const entityPrototype: EntityPrototype = new EntityPrototype(
-				e.name, texture, new EntityBehavior());
-			
+				e.name, texture, this.createEntityBehaviors(e));
+
 			this._entityInformation.set(e.name, e);
 			this._entityPrototypes.set(e.name, entityPrototype);
 		});

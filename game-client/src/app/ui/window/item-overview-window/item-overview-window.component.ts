@@ -1,8 +1,8 @@
 import { Component, OnInit, Injector } from '@angular/core';
-import { GameService } from 'src/services/game.service';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from 'src/app/game/grid/grid';
-import { EntityPrototype, EntityInformation } from 'src/app/game/entities/entity';
+import { BehaviorInformation } from 'src/app/game/entities/entity';
+import { GameManager } from 'src/app/game/game-manager';
 
 @Component({
   selector: 'app-item-window',
@@ -11,11 +11,11 @@ import { EntityPrototype, EntityInformation } from 'src/app/game/entities/entity
 })
 export class ItemOverviewWindowComponent implements OnInit
 {
-	merchandise: EntityInformation[];
+	merchandise: BehaviorInformation[];
 	data: any;
 	origin: Hex<Cell>;
 
-  	constructor(private gameService: GameService)
+  	constructor()
 	{
 		
 	}
@@ -23,6 +23,6 @@ export class ItemOverviewWindowComponent implements OnInit
 	ngOnInit() 
 	{
 		this.origin = this.data.origin;
-		this.merchandise = this.gameService.getBuyableItems(this.origin);
+		this.merchandise = this.origin.entity.behaviors;
 	}
 }
