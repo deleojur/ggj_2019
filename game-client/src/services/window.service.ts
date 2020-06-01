@@ -1,9 +1,16 @@
 import { Type, Injectable } from '@angular/core';
-import { WindowComponent, WindowOptions } from 'src/app/ui/window/window.component';
+import { WindowComponent, WindowOptions, InnerWindowComponent } from 'src/app/ui/window/window.component';
+import { Stack } from 'stack-typescript';
 
 export class WindowItem
 {
-	constructor (public component: Type<any>) {	}
+	constructor (public component: Type<InnerWindowComponent>) {}
+}
+
+interface WindowData
+{
+	windowItem: WindowItem;
+	data: WindowOptions;
 }
 
 export enum WindowType
@@ -20,12 +27,13 @@ export enum WindowType
 export class WindowService
 {
 	private _windowComponent: WindowComponent;
-	private _currentWindow: WindowItem = null;
+	private _windows: Stack<WindowData>;
 	private windowTypes: Map<WindowType, WindowItem>;
 
 	constructor()
 	{
 		this.windowTypes = new Map<WindowType, WindowItem>();
+		this._windows = new Stack<WindowData>();
 	}
 
 	public set windowComponent(val: WindowComponent)
@@ -38,24 +46,54 @@ export class WindowService
 		this.windowTypes.set(windowType, window);
 	}
 
+	public goToPreviousWindow(transitionEnded?: () => void): void
+	{
+		if (this._windows.size > 0)
+		{
+			const window: WindowData = this._windows.pop();
+			if (this._windows.size > 0)
+			{
+				const prev: WindowData = this._windows.head;
+				const n: number = this._windows.size;
+				this._windowComponent.closeWindow(n, () => 
+				{
+					this._windowComponent.openWindow(prev.windowItem, prev.data, n, transitionEnded);
+				});
+			}
+		}
+	}
+
 	/**
 	 * Closes the currently active window, if one is open.
 	 */
-	public closeWindow(transitionEnded?: () => void)
+	public closeAllWindows(transitionEnded?: () => void)
 	{
-		if (this._currentWindow !== null)
+		if (this._windows.size > 0)
 		{
-			this._windowComponent.closeWindow(transitionEnded);
-
-			this._currentWindow = null;
+			this._windowComponent.closeWindow(0, transitionEnded);
+			while (this._windows.size > 0)
+			{
+				this._windows.pop();
+			}
 		}
 	}
 
 	public openWindow(windowType: WindowType, windowOptions: WindowOptions, transitionEnded?: () => void): WindowItem
 	{
-		this._currentWindow = this.getWindow(windowType);
-		this._windowComponent.openWindow(this._currentWindow, windowOptions, transitionEnded);
-		return this._currentWindow;
+		const window: WindowItem = this.getWindow(windowType);
+		const n: number = this._windows.size;
+		if (this._windows.size > 0)
+		{
+			this._windowComponent.closeWindow(n, () => 
+			{
+				this._windowComponent.openWindow(window, windowOptions, n + 1, transitionEnded);
+			});
+		} else
+		{
+			this._windowComponent.openWindow(window, windowOptions, n + 1, transitionEnded);
+		}		
+		this._windows.push({ windowItem: window, data: windowOptions });		
+		return window;
 	}
 
 	public getWindow(windowType: WindowType): WindowItem

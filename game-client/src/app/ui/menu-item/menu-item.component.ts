@@ -27,10 +27,7 @@ export class MenuItemComponent implements OnInit
 	
 	displayDetailsPage()
 	{
-		this.windowService.closeWindow(() =>
-		{
-			return this.windowService.openWindow(WindowType.ItemDetail, { name: this.menuItem.name, data: { origin: this.origin, item: this.menuItem } });
-		});
+		this.windowService.openWindow(WindowType.ItemDetail, { name: this.menuItem.name, data: { origin: this.origin, item: this.menuItem } });
 	}
 
 	buyItem()

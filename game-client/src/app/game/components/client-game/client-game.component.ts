@@ -40,7 +40,7 @@ export class ClientGameComponent implements Game, AfterViewInit
         {
 			const hex: Hex<Cell> = this.grid.getHex(positionData.x, positionData.y);
             const color: number = this.clientUtilsService.colorRGB;
-            this.grid.renderHex(hex, color);
+            //this.grid.renderHex(hex, color);
 		});
 	}
 	
@@ -75,6 +75,7 @@ export class ClientGameComponent implements Game, AfterViewInit
 			if (hex.entity)
 			{
 				const window: WindowItem = this.windowService.openWindow(WindowType.ItemOverview, { name: 'Select Action', data: { origin: hex, entity: hex.entity } });
+				GameManager.instance.grid.renderHexCorners([hex]);
 			}
         }
     }

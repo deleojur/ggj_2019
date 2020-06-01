@@ -89,29 +89,30 @@ export class ResourcesService
 	{
 		if (this.areResourcesConditionsMet(item.cost))
 		{
-			this.windowService.closeWindow(() =>
+			//get some more information, like the target cell.
+			/*var blaat: TurnInformation = 
 			{
-				this.subtractResources(item.cost);
-				console.log(item);
-				if (item.range > 0)
+				originCell: origin,
+				targetCell: null, //get the target cell, if applicable.
+				originEntity: this.origin.entity, //the entity before the command started.
+				targetEntity: null, //create a new entity if there is one in the item.
+				textureUrl: this.item.textureUrl,
+				destroysSelf: this.item.destroySelf
+			};*/
+			if (item.range > 0)
+			{
+				this.windowService.openWindow(WindowType.SelectCell, { name: '¿Que?', data: 
 				{
-					this.windowService.openWindow(WindowType.SelectCell, { name: '¿Que?', data: 
-					{
-						//get a list of possible tiles.
-						origin: origin
-					}});
-				}
-				//get some more information, like the target cell.
-				/*var blaat: TurnInformation = 
+					//get a list of possible tiles.
+					origin: origin
+				}});
+			} else
+			{
+				this.windowService.closeAllWindows(() =>
 				{
-					originCell: origin,
-					targetCell: null, //get the target cell, if applicable.
-					originEntity: this.origin.entity, //the entity before the command started.
-					targetEntity: null, //create a new entity if there is one in the item.
-					textureUrl: this.item.textureUrl,
-					destroysSelf: this.item.destroySelf
-				};*/
-			});
+					this.subtractResources(item.cost);
+				});
+			}
 			return true;
 		}
 		return false;

@@ -4,7 +4,7 @@ import { defineGrid, GridFactory, Hex, Point, Grid } from 'honeycomb-grid';
 import { Graphics, Sprite, Point as pPoint, Polygon } from 'pixi.js';
 import { ViewportManager } from '../render/viewport';
 import { EntityManager } from '../../game/entities/entity-manager';
-import { EntityInformation, Entity } from '../entities/entity';
+import { Entity } from '../entities/entity';
 import { AssetLoader } from 'src/app/asset-loader';
 
 export enum CellType
@@ -46,6 +46,9 @@ export class GridManager
 	private mapReader: MapReader;
 	private entityManager: EntityManager;
 
+	private selectedCellsGraphics: Graphics;
+	private validCellsGraphics: Graphics;
+
     private playerStartPositions: Hex<Cell>[] = [];
     public get $playerPositions(): Hex<Cell>[]
     {
@@ -56,6 +59,12 @@ export class GridManager
     {
 		this.mapReader = new MapReader();
 		this.entityManager = new EntityManager();
+
+		this.selectedCellsGraphics = new Graphics();
+		this.validCellsGraphics = new Graphics();
+
+		this.graphics.addChild(this.selectedCellsGraphics);
+		this.graphics.addChild(this.validCellsGraphics);
 	}
 
 	public createEntity(origin: Hex<Cell>, playerId: string, entityName: string): Entity
@@ -168,23 +177,28 @@ export class GridManager
         });
 	}
 	
-	public clearRendering(): void
+	public clearValidCells(): void
 	{
-		this.graphics.clear();
+		this.validCellsGraphics.clear();
 	}
 
-	public fillSelection(selection: Hex<Cell>[], color: number): void
+	public clearSelectedCells(): void
+	{
+		this.selectedCellsGraphics.clear();
+	}
+
+	public fillBuildableSelection(selection: Hex<Cell>[]): void
 	{
 		for (let i = 0; i < selection.length; i++)
 		{
 			const cell: Hex<Cell> = selection[i];
 			const polygons: Polygon[] = this.getPolygon([cell]);
-			this.graphics.beginFill((cell.buildable && !cell.entity) ? 0x00ff00 : 0xff0000, 0.45);
+			this.validCellsGraphics.beginFill((cell.buildable && !cell.entity) ? 0x00ff00 : 0xff0000, 0.45);
 			polygons.forEach(polygon => 
 			{
-				this.graphics.drawPolygon(polygon);
+				this.validCellsGraphics.drawPolygon(polygon);
 			});		
-			this.graphics.endFill();
+			this.validCellsGraphics.endFill();
 		}		
 	}
 
@@ -212,28 +226,60 @@ export class GridManager
         return outline;
     }
 
-	public renderSelectionOutline(selection: Hex<Cell>[], color: number): void
+	private renderSelectedCellsOutline(selection: Hex<Cell>[]): void
 	{
 		const outline: Outline[] = this.getEdgeCorners(selection);
         for (let i = 0; i < outline.length; i++)
         {
-			this.graphics.lineStyle(5, 0xfada5e, 1, 0.5);
             const corner1 = outline[i].corner1;
             const corner2 = outline[i].corner2;
             // move the "pen" to the first corner
-            this.graphics.moveTo(corner1.x, corner1.y);
+            this.validCellsGraphics.moveTo(corner1.x, corner1.y);
 
             // draw lines to the other corners
-            this.graphics.lineTo(corner2.x, corner2.y);
+            this.validCellsGraphics.lineTo(corner2.x, corner2.y);
 		}
-		this.graphics.lineStyle(0);
 	}
 
-	//TODO: get the color from the network manager.
-    public renderSelection(selection: Hex<Cell>[], color: number): void
+	public renderHexCorners(selection: Hex<Cell>[]): void
     {
-		this.fillSelection(selection, color);
-		this.renderSelectionOutline(selection, color);
+		this.selectedCellsGraphics.lineStyle(6, 0xfada5e, 1, 0.5);
+
+		const outline: Outline[] = this.getEdgeCorners(selection);
+        const length = outline.length;
+        for (let i = 0; i < length; i++)
+        {
+            let l: number = i - 1;
+			if (l < 0) l = length - 1;
+			
+			const center: Point = outline[i].hex.center().add(outline[i].hex.toPoint());
+			const c: Vector = new Vector(center.x, center.y);
+			const current: Vector = new Vector(outline[i].corner1.x, outline[i].corner1.y);
+			const left: Vector = new Vector(outline[l].corner1.x, outline[l].corner1.y);
+			const right: Vector = new Vector(outline[i].corner2.x, outline[i].corner2.y);
+
+            const v1 = current.clone().add(c.clone().subtract(current).normalize().multiplyByScalar(10));
+            const v2 = left.clone().add(c.clone().subtract(left).normalize().multiplyByScalar(10));
+            const v3 = right.clone().add(c.clone().subtract(right).normalize().multiplyByScalar(10));
+    
+            const leftCorner = v1.clone().add(v2.subtract(v1).normalize().multiplyByScalar(25))
+            const rightCorner = v1.clone().add(v3.subtract(v1).normalize().multiplyByScalar(25))
+
+            this.selectedCellsGraphics.moveTo(leftCorner.x, leftCorner.y);
+            this.selectedCellsGraphics.lineTo(v1.x, v1.y);
+            this.selectedCellsGraphics.lineTo(rightCorner.x, rightCorner.y);
+		}
+		
+		this.selectedCellsGraphics.lineStyle(0);
+    }
+
+    public renderValidCells(selection: Hex<Cell>[]): void
+    {
+		this.fillBuildableSelection(selection);
+
+		this.validCellsGraphics.lineStyle(5, 0xfada5e, 1, 0.5);
+		this.renderSelectedCellsOutline(selection);
+		this.validCellsGraphics.lineStyle(0);
     }
 
 	private getPolygon(hexagons: Hex<Cell>[]): Polygon[]
@@ -271,21 +317,6 @@ export class GridManager
         const hex: Hex<Cell> = this.grid.get([x, y]);
         return hex;
     }
-
-    public renderHex(hex: Hex<Cell>, color: number): void
-    {        
-        if (hex)
-        {
-            this.graphics.clear();
-            this.graphics.lineStyle(8, color, 1, 0.5, );
-
-            const neighbors: Hex<Cell>[] = this.grid.neighborsOf(hex);
-            neighbors.push(hex);
-
-            this.renderSelection(neighbors, 0x00ff00);
-            this.graphics.endFill();
-        }
-	}
 
 	public getNeighbors(hex: Hex<Cell>): Hex<Cell>[]
 	{

@@ -3,13 +3,15 @@ import { GameManager } from 'src/app/game/game-manager';
 import { GridManager } from 'src/app/game/grid/grid';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from 'src/app/game/grid/grid';
+import { InnerWindowComponent } from '../window.component';
+import { WindowService } from 'src/services/window.service';
 
 @Component({
   selector: 'app-select-cell',
   templateUrl: './select-cell.component.html',
   styleUrls: ['../window.component.scss', './select-cell.component.scss']
 })
-export class SelectCellComponent implements OnInit
+export class SelectCellComponent implements OnInit, InnerWindowComponent
 {
 	public width: string = '25vh';
 	public top: string = '-20px';
@@ -17,7 +19,7 @@ export class SelectCellComponent implements OnInit
 	data: any;
 	grid: GridManager;
 
-	constructor() 
+	constructor(private windowService: WindowService) 
 	{
 		this.grid = GameManager.instance.grid;
 	}
@@ -25,11 +27,35 @@ export class SelectCellComponent implements OnInit
 	ngOnInit() 
 	{
 		const neighbors: Hex<Cell>[] = this.grid.getNeighbors(this.data.origin);
-		this.grid.renderSelection(neighbors, 0x00ff00);
+		this.grid.renderValidCells(neighbors);
+	}
+
+	backToPreviousMenu(): void
+	{
+		this.windowService.goToPreviousWindow();
 	}
 	  
-	closeWindow(): void
+	beforeCloseWindow(n: number): void
 	{
-		this.grid.clearRendering();
+		this.grid.clearValidCells();
+		if (n == 0)
+		{
+			this.grid.clearSelectedCells();
+		}
+	}
+
+	beforeOpenWindow(n: number): void
+	{
+
+	}
+
+	afterCloseWindow(n: number): void
+	{
+
+	}
+
+	afterOpenWindow(n: number): void
+	{
+		
 	}
 }

@@ -2,27 +2,27 @@
 	<img class="window-btn-bg back-btn" src="assets/UI/button/r_bg_yellow.png">
 	<img class="window-btn-bg back-btn" src="assets/UI/button/ring_frame.PNG">
 	<img class="window-btn back-btn-fg" src="assets/UI/window/btn_d_return.png"
-	(click)="returnToItemOverviewWindow($event)">
+	(click)="windowService.goToPreviousWindow()">
 </div>
 
 <div class="container-fluid">
 	<div class="scrollable-menu scrollbar-ripe-malinka" style="height:47%">
 		<div class="row details">
-			<img class="col-12 icon" src="{{item.textureUrl}}">
+			<img class="col-12 icon" src="{{menuItem.textureUrl}}">
 		</div>
-		<div class="row cost-container">
+		<div class="row cost-container" *ngIf="menuItem.cost && menuItem.cost.length > 0">
 			<div class="description col-4">
 				<h4>Cost</h4>
 			</div>
-			<div class="col-2 resourceWrapper" *ngFor="let resource of item.cost">
+			<div class="col-2 resourceWrapper" *ngFor="let resource of menuItem.cost">
 				<app-resource [(resource)]="resource"></app-resource>
 			</div>
 		</div>
-		<div class="row cost-container" *ngIf="item.upkeep.length > 0">
+		<div class="row cost-container" *ngIf="menuItem.upkeep && menuItem.upkeep.length > 0">
 			<div class="description col-4">
 				<h4>Upkeep</h4>
 			</div>
-			<div class="col-2 resourceWrapper" *ngFor="let resource of item.upkeep">
+			<div class="col-2 resourceWrapper" *ngFor="let resource of menuItem.upkeep">
 				<app-resource [upkeep]="true" [(resource)]="resource"></app-resource>
 			</div>
 		</div>

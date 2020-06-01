@@ -1,12 +1,24 @@
-import { Component, OnInit, ComponentFactoryResolver, ComponentFactory, ViewChild, AfterViewInit, ComponentRef } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver, ComponentFactory, ViewChild, AfterViewInit } from '@angular/core';
 import { WindowDirective } from './window-directive';
-import { WindowItem } from 'src/services/window.service';
+import { WindowItem, WindowService } from 'src/services/window.service';
 import { Subject, Subscription } from 'rxjs';
 
 export interface WindowOptions
 {
 	name: string;
 	data?: any;
+}
+
+export interface InnerWindowComponent
+{
+	beforeCloseWindow(n: number): void;
+	beforeOpenWindow(n: number): void;
+	afterCloseWindow(n: number): void;
+	afterOpenWindow(n: number): void;
+
+	data: any;
+	width: string;
+	top: string;
 }
 
 @Component({
@@ -16,7 +28,7 @@ export interface WindowOptions
 })
 export class WindowComponent implements OnInit, AfterViewInit
 {
-	currentComponent: any = undefined;
+	currentComponent: InnerWindowComponent = undefined;
 	windowName: string = '';
 	showWindow: boolean = false;
 
@@ -28,7 +40,7 @@ export class WindowComponent implements OnInit, AfterViewInit
 
 	@ViewChild(WindowDirective, {static: true}) windowHost: WindowDirective;
 
-    constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
+    constructor(private windowService: WindowService, private componentFactoryResolver: ComponentFactoryResolver) { }
 
     ngOnInit()
     {
@@ -45,11 +57,21 @@ export class WindowComponent implements OnInit, AfterViewInit
 		this.onTransitionEnd.next();
 	}
 
-	waitForTransitionEnd(callback: () => void): void
+	waitForTransitionEnd(n: number, callback?: () => void): void
 	{
+		if (this.showWindow)
+		{
+			this.currentComponent.beforeOpenWindow(n);
+		} else this.currentComponent.beforeCloseWindow(n);
 		const subscription: Subscription = this.onTransitionEnd.subscribe(() => 
 		{
 			subscription.unsubscribe();
+
+			if (this.showWindow)
+			{
+				this.currentComponent.afterOpenWindow(n);
+			} else this.currentComponent.afterCloseWindow(n);
+
 			if (callback)
 			{
 				return callback();
@@ -57,31 +79,27 @@ export class WindowComponent implements OnInit, AfterViewInit
 		});
 	}
 
-	openWindow(windowItem: WindowItem, options: WindowOptions, transitionEnded?: () => void): void
+	public openWindow(windowItem: WindowItem, options: WindowOptions, n: number, transitionEnded?: () => void): void
 	{
 		this.windowName = options.name;
 		const componentFactory: ComponentFactory<any> = this.componentFactoryResolver.resolveComponentFactory(windowItem.component);
 		const viewContainerRef = this.windowHost.viewContainerRef;
 		viewContainerRef.clear();
 
-		this.currentComponent = viewContainerRef.createComponent(componentFactory).instance;
+		this.currentComponent = viewContainerRef.createComponent<InnerWindowComponent>(componentFactory).instance;
 		this.currentComponent.data = options.data;
 
 		this.width = this.currentComponent.width || '45vh';
 		this.top = this.currentComponent.top || '-50px';
 
 		this.showWindow = true;	
-		this.waitForTransitionEnd(transitionEnded);		
+		this.waitForTransitionEnd(n, transitionEnded);		
 	}
 
-	public closeWindow(transitionEnded?: () => void): void
+	public closeWindow(n: number, transitionEnded?: () => void): void
 	{
 		this.showWindow = false;
-		if (this.currentComponent.closeWindow)
-		{
-			this.currentComponent.closeWindow();
-		}
-		this.waitForTransitionEnd(transitionEnded);	
+		this.waitForTransitionEnd(n, transitionEnded);
 	}
 
     closeWindowEvent($event): void
@@ -89,7 +107,7 @@ export class WindowComponent implements OnInit, AfterViewInit
         const closeWindow = $event.target.classList.contains('close-ui-window');
         if (closeWindow)
         {
-            this.closeWindow();
+            this.windowService.closeAllWindows();
         }
     }
 }
