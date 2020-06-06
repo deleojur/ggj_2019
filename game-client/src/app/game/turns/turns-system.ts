@@ -13,6 +13,15 @@ export class TurnsSystem
 		
 	}
 
+	public getTurnInformation(hex: Hex<Cell>): TurnInformation
+	{
+		if (this._turnCommands.has(hex))
+		{
+			return this._turnCommands.get(hex).turnInformation;
+		}
+		return null;
+	}
+
 	public addTurnCommand(turnInformation: TurnInformation): void
 	{
 		const command: TurnCommand = new TurnCommand('someone', turnInformation);

@@ -1,7 +1,13 @@
-<div>
-	<div class="scrollable-menu scrollbar-ripe-malinka" style="padding:8% 0 0 0;">
+<div class="scrollable-menu scrollbar-ripe-malinka" style="padding:8% 0 0 0;">
+	<div *ngIf="currentBehavior === null; else cancelCommand;">
 		<div *ngFor="let merch of merchandise">
-			<app-menu-item [origin]="origin" [menuItem]="merch"></app-menu-item>
+			<app-menu-item [origin]="origin" (mainButtonPressed)="buyItem($event)" [menuItem]="merch"></app-menu-item>
 		</div>
 	</div>
+	<ng-template #cancelCommand>
+		<app-menu-item [origin]="origin" (mainButtonPressed)="cancelItem($event)" [menuItem]="currentBehavior"></app-menu-item>
+		<button>Cancel</button>
+		<!--show what you have bought here, name description and image-->
+		<!--show a button where you can cancel your current command.-->
+	</ng-template>
 </div>

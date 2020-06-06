@@ -28,7 +28,6 @@ export interface BehaviorInformation extends PrototypeInformation
 {
 	type: string;
 	range: number;
-	destroySelf?: boolean;
 	creates?: string;
 	commandIconTextureUrl: string;
 }

@@ -63,7 +63,12 @@ export class GameManager
     public get viewport(): ViewportManager
     {
         return this._viewport;
-    }
+	}
+	
+	public get turnSystem(): TurnsSystem
+	{
+		return this._turnSystem;
+	}
 
     private initPixi(): void
     {
@@ -134,17 +139,16 @@ export class GameManager
 				{
 					this._resourceManager.subtractResources(this._currentItem.cost);
 					const entity: Entity = this._grid.createEntity(hex, 'someone', this._currentItem.creates);
-					console.log(this._currentItem);
-					const turnInformatioin: TurnInformation = 
+					const turnInformation: TurnInformation = 
 					{
+						behaviorInformation: this._currentItem,
 						originCell: this._originCell,
 						targetCell: hex, //get the target cell, if applicable.
 						originEntity: null, //the entity before the command started.
 						targetEntity: entity, //create a new entity if there is one in the item.
-						iconTextureUrl: this._currentItem.commandIconTextureUrl,
-						cost: this._currentItem.cost
+						iconTextureUrl: this._currentItem.commandIconTextureUrl
 					};
-					this._turnSystem.addTurnCommand(turnInformatioin);									
+					this._turnSystem.addTurnCommand(turnInformation);									
 				});
 			}
 		} else if (hex.entity && !this.windowManager.isWindowOpen)
