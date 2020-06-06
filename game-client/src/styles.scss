@@ -32,12 +32,16 @@
     margin-left: 48vw;
 }
 
+.no-pointer
+{
+	pointer-events: none;
+}
 
 input:focus,
 button:focus,
 select:focus
 {
-  outline: none;
+	outline: none;
 }
 
 .btn-bottom

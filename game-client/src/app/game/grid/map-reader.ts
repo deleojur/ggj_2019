@@ -129,7 +129,7 @@ export class MapReader
     {
         for (let i: number = 0; i < this.tileLayers.length; i++)
         {
-            const layer: number[] = this.tileLayers[i];
+			const layer: number[] = this.tileLayers[i];
             for (let j: number = 0; j < layer.length; j++)
             {
                 const id = layer[j];

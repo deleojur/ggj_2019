@@ -14,8 +14,9 @@ export class SelectCellComponent implements OnInit, InnerWindowComponent
 {
 	public width: string = '25vh';
 	public top: string = '-20px';
+	private hex: Hex<Cell>;
 
-	data: any;
+	data: any;	
 	grid: GridManager;
 
 	constructor() 
@@ -25,7 +26,8 @@ export class SelectCellComponent implements OnInit, InnerWindowComponent
 
 	ngOnInit() 
 	{
-		GameManager.instance.renderValidCells(this.data.origin);
+		this.hex = this.data.origin;
+		GameManager.instance.renderValidCells(this.hex);		
 	}
 
 	backToPreviousMenu(): void
@@ -36,9 +38,10 @@ export class SelectCellComponent implements OnInit, InnerWindowComponent
 	beforeCloseWindow(n: number): void
 	{
 		GameManager.instance.clearValidCells();
-		if (n == 0)
+		this.grid.clearSelectedCells();
+		if (n !== 0)
 		{
-			this.grid.clearSelectedCells();
+			this.grid.renderSelectedCellsOutline([this.hex]);
 		}
 	}
 

@@ -37,15 +37,19 @@ export class TurnsSystem
 		this.viewport.addChild(command);
 	}
 
-	public removeTurnCommand(command: TurnCommand): void
+	public removeTurnCommand(hex: Hex<Cell>): TurnInformation
 	{
-		this.removeTurnCommandByOrigin(command.turnInformation.originCell);
-		this.viewport.removeChild(command);
-	}
+		const turnCommand: TurnCommand = this._turnCommands.get(hex);
+		const origin: Hex<Cell> = turnCommand.turnInformation.originCell;
+		const target: Hex<Cell> = turnCommand.turnInformation.targetCell;
 
-	public removeTurnCommandByOrigin(origin: Hex<Cell>): void
-	{
+		const targetCommand: TurnCommand = this._turnCommands.get(target);
 		this._turnCommands.delete(origin);
+		this._turnCommands.delete(target);
+
+		this.viewport.removeChild(targetCommand);
+
+		return targetCommand.turnInformation;
 	}
 
 	/**

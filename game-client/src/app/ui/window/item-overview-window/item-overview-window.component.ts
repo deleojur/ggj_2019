@@ -5,6 +5,7 @@ import { BehaviorInformation } from 'src/app/game/entities/entity';
 import { GameManager } from 'src/app/game/game-manager';
 import { InnerWindowComponent } from '../window.component';
 import { TurnInformation } from 'src/app/game/turns/turn-command';
+import { WindowType } from '../window-manager';
 
 @Component({
   selector: 'app-item-window',
@@ -37,14 +38,20 @@ export class ItemOverviewWindowComponent implements OnInit, InnerWindowComponent
 		}		
 	}
 
+	displayDetailsPage(menuItem: BehaviorInformation)
+	{
+		GameManager.instance.windowManager.openWindow(WindowType.ItemDetail, { name: menuItem.name, data: { origin: this.origin, item: menuItem } });
+	}
+
 	cancelItem(menuItem: BehaviorInformation): void
 	{
-		console.log('never mind...');
-		//GameManager.instance.
+		GameManager.instance.windowManager.closeAllWindows();
+		GameManager.instance.unpurchaseItem(this.origin);
 	}
 
 	buyItem(menuItem: BehaviorInformation): void
 	{
+		console.log('buy that shit');
 		GameManager.instance.resourceManager.tryPurchaseItem(menuItem, this.origin);
 	}
 

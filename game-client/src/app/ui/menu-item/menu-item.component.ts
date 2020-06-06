@@ -15,11 +15,17 @@ export class MenuItemComponent implements OnInit
 	@Output()
 	public mainButtonPressed: EventEmitter<BehaviorInformation> = new EventEmitter<BehaviorInformation>();
 
+	@Output()
+	public secondaryButtonPressed: EventEmitter<BehaviorInformation> = new EventEmitter<BehaviorInformation>(); 
+
 	@Input()
 	public menuItem: BehaviorInformation;
 
 	@Input()
 	public origin: Hex<Cell>;
+
+	@Input()
+	public secondaryActionImgURL: string;
 
 	constructor() { }
 
@@ -27,15 +33,14 @@ export class MenuItemComponent implements OnInit
     {
 		
 	}
-	
-	displayDetailsPage()
+
+	clickMainButton()
 	{
-		GameManager.instance.windowManager.openWindow(WindowType.ItemDetail, { name: this.menuItem.name, data: { origin: this.origin, item: this.menuItem } });
+		this.mainButtonPressed.emit(this.menuItem);
 	}
 
-	clickItem()
+	clickSecondaryButton()
 	{
-		console.log('blaat');
-		this.mainButtonPressed.emit(this.menuItem);
+		this.secondaryButtonPressed.emit(this.menuItem);
 	}
 }

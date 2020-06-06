@@ -228,9 +228,10 @@
 					"name": "build town",
 					"type": "BuildBehavior",
 					"description": "build a town.",
-					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",					
+					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
+					"commandIconTextureUrl": "assets/actions/build.png",
 					"creates": "town",
-					"range": 0,
+					"range": 1,
 					"cost": 
 					[
 						{ "type": "gold", "amount": 3 }, 

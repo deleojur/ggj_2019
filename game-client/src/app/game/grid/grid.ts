@@ -1,7 +1,7 @@
 import { MapReader, TileProperty, Object, WorldMap } from './map-reader';
 import { Vector } from 'vector2d/src/Vec2D';
 import { defineGrid, GridFactory, Hex, Point, Grid } from 'honeycomb-grid';
-import { Graphics, Sprite, Point as pPoint, Polygon } from 'pixi.js';
+import { Graphics, Sprite, Point as pPoint, Polygon, Container } from 'pixi.js';
 import { ViewportManager } from '../render/viewport';
 import { EntityManager } from '../../game/entities/entity-manager';
 import { Entity } from '../entities/entity';
@@ -48,6 +48,7 @@ export class GridManager
 
 	private selectedCellsGraphics: Graphics;
 	private validCellsGraphics: Graphics;
+	private entityContainer: Container;
 
     private playerStartPositions: Hex<Cell>[] = [];
     public get $playerPositions(): Hex<Cell>[]
@@ -61,10 +62,13 @@ export class GridManager
 		this.entityManager = new EntityManager();
 
 		this.selectedCellsGraphics = new Graphics();
-		this.validCellsGraphics = new Graphics();
+
+		this.validCellsGraphics = new Graphics(); //shows red/green shade depending on whether a cell is valid to move to/build on
+		this.entityContainer = new Container();
+		this.entityContainer.sortableChildren = true;
 
 		this.graphics.addChild(this.selectedCellsGraphics);
-		this.graphics.addChild(this.validCellsGraphics);
+		this.graphics.addChild(this.entityContainer);
 	}
 
 	public createEntity(origin: Hex<Cell>, playerId: string, entityName: string): Entity
@@ -73,7 +77,8 @@ export class GridManager
 		origin.entity = entity;
 		const pos = origin.toPoint();
 		entity.position = new pPoint(pos.x, pos.y - 128);
-		this.viewport.addChild(entity);
+		this.entityContainer.addChild(entity);
+		entity.zIndex = origin.y;
 		return entity;
 	}
 
@@ -81,7 +86,7 @@ export class GridManager
 	{
 		const entity: Entity = this.entityManager.removeEntity(origin);
 		origin.entity = undefined;
-		this.viewport.removeChild(entity);
+		this.entityContainer.removeChild(entity);
 	}
 
     private initHexagonalGrid(): pPoint
@@ -114,9 +119,11 @@ export class GridManager
 
     public initLayers(): void
     {
-        this.initObjectLayer(this.mapReader.hexUnderLayer);
-        this.initTileLayer();
-        this.initObjectLayer(this.mapReader.icons);
+		this.initObjectLayer(this.mapReader.hexUnderLayer);
+		this.initTileLayer();
+		this.viewport.addChild(this.graphics);
+		this.initObjectLayer(this.mapReader.icons);
+		this.graphics.addChild(this.validCellsGraphics);
     }
 
     private initTileLayer(): void
@@ -243,61 +250,29 @@ export class GridManager
 		return validNeighbors;
 	}
 
-	private renderSelectedCellsOutline(selection: Hex<Cell>[]): void
+	public renderSelectedCellsOutline(selection: Hex<Cell>[]): void
 	{
+		this.selectedCellsGraphics.lineStyle(5, 0xfada5e, 1, 0.5);
 		const outline: Outline[] = this.getEdgeCorners(selection);
         for (let i = 0; i < outline.length; i++)
         {
             const corner1 = outline[i].corner1;
             const corner2 = outline[i].corner2;
             // move the "pen" to the first corner
-            this.validCellsGraphics.moveTo(corner1.x, corner1.y);
+            this.selectedCellsGraphics.moveTo(corner1.x, corner1.y);
 
             // draw lines to the other corners
-            this.validCellsGraphics.lineTo(corner2.x, corner2.y);
+            this.selectedCellsGraphics.lineTo(corner2.x, corner2.y);
 		}
-	}
-
-	public renderHexCorners(selection: Hex<Cell>[]): void
-    {
-		this.selectedCellsGraphics.lineStyle(6, 0xfada5e, 1, 0.5);
-
-		const outline: Outline[] = this.getEdgeCorners(selection);
-        const length = outline.length;
-        for (let i = 0; i < length; i++)
-        {
-            let l: number = i - 1;
-			if (l < 0) l = length - 1;
-			
-			const center: Point = outline[i].hex.center().add(outline[i].hex.toPoint());
-			const c: Vector = new Vector(center.x, center.y);
-			const current: Vector = new Vector(outline[i].corner1.x, outline[i].corner1.y);
-			const left: Vector = new Vector(outline[l].corner1.x, outline[l].corner1.y);
-			const right: Vector = new Vector(outline[i].corner2.x, outline[i].corner2.y);
-
-            const v1 = current.clone().add(c.clone().subtract(current).normalize().multiplyByScalar(10));
-            const v2 = left.clone().add(c.clone().subtract(left).normalize().multiplyByScalar(10));
-            const v3 = right.clone().add(c.clone().subtract(right).normalize().multiplyByScalar(10));
-    
-            const leftCorner = v1.clone().add(v2.subtract(v1).normalize().multiplyByScalar(25))
-            const rightCorner = v1.clone().add(v3.subtract(v1).normalize().multiplyByScalar(25))
-
-            this.selectedCellsGraphics.moveTo(leftCorner.x, leftCorner.y);
-            this.selectedCellsGraphics.lineTo(v1.x, v1.y);
-            this.selectedCellsGraphics.lineTo(rightCorner.x, rightCorner.y);
-		}
-		
 		this.selectedCellsGraphics.lineStyle(0);
-    }
+	}
 
     public renderValidCells(origin: Hex<Cell>, validNeighbors: Hex<Cell>[]): void
     {
 		const neighbors: Hex<Cell>[] = this.grid.neighborsOf(origin);
 		this.fillBuildableSelection(neighbors, validNeighbors);
-
-		this.validCellsGraphics.lineStyle(5, 0xfada5e, 1, 0.5);
+		
 		this.renderSelectedCellsOutline(neighbors);
-		this.validCellsGraphics.lineStyle(0);
     }
 
 	private getPolygon(hexagons: Hex<Cell>[]): Polygon[]
