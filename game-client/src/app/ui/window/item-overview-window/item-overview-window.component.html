@@ -12,10 +12,10 @@
 	<ng-template #cancelCommand>
 		<app-menu-item
 			[origin]="origin"
-			(mainButtonPressed)="displayDetailsPage($event)"
 			(secondaryButtonPressed)="cancelItem($event)"
 			[menuItem]="currentBehavior"
 			[secondaryActionImgURL]="'assets/UI/button/r_skull.PNG'">
 		</app-menu-item>
+		<p>{{currentBehavior.description}}</p>
 	</ng-template>
 </div>

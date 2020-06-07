@@ -10,7 +10,7 @@ import { GameManager } from 'src/app/game/game-manager';
 @Component({
   selector: 'app-item-detail-window',
   templateUrl: './item-detail-window.component.html',
-  styleUrls: ['../window.component.scss', './item-detail-window.component.scss']
+  styleUrls: ['../window.component.scss', './item-detail-window.component.scss', '../item-overview-window/item-overview-window.component.scss']
 })
 export class ItemDetailWindowComponent implements OnInit, InnerWindowComponent
 {
