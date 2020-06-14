@@ -37,10 +37,13 @@ export class ResourceManager
 
 	public subtractResources(resources: Resource[]): void
 	{
-		for (let i = 0; i < resources.length; i++)
+		if (resources)
 		{
-			const resource: Resource = resources[i];
-			this.resourcePool.get(resource.type).amount -= resource.amount;
+			for (let i = 0; i < resources.length; i++)
+			{
+				const resource: Resource = resources[i];
+				this.resourcePool.get(resource.type).amount -= resource.amount;
+			}
 		}
 	}
 
@@ -66,13 +69,16 @@ export class ResourceManager
 
 	public areResourcesConditionsMet(resources: Resource[]): boolean
 	{
-		for (let i: number = 0; i < resources.length; i++)
+		if (resources)
 		{
-			const resource = resources[i];
-			const pool = this.resourcePool.get(resource.type);
-			if (pool.amount < resource.amount)
+			for (let i: number = 0; i < resources.length; i++)
 			{
-				return false;
+				const resource = resources[i];
+				const pool = this.resourcePool.get(resource.type);
+				if (pool.amount < resource.amount)
+				{
+					return false;
+				}
 			}
 		}
 		return true;

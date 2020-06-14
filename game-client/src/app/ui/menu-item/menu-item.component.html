@@ -2,8 +2,14 @@
 	<img src="assets/UI/window/wood_plank1.svg">
 	<div class="row top-container">
 		<div class="col-2" (click)="clickMainButton()">
-			<img class="iconHolder" src="assets/UI/window/grid4L.svg" >
-			<img class="icon" src={{menuItem.textureUrl}}>
+			<img class="iconHolder" src="assets/UI/window/inside.png">
+			<img src={{menuItem.textureUrl}}
+				[ngClass]="{
+					'unit-icon': menuItem.type === 'train' || menuItem.type === 'skill',
+					'structure-icon': menuItem.type === 'build' || menuItem.type === 'upgrade',					
+					'icon': true}"
+			>
+			<img class="iconHolder" src="assets/UI/window/outside.png">
 		</div>
 		<div class="col-2">
 			<img class="title-background" src="assets/UI/window/banner_small_red2.svg">
@@ -33,6 +39,7 @@
 			<img class="buy-btn" src="assets/UI/button/ring_frame.PNG">
 			<img class="buy-btn" src="assets/UI/button/r_scroll.PNG">
 		</div>-->
+		
 		<div class="col-2 resourceWrapper" *ngFor="let resource of menuItem.cost">
 			<app-resource [(resource)]="resource"></app-resource>
 		</div>

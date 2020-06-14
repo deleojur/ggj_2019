@@ -5,7 +5,7 @@
 
 .bottom-container
 {
-	margin: -15% 0 27% 0;
+	margin: 27% 0 27% 0;
 }
 
 .middle-container
@@ -16,7 +16,6 @@
 
 .resourceWrapper
 {
-	margin-top: 20%;
 	margin-left: 5px;
 	text-align: center;
 }
@@ -42,7 +41,16 @@
 	position: absolute;
     width: 150%;
     left: 10%;
-    margin-top: -28%;
+}
+
+.structure-icon
+{
+	margin-top: -28%;
+}
+
+.unit-icon
+{
+	margin-top: 33%;
 }
 
 .title-background

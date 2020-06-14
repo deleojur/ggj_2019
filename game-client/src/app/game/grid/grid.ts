@@ -75,8 +75,6 @@ export class GridManager
 	{
 		const entity: Entity = this.entityManager.createEntity(origin, playerId, entityName);
 		origin.entity = entity;
-		const pos = origin.toPoint();
-		entity.position = new pPoint(pos.x, pos.y - 128);
 		this.entityContainer.addChild(entity);
 		entity.zIndex = origin.y;
 		return entity;
@@ -151,7 +149,20 @@ export class GridManager
 				}
 			});
         });
-    }
+	}
+	
+	public getValidTiles(): Hex<Cell>[]
+	{
+		const hexes: Hex<Cell>[] = [];
+		this.grid.forEach((hex: Hex<Cell>) =>
+		{
+			if (hex.walkable || hex.buildable)
+			{
+				hexes.push(hex);
+			}
+		});
+		return hexes;
+	}
 
     private initObjectLayer(objects: Object[]): void
     {        

@@ -1,21 +1,16 @@
 <div class="scrollable-menu scrollbar-ripe-malinka" style="padding:8% 0 0 0;">
-	<div *ngIf="currentBehavior === null; else cancelCommand;">
+	<div>
 		<div *ngFor="let merch of merchandise">
 			<app-menu-item 
-			[origin]="origin"
-			(mainButtonPressed)="buyItem($event)"
-			(secondaryButtonPressed)="displayDetailsPage($event)"
-			[menuItem]="merch"
-			[secondaryActionImgURL]="'assets/UI/button/r_scroll.PNG'"></app-menu-item>
+				[origin]="origin"
+				(mainButtonPressed)="merch.onClickPrimary($event)"
+				(secondaryButtonPressed)="merch.onClickSecondary($event)"
+				[menuItem]="merch"
+				[secondaryActionImgURL]="merch.secondaryActionImgUrl">
+			</app-menu-item>
 		</div>
 	</div>
-	<ng-template #cancelCommand>
-		<app-menu-item
-			[origin]="origin"
-			(secondaryButtonPressed)="cancelItem($event)"
-			[menuItem]="currentBehavior"
-			[secondaryActionImgURL]="'assets/UI/button/r_skull.PNG'">
-		</app-menu-item>
-		<p>{{currentBehavior.description}}</p>
-	</ng-template>
+	<div *ngIf="merchandise.length === 1">
+		<p>{{merchandise[0].description}}</p>
+	</div>
 </div>

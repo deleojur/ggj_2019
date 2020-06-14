@@ -14,7 +14,6 @@ import { WindowType } from '../window-manager';
 })
 export class ItemOverviewWindowComponent implements OnInit, InnerWindowComponent
 {
-	currentBehavior: BehaviorInformation = null;
 	merchandise: BehaviorInformation[];
 	data: any;
 	origin: Hex<Cell>;
@@ -28,30 +27,48 @@ export class ItemOverviewWindowComponent implements OnInit, InnerWindowComponent
 
 	ngOnInit() 
 	{
+		console.log(this.data);
 		this.origin = this.data.origin;
 		this.merchandise = this.origin.entity.behaviors;
 
-		const turnInformation: TurnInformation = GameManager.instance.turnSystem.getTurnInformation(this.origin);
-		if (turnInformation !== null)
+		const turnInformation: BehaviorInformation[] = GameManager.instance.turnSystem.getBehaviorInformation(this.origin);
+		if (turnInformation.length)
 		{
-			this.currentBehavior = turnInformation.behaviorInformation;
-		}		
+			this.merchandise = turnInformation;
+			this.setBehaviorInformation('assets/UI/button/r_skull.PNG', this.displayDetailsPage.bind(this), this.cancelItem.bind(this));
+		} else
+		{ 
+			this.merchandise = this.origin.entity.behaviors;
+			this.setBehaviorInformation('assets/UI/button/r_scroll.PNG', this.buyItem.bind(this), this.displayDetailsPage.bind(this));
+		}
 	}
 
-	displayDetailsPage(menuItem: BehaviorInformation)
+	setBehaviorInformation(
+		secondaryActionImgUrl: string, 
+		onClickPrimary: (behavior: BehaviorInformation) => void,
+		onClickSecondary: (behavior: BehaviorInformation) => void): void
+	{		
+		this.merchandise.forEach(e =>
+		{
+			e.secondaryActionImgUrl = secondaryActionImgUrl;
+			e.onClickPrimary = onClickPrimary;
+			e.onClickSecondary = onClickSecondary;
+		});
+	}
+
+	displayDetailsPage(behaviorInformation: BehaviorInformation)
 	{
-		GameManager.instance.windowManager.openWindow(WindowType.ItemDetail, { name: menuItem.name, data: { origin: this.origin, item: menuItem } });
+		GameManager.instance.windowManager.openWindow(WindowType.ItemDetail, { name: behaviorInformation.name, data: { origin: this.origin, item: behaviorInformation } });
 	}
 
-	cancelItem(menuItem: BehaviorInformation): void
+	cancelItem(behaviorInformation: BehaviorInformation): void
 	{
 		GameManager.instance.windowManager.closeAllWindows();
-		GameManager.instance.unpurchaseItem(this.origin);
+		//GameManager.instance.unpurchaseItem(this.origin, );
 	}
 
 	buyItem(menuItem: BehaviorInformation): void
 	{
-		console.log('buy that shit');
 		GameManager.instance.resourceManager.tryPurchaseItem(menuItem, this.origin);
 	}
 

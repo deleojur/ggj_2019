@@ -1,22 +1,22 @@
-import * as PIXI from 'pixi.js';
-import { Subject } from 'rxjs';
 import { Hex } from 'honeycomb-grid';
-import { EntityInformation, Entity, BehaviorInformation } from 'src/app/game/entities/entity';
+import { Entity, BehaviorInformation } from 'src/app/game/entities/entity';
 import { TurnsSystem } from 'src/app/game/turns/turns-system';
 import { AssetLoader } from 'src/app/asset-loader';
 import { ViewportManager } from './render/viewport';
-import { GridManager, Cell, CellType } from './grid/grid';
+import { GridManager, Cell } from './grid/grid';
 import { TurnCommand, TurnInformation } from './turns/turn-command';
 import { WindowManager, WindowType, WindowItem } from '../ui/window/window-manager';
 import { ResourceManager } from 'src/app/game/components/resourceManager';
 import { ItemOverviewWindowComponent } from '../ui/window/item-overview-window/item-overview-window.component';
 import { ItemDetailWindowComponent } from '../ui/window/item-detail-window/item-detail-window.component';
 import { SelectCellComponent } from '../ui/window/select-cell/select-cell.component';
+import { Sprite, Point, Texture, Application, Graphics, autoDetectRenderer } from 'pixi.js';
 
 export class GameManager
 {
-    private pixi: PIXI.Application; // this will be our pixi application
-    private graphics: PIXI.Graphics;
+    private pixi: Application; // this will be our pixi application
+	private _gridGraphics: Graphics;
+	private _commandGraphics: Graphics;
     private _viewport: ViewportManager;
 	private _grid: GridManager;
 	private _turnSystem: TurnsSystem;
@@ -72,10 +72,11 @@ export class GameManager
 
     private initPixi(): void
     {
-        this.pixi = new PIXI.Application({ backgroundColor: 0x0 });
-        this.graphics = new PIXI.Graphics();
+        this.pixi = new Application({ backgroundColor: 0x0 });
+		this._gridGraphics = new Graphics();
+		this._commandGraphics = new Graphics();
         
-        PIXI.autoDetectRenderer({ 
+        autoDetectRenderer({ 
             width: window.innerWidth,
             height: window.innerHeight, 
             antialias: true, 
@@ -86,13 +87,14 @@ export class GameManager
     
     private initGrid(cb: () => void): void
     {
-		this._grid = new GridManager(this.viewport, this.graphics);
-		this._turnSystem = new TurnsSystem(this.viewport);
+		this._grid = new GridManager(this.viewport, this._gridGraphics);
 		AssetLoader.instance.loadAssetsAsync().then(() => 
 		{			
-			const size: PIXI.Point = this._grid.generateWorld();
+			const size: Point = this._grid.generateWorld();
 			this.viewport.initViewport(size.x, size.y);
 			this._grid.initLayers();
+			this.viewport.addChild(this._commandGraphics);
+			this._turnSystem = new TurnsSystem(this._commandGraphics);
 			return cb();
 		});
     }
@@ -126,6 +128,22 @@ export class GameManager
         debugClients.push(client1, client2, client3, /*client4, client5, client6);*/
         return debugClients;
 	}
+
+	private createEntity(hex: Hex<Cell>, item: BehaviorInformation)
+	{
+		this._resourceManager.subtractResources(item.cost);
+		const entity: Entity = this._grid.createEntity(hex, 'someone', item.creates);
+		const turnInformation: TurnInformation = 
+		{
+			behaviorInformation: item,
+			originCell: this._originCell,
+			targetCell: hex, //get the target cell, if applicable.
+			originEntity: null, //TODO: get this from the grid. //the entity before the command started.
+			targetEntity: entity, //create a new entity if there is one in the item.
+			iconTextureUrl: item.commandIconTextureUrl
+		};
+		this._turnSystem.addTurnCommand(turnInformation);		
+	}
 	
 	private selectValidCell(hex: Hex<Cell>): void
 	{
@@ -134,18 +152,7 @@ export class GameManager
 		{
 			this._windowManager.closeAllWindows(() =>
 			{
-				this._resourceManager.subtractResources(this._currentItem.cost);
-				const entity: Entity = this._grid.createEntity(hex, 'someone', this._currentItem.creates);
-				const turnInformation: TurnInformation = 
-				{
-					behaviorInformation: this._currentItem,
-					originCell: this._originCell,
-					targetCell: hex, //get the target cell, if applicable.
-					originEntity: null, //TODO: get this from the grid. //the entity before the command started.
-					targetEntity: entity, //create a new entity if there is one in the item.
-					iconTextureUrl: this._currentItem.commandIconTextureUrl
-				};
-				this._turnSystem.addTurnCommand(turnInformation);									
+				this.createEntity(hex, this._currentItem);				
 			});
 		}
 	}
@@ -159,12 +166,15 @@ export class GameManager
 		{
 			this.windowManager.openWindow(WindowType.ItemOverview, { name: 'Select Action', data: { origin: hex, entity: hex.entity } });
 
-			const turnInformation: TurnInformation = this._turnSystem.getTurnInformation(hex);
-			if (turnInformation !== null)
+			const turnInformationArray: TurnInformation[] = this._turnSystem.getTurnInformation(hex);
+			if (turnInformationArray.length > 0)
 			{
-				const origin: Hex<Cell> = turnInformation.originCell;
-				const target: Hex<Cell> = turnInformation.targetCell;
-				GameManager.instance.grid.renderSelectedCellsOutline([origin, target]);
+				turnInformationArray.forEach((turnInformation: TurnInformation) =>
+				{
+					const origin: Hex<Cell> = turnInformation.originCell;
+					const target: Hex<Cell> = turnInformation.targetCell;
+					GameManager.instance.grid.renderSelectedCellsOutline([origin, target]);
+				});				
 			}
 			else
 			{
@@ -175,6 +185,7 @@ export class GameManager
 
 	public renderValidCells(origin: Hex<Cell>): void
 	{
+		console.log(origin);
 		this._validCells = this.grid.getListOfValidNeighbors(origin);
 		this.grid.renderValidCells(origin, this._validCells);
 	}
@@ -232,13 +243,14 @@ export class GameManager
 			this._windowManager.closeAllWindows(() =>
 			{
 				this._resourceManager.subtractResources(item.cost);
+				this.createEntity(origin, item);
 			});
 		}
 	}
 
-	public unpurchaseItem(origin: Hex<Cell>): void
+	public unpurchaseItem(origin: Hex<Cell>, behaviorInformation: BehaviorInformation): void
 	{
-		const turnInformation: TurnInformation = this._turnSystem.removeTurnCommand(origin);
+		const turnInformation: TurnInformation = this._turnSystem.removeTurnCommand(origin, behaviorInformation);
 		this._resourceManager.addResource(turnInformation.behaviorInformation.cost);
 		const entity: Entity = turnInformation.originEntity;
 		if (entity === null)
@@ -247,5 +259,15 @@ export class GameManager
 		}
 		this._grid.clearSelectedCells();
 		this._windowManager.closeAllWindows();
+	}
+
+	public createSprite(textureUrl: string, position: Point, scale: Point): Sprite
+	{
+		const texture: Texture = AssetLoader.instance.getTexture(textureUrl);
+		const sprite: Sprite = new Sprite(texture);
+		sprite.scale = scale;
+		sprite.position = position;
+		sprite.anchor = new Point(0.5, 0.5);
+		return sprite;
 	}
 }	

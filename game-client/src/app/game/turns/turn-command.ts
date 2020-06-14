@@ -4,6 +4,7 @@ import { Sprite, Container, Texture, Point } from 'pixi.js';
 import { Entity, BehaviorInformation } from '../entities/entity';
 import { AssetLoader } from 'src/app/asset-loader';
 import { Resource } from '../entities/resource';
+import { CommandIcon } from './command-icon';
 
 export interface TurnInformation
 {
@@ -15,13 +16,19 @@ export interface TurnInformation
 	targetCell?: Hex<Cell>; //the cell after the turn is played.
 }
 
-export class TurnCommand extends Sprite
+export class TurnCommand
 {
 	//this is the place where the command originates.	
 	private _owner: string;
-	
+	private _commandIcon: CommandIcon;
+
 	constructor(owner: string, public turnInformation: TurnInformation)
-	{		
-		super(AssetLoader.instance.getTexture(turnInformation.iconTextureUrl));
+	{
+		this._commandIcon = new CommandIcon(turnInformation);	
+	}
+
+	public get commandIcon(): CommandIcon
+	{
+		return this._commandIcon;
 	}
 }

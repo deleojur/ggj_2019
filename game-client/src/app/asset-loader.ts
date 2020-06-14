@@ -1,7 +1,15 @@
 import { Loader, Texture } from 'pixi.js';
-import { EntityPrototype, EntityInformation, PrototypeInformation, BehaviorInformation } from './game/entities/entity';
+import { EntityPrototype, EntityInformation, PrototypeInformation, BehaviorInformation, EntityType } from './game/entities/entity';
 import { WorldMap } from './game/grid/map-reader';
 import { Resource } from './game/entities/resource';
+
+interface CommandIconsBackground
+{
+	build: string;
+	upgrade: string;
+	train: string;
+	skill: string;
+}
 
 export class AssetLoader
 {
@@ -11,6 +19,7 @@ export class AssetLoader
 	private _entityInformation: Map<string, EntityInformation>;
 
 	private _textures: Map<string, Texture>;
+	private _commandIconsBackgrounds: CommandIconsBackground;
 	private _worldMap: WorldMap;
 
 	public entityPrototype(name: string): EntityPrototype
@@ -75,11 +84,11 @@ export class AssetLoader
 
 		entities.forEach(e =>
 		{
-			const texture: Texture = this._textures.get(e.textureUrl);
 			this.setResourceClass(e);
-
+			const typeName: string = e.entityType.charAt(0).toUpperCase() + e.entityType.slice(1);
+			const entityType: EntityType = (<any>EntityType)[typeName];
 			const entityPrototype: EntityPrototype = new EntityPrototype(
-				e.name, texture, this.createEntityBehaviors(e));
+				e.name, entityType, e.textureUrl, this.createEntityBehaviors(e));
 
 			this._entityInformation.set(e.name, e);
 			this._entityPrototypes.set(e.name, entityPrototype);
@@ -124,6 +133,8 @@ export class AssetLoader
 				loader.reset();
 
 				const textureUrls: string[] = resources[manifestUrl].data.textures;
+				this._commandIconsBackgrounds = resources[manifestUrl].data.commandIconsBackground;
+		
 				const entityInformation: EntityInformation[] = resources[manifestUrl].data.entities;
 				this._worldMap = resources[worldMapUrl].data;
 
@@ -134,5 +145,16 @@ export class AssetLoader
 				});
 			});
 		});
+	}
+
+	public commandIconBackground(type: string): string
+	{
+		for (let [key, value] of Object.entries(this._commandIconsBackgrounds))
+		{
+			if(key === type)
+			{
+				return value;
+			}
+		}
 	}
 }

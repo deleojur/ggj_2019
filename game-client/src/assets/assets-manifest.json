@@ -5,6 +5,8 @@
 		"assets/Terrain_Medieval/Base/hexPlains00.png",
 		"assets/Terrain_Medieval/Base/hexUnderDirt00.png",
 		"assets/Terrain_Medieval/Base/hexUnderOcean00.png",
+		"assets/Terrain_Medieval/Base/hexDesertDunes00.png",
+		"assets/Terrain_Medieval/Base/hexMountain00.png",
 
 		"assets/Terrain_Medieval/Decor/villageSmall03.png",
 		"assets/Terrain_Medieval/Decor/farm00.png",
@@ -34,14 +36,40 @@
 		"assets/Terrain_Medieval/Roads/hexRoad-101000-00.png",
 		"assets/Terrain_Medieval/Roads/hexRoad-101000-01.png",
 
-		"assets/actions/build.png"
+		"assets/actions/build.png",
+		"assets/actions/train_monk.png",
+
+		"assets/units/monk.png",
+
+		"assets/UI/button/r_bg_blue.png",
+		"assets/UI/button/r_bg_yellow.png",
+		"assets/UI/button/r_bg_purple.png",
+		"assets/UI/button/r_bg_red.png",
+		"assets/UI/button/r_bg_green.png",
+		"assets/UI/button/round_mask.png",
+		"assets/UI/button/ring_frame.PNG",
+
+		"assets/UI/button/window/w_bg_blue.PNG",
+		"assets/UI/button/window/Window_frame.PNG",
+		"assets/UI/button/window/window_mask.PNG",
+
+		"assets/actions/move_command.png",
+		"assets/actions/Combat_35_T.png"
 	],
+	"commandIconsBackground":
+	{
+		"build": "assets/UI/button/r_bg_yellow.png",
+		"upgrade": "assets/UI/button/r_bg_green.png",
+		"train": "assets/UI/button/r_bg_purple.png",
+		"skill": "assets/UI/button/r_bg_blue.png"
+	},
 	"entities":
 	[
 		{
-			"name": "town",
+			"name": "town",			
 			"description": "a town.",
 			"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
+			"entityType": "structure",
 			"cost": [ 
 				{ "type": "gold", "amount": 3 }, 
 				{ "type": "food", "amount": 0 }, 
@@ -56,7 +84,7 @@
 			[
 				{
 					"name": "upgrade to village",
-					"type": "UpgradeBehavior",
+					"type": "upgrade",
 					"description": "upgrade to a village.",
 					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
 					"creates": "village",
@@ -77,7 +105,7 @@
 				},
 				{
 					"name": "build monastery",
-					"type": "BuildBehavior",
+					"type": "build",
 					"description": "upgrade to a village.",
 					"textureUrl": "assets/Terrain_Medieval/Decor/elvenLodge.png",
 					"commandIconTextureUrl": "assets/actions/build.png",
@@ -92,7 +120,7 @@
 				},
 				{
 					"name": "build barracks",
-					"type": "BuildBehavior",
+					"type": "build",
 					"description": "upgrade to a village.",
 					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
 					"creates": "barracks",
@@ -106,7 +134,7 @@
 				},
 				{
 					"name": "build marketplace",
-					"type": "BuildBehavior",
+					"type": "build",
 					"description": "build a marketplace",
 					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
 					"creates": "marketplace",
@@ -124,6 +152,7 @@
 			"name": "village",
 			"description": "a village.",
 			"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
+			"entityType": "structure",
 			"cost": [ 
 				{ "type": "gold", "amount": 3 }, 
 				{ "type": "food", "amount": 0 }, 
@@ -137,7 +166,7 @@
 			[
 				{
 					"name": "upgrade to village",
-					"type": "UpgradeBehavior",
+					"type": "upgrade",
 					"description": "upgrade to a village.",
 					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
 					"creates": "village",
@@ -156,7 +185,7 @@
 				},
 				{
 					"name": "build monastery",
-					"type": "BuildBehavior",
+					"type": "build",
 					"description": "upgrade to a village.",
 					"textureUrl": "assets/Terrain_Medieval/Decor/elvenLodge.png",
 					"creates": "monastery",
@@ -170,7 +199,7 @@
 				},
 				{
 					"name": "build barracks",
-					"type": "BuildBehavior",
+					"type": "build",
 					"description": "upgrade to a village.",
 					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
 					"creates": "barracks",
@@ -184,7 +213,7 @@
 				},
 				{
 					"name": "build marketplace",
-					"type": "BuildBehavior",
+					"type": "build",
 					"description": "build a marketplace",
 					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
 					"creates": "marketplace",
@@ -198,7 +227,7 @@
 				},
 				{
 					"name": "build farm",
-					"type": "BuildBehavior",
+					"type": "build",
 					"description": "build a farm.",
 					"textureUrl": "assets/Terrain_Medieval/Decor/farm00.png",
 					"creates": "farm",
@@ -216,6 +245,7 @@
 			"name": "farm",
 			"description": "a farm.",
 			"textureUrl": "assets/Terrain_Medieval/Decor/farm00.png",
+			"entityType": "structure",
 			"cost":
 			[
 				{ "type": "gold", "amount": 3 }, 
@@ -226,7 +256,7 @@
 			[
 				{
 					"name": "build town",
-					"type": "BuildBehavior",
+					"type": "build",
 					"description": "build a town.",
 					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
 					"commandIconTextureUrl": "assets/actions/build.png",
@@ -251,6 +281,7 @@
 			"name": "monastery",
 			"description": "a monastery.",
 			"textureUrl": "assets/Terrain_Medieval/Decor/elvenLodge.png",
+			"entityType": "structure",
 			"cost": 
 			[ 
 				{ "type": "gold", "amount": 3 }, 
@@ -261,9 +292,10 @@
 			[
 				{
 					"name": "train monk",
-					"type": "BuildBehavior",
+					"type": "train",
 					"description": "train a monk.",
-					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",					
+					"textureUrl": "assets/units/monk.png",
+					"commandIconTextureUrl": "assets/actions/train_monk.png",				
 					"creates": "monk",
 					"range": 0,
 					"cost": 
@@ -283,21 +315,16 @@
 		},
 		{
 			"name": "monk",
-			"description": "a monk.",
-			"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
-			"cost": 
-			[ 
-				{ "type": "gold", "amount": 3 }, 
-				{ "type": "food", "amount": 0 }, 
-				{ "type": "population", "amount": 2 } 
-			],
+			"textureUrl": "assets/units/monk.png",
+			"entityType": "unit",
 			"behaviors" : 
 			[
 				{
-					"name": "move monk",
-					"type": "MoveBehavior",
+					"name": "move",
+					"type": "skill",
 					"description": "Move monk to another tile.",
-					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png"
+					"textureUrl": "assets/actions/move.png",
+					"range": 1
 				}
 			]
 		}
