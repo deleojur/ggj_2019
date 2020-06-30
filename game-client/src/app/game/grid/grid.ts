@@ -6,6 +6,7 @@ import { ViewportManager } from '../render/viewport';
 import { EntityManager } from '../../game/entities/entity-manager';
 import { Entity } from '../entities/entity';
 import { AssetLoader } from 'src/app/asset-loader';
+import { Unit } from '../entities/unit';
 
 export enum CellType
 {
@@ -23,11 +24,12 @@ export interface Cell
 {
     color?: string; 
 	isGenerated?: boolean;
-	entity?: Entity;
+	entities: Entity[];
     properties: TileProperty[];
 	sprites: PIXI.Sprite[];
-	walkable: boolean;
-	buildable: boolean;
+	walkable: boolean; //units can walk on this tile.
+	buildable: boolean; //structures can be built on this tile.
+	road: boolean; //units have a speed advantage on this tile.
 }
 
 export interface Outline
@@ -59,7 +61,6 @@ export class GridManager
     constructor(private viewport: ViewportManager, private graphics: Graphics)
     {
 		this.mapReader = new MapReader();
-		this.entityManager = new EntityManager();
 
 		this.selectedCellsGraphics = new Graphics();
 
@@ -71,19 +72,38 @@ export class GridManager
 		this.graphics.addChild(this.entityContainer);
 	}
 
+	private setZIndex(hex: Hex<Cell>, entity: Entity): void
+	{
+		entity.zIndex = hex.y;
+		if (entity instanceof Unit)
+		{
+			entity.zIndex++;
+		}
+	}
+
+	public moveEntityToHex(hex: Hex<Cell>, entity: Entity): void
+	{
+		entity.moveToHex(hex);
+		this.setZIndex(hex, entity);
+	}
+
 	public createEntity(origin: Hex<Cell>, playerId: string, entityName: string): Entity
 	{
 		const entity: Entity = this.entityManager.createEntity(origin, playerId, entityName);
-		origin.entity = entity;
+		origin.entities.push(entity);
 		this.entityContainer.addChild(entity);
-		entity.zIndex = origin.y;
+		this.setZIndex(origin, entity);
 		return entity;
 	}
 
-	public removeEntity(origin: Hex<Cell>): void
+	public removeEntity(hex: Hex<Cell>, entity: Entity): void
 	{
-		const entity: Entity = this.entityManager.removeEntity(origin);
-		origin.entity = undefined;
+		this.entityManager.removeEntity(hex, entity);
+		const i: number = hex.entities.indexOf(entity);
+		if (i > -1)
+		{
+			hex.entities.splice(i, 1);
+		}
 		this.entityContainer.removeChild(entity);
 	}
 
@@ -98,6 +118,7 @@ export class GridManager
 		{
 			hex.sprites = [];
 			hex.properties = [];
+			hex.entities = [];
 		});
 
 		const r = this.tileWidth;
@@ -111,17 +132,17 @@ export class GridManager
     {
 		const size: pPoint = this.initHexagonalGrid();
 		this.mapReader.parseWorldMap(this.grid);
-
 		return size;
     }
 
-    public initLayers(): void
+    public initialize(): void
     {
 		this.initObjectLayer(this.mapReader.hexUnderLayer);
 		this.initTileLayer();
 		this.viewport.addChild(this.graphics);
+		this.entityManager = new EntityManager();
 		this.initObjectLayer(this.mapReader.icons);
-		this.graphics.addChild(this.validCellsGraphics);
+		this.graphics.addChild(this.validCellsGraphics);		
     }
 
     private initTileLayer(): void
@@ -143,9 +164,12 @@ export class GridManager
 				if (property.name === 'walkable')
 				{
 					hex.walkable = property.value;
-				} else if (property.name === 'buildable')
+				} if (property.name === 'buildable')
 				{
 					hex.buildable = property.value;
+				} if (property.name === 'tileType')
+				{
+					hex.road = property.value === 'road';
 				}
 			});
         });
@@ -181,8 +205,7 @@ export class GridManager
             {
                 const hexCoordinates = this.gridFactory.pointToHex([object.x / this.tileWidth, object.y / this.tileHeight]);
                 const hex: Hex<Cell> = this.grid.get(hexCoordinates);
-                hex.properties.push(...Array.from(object.properties));
-
+                hex.properties = Array.from(object.properties);
                 hex.properties.forEach(properties =>
                 {
                     if (properties.name === 'playerStart')
@@ -244,7 +267,42 @@ export class GridManager
         });
         return outline;
 	}
-	
+
+	private calculateRing(center: Hex<Cell>, radius: number): Hex<Cell>[]
+    {
+        const result: Hex<Cell>[] = [];
+        let hex: Hex<Cell> = this.grid.get(center.toCartesian
+        ({
+            q: center.q, r: center.r - radius, s: center.s
+        }));
+        for (let i = 0; i < 6; i++) //6 because there are 6 sides to any hexagon circle.
+        {
+            for (let j = 0; j < radius; j++)
+            {
+                result.push(hex);
+                const n = this.grid.neighborsOf(hex)[i];
+        
+                //TODO: what kind of tile will this be?
+                if (n) hex = n;
+            }
+        }
+        return result;
+    }
+
+	public getWalkableHexes(hex: Hex<Cell>): Hex<Cell>[]
+	{
+		const neighbors: Hex<Cell>[] = this.getNeighbors(hex);
+		if (hex.road)
+		{
+			for (let i: number = 1; i < 3; i++)
+			{
+				const ring: Hex<Cell>[] = this.calculateRing(hex, i);
+				//console.log(ring);
+			}
+		}
+		return neighbors;
+	}
+
 	//can move, can build, can move on entities?
 	public getListOfValidNeighbors(origin: Hex<Cell>): Hex<Cell>[]
 	{
@@ -253,7 +311,7 @@ export class GridManager
 
 		neighbors.forEach(e =>
 		{
-			if (e.buildable && !e.entity)
+			if (e.buildable && e.entities.length === 0)
 			{
 				validNeighbors.push(e);
 			}

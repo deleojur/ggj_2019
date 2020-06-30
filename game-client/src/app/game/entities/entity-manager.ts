@@ -1,21 +1,26 @@
 import { Cell } from '../grid/grid';
 import { Hex } from 'honeycomb-grid';
-import { Entity, EntityType, EntityFactory } from './entity';
+import { Entity, EntityType, EntityFactory, BehaviorInformation } from './entity';
 import { AssetLoader } from 'src/app/asset-loader';
 import { Structure } from './structure';
 import { Unit } from './unit';
+import { GameManager } from '../game-manager';
 
 export class EntityManager
 {
-	private _entities: Map<Hex<Cell>, Entity>;
+	private _entities: Map<Hex<Cell>, Entity[]>;
 
-	public createEntity(origin: Hex<Cell>, ownerId: string, entityName: string): Entity
+	public createEntity(hex: Hex<Cell>, ownerId: string, entityName: string): Entity
 	{
 		const entityPrototype = AssetLoader.instance.entityPrototype(entityName);
 		const entityFactory: EntityFactory<Entity> = this.getEntity(entityPrototype.entityType);
-		const entity = new entityFactory.entityClass(entityPrototype, origin, ownerId);
+		const entity = new entityFactory.entityClass(entityPrototype, hex, ownerId);
 
-		this._entities.set(origin, entity);
+		if (this._entities.has(hex))
+		{
+			const entities: Entity[] = this._entities.get(hex);
+			entities.push(entity);
+		}
 		return entity;
 	}
 
@@ -31,15 +36,26 @@ export class EntityManager
 		}
 	}
 
-	public removeEntity(origin: Hex<Cell>): Entity
+	public removeEntity(hex: Hex<Cell>, entity: Entity): boolean
 	{
-		const entity: Entity = this._entities.get(origin);
-		this._entities.delete(origin);
-		return entity;
+		const entities: Entity[] = this._entities.get(hex);
+		const index: number = entities.indexOf(entity);
+		if (index > -1)
+		{
+			entities.splice(index, 1);
+			return true;
+		}
+		return false;
 	}
 
 	constructor()
 	{
-		this._entities = new Map<Hex<Cell>, Entity>();
+		this._entities = new Map<Hex<Cell>, Entity[]>();
+		const validTiles: Hex<Cell>[] = GameManager.instance.grid.getValidTiles();
+		console.log('validCells', validTiles);
+		validTiles.forEach(hex =>
+		{
+			this._entities.set(hex, []);
+		});
 	}
 }

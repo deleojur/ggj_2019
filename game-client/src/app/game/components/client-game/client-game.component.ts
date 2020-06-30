@@ -1,6 +1,6 @@
 import { ClientUtilsService } from './../../../../services/utils/client-utils.service';
 import { GridManager } from './../../grid/grid';
-import { Component, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { Vector } from 'vector2d';
 import { Game } from '../game.component';
 import { StateHandlerService } from 'src/services/state-handler.service';
@@ -10,8 +10,8 @@ import { PositionData } from '../../states/request-data';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from '../../grid/grid';
 import { ViewportManager } from '../../render/viewport';
-import { WindowType, WindowItem } from 'src/app/ui/window/window-manager';
 import { GameManager } from '../../game-manager';
+import { Subject, Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-client-game',

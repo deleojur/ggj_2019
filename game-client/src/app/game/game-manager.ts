@@ -11,6 +11,8 @@ import { ItemOverviewWindowComponent } from '../ui/window/item-overview-window/i
 import { ItemDetailWindowComponent } from '../ui/window/item-detail-window/item-detail-window.component';
 import { SelectCellComponent } from '../ui/window/select-cell/select-cell.component';
 import { Sprite, Point, Texture, Application, Graphics, autoDetectRenderer } from 'pixi.js';
+import { Subject, Subscription } from 'rxjs';
+import { cardModel } from 'src/resource-cards/card/card-model';
 
 export class GameManager
 {
@@ -25,9 +27,8 @@ export class GameManager
 	private _resourceManager: ResourceManager;
 	private _windowManager: WindowManager;
 
-	private _validCells: Hex<Cell>[] = null;
-	private _originCell: Hex<Cell>;
-	private _currentItem: BehaviorInformation = null;
+	private onHexClicked: Subject<Hex<Cell>> = new Subject<Hex<Cell>>();
+	private hexSubscription: Subscription;
 
 	private static _instance: GameManager = null;
 	public static get instance(): GameManager
@@ -43,6 +44,20 @@ export class GameManager
 	{
 		this._resourceManager = new ResourceManager();
 		this.initWindowManager();
+		this.grantControlOverHexSelection();
+	}
+
+	public grantControlOverHexSelection(): void
+	{
+		this.hexSubscription = this.subscribeToClickEvent((hex: Hex<Cell>) => 
+		{
+			this.onHexSelected(hex);
+		});
+	}
+
+	public revokeControlOverHexSelection(): void
+	{
+		this.hexSubscription.unsubscribe();
 	}
 
 	public get resourceManager(): ResourceManager
@@ -70,6 +85,11 @@ export class GameManager
 		return this._turnSystem;
 	}
 
+	public subscribeToClickEvent(f: (cell: Hex<Cell>) => void): Subscription
+	{
+		return this.onHexClicked.subscribe(f);
+	}
+
     private initPixi(): void
     {
         this.pixi = new Application({ backgroundColor: 0x0 });
@@ -92,7 +112,7 @@ export class GameManager
 		{			
 			const size: Point = this._grid.generateWorld();
 			this.viewport.initViewport(size.x, size.y);
-			this._grid.initLayers();
+			this._grid.initialize();
 			this.viewport.addChild(this._commandGraphics);
 			this._turnSystem = new TurnsSystem(this._commandGraphics);
 			return cb();
@@ -129,42 +149,23 @@ export class GameManager
         return debugClients;
 	}
 
-	private createEntity(hex: Hex<Cell>, item: BehaviorInformation)
+	public createTurnCommand(
+		originCell: Hex<Cell>,
+		targetCell: Hex<Cell>,
+		entity: Entity,
+		item: BehaviorInformation): void
 	{
 		this._resourceManager.subtractResources(item.cost);
-		const entity: Entity = this._grid.createEntity(hex, 'someone', item.creates);
-		const turnInformation: TurnInformation = 
-		{
-			behaviorInformation: item,
-			originCell: this._originCell,
-			targetCell: hex, //get the target cell, if applicable.
-			originEntity: null, //TODO: get this from the grid. //the entity before the command started.
-			targetEntity: entity, //create a new entity if there is one in the item.
-			iconTextureUrl: item.commandIconTextureUrl
-		};
-		this._turnSystem.addTurnCommand(turnInformation);		
-	}
-	
-	private selectValidCell(hex: Hex<Cell>): void
-	{
-		const isHexValid: boolean = this._validCells.indexOf(hex) > -1;
-		if (isHexValid)
-		{
-			this._windowManager.closeAllWindows(() =>
-			{
-				this.createEntity(hex, this._currentItem);				
-			});
-		}
+		const turnInformation: TurnInformation = this._turnSystem.generateTurnInformation(originCell, targetCell, entity, item);
+		this._turnSystem.addTurnCommand(turnInformation);
 	}
 
-	public hexClicked(hex: Hex<Cell>): void
+	private onHexSelected(hex: Hex<Cell>): void
 	{
-		if (this._validCells !== null)
+		if (hex.entities.length > 0)
 		{
-			this.selectValidCell(hex);
-		} else if (hex.entity && !this.windowManager.isWindowOpen)
-		{
-			this.windowManager.openWindow(WindowType.ItemOverview, { name: 'Select Action', data: { origin: hex, entity: hex.entity } });
+			this.hexSubscription.unsubscribe();
+			this.windowManager.openWindow(WindowType.ItemOverview, { name: 'Select Action', data: { origin: hex, entities: hex.entities } });
 
 			const turnInformationArray: TurnInformation[] = this._turnSystem.getTurnInformation(hex);
 			if (turnInformationArray.length > 0)
@@ -183,17 +184,9 @@ export class GameManager
 		}
 	}
 
-	public renderValidCells(origin: Hex<Cell>): void
+	public hexClicked(hex: Hex<Cell>): void
 	{
-		console.log(origin);
-		this._validCells = this.grid.getListOfValidNeighbors(origin);
-		this.grid.renderValidCells(origin, this._validCells);
-	}
-
-	public clearValidCells(): void
-	{
-		this._validCells = null;
-		this.grid.clearValidCells();
+		this.onHexClicked.next(hex);
 	}
 
 	public getCells(origin: Hex<Cell>): Hex<Cell>[]
@@ -227,35 +220,32 @@ export class GameManager
 
 	}
 
-	public purchaseItem(item: BehaviorInformation, origin: Hex<Cell>): void
+	public acquireItem(item: BehaviorInformation, origin: Hex<Cell>, entity: Entity): void
 	{
 		if (item.range > 0)
 		{
 			this._windowManager.openWindow(WindowType.SelectCell, { name: '¿Que?', data: 
 			{
-				//get a list of possible tiles.
-				origin: origin
+				origin: origin,
+				behavior: item,
+				entity: entity
 			}});
-			this._originCell = origin;
-			this._currentItem = item;
 		} else
 		{
 			this._windowManager.closeAllWindows(() =>
 			{
-				this._resourceManager.subtractResources(item.cost);
-				this.createEntity(origin, item);
+				this.createTurnCommand(origin, origin, entity, item);
 			});
 		}
 	}
 
-	public unpurchaseItem(origin: Hex<Cell>, behaviorInformation: BehaviorInformation): void
+	public cancelAcquireItem(item: BehaviorInformation, origin: Hex<Cell>, entity: Entity): void
 	{
-		const turnInformation: TurnInformation = this._turnSystem.removeTurnCommand(origin, behaviorInformation);
+		const turnInformation: TurnInformation = this._turnSystem.removeTurnCommand(origin, item);
 		this._resourceManager.addResource(turnInformation.behaviorInformation.cost);
-		const entity: Entity = turnInformation.originEntity;
 		if (entity === null)
 		{
-			this._grid.removeEntity(turnInformation.targetCell);
+			this._grid.removeEntity(turnInformation.targetCell, turnInformation.targetEntity);
 		}
 		this._grid.clearSelectedCells();
 		this._windowManager.closeAllWindows();

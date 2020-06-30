@@ -3,7 +3,7 @@ import { WindowType } from 'src/app/ui/window/window-manager';
 import { ResourceManager } from 'src/app/game/components/resourceManager';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from 'src/app/game/grid/grid';
-import { BehaviorInformation } from 'src/app/game/entities/entity';
+import { BehaviorInformation, Entity } from 'src/app/game/entities/entity';
 import { InnerWindowComponent } from '../window.component';
 import { GameManager } from 'src/app/game/game-manager';
 
@@ -20,6 +20,7 @@ export class ItemDetailWindowComponent implements OnInit, InnerWindowComponent
 
 	menuItem: BehaviorInformation;
 	private origin: Hex<Cell>;
+	private entity: Entity;
 
 	constructor() { }
 
@@ -27,11 +28,12 @@ export class ItemDetailWindowComponent implements OnInit, InnerWindowComponent
 	{
 		this.origin = this.data.origin;
 		this.menuItem = this.data.item;
+		this.entity = this.data.entity;
 	}
 
 	buyItem()
 	{
-		GameManager.instance.resourceManager.tryPurchaseItem(this.menuItem, this.origin);
+		GameManager.instance.resourceManager.tryAcquireItem(this.menuItem, this.origin, this.entity);
 	}
 
 	goToPreviousWindow(): void

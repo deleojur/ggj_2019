@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from 'src/app/game/grid/grid';
-import { BehaviorInformation } from 'src/app/game/entities/entity';
+import { BehaviorInformation, Entity } from 'src/app/game/entities/entity';
 import { GameManager } from 'src/app/game/game-manager';
 import { InnerWindowComponent } from '../window.component';
 import { TurnInformation } from 'src/app/game/turns/turn-command';
 import { WindowType } from '../window-manager';
+import { ButtonEvent } from '../../menu-item/menu-item.component';
 
 @Component({
   selector: 'app-item-window',
@@ -14,9 +15,11 @@ import { WindowType } from '../window-manager';
 })
 export class ItemOverviewWindowComponent implements OnInit, InnerWindowComponent
 {
-	merchandise: BehaviorInformation[];
+	activeBehaviors: Map<Entity, BehaviorInformation>;
+
 	data: any;
 	origin: Hex<Cell>;
+	entities: Entity[];
 	width: string = '45vh';
 	top: string = '-50px';
 
@@ -27,32 +30,49 @@ export class ItemOverviewWindowComponent implements OnInit, InnerWindowComponent
 
 	ngOnInit() 
 	{
-		console.log(this.data);
 		this.origin = this.data.origin;
-		this.merchandise = this.origin.entity.behaviors;
-
-		const turnInformation: BehaviorInformation[] = GameManager.instance.turnSystem.getBehaviorInformation(this.origin);
-		if (turnInformation.length)
+		this.entities = this.origin.entities;
+		
+		this.activeBehaviors = new Map<Entity, BehaviorInformation>();
+		
+		const turnInformation: TurnInformation[] = GameManager.instance.turnSystem.getTurnInformation(this.origin);
+		this.entities.forEach(entity =>
 		{
-			this.merchandise = turnInformation;
-			this.setBehaviorInformation('assets/UI/button/r_skull.PNG', this.displayDetailsPage.bind(this), this.cancelItem.bind(this));
+			turnInformation.forEach(turn =>
+			{
+				if (turn.originEntity === entity || turn.targetEntity === entity)
+				{
+					this.activeBehaviors.set(entity, turn.behaviorInformation);
+				}
+			});
+		});
+	}
+
+	getEntityBehavior(entity: Entity): BehaviorInformation[]
+	{
+		if (this.activeBehaviors.has(entity))
+		{
+			const behaviors: BehaviorInformation[] = [this.activeBehaviors.get(entity)];
+			this.setBehaviorInformation(behaviors, 'assets/UI/button/r_skull.PNG', this.displayDetailsPage.bind(this), this.cancelItem.bind(this));
+			return behaviors;
 		} else
-		{ 
-			this.merchandise = this.origin.entity.behaviors;
-			this.setBehaviorInformation('assets/UI/button/r_scroll.PNG', this.buyItem.bind(this), this.displayDetailsPage.bind(this));
+		{
+			this.setBehaviorInformation(entity.behaviors, 'assets/UI/button/r_scroll.PNG', this.buyItem.bind(this), this.displayDetailsPage.bind(this));
+			return entity.behaviors;
 		}
 	}
 
 	setBehaviorInformation(
+		behaviors: BehaviorInformation[],
 		secondaryActionImgUrl: string, 
-		onClickPrimary: (behavior: BehaviorInformation) => void,
-		onClickSecondary: (behavior: BehaviorInformation) => void): void
+		onClickPrimary: (behavior: BehaviorInformation, entity: Entity) => void,
+		onClickSecondary: (behavior: BehaviorInformation, entity: Entity) => void): void
 	{		
-		this.merchandise.forEach(e =>
+		behaviors.forEach(behavior =>
 		{
-			e.secondaryActionImgUrl = secondaryActionImgUrl;
-			e.onClickPrimary = onClickPrimary;
-			e.onClickSecondary = onClickSecondary;
+			behavior.secondaryActionImgUrl = secondaryActionImgUrl;
+			behavior.onClickPrimary = onClickPrimary;
+			behavior.onClickSecondary = onClickSecondary;
 		});
 	}
 
@@ -61,15 +81,18 @@ export class ItemOverviewWindowComponent implements OnInit, InnerWindowComponent
 		GameManager.instance.windowManager.openWindow(WindowType.ItemDetail, { name: behaviorInformation.name, data: { origin: this.origin, item: behaviorInformation } });
 	}
 
-	cancelItem(behaviorInformation: BehaviorInformation): void
+	cancelItem(buttonEvent: ButtonEvent): void
 	{
-		GameManager.instance.windowManager.closeAllWindows();
-		//GameManager.instance.unpurchaseItem(this.origin, );
+		const behavior: BehaviorInformation = buttonEvent.behavior;
+		const entity: Entity = buttonEvent.entity;
+		GameManager.instance.cancelAcquireItem(behavior, this.origin, entity);
 	}
 
-	buyItem(menuItem: BehaviorInformation): void
+	buyItem(buttonEvent: ButtonEvent): void
 	{
-		GameManager.instance.resourceManager.tryPurchaseItem(menuItem, this.origin);
+		const behavior: BehaviorInformation = buttonEvent.behavior;
+		const entity: Entity = buttonEvent.entity;
+		GameManager.instance.resourceManager.tryAcquireItem(behavior, this.origin, entity);
 	}
 
 	beforeCloseWindow(n: number): void

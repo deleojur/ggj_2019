@@ -2,9 +2,14 @@ import { TurnCommand, TurnInformation } from 'src/app/game/turns/turn-command';
 import { Hex, Point } from 'honeycomb-grid';
 import { Cell } from 'src/app/game/grid/grid';
 import { Point as pPoint, Graphics } from 'pixi.js';
-import { CommandIcon } from './command-icon';
 import { GameManager } from '../game-manager';
-import { BehaviorInformation } from '../entities/entity';
+import { BehaviorInformation, Entity } from '../entities/entity';
+
+interface EntityTypes
+{
+	originEntity: Entity;
+	targetEntity: Entity;
+}
 
 export class TurnsSystem
 {
@@ -29,6 +34,8 @@ export class TurnsSystem
 			const behaviorInformation: BehaviorInformation[] = [];
 			turnInformationArray.forEach(turnInformation =>
 			{
+				turnInformation.behaviorInformation.entity = turnInformation.targetEntity;
+
 				behaviorInformation.push(turnInformation.behaviorInformation);
 			});
 			return behaviorInformation;
@@ -51,12 +58,60 @@ export class TurnsSystem
 		return [];
 	}
 
+	private createTargetEntity(entity: Entity, hex: Hex<Cell>, item: BehaviorInformation): Entity
+	{
+		switch (item.type)
+		{
+			case "upgrade":
+			case "build":
+			case "train":
+				return GameManager.instance.grid.createEntity(hex, 'someone', item.creates);
+			case "move":
+				return entity;
+		}
+	}
+
+	public generateTurnInformation(
+		originCell: Hex<Cell>,
+		targetCell: Hex<Cell>,
+		entity: Entity,
+		item: BehaviorInformation): TurnInformation
+	{
+		const targetEntity: Entity = this.createTargetEntity(entity, targetCell, item);
+		return {
+			originCell: originCell,
+			targetCell: targetCell,
+			originEntity: entity,
+			targetEntity: targetEntity,
+			behaviorInformation: item
+		};
+	}
+
 	public addTurnCommand(turnInformation: TurnInformation): void
 	{
 		const command: TurnCommand = new TurnCommand('someone', turnInformation);
-
 		this._turnCommands.get(turnInformation.targetCell).push(command);
-		this._turnCommands.get(turnInformation.originCell).push(command);
+		if (turnInformation.originCell !== turnInformation.targetCell)
+		{
+			this._turnCommands.get(turnInformation.originCell).push(command);
+		}
+
+		if (turnInformation.behaviorInformation.type === 'upgrade')
+		{
+			//destroy the original entity
+			GameManager.instance.grid.removeEntity(turnInformation.originCell, turnInformation.originEntity);
+		}
+
+		if (turnInformation.targetEntity !== null)
+		{
+			//create that entity.
+		}
+
+		if (turnInformation.behaviorInformation.type === 'move')
+		{
+			//move that entity.
+			GameManager.instance.grid.moveEntityToHex(turnInformation.targetCell, turnInformation.targetEntity);
+		}
 
 		this.graphics.addChild(command.commandIcon);		
 		this.addCommandIcon(turnInformation.targetCell);

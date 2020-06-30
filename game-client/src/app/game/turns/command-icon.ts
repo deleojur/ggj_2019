@@ -22,7 +22,7 @@ export class CommandIcon extends Container
 		const background: Sprite = game.createSprite(backgroundUrl, new Point(0, 0), new Point(0.12, 0.12));
 		const foreground: Sprite = game.createSprite('assets/UI/button/ring_frame.PNG', new Point(0, 0), new Point(0.12, 0.12));
 		const round_mask: Sprite = game.createSprite('assets/UI/button/round_mask.png', new Point(0, 0), new Point(0.12, 0.12));
-		const command: Sprite = game.createSprite(commandUrl, new Point(0, -5), new Point(0.35, 0.35));
+		const command: Sprite = game.createSprite(commandUrl, new Point(0, 3), new Point(0.35, 0.35));
 
 		command.mask = round_mask;
 		this.addChild(round_mask);

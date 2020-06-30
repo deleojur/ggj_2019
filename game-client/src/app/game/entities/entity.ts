@@ -1,9 +1,7 @@
 import { Resource } from 'src/app/game/entities/resource';
-import { Sprite, Texture, Container, Point as pPoint } from 'pixi.js';
+import { Container, Point as pPoint } from 'pixi.js';
 import { Hex, Point } from 'honeycomb-grid';
 import { Cell } from '../grid/grid';
-import { Vector } from 'vector2d';
-import { AssetLoader } from 'src/app/asset-loader';
 
 export enum EntityType
 {
@@ -33,8 +31,9 @@ export interface BehaviorInformation extends PrototypeInformation
 	creates?: string;
 	commandIconTextureUrl?: string;
 	secondaryActionImgUrl?: string;
-	onClickPrimary?: (behavior: BehaviorInformation) => void;
-	onClickSecondary?: (behavior: BehaviorInformation) => void;
+	entity: Entity;
+	onClickPrimary?: (behavior: BehaviorInformation, entity: Entity) => void;
+	onClickSecondary?: (behavior: BehaviorInformation, entity: Entity) => void;
 }
 
 export class EntityPrototype
@@ -55,6 +54,11 @@ export class EntityFactory<T extends Entity>
 
 export class Entity extends Container
 {
+	public get name(): string
+	{
+		return this._prototype.name;
+	}
+
 	public get behaviors(): BehaviorInformation[]
 	{
 		return this._prototype.behaviors;
@@ -64,6 +68,12 @@ export class Entity extends Container
 	{
 		super();
 		this.initialise();
+	}
+
+	public moveToHex(hex: Hex<Cell>): void
+	{
+		const pos: Point = hex.toPoint().add(hex.center());
+		this.position = new pPoint(pos.x, pos.y);
 	}
 
 	protected initialise(): void

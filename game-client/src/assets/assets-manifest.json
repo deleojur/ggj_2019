@@ -36,9 +36,6 @@
 		"assets/Terrain_Medieval/Roads/hexRoad-101000-00.png",
 		"assets/Terrain_Medieval/Roads/hexRoad-101000-01.png",
 
-		"assets/actions/build.png",
-		"assets/actions/train_monk.png",
-
 		"assets/units/monk.png",
 
 		"assets/UI/button/r_bg_blue.png",
@@ -53,24 +50,28 @@
 		"assets/UI/button/window/Window_frame.PNG",
 		"assets/UI/button/window/window_mask.PNG",
 
-		"assets/actions/move_command.png",
-		"assets/actions/Combat_35_T.png"
+		"assets/actions/move_t.png",
+		"assets/actions/upgrade_t.png",
+		"assets/actions/build_monastery_t.png",
+		"assets/actions/build_barracks_t.png",
+		"assets/actions/build_marketplace_t.png",
+		"assets/actions/build_farm_t.png"
 	],
 	"commandIconsBackground":
 	{
 		"build": "assets/UI/button/r_bg_yellow.png",
 		"upgrade": "assets/UI/button/r_bg_green.png",
 		"train": "assets/UI/button/r_bg_purple.png",
-		"skill": "assets/UI/button/r_bg_blue.png"
+		"move": "assets/UI/button/r_bg_blue.png"
 	},
 	"entities":
 	[
 		{
-			"name": "town",			
+			"name": "town",
 			"description": "a town.",
 			"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
 			"entityType": "structure",
-			"cost": [ 
+			"cost": [
 				{ "type": "gold", "amount": 3 }, 
 				{ "type": "food", "amount": 0 }, 
 				{ "type": "population", "amount": 2 } 
@@ -86,7 +87,8 @@
 					"name": "upgrade to village",
 					"type": "upgrade",
 					"description": "upgrade to a village.",
-					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
+					"textureUrl": "assets/actions/upgrade_bg.png",
+					"commandIconTextureUrl": "assets/actions/upgrade_t.png",
 					"creates": "village",
 					"range": 0,
 					"destroySelf": true,
@@ -104,13 +106,30 @@
 					]
 				},
 				{
+					"name": "build farm",
+					"type": "build",
+					"description": "build a farm.",
+					"textureUrl": "assets/actions/build_farm_bg.png",
+					"commandIconTextureUrl": "assets/actions/build_farm_t.png",
+					"creates": "farm",
+					"range": 1,
+					"validCells": ["buildable", "unit"],
+					"cost": 
+					[
+						{ "type": "gold", "amount": 3 }, 
+						{ "type": "food", "amount": 0 }, 
+						{ "type": "population", "amount": 2 }
+					]
+				},
+				{
 					"name": "build monastery",
 					"type": "build",
 					"description": "upgrade to a village.",
-					"textureUrl": "assets/Terrain_Medieval/Decor/elvenLodge.png",
-					"commandIconTextureUrl": "assets/actions/build.png",
+					"textureUrl": "assets/actions/build_monastery_bg.png",
+					"commandIconTextureUrl": "assets/actions/build_monastery_t.png",
 					"creates": "monastery",
 					"range": 1,
+					"validCells": ["buildable", "unit"],
 					"cost": 
 					[
 						{ "type": "gold", "amount": 3 }, 
@@ -122,9 +141,11 @@
 					"name": "build barracks",
 					"type": "build",
 					"description": "upgrade to a village.",
-					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
+					"textureUrl": "assets/actions/build_barracks_bg.png",
+					"commandIconTextureUrl": "assets/actions/build_barracks_t.png",
 					"creates": "barracks",
 					"range": 1,
+					"validCells": ["buildable", "unit"],
 					"cost": 
 					[
 						{ "type": "gold", "amount": 3 }, 
@@ -136,9 +157,11 @@
 					"name": "build marketplace",
 					"type": "build",
 					"description": "build a marketplace",
-					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
+					"textureUrl": "assets/actions/build_marketplace_bg.png",
+					"commandIconTextureUrl": "assets/actions/build_marketplace_t.png",
 					"creates": "marketplace",
 					"range": 1,
+					"validCells": ["buildable", "unit"],
 					"cost": 
 					[
 						{ "type": "gold", "amount": 3 }, 
@@ -321,10 +344,13 @@
 			[
 				{
 					"name": "move",
-					"type": "skill",
+					"type": "move",
 					"description": "Move monk to another tile.",
-					"textureUrl": "assets/actions/move.png",
-					"range": 1
+					"textureUrl": "assets/actions/move_bg.png",
+					"commandIconTextureUrl": "assets/actions/move_t.png",				
+					"range": 1,
+					"rangeRoad": 2,
+					"validCells": ["walkable", "buildable", "structure", "unit"]
 				}
 			]
 		}
