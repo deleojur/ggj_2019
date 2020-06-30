@@ -1,16 +1,17 @@
 <div class="scrollable-menu scrollbar-ripe-malinka" style="padding:8% 0 0 0;">
 	<div>
-		<div *ngFor="let merch of merchandise">
-			<app-menu-item 
-				[origin]="origin"
-				(mainButtonPressed)="merch.onClickPrimary($event)"
-				(secondaryButtonPressed)="merch.onClickSecondary($event)"
-				[menuItem]="merch"
-				[secondaryActionImgURL]="merch.secondaryActionImgUrl">
-			</app-menu-item>
+		<div *ngFor="let entity of entities">
+			<h4 class="entity-name">- {{entity.name}} -</h4>
+			<div *ngFor="let merch of getEntityBehavior(entity)">
+				<app-menu-item 
+					[origin]="origin"
+					(mainButtonPressed)="merch.onClickPrimary($event)"
+					(secondaryButtonPressed)="merch.onClickSecondary($event)"
+					[menuItem]="merch"
+					[entity]="entity"
+					[secondaryActionImgURL]="merch.secondaryActionImgUrl">
+				</app-menu-item>
+			</div>
 		</div>
-	</div>
-	<div *ngIf="merchandise.length === 1">
-		<p>{{merchandise[0].description}}</p>
 	</div>
 </div>

@@ -141,8 +141,8 @@ export class MapReader
     
                     grid[j].sprites.push(sprite);
                     tile.properties.forEach((property: TileProperty) =>
-                    {						
-                        grid[j].properties.push(property);
+                    {
+						grid[j].properties.push(property);
                     });
                 }
             }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.5" orientation="hexagonal" renderorder="right-up" width="13" height="19" tilewidth="256" tileheight="388" infinite="0" hexsidelength="0" staggeraxis="y" staggerindex="odd" nextlayerid="11" nextobjectid="159">
+<map version="1.2" tiledversion="1.2.5" orientation="hexagonal" renderorder="right-up" width="13" height="19" tilewidth="256" tileheight="388" infinite="0" hexsidelength="0" staggeraxis="y" staggerindex="odd" nextlayerid="11" nextobjectid="160">
  <tileset firstgid="1" name="Coldlands" tilewidth="256" tileheight="384" tilecount="67" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
@@ -683,258 +683,513 @@
  <tileset firstgid="235" name="Roads" tilewidth="256" tileheight="384" tilecount="85" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000001-00.png"/>
   </tile>
   <tile id="1">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000001-01.png"/>
   </tile>
   <tile id="2">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000010-00.png"/>
   </tile>
   <tile id="3">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000010-01.png"/>
   </tile>
   <tile id="4">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000011-00.png"/>
   </tile>
   <tile id="5">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000011-01.png"/>
   </tile>
   <tile id="6">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000100-00.png"/>
   </tile>
   <tile id="7">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000100-01.png"/>
   </tile>
   <tile id="8">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000101-00.png"/>
   </tile>
   <tile id="9">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000101-01.png"/>
   </tile>
   <tile id="10">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000110-00.png"/>
   </tile>
   <tile id="11">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000110-01.png"/>
   </tile>
   <tile id="12">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000111-00.png"/>
   </tile>
   <tile id="13">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001000-00.png"/>
   </tile>
   <tile id="14">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001000-01.png"/>
   </tile>
   <tile id="15">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001001-00.png"/>
   </tile>
   <tile id="16">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001001-01.png"/>
   </tile>
   <tile id="17">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001010-00.png"/>
   </tile>
   <tile id="18">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001010-01.png"/>
   </tile>
   <tile id="19">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001011-00.png"/>
   </tile>
   <tile id="20">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001100-00.png"/>
   </tile>
   <tile id="21">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001100-01.png"/>
   </tile>
   <tile id="22">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001101-00.png"/>
   </tile>
   <tile id="23">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001110-00.png"/>
   </tile>
   <tile id="24">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001111-00.png"/>
   </tile>
   <tile id="25">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010000-00.png"/>
   </tile>
   <tile id="26">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010000-01.png"/>
   </tile>
   <tile id="27">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010001-00.png"/>
   </tile>
   <tile id="28">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010001-01.png"/>
   </tile>
   <tile id="29">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010010-00.png"/>
   </tile>
   <tile id="30">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010010-01.png"/>
   </tile>
   <tile id="31">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010011-00.png"/>
   </tile>
   <tile id="32">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010100-00.png"/>
   </tile>
   <tile id="33">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010100-01.png"/>
   </tile>
   <tile id="34">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010101-00.png"/>
   </tile>
   <tile id="35">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010110-00.png"/>
   </tile>
   <tile id="36">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010111-00.png"/>
   </tile>
   <tile id="37">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-011000-00.png"/>
   </tile>
   <tile id="38">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-011000-01.png"/>
   </tile>
   <tile id="39">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-011001-00.png"/>
   </tile>
   <tile id="40">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-011010-00.png"/>
   </tile>
   <tile id="41">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-011011-00.png"/>
   </tile>
   <tile id="42">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-011100-00.png"/>
   </tile>
   <tile id="43">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-011101-00.png"/>
   </tile>
   <tile id="44">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-011110-00.png"/>
   </tile>
   <tile id="45">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-011111-00.png"/>
   </tile>
   <tile id="46">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100000-00.png"/>
   </tile>
   <tile id="47">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100000-01.png"/>
   </tile>
   <tile id="48">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100001-00.png"/>
   </tile>
   <tile id="49">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100001-01.png"/>
   </tile>
   <tile id="50">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100010-00.png"/>
   </tile>
   <tile id="51">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100010-01.png"/>
   </tile>
   <tile id="52">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100011-00.png"/>
   </tile>
   <tile id="53">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100100-00.png"/>
   </tile>
   <tile id="54">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100100-01.png"/>
   </tile>
   <tile id="55">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100101-00.png"/>
   </tile>
   <tile id="56">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100110-00.png"/>
   </tile>
   <tile id="57">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100111-00.png"/>
   </tile>
   <tile id="58">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-101000-00.png"/>
   </tile>
   <tile id="59">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-101000-01.png"/>
   </tile>
   <tile id="60">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-101001-00.png"/>
   </tile>
   <tile id="61">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-101010-00.png"/>
   </tile>
   <tile id="62">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-101011-00.png"/>
   </tile>
   <tile id="63">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-101100-00.png"/>
   </tile>
   <tile id="64">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-101101-00.png"/>
   </tile>
   <tile id="65">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-101110-00.png"/>
   </tile>
   <tile id="66">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-101111-00.png"/>
   </tile>
   <tile id="67">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-110000-00.png"/>
   </tile>
   <tile id="68">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-110000-01.png"/>
   </tile>
   <tile id="69">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-110001-00.png"/>
   </tile>
   <tile id="70">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-110010-00.png"/>
   </tile>
   <tile id="71">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-110011-00.png"/>
   </tile>
   <tile id="72">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-110100-00.png"/>
   </tile>
   <tile id="73">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-110101-00.png"/>
   </tile>
   <tile id="74">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-110110-00.png"/>
   </tile>
   <tile id="75">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-110111-00.png"/>
   </tile>
   <tile id="76">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-111000-00.png"/>
   </tile>
   <tile id="77">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-111001-00.png"/>
   </tile>
   <tile id="78">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-111010-00.png"/>
   </tile>
   <tile id="79">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-111011-00.png"/>
   </tile>
   <tile id="80">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-111100-00.png"/>
   </tile>
   <tile id="81">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-111101-00.png"/>
   </tile>
   <tile id="82">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-111110-00.png"/>
   </tile>
   <tile id="83">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-111111-00.png"/>
   </tile>
   <tile id="84">
+   <properties>
+    <property name="tileType" value="road"/>
+   </properties>
    <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-111111-01.png"/>
   </tile>
  </tileset>
@@ -1168,11 +1423,6 @@
   <properties>
    <property name="PlayerStart" value="town"/>
   </properties>
-  <object id="146" x="1385.63" y="2018.38" width="70.1388" height="85.0619">
-   <properties>
-    <property name="playerStart" value="town"/>
-   </properties>
-  </object>
   <object id="150" x="1614.88" y="2030.72" width="81.7661" height="61.3246">
    <properties>
     <property name="playerStart" value="farm"/>
@@ -1183,9 +1433,14 @@
     <property name="playerStart" value="farm"/>
    </properties>
   </object>
-  <object id="158" x="1241.76" y="2217.03" width="96.1538" height="74.1758">
+  <object id="158" x="1296.71" y="2019.23" width="96.1538" height="74.1758">
    <properties>
     <property name="playerStart" value="monk"/>
+   </properties>
+  </object>
+  <object id="159" x="1245.88" y="2193.68" width="96.1538" height="74.1758">
+   <properties>
+    <property name="playerStart" value="town"/>
    </properties>
   </object>
  </objectgroup>

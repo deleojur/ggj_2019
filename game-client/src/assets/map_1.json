@@ -419,23 +419,6 @@
          "name":"Icon Layer",
          "objects":[
                 {
-                 "height":85.0619,
-                 "id":146,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"playerStart",
-                         "type":"string",
-                         "value":"town"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":70.1388,
-                 "x":1385.63,
-                 "y":2018.38
-                }, 
-                {
                  "height":61.3246,
                  "id":150,
                  "name":"",
@@ -483,8 +466,25 @@
                  "type":"",
                  "visible":true,
                  "width":96.1538,
-                 "x":1241.76,
-                 "y":2217.03
+                 "x":1296.70505494505,
+                 "y":2019.2278021978
+                }, 
+                {
+                 "height":74.1758,
+                 "id":159,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"playerStart",
+                         "type":"string",
+                         "value":"town"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":96.1538,
+                 "x":1396.97804505494,
+                 "y":2031.59341868132
                 }],
          "opacity":1,
          "properties":[
@@ -499,7 +499,7 @@
          "y":0
         }],
  "nextlayerid":11,
- "nextobjectid":159,
+ "nextobjectid":160,
  "orientation":"hexagonal",
  "renderorder":"right-up",
  "staggeraxis":"y",
@@ -1926,511 +1926,1021 @@
                  "id":0,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-000001-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":1,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-000001-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":2,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-000010-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":3,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-000010-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":4,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-000011-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":5,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-000011-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":6,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-000100-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":7,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-000100-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":8,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-000101-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":9,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-000101-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":10,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-000110-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":11,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-000110-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":12,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-000111-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":13,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-001000-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":14,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-001000-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":15,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-001001-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":16,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-001001-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":17,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-001010-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":18,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-001010-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":19,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-001011-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":20,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-001100-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":21,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-001100-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":22,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-001101-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":23,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-001110-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":24,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-001111-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":25,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-010000-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":26,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-010000-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":27,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-010001-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":28,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-010001-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":29,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-010010-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":30,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-010010-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":31,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-010011-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":32,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-010100-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":33,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-010100-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":34,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-010101-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":35,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-010110-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":36,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-010111-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":37,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-011000-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":38,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-011000-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":39,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-011001-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":40,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-011010-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":41,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-011011-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":42,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-011100-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":43,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-011101-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":44,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-011110-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":45,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-011111-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":46,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-100000-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":47,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-100000-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":48,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-100001-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":49,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-100001-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":50,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-100010-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":51,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-100010-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":52,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-100011-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":53,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-100100-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":54,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-100100-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":55,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-100101-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":56,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-100110-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":57,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-100111-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":58,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-101000-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":59,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-101000-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":60,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-101001-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":61,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-101010-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":62,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-101011-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":63,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-101100-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":64,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-101101-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":65,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-101110-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":66,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-101111-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":67,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-110000-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":68,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-110000-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":69,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-110001-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":70,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-110010-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":71,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-110011-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":72,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-110100-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":73,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-110101-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":74,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-110110-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":75,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-110111-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":76,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-111000-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":77,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-111001-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":78,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-111010-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":79,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-111011-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":80,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-111100-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":81,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-111101-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":82,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-111110-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":83,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-111111-00.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }, 
                 {
                  "id":84,
                  "image":"Terrain_Medieval\/Roads\/hexRoad-111111-01.png",
                  "imageheight":384,
-                 "imagewidth":256
+                 "imagewidth":256,
+                 "properties":[
+                        {
+                         "name":"tileType",
+                         "type":"string",
+                         "value":"road"
+                        }]
                 }],
          "tilewidth":256
         }, 

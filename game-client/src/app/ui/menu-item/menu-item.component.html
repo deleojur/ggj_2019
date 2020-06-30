@@ -3,12 +3,7 @@
 	<div class="row top-container">
 		<div class="col-2" (click)="clickMainButton()">
 			<img class="iconHolder" src="assets/UI/window/inside.png">
-			<img src={{menuItem.textureUrl}}
-				[ngClass]="{
-					'unit-icon': menuItem.type === 'train' || menuItem.type === 'skill',
-					'structure-icon': menuItem.type === 'build' || menuItem.type === 'upgrade',					
-					'icon': true}"
-			>
+			<img src={{menuItem.textureUrl}} class="command-icon">
 			<img class="iconHolder" src="assets/UI/window/outside.png">
 		</div>
 		<div class="col-2">

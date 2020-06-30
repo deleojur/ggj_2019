@@ -65,6 +65,7 @@ export class WindowComponent implements OnInit, AfterViewInit
 		if (this.showWindow)
 		{
 			this.currentComponent.beforeOpenWindow(n);
+			GameManager.instance.revokeControlOverHexSelection();
 		} else this.currentComponent.beforeCloseWindow(n);
 		const subscription: Subscription = this.onTransitionEnd.subscribe(() => 
 		{
@@ -73,7 +74,11 @@ export class WindowComponent implements OnInit, AfterViewInit
 			if (this.showWindow)
 			{
 				this.currentComponent.afterOpenWindow(n);
-			} else this.currentComponent.afterCloseWindow(n);
+			} else
+			{
+				GameManager.instance.grantControlOverHexSelection(); 
+				this.currentComponent.afterCloseWindow(n);
+			}
 
 			if (callback)
 			{
@@ -95,7 +100,7 @@ export class WindowComponent implements OnInit, AfterViewInit
 		this.width = this.currentComponent.width || '45vh';
 		this.top = this.currentComponent.top || '-50px';
 
-		this.showWindow = true;	
+		this.showWindow = true;
 		this.waitForTransitionEnd(n, transitionEnded);		
 	}
 

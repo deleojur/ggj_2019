@@ -1,7 +1,7 @@
 import { Resource} from 'src/app/game/entities/resource';
 import { Cell } from 'src/app/game/grid/grid';
 import { Hex } from 'honeycomb-grid';
-import { BehaviorInformation } from 'src/app/game/entities/entity';
+import { BehaviorInformation, Entity } from 'src/app/game/entities/entity';
 import { GameManager } from 'src/app/game/game-manager';
 
 export class ResourceManager
@@ -84,11 +84,11 @@ export class ResourceManager
 		return true;
 	}
 
-	public tryPurchaseItem(item: BehaviorInformation, origin: Hex<Cell>): boolean
+	public tryAcquireItem(item: BehaviorInformation, origin: Hex<Cell>, entity: Entity): boolean
 	{
 		if (this.areResourcesConditionsMet(item.cost))
 		{
-			GameManager.instance.purchaseItem(item, origin);
+			GameManager.instance.acquireItem(item, origin, entity);
 			return true;
 		}
 		return false;
