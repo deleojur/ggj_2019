@@ -102,7 +102,7 @@ export class GridManager
 		const i: number = hex.entities.indexOf(entity);
 		if (i > -1)
 		{
-			hex.entities.splice(i, 1);
+			hex.entities.splice(i, 1);		
 		}
 		this.entityContainer.removeChild(entity);
 	}

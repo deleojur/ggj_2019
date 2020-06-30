@@ -13,6 +13,8 @@ interface EntityTypes
 
 export class TurnsSystem
 {
+	
+
 	private _turnCommands: Map<Hex<Cell>, TurnCommand[]> = new Map<Hex<Cell>, TurnCommand[]>();
 	private _commandIconPositions: pPoint[][] = [[], [new pPoint(0, -75)], [new pPoint(-62, -50), new pPoint(62, -50)]];
 	
