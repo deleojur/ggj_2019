@@ -18,7 +18,7 @@ export class ItemOverviewWindowComponent implements OnInit, InnerWindowComponent
 	activeBehaviors: Map<Entity, BehaviorInformation>;
 
 	data: any;
-	origin: Hex<Cell>;
+	hex: Hex<Cell>;
 	entities: Entity[];
 	width: string = '45vh';
 	top: string = '-50px';
@@ -30,12 +30,12 @@ export class ItemOverviewWindowComponent implements OnInit, InnerWindowComponent
 
 	ngOnInit() 
 	{
-		this.origin = this.data.origin;
-		this.entities = this.origin.entities;
+		this.hex = this.data.origin;
+		this.entities = GameManager.instance.grid.getEntitiesAtHex(this.hex);
 		
 		this.activeBehaviors = new Map<Entity, BehaviorInformation>();
 		
-		const turnInformation: TurnInformation[] = GameManager.instance.turnSystem.getTurnInformation(this.origin);
+		const turnInformation: TurnInformation[] = GameManager.instance.turnSystem.getTurnInformation(this.hex);
 		this.entities.forEach(entity =>
 		{
 			turnInformation.forEach(turn =>
@@ -78,21 +78,21 @@ export class ItemOverviewWindowComponent implements OnInit, InnerWindowComponent
 
 	displayDetailsPage(behaviorInformation: BehaviorInformation)
 	{
-		GameManager.instance.windowManager.openWindow(WindowType.ItemDetail, { name: behaviorInformation.name, data: { origin: this.origin, item: behaviorInformation } });
+		GameManager.instance.windowManager.openWindow(WindowType.ItemDetail, { name: behaviorInformation.name, data: { origin: this.hex, item: behaviorInformation } });
 	}
 
 	cancelItem(buttonEvent: ButtonEvent): void
 	{
 		const behavior: BehaviorInformation = buttonEvent.behavior;
 		const entity: Entity = buttonEvent.entity;
-		GameManager.instance.cancelAcquireItem(behavior, this.origin, entity);
+		GameManager.instance.cancelAcquireItem(behavior, this.hex, entity);
 	}
 
 	buyItem(buttonEvent: ButtonEvent): void
 	{
 		const behavior: BehaviorInformation = buttonEvent.behavior;
 		const entity: Entity = buttonEvent.entity;
-		GameManager.instance.resourceManager.tryAcquireItem(behavior, this.origin, entity);
+		GameManager.instance.resourceManager.tryAcquireItem(behavior, this.hex, entity);
 	}
 
 	beforeCloseWindow(n: number): void

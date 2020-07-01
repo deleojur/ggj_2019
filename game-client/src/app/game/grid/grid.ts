@@ -24,7 +24,6 @@ export interface Cell
 {
     color?: string; 
 	isGenerated?: boolean;
-	entities: Entity[];
     properties: TileProperty[];
 	sprites: PIXI.Sprite[];
 	walkable: boolean; //units can walk on this tile.
@@ -81,29 +80,34 @@ export class GridManager
 		}
 	}
 
-	public moveEntityToHex(hex: Hex<Cell>, entity: Entity): void
+	public getEntitiesAtHex(hex: Hex<Cell>): Entity[]
 	{
-		entity.moveToHex(hex);
+		return this.entityManager.getEntitiesAtHex(hex);
+	}
+
+	public moveEntityToHex(entity: Entity, from: Hex<Cell>, to: Hex<Cell>): void
+	{
+		this.entityManager.moveEntityToHex(entity, from, to);
+		entity.moveToHex(to);
+		this.setZIndex(to, entity);
+	}
+
+	public addEntity(hex: Hex<Cell>, entity: Entity): void
+	{
+		this.entityContainer.addChild(entity);
 		this.setZIndex(hex, entity);
 	}
 
-	public createEntity(origin: Hex<Cell>, playerId: string, entityName: string): Entity
+	public createEntity(hex: Hex<Cell>, playerId: string, entityName: string): Entity
 	{
-		const entity: Entity = this.entityManager.createEntity(origin, playerId, entityName);
-		origin.entities.push(entity);
-		this.entityContainer.addChild(entity);
-		this.setZIndex(origin, entity);
+		const entity: Entity = this.entityManager.createEntity(hex, playerId, entityName);
+		this.addEntity(hex, entity);
 		return entity;
 	}
 
 	public removeEntity(hex: Hex<Cell>, entity: Entity): void
 	{
 		this.entityManager.removeEntity(hex, entity);
-		const i: number = hex.entities.indexOf(entity);
-		if (i > -1)
-		{
-			hex.entities.splice(i, 1);		
-		}
 		this.entityContainer.removeChild(entity);
 	}
 
@@ -118,7 +122,6 @@ export class GridManager
 		{
 			hex.sprites = [];
 			hex.properties = [];
-			hex.entities = [];
 		});
 
 		const r = this.tileWidth;
@@ -297,7 +300,6 @@ export class GridManager
 			for (let i: number = 1; i < 3; i++)
 			{
 				const ring: Hex<Cell>[] = this.calculateRing(hex, i);
-				//console.log(ring);
 			}
 		}
 		return neighbors;
@@ -311,7 +313,7 @@ export class GridManager
 
 		neighbors.forEach(e =>
 		{
-			if (e.buildable && e.entities.length === 0)
+			if (e.buildable)
 			{
 				validNeighbors.push(e);
 			}

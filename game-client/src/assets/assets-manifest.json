@@ -46,9 +46,10 @@
 		"assets/UI/button/round_mask.png",
 		"assets/UI/button/ring_frame.PNG",
 
-		"assets/UI/button/window/w_bg_blue.PNG",
-		"assets/UI/button/window/Window_frame.PNG",
-		"assets/UI/button/window/window_mask.PNG",
+		"assets/units/frames/frame_foreground.png",	
+		"assets/units/frames/frame_mask.png",
+		"assets/units/frames/round_frame.png",
+		"assets/units/frames/temp.png",
 
 		"assets/actions/move_t.png",
 		"assets/actions/upgrade_t.png",

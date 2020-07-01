@@ -100,19 +100,12 @@ export class TurnsSystem
 
 		if (turnInformation.behaviorInformation.type === 'upgrade')
 		{
-			//destroy the original entity
 			GameManager.instance.grid.removeEntity(turnInformation.originCell, turnInformation.originEntity);
-		}
-
-		if (turnInformation.targetEntity !== null)
-		{
-			//create that entity.
 		}
 
 		if (turnInformation.behaviorInformation.type === 'move')
 		{
-			//move that entity.
-			GameManager.instance.grid.moveEntityToHex(turnInformation.targetCell, turnInformation.targetEntity);
+			GameManager.instance.grid.moveEntityToHex(turnInformation.targetEntity, turnInformation.originCell, turnInformation.targetCell);
 		}
 
 		this.graphics.addChild(command.commandIcon);		
@@ -131,22 +124,44 @@ export class TurnsSystem
 		}
 	}
 
+	private reverseTurnCommand(turnInformation: TurnInformation): void
+	{
+		const behaviorInformation: BehaviorInformation = turnInformation.behaviorInformation;
+		switch (behaviorInformation.type)
+		{
+			case 'upgrade':
+			case 'train':
+				GameManager.instance.grid.addEntity(turnInformation.originCell, turnInformation.originEntity);
+				GameManager.instance.grid.removeEntity(turnInformation.targetCell, turnInformation.targetEntity);
+				break;
+			case 'build':
+				GameManager.instance.grid.removeEntity(turnInformation.targetCell, turnInformation.targetEntity);
+				break;
+			case 'move':
+				GameManager.instance.grid.moveEntityToHex(turnInformation.originEntity, turnInformation.targetCell, turnInformation.originCell);
+				break;
+		}
+	}
+
 	public removeTurnCommand(hex: Hex<Cell>, behaviorInformation: BehaviorInformation): TurnInformation
 	{
 		const turnCommands: TurnCommand[] = this._turnCommands.get(hex);
 		for (let i: number = 0; i < turnCommands.length; i++)
 		{
 			const turnCommand: TurnCommand = turnCommands[i];
+			const turnInformation: TurnInformation = turnCommand.turnInformation;
 			if (behaviorInformation === turnCommand.turnInformation.behaviorInformation)
 			{
-				const origin: Hex<Cell> = turnCommand.turnInformation.originCell;
-				const target: Hex<Cell> = turnCommand.turnInformation.targetCell;
+				const origin: Hex<Cell> = turnInformation.originCell;
+				const target: Hex<Cell> = turnInformation.targetCell;
 
 				const originIndex: number = this._turnCommands.get(origin).indexOf(turnCommand);
 				const targetIndex: number = this._turnCommands.get(target).indexOf(turnCommand);
 
 				this._turnCommands.get(origin).splice(originIndex, 1);
 				this._turnCommands.get(target).splice(targetIndex, 1);
+
+				this.reverseTurnCommand(turnInformation);
 
 				this.graphics.removeChild(turnCommand.commandIcon);
 				return turnCommand.turnInformation;

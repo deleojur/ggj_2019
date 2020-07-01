@@ -1433,12 +1433,12 @@
     <property name="playerStart" value="farm"/>
    </properties>
   </object>
-  <object id="158" x="1296.71" y="2019.23" width="96.1538" height="74.1758">
+  <object id="158" x="1222.53" y="2214.28" width="96.1538" height="74.1758">
    <properties>
     <property name="playerStart" value="monk"/>
    </properties>
   </object>
-  <object id="159" x="1245.88" y="2193.68" width="96.1538" height="74.1758">
+  <object id="159" x="1396.98" y="2031.59" width="96.1538" height="74.1758">
    <properties>
     <property name="playerStart" value="town"/>
    </properties>

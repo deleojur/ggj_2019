@@ -162,10 +162,11 @@ export class GameManager
 
 	private onHexSelected(hex: Hex<Cell>): void
 	{
-		if (hex.entities.length > 0)
+		const entities: Entity[] = this._grid.getEntitiesAtHex(hex);
+		if (entities.length > 0)
 		{
 			this.hexSubscription.unsubscribe();
-			this.windowManager.openWindow(WindowType.ItemOverview, { name: 'Select Action', data: { origin: hex, entities: hex.entities } });
+			this.windowManager.openWindow(WindowType.ItemOverview, { name: 'Select Action', data: { origin: hex, entities: entities } });
 
 			const turnInformationArray: TurnInformation[] = this._turnSystem.getTurnInformation(hex);
 			if (turnInformationArray.length > 0)

@@ -13,7 +13,7 @@ export class EntityManager
 	public createEntity(hex: Hex<Cell>, ownerId: string, entityName: string): Entity
 	{
 		const entityPrototype = AssetLoader.instance.entityPrototype(entityName);
-		const entityFactory: EntityFactory<Entity> = this.getEntity(entityPrototype.entityType);
+		const entityFactory: EntityFactory<Entity> = this.getEntityType(entityPrototype.entityType);
 		const entity = new entityFactory.entityClass(entityPrototype, hex, ownerId);
 
 		if (this._entities.has(hex))
@@ -24,7 +24,7 @@ export class EntityManager
 		return entity;
 	}
 
-	private getEntity(entityType: EntityType): EntityFactory<Entity>
+	private getEntityType(entityType: EntityType): EntityFactory<Entity>
 	{
 		switch (entityType)
 		{
@@ -34,6 +34,21 @@ export class EntityManager
 			case EntityType.Unit:
 				return new EntityFactory<Entity>(Unit);
 		}
+	}
+
+	public getEntitiesAtHex(hex: Hex<Cell>): Entity[]
+	{
+		if (this._entities.has(hex))
+		{
+			return this._entities.get(hex);
+		}
+		return [];
+	}
+
+	public addEntity(hex: Hex<Cell>, entity: Entity): void
+	{
+		const entities: Entity[] = this._entities.get(hex);
+		entities.push(entity);
 	}
 
 	public removeEntity(hex: Hex<Cell>, entity: Entity): boolean
@@ -48,11 +63,16 @@ export class EntityManager
 		return false;
 	}
 
+	public moveEntityToHex(entity: Entity, from: Hex<Cell>, to: Hex<Cell>): void
+	{
+		this.addEntity(to, entity);
+		this.removeEntity(from, entity);
+	}
+
 	constructor()
 	{
 		this._entities = new Map<Hex<Cell>, Entity[]>();
 		const validTiles: Hex<Cell>[] = GameManager.instance.grid.getValidTiles();
-		console.log('validCells', validTiles);
 		validTiles.forEach(hex =>
 		{
 			this._entities.set(hex, []);

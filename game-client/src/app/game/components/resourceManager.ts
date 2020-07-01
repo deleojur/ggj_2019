@@ -28,10 +28,13 @@ export class ResourceManager
 
 	public addResource(resources: Resource[]): void
 	{
-		for (let i = 0; i < resources.length; i++)
+		if (resources)
 		{
-			const resource: Resource = resources[i];
-			this.resourcePool.get(resource.type).amount += resource.amount;
+			for (let i = 0; i < resources.length; i++)
+			{
+				const resource: Resource = resources[i];
+				this.resourcePool.get(resource.type).amount += resource.amount;
+			}
 		}
 	}
 
