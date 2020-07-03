@@ -7,6 +7,8 @@ import { EntityManager } from '../../game/entities/entity-manager';
 import { Entity } from '../entities/entity';
 import { AssetLoader } from 'src/app/asset-loader';
 import { Unit } from '../entities/unit';
+import { Structure } from '../entities/structure';
+import { Queue } from 'simple-fifo-queue';
 
 export enum CellType
 {
@@ -171,7 +173,7 @@ export class GridManager
 				{
 					hex.buildable = property.value;
 				} if (property.name === 'tileType')
-				{
+				{					
 					hex.road = property.value === 'road';
 				}
 			});
@@ -231,22 +233,6 @@ export class GridManager
 		this.selectedCellsGraphics.clear();
 	}
 
-	public fillBuildableSelection(selection: Hex<Cell>[], validSelection: Hex<Cell>[]): void
-	{
-		for (let i = 0; i < selection.length; i++)
-		{
-			const cell: Hex<Cell> = selection[i];
-			const polygons: Polygon[] = this.getPolygon([cell]);
-			const isValid: boolean = validSelection.indexOf(cell) > -1;
-			this.validCellsGraphics.beginFill(isValid ? 0x00ff00 : 0xff0000, 0.45);
-			polygons.forEach(polygon => 
-			{
-				this.validCellsGraphics.drawPolygon(polygon);
-			});		
-			this.validCellsGraphics.endFill();
-		}		
-	}
-
 	private getEdgeCorners(hexagons: Hex<Cell>[]): Outline[]
     {
         const outline: Outline[] = [];
@@ -271,7 +257,7 @@ export class GridManager
         return outline;
 	}
 
-	private calculateRing(center: Hex<Cell>, radius: number): Hex<Cell>[]
+	public getTileRing(center: Hex<Cell>, radius: number): Hex<Cell>[]
     {
         const result: Hex<Cell>[] = [];
         let hex: Hex<Cell> = this.grid.get(center.toCartesian
@@ -290,35 +276,97 @@ export class GridManager
             }
         }
         return result;
-    }
-
-	public getWalkableHexes(hex: Hex<Cell>): Hex<Cell>[]
-	{
-		const neighbors: Hex<Cell>[] = this.getNeighbors(hex);
-		if (hex.road)
-		{
-			for (let i: number = 1; i < 3; i++)
-			{
-				const ring: Hex<Cell>[] = this.calculateRing(hex, i);
-			}
-		}
-		return neighbors;
 	}
 
-	//can move, can build, can move on entities?
-	public getListOfValidNeighbors(origin: Hex<Cell>): Hex<Cell>[]
+	private isStructure(hex: Hex<Cell>): boolean
 	{
-		const validNeighbors: Hex<Cell>[] = [];
-		const neighbors: Hex<Cell>[] = this.grid.neighborsOf(origin);
-
-		neighbors.forEach(e =>
+		const entities: Entity[] = this.entityManager.getEntitiesAtHex(hex);
+		for (let i: number = 0; i < entities.length; i++)
 		{
-			if (e.buildable)
+			const entity: Entity = entities[i];
+			if (entity instanceof Structure)
 			{
-				validNeighbors.push(e);
+				return true;
+			}
+		}		
+		return false;
+	}
+
+	private getBuildableCells(hex: Hex<Cell>): Hex<Cell>[]
+	{
+		const neighbors: Hex<Cell>[] = this.grid.neighborsOf(hex);
+		const validCells: Hex<Cell>[] = [];
+		neighbors.forEach(n =>
+		{			
+			if (n.buildable && !this.isStructure(n))
+			{
+				validCells.push(n);
 			}
 		});
-		return validNeighbors;
+		return validCells;
+	}
+
+	private getValidCells(hex: Hex<Cell>, type: string): Hex<Cell>[]
+	{
+		switch (type)
+		{
+			case "build":
+				return this.getBuildableCells(hex);
+			
+			case "move":
+				return this.getWalkableCells(hex, 3);
+		}
+	}
+
+	private getWalkableCells(hex: Hex<Cell>, radius: number): Hex<Cell>[]
+	{
+		const checkedCells: Hex<Cell>[] = [];
+		const uncheckedCells: Queue<{ hex: Hex<Cell>, dist: number }> = new Queue<{ hex: Hex<Cell>, dist: number }>();
+		const road: Hex<Cell>[] = [];
+		let current: { hex: Hex<Cell>, dist: number } = { hex: hex, dist: 0 };
+		do
+		{
+			const neighbors: Hex<Cell>[] = this.grid.neighborsOf(current.hex);
+			neighbors.forEach(n =>
+			{
+				if (checkedCells.indexOf(n) === -1)
+				{
+					checkedCells.push(n);
+					if ((current.dist + 1 === 1 && n.walkable) ||
+						(current.dist + 1 <= radius && n.road && hex.road))
+					{
+						if (!this.isStructure(n))
+						{
+							uncheckedCells.Push({ hex: n, dist: current.dist + 1 });
+						}
+						road.push(n);
+					}
+				}
+			});
+			checkedCells.push(current.hex);
+			current = uncheckedCells.Front();
+			uncheckedCells.Pop();
+		} while (!uncheckedCells.Empty());
+		return road;
+	} 
+
+	public renderValidCells(hex: Hex<Cell>, type: string): Hex<Cell>[]
+	{
+		const validCells: Hex<Cell>[] = this.getValidCells(hex, type);
+		this.renderSelectedCellsOutline(validCells);
+
+		validCells.forEach(cell =>
+		{
+			const polygons: Polygon[] = this.getPolygon([cell]);
+			this.validCellsGraphics.beginFill(0x00ff00, 0.45);
+			polygons.forEach(polygon => 
+			{
+				this.validCellsGraphics.drawPolygon(polygon);
+			});		
+			this.validCellsGraphics.endFill();
+		});
+
+		return validCells;
 	}
 
 	public renderSelectedCellsOutline(selection: Hex<Cell>[]): void
@@ -337,14 +385,6 @@ export class GridManager
 		}
 		this.selectedCellsGraphics.lineStyle(0);
 	}
-
-    public renderValidCells(origin: Hex<Cell>, validNeighbors: Hex<Cell>[]): void
-    {
-		const neighbors: Hex<Cell>[] = this.grid.neighborsOf(origin);
-		this.fillBuildableSelection(neighbors, validNeighbors);
-		
-		this.renderSelectedCellsOutline(neighbors);
-    }
 
 	private getPolygon(hexagons: Hex<Cell>[]): Polygon[]
 	{

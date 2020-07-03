@@ -114,7 +114,6 @@
 					"commandIconTextureUrl": "assets/actions/build_farm_t.png",
 					"creates": "farm",
 					"range": 1,
-					"validCells": ["buildable", "unit"],
 					"cost": 
 					[
 						{ "type": "gold", "amount": 3 }, 
@@ -130,7 +129,6 @@
 					"commandIconTextureUrl": "assets/actions/build_monastery_t.png",
 					"creates": "monastery",
 					"range": 1,
-					"validCells": ["buildable", "unit"],
 					"cost": 
 					[
 						{ "type": "gold", "amount": 3 }, 
@@ -146,7 +144,6 @@
 					"commandIconTextureUrl": "assets/actions/build_barracks_t.png",
 					"creates": "barracks",
 					"range": 1,
-					"validCells": ["buildable", "unit"],
 					"cost": 
 					[
 						{ "type": "gold", "amount": 3 }, 
@@ -162,7 +159,6 @@
 					"commandIconTextureUrl": "assets/actions/build_marketplace_t.png",
 					"creates": "marketplace",
 					"range": 1,
-					"validCells": ["buildable", "unit"],
 					"cost": 
 					[
 						{ "type": "gold", "amount": 3 }, 
@@ -341,7 +337,7 @@
 			"name": "monk",
 			"textureUrl": "assets/units/monk.png",
 			"entityType": "unit",
-			"behaviors" : 
+			"behaviors" :
 			[
 				{
 					"name": "move",
@@ -349,9 +345,7 @@
 					"description": "Move monk to another tile.",
 					"textureUrl": "assets/actions/move_bg.png",
 					"commandIconTextureUrl": "assets/actions/move_t.png",				
-					"range": 1,
-					"rangeRoad": 2,
-					"validCells": ["walkable", "buildable", "structure", "unit"]
+					"range": 2
 				}
 			]
 		}

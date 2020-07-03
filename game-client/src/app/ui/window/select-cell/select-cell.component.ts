@@ -43,8 +43,7 @@ export class SelectCellComponent implements OnInit, InnerWindowComponent
 
 	private renderValidCells(origin: Hex<Cell>): void
 	{
-		this._validCells = this.grid.getWalkableHexes(origin);
-		this.grid.renderValidCells(origin, this._validCells);
+		this._validCells = this.grid.renderValidCells(origin, this._behavior.type);
 	}
 
 	private clearValidCells(): void
@@ -60,6 +59,7 @@ export class SelectCellComponent implements OnInit, InnerWindowComponent
 	  
 	beforeCloseWindow(n: number): void
 	{
+		this.hexSubscription.unsubscribe();
 		this.clearValidCells();
 		this.grid.clearSelectedCells();
 		if (n !== 0)
