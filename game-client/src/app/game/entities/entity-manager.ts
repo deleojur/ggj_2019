@@ -15,12 +15,6 @@ export class EntityManager
 		const entityPrototype = AssetLoader.instance.entityPrototype(entityName);
 		const entityFactory: EntityFactory<Entity> = this.getEntityType(entityPrototype.entityType);
 		const entity = new entityFactory.entityClass(entityPrototype, hex, ownerId);
-
-		if (this._entities.has(hex))
-		{
-			const entities: Entity[] = this._entities.get(hex);
-			entities.push(entity);
-		}
 		return entity;
 	}
 

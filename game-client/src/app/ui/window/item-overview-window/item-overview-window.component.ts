@@ -31,7 +31,7 @@ export class ItemOverviewWindowComponent implements OnInit, InnerWindowComponent
 	ngOnInit() 
 	{
 		this.hex = this.data.origin;
-		this.entities = GameManager.instance.grid.getEntitiesAtHex(this.hex);
+		this.entities = this.data.entities;
 		
 		this.activeBehaviors = new Map<Entity, BehaviorInformation>();
 		

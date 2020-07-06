@@ -13,8 +13,6 @@ interface EntityTypes
 
 export class TurnsSystem
 {
-	
-
 	private _turnCommands: Map<Hex<Cell>, TurnCommand[]> = new Map<Hex<Cell>, TurnCommand[]>();
 	private _commandIconPositions: pPoint[][] = [[], [new pPoint(0, -75)], [new pPoint(-62, -50), new pPoint(62, -50)]];
 	
@@ -108,19 +106,29 @@ export class TurnsSystem
 			GameManager.instance.grid.moveEntityToHex(turnInformation.targetEntity, turnInformation.originCell, turnInformation.targetCell);
 		}
 
-		this.graphics.addChild(command.commandIcon);		
-		this.addCommandIcon(turnInformation.targetCell);
+		this.graphics.addChild(command.commandIcon);
+		this.updateCommandIcons(turnInformation.targetCell);
 	}
 
-	private addCommandIcon(hex: Hex<Cell>): void
+	private updateCommandIcons(hex: Hex<Cell>): void
 	{
 		const pos: Point = hex.toPoint().add(hex.center());
-		const length: number = this._turnCommands.get(hex).length;
-		for (let i: number = 0; i < length; i++)
+		const turnCommands: TurnCommand[] = this._turnCommands.get(hex).slice();
+
+		for (let i: number = turnCommands.length - 1; i > -1; i--)
 		{
-			const turnCommand: TurnCommand = this._turnCommands.get(hex)[i];
-			const localPos: pPoint = this._commandIconPositions[length][i];
-			turnCommand.commandIcon.position = new pPoint(pos.x + localPos.x, pos.y + localPos.y);
+			const command: TurnCommand = turnCommands[i];
+			if (command.turnInformation.targetCell !== hex)
+			{
+				turnCommands.splice(i, 1);
+			}
+		}
+
+		for (let i: number = 0; i < turnCommands.length; i++)
+		{
+			const command: TurnCommand = turnCommands[i];
+			const localPos: pPoint = this._commandIconPositions[turnCommands.length][i];
+			command.commandIcon.position = new pPoint(pos.x + localPos.x, pos.y + localPos.y);
 		}
 	}
 
@@ -158,12 +166,18 @@ export class TurnsSystem
 				const originIndex: number = this._turnCommands.get(origin).indexOf(turnCommand);
 				const targetIndex: number = this._turnCommands.get(target).indexOf(turnCommand);
 
-				this._turnCommands.get(origin).splice(originIndex, 1);
 				this._turnCommands.get(target).splice(targetIndex, 1);
+
+				if (target !== origin)
+				{
+					this._turnCommands.get(origin).splice(originIndex, 1);
+				}
 
 				this.reverseTurnCommand(turnInformation);
 
 				this.graphics.removeChild(turnCommand.commandIcon);
+
+				this.updateCommandIcons(hex);
 				return turnCommand.turnInformation;
 			}
 		}

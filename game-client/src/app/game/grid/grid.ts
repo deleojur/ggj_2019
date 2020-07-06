@@ -96,6 +96,7 @@ export class GridManager
 
 	public addEntity(hex: Hex<Cell>, entity: Entity): void
 	{
+		this.entityManager.addEntity(hex, entity);
 		this.entityContainer.addChild(entity);
 		this.setZIndex(hex, entity);
 	}

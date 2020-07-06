@@ -162,7 +162,19 @@ export class GameManager
 
 	private onHexSelected(hex: Hex<Cell>): void
 	{
-		const entities: Entity[] = this._grid.getEntitiesAtHex(hex);
+		const entities: Entity[] = this._grid.getEntitiesAtHex(hex).slice();
+		const turnInformation: TurnInformation[] = this.turnSystem.getTurnInformation(hex);
+
+		turnInformation.forEach(turnInfo =>
+		{
+			const entity: Entity = turnInfo.targetEntity;
+			if (entities.indexOf(entity) === -1 && 
+				entities.indexOf(turnInfo.originEntity) === -1)
+			{
+				entities.push(entity);
+			}
+		});
+
 		if (entities.length > 0)
 		{
 			this.hexSubscription.unsubscribe();
