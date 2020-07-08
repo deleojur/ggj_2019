@@ -12,7 +12,6 @@ import { ClientRoomComponent } from './room/client-room/client-room.component';
 import { GameComponent } from './game/components/game.component';
 import { ClientGameComponent } from './game/components/client-game/client-game.component';
 import { HostGameComponent } from './game/components/host-game/host-game.component';
-import { ButtonComponent } from './ui/button/button.component';
 import { WindowComponent } from './ui/window/window.component';
 import { CardComponent } from '../resource-cards/card/card.component';
 import { MenuItemComponent } from './ui/menu-item/menu-item.component';
@@ -35,7 +34,6 @@ import { SelectCellComponent } from './ui/window/select-cell/select-cell.compone
 		ClientRoomComponent,
 		ClientGameComponent,
 		HostGameComponent,
-		ButtonComponent,
 		WindowComponent,
 		CardComponent,
 		MenuItemComponent,

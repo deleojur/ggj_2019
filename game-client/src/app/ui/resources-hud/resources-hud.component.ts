@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Resource } from 'src/app/game/entities/resource';
 import { GameManager } from 'src/app/game/game-manager';
 
@@ -9,6 +9,8 @@ import { GameManager } from 'src/app/game/game-manager';
 })
 export class ResourcesHudComponent implements OnInit
 {
+	showCheckbox: boolean = false;
+
 	resourcePool: Resource[];
 	constructor()
 	{
@@ -18,5 +20,22 @@ export class ResourcesHudComponent implements OnInit
 	ngOnInit() 
 	{
 		this.resourcePool = GameManager.instance.resourceManager.$resourcePool;
+	}
+
+	ngAfterViewInit()
+    {
+	}
+
+	onConfirmButtonClicked(): void
+	{
+		this.showCheckbox = !this.showCheckbox;
+
+		if (this.showCheckbox)
+		{
+			console.log('I\'m ready!');
+		} else 
+		{
+			console.log('I\'m not ready');
+		}
 	}
 }

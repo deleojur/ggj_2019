@@ -4,7 +4,7 @@
 			<h4 class="entity-name">- {{entity.name}} -</h4>
 			<div *ngFor="let merch of getEntityBehavior(entity)">
 				<app-menu-item 
-					[origin]="origin"
+					[origin]="hex"
 					(mainButtonPressed)="merch.onClickPrimary($event)"
 					(secondaryButtonPressed)="merch.onClickSecondary($event)"
 					[menuItem]="merch"

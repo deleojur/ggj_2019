@@ -50,3 +50,47 @@ img.background
     font-size: 125%;
     margin-top: -23%;
 }
+
+.resource-background
+{
+	margin-left: -10%;
+	pointer-events: none;
+}
+
+.confirm-btn-background
+{
+	margin-left: -86%;
+	width: 200%;
+}
+
+.confirm-btn-text
+{
+	font-family: Zolof;
+    text-align: c;
+    font-size: 130%;
+    width: 100%;
+    color: #fca475;
+    pointer-events: none;
+    margin-top: -23%;
+    margin-left: 9%;
+}
+
+.confirmed-checkmark
+{
+	position: absolute;
+    width: 38%;
+    margin-left: 33%;
+    margin-top: -34%;
+}
+
+.confirmed-checkmark.animate-in
+{
+    transition: transform .3s cubic-bezier(.85, -.25, .57, 1);
+	transform: scale(100%, 100%);
+}
+
+.confirmed-checkmark.animate-out
+{
+    transition: transform .3s cubic-bezier(.85, -.25, .57, 1);
+	transform: scale(0, 0);
+}
