@@ -20,7 +20,7 @@ import { ResourceComponent } from './ui/resource/resource.component';
 import { WindowDirective } from './ui/window/window-directive';
 import { ItemDetailWindowComponent } from './ui/window/item-detail-window/item-detail-window.component';
 import { ItemOverviewWindowComponent } from './ui/window/item-overview-window/item-overview-window.component';
-import { ResourcesHudComponent } from './ui/resources-hud/resources-hud.component';
+import { StatusBarHudComponent } from './ui/satus-bar-hud/satus-bar-hud.component';
 import { SelectCellComponent } from './ui/window/select-cell/select-cell.component';
 
 @NgModule({
@@ -40,7 +40,7 @@ import { SelectCellComponent } from './ui/window/select-cell/select-cell.compone
 		ResourceComponent,
 		ItemOverviewWindowComponent,
 		ItemDetailWindowComponent,
-		ResourcesHudComponent,
+		StatusBarHudComponent,
 		SelectCellComponent
 	],
   	entryComponents: [

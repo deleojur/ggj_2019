@@ -3,11 +3,11 @@ import { Resource } from 'src/app/game/entities/resource';
 import { GameManager } from 'src/app/game/game-manager';
 
 @Component({
-  selector: 'app-resources-hud',
-  templateUrl: './resources-hud.component.html',
-  styleUrls: ['./resources-hud.component.scss']
+  selector: 'app-satus-bar-hud',
+  templateUrl: './satus-bar-hud.component.html',
+  styleUrls: ['./satus-bar-hud.component.scss']
 })
-export class ResourcesHudComponent implements OnInit
+export class StatusBarHudComponent implements OnInit
 {
 	showCheckbox: boolean = false;
 
