@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Resource } from 'src/app/game/entities/resource';
 import { GameManager } from 'src/app/game/game-manager';
 

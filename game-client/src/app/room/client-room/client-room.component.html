@@ -1,4 +1,4 @@
-<div *ngIf="!clientData; else joined">
+<div *ngIf="!clientStateHandler.getClientData(); else joined">
     <form #f='ngForm' (ngSubmit)="joinRoom(f)">
         <div class="col-md-5">
             <div class="form-group">
@@ -28,7 +28,7 @@
     </form>
 </div>
 <ng-template #joined>
-    <h5 class="p-3 mb-2 text-center" [style.color]="clientData.color">
+    <h5 class="p-3 mb-2 text-center" [style.color]="clientStateHandler.getClientData().color">
         Press "Start Game" when all players have joined.
     </h5>
 
@@ -36,7 +36,7 @@
         id="start-game-btn"
         type="button"
         class="btn btn-bottom btn-lg btn-block"
-        [style.backgroundColor]="clientData.color"
+        [style.backgroundColor]="clientStateHandler.getClientData().color"
         (click)="startGame()">Start Game!</button>
 
 </ng-template>

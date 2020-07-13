@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { StateHandlerService } from 'src/services/state-handler.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,7 +10,6 @@ export class RoomComponent implements OnInit
 {
     router: Router;
     constructor(
-        private stateHandler: StateHandlerService, 
         private activatedRoute: ActivatedRoute,
         router: Router)
     {

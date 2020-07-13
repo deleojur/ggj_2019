@@ -7,18 +7,18 @@ export abstract class PrimaryState<RequestData>
     protected requestStack: Stack<RequestData>;
 
     private isActiveState: boolean = false;
-    private onStateDone: (data: RequestData) => void;
+	private onStateDone: (data: RequestData) => void;
 
     public init(connectionService: ConnectionService): void
     {
         this.connectionService = connectionService;
         this.requestStack = new Stack<RequestData>();
         this.subscribeToEvents();
-    }
+	}
 
-    public setActive(onStateDone: (data: RequestData) => void): void
+    public setActive(onStateDone: (data: RequestData) => void,): void
     {
-        this.isActiveState = true;
+		this.isActiveState = true;
         
         if (this.requestStack.length > 0)
         {
@@ -42,7 +42,7 @@ export abstract class PrimaryState<RequestData>
         } else
         {
             this.requestStack.push(data);
-        }
+		}
     }
 
     protected abstract subscribeToEvents(): void;

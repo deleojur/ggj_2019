@@ -12,11 +12,17 @@ import { ItemDetailWindowComponent } from '../ui/window/item-detail-window/item-
 import { SelectCellComponent } from '../ui/window/select-cell/select-cell.component';
 import { Sprite, Point, Texture, Application, Graphics, autoDetectRenderer } from 'pixi.js';
 import { Subject, Subscription } from 'rxjs';
-import { cardModel } from 'src/resource-cards/card/card-model';
+import { ClientData } from './states/request-data';
+import { StateHandlerService } from './states/state-handler.service';
+import { ClientStateHandler } from './states/client-states/client-state-handler';
 
 export class GameManager
 {
-    private pixi: Application; // this will be our pixi application
+	private _stateHandler: StateHandlerService;
+	private _worldCanvas: HTMLCanvasElement = null;
+	private _onWorldLoaded: () => void;
+
+	private pixi: Application; // this will be our pixi application
 	private _gridGraphics: Graphics;
 	private _commandGraphics: Graphics;
     private _viewport: ViewportManager;
@@ -107,7 +113,7 @@ export class GameManager
     
     private initGrid(cb: () => void): void
     {
-		this._grid = new GridManager(this.viewport, this._gridGraphics);
+		this._grid = new GridManager(this._stateHandler, this.viewport, this._gridGraphics);
 		AssetLoader.instance.loadAssetsAsync().then(() => 
 		{			
 			const size: Point = this._grid.generateWorld();
@@ -117,15 +123,31 @@ export class GameManager
 			this._turnSystem = new TurnsSystem(this._commandGraphics);
 			return cb();
 		});
-    }
-
-    public init(cb: () => void): HTMLCanvasElement
-    {
-        this.initPixi();
+	}
+	
+	private generateWorld(cb: () => void): HTMLCanvasElement
+	{		
+		this.initPixi();
 		this._viewport = new ViewportManager(this.pixi);
         this.initGrid(cb);
-        this.resizePixi();
-        return this.pixi.view;
+		this.resizePixi();
+		this._worldCanvas = this.pixi.view;
+        return this._worldCanvas;
+	}
+
+	public get worldCanvas(): HTMLCanvasElement
+	{
+		if (this._worldCanvas === null)
+		{
+			return this.generateWorld(() => { });
+		}
+		return this._worldCanvas;
+	}
+
+    public init(stateHandler: StateHandlerService, cb: () => void): void
+    {
+		this._stateHandler = stateHandler;
+		this.generateWorld(cb);
     }
 
 	private initWindowManager(): void
@@ -162,7 +184,8 @@ export class GameManager
 
 	private onHexSelected(hex: Hex<Cell>): void
 	{
-		const entities: Entity[] = this._grid.getEntitiesAtHex(hex).slice();
+		const clientId: string = (this._stateHandler as ClientStateHandler).getClientData().id;
+		const entities: Entity[] = this._grid.getEntitiesAtHexOfOwner(hex, clientId).slice();
 		const turnInformation: TurnInformation[] = this.turnSystem.getTurnInformation(hex);
 
 		turnInformation.forEach(turnInfo =>
@@ -176,7 +199,7 @@ export class GameManager
 		});
 
 		if (entities.length > 0)
-		{
+		{			
 			this.hexSubscription.unsubscribe();
 			this.windowManager.openWindow(WindowType.ItemOverview, { name: 'Select Action', data: { origin: hex, entities: entities } });
 
@@ -187,12 +210,12 @@ export class GameManager
 				{
 					const origin: Hex<Cell> = turnInformation.originCell;
 					const target: Hex<Cell> = turnInformation.targetCell;
-					GameManager.instance.grid.renderSelectedCellsOutline([origin, target]);
+					GameManager.instance.grid.renderSelectedCellsOutline([origin, target], this._stateHandler.getColor(clientId));
 				});				
 			}
 			else
 			{
-				GameManager.instance.grid.renderSelectedCellsOutline([hex]);
+				GameManager.instance.grid.renderSelectedCellsOutline([hex], this._stateHandler.getColor(clientId));
 			}			
 		}
 	}

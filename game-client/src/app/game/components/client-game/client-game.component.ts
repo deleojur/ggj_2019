@@ -1,48 +1,35 @@
-import { ClientUtilsService } from './../../../../services/utils/client-utils.service';
 import { GridManager } from './../../grid/grid';
 import { Component, AfterViewInit } from '@angular/core';
 import { Vector } from 'vector2d';
 import { Game } from '../game.component';
-import { StateHandlerService } from 'src/services/state-handler.service';
 
 import { state_playerStartingPositions } from '../../states/turn-state-handling/state_player-starting-positions';
-import { PositionData } from '../../states/request-data';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from '../../grid/grid';
-import { ViewportManager } from '../../render/viewport';
 import { GameManager } from '../../game-manager';
-import { Subject, Subscription, Observable } from 'rxjs';
+import { ClientStateHandler } from '../../states/client-states/client-state-handler';
+import { StateHandlerService } from '../../states/state-handler.service';
 
 @Component({
   selector: 'app-client-game',
   template: ''
 })
 export class ClientGameComponent implements Game, AfterViewInit
-{
-    private grid: GridManager;
-    private viewport: ViewportManager;
+{    
     private interactionStart: Vector;
 	private color: number;
 
     constructor(
-        private stateHandlerService: StateHandlerService,
-		private clientUtilsService: ClientUtilsService) 
-        {
-            
-        }
-
-    onMapLoaded(): void
-    {
-        this.grid = GameManager.instance.grid;
-        this.viewport = GameManager.instance.viewport;
-        this.stateHandlerService.activateState<PositionData>(state_playerStartingPositions, (positionData) =>
-        {
-			const hex: Hex<Cell> = this.grid.getHex(positionData.x, positionData.y);
-            const color: number = this.clientUtilsService.colorRGB;
-            //this.grid.renderHex(hex, color);
-		});
+        private clientStateHandler: ClientStateHandler)
+	{
+		
 	}
-	
+
+	stateHandler(): StateHandlerService
+	{
+		return this.clientStateHandler;
+	}
+
 	ngAfterViewInit()
 	{
 		this.attachEventListeners();	

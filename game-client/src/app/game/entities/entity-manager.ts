@@ -10,11 +10,11 @@ export class EntityManager
 {
 	private _entities: Map<Hex<Cell>, Entity[]>;
 
-	public createEntity(hex: Hex<Cell>, ownerId: string, entityName: string): Entity
+	public createEntity(hex: Hex<Cell>, owner: string, entityName: string): Entity
 	{
 		const entityPrototype = AssetLoader.instance.entityPrototype(entityName);
 		const entityFactory: EntityFactory<Entity> = this.getEntityType(entityPrototype.entityType);
-		const entity = new entityFactory.entityClass(entityPrototype, hex, ownerId);
+		const entity = new entityFactory.entityClass(entityPrototype, hex, owner);
 		return entity;
 	}
 

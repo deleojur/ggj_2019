@@ -1,10 +1,11 @@
 import { Component, AfterViewInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { WindowComponent } from 'src/app/ui/window/window.component';
 import { GameManager } from '../game-manager';
+import { StateHandlerService } from '../states/state-handler.service';
 
 export interface Game
 {
-    onMapLoaded(): void;
+	stateHandler(): StateHandlerService;
 
     touchStart(event: TouchEvent): void;
     touchEnd(event: TouchEvent): void;
@@ -20,25 +21,21 @@ export interface Game
 })
 export class GameComponent implements AfterViewInit
 {
-    game: Game;
+	game: Game;
+	stateHandler: StateHandlerService;
 
     @ViewChild('pixiContainer', {static: false}) pixiContainer: ElementRef;
     @ViewChild(WindowComponent, {static: true}) windowContainer: WindowComponent;
 
     constructor()
     {
+		
     }
     
     ngAfterViewInit()
     {
-        const canvas: HTMLCanvasElement = GameManager.instance.init(() =>
-        {
-            //the game has been initialized!
-            this.game.onMapLoaded();
-            
-            return this.pixiContainer.nativeElement.appendChild(canvas);
-		});
-
+		const canvas: HTMLCanvasElement = GameManager.instance.worldCanvas;
+		this.pixiContainer.nativeElement.appendChild(canvas);
 		GameManager.instance.windowManager.windowComponent = this.windowContainer;
     }
 
@@ -50,6 +47,7 @@ export class GameComponent implements AfterViewInit
 
     onActivate(gameComponentReference: Game) 
     {
-        this.game = gameComponentReference;
+		this.game = gameComponentReference;
+		this.stateHandler = this.game.stateHandler();
     }
 }

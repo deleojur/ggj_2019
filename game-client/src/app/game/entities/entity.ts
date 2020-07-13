@@ -24,6 +24,13 @@ export interface EntityInformation extends PrototypeInformation
 	behaviors?: BehaviorInformation[];
 }
 
+export interface EntityShareInformation
+{
+	entityName: string;
+	hex: Hex<Cell>;
+	ownerId: string;
+}
+
 export interface BehaviorInformation extends PrototypeInformation
 {
 	type: string;
@@ -59,12 +66,17 @@ export class Entity extends Container
 		return this._prototype.name;
 	}
 
+	public get owner(): string
+	{
+		return this._owner;
+	}
+
 	public get behaviors(): BehaviorInformation[]
 	{
 		return this._prototype.behaviors;
 	}
 	
-	constructor(protected _prototype: EntityPrototype, protected _location: Hex<Cell>, protected _ownerId: string)
+	constructor(protected _prototype: EntityPrototype, protected _location: Hex<Cell>, protected _owner: string)
 	{
 		super();
 		this.initialise();

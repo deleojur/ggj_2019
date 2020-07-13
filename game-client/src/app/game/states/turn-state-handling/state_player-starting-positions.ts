@@ -15,7 +15,7 @@ export class state_playerStartingPositions extends PrimaryState<PositionData>
 
     public doRequestPlayerStartPositions(data: { roomid: string, clients: ClientData[] }): void
     {
-        const playerLocations: Hex<Cell>[] = this.getPlayerLocations();
+        const playerLocations: Hex<Cell>[] = [];
         const locationData: { roomid: string, clients: PositionData[] } = 
             { roomid: data.roomid, clients: [] };
 
@@ -26,11 +26,5 @@ export class state_playerStartingPositions extends PrimaryState<PositionData>
             locationData.clients.push(positionData);
         });
         this.connectionService.emitOutgoingEvent('host_game_startLocation', locationData);
-    }
-
-    getPlayerLocations(): Hex<Cell>[]
-    {
-        const grid: GridManager = GameManager.instance.grid;
-        return grid.$playerPositions;
     }
 }

@@ -7,6 +7,7 @@ import { InnerWindowComponent } from '../window.component';
 import { Subscription } from 'rxjs';
 import { BehaviorInformation, Entity } from 'src/app/game/entities/entity';
 import { TurnInformation } from 'src/app/game/turns/turn-command';
+import { ClientStateHandler } from 'src/app/game/states/client-states/client-state-handler';
 
 @Component({
   selector: 'app-select-cell',
@@ -28,7 +29,7 @@ export class SelectCellComponent implements OnInit, InnerWindowComponent
 	data: any;	
 	grid: GridManager;
 
-	constructor() 
+	constructor(private clientStateHandler: ClientStateHandler)
 	{
 		this.grid = GameManager.instance.grid;
 	}
@@ -64,7 +65,7 @@ export class SelectCellComponent implements OnInit, InnerWindowComponent
 		this.grid.clearSelectedCells();
 		if (n !== 0)
 		{
-			this.grid.renderSelectedCellsOutline([this.hex]);
+			this.grid.renderSelectedCellsOutline([this.hex], this.clientStateHandler.getColor());
 		}
 	}
 

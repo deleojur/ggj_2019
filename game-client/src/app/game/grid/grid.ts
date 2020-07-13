@@ -9,6 +9,7 @@ import { AssetLoader } from 'src/app/asset-loader';
 import { Unit } from '../entities/unit';
 import { Structure } from '../entities/structure';
 import { Queue } from 'simple-fifo-queue';
+import { StateHandlerService } from '../states/state-handler.service';
 
 export enum CellType
 {
@@ -42,6 +43,7 @@ export interface Outline
 
 export class GridManager
 {
+	private _maxPlayerNumber: number = 0;
     private gridFactory: GridFactory<Hex<Cell>>;
     private grid: Grid<Hex<Cell>>;
     private tileWidth: number = 147.75;
@@ -53,13 +55,7 @@ export class GridManager
 	private validCellsGraphics: Graphics;
 	private entityContainer: Container;
 
-    private playerStartPositions: Hex<Cell>[] = [];
-    public get $playerPositions(): Hex<Cell>[]
-    {
-        return this.playerStartPositions;
-    }
-
-    constructor(private viewport: ViewportManager, private graphics: Graphics)
+    constructor(private stateHandler: StateHandlerService, private viewport: ViewportManager, private graphics: Graphics)
     {
 		this.mapReader = new MapReader();
 
@@ -73,6 +69,11 @@ export class GridManager
 		this.graphics.addChild(this.entityContainer);
 	}
 
+	public get maxPlayerNumber(): number
+	{
+		return this._maxPlayerNumber;
+	}
+
 	private setZIndex(hex: Hex<Cell>, entity: Entity): void
 	{
 		entity.zIndex = hex.y;
@@ -84,7 +85,20 @@ export class GridManager
 
 	public getEntitiesAtHex(hex: Hex<Cell>): Entity[]
 	{
-		return this.entityManager.getEntitiesAtHex(hex);
+		return this.entityManager.getEntitiesAtHex(hex).slice();
+	}
+
+	public getEntitiesAtHexOfOwner(hex: Hex<Cell>, id: string): Entity[]
+	{
+		const entities: Entity[] = this.getEntitiesAtHex(hex);
+		for (let i = entities.length - 1; i > -1; i--)
+		{
+			if (entities[i].owner !== id)
+			{
+				entities.splice(i, 1);
+			}
+		}
+		return entities;
 	}
 
 	public moveEntityToHex(entity: Entity, from: Hex<Cell>, to: Hex<Cell>): void
@@ -101,9 +115,9 @@ export class GridManager
 		this.setZIndex(hex, entity);
 	}
 
-	public createEntity(hex: Hex<Cell>, playerId: string, entityName: string): Entity
+	public createEntity(hex: Hex<Cell>, owner: string, entityName: string): Entity
 	{
-		const entity: Entity = this.entityManager.createEntity(hex, playerId, entityName);
+		const entity: Entity = this.entityManager.createEntity(hex, owner, entityName);
 		this.addEntity(hex, entity);
 		return entity;
 	}
@@ -195,7 +209,8 @@ export class GridManager
 	}
 
     private initObjectLayer(objects: Object[]): void
-    {        
+    {
+		const numberOfPlayers: Set<number> = new Set<number>();  
         objects.forEach(object =>
         {
             const sprite: Sprite = object.sprite;
@@ -214,14 +229,20 @@ export class GridManager
                 hex.properties = Array.from(object.properties);
                 hex.properties.forEach(properties =>
                 {
-                    if (properties.name === 'playerStart')
-                    {
-						this.playerStartPositions.push(hex);
-						this.createEntity(hex, "1", properties.value);
-                    }
+                    if (properties.name === 'entity')
+                    {						
+						const entityProps: string[] = properties.value.split('.');
+						const index: number = parseInt(entityProps[0]); 
+						const entityName: string = entityProps[1];
+						numberOfPlayers.add(index);
+						//TODO: which player starts at what location must be shared by the host, because the players don't know which index they have
+						//they only have their ID.
+						//TODO: use the strategy pattern to use either the client or the server strategy.
+					}
                 });
             }
-        });
+		});
+		this._maxPlayerNumber = numberOfPlayers.size;
 	}
 	
 	public clearValidCells(): void
@@ -354,7 +375,7 @@ export class GridManager
 	public renderValidCells(hex: Hex<Cell>, type: string): Hex<Cell>[]
 	{
 		const validCells: Hex<Cell>[] = this.getValidCells(hex, type);
-		this.renderSelectedCellsOutline(validCells);
+		this.renderSelectedCellsOutline(validCells, 0xfada5e);
 
 		validCells.forEach(cell =>
 		{
@@ -370,9 +391,9 @@ export class GridManager
 		return validCells;
 	}
 
-	public renderSelectedCellsOutline(selection: Hex<Cell>[]): void
+	public renderSelectedCellsOutline(selection: Hex<Cell>[], color: number): void
 	{
-		this.selectedCellsGraphics.lineStyle(5, 0xfada5e, 1, 0.5);
+		this.selectedCellsGraphics.lineStyle(5, color, 1, 0.5);
 		const outline: Outline[] = this.getEdgeCorners(selection);
         for (let i = 0; i < outline.length; i++)
         {
