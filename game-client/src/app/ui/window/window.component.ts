@@ -65,7 +65,7 @@ export class WindowComponent implements OnInit, AfterViewInit
 		if (this.showWindow)
 		{
 			this.currentComponent.beforeOpenWindow(n);
-			GameManager.instance.revokeControlOverHexSelection();
+			GameManager.instance.clientInteraction.isInteractive = false;
 		} else this.currentComponent.beforeCloseWindow(n);
 		const subscription: Subscription = this.onTransitionEnd.subscribe(() => 
 		{
@@ -76,7 +76,7 @@ export class WindowComponent implements OnInit, AfterViewInit
 				this.currentComponent.afterOpenWindow(n);
 			} else
 			{
-				GameManager.instance.grantControlOverHexSelection(); 
+				GameManager.instance.clientInteraction.isInteractive = true;
 				this.currentComponent.afterCloseWindow(n);
 			}
 

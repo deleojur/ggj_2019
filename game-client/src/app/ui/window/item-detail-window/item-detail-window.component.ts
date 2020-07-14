@@ -45,7 +45,7 @@ export class ItemDetailWindowComponent implements OnInit, InnerWindowComponent
 	{
 		if (n == 0)
 		{
-			GameManager.instance.grid.clearSelectedCells();
+			GameManager.instance.clientGrid.clearSelectedCells();
 		}
 	}
 

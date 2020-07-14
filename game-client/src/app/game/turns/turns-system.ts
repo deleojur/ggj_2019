@@ -5,12 +5,6 @@ import { Point as pPoint, Graphics } from 'pixi.js';
 import { GameManager } from '../game-manager';
 import { BehaviorInformation, Entity } from '../entities/entity';
 
-interface EntityTypes
-{
-	originEntity: Entity;
-	targetEntity: Entity;
-}
-
 export class TurnsSystem
 {
 	private _turnCommands: Map<Hex<Cell>, TurnCommand[]> = new Map<Hex<Cell>, TurnCommand[]>();
@@ -60,12 +54,13 @@ export class TurnsSystem
 
 	private createTargetEntity(entity: Entity, hex: Hex<Cell>, item: BehaviorInformation): Entity
 	{
+		//TODO: set the id of the owner.
 		switch (item.type)
 		{
 			case "upgrade":
 			case "build":
 			case "train":
-				return GameManager.instance.grid.createEntity(hex, 'someone', item.creates);
+				return GameManager.instance.gridStrategy.createEntity(hex, 'someone', item.creates);
 			case "move":
 				return entity;
 		}
@@ -98,12 +93,12 @@ export class TurnsSystem
 
 		if (turnInformation.behaviorInformation.type === 'upgrade')
 		{
-			GameManager.instance.grid.removeEntity(turnInformation.originCell, turnInformation.originEntity);
+			GameManager.instance.gridStrategy.removeEntity(turnInformation.originCell, turnInformation.originEntity);
 		}
 
 		if (turnInformation.behaviorInformation.type === 'move')
 		{
-			GameManager.instance.grid.moveEntityToHex(turnInformation.targetEntity, turnInformation.originCell, turnInformation.targetCell);
+			GameManager.instance.gridStrategy.moveEntityToHex(turnInformation.targetEntity, turnInformation.originCell, turnInformation.targetCell);
 		}
 
 		this.graphics.addChild(command.commandIcon);
@@ -139,14 +134,14 @@ export class TurnsSystem
 		{
 			case 'upgrade':
 			case 'train':
-				GameManager.instance.grid.addEntity(turnInformation.originCell, turnInformation.originEntity);
-				GameManager.instance.grid.removeEntity(turnInformation.targetCell, turnInformation.targetEntity);
+				GameManager.instance.gridStrategy.addEntity(turnInformation.originCell, turnInformation.originEntity);
+				GameManager.instance.gridStrategy.removeEntity(turnInformation.targetCell, turnInformation.targetEntity);
 				break;
 			case 'build':
-				GameManager.instance.grid.removeEntity(turnInformation.targetCell, turnInformation.targetEntity);
+				GameManager.instance.gridStrategy.removeEntity(turnInformation.targetCell, turnInformation.targetEntity);
 				break;
 			case 'move':
-				GameManager.instance.grid.moveEntityToHex(turnInformation.originEntity, turnInformation.targetCell, turnInformation.originCell);
+				GameManager.instance.gridStrategy.moveEntityToHex(turnInformation.originEntity, turnInformation.targetCell, turnInformation.originCell);
 				break;
 		}
 	}

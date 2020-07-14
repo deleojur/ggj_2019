@@ -85,7 +85,7 @@ export class ItemOverviewWindowComponent implements OnInit, InnerWindowComponent
 	{
 		const behavior: BehaviorInformation = buttonEvent.behavior;
 		const entity: Entity = buttonEvent.entity;
-		GameManager.instance.cancelAcquireItem(behavior, this.hex, entity);
+		GameManager.instance.clientInteraction.cancelAcquireItem(behavior, this.hex, entity);
 	}
 
 	buyItem(buttonEvent: ButtonEvent): void
@@ -99,7 +99,7 @@ export class ItemOverviewWindowComponent implements OnInit, InnerWindowComponent
 	{
 		if (n == 0)
 		{
-			GameManager.instance.grid.clearSelectedCells();
+			GameManager.instance.clientGrid.clearSelectedCells();
 		}
 	}
 

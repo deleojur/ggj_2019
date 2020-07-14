@@ -12,29 +12,28 @@ import { ItemDetailWindowComponent } from '../ui/window/item-detail-window/item-
 import { SelectCellComponent } from '../ui/window/select-cell/select-cell.component';
 import { Sprite, Point, Texture, Application, Graphics, autoDetectRenderer } from 'pixi.js';
 import { Subject, Subscription } from 'rxjs';
-import { ClientData } from './states/request-data';
-import { StateHandlerService } from './states/state-handler.service';
+import { GridStrategy } from './grid/grid-strategy';
 import { ClientStateHandler } from './states/client-states/client-state-handler';
+import { GridClient } from './grid/client-grid';
+import { ClientInteraction } from './client-interaction';
 
 export class GameManager
 {
-	private _stateHandler: StateHandlerService;
-	private _worldCanvas: HTMLCanvasElement = null;
-	private _onWorldLoaded: () => void;
+	private isInitialized: boolean = false;
+	private _worldCanvas: HTMLCanvasElement = null;	
 
 	private pixi: Application; // this will be our pixi application
-	private _gridGraphics: Graphics;
-	private _commandGraphics: Graphics;
     private _viewport: ViewportManager;
 	private _grid: GridManager;
+	private _gridStrategy: GridStrategy;
 	private _turnSystem: TurnsSystem;
+	private _clientInteraction: ClientInteraction;
 	private ratio: number;
 
 	private _resourceManager: ResourceManager;
 	private _windowManager: WindowManager;
 
-	private onHexClicked: Subject<Hex<Cell>> = new Subject<Hex<Cell>>();
-	private hexSubscription: Subscription;
+	private _onHexClicked: Subject<Hex<Cell>> = new Subject<Hex<Cell>>();
 
 	private static _instance: GameManager = null;
 	public static get instance(): GameManager
@@ -50,20 +49,6 @@ export class GameManager
 	{
 		this._resourceManager = new ResourceManager();
 		this.initWindowManager();
-		this.grantControlOverHexSelection();
-	}
-
-	public grantControlOverHexSelection(): void
-	{
-		this.hexSubscription = this.subscribeToClickEvent((hex: Hex<Cell>) => 
-		{
-			this.onHexSelected(hex);
-		});
-	}
-
-	public revokeControlOverHexSelection(): void
-	{
-		this.hexSubscription.unsubscribe();
 	}
 
 	public get resourceManager(): ResourceManager
@@ -79,7 +64,27 @@ export class GameManager
     public get grid(): GridManager
     {
         return this._grid;
-    }
+	}
+	
+	public get gridStrategy(): GridStrategy
+	{
+		return this._gridStrategy;
+	}
+
+	public get clientInteraction(): ClientInteraction
+	{
+		return this._clientInteraction;
+	}
+
+	public get clientGrid(): GridClient
+	{
+		return this._gridStrategy as GridClient;
+	}
+
+	public get clientStateHandler(): ClientStateHandler
+	{
+		return this.clientGrid.clientStateHandler;
+	}
 
     public get viewport(): ViewportManager
     {
@@ -93,34 +98,35 @@ export class GameManager
 
 	public subscribeToClickEvent(f: (cell: Hex<Cell>) => void): Subscription
 	{
-		return this.onHexClicked.subscribe(f);
+		return this._onHexClicked.subscribe(f);
 	}
 
     private initPixi(): void
     {
         this.pixi = new Application({ backgroundColor: 0x0 });
-		this._gridGraphics = new Graphics();
-		this._commandGraphics = new Graphics();
         
         autoDetectRenderer({ 
             width: window.innerWidth,
             height: window.innerHeight, 
             antialias: true, 
-            transparent: true });
+            transparent: true});
 
         this.ratio = window.innerWidth / window.innerHeight;
     } 
     
     private initGrid(cb: () => void): void
     {
-		this._grid = new GridManager(this._stateHandler, this.viewport, this._gridGraphics);
+		this._grid = new GridManager(this._gridStrategy, this.viewport);
 		AssetLoader.instance.loadAssetsAsync().then(() => 
-		{			
+		{
+			const gridGraphics: Graphics = new Graphics, commandGraphics: Graphics = new Graphics();
 			const size: Point = this._grid.generateWorld();
 			this.viewport.initViewport(size.x, size.y);
-			this._grid.initialize();
-			this.viewport.addChild(this._commandGraphics);
-			this._turnSystem = new TurnsSystem(this._commandGraphics);
+			this._grid.init(gridGraphics);
+			this._turnSystem = new TurnsSystem(commandGraphics);
+
+			this.viewport.addChild(gridGraphics);
+			this.viewport.addChild(commandGraphics);
 			return cb();
 		});
 	}
@@ -144,10 +150,15 @@ export class GameManager
 		return this._worldCanvas;
 	}
 
-    public init(stateHandler: StateHandlerService, cb: () => void): void
+    public init(gridStrategy: GridStrategy, cb: () => void): void
     {
-		this._stateHandler = stateHandler;
-		this.generateWorld(cb);
+		if (!this.isInitialized)
+		{	
+			this.isInitialized = true;
+			this._gridStrategy = gridStrategy;
+			this._clientInteraction = new ClientInteraction();
+			this.generateWorld(cb);
+		}
     }
 
 	private initWindowManager(): void
@@ -156,19 +167,6 @@ export class GameManager
 		this.windowManager.subscribeWindow(WindowType.ItemOverview, new WindowItem(ItemOverviewWindowComponent));
 		this.windowManager.subscribeWindow(WindowType.ItemDetail, new WindowItem(ItemDetailWindowComponent));
 		this.windowManager.subscribeWindow(WindowType.SelectCell, new WindowItem(SelectCellComponent));
-	}
-
-    generateDebuggerClients(): ClientData[]
-    {
-        const debugClients: ClientData[] =[];
-        /* const client1 = {roomid: '', id: '', addr: '', color: '0x0000ff', name: 'Jur'};
-        const client2 = {roomid: '', id: '', addr: '', color: '0x00ffff', name: 'Laura'};
-        const client3 = {roomid: '', id: '', addr: '', color: '0xff00ff', name: 'Alex'};
-        const client4 = {roomid: '', id: '', addr: '', color: '0xffff00', name: 'Sam'};
-        const client5 = {roomid: '', id: '', addr: '', color: '0xffff00', name: 'asdsad'};
-        const client6 = {roomid: '', id: '', addr: '', color: '0xffff00', name: 'Saad'};
-        debugClients.push(client1, client2, client3, /*client4, client5, client6);*/
-        return debugClients;
 	}
 
 	public createTurnCommand(
@@ -182,47 +180,9 @@ export class GameManager
 		this._turnSystem.addTurnCommand(turnInformation);
 	}
 
-	private onHexSelected(hex: Hex<Cell>): void
-	{
-		const clientId: string = (this._stateHandler as ClientStateHandler).getClientData().id;
-		const entities: Entity[] = this._grid.getEntitiesAtHexOfOwner(hex, clientId).slice();
-		const turnInformation: TurnInformation[] = this.turnSystem.getTurnInformation(hex);
-
-		turnInformation.forEach(turnInfo =>
-		{
-			const entity: Entity = turnInfo.targetEntity;
-			if (entities.indexOf(entity) === -1 && 
-				entities.indexOf(turnInfo.originEntity) === -1)
-			{
-				entities.push(entity);
-			}
-		});
-
-		if (entities.length > 0)
-		{			
-			this.hexSubscription.unsubscribe();
-			this.windowManager.openWindow(WindowType.ItemOverview, { name: 'Select Action', data: { origin: hex, entities: entities } });
-
-			const turnInformationArray: TurnInformation[] = this._turnSystem.getTurnInformation(hex);
-			if (turnInformationArray.length > 0)
-			{
-				turnInformationArray.forEach((turnInformation: TurnInformation) =>
-				{
-					const origin: Hex<Cell> = turnInformation.originCell;
-					const target: Hex<Cell> = turnInformation.targetCell;
-					GameManager.instance.grid.renderSelectedCellsOutline([origin, target], this._stateHandler.getColor(clientId));
-				});				
-			}
-			else
-			{
-				GameManager.instance.grid.renderSelectedCellsOutline([hex], this._stateHandler.getColor(clientId));
-			}			
-		}
-	}
-
 	public hexClicked(hex: Hex<Cell>): void
 	{
-		this.onHexClicked.next(hex);
+		this._onHexClicked.next(hex);
 	}
 
 	public getCells(origin: Hex<Cell>): Hex<Cell>[]
@@ -273,18 +233,6 @@ export class GameManager
 				this.createTurnCommand(origin, origin, entity, item);
 			});
 		}
-	}
-
-	public cancelAcquireItem(item: BehaviorInformation, origin: Hex<Cell>, entity: Entity): void
-	{
-		const turnInformation: TurnInformation = this._turnSystem.removeTurnCommand(origin, item);
-		this._resourceManager.addResource(turnInformation.behaviorInformation.cost);
-		if (entity === null)
-		{
-			this._grid.removeEntity(turnInformation.targetCell, turnInformation.targetEntity);
-		}
-		this._grid.clearSelectedCells();
-		this._windowManager.closeAllWindows();
 	}
 
 	public createSprite(textureUrl: string, position: Point, scale: Point): Sprite

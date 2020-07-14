@@ -9,6 +9,7 @@ import { Cell } from '../../grid/grid';
 import { GameManager } from '../../game-manager';
 import { ClientStateHandler } from '../../states/client-states/client-state-handler';
 import { StateHandlerService } from '../../states/state-handler.service';
+import { GridClient } from '../../grid/client-grid';
 
 @Component({
   selector: 'app-client-game',
@@ -22,7 +23,8 @@ export class ClientGameComponent implements Game, AfterViewInit
     constructor(
         private clientStateHandler: ClientStateHandler)
 	{
-		
+		const clientGrid: GridClient = new GridClient(this.clientStateHandler);
+		GameManager.instance.init(clientGrid, () => {});
 	}
 
 	stateHandler(): StateHandlerService

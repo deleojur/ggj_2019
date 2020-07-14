@@ -11,7 +11,7 @@ import { ClientData } from '../request-data';
 })
 export class ClientStateHandler extends StateHandlerService
 {
-	private clientId: string;
+	private _clientId: string;
 	constructor(connectionService: ConnectionService)
     {
         super(connectionService);
@@ -35,9 +35,19 @@ export class ClientStateHandler extends StateHandlerService
 
 	public set self(client: ClientData)
 	{
-		this.clientId = client.id;
+		this._clientId = client.id;
 		this._clients.set(client.id, client);
 	}
+
+	public get self(): ClientData
+	{
+		return this._clients.get(this._clientId);
+	}
+
+	public get clientId(): string
+	{
+		return this._clientId;
+	} 
 
 	public getColor(): number
 	{
@@ -48,6 +58,6 @@ export class ClientStateHandler extends StateHandlerService
 
 	public getClientData(): ClientData
 	{
-		return this._clients.get(this.clientId);
+		return this._clients.get(this._clientId);
 	}
 }

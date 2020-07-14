@@ -7,6 +7,7 @@ import { state_clientConnection } from '../../game/states/host-states/state_clie
 import { hostState_startGame } from 'src/app/game/states/host-states/host-state_start-game';
 import { HostStateHandler } from 'src/app/game/states/host-states/host-state-handler';
 import { GameManager } from 'src/app/game/game-manager';
+import { HostGrid } from 'src/app/game/grid/host-grid';
 
 @Component({
   selector: 'app-host-room',
@@ -20,11 +21,15 @@ export class HostRoomComponent implements OnInit
 
     constructor(
         public hostStateHandler: HostStateHandler,
-        private router: Router) { }
+		private router: Router)
+		{
+			
+		}
     
     ngOnInit() 
     {
-		GameManager.instance.init(this.hostStateHandler, () =>
+		const hostGrid: HostGrid = new HostGrid(this.hostStateHandler);
+		GameManager.instance.init(hostGrid, () =>
 		{
 			this.maxPlayers = GameManager.instance.grid.maxPlayerNumber;
 		});

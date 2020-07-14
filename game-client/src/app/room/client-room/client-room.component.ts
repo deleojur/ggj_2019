@@ -8,6 +8,7 @@ import { state_requestJoinRoom } from '../../game/states/client-states/state_req
 import { ClientData, HostStartGameData } from '../../game/states/request-data';
 import { ClientStateHandler } from 'src/app/game/states/client-states/client-state-handler';
 import { GameManager } from 'src/app/game/game-manager';
+import { GridClient } from 'src/app/game/grid/client-grid';
 
 @Component({
   selector: 'app-client-room',
@@ -24,7 +25,8 @@ export class ClientRoomComponent implements OnInit
     
     ngOnInit() 
     {
-		GameManager.instance.init(this.clientStateHandler, () => {});
+		const clientGrid: GridClient = new GridClient(this.clientStateHandler);
+		GameManager.instance.init(clientGrid, () => {});
     }
 
     joinRoom(f: NgForm): void

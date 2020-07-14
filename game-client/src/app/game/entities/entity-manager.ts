@@ -1,6 +1,6 @@
 import { Cell } from '../grid/grid';
 import { Hex } from 'honeycomb-grid';
-import { Entity, EntityType, EntityFactory, BehaviorInformation } from './entity';
+import { Entity, EntityType, EntityFactory } from './entity';
 import { AssetLoader } from 'src/app/asset-loader';
 import { Structure } from './structure';
 import { Unit } from './unit';

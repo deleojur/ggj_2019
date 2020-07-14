@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { BehaviorInformation, Entity } from 'src/app/game/entities/entity';
 import { TurnInformation } from 'src/app/game/turns/turn-command';
 import { ClientStateHandler } from 'src/app/game/states/client-states/client-state-handler';
+import { GridClient } from 'src/app/game/grid/client-grid';
 
 @Component({
   selector: 'app-select-cell',
@@ -27,11 +28,11 @@ export class SelectCellComponent implements OnInit, InnerWindowComponent
 	private hexSubscription: Subscription;
 
 	data: any;	
-	grid: GridManager;
+	gridClient: GridClient;
 
 	constructor(private clientStateHandler: ClientStateHandler)
 	{
-		this.grid = GameManager.instance.grid;
+		this.gridClient = GameManager.instance.gridStrategy as GridClient;
 	}
 
 	ngOnInit() 
@@ -44,13 +45,13 @@ export class SelectCellComponent implements OnInit, InnerWindowComponent
 
 	private renderValidCells(origin: Hex<Cell>): void
 	{
-		this._validCells = this.grid.renderValidCells(origin, this._behavior.type);
+		this._validCells = this.gridClient.renderValidCells(origin, this._behavior.type);
 	}
 
 	private clearValidCells(): void
 	{
 		this._validCells = null;
-		this.grid.clearValidCells();
+		this.gridClient.clearValidCells();
 	}
 
 	backToPreviousMenu(): void
@@ -62,10 +63,10 @@ export class SelectCellComponent implements OnInit, InnerWindowComponent
 	{
 		this.hexSubscription.unsubscribe();
 		this.clearValidCells();
-		this.grid.clearSelectedCells();
+		this.gridClient.clearSelectedCells();
 		if (n !== 0)
 		{
-			this.grid.renderSelectedCellsOutline([this.hex], this.clientStateHandler.getColor());
+			this.gridClient.renderSelectedCellsOutline([this.hex], this.clientStateHandler.getColor());
 		}
 	}
 
