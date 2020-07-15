@@ -66,7 +66,15 @@ export class WindowComponent implements OnInit, AfterViewInit
 		{
 			this.currentComponent.beforeOpenWindow(n);
 			GameManager.instance.clientInteraction.isInteractive = false;
-		} else this.currentComponent.beforeCloseWindow(n);
+		} else 
+		{
+			this.currentComponent.beforeCloseWindow(n);
+			if (n === 0)
+			{
+				GameManager.instance.gridStrategy.renderEntitiesByOwnerColor();
+			}
+		}
+
 		const subscription: Subscription = this.onTransitionEnd.subscribe(() => 
 		{
 			subscription.unsubscribe();

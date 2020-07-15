@@ -7,6 +7,8 @@ import { Unit } from '../entities/unit';
 import { Container, Graphics } from 'pixi.js';
 import { Point } from 'honeycomb-grid';
 import { GameManager } from '../game-manager';
+import { ClientData } from '../states/request-data';
+import { StateHandlerService } from '../states/state-handler.service';
 
 interface Outline
 {
@@ -23,9 +25,13 @@ export class GridStrategy
 	protected graphics: Graphics;
 	protected gameManager: GameManager;
 	protected grid: GridManager;
+	protected clients: ClientData[];
 
-	constructor()
+	protected startEntities: Map<number, { hex: Hex<Cell>, entityName: string }[]>
+
+	constructor(protected stateHandler: StateHandlerService)
 	{
+		this.startEntities = new Map<number, { hex: Hex<Cell>, entityName: string }[]>();
 	}
 
 	public init(graphics: Graphics): void
@@ -36,6 +42,7 @@ export class GridStrategy
 		this.selectedCellsGraphics = new Graphics();
 		
 		this.entityManager = new EntityManager();
+		this.entityManager.init();
 		this.entityContainer = new Container();
 		this.entityContainer.sortableChildren = true;
 
@@ -70,6 +77,49 @@ export class GridStrategy
 		this.entityManager.moveEntityToHex(entity, from, to);
 		entity.moveToHex(to);
 		this.setZIndex(to, entity);
+	}
+
+	public get maxNumberOfPlayers(): number
+	{
+		return this.startEntities.size;
+	}
+
+	private getColor(color: string): number
+	{
+		return parseInt(color.replace('#', '0x'));
+	}
+
+	public renderEntitiesByOwnerColor(): void
+	{
+		this.clearSelectedCells();
+		const occupiedHexes: Map<string, Hex<Cell>[]> = this.entityManager.getAllOccupiedHexesOfOwner();
+		this.clients.forEach(client =>
+		{
+			const hexes: Hex<Cell>[] = occupiedHexes.get(client.id);
+			this.renderSelectedCellsOutline(hexes, this.getColor(client.color));
+		});
+	}
+
+	public createStartEntities(clients: ClientData[]): void
+	{
+		this.clients = clients;
+		clients.forEach(client =>
+		{
+			const startPositions: { hex: Hex<Cell>, entityName: string }[] = this.startEntities.get(client.startingPosition);
+			startPositions.forEach(startPosition =>
+			{
+				this.createEntity(startPosition.hex, client.id, startPosition.entityName);
+			});			
+		});
+	}
+
+	public addStartEntityPrototype(playerIndex: number, hex: Hex<Cell>, entityName: string): void
+	{
+		if (!this.startEntities.has(playerIndex))
+		{
+			this.startEntities.set(playerIndex, []);
+		}
+		this.startEntities.get(playerIndex).push({ hex: hex, entityName: entityName });
 	}
 
 	public addEntity(hex: Hex<Cell>, entity: Entity): void
@@ -118,6 +168,7 @@ export class GridStrategy
 
 	public renderSelectedCellsOutline(selection: Hex<Cell>[], color: number): void
 	{
+		console.log('render with color', color);
 		this.selectedCellsGraphics.lineStyle(5, color, 1, 0.5);
 		const outline: Outline[] = this.getEdgeCorners(selection);
         for (let i = 0; i < outline.length; i++)
@@ -140,7 +191,7 @@ export class GridStrategy
 
 	public getEntitiesAtHex(hex: Hex<Cell>): Entity[]
 	{
-		return this.entityManager.getEntitiesAtHex(hex);
+		return this.entityManager.getEntitiesAtHex(hex).slice();
 	}
 
 	public isStructure(hex: Hex<Cell>): boolean

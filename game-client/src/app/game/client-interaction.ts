@@ -3,30 +3,25 @@ import { BehaviorInformation, Entity } from './entities/entity';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from './grid/grid';
 import { GameManager } from './game-manager';
-import { GridClient } from './grid/client-grid';
 import { ClientStateHandler } from './states/client-states/client-state-handler';
 import { Subscription } from 'rxjs';
 import { WindowType } from '../ui/window/window-manager';
+import { GridStrategy } from './grid/grid-strategy';
 
 export class ClientInteraction
 {
-	private gameManager: GameManager;
-	private clientGrid: GridClient;
 	private hexInteractionSubscription: Subscription;
-	private clientStateHandler: ClientStateHandler;
 
 	constructor()
 	{
-		this.gameManager = GameManager.instance;
-		this.clientGrid = this.gameManager.clientGrid;
-		this.clientStateHandler = this.gameManager.clientStateHandler;
+		this.isInteractive = true;
 	}
 
 	public set isInteractive(val: boolean)
 	{
 		if (val)
 		{
-			this.hexInteractionSubscription = this.gameManager.subscribeToClickEvent((hex: Hex<Cell>) => this.onHexSelected);
+			this.hexInteractionSubscription = GameManager.instance.subscribeToClickEvent(this.onHexSelected);
 		} else if (this.hexInteractionSubscription)
 		{
 			this.hexInteractionSubscription.unsubscribe();
@@ -35,20 +30,25 @@ export class ClientInteraction
 
 	public cancelAcquireItem(item: BehaviorInformation, origin: Hex<Cell>, entity: Entity): void
 	{
-		const turnInformation: TurnInformation = this.gameManager.turnSystem.removeTurnCommand(origin, item);
-		this.gameManager.resourceManager.addResource(turnInformation.behaviorInformation.cost);
+		const gameManager: GameManager = GameManager.instance;
+		const turnInformation: TurnInformation = gameManager.turnSystem.removeTurnCommand(origin, item);
+		gameManager.resourceManager.addResource(turnInformation.behaviorInformation.cost);
 		if (entity === null)
 		{
-			this.gameManager.clientGrid.removeEntity(turnInformation.targetCell, turnInformation.targetEntity);
+			gameManager.clientGrid.removeEntity(turnInformation.targetCell, turnInformation.targetEntity);
 		}
-		this.gameManager.clientGrid.clearSelectedCells();
-		this.gameManager.windowManager.closeAllWindows();
+		gameManager.clientGrid.clearSelectedCells();
+		gameManager.windowManager.closeAllWindows();
 	}
 
 	private onHexSelected(hex: Hex<Cell>): void
 	{
-		const entities: Entity[] = this.clientGrid.getEntitiesAtHexOfOwner(hex, this.clientStateHandler.clientId);
-		const turnInformation: TurnInformation[] = this.gameManager.turnSystem.getTurnInformation(hex);
+		const gameManager: GameManager = GameManager.instance;
+		const gridStrategy: GridStrategy = gameManager.gridStrategy;
+		const stateHandler: ClientStateHandler = gameManager.clientStateHandler;
+		
+		const entities: Entity[] = gridStrategy.getEntitiesAtHexOfOwner(hex, stateHandler.clientId);
+		const turnInformation: TurnInformation[] = gameManager.turnSystem.getTurnInformation(hex);
 
 		turnInformation.forEach(turnInfo =>
 		{
@@ -61,23 +61,25 @@ export class ClientInteraction
 		});
 
 		if (entities.length > 0)
-		{			
-			this.hexInteractionSubscription.unsubscribe();
-			this.gameManager.windowManager.openWindow(WindowType.ItemOverview, { name: 'Select Action', data: { origin: hex, entities: entities } });
+		{
+			this.isInteractive = false;
+			gridStrategy.clearSelectedCells();
 
-			const turnInformationArray: TurnInformation[] = this.gameManager.turnSystem.getTurnInformation(hex);
+			gameManager.windowManager.openWindow(WindowType.ItemOverview, { name: 'Select Action', data: { origin: hex, entities: entities } });
+
+			const turnInformationArray: TurnInformation[] = gameManager.turnSystem.getTurnInformation(hex);
 			if (turnInformationArray.length > 0)
 			{
 				turnInformationArray.forEach((turnInformation: TurnInformation) =>
 				{
 					const origin: Hex<Cell> = turnInformation.originCell;
 					const target: Hex<Cell> = turnInformation.targetCell;
-					this.clientGrid.renderSelectedCellsOutline([origin, target], this.clientStateHandler.getColor());
+					gridStrategy.renderSelectedCellsOutline([origin, target], stateHandler.getColor());
 				});				
 			}
 			else
 			{
-				this.clientGrid.renderSelectedCellsOutline([hex], this.clientStateHandler.getColor());
+				gridStrategy.renderSelectedCellsOutline([hex], stateHandler.getColor());
 			}			
 		}
 	}

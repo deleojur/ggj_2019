@@ -12,7 +12,7 @@ export class GridClient extends GridStrategy
 
 	constructor(private _clientStateHandler: ClientStateHandler)
 	{
-		super();
+		super(_clientStateHandler);
 		this.validCellsGraphics = new Graphics(); //shows red/green shade depending on whether a cell is valid to move to/build on
 	}
 

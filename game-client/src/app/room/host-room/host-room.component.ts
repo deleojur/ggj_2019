@@ -31,7 +31,7 @@ export class HostRoomComponent implements OnInit
 		const hostGrid: HostGrid = new HostGrid(this.hostStateHandler);
 		GameManager.instance.init(hostGrid, () =>
 		{
-			this.maxPlayers = GameManager.instance.grid.maxPlayerNumber;
+			this.maxPlayers = GameManager.instance.gridStrategy.maxNumberOfPlayers;
 		});
 		this.doRequest();
     }
@@ -56,8 +56,10 @@ export class HostRoomComponent implements OnInit
             {
 				//TODO: display player X started the game!
 				this.hostStateHandler.mapOwnerId();
-				
-				stateRequestStartGame.doRequestStartGame(this.hostStateHandler.clients);
+				const clients: ClientData[] = this.hostStateHandler.clients;
+				stateRequestStartGame.doRequestStartGame(clients);
+
+				GameManager.instance.gridStrategy.createStartEntities(clients);
                 this.router.navigate(['game/host']);
 			}, true) as hostState_startGame;
 			

@@ -19,7 +19,6 @@ export interface Cell
 
 export class GridManager
 {
-	private _maxPlayerNumber: number = 0;
     private gridFactory: GridFactory<Hex<Cell>>;
     private grid: Grid<Hex<Cell>>;
     private tileWidth: number = 147.75;
@@ -29,11 +28,6 @@ export class GridManager
     constructor(private gridStrategy: GridStrategy, private viewport: ViewportManager)
     {
 		this.mapReader = new MapReader();
-	}
-
-	public get maxPlayerNumber(): number
-	{
-		return this._maxPlayerNumber;
 	}
 
     private initHexagonalGrid(): pPoint
@@ -116,7 +110,6 @@ export class GridManager
 
     private initObjectLayer(objects: Object[]): void
     {
-		const numberOfPlayers: Set<number> = new Set<number>();  
         objects.forEach(object =>
         {
             const sprite: Sprite = object.sprite;
@@ -140,15 +133,11 @@ export class GridManager
 						const entityProps: string[] = properties.value.split('.');
 						const index: number = parseInt(entityProps[0]); 
 						const entityName: string = entityProps[1];
-						numberOfPlayers.add(index);
-						this.gridStrategy.createEntity(hex, 'blaat', entityName);
-						//TODO: which player starts at what location must be shared by the host, because the players don't know which index they have
-						//they only have their ID.						
+						this.gridStrategy.addStartEntityPrototype(index, hex, entityName);
 					}
                 });
             }
 		});
-		this._maxPlayerNumber = numberOfPlayers.size;
 	}
 
 	public getPolygon(hexagons: Hex<Cell>[]): Polygon[]

@@ -159,7 +159,7 @@ export class GameManager
 			this._clientInteraction = new ClientInteraction();
 			this.generateWorld(cb);
 		}
-    }
+	}
 
 	private initWindowManager(): void
 	{
@@ -167,6 +167,11 @@ export class GameManager
 		this.windowManager.subscribeWindow(WindowType.ItemOverview, new WindowItem(ItemOverviewWindowComponent));
 		this.windowManager.subscribeWindow(WindowType.ItemDetail, new WindowItem(ItemDetailWindowComponent));
 		this.windowManager.subscribeWindow(WindowType.SelectCell, new WindowItem(SelectCellComponent));
+	}
+
+	public startGame(): void
+	{
+		this._gridStrategy.renderEntitiesByOwnerColor();
 	}
 
 	public createTurnCommand(

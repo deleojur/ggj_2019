@@ -44,6 +44,8 @@ export class ClientRoomComponent implements OnInit
                 {
 					//fill the map with all the player data.
 					this.clientStateHandler.hostSharedClients(startGameData.clients);
+					GameManager.instance.gridStrategy.createStartEntities(startGameData.clients);
+
                     this.router.navigate(['game/client']);
 				}, true) as clientState_startGame;
 				

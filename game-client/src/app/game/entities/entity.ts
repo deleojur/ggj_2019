@@ -75,6 +75,11 @@ export class Entity extends Container
 	{
 		return this._prototype.behaviors;
 	}
+
+	public get hex(): Hex<Cell>
+	{
+		return this._location;
+	}
 	
 	constructor(protected _prototype: EntityPrototype, protected _location: Hex<Cell>, protected _owner: string)
 	{

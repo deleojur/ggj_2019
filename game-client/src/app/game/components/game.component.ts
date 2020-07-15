@@ -37,6 +37,7 @@ export class GameComponent implements AfterViewInit
 		const canvas: HTMLCanvasElement = GameManager.instance.worldCanvas;
 		this.pixiContainer.nativeElement.appendChild(canvas);
 		GameManager.instance.windowManager.windowComponent = this.windowContainer;
+		GameManager.instance.startGame();
     }
 
     @HostListener('window:resize', ['$event'])

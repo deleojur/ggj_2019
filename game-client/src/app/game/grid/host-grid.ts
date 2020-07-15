@@ -5,6 +5,6 @@ export class HostGrid extends GridStrategy
 {
 	constructor(private hostStateHandler: HostStateHandler)
 	{
-		super();
+		super(hostStateHandler);
 	}
 }

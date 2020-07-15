@@ -5,6 +5,7 @@ import { AssetLoader } from 'src/app/asset-loader';
 import { Structure } from './structure';
 import { Unit } from './unit';
 import { GameManager } from '../game-manager';
+import { ClientData } from '../states/request-data';
 
 export class EntityManager
 {
@@ -28,6 +29,26 @@ export class EntityManager
 			case EntityType.Unit:
 				return new EntityFactory<Entity>(Unit);
 		}
+	}
+
+	public getAllOccupiedHexesOfOwner(): Map<string, Hex<Cell>[]>
+	{
+		const occupiedHexes: Map<string, Hex<Cell>[]> = new Map<string, Hex<Cell>[]>();
+		const allHexes: Hex<Cell>[] = Array.from(this._entities.keys());
+		allHexes.forEach(hex =>
+		{
+			const entities: Entity[] = this._entities.get(hex);
+			entities.forEach(entity =>
+			{
+				const owner: string = entity.owner;
+				if (!occupiedHexes.has(owner))
+				{
+					occupiedHexes.set(owner, []);
+				} 
+				occupiedHexes.get(owner).push(hex);
+			});
+		});
+		return occupiedHexes;
 	}
 
 	public getEntitiesAtHex(hex: Hex<Cell>): Entity[]
@@ -63,7 +84,7 @@ export class EntityManager
 		this.removeEntity(from, entity);
 	}
 
-	constructor()
+	init()
 	{
 		this._entities = new Map<Hex<Cell>, Entity[]>();
 		const validTiles: Hex<Cell>[] = GameManager.instance.grid.getValidTiles();

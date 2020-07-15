@@ -18,7 +18,6 @@ import { GridClient } from '../../grid/client-grid';
 export class ClientGameComponent implements Game, AfterViewInit
 {    
     private interactionStart: Vector;
-	private color: number;
 
     constructor(
         private clientStateHandler: ClientStateHandler)
