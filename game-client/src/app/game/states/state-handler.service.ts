@@ -26,7 +26,8 @@ export abstract class StateHandlerService
 		this.initStates();
 	}
 	
-    protected abstract registerStates(): void;
+	protected abstract registerStates(): void;
+	public abstract get clientType(): string;
 
 	public get clients(): ClientData[]
 	{

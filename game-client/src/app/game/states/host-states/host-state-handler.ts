@@ -30,6 +30,11 @@ export class HostStateHandler extends StateHandlerService
 		this._states.set(state_clientConnection, new state_clientConnection());
 	}
 
+	public get clientType(): string
+	{
+		return 'host';
+	}
+
 	public roomJoined(room: RoomData): void
 	{
 		this._room = room;

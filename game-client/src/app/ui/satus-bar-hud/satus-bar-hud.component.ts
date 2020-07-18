@@ -10,8 +10,8 @@ import { GameManager } from 'src/app/game/game-manager';
 export class StatusBarHudComponent implements OnInit
 {
 	showCheckbox: boolean = false;
-
 	resourcePool: Resource[];
+	
 	constructor()
 	{
 		

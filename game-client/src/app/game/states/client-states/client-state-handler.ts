@@ -24,6 +24,11 @@ export class ClientStateHandler extends StateHandlerService
 		this._states.set(state_playerStartingPositions, new state_playerStartingPositions());
 	}
 
+	public get clientType(): string
+	{
+		return 'client';
+	}
+
 	public hostSharedClients(clients: ClientData[]): void
 	{
 		this._clients.clear();

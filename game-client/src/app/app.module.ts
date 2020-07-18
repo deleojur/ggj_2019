@@ -22,6 +22,7 @@ import { ItemDetailWindowComponent } from './ui/window/item-detail-window/item-d
 import { ItemOverviewWindowComponent } from './ui/window/item-overview-window/item-overview-window.component';
 import { StatusBarHudComponent } from './ui/satus-bar-hud/satus-bar-hud.component';
 import { SelectCellComponent } from './ui/window/select-cell/select-cell.component';
+import { HostHudComponent } from './ui/host-hud/host-hud.component';
 
 @NgModule({
 	declarations: [
@@ -41,7 +42,8 @@ import { SelectCellComponent } from './ui/window/select-cell/select-cell.compone
 		ItemOverviewWindowComponent,
 		ItemDetailWindowComponent,
 		StatusBarHudComponent,
-		SelectCellComponent
+		SelectCellComponent,
+		HostHudComponent
 	],
   	entryComponents: [
 		ItemOverviewWindowComponent,
