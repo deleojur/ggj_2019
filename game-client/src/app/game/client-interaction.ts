@@ -6,7 +6,7 @@ import { GameManager } from './game-manager';
 import { ClientStateHandler } from './states/client-states/client-state-handler';
 import { Subscription } from 'rxjs';
 import { WindowType } from '../ui/window/window-manager';
-import { GridStrategy } from './grid/grid-strategy';
+import { GridStrategy, RenderType } from './grid/grid-strategy';
 
 export class ClientInteraction
 {
@@ -74,12 +74,12 @@ export class ClientInteraction
 				{
 					const origin: Hex<Cell> = turnInformation.originCell;
 					const target: Hex<Cell> = turnInformation.targetCell;
-					gridStrategy.renderSelectedCellsOutline([origin, target], stateHandler.getColor());
+					gridStrategy.renderSelectedCellsOutline([origin, target], stateHandler.getColor(), RenderType.DottedLine);
 				});				
 			}
 			else
 			{
-				gridStrategy.renderSelectedCellsOutline([hex], stateHandler.getColor());
+				gridStrategy.renderSelectedCellsOutline([hex], stateHandler.getColor(), RenderType.DottedLine);
 			}			
 		}
 	}

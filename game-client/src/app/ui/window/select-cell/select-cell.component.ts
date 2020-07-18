@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { GameManager } from 'src/app/game/game-manager';
-import { GridManager } from 'src/app/game/grid/grid';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from 'src/app/game/grid/grid';
 import { InnerWindowComponent } from '../window.component';
 import { Subscription } from 'rxjs';
 import { BehaviorInformation, Entity } from 'src/app/game/entities/entity';
-import { TurnInformation } from 'src/app/game/turns/turn-command';
 import { ClientStateHandler } from 'src/app/game/states/client-states/client-state-handler';
 import { GridClient } from 'src/app/game/grid/client-grid';
+import { RenderType } from 'src/app/game/grid/grid-strategy';
 
 @Component({
   selector: 'app-select-cell',
@@ -66,7 +65,7 @@ export class SelectCellComponent implements OnInit, InnerWindowComponent
 		this.gridClient.clearSelectedCells();
 		if (n !== 0)
 		{
-			this.gridClient.renderSelectedCellsOutline([this.hex], this.clientStateHandler.getColor());
+			this.gridClient.renderSelectedCellsOutline([this.hex], this.clientStateHandler.getColor(), RenderType.StraightLine);
 		}
 	}
 
@@ -87,8 +86,8 @@ export class SelectCellComponent implements OnInit, InnerWindowComponent
 			if (this._validCells.indexOf(hex) > -1)
 			{
 				this.hexSubscription.unsubscribe();
-				GameManager.instance.windowManager.closeAllWindows();
 				GameManager.instance.createTurnCommand(this.hex, hex, this._entity, this._behavior);
+				GameManager.instance.windowManager.closeAllWindows();
 			}
 		});
 	}

@@ -34,7 +34,7 @@ export abstract class PrimaryState<RequestData>
         this.isActiveState = false;
     }
 
-    protected onDataRetrieved<T extends RequestData>(data: RequestData): void
+    protected onDataRetrieved<T extends RequestData>(data: T): void
     {
         if (this.isActiveState)
         {

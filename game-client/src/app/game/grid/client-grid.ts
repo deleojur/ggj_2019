@@ -1,5 +1,5 @@
 import { ClientStateHandler } from '../states/client-states/client-state-handler';
-import { GridStrategy } from './grid-strategy';
+import { GridStrategy, RenderType } from './grid-strategy';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from './grid';
 import { Entity } from '../entities/entity';
@@ -19,6 +19,11 @@ export class GridClient extends GridStrategy
 	public get clientStateHandler(): ClientStateHandler
 	{
 		return this._clientStateHandler;
+	}
+
+	public get clientColor(): number
+	{
+		return this._clientStateHandler.getColor();
 	}
 
 	public init(graphics: Graphics): void
@@ -93,7 +98,7 @@ export class GridClient extends GridStrategy
 	public renderValidCells(hex: Hex<Cell>, type: string): Hex<Cell>[]
 	{
 		const validCells: Hex<Cell>[] = this.getValidCells(hex, type);
-		this.renderSelectedCellsOutline(validCells, 0xfada5e);
+		this.renderSelectedCellsOutline(validCells, 0xfada5e, RenderType.DottedLine);
 
 		validCells.forEach(cell =>
 		{

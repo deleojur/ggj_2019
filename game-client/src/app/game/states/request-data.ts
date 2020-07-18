@@ -36,9 +36,9 @@ export interface HostStartGameData extends RequestData
 	clients: ClientData[];
 }
 
-export interface TurnConfirmData extends RequestData
+export interface TurnInformationData extends RequestData
 {
-	isConfirmed: boolean;
+	
 }
 
 export interface TurnData extends RequestData

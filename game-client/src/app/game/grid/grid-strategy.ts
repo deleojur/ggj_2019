@@ -9,6 +9,13 @@ import { Point } from 'honeycomb-grid';
 import { GameManager } from '../game-manager';
 import { ClientData } from '../states/request-data';
 import { StateHandlerService } from '../states/state-handler.service';
+import { Vector } from 'vector2d';
+
+export enum RenderType
+{
+	StraightLine,
+	DottedLine
+}
 
 interface Outline
 {
@@ -96,7 +103,7 @@ export class GridStrategy
 		this.clients.forEach(client =>
 		{
 			const hexes: Hex<Cell>[] = occupiedHexes.get(client.id);
-			this.renderSelectedCellsOutline(hexes, this.getColor(client.color));
+			this.renderSelectedCellsOutline(hexes, this.getColor(client.color), RenderType.StraightLine);
 		});
 	}
 
@@ -166,22 +173,66 @@ export class GridStrategy
         return outline;
 	}
 
-	public renderSelectedCellsOutline(selection: Hex<Cell>[], color: number): void
+	public renderSelectedCellsOutline(selection: Hex<Cell>[], color: number, renderType: RenderType): void
 	{
-		console.log('render with color', color);
-		this.selectedCellsGraphics.lineStyle(5, color, 1, 0.5);
+		this.selectedCellsGraphics.lineStyle(7, color, 1, 0.5);
 		const outline: Outline[] = this.getEdgeCorners(selection);
         for (let i = 0; i < outline.length; i++)
         {
-            const corner1 = outline[i].corner1;
-            const corner2 = outline[i].corner2;
-            // move the "pen" to the first corner
-            this.selectedCellsGraphics.moveTo(corner1.x, corner1.y);
-
-            // draw lines to the other corners
-            this.selectedCellsGraphics.lineTo(corner2.x, corner2.y);
+			switch (renderType)
+			{
+				case RenderType.DottedLine:
+					
+					this.renderDottedLine(outline[i]);
+					break;
+				case RenderType.StraightLine:
+					this.renderStraightLine(outline[i]);
+					break;
+			}
 		}
 		this.selectedCellsGraphics.lineStyle(0);
+	}
+
+	private renderStraightLine(outline: Outline): void
+	{
+		const corner1 = outline.corner1;
+		const corner2 = outline.corner2;
+		
+		// move the "pen" to the first corner
+		this.selectedCellsGraphics.moveTo(corner1.x, corner1.y);
+
+		// draw lines to the other corners
+		this.selectedCellsGraphics.lineTo(corner2.x, corner2.y);
+	}
+
+	private renderDottedLine(outline: Outline): void
+	{
+		const corner1 = outline.corner1;
+		const corner2 = outline.corner2;
+		
+		const v1: Vector = new Vector(corner1.x, corner1.y);
+		const v2: Vector = new Vector(corner2.x, corner2.y);
+
+		const vdir = v2.clone().subtract(v1);
+		const dist: number = vdir.clone().magnitude();
+		const step: number = dist / 3;
+		const length: number = dist / 6;
+		const dif: number = (step - length) / 2;
+
+		const vdirn = vdir.clone().normalise();
+		//const vdirs: Vector = vdir.clone().multiplyByScalar(step) as Vector;
+
+		for (let j: number = 0; j < 3; j ++)
+		{
+			let from = v1.clone().add(vdirn.clone().multiplyByScalar(step * j + dif * j));
+			let to = from.clone().add(vdirn.clone().multiplyByScalar(length));
+
+			// move the "pen" to the first corner
+			this.selectedCellsGraphics.moveTo(from.x, from.y);
+
+			// draw lines to the other corners
+			this.selectedCellsGraphics.lineTo(to.x, to.y);
+		}
 	}
 
 	public clearSelectedCells(): void

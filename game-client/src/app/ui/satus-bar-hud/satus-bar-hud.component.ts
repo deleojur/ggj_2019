@@ -32,7 +32,7 @@ export class StatusBarHudComponent implements OnInit
 
 		if (this.showCheckbox)
 		{
-			console.log('I\'m ready!');
+			
 		} else 
 		{
 			console.log('I\'m not ready');

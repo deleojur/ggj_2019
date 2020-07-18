@@ -37,6 +37,20 @@ export class TurnsSystem
 		return [];
 	}
 
+	public getAllTurnCommands(): TurnCommand[]
+	{
+		const turnCommands: TurnCommand[] = [];
+		const allCommands = Array.from(this._turnCommands.values());
+		allCommands.forEach(turnCommandArray =>
+		{
+			turnCommandArray.forEach(turnCommand =>
+			{
+				turnCommands.push(turnCommand);
+			});
+		});
+		return turnCommands;
+	}
+
 	public getTurnInformation(hex: Hex<Cell>): TurnInformation[]
 	{
 		if (this._turnCommands.has(hex))
@@ -180,15 +194,20 @@ export class TurnsSystem
 
 	/**
 	 * This function is called when all data is send to the server. When it is called,
-	 * the functionCommands map is cleared. 
+	 * the functionCommands map is cleared.
 	 */
 	public get exportCommands(): TurnCommand[][]
 	{
 		const turnCommands: TurnCommand[][] = Array.from(this._turnCommands.values());
 		this._turnCommands.clear();
+		//the host needs to know the following properties:
+		
 		return turnCommands;
 	}
 
+	/**
+	 * This function imports and parses all the TurnCommands for the host, so that it can handle them one by one.
+	 */
 	public set importCommands(commands: TurnCommand[])
 	{
 		commands.forEach(e => 

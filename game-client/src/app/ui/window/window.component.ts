@@ -71,7 +71,7 @@ export class WindowComponent implements OnInit, AfterViewInit
 			this.currentComponent.beforeCloseWindow(n);
 			if (n === 0)
 			{
-				GameManager.instance.gridStrategy.renderEntitiesByOwnerColor();
+				GameManager.instance.renderCellsOutline();
 			}
 		}
 

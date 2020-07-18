@@ -5,7 +5,19 @@ listener =
     initialize(rooms)
     {
         this.rooms = rooms;
-    },
+	},
+	send_to_host(socket, endpoint, data)
+	{
+		const roomid = socket.roomid;
+        const room = this.rooms[roomid];
+        if (room !== undefined)
+        {
+            data = JSON.parse(data);
+            data.id = socket.id;
+            const host = room.host;
+            this.io.to(host).emit(endpoint, data);
+        }
+	},
     client_connection_lost(socket, roomid)
     {
         const room = this.rooms[roomid];
@@ -51,26 +63,22 @@ listener =
         {
             this.io.to(socket.roomid).emit('server_room_validateStartGame');
         }
-    },
+	},
     client_game_turnConfirm(socket, data)
     {
-        const roomid = socket.roomid;
-        const room = this.rooms[roomid];
-        if (room !== undefined)
-        {
-            data = JSON.parse(data);
-            data.id = socket.id;
-            const host = room.host;
-            this.io.to(host).emit('client_game_turnConfirm', data);
-        }
+        this.send_to_host('client_game_turnConfirm', socket, data);
 	},
-	
+	client_game_turnInformation(socket, data)
+	{
+		this.send_to_host('client_game_turnInformation', socket, data);
+	},
     listen(io, socket)
     {
         this.io = io;
         socket.on('client_room_join', (data) => { this.client_room_join(socket, data); });
         socket.on('client_room_startGame', () => { this.client_room_startGame(socket); });
 		socket.on('client_game_turnConfirm', (data) => this.client_game_turnConfirm(socket, data));
+		socket.on('client_game_turnInformation', (data) => this.client_game_turnInformation(socket, data));
     }
 };
 module.exports = listener;

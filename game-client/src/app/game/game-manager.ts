@@ -12,7 +12,7 @@ import { ItemDetailWindowComponent } from '../ui/window/item-detail-window/item-
 import { SelectCellComponent } from '../ui/window/select-cell/select-cell.component';
 import { Sprite, Point, Texture, Application, Graphics, autoDetectRenderer } from 'pixi.js';
 import { Subject, Subscription } from 'rxjs';
-import { GridStrategy } from './grid/grid-strategy';
+import { GridStrategy, RenderType } from './grid/grid-strategy';
 import { ClientStateHandler } from './states/client-states/client-state-handler';
 import { GridClient } from './grid/client-grid';
 import { ClientInteraction } from './client-interaction';
@@ -172,6 +172,20 @@ export class GameManager
 	public startGame(): void
 	{
 		this._gridStrategy.renderEntitiesByOwnerColor();
+	}
+
+	public renderCellsOutline(): void
+	{
+		this.gridStrategy.renderEntitiesByOwnerColor();
+
+		const color: number = this.clientGrid.clientColor;
+		const turnCommands: TurnCommand[] = this._turnSystem.getAllTurnCommands();
+		const cells: Hex<Cell>[] = [];
+		turnCommands.forEach(turnCommand =>
+		{
+			cells.push(turnCommand.turnInformation.targetCell);
+		});
+		this._gridStrategy.renderSelectedCellsOutline(cells, color, RenderType.DottedLine);
 	}
 
 	public createTurnCommand(

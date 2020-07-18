@@ -1,7 +1,8 @@
 import { StateHandlerService } from '../state-handler.service';
-import { clientState_startGame } from 'src/app/game/states/client-states/client-state_start-game';
-import { state_requestJoinRoom } from 'src/app/game/states/client-states/state_request-join-room';
-import { state_playerStartingPositions } from 'src/app/game/states/turn-state-handling/state_player-starting-positions';
+import { clientState_startGame } from './client-state_start-game';
+import { state_requestJoinRoom } from './state_request-join-room';
+import { clientState_turnInformation } from './client-state_turn-information';
+import { state_playerStartingPositions } from '../turn-state-handling/state_player-starting-positions';
 import { ConnectionService } from 'src/services/connection.service';
 import { Injectable } from '@angular/core';
 import { ClientData } from '../request-data';
@@ -22,6 +23,7 @@ export class ClientStateHandler extends StateHandlerService
 		this._states.set(state_requestJoinRoom, new state_requestJoinRoom());
 		this._states.set(clientState_startGame, new clientState_startGame());
 		this._states.set(state_playerStartingPositions, new state_playerStartingPositions());
+		this._states.set(clientState_turnInformation, new clientState_turnInformation());
 	}
 
 	public get clientType(): string
