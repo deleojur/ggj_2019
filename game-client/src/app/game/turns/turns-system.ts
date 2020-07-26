@@ -5,13 +5,20 @@ import { Point as pPoint, Graphics } from 'pixi.js';
 import { GameManager } from '../game-manager';
 import { BehaviorInformation, Entity } from '../entities/entity';
 
-export class TurnsSystem
+export abstract class TurnsSystem
 {
-	private _turnCommands: Map<Hex<Cell>, TurnCommand[]> = new Map<Hex<Cell>, TurnCommand[]>();
+	protected _turnCommands: Map<Hex<Cell>, TurnCommand[]> = new Map<Hex<Cell>, TurnCommand[]>();
 	private _commandIconPositions: pPoint[][] = [[], [new pPoint(0, -75)], [new pPoint(-62, -50), new pPoint(62, -50)]];
-	
-	constructor(private graphics: Graphics)
+	private graphics: Graphics;
+
+	constructor()
 	{
+	
+	}
+
+	public init(graphics: Graphics): void
+	{
+		this.graphics = graphics;
 		const tiles: Hex<Cell>[] = GameManager.instance.grid.getValidTiles();
 		tiles.forEach((e: Hex<Cell>) => 
 		{
@@ -19,6 +26,10 @@ export class TurnsSystem
 			this._turnCommands.set(e, []);
 		});
 	}
+
+	public abstract onGameStarted(): void;
+	protected abstract onRoundStarted(): void;
+	protected abstract onRoundEnded(): void;
 
 	public getBehaviorInformation(hex: Hex<Cell>): BehaviorInformation[]
 	{
@@ -96,9 +107,9 @@ export class TurnsSystem
 		};
 	}
 
-	public addTurnCommand(turnInformation: TurnInformation): void
+	public addTurnCommand(turnInformation: TurnInformation, owner: string): void
 	{
-		const command: TurnCommand = new TurnCommand('someone', turnInformation);
+		const command: TurnCommand = new TurnCommand(owner, turnInformation);
 		this._turnCommands.get(turnInformation.targetCell).push(command);
 		if (turnInformation.originCell !== turnInformation.targetCell)
 		{
@@ -190,19 +201,6 @@ export class TurnsSystem
 				return turnCommand.turnInformation;
 			}
 		}
-	}
-
-	/**
-	 * This function is called when all data is send to the server. When it is called,
-	 * the functionCommands map is cleared.
-	 */
-	public get exportCommands(): TurnCommand[][]
-	{
-		const turnCommands: TurnCommand[][] = Array.from(this._turnCommands.values());
-		this._turnCommands.clear();
-		//the host needs to know the following properties:
-		
-		return turnCommands;
 	}
 
 	/**

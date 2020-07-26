@@ -5,7 +5,7 @@ import { GameManager } from 'src/app/game/game-manager';
 @Component({
   selector: 'app-satus-bar-hud',
   templateUrl: './satus-bar-hud.component.html',
-  styleUrls: ['./satus-bar-hud.component.scss']
+  styleUrls: ['./satus-bar-hud.component.scss', '../game-hud.scss']
 })
 export class StatusBarHudComponent implements OnInit
 {
@@ -29,13 +29,6 @@ export class StatusBarHudComponent implements OnInit
 	onConfirmButtonClicked(): void
 	{
 		this.showCheckbox = !this.showCheckbox;
-
-		if (this.showCheckbox)
-		{
-			
-		} else 
-		{
-			console.log('I\'m not ready');
-		}
+		GameManager.instance.clientTurnSystem.sendSubmitTurn(this.showCheckbox);
 	}
 }

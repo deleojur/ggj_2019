@@ -1,12 +1,22 @@
-div.fixed 
-{
-	position: absolute;
-	width: 100%;
-	bottom: 87vh;
+.timer-background
+{	
+	pointer-events: none;
+	margin-top: -14%;
 }
 
-img.background
+.timer-container
 {
-	width: 120%;
-	margin-left: -10%;
+	position: absolute;
+    margin-top: -19%;
+    margin-left: 10%;
+    padding: 10px;
+    width: 100%;
+}
+
+.timer-text
+{
+	font-family: Zolof;
+    color: #007bff;
+    text-align: center;
+    pointer-events: none;
 }

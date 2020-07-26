@@ -37,10 +37,13 @@ listener =
 		this.io.to(roomid).emit('host_startGame', { clients: clients });
         //TODO: send list of all players + start Locations
 	},
-	host_requestTurnInfotmation(socket)
+	host_requestTurnInformation(socket)
 	{
-		this.io.to(roomid).emit('host_game_requestTurnInformation');
-		console.log('requesting client turn information...');
+		this.io.to(socket.roomid).emit('host_game_requestTurnInformation');
+	},
+	host_turnsResolved(socket)
+	{
+		this.io.to(socket.roomid).emit('host_game_turnsResolved');
 	},
     host_connection_lost(roomid)
     {
@@ -53,7 +56,8 @@ listener =
         this.io = io;
         socket.on('host_room_createRoom', () => this.host_createRoom(socket));
 		socket.on('host_startGame', (clients) => this.host_startGame(socket, clients));
-		socket.on('host_requestTurnInformation', () => this.host_requestTurnInfotmation(socket));
+		socket.on('host_game_requestTurnInformation', () => this.host_requestTurnInformation(socket));
+		socket.on('host_game_turnsResolved', () => this.host_requestTurnInformation(socket));
     }
 };
 module.exports = listener;

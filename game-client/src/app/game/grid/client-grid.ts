@@ -98,7 +98,7 @@ export class GridClient extends GridStrategy
 	public renderValidCells(hex: Hex<Cell>, type: string): Hex<Cell>[]
 	{
 		const validCells: Hex<Cell>[] = this.getValidCells(hex, type);
-		this.renderSelectedCellsOutline(validCells, 0xfada5e, RenderType.DottedLine);
+		this.renderSelectedCellsOutline(validCells, 0xfada5e, RenderType.StraightLine);
 
 		validCells.forEach(cell =>
 		{

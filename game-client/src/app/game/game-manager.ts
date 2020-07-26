@@ -16,6 +16,10 @@ import { GridStrategy, RenderType } from './grid/grid-strategy';
 import { ClientStateHandler } from './states/client-states/client-state-handler';
 import { GridClient } from './grid/client-grid';
 import { ClientInteraction } from './client-interaction';
+import { HostStateHandler } from './states/host-states/host-state-handler';
+import { HostGrid } from './grid/host-grid';
+import { HostTurnSystem } from './turns/host-turn-system';
+import { ClientTurnSystem } from './turns/client-turn-system';
 
 export class GameManager
 {
@@ -86,6 +90,26 @@ export class GameManager
 		return this.clientGrid.clientStateHandler;
 	}
 
+	public get clientTurnSystem(): ClientTurnSystem
+	{
+		return this._turnSystem as ClientTurnSystem;
+	}
+
+	public get hostGrid(): HostGrid
+	{
+		return this._gridStrategy as HostGrid;
+	}
+
+	public get hostStateHandler(): HostStateHandler
+	{
+		return this.hostGrid.hostStateHandler;
+	}
+
+	public get hostTurnSystem(): HostTurnSystem
+	{
+		return this._turnSystem as HostTurnSystem;
+	}
+
     public get viewport(): ViewportManager
     {
         return this._viewport;
@@ -123,7 +147,7 @@ export class GameManager
 			const size: Point = this._grid.generateWorld();
 			this.viewport.initViewport(size.x, size.y);
 			this._grid.init(gridGraphics);
-			this._turnSystem = new TurnsSystem(commandGraphics);
+			this._turnSystem.init(commandGraphics);
 
 			this.viewport.addChild(gridGraphics);
 			this.viewport.addChild(commandGraphics);
@@ -150,12 +174,13 @@ export class GameManager
 		return this._worldCanvas;
 	}
 
-    public init(gridStrategy: GridStrategy, cb: () => void): void
+    public init(gridStrategy: GridStrategy, turnSystem: TurnsSystem, cb: () => void): void
     {
 		if (!this.isInitialized)
 		{	
 			this.isInitialized = true;
 			this._gridStrategy = gridStrategy;
+			this._turnSystem = turnSystem;
 			this._clientInteraction = new ClientInteraction();
 			this.generateWorld(cb);
 		}
@@ -172,6 +197,7 @@ export class GameManager
 	public startGame(): void
 	{
 		this._gridStrategy.renderEntitiesByOwnerColor();
+		this.turnSystem.onGameStarted();
 	}
 
 	public renderCellsOutline(): void
@@ -185,7 +211,7 @@ export class GameManager
 		{
 			cells.push(turnCommand.turnInformation.targetCell);
 		});
-		this._gridStrategy.renderSelectedCellsOutline(cells, color, RenderType.DottedLine);
+		this._gridStrategy.renderSelectedCellsOutline(cells, color, RenderType.StraightLine);
 	}
 
 	public createTurnCommand(
@@ -196,7 +222,7 @@ export class GameManager
 	{
 		this._resourceManager.subtractResources(item.cost);
 		const turnInformation: TurnInformation = this._turnSystem.generateTurnInformation(originCell, targetCell, entity, item);
-		this._turnSystem.addTurnCommand(turnInformation);
+		this._turnSystem.addTurnCommand(turnInformation, this.clientStateHandler.clientId);
 	}
 
 	public hexClicked(hex: Hex<Cell>): void

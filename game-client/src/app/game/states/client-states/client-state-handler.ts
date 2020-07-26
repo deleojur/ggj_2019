@@ -6,6 +6,7 @@ import { state_playerStartingPositions } from '../turn-state-handling/state_play
 import { ConnectionService } from 'src/services/connection.service';
 import { Injectable } from '@angular/core';
 import { ClientData } from '../request-data';
+import { clientState_endOfTurn } from './client-state_end-of-turn';
 
 @Injectable({
     providedIn: 'root'
@@ -24,6 +25,7 @@ export class ClientStateHandler extends StateHandlerService
 		this._states.set(clientState_startGame, new clientState_startGame());
 		this._states.set(state_playerStartingPositions, new state_playerStartingPositions());
 		this._states.set(clientState_turnInformation, new clientState_turnInformation());
+		this._states.set(clientState_endOfTurn, new clientState_endOfTurn());
 	}
 
 	public get clientType(): string

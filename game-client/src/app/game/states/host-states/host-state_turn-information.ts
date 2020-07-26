@@ -8,7 +8,7 @@ export class hostState_turnInformation extends PrimaryState<TurnInformationData>
 	 */
 	protected subscribeToEvents(): void
     {
-        this.connectionService.subscribeToIncomingEvent<TurnInformationData>('host_game_requestTurnInformation', 
+        this.connectionService.subscribeToIncomingEvent<TurnInformationData>('client_game_sendTurnInformation', 
             (turnInformationData) => this.onDataRetrieved(turnInformationData));
 	}
 
@@ -17,6 +17,6 @@ export class hostState_turnInformation extends PrimaryState<TurnInformationData>
 	 */
 	public doRequestTurnInformation(): void
 	{
-		this.connectionService.emitOutgoingEvent('');
+		this.connectionService.emitOutgoingEvent('host_game_requestTurnInformation');
 	}
 }

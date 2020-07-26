@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { ConnectionService } from 'src/services/connection.service';
 import { ClientData, RoomData } from '../request-data';
 import { hostState_turnInformation } from './host-state_turn-information';
+import { hostState_clientTurnConfirm } from './host-state_client-turn-confirm';
 
 @Injectable({
     providedIn: 'root'
@@ -30,6 +31,7 @@ export class HostStateHandler extends StateHandlerService
         this._states.set(hostState_startGame, new hostState_startGame());
 		this._states.set(state_clientConnection, new state_clientConnection());
 		this._states.set(hostState_turnInformation, new hostState_turnInformation());
+		this._states.set(hostState_clientTurnConfirm, new hostState_clientTurnConfirm());
 	}
 
 	public get clientType(): string

@@ -14,13 +14,17 @@ export interface TurnInformation
 
 export class TurnCommand
 {
-	//this is the place where the command originates.	
 	private _owner: string;
 	private _commandIcon: CommandIcon;
 
 	constructor(owner: string, public turnInformation: TurnInformation)
 	{
 		this._commandIcon = new CommandIcon(turnInformation);	
+	}
+
+	public get owner(): string
+	{
+		return this._owner;
 	}
 
 	public get commandIcon(): CommandIcon

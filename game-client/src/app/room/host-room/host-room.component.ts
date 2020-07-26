@@ -8,6 +8,7 @@ import { hostState_startGame } from 'src/app/game/states/host-states/host-state_
 import { HostStateHandler } from 'src/app/game/states/host-states/host-state-handler';
 import { GameManager } from 'src/app/game/game-manager';
 import { HostGrid } from 'src/app/game/grid/host-grid';
+import { HostTurnSystem } from 'src/app/game/turns/host-turn-system';
 
 @Component({
   selector: 'app-host-room',
@@ -29,7 +30,8 @@ export class HostRoomComponent implements OnInit
     ngOnInit() 
     {
 		const hostGrid: HostGrid = new HostGrid(this.hostStateHandler);
-		GameManager.instance.init(hostGrid, () =>
+		const hostTurnSystyem: HostTurnSystem = new HostTurnSystem();
+		GameManager.instance.init(hostGrid, hostTurnSystyem, () =>
 		{
 			this.maxPlayers = GameManager.instance.gridStrategy.maxNumberOfPlayers;
 		});

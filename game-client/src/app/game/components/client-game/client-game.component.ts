@@ -24,8 +24,8 @@ export class ClientGameComponent implements Game, OnInit, AfterViewInit
 
 	ngOnInit() 
     {
-		const clientGrid: GridClient = new GridClient(this.clientStateHandler);
-		GameManager.instance.init(clientGrid, () => {});
+		/*const clientGrid: GridClient = new GridClient(this.clientStateHandler);
+		GameManager.instance.init(clientGrid, () => {});*/
     }
 
 	stateHandler(): StateHandlerService

@@ -3,7 +3,7 @@ import { Hex } from 'honeycomb-grid';
 
 export interface RequestData
 {
-    id: string;
+    id?: string;
 }
 
 export interface RoomData extends RequestData
@@ -38,10 +38,14 @@ export interface HostStartGameData extends RequestData
 
 export interface TurnInformationData extends RequestData
 {
-	
+	name: string; //the mame of the command.
+	originEntity: string; //the name of the origin entity (will be generated on the host side).
+	targetEntity: string; //the name of the origin entity (will be generated on the host side).
+	originCell: PositionData;
+	targetCell: PositionData;
 }
 
-export interface TurnData extends RequestData
+export interface TurnConfirmData extends RequestData
 {
-
+	turnConfirmed: boolean;
 }

@@ -12,7 +12,6 @@ listener =
         const room = this.rooms[roomid];
         if (room !== undefined)
         {
-            data = JSON.parse(data);
             data.id = socket.id;
             const host = room.host;
             this.io.to(host).emit(endpoint, data);
@@ -66,11 +65,13 @@ listener =
 	},
     client_game_turnConfirm(socket, data)
     {
-        this.send_to_host('client_game_turnConfirm', socket, data);
+		const dataObject = { turnConfirmed: data };
+        this.send_to_host(socket, 'client_game_turnConfirm', dataObject);
 	},
-	client_game_turnInformation(socket, data)
+	client_game_sendTurnInformation(socket, data)
 	{
-		this.send_to_host('client_game_turnInformation', socket, data);
+		const dataObject = { turnInformation: data };
+		this.send_to_host(socket, 'client_game_sendTurnInformation', dataObject);
 	},
     listen(io, socket)
     {
@@ -78,7 +79,7 @@ listener =
         socket.on('client_room_join', (data) => { this.client_room_join(socket, data); });
         socket.on('client_room_startGame', () => { this.client_room_startGame(socket); });
 		socket.on('client_game_turnConfirm', (data) => this.client_game_turnConfirm(socket, data));
-		socket.on('client_game_turnInformation', (data) => this.client_game_turnInformation(socket, data));
+		socket.on('client_game_sendTurnInformation', (data) => this.client_game_sendTurnInformation(socket, data));
     }
 };
 module.exports = listener;

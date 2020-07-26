@@ -3,8 +3,13 @@ import { HostStateHandler } from '../states/host-states/host-state-handler';
 
 export class HostGrid extends GridStrategy
 {
-	constructor(private hostStateHandler: HostStateHandler)
+	constructor(private _hostStateHandler: HostStateHandler)
 	{
-		super(hostStateHandler);
+		super(_hostStateHandler);
+	}
+
+	public get hostStateHandler(): HostStateHandler
+	{
+		return this._hostStateHandler
 	}
 }
