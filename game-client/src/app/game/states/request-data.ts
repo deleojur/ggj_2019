@@ -1,5 +1,6 @@
 import { Cell } from '../grid/grid';
 import { Hex } from 'honeycomb-grid';
+import { BehaviorInformation } from '../entities/entity';
 
 export interface RequestData
 {
@@ -38,11 +39,14 @@ export interface HostStartGameData extends RequestData
 
 export interface TurnInformationData extends RequestData
 {
-	name: string; //the mame of the command.
-	originEntity: string; //the name of the origin entity (will be generated on the host side).
-	targetEntity: string; //the name of the origin entity (will be generated on the host side).
-	originCell: PositionData;
-	targetCell: PositionData;
+	turnCommands: { 
+		name: string; //the mame of the command.
+		originEntityGuid: number;
+		targetEntityName: string; //the name of the target entity.
+		originCell: PositionData;
+		targetCell: PositionData;
+		behaviorInformation: BehaviorInformation
+	}[];
 }
 
 export interface TurnConfirmData extends RequestData

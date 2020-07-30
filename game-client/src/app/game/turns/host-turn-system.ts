@@ -4,23 +4,27 @@ import { hostState_clientTurnConfirm } from '../states/host-states/host-state_cl
 import { TurnConfirmData, ClientData, TurnInformationData } from '../states/request-data';
 import { Graphics } from 'pixi.js';
 import { hostState_turnInformation } from '../states/host-states/host-state_turn-information';
+import { TurnInformation, TurnCommand } from './turn-command';
+import { Cell } from '../grid/grid';
+import { Hex } from 'honeycomb-grid';
+import { Entity } from '../entities/entity';
 
 export class HostTurnSystem extends TurnsSystem
 {
-	private _clientsTurns: Map<string, boolean>;
+	private clientDataReceived: Map<string, boolean>;
 	private _clients: ClientData[];
 
 	public init(graphics: Graphics)
 	{
 		super.init(graphics);
-		this._clientsTurns = new Map<string, boolean>();
+		this.clientDataReceived = new Map<string, boolean>();
 	}
 
-	private setTurnConfirmedFalseForClients(): void
+	private setClientDataReceivedFalse(): void
 	{
 		this._clients.forEach(client =>
 		{
-			this._clientsTurns.set(client.id, false);
+			this.clientDataReceived.set(client.id, false);
 		});
 	}
 
@@ -43,7 +47,7 @@ export class HostTurnSystem extends TurnsSystem
 		{
 			this.onClientConfirmedTurn(turnConfirmData);
 		}, false);
-		this.setTurnConfirmedFalseForClients();
+		this.setClientDataReceivedFalse();
 	}
 
 	//called either when the countdown runs to 0 or when all players have locked in their actions.
@@ -51,7 +55,7 @@ export class HostTurnSystem extends TurnsSystem
 	{
 		//the text in the host hud component is replaced with -> resolving turns
 		//go to state resolving turns.
-		this.setTurnConfirmedFalseForClients();
+		this.setClientDataReceivedFalse();
 		const requestTurnInformation: hostState_turnInformation =
 		GameManager.instance.hostStateHandler.activateState<TurnInformationData>(hostState_turnInformation, (turnInformation) =>
 		{
@@ -62,9 +66,9 @@ export class HostTurnSystem extends TurnsSystem
 		requestTurnInformation.doRequestTurnInformation();
 	}
 
-	private getAllClientsConfirmedTurn(): boolean
+	private get receivedDataForAllClients(): boolean
 	{
-		const values: boolean[] = Array.from(this._clientsTurns.values());
+		const values: boolean[] = Array.from(this.clientDataReceived.values());
 		for (let i: number = 0; i < values.length; i++)
 		{
 			if (!values[i])
@@ -78,17 +82,48 @@ export class HostTurnSystem extends TurnsSystem
 	//called when a client locked their turn. Also called when a client decides to unlock their turn again.
 	private onClientConfirmedTurn(turnConfirmed: TurnConfirmData): void
 	{
-		this._clientsTurns.set(turnConfirmed.id, turnConfirmed.turnConfirmed);
-		let allConfirmed: boolean = this.getAllClientsConfirmedTurn();
-		if (allConfirmed)
+		this.clientDataReceived.set(turnConfirmed.id, turnConfirmed.turnConfirmed);
+		if (this.receivedDataForAllClients)
 		{
 			this.onRoundEnded();
 		}		
 	}
 
-	private onClientSharedTurnInformation(turnInformation: TurnInformationData): void
+	private onClientSharedTurnInformation(turnInformationData: TurnInformationData): void
 	{
-		console.log('turnInformation was received for player', turnInformation);
+		this.clientDataReceived.set(turnInformationData.id, true);
+		turnInformationData.turnCommands.forEach(command => 
+		{
+			const originCell: Hex<Cell> = GameManager.instance.grid.getHex(command.originCell.x, command.originCell.y);
+			const targetCell: Hex<Cell> = GameManager.instance.grid.getHex(command.targetCell.x, command.targetCell.y);
+			const entity: Entity = GameManager.instance.gridStrategy.getEntityByGuid(command.originEntityGuid);
+			const turnInformation: TurnInformation = this.generateTurnInformation(originCell, targetCell, entity, command.behaviorInformation);
+			this.addTurnCommand(turnInformation, turnInformationData.id);
+		});
+
+		if (this.receivedDataForAllClients)
+		{
+			GameManager.instance.renderCellsOutline();
+		}
+	}
+
+	public getAllTurnCommands(): Map<string, TurnCommand[]>
+	{
+		const turnCommands: Map<string, TurnCommand[]> = new Map<string, TurnCommand[]>();
+		const allCommands = Array.from(this._turnCommands.values());
+		allCommands.forEach(turnCommandArray =>
+		{
+			turnCommandArray.forEach(turnCommand =>
+			{
+				const owner: string = turnCommand.owner;
+				if (!turnCommands.has(owner))
+				{
+					turnCommands.set(owner, []);
+				} 
+				turnCommands.get(owner).push(turnCommand);
+			});
+		});
+		return turnCommands;
 	}
 
 	//whenever a client has 

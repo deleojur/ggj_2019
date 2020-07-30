@@ -5,7 +5,6 @@ import { AssetLoader } from 'src/app/asset-loader';
 import { Structure } from './structure';
 import { Unit } from './unit';
 import { GameManager } from '../game-manager';
-import { ClientData } from '../states/request-data';
 
 export class EntityManager
 {
@@ -17,7 +16,7 @@ export class EntityManager
 		const entityFactory: EntityFactory<Entity> = this.getEntityType(entityPrototype.entityType);
 		const entity = new entityFactory.entityClass(entityPrototype, hex, owner);
 		return entity;
-	}
+	}	
 
 	private getEntityType(entityType: EntityType): EntityFactory<Entity>
 	{

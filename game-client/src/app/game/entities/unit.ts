@@ -7,23 +7,8 @@ import { GameManager } from '../game-manager';
 
 export class Unit extends Entity
 {
-	protected initialise(): void
+	protected init(): void
 	{
-		/*const game: GameManager = GameManager.instance;
-		const background: Sprite = game.createSprite('assets/UI/button/r_bg_yellow.png', new Point(0, 30), new Point(0.15, 0.15));
-		const window_mask: Sprite = game.createSprite('assets/units/frames/frame_mask.png', new Point(0, 30), new Point(0.45, 0.45));
-		const unit: Sprite = game.createSprite(this._prototype.textureUrl, new Point(0, 40), new Point(0.5, 0.5));
-		const foreground: Sprite = game.createSprite('assets/units/frames/frame_foreground.png', new Point(0, 30), new Point(0.45, 0.45));
-		unit.mask = window_mask;
-		background.mask = window_mask;
-		
-		this.addChild(background);
-		this.addChild(window_mask);	
-		this.addChild(unit);
-		this.addChild(foreground);
-		this.moveToHex(this._location);*/
-
-
 		const game: GameManager = GameManager.instance;
 
 		const background: Sprite = game.createSprite('assets/UI/button/r_bg_yellow.png', new Point(0, 50), new Point(0.1, 0.1));

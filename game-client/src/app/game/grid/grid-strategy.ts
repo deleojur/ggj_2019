@@ -24,7 +24,7 @@ interface Outline
 	hex: Hex<Cell>;
 }
 
-export class GridStrategy
+export abstract class GridStrategy
 {
 	private entityContainer: Container;
 	private selectedCellsGraphics: Graphics;
@@ -33,12 +33,15 @@ export class GridStrategy
 	protected gameManager: GameManager;
 	protected grid: GridManager;
 	protected clients: ClientData[];
+	private static _autoIncrement: number = 0;
+	private _entitiesByGuids: Map<number, Entity>;
 
 	protected startEntities: Map<number, { hex: Hex<Cell>, entityName: string }[]>
 
 	constructor(protected stateHandler: StateHandlerService)
 	{
 		this.startEntities = new Map<number, { hex: Hex<Cell>, entityName: string }[]>();
+		this._entitiesByGuids = new Map<number, Entity>();
 	}
 
 	public init(graphics: Graphics): void
@@ -66,6 +69,11 @@ export class GridStrategy
 		}
 	}
 
+	public getEntityByGuid(guid: number): Entity
+	{
+		return this._entitiesByGuids.get(guid);
+	}
+
 	public getEntitiesAtHexOfOwner(hex: Hex<Cell>, id: string): Entity[]
 	{
 		const entities: Entity[] = this.getEntitiesAtHex(hex);
@@ -91,7 +99,7 @@ export class GridStrategy
 		return this.startEntities.size;
 	}
 
-	private getColor(color: string): number
+	protected getColor(color: string): number
 	{
 		return parseInt(color.replace('#', '0x'));
 	}
@@ -105,6 +113,17 @@ export class GridStrategy
 			const hexes: Hex<Cell>[] = occupiedHexes.get(client.id);
 			this.renderSelectedCellsOutline(hexes, this.getColor(client.color), RenderType.StraightLine);
 		});
+		this.renderCommandsByOwnerColor();
+	}
+
+	protected abstract renderCommandsByOwnerColor(): void;
+
+	private setEntityGuid(entity: Entity): Entity
+	{
+		entity.guid = GridStrategy._autoIncrement;
+		this._entitiesByGuids.set(GridStrategy._autoIncrement, entity);
+		GridStrategy._autoIncrement++;
+		return entity;
 	}
 
 	public createStartEntities(clients: ClientData[]): void
@@ -115,7 +134,8 @@ export class GridStrategy
 			const startPositions: { hex: Hex<Cell>, entityName: string }[] = this.startEntities.get(client.startingPosition);
 			startPositions.forEach(startPosition =>
 			{
-				this.createEntity(startPosition.hex, client.id, startPosition.entityName);
+				const entity: Entity = this.createEntity(startPosition.hex, client.id, startPosition.entityName);
+				this.setEntityGuid(entity);
 			});			
 		});
 	}
@@ -182,7 +202,6 @@ export class GridStrategy
 			switch (renderType)
 			{
 				case RenderType.DottedLine:
-					
 					this.renderDottedLine(outline[i]);
 					break;
 				case RenderType.StraightLine:
@@ -190,7 +209,7 @@ export class GridStrategy
 					break;
 			}
 		}
-		this.selectedCellsGraphics.lineStyle(0);
+		this.selectedCellsGraphics.lineStyle(0, 0);
 	}
 
 	private renderStraightLine(outline: Outline): void

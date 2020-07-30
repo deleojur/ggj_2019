@@ -59,12 +59,9 @@ export class EntityFactory<T extends Entity>
 	constructor ( public readonly entityClass: new (prototype: EntityPrototype, location: Hex<Cell>, ownerId: string) => T ) {}
 }
 
-export class Entity extends Container
+export abstract class Entity extends Container
 {
-	public get name(): string
-	{
-		return this._prototype.name;
-	}
+	private _guid: number = -1;
 
 	public get owner(): string
 	{
@@ -80,26 +77,24 @@ export class Entity extends Container
 	{
 		return this._location;
 	}
+
+	public get guid(): number
+	{
+		return this._guid;
+	}
+
+	public set guid(value: number)
+	{
+		this._guid = value;
+	}
 	
 	constructor(protected _prototype: EntityPrototype, protected _location: Hex<Cell>, protected _owner: string)
 	{
 		super();
-		this.initialise();
+		this.init();
+		this.name = this._prototype.name;
 	}
 
-	public moveToHex(hex: Hex<Cell>): void
-	{
-		const pos: Point = hex.toPoint().add(hex.center());
-		this.position = new pPoint(pos.x, pos.y);
-	}
-
-	protected initialise(): void
-	{
-
-	}
-
-	public createCommandIcon(): void
-	{
-		
-	}
+	public abstract moveToHex(hex: Hex<Cell>): void;
+	protected abstract init(): void;
 }

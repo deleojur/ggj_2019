@@ -62,7 +62,7 @@ export class GridManager
 		this.initObjectLayer(this.mapReader.hexUnderLayer);
 		this.initTileLayer();
 		this.gridStrategy.init(graphics);
-		this.initObjectLayer(this.mapReader.icons);
+		this.initObjectLayer(this.mapReader.entities);
     }
 
     private initTileLayer(): void

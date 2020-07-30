@@ -42,34 +42,48 @@ export class ClientTurnSystem extends TurnsSystem
 
 	}
 
+	public getAllTurnCommands(): TurnCommand[]
+	{
+		const turnCommands: TurnCommand[] = [];
+		const allCommands = Array.from(this._turnCommands.values());
+		allCommands.forEach(turnCommandArray =>
+		{
+			turnCommandArray.forEach(turnCommand =>
+			{
+				turnCommands.push(turnCommand);
+			});
+		});
+		return turnCommands;
+	}
+
 	/**
 	 * This function is called when all data is send to the server. When it is called,
 	 * the functionCommands map is cleared.
 	 */
-	private get exportCommands(): TurnInformationData[]
+	private get exportCommands(): TurnInformationData
 	{
-		const commands: TurnInformationData[] = [];
+		const command: TurnInformationData = { turnCommands: [] };
 		this._turnCommands.forEach((val: TurnCommand[], key: Hex<Cell>) =>
 		{
 			if (val.length > 0)
-			{
+			{				
+				command.turnCommands = [];
 				val.forEach(turnCommand =>
 				{
 					const turnInformation: TurnInformation = turnCommand.turnInformation;
 					const originCell: Hex<Cell> = turnInformation.originCell;
 					const targetCell: Hex<Cell> = turnInformation.targetCell;
-					const command: TurnInformationData = {
+					command.turnCommands.push({
 						name: turnInformation.behaviorInformation.name,
-						originEntity: 'some entity', //TODO: entities must be marked, so that they can be shared across host and client by use of JSON.
-						targetEntity: 'some entity', //this will be a combination of the entity's name, player id and some form of index.
+						originEntityGuid: turnCommand.turnInformation.originEntity.guid, //TODO: entities must be marked, so that they can be shared across host and client by use of JSON.
+						targetEntityName: turnCommand.turnInformation.targetEntity.name, //this will be a combination of the entity's name, player id and some form of index.
 						originCell: { x: originCell.x, y: originCell.y },
 						targetCell: { x: targetCell.x, y: targetCell.y },
-						id: turnCommand.owner
-					};
-					commands.push(command);
+						behaviorInformation: turnInformation.behaviorInformation
+					});
 				});
 			}
 		});
-		return commands;
+		return command;
 	}
 }

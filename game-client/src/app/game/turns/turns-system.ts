@@ -48,20 +48,6 @@ export abstract class TurnsSystem
 		return [];
 	}
 
-	public getAllTurnCommands(): TurnCommand[]
-	{
-		const turnCommands: TurnCommand[] = [];
-		const allCommands = Array.from(this._turnCommands.values());
-		allCommands.forEach(turnCommandArray =>
-		{
-			turnCommandArray.forEach(turnCommand =>
-			{
-				turnCommands.push(turnCommand);
-			});
-		});
-		return turnCommands;
-	}
-
 	public getTurnInformation(hex: Hex<Cell>): TurnInformation[]
 	{
 		if (this._turnCommands.has(hex))
@@ -95,7 +81,7 @@ export abstract class TurnsSystem
 		originCell: Hex<Cell>,
 		targetCell: Hex<Cell>,
 		entity: Entity,
-		item: BehaviorInformation): TurnInformation
+		item?: BehaviorInformation): TurnInformation
 	{
 		const targetEntity: Entity = this.createTargetEntity(entity, targetCell, item);
 		return {

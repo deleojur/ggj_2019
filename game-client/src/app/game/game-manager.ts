@@ -196,22 +196,13 @@ export class GameManager
 
 	public startGame(): void
 	{
-		this._gridStrategy.renderEntitiesByOwnerColor();
+		this.renderCellsOutline();
 		this.turnSystem.onGameStarted();
 	}
 
 	public renderCellsOutline(): void
 	{
 		this.gridStrategy.renderEntitiesByOwnerColor();
-
-		const color: number = this.clientGrid.clientColor;
-		const turnCommands: TurnCommand[] = this._turnSystem.getAllTurnCommands();
-		const cells: Hex<Cell>[] = [];
-		turnCommands.forEach(turnCommand =>
-		{
-			cells.push(turnCommand.turnInformation.targetCell);
-		});
-		this._gridStrategy.renderSelectedCellsOutline(cells, color, RenderType.StraightLine);
 	}
 
 	public createTurnCommand(

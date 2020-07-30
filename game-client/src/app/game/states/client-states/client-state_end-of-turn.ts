@@ -15,7 +15,7 @@ export class clientState_endOfTurn extends PrimaryState<RequestData>
 	/**
 	 * Make a call to the host when turn is confirmed, either set to true or false.
 	 */
-	public doRequestSendTurnInformation(turnInformationData: TurnInformationData[]): void
+	public doRequestSendTurnInformation(turnInformationData: TurnInformationData): void
 	{
 		this.connectionService.emitOutgoingEvent('client_game_sendTurnInformation', turnInformationData);
 	}

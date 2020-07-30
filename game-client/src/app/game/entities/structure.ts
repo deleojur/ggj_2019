@@ -6,7 +6,7 @@ import { Cell } from '../grid/grid';
 
 export class Structure extends Entity
 {
-	protected initialise(): void
+	protected init(): void
 	{
 		const pos = this._location.center().add(this._location.toPoint());
 		const structure: Sprite = GameManager.instance.createSprite(this._prototype.textureUrl, new Point(0, 0), new Point(1, 1));

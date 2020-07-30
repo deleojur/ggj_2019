@@ -5,6 +5,8 @@ import { Cell } from './grid';
 import { Entity } from '../entities/entity';
 import { Graphics, Polygon } from 'pixi.js';
 import { Queue } from 'simple-fifo-queue';
+import { TurnCommand } from '../turns/turn-command';
+import { GameManager } from '../game-manager';
 
 export class GridClient extends GridStrategy
 {
@@ -111,6 +113,18 @@ export class GridClient extends GridStrategy
 			this.validCellsGraphics.endFill();
 		});
 		return validCells;
+	}
+
+	protected renderCommandsByOwnerColor(): void
+	{
+		const color: number = this.clientColor;
+		const turnCommands: TurnCommand[] = GameManager.instance.clientTurnSystem.getAllTurnCommands();
+		const cells: Hex<Cell>[] = [];
+		turnCommands.forEach(turnCommand =>
+		{
+			cells.push(turnCommand.turnInformation.targetCell);
+		});
+		this.renderSelectedCellsOutline(cells, color, RenderType.DottedLine);
 	}
 
 	public clearValidCells(): void

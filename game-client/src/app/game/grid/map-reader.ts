@@ -39,13 +39,13 @@ export class MapReader
 {
     private worldMap: WorldMap;
     private tileLayers: number[][] = [];
-    private iconLayer: Object[] = [];
+    private entityLayer: Object[] = [];
     private hexArtLayer: Object[] = [];
 	private worldTiles: Map<number, Tile> = new Map<number, Tile>();
 
-    public get icons(): Object[]
+    public get entities(): Object[]
     {
-        return this.iconLayer;
+        return this.entityLayer;
     }
 
     public get hexUnderLayer(): Object[]
@@ -95,9 +95,9 @@ export class MapReader
                     if (layer.name === 'Hex Under Layer')
                     {
                         this.hexArtLayer.push(obj);
-                    } else 
+                    } else if (layer.name === 'Entity Layer')
                     {
-                        this.iconLayer.push(obj);
+                        this.entityLayer.push(obj);
                     }
                 });
             }
@@ -170,7 +170,7 @@ export class MapReader
     private mapGrid(grid: Grid<Hex<Cell>>): void
     {
         this.mapTileLayers(grid);
-        this.mapObjectLayers(this.iconLayer);
+        this.mapObjectLayers(this.entityLayer);
         this.mapObjectLayers(this.hexArtLayer);
     }
 }

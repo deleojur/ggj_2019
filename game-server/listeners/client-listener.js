@@ -70,8 +70,8 @@ listener =
 	},
 	client_game_sendTurnInformation(socket, data)
 	{
-		const dataObject = { turnInformation: data };
-		this.send_to_host(socket, 'client_game_sendTurnInformation', dataObject);
+		data = JSON.parse(data);
+		this.send_to_host(socket, 'client_game_sendTurnInformation', data);
 	},
     listen(io, socket)
     {
