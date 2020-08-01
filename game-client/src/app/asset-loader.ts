@@ -17,6 +17,7 @@ export class AssetLoader
 
 	private _entityPrototypes: Map<string, EntityPrototype>;
 	private _entityInformation: Map<string, EntityInformation>;
+	private _behaviorInformation: Map<string, BehaviorInformation>;
 
 	private _textures: Map<string, Texture>;
 	private _commandIconsBackgrounds: CommandIconsBackground;
@@ -57,6 +58,11 @@ export class AssetLoader
 		return this._textures.get(url);
 	}
 
+	public getBehaviorInformation(name: string): BehaviorInformation
+	{
+		return this._behaviorInformation.get(name);
+	}
+
 	private setResourceClass(e: PrototypeInformation): void
 	{
 		[...e.cost || [], ...e.upkeep || []].forEach(res => 
@@ -70,8 +76,7 @@ export class AssetLoader
 		const behaviors: BehaviorInformation[] = [];
 		e.behaviors.forEach(b =>
 		{
-			this.setResourceClass(b);
-			behaviors.push(b);
+			behaviors.push(this._behaviorInformation.get(b));
 		});
 
 		return behaviors;
@@ -92,6 +97,16 @@ export class AssetLoader
 
 			this._entityInformation.set(e.name, e);
 			this._entityPrototypes.set(e.name, entityPrototype);
+		});
+	}
+
+	private createBehaviorInformation(behaviorInformation: BehaviorInformation[]): void
+	{
+		this._behaviorInformation = new Map<string, BehaviorInformation>();
+		behaviorInformation.forEach(behavior =>
+		{
+			this.setResourceClass(behavior);
+			this._behaviorInformation.set(behavior.name, behavior);
 		});
 	}
 
@@ -136,10 +151,12 @@ export class AssetLoader
 				this._commandIconsBackgrounds = resources[manifestUrl].data.commandIconsBackground;
 		
 				const entityInformation: EntityInformation[] = resources[manifestUrl].data.entities;
+				const behaviorInformation: BehaviorInformation[] = resources[manifestUrl].data.behaviors;
 				this._worldMap = resources[worldMapUrl].data;
 
 				this.loadTextures(loader, textureUrls).then(() =>
 				{
+					this.createBehaviorInformation(behaviorInformation);
 					this.createEntityPrototypes(entityInformation);
 					resolve();
 				});

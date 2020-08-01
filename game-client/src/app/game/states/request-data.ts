@@ -40,12 +40,14 @@ export interface HostStartGameData extends RequestData
 
 export interface TurnCommandData
 {
+	owner: string;
 	name: string; //the mame of the command.
 	originEntityGuid: number;
 	targetEntityName: string; //the name of the target entity.
+	targetEntityGuid: number; //if a new entity is created or another entity is referenced, make sure that the same reference is used.
 	originCell: PositionData;
 	targetCell: PositionData;
-	behaviorInformation: BehaviorInformation;
+	behaviorInformation: string;
 }
 
 export interface TurnInformationData extends RequestData

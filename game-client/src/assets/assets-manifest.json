@@ -65,10 +65,140 @@
 		"train": "assets/UI/button/r_bg_purple.png",
 		"move": "assets/UI/button/r_bg_blue.png"
 	},
-	"commands":
-	{
-		
-	},
+	"behaviors":
+	[
+		{
+			"name": "upgrade to village",
+			"type": "upgrade",
+			"description": "upgrade to a village.",
+			"textureUrl": "assets/actions/upgrade_bg.png",
+			"commandIconTextureUrl": "assets/actions/upgrade_t.png",
+			"creates": "village",
+			"range": 0,
+			"cost": 
+			[
+				{ "type": "gold", "amount": 3 }, 
+				{ "type": "food", "amount": 0 }, 
+				{ "type": "population", "amount": 2 }
+			], 
+			"upkeep": 
+			[
+				{ "type": "gold", "amount": 1 }, 
+				{ "type": "food", "amount": -1 }, 
+				{ "type": "population", "amount": 1 }
+			]
+		},
+		{
+			"name": "build farm",
+			"type": "build",
+			"description": "build a farm.",
+			"textureUrl": "assets/actions/build_farm_bg.png",
+			"commandIconTextureUrl": "assets/actions/build_farm_t.png",
+			"creates": "farm",
+			"range": 1,
+			"cost": 
+			[
+				{ "type": "gold", "amount": 3 }, 
+				{ "type": "food", "amount": 0 }, 
+				{ "type": "population", "amount": 2 }
+			]
+		},
+		{
+			"name": "build monastery",
+			"type": "build",
+			"description": "upgrade to a village.",
+			"textureUrl": "assets/actions/build_monastery_bg.png",
+			"commandIconTextureUrl": "assets/actions/build_monastery_t.png",
+			"creates": "monastery",
+			"range": 1,
+			"cost": 
+			[
+				{ "type": "gold", "amount": 3 }, 
+				{ "type": "food", "amount": 0 }, 
+				{ "type": "population", "amount": 2 }
+			]
+		},
+		{
+			"name": "build barracks",
+			"type": "build",
+			"description": "upgrade to a village.",
+			"textureUrl": "assets/actions/build_barracks_bg.png",
+			"commandIconTextureUrl": "assets/actions/build_barracks_t.png",
+			"creates": "barracks",
+			"range": 1,
+			"cost": 
+			[
+				{ "type": "gold", "amount": 3 }, 
+				{ "type": "food", "amount": 0 }, 
+				{ "type": "population", "amount": 2 }
+			]
+		},
+		{
+			"name": "build marketplace",
+			"type": "build",
+			"description": "build a marketplace",
+			"textureUrl": "assets/actions/build_marketplace_bg.png",
+			"commandIconTextureUrl": "assets/actions/build_marketplace_t.png",
+			"creates": "marketplace",
+			"range": 1,
+			"cost": 
+			[
+				{ "type": "gold", "amount": 3 }, 
+				{ "type": "food", "amount": 0 }, 
+				{ "type": "population", "amount": 2 }
+			]
+		},
+		{
+			"name": "build town",
+			"type": "build",
+			"description": "build a town.",
+			"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
+			"commandIconTextureUrl": "assets/actions/build.png",
+			"creates": "town",
+			"range": 1,
+			"cost": 
+			[
+				{ "type": "gold", "amount": 3 }, 
+				{ "type": "food", "amount": 0 }, 
+				{ "type": "population", "amount": 2 }
+			],
+			"upkeep":
+			[
+				{ "type": "gold", "amount": 3 }, 
+				{ "type": "food", "amount": 0 }, 
+				{ "type": "population", "amount": 2 }
+			]
+		},
+		{
+			"name": "train monk",
+			"type": "train",
+			"description": "train a monk.",
+			"textureUrl": "assets/units/monk.png",
+			"commandIconTextureUrl": "assets/actions/train_monk.png",				
+			"creates": "monk",
+			"range": 0,
+			"cost": 
+			[
+				{ "type": "gold", "amount": 3 }, 
+				{ "type": "food", "amount": 0 }, 
+				{ "type": "population", "amount": 2 }
+			],
+			"upkeep":
+			[
+				{ "type": "gold", "amount": 3 }, 
+				{ "type": "food", "amount": 0 }, 
+				{ "type": "population", "amount": 2 }
+			]
+		},
+		{
+			"name": "move",
+			"type": "move",
+			"description": "Move to another tile.",
+			"textureUrl": "assets/actions/move_bg.png",
+			"commandIconTextureUrl": "assets/actions/move_t.png",				
+			"range": 2
+		}
+	],
 	"entities":
 	[
 		{
@@ -88,88 +218,9 @@
 			],
 			"behaviors": 
 			[
-				{
-					"name": "upgrade to village",
-					"type": "upgrade",
-					"description": "upgrade to a village.",
-					"textureUrl": "assets/actions/upgrade_bg.png",
-					"commandIconTextureUrl": "assets/actions/upgrade_t.png",
-					"creates": "village",
-					"range": 0,
-					"destroySelf": true,
-					"cost": 
-					[
-						{ "type": "gold", "amount": 3 }, 
-						{ "type": "food", "amount": 0 }, 
-						{ "type": "population", "amount": 2 }
-					], 
-					"upkeep": 
-					[
-						{ "type": "gold", "amount": 1 }, 
-						{ "type": "food", "amount": -1 }, 
-						{ "type": "population", "amount": 1 }
-					]
-				},
-				{
-					"name": "build farm",
-					"type": "build",
-					"description": "build a farm.",
-					"textureUrl": "assets/actions/build_farm_bg.png",
-					"commandIconTextureUrl": "assets/actions/build_farm_t.png",
-					"creates": "farm",
-					"range": 1,
-					"cost": 
-					[
-						{ "type": "gold", "amount": 3 }, 
-						{ "type": "food", "amount": 0 }, 
-						{ "type": "population", "amount": 2 }
-					]
-				},
-				{
-					"name": "build monastery",
-					"type": "build",
-					"description": "upgrade to a village.",
-					"textureUrl": "assets/actions/build_monastery_bg.png",
-					"commandIconTextureUrl": "assets/actions/build_monastery_t.png",
-					"creates": "monastery",
-					"range": 1,
-					"cost": 
-					[
-						{ "type": "gold", "amount": 3 }, 
-						{ "type": "food", "amount": 0 }, 
-						{ "type": "population", "amount": 2 }
-					]
-				},
-				{
-					"name": "build barracks",
-					"type": "build",
-					"description": "upgrade to a village.",
-					"textureUrl": "assets/actions/build_barracks_bg.png",
-					"commandIconTextureUrl": "assets/actions/build_barracks_t.png",
-					"creates": "barracks",
-					"range": 1,
-					"cost": 
-					[
-						{ "type": "gold", "amount": 3 }, 
-						{ "type": "food", "amount": 0 }, 
-						{ "type": "population", "amount": 2 }
-					]
-				},
-				{
-					"name": "build marketplace",
-					"type": "build",
-					"description": "build a marketplace",
-					"textureUrl": "assets/actions/build_marketplace_bg.png",
-					"commandIconTextureUrl": "assets/actions/build_marketplace_t.png",
-					"creates": "marketplace",
-					"range": 1,
-					"cost": 
-					[
-						{ "type": "gold", "amount": 3 }, 
-						{ "type": "food", "amount": 0 }, 
-						{ "type": "population", "amount": 2 }
-					]
-				}
+				"upgrade to village",
+				"build farm",
+				"build monastery"
 			]
 		},
 		{	
@@ -188,81 +239,8 @@
 				{ "type": "population", "amount": 1 } 
 			], "behaviors": 
 			[
-				{
-					"name": "upgrade to village",
-					"type": "upgrade",
-					"description": "upgrade to a village.",
-					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
-					"creates": "village",
-					"cost": 
-					[
-						{ "type": "gold", "amount": 3 }, 
-						{ "type": "food", "amount": 0 }, 
-						{ "type": "population", "amount": 2 }
-					], 
-					"upkeep": 
-					[
-						{ "type": "gold", "amount": 1 }, 
-						{ "type": "food", "amount": -1 }, 
-						{ "type": "population", "amount": 1 }
-					]
-				},
-				{
-					"name": "build monastery",
-					"type": "build",
-					"description": "upgrade to a village.",
-					"textureUrl": "assets/Terrain_Medieval/Decor/elvenLodge.png",
-					"creates": "monastery",
-					"range": 1,
-					"cost": 
-					[
-						{ "type": "gold", "amount": 3 }, 
-						{ "type": "food", "amount": 0 }, 
-						{ "type": "population", "amount": 2 }
-					]
-				},
-				{
-					"name": "build barracks",
-					"type": "build",
-					"description": "upgrade to a village.",
-					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
-					"creates": "barracks",
-					"range": 1,
-					"cost": 
-					[
-						{ "type": "gold", "amount": 3 }, 
-						{ "type": "food", "amount": 0 }, 
-						{ "type": "population", "amount": 2 }
-					]
-				},
-				{
-					"name": "build marketplace",
-					"type": "build",
-					"description": "build a marketplace",
-					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
-					"creates": "marketplace",
-					"range": 1,
-					"cost": 
-					[
-						{ "type": "gold", "amount": 3 }, 
-						{ "type": "food", "amount": 0 }, 
-						{ "type": "population", "amount": 2 }
-					]
-				},
-				{
-					"name": "build farm",
-					"type": "build",
-					"description": "build a farm.",
-					"textureUrl": "assets/Terrain_Medieval/Decor/farm00.png",
-					"creates": "farm",
-					"range": 1,
-					"cost": 
-					[
-						{ "type": "gold", "amount": 3 }, 
-						{ "type": "food", "amount": 0 }, 
-						{ "type": "population", "amount": 2 }
-					]
-				}
+				"build farm",
+				"build monastery"
 			]
 		},
 		{
@@ -278,27 +256,7 @@
 			],
 			"behaviors" : 
 			[
-				{
-					"name": "build town",
-					"type": "build",
-					"description": "build a town.",
-					"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
-					"commandIconTextureUrl": "assets/actions/build.png",
-					"creates": "town",
-					"range": 1,
-					"cost": 
-					[
-						{ "type": "gold", "amount": 3 }, 
-						{ "type": "food", "amount": 0 }, 
-						{ "type": "population", "amount": 2 }
-					],
-					"upkeep":
-					[
-						{ "type": "gold", "amount": 3 }, 
-						{ "type": "food", "amount": 0 }, 
-						{ "type": "population", "amount": 2 }
-					]
-				}
+				
 			]
 		},
 		{
@@ -314,27 +272,7 @@
 			],
 			"behaviors" : 
 			[
-				{
-					"name": "train monk",
-					"type": "train",
-					"description": "train a monk.",
-					"textureUrl": "assets/units/monk.png",
-					"commandIconTextureUrl": "assets/actions/train_monk.png",				
-					"creates": "monk",
-					"range": 0,
-					"cost": 
-					[
-						{ "type": "gold", "amount": 3 }, 
-						{ "type": "food", "amount": 0 }, 
-						{ "type": "population", "amount": 2 }
-					],
-					"upkeep":
-					[
-						{ "type": "gold", "amount": 3 }, 
-						{ "type": "food", "amount": 0 }, 
-						{ "type": "population", "amount": 2 }
-					]
-				}
+				"train monk"
 			]
 		},
 		{
@@ -343,14 +281,7 @@
 			"entityType": "unit",
 			"behaviors" :
 			[
-				{
-					"name": "move",
-					"type": "move",
-					"description": "Move monk to another tile.",
-					"textureUrl": "assets/actions/move_bg.png",
-					"commandIconTextureUrl": "assets/actions/move_t.png",				
-					"range": 2
-				}
+				"move"
 			]
 		}
 	]

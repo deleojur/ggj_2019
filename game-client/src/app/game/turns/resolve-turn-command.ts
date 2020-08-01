@@ -32,6 +32,6 @@ export class ResolveTurnCommand
 	public solidifyTurnInformation(turnCommand: TurnCommand): void
 	{
 		//TODO: based on the type of turnCommand, make sure it is carried out.
-		GameManager.instance.gridStrategy.createEntityFromCommand(turnCommand);
+		turnCommand.turnInformation.targetEntity = GameManager.instance.gridStrategy.createEntityFromCommand(turnCommand);
 	}
 }

@@ -5,12 +5,12 @@ import { TurnConfirmData, ClientData, TurnInformationData, RequestData } from '.
 import { Graphics } from 'pixi.js';
 import { hostState_turnInformation } from '../states/host-states/host-state_turn-information';
 import { TurnInformation, TurnCommand } from './turn-command';
-import { Cell } from '../grid/grid';
-import { Hex } from 'honeycomb-grid';
 import { Entity } from '../entities/entity';
 import { Resource } from '../entities/resource';
 import { ResourceManager } from '../components/resourceManager';
 import { hostState_turnResolve } from '../states/host-states/host-state_turn-resolve';
+import { Hex } from 'honeycomb-grid';
+import { Cell } from '../grid/grid';
 
 export class HostTurnSystem extends TurnsSystem
 {
@@ -102,6 +102,15 @@ export class HostTurnSystem extends TurnsSystem
 		}
 	}
 
+	protected hostResetTurnCommandsRender(): void
+	{
+		this.removeRenderCommands();
+		this.resetTurnCommandsRender(turnCommand =>
+		{
+			this._renderCommands.push(turnCommand);
+		});
+	}
+
 	private resolveTurn(): void
 	{
 		this.setClientDataReceivedFalse();
@@ -120,12 +129,12 @@ export class HostTurnSystem extends TurnsSystem
 
 				if (this.receivedDataForAllClients)
 				{
-					//TODO: advance to the next turn.
+					console.log('all clients have received the information to move to the next turn, so let\'s do it!');
 				}
 			}, false) as hostState_turnResolve;
 			turnResolve.doRequestTurnResolve(client.id, this.exportCommands(validTurnCommands), newResources.get(client.id));
 		});
-		this._turnCommands.clear();
+		this.hostResetTurnCommandsRender();
 		GameManager.instance.renderCellsOutline();
 	}
 
@@ -138,6 +147,7 @@ export class HostTurnSystem extends TurnsSystem
 		this._clients.forEach(client =>
 		{
 			const clientCommands: TurnCommand[] = turnCommands.get(client.id);
+			console.log(clientCommands);
 			clientCommands.forEach(clientCommand =>
 			{
 				const clientTurnInformation: TurnInformation = clientCommand.turnInformation;
@@ -189,11 +199,5 @@ export class HostTurnSystem extends TurnsSystem
 			});
 		});
 		return turnCommands;
-	}
-
-	//whenever a client has 
-	public onClientTurnInfoRetrieved(): void
-	{
-
 	}
 }

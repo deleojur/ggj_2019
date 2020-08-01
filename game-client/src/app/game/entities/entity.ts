@@ -21,7 +21,7 @@ export interface PrototypeInformation
 
 export interface EntityInformation extends PrototypeInformation
 {
-	behaviors?: BehaviorInformation[];
+	behaviors: string[];
 }
 
 export interface EntityShareInformation

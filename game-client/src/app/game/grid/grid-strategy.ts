@@ -119,7 +119,14 @@ export abstract class GridStrategy
 
 	protected abstract renderCommandsByOwnerColor(): void;
 
-	protected setEntityGuid(entity: Entity): Entity
+	protected setEntityGuid(entity: Entity, guid: number): Entity
+	{
+		entity.guid = guid;
+		this._entitiesByGuids.set(guid, entity);
+		return entity;
+	}
+
+	protected setEntityGuidAutoIncrement(entity: Entity): Entity
 	{
 		entity.guid = GridStrategy._autoIncrement;
 		this._entitiesByGuids.set(GridStrategy._autoIncrement, entity);
@@ -136,7 +143,7 @@ export abstract class GridStrategy
 			startPositions.forEach(startPosition =>
 			{
 				const entity: Entity = this.createEntity(startPosition.hex, client.id, startPosition.entityName);
-				this.setEntityGuid(entity);
+				this.setEntityGuidAutoIncrement(entity);
 			});			
 		});
 	}
@@ -284,10 +291,14 @@ export abstract class GridStrategy
 		return false;
 	}
 
-	public createEntityFromCommand(turnCommand: TurnCommand): void
+	public createEntityFromCommand(turnCommand: TurnCommand): Entity
 	{
 		const targetEntity: Entity = turnCommand.turnInformation.targetEntity;
 		targetEntity.owner = turnCommand.owner;
-		this.setEntityGuid(targetEntity);
+		if (targetEntity.guid === -1)
+		{
+			return this.setEntityGuidAutoIncrement(targetEntity);
+		}
+		return targetEntity;
 	}
 }

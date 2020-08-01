@@ -6,27 +6,27 @@ import { GameManager } from '../game-manager';
 import { BehaviorInformation, Entity } from '../entities/entity';
 import { TurnInformationData, TurnCommandData } from '../states/request-data';
 import { ResolveTurnCommand } from './resolve-turn-command';
+import { AssetLoader } from 'src/app/asset-loader';
 
 export abstract class TurnsSystem
 {
 	protected _resolveTurnCommand: ResolveTurnCommand;
-	protected _turnCommands: Map<Hex<Cell>, TurnCommand[]> = new Map<Hex<Cell>, TurnCommand[]>();
+	protected _turnCommands: Map<Hex<Cell>, TurnCommand[]>;
+	protected _renderCommands: TurnCommand[];
+
 	private _commandIconPositions: pPoint[][] = [[], [new pPoint(0, -75)], [new pPoint(-62, -50), new pPoint(62, -50)]];
-	private graphics: Graphics;
+	protected graphics: Graphics;
 
 	public init(graphics: Graphics): void
 	{
 		this.graphics = graphics;
+		this._turnCommands = new Map<Hex<Cell>, TurnCommand[]>();
+		this._renderCommands = [];
 		this._resolveTurnCommand = new ResolveTurnCommand();
-		this.clearTurnCommands();
-	}
-
-	protected clearTurnCommands(): void
-	{
+		
 		const tiles: Hex<Cell>[] = GameManager.instance.grid.getValidTiles();
 		tiles.forEach((e: Hex<Cell>) => 
 		{
-			//add an empty commandlist for every valid tile.
 			this._turnCommands.set(e, []);
 		});
 	}
@@ -34,6 +34,30 @@ export abstract class TurnsSystem
 	public abstract onGameStarted(): void;
 	protected abstract onRoundStarted(): void;
 	protected abstract onRoundEnded(): void;
+
+	protected removeRenderCommands(): void
+	{
+		this._renderCommands.forEach(command =>
+		{
+			this.graphics.removeChild(command.commandIcon);
+		});
+		this._renderCommands = [];
+	}
+
+	protected resetTurnCommandsRender(forEachTurnCommand: (turnCommand: TurnCommand) => void): void
+	{
+		this.removeRenderCommands();
+		const tiles: Hex<Cell>[] = GameManager.instance.grid.getValidTiles();
+		tiles.forEach((e: Hex<Cell>) => 
+		{
+			const turnCommands: TurnCommand[] = this._turnCommands.get(e);
+			this._turnCommands.set(e, []);
+			turnCommands.forEach(turnCommand =>
+			{
+				forEachTurnCommand(turnCommand);
+			});
+		});
+	}
 
 	public getBehaviorInformation(hex: Hex<Cell>): BehaviorInformation[]
 	{
@@ -80,16 +104,21 @@ export abstract class TurnsSystem
 		}
 	}
 
-	public addTurnInformationFromCommanData(turnInformationData: TurnInformationData)
+	public addTurnInformationFromCommanData(turnInformationData: TurnInformationData): TurnCommand[]
 	{
+		const turnCommands: TurnCommand[] = [];
 		turnInformationData.turnCommands.forEach(command => 
 		{
 			const originCell: Hex<Cell> = GameManager.instance.grid.getHex(command.originCell.x, command.originCell.y);
 			const targetCell: Hex<Cell> = GameManager.instance.grid.getHex(command.targetCell.x, command.targetCell.y);
 			const entity: Entity = GameManager.instance.gridStrategy.getEntityByGuid(command.originEntityGuid);
-			const turnInformation: TurnInformation = this.generateTurnInformation(originCell, targetCell, entity, command.behaviorInformation);
-			this.addTurnCommand(turnInformation, turnInformationData.id);	
+			const behaviorInformation: BehaviorInformation = AssetLoader.instance.getBehaviorInformation(command.behaviorInformation);
+			const turnInformation: TurnInformation = this.generateTurnInformation(originCell, targetCell, entity, behaviorInformation);
+			const turnCommand: TurnCommand = this.addTurnCommand(turnInformation, command.owner);
+			turnCommand.turnInformation.targetEntity.guid = command.targetEntityGuid;
+			turnCommands.push(turnCommand);
 		});
+		return turnCommands;
 	}
 
 	public generateTurnInformation(
@@ -108,15 +137,10 @@ export abstract class TurnsSystem
 		};
 	}
 
-	public addTurnCommand(turnInformation: TurnInformation, owner: string): void
+	public addTurnCommand(turnInformation: TurnInformation, owner: string): TurnCommand
 	{
-		//TODO: set the sourcetype more naturally.
 		const command: TurnCommand = new TurnCommand(owner, turnInformation);
 		this._turnCommands.get(turnInformation.targetCell).push(command);
-		if (turnInformation.originCell !== turnInformation.targetCell)
-		{
-			this._turnCommands.get(turnInformation.originCell).push(command);
-		}
 
 		if (turnInformation.behaviorInformation.type === 'upgrade')
 		{
@@ -130,6 +154,8 @@ export abstract class TurnsSystem
 
 		this.graphics.addChild(command.commandIcon);
 		this.updateCommandIcons(turnInformation.targetCell);
+
+		return command;
 	}
 
 	private updateCommandIcons(hex: Hex<Cell>): void
@@ -228,13 +254,16 @@ export abstract class TurnsSystem
 
 			if (!isPresent)
 			{
-				turnInformationData.turnCommands.push({
+				turnInformationData.turnCommands.push(
+				{
+					owner: turnCommand.owner,
 					name: turnInformation.behaviorInformation.name,
 					originEntityGuid: turnCommand.turnInformation.originEntity.guid,
 					targetEntityName: turnCommand.turnInformation.targetEntity.name,
+					targetEntityGuid: turnCommand.turnInformation.targetEntity.guid,
 					originCell: { x: originCell.x, y: originCell.y },
 					targetCell: { x: targetCell.x, y: targetCell.y },
-					behaviorInformation: turnInformation.behaviorInformation
+					behaviorInformation: turnInformation.behaviorInformation.name,
 				});
 			}
 		});
