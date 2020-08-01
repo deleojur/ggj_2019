@@ -6,24 +6,24 @@ import { GameManager } from 'src/app/game/game-manager';
 
 export class ResourceManager
 {
-	private resourcePool: Map<string, Resource>;
+	private _resourcePool: Map<string, Resource>;
 
-	constructor()
+	public init(gold: number, food: number, population: number): void
 	{
-		this.resourcePool = new Map<string, Resource>();
-		this.resourcePool.set("gold", new Resource("gold", 10));
-		this.resourcePool.set("food", new Resource("food", 10));
-		this.resourcePool.set("population", new Resource("population", 4));
+		this._resourcePool = new Map<string, Resource>();
+		this._resourcePool.set("gold", new Resource("gold", gold));
+		this._resourcePool.set("food", new Resource("food", food));
+		this._resourcePool.set("population", new Resource("population", population));
 	}
 
-	public get $resourcePool(): Resource[]
+	public get resourcePool(): Resource[]
 	{
-		return Array.from(this.resourcePool.values());
+		return Array.from(this._resourcePool.values());
 	}
 
 	public getResourceAmount(type: string): number
 	{
-		return this.resourcePool.get(type).amount;
+		return this._resourcePool.get(type).amount;
 	}
 
 	public addResource(resources: Resource[]): void
@@ -33,7 +33,7 @@ export class ResourceManager
 			for (let i = 0; i < resources.length; i++)
 			{
 				const resource: Resource = resources[i];
-				this.resourcePool.get(resource.type).amount += resource.amount;
+				this._resourcePool.get(resource.type).amount += resource.amount;
 			}
 		}
 	}
@@ -45,7 +45,7 @@ export class ResourceManager
 			for (let i = 0; i < resources.length; i++)
 			{
 				const resource: Resource = resources[i];
-				this.resourcePool.get(resource.type).amount -= resource.amount;
+				this._resourcePool.get(resource.type).amount -= resource.amount;
 			}
 		}
 	}
@@ -57,7 +57,7 @@ export class ResourceManager
 			for (let i = 0; i < resources.length; i++)
 			{
 				const resource: Resource = resources[i];
-				this.resourcePool.get(resource.type).amount -= resource.amount;
+				this._resourcePool.get(resource.type).amount -= resource.amount;
 			}
 			return true;
 		}
@@ -66,7 +66,7 @@ export class ResourceManager
 
 	public isResourceConditionMet(resource: Resource): boolean
 	{
-		const pool = this.resourcePool.get(resource.type);
+		const pool = this._resourcePool.get(resource.type);
 		return pool.amount >= resource.amount;
 	}
 
@@ -77,7 +77,7 @@ export class ResourceManager
 			for (let i: number = 0; i < resources.length; i++)
 			{
 				const resource = resources[i];
-				const pool = this.resourcePool.get(resource.type);
+				const pool = this._resourcePool.get(resource.type);
 				if (pool.amount < resource.amount)
 				{
 					return false;

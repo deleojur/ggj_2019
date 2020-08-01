@@ -1,13 +1,16 @@
 import { TurnsSystem } from './turns-system';
 import { GameManager } from '../game-manager';
 import { hostState_clientTurnConfirm } from '../states/host-states/host-state_client-turn-confirm';
-import { TurnConfirmData, ClientData, TurnInformationData } from '../states/request-data';
+import { TurnConfirmData, ClientData, TurnInformationData, RequestData } from '../states/request-data';
 import { Graphics } from 'pixi.js';
 import { hostState_turnInformation } from '../states/host-states/host-state_turn-information';
 import { TurnInformation, TurnCommand } from './turn-command';
 import { Cell } from '../grid/grid';
 import { Hex } from 'honeycomb-grid';
 import { Entity } from '../entities/entity';
+import { Resource } from '../entities/resource';
+import { ResourceManager } from '../components/resourceManager';
+import { hostState_turnResolve } from '../states/host-states/host-state_turn-resolve';
 
 export class HostTurnSystem extends TurnsSystem
 {
@@ -42,12 +45,13 @@ export class HostTurnSystem extends TurnsSystem
 	//called when the game starts or when all the turns have been resolved.
 	protected onRoundStarted(): void
 	{
+		this.setClientDataReceivedFalse();
+
 		//the text in the host hud component is replaced with -> x time to enter turn info.
 		GameManager.instance.hostStateHandler.activateState<TurnConfirmData>(hostState_clientTurnConfirm, (turnConfirmData) =>
 		{
 			this.onClientConfirmedTurn(turnConfirmData);
 		}, false);
-		this.setClientDataReceivedFalse();
 	}
 
 	//called either when the countdown runs to 0 or when all players have locked in their actions.
@@ -60,8 +64,6 @@ export class HostTurnSystem extends TurnsSystem
 		GameManager.instance.hostStateHandler.activateState<TurnInformationData>(hostState_turnInformation, (turnInformation) =>
 		{
 			this.onClientSharedTurnInformation(turnInformation);
-
-			//start the state that resolves the turn information.
 		}, false) as hostState_turnInformation;
 		requestTurnInformation.doRequestTurnInformation();
 	}
@@ -92,19 +94,82 @@ export class HostTurnSystem extends TurnsSystem
 	private onClientSharedTurnInformation(turnInformationData: TurnInformationData): void
 	{
 		this.clientDataReceived.set(turnInformationData.id, true);
-		turnInformationData.turnCommands.forEach(command => 
-		{
-			const originCell: Hex<Cell> = GameManager.instance.grid.getHex(command.originCell.x, command.originCell.y);
-			const targetCell: Hex<Cell> = GameManager.instance.grid.getHex(command.targetCell.x, command.targetCell.y);
-			const entity: Entity = GameManager.instance.gridStrategy.getEntityByGuid(command.originEntityGuid);
-			const turnInformation: TurnInformation = this.generateTurnInformation(originCell, targetCell, entity, command.behaviorInformation);
-			this.addTurnCommand(turnInformation, turnInformationData.id);
-		});
+		this.addTurnInformationFromCommanData(turnInformationData);
 
 		if (this.receivedDataForAllClients)
 		{
-			GameManager.instance.renderCellsOutline();
+			this.resolveTurn();
 		}
+	}
+
+	private resolveTurn(): void
+	{
+		this.setClientDataReceivedFalse();
+
+		//TODO: also send the commands that were invalid.
+		const validTurnCommands: TurnCommand[] = this.resolveTurnInformation();
+		const newResources: Map<string, Resource[]> = this.resolveResources();
+
+		this._clients.forEach(client =>
+		{
+			const turnResolve: hostState_turnResolve =
+			GameManager.instance.hostStateHandler.activateState<RequestData>(
+				hostState_turnResolve, (verifyTurnResolve: RequestData) =>
+			{
+				this.clientDataReceived.set(verifyTurnResolve.id, true);
+
+				if (this.receivedDataForAllClients)
+				{
+					//TODO: advance to the next turn.
+				}
+			}, false) as hostState_turnResolve;
+			turnResolve.doRequestTurnResolve(client.id, this.exportCommands(validTurnCommands), newResources.get(client.id));
+		});
+		this._turnCommands.clear();
+		GameManager.instance.renderCellsOutline();
+	}
+
+	private resolveTurnInformation(): TurnCommand[]
+	{
+	 	// TODO: first, apply all the entity commands -> commands that are put on entities rather than on cells.
+		const turnCommands: Map<string, TurnCommand[]> = this.getAllTurnCommands();
+		const validTurnCommands: TurnCommand[] = [];
+
+		this._clients.forEach(client =>
+		{
+			const clientCommands: TurnCommand[] = turnCommands.get(client.id);
+			clientCommands.forEach(clientCommand =>
+			{
+				const clientTurnInformation: TurnInformation = clientCommand.turnInformation;
+				const otherCommands: TurnInformation[] = this.getTurnInformation(clientCommand.turnInformation.targetCell).slice();
+				const indexOf: number = otherCommands.indexOf(clientTurnInformation);
+				otherCommands.splice(indexOf, 1);
+
+				if (this._resolveTurnCommand.tryToResolveTurnCommand(clientCommand, otherCommands))
+				{
+					validTurnCommands.push(clientCommand);
+				}
+			});
+		});
+		return validTurnCommands;
+	}
+
+	private resolveResources(): Map<string, Resource[]>
+	{
+		const resources: Map<string, Resource[]> = new Map<string, Resource[]>();
+		const entities: Map<string, Entity[]> = GameManager.instance.gridStrategy.getAllEntities();
+		this._clients.forEach(client => 
+		{
+			const resourceManager: ResourceManager = new ResourceManager();
+			resourceManager.init(0, 0, 0);
+			const clientEntities: Entity[] = entities.get(client.id);
+			clientEntities.forEach(entity =>
+			{
+				resourceManager.addResource(entity.upkeep);
+			});
+			resources.set(client.id, resourceManager.resourcePool);
+		});
+		return resources;
 	}
 
 	public getAllTurnCommands(): Map<string, TurnCommand[]>

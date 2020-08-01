@@ -65,6 +65,10 @@
 		"train": "assets/UI/button/r_bg_purple.png",
 		"move": "assets/UI/button/r_bg_blue.png"
 	},
+	"commands":
+	{
+		
+	},
 	"entities":
 	[
 		{

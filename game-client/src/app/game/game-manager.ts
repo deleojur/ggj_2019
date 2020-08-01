@@ -5,14 +5,11 @@ import { AssetLoader } from 'src/app/asset-loader';
 import { ViewportManager } from './render/viewport';
 import { GridManager, Cell } from './grid/grid';
 import { TurnCommand, TurnInformation } from './turns/turn-command';
-import { WindowManager, WindowType, WindowItem } from '../ui/window/window-manager';
+import { WindowManager, WindowType } from '../ui/window/window-manager';
 import { ResourceManager } from 'src/app/game/components/resourceManager';
-import { ItemOverviewWindowComponent } from '../ui/window/item-overview-window/item-overview-window.component';
-import { ItemDetailWindowComponent } from '../ui/window/item-detail-window/item-detail-window.component';
-import { SelectCellComponent } from '../ui/window/select-cell/select-cell.component';
 import { Sprite, Point, Texture, Application, Graphics, autoDetectRenderer } from 'pixi.js';
 import { Subject, Subscription } from 'rxjs';
-import { GridStrategy, RenderType } from './grid/grid-strategy';
+import { GridStrategy } from './grid/grid-strategy';
 import { ClientStateHandler } from './states/client-states/client-state-handler';
 import { GridClient } from './grid/client-grid';
 import { ClientInteraction } from './client-interaction';
@@ -52,6 +49,7 @@ export class GameManager
 	private constructor()
 	{
 		this._resourceManager = new ResourceManager();
+		this._resourceManager.init(10, 10, 4);
 		this.initWindowManager();
 	}
 
@@ -189,9 +187,7 @@ export class GameManager
 	private initWindowManager(): void
 	{
 		this._windowManager = new WindowManager();
-		this.windowManager.subscribeWindow(WindowType.ItemOverview, new WindowItem(ItemOverviewWindowComponent));
-		this.windowManager.subscribeWindow(WindowType.ItemDetail, new WindowItem(ItemDetailWindowComponent));
-		this.windowManager.subscribeWindow(WindowType.SelectCell, new WindowItem(SelectCellComponent));
+		this._windowManager.init();
 	}
 
 	public startGame(): void
@@ -208,11 +204,11 @@ export class GameManager
 	public createTurnCommand(
 		originCell: Hex<Cell>,
 		targetCell: Hex<Cell>,
-		entity: Entity,
+		originEntity: Entity,
 		item: BehaviorInformation): void
 	{
 		this._resourceManager.subtractResources(item.cost);
-		const turnInformation: TurnInformation = this._turnSystem.generateTurnInformation(originCell, targetCell, entity, item);
+		const turnInformation: TurnInformation = this._turnSystem.generateTurnInformation(originCell, targetCell, originEntity, item);
 		this._turnSystem.addTurnCommand(turnInformation, this.clientStateHandler.clientId);
 	}
 

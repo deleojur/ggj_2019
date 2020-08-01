@@ -1,7 +1,6 @@
 import { GridStrategy, RenderType } from './grid-strategy';
 import { HostStateHandler } from '../states/host-states/host-state-handler';
 import { GameManager } from '../game-manager';
-import { ClientData } from '../states/request-data';
 import { TurnCommand } from '../turns/turn-command';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from './grid';
@@ -17,7 +16,6 @@ export class HostGrid extends GridStrategy
 	{
 		return this._hostStateHandler
 	}
-
 
 	protected renderCommandsByOwnerColor(): void
 	{

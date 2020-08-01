@@ -10,6 +10,7 @@ import { GameManager } from '../game-manager';
 import { ClientData } from '../states/request-data';
 import { StateHandlerService } from '../states/state-handler.service';
 import { Vector } from 'vector2d';
+import { TurnCommand } from '../turns/turn-command';
 
 export enum RenderType
 {
@@ -107,7 +108,7 @@ export abstract class GridStrategy
 	public renderEntitiesByOwnerColor(): void
 	{
 		this.clearSelectedCells();
-		const occupiedHexes: Map<string, Hex<Cell>[]> = this.entityManager.getAllOccupiedHexesOfOwner();
+		const occupiedHexes: Map<string, Hex<Cell>[]> = this.entityManager.getAllOccupiedHexes();
 		this.clients.forEach(client =>
 		{
 			const hexes: Hex<Cell>[] = occupiedHexes.get(client.id);
@@ -118,7 +119,7 @@ export abstract class GridStrategy
 
 	protected abstract renderCommandsByOwnerColor(): void;
 
-	private setEntityGuid(entity: Entity): Entity
+	protected setEntityGuid(entity: Entity): Entity
 	{
 		entity.guid = GridStrategy._autoIncrement;
 		this._entitiesByGuids.set(GridStrategy._autoIncrement, entity);
@@ -264,6 +265,11 @@ export abstract class GridStrategy
 		return this.entityManager.getEntitiesAtHex(hex).slice();
 	}
 
+	public getAllEntities(): Map<string, Entity[]>
+	{
+		return this.entityManager.getAllEntities();
+	}
+
 	public isStructure(hex: Hex<Cell>): boolean
 	{
 		const entities: Entity[] = this.entityManager.getEntitiesAtHex(hex);
@@ -276,5 +282,12 @@ export abstract class GridStrategy
 			}
 		}		
 		return false;
-	}	
+	}
+
+	public createEntityFromCommand(turnCommand: TurnCommand): void
+	{
+		const targetEntity: Entity = turnCommand.turnInformation.targetEntity;
+		targetEntity.owner = turnCommand.owner;
+		this.setEntityGuid(targetEntity);
+	}
 }

@@ -30,7 +30,7 @@ export class EntityManager
 		}
 	}
 
-	public getAllOccupiedHexesOfOwner(): Map<string, Hex<Cell>[]>
+	public getAllOccupiedHexes(): Map<string, Hex<Cell>[]>
 	{
 		const occupiedHexes: Map<string, Hex<Cell>[]> = new Map<string, Hex<Cell>[]>();
 		const allHexes: Hex<Cell>[] = Array.from(this._entities.keys());
@@ -48,6 +48,27 @@ export class EntityManager
 			});
 		});
 		return occupiedHexes;
+	}
+
+	public getAllEntities(): Map<string, Entity[]>
+	{
+		const allEntities: Map<string, Entity[]> = new Map<string, Entity[]>();
+		const hexes: Hex<Cell>[] = Array.from(this._entities.keys());
+		hexes.forEach(hex =>
+		{
+			const entities: Entity[] = this._entities.get(hex);
+			
+			entities.forEach(entity =>
+			{
+				const owner: string = entity.owner;
+				if (!allEntities.has(owner))
+				{
+					allEntities.set(owner, []);
+				}
+				allEntities.get(owner).push(entity);
+			});
+		});
+		return allEntities;
 	}
 
 	public getEntitiesAtHex(hex: Hex<Cell>): Entity[]

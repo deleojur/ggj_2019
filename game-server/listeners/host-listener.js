@@ -41,9 +41,12 @@ listener =
 	{
 		this.io.to(socket.roomid).emit('host_game_requestTurnInformation');
 	},
-	host_turnsResolved(socket)
+	//there are separate calls for each of the clients. Parse their ID from the data object.
+	host_game_turnsResolve(data)
 	{
-		this.io.to(socket.roomid).emit('host_game_turnsResolved');
+		data = JSON.parse(data);
+		const clientId = data.id;
+		this.io.to(clientId).emit('host_game_turnsResolve', data);
 	},
     host_connection_lost(roomid)
     {
@@ -57,7 +60,7 @@ listener =
         socket.on('host_room_createRoom', () => this.host_createRoom(socket));
 		socket.on('host_startGame', (clients) => this.host_startGame(socket, clients));
 		socket.on('host_game_requestTurnInformation', () => this.host_requestTurnInformation(socket));
-		socket.on('host_game_turnsResolved', () => this.host_requestTurnInformation(socket));
+		socket.on('host_game_turnsResolve', (data) => this.host_game_turnsResolve(data));
     }
 };
 module.exports = listener;

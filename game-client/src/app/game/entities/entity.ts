@@ -49,7 +49,8 @@ export class EntityPrototype
 		public name: string,
 		public entityType: EntityType,
 		public textureUrl: string,
-		public behaviors: BehaviorInformation[])
+		public behaviors: BehaviorInformation[],
+		public upkeep: Resource[])
 	{
 	}
 }
@@ -66,6 +67,11 @@ export abstract class Entity extends Container
 	public get owner(): string
 	{
 		return this._owner;
+	}
+
+	public set owner(value: string)
+	{
+		this._owner = value;
 	}
 
 	public get behaviors(): BehaviorInformation[]
@@ -86,6 +92,11 @@ export abstract class Entity extends Container
 	public set guid(value: number)
 	{
 		this._guid = value;
+	}
+
+	public get upkeep(): Resource[]
+	{
+		return this._prototype.upkeep;
 	}
 	
 	constructor(protected _prototype: EntityPrototype, protected _location: Hex<Cell>, protected _owner: string)

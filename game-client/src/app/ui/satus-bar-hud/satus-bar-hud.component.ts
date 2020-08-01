@@ -19,7 +19,7 @@ export class StatusBarHudComponent implements OnInit
 
 	ngOnInit() 
 	{
-		this.resourcePool = GameManager.instance.resourceManager.$resourcePool;
+		this.resourcePool = GameManager.instance.resourceManager.resourcePool;
 	}
 
 	ngAfterViewInit()

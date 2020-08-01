@@ -1,6 +1,10 @@
-import { Type, Injectable } from '@angular/core';
+import { Type } from '@angular/core';
 import { WindowComponent, WindowOptions, InnerWindowComponent } from 'src/app/ui/window/window.component';
 import { Stack } from 'stack-typescript';
+import { ItemOverviewWindowComponent } from './item-overview-window/item-overview-window.component';
+import { ItemDetailWindowComponent } from './item-detail-window/item-detail-window.component';
+import { SelectCellComponent } from './select-cell/select-cell.component';
+import { EndOfTurnWindowComponent } from './end-of-turn-window/end-of-turn-window.component';
 
 export class WindowItem
 {
@@ -18,6 +22,7 @@ export enum WindowType
 	ItemOverview,
 	ItemDetail,
 	SelectCell,
+	EndOfTurn,
 	Settings
 }
 
@@ -29,8 +34,18 @@ export class WindowManager
 
 	constructor()
 	{
+		
+	}
+
+	public init(): void
+	{
 		this.windowTypes = new Map<WindowType, WindowItem>();
 		this._windows = new Stack<WindowData>();
+		
+		this.subscribeWindow(WindowType.ItemOverview, new WindowItem(ItemOverviewWindowComponent));
+		this.subscribeWindow(WindowType.ItemDetail, new WindowItem(ItemDetailWindowComponent));
+		this.subscribeWindow(WindowType.SelectCell, new WindowItem(SelectCellComponent));
+		this.subscribeWindow(WindowType.EndOfTurn, new WindowItem(EndOfTurnWindowComponent));
 	}
 
 	public set windowComponent(val: WindowComponent)

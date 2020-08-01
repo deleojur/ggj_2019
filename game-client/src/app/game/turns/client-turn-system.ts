@@ -1,11 +1,9 @@
 import { TurnsSystem } from './turns-system';
 import { GameManager } from '../game-manager';
 import { clientState_turnInformation } from '../states/client-states/client-state_turn-information';
-import { TurnCommand, TurnInformation } from './turn-command';
-import { TurnInformationData } from '../states/request-data';
-import { Hex } from 'honeycomb-grid';
-import { Cell } from '../grid/grid';
-import { clientState_endOfTurn } from '../states/client-states/client-state_end-of-turn';
+import { TurnCommand } from './turn-command';
+import { clientState_turnResolve } from '../states/client-states/client-state_turn-resolve';
+import { TurnResolveData } from '../states/request-data';
 
 export class ClientTurnSystem extends TurnsSystem
 {
@@ -21,19 +19,46 @@ export class ClientTurnSystem extends TurnsSystem
 		this.onRoundStarted();
 	}
 
+	//1) host: Create the entities.
+	//2) host: Generate their guid and share this information with the clients
+	//3) client/host: Put the turncommands of all clients in a temporary map.
+	//4) client: Clear all turn commands.
+	//5) client: Create turn commands and resolve them.
+	//6) client/host: Display turn commands that weren't able to resolve.
 	protected onRoundStarted(): void
 	{
 		this.clientStateTurnInformation = 
 		GameManager.instance.clientStateHandler.activateState(clientState_turnInformation, () =>
 		{
-			const clientStateEndOfTurn: clientState_endOfTurn = 
-			GameManager.instance.clientStateHandler.activateState(clientState_endOfTurn, () =>
+			const clientStateEndOfTurn: clientState_turnResolve = 
+			GameManager.instance.clientStateHandler.activateState(clientState_turnResolve, (turnResolveData: TurnResolveData) =>
 			{
-				//start a new round.
-				this.onRoundStarted();
-			}, true) as clientState_endOfTurn;
+				//TODO: clear all the turnCommands and build/destroy/move entities.
+				//Also display the latest turn commands of clients - what have they done in the previous turn?
+				this.clearTurnCommands();
+				this.addTurnInformationFromCommanData(turnResolveData.validTurnCommands);
 
-			clientStateEndOfTurn.doRequestSendTurnInformation(this.exportCommands);
+				this._turnCommands.forEach((val, key) =>
+				{
+					val.forEach(turnCommand =>
+					{
+						this._resolveTurnCommand.solidifyTurnInformation(turnCommand);
+					});
+				});			
+			}, true) as clientState_turnResolve;
+
+			const turnCommands: TurnCommand[] = [];
+			this._turnCommands.forEach((val, key) => 
+			{
+				if (val.length > 0)
+				{
+					val.forEach(turnCommand =>
+					{
+						turnCommands.push(turnCommand);
+					});
+				}				
+			});
+			clientStateEndOfTurn.doRequestSendTurnInformation(this.exportCommands(turnCommands));
 		}, true) as clientState_turnInformation;
 	}
 
@@ -54,36 +79,5 @@ export class ClientTurnSystem extends TurnsSystem
 			});
 		});
 		return turnCommands;
-	}
-
-	/**
-	 * This function is called when all data is send to the server. When it is called,
-	 * the functionCommands map is cleared.
-	 */
-	private get exportCommands(): TurnInformationData
-	{
-		const command: TurnInformationData = { turnCommands: [] };
-		this._turnCommands.forEach((val: TurnCommand[], key: Hex<Cell>) =>
-		{
-			if (val.length > 0)
-			{				
-				command.turnCommands = [];
-				val.forEach(turnCommand =>
-				{
-					const turnInformation: TurnInformation = turnCommand.turnInformation;
-					const originCell: Hex<Cell> = turnInformation.originCell;
-					const targetCell: Hex<Cell> = turnInformation.targetCell;
-					command.turnCommands.push({
-						name: turnInformation.behaviorInformation.name,
-						originEntityGuid: turnCommand.turnInformation.originEntity.guid, //TODO: entities must be marked, so that they can be shared across host and client by use of JSON.
-						targetEntityName: turnCommand.turnInformation.targetEntity.name, //this will be a combination of the entity's name, player id and some form of index.
-						originCell: { x: originCell.x, y: originCell.y },
-						targetCell: { x: targetCell.x, y: targetCell.y },
-						behaviorInformation: turnInformation.behaviorInformation
-					});
-				});
-			}
-		});
-		return command;
 	}
 }

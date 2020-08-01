@@ -73,6 +73,10 @@ listener =
 		data = JSON.parse(data);
 		this.send_to_host(socket, 'client_game_sendTurnInformation', data);
 	},
+	client_verify_turnResolve(socket)
+	{
+		this.send_to_host(socket, 'client_verify_turnsResolve', {});
+	},
     listen(io, socket)
     {
         this.io = io;
@@ -80,6 +84,7 @@ listener =
         socket.on('client_room_startGame', () => { this.client_room_startGame(socket); });
 		socket.on('client_game_turnConfirm', (data) => this.client_game_turnConfirm(socket, data));
 		socket.on('client_game_sendTurnInformation', (data) => this.client_game_sendTurnInformation(socket, data));
+		socket.on('client_verify_turnsResolve', () => { this.client_verify_turnResolve(socket); });
     }
 };
 module.exports = listener;
