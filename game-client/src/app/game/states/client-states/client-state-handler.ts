@@ -7,6 +7,7 @@ import { ConnectionService } from 'src/services/connection.service';
 import { Injectable } from '@angular/core';
 import { ClientData } from '../request-data';
 import { clientState_turnResolve } from './client-state_turn-resolve';
+import { clientState_advanceToNextTurn } from './client-state_advance-to-next-turn';
 
 @Injectable({
     providedIn: 'root'
@@ -26,6 +27,7 @@ export class ClientStateHandler extends StateHandlerService
 		this._states.set(state_playerStartingPositions, new state_playerStartingPositions());
 		this._states.set(clientState_turnInformation, new clientState_turnInformation());
 		this._states.set(clientState_turnResolve, new clientState_turnResolve());
+		this._states.set(clientState_advanceToNextTurn, new clientState_advanceToNextTurn());
 	}
 
 	public get clientType(): string

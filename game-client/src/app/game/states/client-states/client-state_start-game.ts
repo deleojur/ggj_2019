@@ -11,7 +11,7 @@ export class clientState_startGame extends PrimaryState<HostStartGameData>
 
     public doRequestStartGame(): void
     {
-        //TODO: everyone has to agree to start? 
+        //TODO: everyone has to agree to start(?)
         this.connectionService.emitOutgoingEvent('client_room_startGame');
     }
 }

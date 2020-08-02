@@ -74,19 +74,7 @@
 			"textureUrl": "assets/actions/upgrade_bg.png",
 			"commandIconTextureUrl": "assets/actions/upgrade_t.png",
 			"creates": "village",
-			"range": 0,
-			"cost": 
-			[
-				{ "type": "gold", "amount": 3 }, 
-				{ "type": "food", "amount": 0 }, 
-				{ "type": "population", "amount": 2 }
-			], 
-			"upkeep": 
-			[
-				{ "type": "gold", "amount": 1 }, 
-				{ "type": "food", "amount": -1 }, 
-				{ "type": "population", "amount": 1 }
-			]
+			"range": 0
 		},
 		{
 			"name": "build farm",
@@ -95,13 +83,7 @@
 			"textureUrl": "assets/actions/build_farm_bg.png",
 			"commandIconTextureUrl": "assets/actions/build_farm_t.png",
 			"creates": "farm",
-			"range": 1,
-			"cost": 
-			[
-				{ "type": "gold", "amount": 3 }, 
-				{ "type": "food", "amount": 0 }, 
-				{ "type": "population", "amount": 2 }
-			]
+			"range": 1
 		},
 		{
 			"name": "build monastery",
@@ -110,13 +92,7 @@
 			"textureUrl": "assets/actions/build_monastery_bg.png",
 			"commandIconTextureUrl": "assets/actions/build_monastery_t.png",
 			"creates": "monastery",
-			"range": 1,
-			"cost": 
-			[
-				{ "type": "gold", "amount": 3 }, 
-				{ "type": "food", "amount": 0 }, 
-				{ "type": "population", "amount": 2 }
-			]
+			"range": 1
 		},
 		{
 			"name": "build barracks",
@@ -125,13 +101,7 @@
 			"textureUrl": "assets/actions/build_barracks_bg.png",
 			"commandIconTextureUrl": "assets/actions/build_barracks_t.png",
 			"creates": "barracks",
-			"range": 1,
-			"cost": 
-			[
-				{ "type": "gold", "amount": 3 }, 
-				{ "type": "food", "amount": 0 }, 
-				{ "type": "population", "amount": 2 }
-			]
+			"range": 1
 		},
 		{
 			"name": "build marketplace",
@@ -140,13 +110,7 @@
 			"textureUrl": "assets/actions/build_marketplace_bg.png",
 			"commandIconTextureUrl": "assets/actions/build_marketplace_t.png",
 			"creates": "marketplace",
-			"range": 1,
-			"cost": 
-			[
-				{ "type": "gold", "amount": 3 }, 
-				{ "type": "food", "amount": 0 }, 
-				{ "type": "population", "amount": 2 }
-			]
+			"range": 1
 		},
 		{
 			"name": "build town",
@@ -155,19 +119,7 @@
 			"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
 			"commandIconTextureUrl": "assets/actions/build.png",
 			"creates": "town",
-			"range": 1,
-			"cost": 
-			[
-				{ "type": "gold", "amount": 3 }, 
-				{ "type": "food", "amount": 0 }, 
-				{ "type": "population", "amount": 2 }
-			],
-			"upkeep":
-			[
-				{ "type": "gold", "amount": 3 }, 
-				{ "type": "food", "amount": 0 }, 
-				{ "type": "population", "amount": 2 }
-			]
+			"range": 1
 		},
 		{
 			"name": "train monk",
@@ -176,26 +128,14 @@
 			"textureUrl": "assets/units/monk.png",
 			"commandIconTextureUrl": "assets/actions/train_monk.png",				
 			"creates": "monk",
-			"range": 0,
-			"cost": 
-			[
-				{ "type": "gold", "amount": 3 }, 
-				{ "type": "food", "amount": 0 }, 
-				{ "type": "population", "amount": 2 }
-			],
-			"upkeep":
-			[
-				{ "type": "gold", "amount": 3 }, 
-				{ "type": "food", "amount": 0 }, 
-				{ "type": "population", "amount": 2 }
-			]
+			"range": 0
 		},
 		{
 			"name": "move",
 			"type": "move",
 			"description": "Move to another tile.",
 			"textureUrl": "assets/actions/move_bg.png",
-			"commandIconTextureUrl": "assets/actions/move_t.png",				
+			"commandIconTextureUrl": "assets/actions/move_t.png",
 			"range": 2
 		}
 	],
@@ -206,15 +146,17 @@
 			"description": "a town.",
 			"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
 			"entityType": "structure",
-			"cost": [
+			"cost": 
+			[ 
 				{ "type": "gold", "amount": 3 }, 
 				{ "type": "food", "amount": 0 }, 
 				{ "type": "population", "amount": 2 } 
 			],
-			"upkeep": [
-				{ "type": "gold", "amount": 1 }, 
-				{ "type": "food", "amount": -1 }, 
-				{ "type": "population", "amount": 1 } 
+			"upkeep": 
+			[
+				{ "type": "gold", "amount": 3 }, 
+				{ "type": "food", "amount": -2 }, 
+				{ "type": "population", "amount": 2 }
 			],
 			"behaviors": 
 			[
@@ -234,9 +176,9 @@
 				{ "type": "population", "amount": 2 } 
 			],
 			"upkeep": [
-				{ "type": "gold", "amount": 1 }, 
-				{ "type": "food", "amount": -1 }, 
-				{ "type": "population", "amount": 1 } 
+				{ "type": "gold", "amount": 3 }, 
+				{ "type": "food", "amount": -2 }, 
+				{ "type": "population", "amount": 2 }
 			], "behaviors": 
 			[
 				"build farm",
@@ -253,6 +195,10 @@
 				{ "type": "gold", "amount": 3 }, 
 				{ "type": "food", "amount": 0 }, 
 				{ "type": "population", "amount": 2 } 
+			],
+			"upkeep":
+			[ 
+				{ "type": "food", "amount": 2 }
 			],
 			"behaviors" : 
 			[

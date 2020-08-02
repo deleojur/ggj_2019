@@ -1,5 +1,5 @@
 import { Loader, Texture } from 'pixi.js';
-import { EntityPrototype, EntityInformation, PrototypeInformation, BehaviorInformation, EntityType } from './game/entities/entity';
+import { EntityPrototype, EntityInformation, PrototypeInformation, BehaviorInformation, EntityType, Entity } from './game/entities/entity';
 import { WorldMap } from './game/grid/map-reader';
 import { Resource } from './game/entities/resource';
 
@@ -76,7 +76,8 @@ export class AssetLoader
 		const behaviors: BehaviorInformation[] = [];
 		e.behaviors.forEach(b =>
 		{
-			behaviors.push(this._behaviorInformation.get(b));
+			const behavior: BehaviorInformation = this._behaviorInformation.get(b)
+			behaviors.push(behavior);
 		});
 
 		return behaviors;
@@ -105,8 +106,20 @@ export class AssetLoader
 		this._behaviorInformation = new Map<string, BehaviorInformation>();
 		behaviorInformation.forEach(behavior =>
 		{
-			this.setResourceClass(behavior);
 			this._behaviorInformation.set(behavior.name, behavior);
+		});
+	}
+
+	private setBehaviorCostAndUpkeep(behaviorInformation: BehaviorInformation[]): void
+	{
+		behaviorInformation.forEach(behavior =>
+		{
+			const entity: EntityInformation = this._entityInformation.get(behavior.creates);
+			if (entity)
+			{
+				behavior.cost = entity.cost;
+				behavior.upkeep = entity.upkeep;
+			}
 		});
 	}
 
@@ -158,6 +171,7 @@ export class AssetLoader
 				{
 					this.createBehaviorInformation(behaviorInformation);
 					this.createEntityPrototypes(entityInformation);
+					this.setBehaviorCostAndUpkeep(behaviorInformation);
 					resolve();
 				});
 			});

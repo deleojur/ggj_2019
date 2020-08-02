@@ -11,4 +11,9 @@ export class hostState_clientTurnConfirm extends PrimaryState<TurnConfirmData>
         this.connectionService.subscribeToIncomingEvent<TurnConfirmData>('client_game_turnConfirm',
             (turnLockedData) => this.onDataRetrieved(turnLockedData));
 	}
+
+	public requestNextTurn(): void
+	{
+		this.connectionService.emitOutgoingEvent('host_game_nextTurn');
+	}
 }

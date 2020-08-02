@@ -3,13 +3,9 @@ import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { Vector } from 'vector2d';
 import { Game } from '../game.component';
 
-import { state_playerStartingPositions } from '../../states/turn-state-handling/state_player-starting-positions';
-import { Hex } from 'honeycomb-grid';
-import { Cell } from '../../grid/grid';
 import { GameManager } from '../../game-manager';
 import { ClientStateHandler } from '../../states/client-states/client-state-handler';
 import { StateHandlerService } from '../../states/state-handler.service';
-import { GridClient } from '../../grid/client-grid';
 
 @Component({
   selector: 'app-client-game',

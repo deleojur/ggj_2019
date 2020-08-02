@@ -6,7 +6,7 @@ listener =
     {
         this.rooms = rooms;
 	},
-	send_to_host(socket, endpoint, data)
+	emit_to_host(socket, endpoint, data)
 	{
 		const roomid = socket.roomid;
         const room = this.rooms[roomid];
@@ -65,17 +65,17 @@ listener =
 	},
     client_game_turnConfirm(socket, data)
     {
-		const dataObject = { turnConfirmed: data };
-        this.send_to_host(socket, 'client_game_turnConfirm', dataObject);
+		data = { turnConfirmed: JSON.parse(data) };
+        this.emit_to_host(socket, 'client_game_turnConfirm', data);
 	},
 	client_game_sendTurnInformation(socket, data)
 	{
 		data = JSON.parse(data);
-		this.send_to_host(socket, 'client_game_sendTurnInformation', data);
+		this.emit_to_host(socket, 'client_game_sendTurnInformation', data);
 	},
 	client_verify_turnResolve(socket)
 	{
-		this.send_to_host(socket, 'client_verify_turnsResolve', {});
+		this.emit_to_host(socket, 'client_verify_turnsResolve', {});
 	},
     listen(io, socket)
     {

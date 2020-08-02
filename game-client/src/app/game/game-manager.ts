@@ -49,7 +49,7 @@ export class GameManager
 	private constructor()
 	{
 		this._resourceManager = new ResourceManager();
-		this._resourceManager.init(10, 10, 4);
+		this._resourceManager.init(100, 100, 40);
 		this.initWindowManager();
 	}
 

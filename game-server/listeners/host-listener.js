@@ -4,7 +4,20 @@ listener =
     initialize(rooms)
     {
         this.rooms = rooms;
-    },
+	},
+	emit_to_clients(socket, endpoint, data)
+	{
+		const roomid = socket.roomid;
+        const room = this.rooms[roomid];
+        if (room !== undefined)
+        {
+			const clients = room.clients;
+			for (const client in clients)
+			{
+				this.io.to(client).emit(endpoint, data);
+			}            
+        }
+	},
     host_createRoom(socket)
     {
         const host  = socket.id;
@@ -48,6 +61,10 @@ listener =
 		const clientId = data.id;
 		this.io.to(clientId).emit('host_game_turnsResolve', data);
 	},
+	host_game_nextTurn(socket)
+	{
+		this.emit_to_clients(socket, 'host_game_nextTurn', { });
+	},
     host_connection_lost(roomid)
     {
         this.io.to(roomid).emit('server_global_disconnected');
@@ -61,6 +78,7 @@ listener =
 		socket.on('host_startGame', (clients) => this.host_startGame(socket, clients));
 		socket.on('host_game_requestTurnInformation', () => this.host_requestTurnInformation(socket));
 		socket.on('host_game_turnsResolve', (data) => this.host_game_turnsResolve(data));
+		socket.on('host_game_nextTurn', () => this.host_game_nextTurn(socket));
     }
 };
 module.exports = listener;

@@ -45,25 +45,36 @@ export class HostTurnSystem extends TurnsSystem
 	//called when the game starts or when all the turns have been resolved.
 	protected onRoundStarted(): void
 	{
+		console.log('start a new round!');
 		this.setClientDataReceivedFalse();
 
 		//the text in the host hud component is replaced with -> x time to enter turn info.
+		const clientTurnConfirm: hostState_clientTurnConfirm =
 		GameManager.instance.hostStateHandler.activateState<TurnConfirmData>(hostState_clientTurnConfirm, (turnConfirmData) =>
 		{
 			this.onClientConfirmedTurn(turnConfirmData);
-		}, false);
+		}, false) as hostState_clientTurnConfirm;
+		clientTurnConfirm.requestNextTurn();
 	}
 
 	//called either when the countdown runs to 0 or when all players have locked in their actions.
 	protected onRoundEnded(): void
 	{
+		console.log('round has ended!');
 		//the text in the host hud component is replaced with -> resolving turns
 		//go to state resolving turns.
 		this.setClientDataReceivedFalse();
 		const requestTurnInformation: hostState_turnInformation =
 		GameManager.instance.hostStateHandler.activateState<TurnInformationData>(hostState_turnInformation, (turnInformation) =>
 		{
-			this.onClientSharedTurnInformation(turnInformation);
+			this.clientDataReceived.set(turnInformation.id, true);
+			this.addTurnInformationFromCommanData(turnInformation);
+
+			if (this.receivedDataForAllClients)
+			{
+				GameManager.instance.hostStateHandler.deactivateState(hostState_turnInformation);
+				this.resolveTurn();
+			}
 		}, false) as hostState_turnInformation;
 		requestTurnInformation.doRequestTurnInformation();
 	}
@@ -91,17 +102,6 @@ export class HostTurnSystem extends TurnsSystem
 		}		
 	}
 
-	private onClientSharedTurnInformation(turnInformationData: TurnInformationData): void
-	{
-		this.clientDataReceived.set(turnInformationData.id, true);
-		this.addTurnInformationFromCommanData(turnInformationData);
-
-		if (this.receivedDataForAllClients)
-		{
-			this.resolveTurn();
-		}
-	}
-
 	protected hostResetTurnCommandsRender(): void
 	{
 		this.removeRenderCommands();
@@ -116,8 +116,8 @@ export class HostTurnSystem extends TurnsSystem
 		this.setClientDataReceivedFalse();
 
 		//TODO: also send the commands that were invalid.
-		const validTurnCommands: TurnCommand[] = this.resolveTurnInformation();
 		const newResources: Map<string, Resource[]> = this.resolveResources();
+		const validTurnCommands: TurnCommand[] = this.resolveTurnInformation();
 
 		this._clients.forEach(client =>
 		{
@@ -129,7 +129,7 @@ export class HostTurnSystem extends TurnsSystem
 
 				if (this.receivedDataForAllClients)
 				{
-					console.log('all clients have received the information to move to the next turn, so let\'s do it!');
+					this.onRoundStarted();
 				}
 			}, false) as hostState_turnResolve;
 			turnResolve.doRequestTurnResolve(client.id, this.exportCommands(validTurnCommands), newResources.get(client.id));

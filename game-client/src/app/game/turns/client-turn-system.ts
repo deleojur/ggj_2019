@@ -3,9 +3,8 @@ import { GameManager } from '../game-manager';
 import { clientState_turnInformation } from '../states/client-states/client-state_turn-information';
 import { TurnCommand, TurnInformation } from './turn-command';
 import { clientState_turnResolve } from '../states/client-states/client-state_turn-resolve';
-import { TurnResolveData } from '../states/request-data';
-import { Hex } from 'honeycomb-grid';
-import { Cell } from '../grid/grid';
+import { TurnResolveData, RequestData } from '../states/request-data';
+import { clientState_advanceToNextTurn } from '../states/client-states/client-state_advance-to-next-turn';
 
 export class ClientTurnSystem extends TurnsSystem
 {
@@ -49,6 +48,7 @@ export class ClientTurnSystem extends TurnsSystem
 	//11) client: add resources from upkeep to resource pool.
 	protected onRoundStarted(): void
 	{
+		console.log('round has started!');
 		this.clientStateTurnInformation = 
 		GameManager.instance.clientStateHandler.activateState(clientState_turnInformation, () =>
 		{
@@ -64,7 +64,15 @@ export class ClientTurnSystem extends TurnsSystem
 				});
 				this.clientResetTurnCommandsRender();
 				GameManager.instance.renderCellsOutline();
-				clientStateTurnResolve.doRequestVerifyTurnResolve();
+
+				GameManager.instance.clientStateHandler.activateState(clientState_advanceToNextTurn, (advanceTurn: RequestData) =>
+				{
+					GameManager.instance.resourceManager.addResource(turnResolveData.resources);
+					this.onRoundEnded();
+					this.onRoundStarted();
+				}, true);
+
+				clientStateTurnResolve.doRequestVerifyTurnResolve();				
 			}, true) as clientState_turnResolve;
 
 			const turnCommands: TurnCommand[] = [];
@@ -94,7 +102,7 @@ export class ClientTurnSystem extends TurnsSystem
 
 	protected onRoundEnded(): void
 	{
-
+		console.log('round has ended!');
 	}
 
 	public getAllTurnCommands(): TurnCommand[]
