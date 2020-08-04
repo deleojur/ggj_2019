@@ -51,10 +51,23 @@ export abstract class TurnsSystem
 		tiles.forEach((e: Hex<Cell>) => 
 		{
 			const turnCommands: TurnCommand[] = this._turnCommands.get(e);
-			this._turnCommands.set(e, []);
 			turnCommands.forEach(turnCommand =>
 			{
 				forEachTurnCommand(turnCommand);
+			});
+			this._turnCommands.set(e, []);
+		});
+	}
+
+	protected removeAllTurnCommands(): void
+	{
+		const tiles: Hex<Cell>[] = GameManager.instance.grid.getValidTiles();
+		tiles.forEach((e: Hex<Cell>) => 
+		{
+			const turnCommands: TurnCommand[] = this._turnCommands.get(e);
+			turnCommands.forEach(turnCommand =>
+			{
+				GameManager.instance.gridStrategy.removeEntity(turnCommand.turnInformation.targetCell, turnCommand.turnInformation.targetEntity);
 			});
 		});
 	}

@@ -5,6 +5,8 @@ import { TurnCommand, TurnInformation } from './turn-command';
 import { clientState_turnResolve } from '../states/client-states/client-state_turn-resolve';
 import { TurnResolveData, RequestData } from '../states/request-data';
 import { clientState_advanceToNextTurn } from '../states/client-states/client-state_advance-to-next-turn';
+import { Hex } from 'honeycomb-grid';
+import { Cell } from '../grid/grid';
 
 export class ClientTurnSystem extends TurnsSystem
 {
@@ -34,18 +36,6 @@ export class ClientTurnSystem extends TurnsSystem
 		});
 	}
 
-	//done 1) host: Create the entities.
-	//done 2) host: Generate their guid and share this information with the clients
-	//done 3) client/host: Put the turncommands of all clients in a temporary map.
-	//done 4) client/host: Clear all turn commands.
-	//done 5) client: Create turn commands and resolve them.
-		//done 5.1) host/client: set the owner of the command.
-	//6) client/host: Display turn commands that weren't able to resolve.
-	//done 7) client: verify that turn information was resolved.
-	//8) host: advance to next turn.
-	//9) host: send request to clients to advance to next turn.
-	//10) client: advance to next turn.
-	//11) client: add resources from upkeep to resource pool.
 	protected onRoundStarted(): void
 	{
 		console.log('round has started!');
@@ -56,7 +46,8 @@ export class ClientTurnSystem extends TurnsSystem
 			GameManager.instance.clientStateHandler.activateState(clientState_turnResolve, (turnResolveData: TurnResolveData) =>
 			{
 				//TODO: clear all the turnCommands and build/destroy/move entities.
-				//Also display the latest turn commands of clients - what have they done in the previous turn?
+				this.removeAllTurnCommands();
+
 				const turnCommands: TurnCommand[] = this.addTurnInformationFromCommanData(turnResolveData.validTurnCommands);
 				turnCommands.forEach(turnCommand =>
 				{
@@ -102,7 +93,7 @@ export class ClientTurnSystem extends TurnsSystem
 
 	protected onRoundEnded(): void
 	{
-		console.log('round has ended!');
+		console.log('round has ended!');	
 	}
 
 	public getAllTurnCommands(): TurnCommand[]

@@ -173,8 +173,11 @@ export abstract class GridStrategy
 
 	public removeEntity(hex: Hex<Cell>, entity: Entity): void
 	{
-		this.entityManager.removeEntity(hex, entity);
-		this.entityContainer.removeChild(entity);
+		if (entity)
+		{
+			this.entityManager.removeEntity(hex, entity);
+			this.entityContainer.removeChild(entity);
+		}
 	}
 
 	private getEdgeCorners(hexagons: Hex<Cell>[]): Outline[]

@@ -570,6 +570,40 @@
                  "width":96.1538,
                  "x":2146.82,
                  "y":3203.62
+                }, 
+                {
+                 "height":74.1758,
+                 "id":175,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"entity",
+                         "type":"string",
+                         "value":"0.monastery"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":96.1538,
+                 "x":1196.35434443124,
+                 "y":2208.23434532225
+                }, 
+                {
+                 "height":74.1758,
+                 "id":176,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"entity",
+                         "type":"string",
+                         "value":"0.monk"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":96.1538,
+                 "x":1279.51442759133,
+                 "y":2231.99436908227
                 }],
          "opacity":1,
          "properties":[
@@ -584,7 +618,7 @@
          "y":0
         }],
  "nextlayerid":11,
- "nextobjectid":174,
+ "nextobjectid":177,
  "orientation":"hexagonal",
  "renderorder":"right-up",
  "staggeraxis":"y",
