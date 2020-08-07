@@ -143,6 +143,7 @@ export abstract class GridStrategy
 			startPositions.forEach(startPosition =>
 			{
 				const entity: Entity = this.createEntity(startPosition.hex, client.id, startPosition.entityName);
+				this.addEntity(startPosition.hex, entity)
 				this.setEntityGuidAutoIncrement(entity);
 			});			
 		});
@@ -157,17 +158,17 @@ export abstract class GridStrategy
 		this.startEntities.get(playerIndex).push({ hex: hex, entityName: entityName });
 	}
 
-	public addEntity(hex: Hex<Cell>, entity: Entity): void
+	public addEntity(hex: Hex<Cell>, entity: Entity): Entity
 	{
 		this.entityManager.addEntity(hex, entity);
 		this.entityContainer.addChild(entity);
 		this.setZIndex(hex, entity);
+		return entity;
 	}
 
 	public createEntity(hex: Hex<Cell>, owner: string, entityName: string): Entity
 	{
 		const entity: Entity = this.entityManager.createEntity(hex, owner, entityName);
-		this.addEntity(hex, entity);
 		return entity;
 	}
 
@@ -301,6 +302,9 @@ export abstract class GridStrategy
 		if (targetEntity.guid === -1)
 		{
 			return this.setEntityGuidAutoIncrement(targetEntity);
+		} else
+		{
+			this._entitiesByGuids.set(targetEntity.guid, targetEntity);
 		}
 		return targetEntity;
 	}

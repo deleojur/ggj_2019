@@ -19,10 +19,10 @@ export class CommandIcon extends Container
 		const backgroundUrl: string = assets.commandIconBackground(turnInformation.behaviorInformation.type);
 		const commandUrl: string = turnInformation.behaviorInformation.commandIconTextureUrl;
 
-		const background: Sprite = game.createSprite(backgroundUrl, new Point(0, 0), new Point(0.10, 0.10));
-		const foreground: Sprite = game.createSprite('assets/units/frames/temp.png', new Point(0, 0), new Point(1, 1));
-		const round_mask: Sprite = game.createSprite('assets/UI/button/round_mask.png', new Point(0, 0), new Point(0.10, 0.10));
-		const command: Sprite = game.createSprite(commandUrl, new Point(0, 3), new Point(0.3, 0.3));
+		const background: Sprite = game.createSprite(backgroundUrl, new Point(0, 0), new Point(0.12, 0.12));
+		const foreground: Sprite = game.createSprite('assets/units/frames/temp.png', new Point(0, 0), new Point(1.2, 1.2));
+		const round_mask: Sprite = game.createSprite('assets/UI/button/round_mask.png', new Point(0, 0), new Point(0.12, 0.12));
+		const command: Sprite = game.createSprite(commandUrl, new Point(0, 3), new Point(0.35, 0.35));
 
 		command.mask = round_mask;
 		this.addChild(round_mask);

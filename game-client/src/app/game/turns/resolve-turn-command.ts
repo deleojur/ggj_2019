@@ -1,6 +1,5 @@
-import { HostTurnSystem } from './host-turn-system';
 import { TurnInformation, TurnCommand } from './turn-command';
-import { BehaviorInformation } from '../entities/entity';
+import { BehaviorInformation, Entity } from '../entities/entity';
 import { GameManager } from '../game-manager';
 
 export class ResolveTurnCommand
@@ -31,7 +30,16 @@ export class ResolveTurnCommand
 
 	public solidifyTurnInformation(turnCommand: TurnCommand): void
 	{
+		const turnInformation: TurnInformation = turnCommand.turnInformation;
 		//TODO: based on the type of turnCommand, make sure it is carried out.
-		turnCommand.turnInformation.targetEntity = GameManager.instance.gridStrategy.createEntityFromCommand(turnCommand);
+		turnInformation.targetEntity = GameManager.instance.gridStrategy.createEntityFromCommand(turnCommand);		
+		if (turnInformation.behaviorInformation.type === 'train' || 'upgrade')
+		{
+			GameManager.instance.gridStrategy.addEntity(turnInformation.targetCell, turnInformation.targetEntity);
+			if (turnInformation.behaviorInformation.type === 'upgrade')
+			{
+				GameManager.instance.gridStrategy.removeEntity(turnInformation.originCell, turnInformation.originEntity);
+			}
+		}
 	}
 }

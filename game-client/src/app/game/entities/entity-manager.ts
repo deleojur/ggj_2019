@@ -83,7 +83,10 @@ export class EntityManager
 	public addEntity(hex: Hex<Cell>, entity: Entity): void
 	{
 		const entities: Entity[] = this._entities.get(hex);
-		entities.push(entity);
+		if (entities.indexOf(entity) === -1)
+		{
+			entities.push(entity);
+		}
 	}
 
 	public removeEntity(hex: Hex<Cell>, entity: Entity): boolean

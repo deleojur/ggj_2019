@@ -7,6 +7,7 @@ import { BehaviorInformation, Entity } from '../entities/entity';
 import { TurnInformationData, TurnCommandData } from '../states/request-data';
 import { ResolveTurnCommand } from './resolve-turn-command';
 import { AssetLoader } from 'src/app/asset-loader';
+import { GridStrategy } from '../grid/grid-strategy';
 
 export abstract class TurnsSystem
 {
@@ -67,7 +68,9 @@ export abstract class TurnsSystem
 			const turnCommands: TurnCommand[] = this._turnCommands.get(e);
 			turnCommands.forEach(turnCommand =>
 			{
-				GameManager.instance.gridStrategy.removeEntity(turnCommand.turnInformation.targetCell, turnCommand.turnInformation.targetEntity);
+				const type: string = turnCommand.turnInformation.behaviorInformation.type;
+				if (type === 'build' || type === 'train')
+					GameManager.instance.gridStrategy.removeEntity(turnCommand.turnInformation.targetCell, turnCommand.turnInformation.targetEntity);
 			});
 		});
 	}
@@ -105,13 +108,18 @@ export abstract class TurnsSystem
 	}
 
 	private createTargetEntity(originEntity: Entity, hex: Hex<Cell>, item: BehaviorInformation): Entity
-	{		
+	{
+		const gridStrategy: GridStrategy = GameManager.instance.gridStrategy;
 		switch (item.type)
 		{
-			case "upgrade":
 			case "build":
+				const entity_b: Entity = gridStrategy.createEntity(hex, 'new entity -> no owner has been set yet.', item.creates);
+				gridStrategy.addEntity(hex, entity_b);
+				return entity_b;
+			case "upgrade":
 			case "train":
-				return GameManager.instance.gridStrategy.createEntity(hex, 'new entity -> no owner has been set yet.', item.creates);
+				const entity_t: Entity = gridStrategy.createEntity(hex, 'new entity -> no owner has been set yet.', item.creates);
+				return entity_t;
 			case "move":
 				return originEntity;
 		}
@@ -154,11 +162,6 @@ export abstract class TurnsSystem
 	{
 		const command: TurnCommand = new TurnCommand(owner, turnInformation);
 		this._turnCommands.get(turnInformation.targetCell).push(command);
-
-		if (turnInformation.behaviorInformation.type === 'upgrade')
-		{
-			GameManager.instance.gridStrategy.removeEntity(turnInformation.originCell, turnInformation.originEntity);
-		}
 
 		if (turnInformation.behaviorInformation.type === 'move')
 		{

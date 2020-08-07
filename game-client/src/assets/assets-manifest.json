@@ -8,9 +8,15 @@
 		"assets/Terrain_Medieval/Base/hexDesertDunes00.png",
 		"assets/Terrain_Medieval/Base/hexMountain00.png",
 
-		"assets/Terrain_Medieval/Decor/villageSmall03.png",
-		"assets/Terrain_Medieval/Decor/farm00.png",
+		"assets/Terrain_Medieval/Decor/town.png",
+		"assets/Terrain_Medieval/Decor/village.png",
+		"assets/Terrain_Medieval/Decor/city.png",
+		"assets/Terrain_Medieval/Decor/capital.png",
+
+		"assets/Terrain_Medieval/Decor/farm.png",
 		"assets/Terrain_Medieval/Decor/elvenLodge.png",
+		"assets/Terrain_Medieval/Decor/inn.png",
+		"assets/Terrain_Medieval/Decor/smithy.png",
 
 		"assets/Terrain_Medieval/Roads/hexRoad-000001-00.png",
 		"assets/Terrain_Medieval/Roads/hexRoad-000001-01.png",
@@ -37,6 +43,17 @@
 		"assets/Terrain_Medieval/Roads/hexRoad-101000-01.png",
 
 		"assets/units/monk.png",
+		"assets/units/priest.png",
+		"assets/units/bishop.png",
+		"assets/units/merchant.png",
+		"assets/units/soldier_1.png",
+		"assets/units/soldier_2.png",
+		"assets/units/soldier_3.png",
+		"assets/units/soldier_4.png",
+		"assets/units/soldier_5.png",
+		"assets/units/noble.png",
+		"assets/units/mayor.png",
+		"assets/units/king.png",
 
 		"assets/UI/button/r_bg_blue.png",
 		"assets/UI/button/r_bg_yellow.png",
@@ -51,8 +68,11 @@
 		"assets/units/frames/round_frame.png",
 		"assets/units/frames/temp.png",
 
+		"assets/actions/build_town_t.png",
+		"assets/actions/upgrade_to_village_t.png",
+		"assets/actions/upgrade_to_city_t.png",
+		"assets/actions/upgrade_to_capital_t.png",
 		"assets/actions/move_t.png",
-		"assets/actions/upgrade_t.png",
 		"assets/actions/build_monastery_t.png",
 		"assets/actions/build_barracks_t.png",
 		"assets/actions/build_marketplace_t.png",
@@ -60,9 +80,9 @@
 	],
 	"commandIconsBackground":
 	{
-		"build": "assets/UI/button/r_bg_yellow.png",
-		"upgrade": "assets/UI/button/r_bg_green.png",
-		"train": "assets/UI/button/r_bg_purple.png",
+		"build": "assets/UI/button/r_bg_blue.png",
+		"upgrade": "assets/UI/button/r_bg_blue.png",
+		"train": "assets/UI/button/r_bg_blue.png",
 		"move": "assets/UI/button/r_bg_blue.png"
 	},
 	"behaviors":
@@ -71,9 +91,27 @@
 			"name": "upgrade to village",
 			"type": "upgrade",
 			"description": "upgrade to a village.",
-			"textureUrl": "assets/actions/upgrade_bg.png",
-			"commandIconTextureUrl": "assets/actions/upgrade_t.png",
+			"textureUrl": "assets/actions/upgrade_to_village_bg.png",
+			"commandIconTextureUrl": "assets/actions/upgrade_to_village_t.png",
 			"creates": "village",
+			"range": 0
+		},
+		{
+			"name": "upgrade to city",
+			"type": "upgrade",
+			"description": "upgrade to a city.",
+			"textureUrl": "assets/actions/upgrade_to_city_bg.png",
+			"commandIconTextureUrl": "assets/actions/upgrade_to_city_t.png",
+			"creates": "city",
+			"range": 0
+		},
+		{
+			"name": "upgrade to capital",
+			"type": "upgrade",
+			"description": "upgrade to a capital.",
+			"textureUrl": "assets/actions/upgrade_to_capital_bg.png",
+			"commandIconTextureUrl": "assets/actions/upgrade_to_capital_t.png",
+			"creates": "capital",
 			"range": 0
 		},
 		{
@@ -116,8 +154,8 @@
 			"name": "build town",
 			"type": "build",
 			"description": "build a town.",
-			"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
-			"commandIconTextureUrl": "assets/actions/build.png",
+			"textureUrl": "assets/actions/build_town_bg.png",
+			"commandIconTextureUrl": "assets/actions/build_town_t.png",
 			"creates": "town",
 			"range": 1
 		},
@@ -126,8 +164,26 @@
 			"type": "train",
 			"description": "train a monk.",
 			"textureUrl": "assets/units/monk.png",
-			"commandIconTextureUrl": "assets/actions/train_monk.png",				
+			"commandIconTextureUrl": "assets/units/monk.png",				
 			"creates": "monk",
+			"range": 0
+		},
+		{
+			"name": "train soldier",
+			"type": "train",
+			"description": "train a soldier.",
+			"textureUrl": "assets/units/soldier_1.png",
+			"commandIconTextureUrl": "assets/units/soldier_1.png",				
+			"creates": "soldier",
+			"range": 0
+		},
+		{
+			"name": "train merchant",
+			"type": "train",
+			"description": "train a merchant.",
+			"textureUrl": "assets/units/merchant.png",
+			"commandIconTextureUrl": "assets/units/merchant.png",
+			"creates": "merchant",
 			"range": 0
 		},
 		{
@@ -144,7 +200,7 @@
 		{
 			"name": "town",
 			"description": "a town.",
-			"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
+			"textureUrl": "assets/Terrain_Medieval/Decor/town.png",
 			"entityType": "structure",
 			"cost": 
 			[ 
@@ -162,13 +218,13 @@
 			[
 				"upgrade to village",
 				"build farm",
-				"build monastery"
+				"build marketplace"
 			]
 		},
 		{	
 			"name": "village",
 			"description": "a village.",
-			"textureUrl": "assets/Terrain_Medieval/Decor/villageSmall03.png",
+			"textureUrl": "assets/Terrain_Medieval/Decor/village.png",
 			"entityType": "structure",
 			"cost": [ 
 				{ "type": "gold", "amount": 3 }, 
@@ -181,14 +237,39 @@
 				{ "type": "population", "amount": 2 }
 			], "behaviors": 
 			[
+				"upgrade to city",
 				"build farm",
+				"build marketplace",
 				"build monastery"
 			]
 		},
+		{	
+			"name": "city",
+			"description": "a city.",
+			"textureUrl": "assets/Terrain_Medieval/Decor/city.png",
+			"entityType": "structure",
+			"cost": [ 
+				{ "type": "gold", "amount": 3 }, 
+				{ "type": "food", "amount": 0 }, 
+				{ "type": "population", "amount": 2 } 
+			],
+			"upkeep": [
+				{ "type": "gold", "amount": 3 }, 
+				{ "type": "food", "amount": -2 }, 
+				{ "type": "population", "amount": 2 }
+			], "behaviors": 
+			[
+				"upgrade to capital",
+				"build farm",
+				"build marketplace",
+				"build monastery",
+				"build barracks"
+			]
+		},
 		{
-			"name": "farm",
-			"description": "a farm.",
-			"textureUrl": "assets/Terrain_Medieval/Decor/farm00.png",
+			"name": "capital",
+			"description": "a capital.",
+			"textureUrl": "assets/Terrain_Medieval/Decor/capital.png",
 			"entityType": "structure",
 			"cost":
 			[
@@ -202,7 +283,25 @@
 			],
 			"behaviors" : 
 			[
-				
+				"crown king",
+				"build farm",
+				"build marketplace",
+				"build monastery",
+				"build barracks"
+			]
+		},
+		{
+			"name": "farm",
+			"description": "a farm.",
+			"textureUrl": "assets/Terrain_Medieval/Decor/farm.png",
+			"entityType": "structure",
+			"cost": 
+			[ 
+				{ "type": "gold", "amount": 3 }
+			],
+			"behaviors" : 
+			[
+				"build town"
 			]
 		},
 		{
@@ -212,9 +311,7 @@
 			"entityType": "structure",
 			"cost": 
 			[ 
-				{ "type": "gold", "amount": 3 }, 
-				{ "type": "food", "amount": 0 }, 
-				{ "type": "population", "amount": 2 } 
+				{ "type": "gold", "amount": 3 }
 			],
 			"behaviors" : 
 			[
@@ -222,10 +319,56 @@
 			]
 		},
 		{
+			"name": "barracks",
+			"description": "a barracks trains soldiers. Soldiers can fight other units and help you invade other towns.",
+			"textureUrl": "assets/Terrain_Medieval/Decor/smithy.png",
+			"entityType": "structure",
+			"cost":
+			[
+				{ "type": "gold", "amount": 5 }
+			],
+			"behaviors":
+			[
+				"train soldier"
+			]
+		},
+		{
+			"name": "marketplace",
+			"description": "a marketplace trains merchants.",
+			"textureUrl": "assets/Terrain_Medieval/Decor/inn.png",
+			"entityType": "structure",
+			"cost":
+			[
+				{ "type": "gold", "amount": 3 }
+			],
+			"behaviors":
+			[
+				"train merchant"
+			]
+		},
+		{
 			"name": "monk",
 			"textureUrl": "assets/units/monk.png",
 			"entityType": "unit",
 			"behaviors" :
+			[
+				"move"
+			]
+		},
+		{
+			"name": "soldier",
+			"textureUrl": "assets/units/soldier_1.png",
+			"entityType": "unit",
+			"behaviors":
+			[
+				"move"
+			]
+		},
+		{
+			"name": "merchant",
+			"textureUrl": "assets/units/merchant.png",
+			"entityType": "unit",
+			"behaviors":
 			[
 				"move"
 			]
