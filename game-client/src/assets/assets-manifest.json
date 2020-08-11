@@ -16,7 +16,7 @@
 		"assets/Terrain_Medieval/Decor/farm.png",
 		"assets/Terrain_Medieval/Decor/elvenLodge.png",
 		"assets/Terrain_Medieval/Decor/inn.png",
-		"assets/Terrain_Medieval/Decor/smithy.png",
+		"assets/Terrain_Medieval/Decor/barracks.png",
 
 		"assets/Terrain_Medieval/Roads/hexRoad-000001-00.png",
 		"assets/Terrain_Medieval/Roads/hexRoad-000001-01.png",
@@ -69,9 +69,7 @@
 		"assets/units/frames/temp.png",
 
 		"assets/actions/build_town_t.png",
-		"assets/actions/upgrade_to_village_t.png",
-		"assets/actions/upgrade_to_city_t.png",
-		"assets/actions/upgrade_to_capital_t.png",
+		"assets/actions/upgrade_t.png",
 		"assets/actions/move_t.png",
 		"assets/actions/build_monastery_t.png",
 		"assets/actions/build_barracks_t.png",
@@ -91,8 +89,8 @@
 			"name": "upgrade to village",
 			"type": "upgrade",
 			"description": "upgrade to a village.",
-			"textureUrl": "assets/actions/upgrade_to_village_bg.png",
-			"commandIconTextureUrl": "assets/actions/upgrade_to_village_t.png",
+			"textureUrl": "assets/actions/upgrade_bg.png",
+			"commandIconTextureUrl": "assets/actions/upgrade_t.png",
 			"creates": "village",
 			"range": 0
 		},
@@ -100,8 +98,8 @@
 			"name": "upgrade to city",
 			"type": "upgrade",
 			"description": "upgrade to a city.",
-			"textureUrl": "assets/actions/upgrade_to_city_bg.png",
-			"commandIconTextureUrl": "assets/actions/upgrade_to_city_t.png",
+			"textureUrl": "assets/actions/upgrade_bg.png",
+			"commandIconTextureUrl": "assets/actions/upgrade_t.png",
 			"creates": "city",
 			"range": 0
 		},
@@ -109,8 +107,8 @@
 			"name": "upgrade to capital",
 			"type": "upgrade",
 			"description": "upgrade to a capital.",
-			"textureUrl": "assets/actions/upgrade_to_capital_bg.png",
-			"commandIconTextureUrl": "assets/actions/upgrade_to_capital_t.png",
+			"textureUrl": "assets/actions/upgrade_bg.png",
+			"commandIconTextureUrl": "assets/actions/upgrade_t.png",
 			"creates": "capital",
 			"range": 0
 		},
@@ -321,7 +319,7 @@
 		{
 			"name": "barracks",
 			"description": "a barracks trains soldiers. Soldiers can fight other units and help you invade other towns.",
-			"textureUrl": "assets/Terrain_Medieval/Decor/smithy.png",
+			"textureUrl": "assets/Terrain_Medieval/Decor/barracks.png",
 			"entityType": "structure",
 			"cost":
 			[
