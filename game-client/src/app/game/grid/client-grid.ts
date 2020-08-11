@@ -69,23 +69,26 @@ export class GridClient extends GridStrategy
 	{
 		const checkedCells: Hex<Cell>[] = [];
 		const uncheckedCells: Queue<{ hex: Hex<Cell>, dist: number }> = new Queue<{ hex: Hex<Cell>, dist: number }>();
-		const road: Hex<Cell>[] = [];
-		let current: { hex: Hex<Cell>, dist: number } = { hex: hex, dist: 0 };
+		const road: Hex<Cell>[] = this.grid.getWalkableNeighbors(hex);
+		if (hex.road.length === 0)
+			return road;
+
+		let current: { hex: Hex<Cell>, dist: number } = { hex: hex, dist: 0 };		
 		do
 		{
-			const neighbors: Hex<Cell>[] = this.grid.getNeighbors(current.hex);
+			const neighbors: Hex<Cell>[] = this.grid.getRoadNeighbors(current.hex);
 			neighbors.forEach(n =>
 			{
 				if (checkedCells.indexOf(n) === -1)
 				{
 					checkedCells.push(n);
-					if ((current.dist + 1 === 1 && n.walkable) ||
-						(current.dist + 1 <= radius && n.road && hex.road))
+					if (current.dist + 1 <= radius)
 					{
 						if (!this.isStructure(n))
 						{
 							uncheckedCells.Push({ hex: n, dist: current.dist + 1 });
 						}
+						if (road.indexOf(n) === -1)
 						road.push(n);
 					}
 				}

@@ -1,6 +1,6 @@
 import { MapReader, TileProperty, Object, WorldMap } from './map-reader';
 import { Vector } from 'vector2d/src/Vec2D';
-import { defineGrid, GridFactory, Hex, Point, Grid } from 'honeycomb-grid';
+import { defineGrid, GridFactory, Hex, Point, Grid, PointLike } from 'honeycomb-grid';
 import { Graphics, Sprite, Point as pPoint, Polygon } from 'pixi.js';
 import { ViewportManager } from '../render/viewport';
 import { AssetLoader } from 'src/app/asset-loader';
@@ -14,11 +14,12 @@ export interface Cell
 	sprites: PIXI.Sprite[];
 	walkable: boolean; //units can walk on this tile.
 	buildable: boolean; //structures can be built on this tile.
-	road: boolean; //units have a speed advantage on this tile.
+	road: number[]; //units have a speed advantage on this tile.
 }
 
 export class GridManager
 {
+	private roadMap: Map<number, PointLike[]>;
     private gridFactory: GridFactory<Hex<Cell>>;
     private grid: Grid<Hex<Cell>>;
     private tileWidth: number = 147.75;
@@ -63,7 +64,35 @@ export class GridManager
 		this.initTileLayer();
 		this.gridStrategy.init(graphics);
 		this.initObjectLayer(this.mapReader.entities);
-    }
+		this.mapRoad();
+	}
+
+	private mapRoad(): void
+	{
+		this.roadMap = new Map<number, PointLike[]>();
+		this.roadMap.set(0, [{x: 0, y: -1}, {x: 1, y: -1}]);
+		this.roadMap.set(1, [{x: 1, y: 0}, {x: 1, y: 0}]);
+		this.roadMap.set(2, [{x: 0, y: 1}, {x: 1, y: 1}]);
+		this.roadMap.set(3, [{x: -1, y: 1}, {x: 0, y: 1}]);
+		this.roadMap.set(4, [{x: -1, y: 0}, {x: -1, y: 0}]);
+		this.roadMap.set(5, [{x: -1, y: -1}, {x: 0, y: -1}]);
+	}
+	
+	public getRoadNeighbors(hex: Hex<Cell>): Hex<Cell>[]
+	{
+		const neighbors: Hex<Cell>[] = [];
+		hex.road.forEach((road: number) =>
+		{
+			const index: number = hex.y % 2;
+			const mapCoordinates: PointLike = this.roadMap.get(road)[index];
+			const hexCoordinates: PointLike = hex.coordinates();
+			const coordinates: PointLike = { x: hexCoordinates.x + mapCoordinates.x, y: hexCoordinates.y + mapCoordinates.y };
+			
+			neighbors.push(this.grid.get(coordinates));
+		});
+		console.log(hex.road);
+		return neighbors;
+	}
 
     private initTileLayer(): void
     {
@@ -79,6 +108,7 @@ export class GridManager
                 this.viewport.addChild(sprite);
 			});
 
+			hex.road = [];
 			hex.properties.forEach((property) =>
 			{
 				if (property.name === 'walkable')
@@ -88,8 +118,13 @@ export class GridManager
 				{
 					hex.buildable = property.value;
 				} if (property.name === 'tileType')
-				{					
-					hex.road = property.value === 'road';
+				{
+					const roadstring: string = property.value;
+					if (roadstring.indexOf('road') !== -1)
+					{
+						const roads: number[] = JSON.parse(roadstring.substring(5));
+						hex.road = roads;
+					}
 				}
 			});
         });
@@ -179,5 +214,16 @@ export class GridManager
 	public getNeighbors(hex: Hex<Cell>): Hex<Cell>[]
 	{
 		return this.grid.neighborsOf(hex);
+	}
+
+	public getWalkableNeighbors(hex: Hex<Cell>): Hex<Cell>[]
+	{
+		const neighbors = this.getNeighbors(hex);
+		for (let i: number = neighbors.length - 1; i > -1; i--)
+		{
+			if (!neighbors[i].walkable)
+				neighbors.splice(i, 1);
+		}
+		return neighbors;
 	}
 }

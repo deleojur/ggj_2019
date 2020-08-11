@@ -14,7 +14,7 @@ interface Tile
 {
     id: number;
     texture: PIXI.Texture;
-    properties?: TileProperty[];
+	properties?: TileProperty[];
 };
 
 export interface Object
