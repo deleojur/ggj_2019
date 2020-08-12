@@ -11,10 +11,10 @@ export class Unit extends Entity
 	{
 		const game: GameManager = GameManager.instance;
 
-		const background: Sprite = game.createSprite('assets/UI/button/r_bg_yellow.png', new Point(0, 50), new Point(0.1, 0.1));
-		const foreground: Sprite = game.createSprite('assets/units/frames/temp.png', new Point(0, 50), new Point(1.0, 1.0));
-		const round_mask: Sprite = game.createSprite('assets/UI/button/round_mask.png', new Point(0, 50), new Point(0.13, 0.1));
-		const command: Sprite = game.createSprite(this._prototype.textureUrl, new Point(0, 55), new Point(0.4, 0.4));
+		const background: Sprite = game.createSprite('assets/UI/button/r_bg_yellow.png', new Point(0, 30), new Point(0.1, 0.1));
+		const foreground: Sprite = game.createSprite('assets/units/frames/temp.png', new Point(0, 30), new Point(1.0, 1.0));
+		const round_mask: Sprite = game.createSprite('assets/UI/button/round_mask.png', new Point(0, 30), new Point(0.13, 0.1));
+		const command: Sprite = game.createSprite(this._prototype.textureUrl, new Point(0, 35), new Point(0.45, 0.45));
 
 		command.mask = round_mask;
 		this.addChild(round_mask);

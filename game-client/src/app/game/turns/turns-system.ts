@@ -16,11 +16,13 @@ export abstract class TurnsSystem
 	protected _renderCommands: TurnCommand[];
 
 	private _commandIconPositions: pPoint[][] = [[], [new pPoint(0, -75)], [new pPoint(-62, -50), new pPoint(62, -50)]];
-	protected graphics: Graphics;
+	protected iconGraphics: Graphics;
 
 	public init(graphics: Graphics): void
 	{
-		this.graphics = graphics;
+		this.iconGraphics = new Graphics();
+		graphics.addChild(this.iconGraphics);
+
 		this._turnCommands = new Map<Hex<Cell>, TurnCommand[]>();
 		this._renderCommands = [];
 		this._resolveTurnCommand = new ResolveTurnCommand();
@@ -40,7 +42,7 @@ export abstract class TurnsSystem
 	{
 		this._renderCommands.forEach(command =>
 		{
-			this.graphics.removeChild(command.commandIcon);
+			this.iconGraphics.removeChild(command.commandIcon);
 		});
 		this._renderCommands = [];
 	}
@@ -146,7 +148,8 @@ export abstract class TurnsSystem
 		originCell: Hex<Cell>,
 		targetCell: Hex<Cell>,
 		originEntity: Entity,
-		item?: BehaviorInformation): TurnInformation
+		item?: BehaviorInformation,
+		path?: Hex<Cell>[]): TurnInformation
 	{
 		const targetEntity: Entity = this.createTargetEntity(originEntity, targetCell, item);
 		return {
@@ -154,7 +157,8 @@ export abstract class TurnsSystem
 			targetCell: targetCell,
 			originEntity: originEntity,
 			targetEntity: targetEntity,
-			behaviorInformation: item
+			behaviorInformation: item,
+			path: path
 		};
 	}
 
@@ -168,7 +172,7 @@ export abstract class TurnsSystem
 			GameManager.instance.gridStrategy.moveEntityToHex(turnInformation.targetEntity, turnInformation.originCell, turnInformation.targetCell);
 		}
 
-		this.graphics.addChild(command.commandIcon);
+		this.iconGraphics.addChild(command.commandIcon);
 		this.updateCommandIcons(turnInformation.targetCell);
 
 		return command;
@@ -239,7 +243,7 @@ export abstract class TurnsSystem
 
 				this.reverseTurnCommand(turnInformation);
 
-				this.graphics.removeChild(turnCommand.commandIcon);
+				this.iconGraphics.removeChild(turnCommand.commandIcon);
 
 				this.updateCommandIcons(hex);
 				return turnCommand.turnInformation;

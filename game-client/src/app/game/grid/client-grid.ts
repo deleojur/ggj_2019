@@ -5,8 +5,14 @@ import { Cell } from './grid';
 import { Entity } from '../entities/entity';
 import { Graphics, Polygon } from 'pixi.js';
 import { Queue } from 'simple-fifo-queue';
-import { TurnCommand } from '../turns/turn-command';
+import { TurnCommand, TurnInformation } from '../turns/turn-command';
 import { GameManager } from '../game-manager';
+
+interface Path
+{
+	hex: Hex<Cell>;
+	dist: number;
+};
 
 export class GridClient extends GridStrategy
 {
@@ -28,10 +34,10 @@ export class GridClient extends GridStrategy
 		return this._clientStateHandler.getColor();
 	}
 
-	public init(graphics: Graphics): void
+	public init(gridGraphics: Graphics, pathGraphics: Graphics): void
 	{
-		super.init(graphics);
-		graphics.addChild(this.validCellsGraphics);
+		super.init(gridGraphics, pathGraphics);
+		gridGraphics.addChild(this.validCellsGraphics);
 	}
 
 	public selectEntities(hex: Hex<Cell>): Entity[]
@@ -39,7 +45,7 @@ export class GridClient extends GridStrategy
 		return [];
 	}
 
-	private getBuildableCells(hex: Hex<Cell>): Hex<Cell>[]
+	public getBuildableCells(hex: Hex<Cell>): Hex<Cell>[]
 	{
 		const neighbors: Hex<Cell>[] = this.grid.getNeighbors(hex);
 		const validCells: Hex<Cell>[] = [];
@@ -47,33 +53,24 @@ export class GridClient extends GridStrategy
 		{			
 			if (n.buildable && !this.isStructure(n))
 			{
+				n.parent = hex;
 				validCells.push(n);
 			}
 		});
 		return validCells;
 	}
 
-	private getValidCells(hex: Hex<Cell>, type: string): Hex<Cell>[]
-	{
-		switch (type)
-		{
-			case "build":
-				return this.getBuildableCells(hex);
-			
-			case "move":
-				return this.getWalkableCells(hex, 3);
-		}
-	}
-
-	private getWalkableCells(hex: Hex<Cell>, radius: number): Hex<Cell>[]
+	public getWalkableCells(hex: Hex<Cell>, radius: number): Hex<Cell>[]
 	{
 		const checkedCells: Hex<Cell>[] = [];
-		const uncheckedCells: Queue<{ hex: Hex<Cell>, dist: number }> = new Queue<{ hex: Hex<Cell>, dist: number }>();
+		const uncheckedCells: Queue<Path> = new Queue<Path>();
 		const road: Hex<Cell>[] = this.grid.getWalkableNeighbors(hex);
-		if (hex.road.length === 0)
-			return road;
-
-		let current: { hex: Hex<Cell>, dist: number } = { hex: hex, dist: 0 };		
+		road.forEach(node =>
+		{
+			node.parent = hex;
+		});
+		
+		let current: Path = { hex: hex, dist: 0 };
 		do
 		{
 			const neighbors: Hex<Cell>[] = this.grid.getRoadNeighbors(current.hex);
@@ -84,25 +81,32 @@ export class GridClient extends GridStrategy
 					checkedCells.push(n);
 					if (current.dist + 1 <= radius)
 					{
-						if (!this.isStructure(n))
+						//if (!this.isStructure(n))
 						{
 							uncheckedCells.Push({ hex: n, dist: current.dist + 1 });
 						}
 						if (road.indexOf(n) === -1)
-						road.push(n);
+						{
+							n.parent = current.hex;
+							road.push(n);
+						}
 					}
 				}
 			});
 			checkedCells.push(current.hex);
+			if (uncheckedCells.Size() === 0)
+			{
+				break;
+			}
 			current = uncheckedCells.Front();
 			uncheckedCells.Pop();
-		} while (!uncheckedCells.Empty());
+		} while (true);
 		return road;
 	}
 
-	public renderValidCells(hex: Hex<Cell>, type: string): Hex<Cell>[]
+	public renderValidCells(validCells: Hex<Cell>[]): Hex<Cell>[]
 	{
-		const validCells: Hex<Cell>[] = this.getValidCells(hex, type);
+		 //= this.getValidCells(hex, type);
 		this.renderSelectedCellsOutline(validCells, 0xfada5e, RenderType.StraightLine);
 
 		validCells.forEach(cell =>
@@ -121,13 +125,8 @@ export class GridClient extends GridStrategy
 	protected renderCommandsByOwnerColor(): void
 	{
 		const color: number = this.clientColor;
-		const turnCommands: TurnCommand[] = GameManager.instance.clientTurnSystem.getAllTurnCommands();
-		const cells: Hex<Cell>[] = [];
-		turnCommands.forEach(turnCommand =>
-		{
-			cells.push(turnCommand.turnInformation.targetCell);
-		});
-		this.renderSelectedCellsOutline(cells, color, RenderType.DottedLine);
+		const turnInformation: TurnInformation[] = GameManager.instance.clientTurnSystem.getAllTurnInformation();
+		this.renderTurnCommandPath(turnInformation, color);
 	}
 
 	public clearValidCells(): void

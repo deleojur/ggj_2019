@@ -8,6 +8,7 @@ import { GridStrategy } from './grid-strategy';
 
 export interface Cell
 {
+	parent?: Hex<Cell>; //used in searching paths.
     color?: string; 
 	isGenerated?: boolean;
     properties: TileProperty[];
@@ -58,11 +59,11 @@ export class GridManager
 		return size;
     }
 
-    public init(graphics: Graphics): void
+    public init(gridGraphics: Graphics, pathGraphics: Graphics): void
     {
 		this.initObjectLayer(this.mapReader.hexUnderLayer);
 		this.initTileLayer();
-		this.gridStrategy.init(graphics);
+		this.gridStrategy.init(gridGraphics, pathGraphics);
 		this.initObjectLayer(this.mapReader.entities);
 		this.mapRoad();
 	}
@@ -90,7 +91,6 @@ export class GridManager
 			
 			neighbors.push(this.grid.get(coordinates));
 		});
-		console.log(hex.road);
 		return neighbors;
 	}
 
@@ -225,5 +225,13 @@ export class GridManager
 				neighbors.splice(i, 1);
 		}
 		return neighbors;
+	}
+
+	public clearPath(): void
+	{
+		this.getValidTiles().forEach(cell =>
+		{
+			cell.parent = undefined;
+		});
 	}
 }

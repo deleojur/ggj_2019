@@ -44,7 +44,17 @@ export class SelectCellComponent implements OnInit, InnerWindowComponent
 
 	private renderValidCells(origin: Hex<Cell>): void
 	{
-		this._validCells = this.gridClient.renderValidCells(origin, this._behavior.type);
+		GameManager.instance.grid.clearPath();
+		switch (this._behavior.type)
+		{
+			case "build":
+				this._validCells = this.gridClient.renderValidCells(this.gridClient.getBuildableCells(origin));
+				break;
+			case "move":				
+				this._validCells = this.gridClient.renderValidCells(this.gridClient.getWalkableCells(origin, 3));
+				break;
+		}
+		
 	}
 
 	private clearValidCells(): void
@@ -86,7 +96,17 @@ export class SelectCellComponent implements OnInit, InnerWindowComponent
 			if (this._validCells.indexOf(hex) > -1)
 			{
 				this.hexSubscription.unsubscribe();
-				GameManager.instance.createTurnCommand(this.hex, hex, this._entity, this._behavior);
+				const path: Hex<Cell>[] = [];
+				let current: Hex<Cell> = hex;
+				do
+				{
+					path.unshift(current);
+					if (current.parent)
+					{
+						current = current.parent;
+					} else break;					
+				} while (true);
+				GameManager.instance.createTurnCommand(this.hex, hex, this._entity, this._behavior, path);
 				GameManager.instance.windowManager.closeAllWindows();
 			}
 		});

@@ -2,6 +2,7 @@ import { Resource } from 'src/app/game/entities/resource';
 import { Container, Point as pPoint } from 'pixi.js';
 import { Hex, Point } from 'honeycomb-grid';
 import { Cell } from '../grid/grid';
+import { TurnCommand } from '../turns/turn-command';
 
 export enum EntityType
 {

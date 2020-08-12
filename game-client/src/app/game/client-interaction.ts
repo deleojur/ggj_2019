@@ -70,12 +70,7 @@ export class ClientInteraction
 			const turnInformationArray: TurnInformation[] = gameManager.turnSystem.getTurnInformation(hex);
 			if (turnInformationArray.length > 0)
 			{
-				turnInformationArray.forEach((turnInformation: TurnInformation) =>
-				{
-					const origin: Hex<Cell> = turnInformation.originCell;
-					const target: Hex<Cell> = turnInformation.targetCell;
-					gridStrategy.renderSelectedCellsOutline([origin, target], stateHandler.getColor(), RenderType.DottedLine);
-				});				
+				gridStrategy.renderTurnCommandPath(turnInformationArray, stateHandler.getColor());			
 			}
 			else
 			{

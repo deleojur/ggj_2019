@@ -10,6 +10,7 @@ export interface TurnInformation
 	targetEntity: Entity; //the entity after the turn is played.
 	originCell: Hex<Cell>; //the cell before the turn.
 	targetCell?: Hex<Cell>; //the cell after the turn is played.
+	path?: Hex<Cell>[];
 }
 
 export class TurnCommand

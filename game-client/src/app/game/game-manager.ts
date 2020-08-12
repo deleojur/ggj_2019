@@ -141,14 +141,15 @@ export class GameManager
 		this._grid = new GridManager(this._gridStrategy, this.viewport);
 		AssetLoader.instance.loadAssetsAsync().then(() => 
 		{
-			const gridGraphics: Graphics = new Graphics, commandGraphics: Graphics = new Graphics();
+			const gridGraphics: Graphics = new Graphics, commandGraphics: Graphics = new Graphics(), pathGraphics: Graphics = new Graphics();
 			const size: Point = this._grid.generateWorld();
 			this.viewport.initViewport(size.x, size.y);
-			this._grid.init(gridGraphics);
+			this._grid.init(gridGraphics, pathGraphics);
 			this._turnSystem.init(commandGraphics);
 
 			this.viewport.addChild(gridGraphics);
 			this.viewport.addChild(commandGraphics);
+			this.viewport.addChild(pathGraphics);
 			return cb();
 		});
 	}
@@ -170,6 +171,13 @@ export class GameManager
 			return this.generateWorld(() => { });
 		}
 		return this._worldCanvas;
+	}
+
+	public generateDebugClients(): void
+	{
+		const clients = [{ color: '#ff0000', name: 'Jur', startingPosition: 0, status: 'connected' }];
+		this.clientStateHandler.hostSharedClients(clients);
+		this.gridStrategy.createStartEntities(clients);
 	}
 
     public init(gridStrategy: GridStrategy, turnSystem: TurnsSystem, cb: () => void): void
@@ -205,10 +213,11 @@ export class GameManager
 		originCell: Hex<Cell>,
 		targetCell: Hex<Cell>,
 		originEntity: Entity,
-		item: BehaviorInformation): void
+		item: BehaviorInformation,
+		path?: Hex<Cell>[]): void
 	{
 		this._resourceManager.subtractResources(item.cost);
-		const turnInformation: TurnInformation = this._turnSystem.generateTurnInformation(originCell, targetCell, originEntity, item);
+		const turnInformation: TurnInformation = this._turnSystem.generateTurnInformation(originCell, targetCell, originEntity, item, path);
 		this._turnSystem.addTurnCommand(turnInformation, this.clientStateHandler.clientId);
 	}
 

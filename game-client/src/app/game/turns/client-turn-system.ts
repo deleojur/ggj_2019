@@ -31,7 +31,7 @@ export class ClientTurnSystem extends TurnsSystem
 				this._renderCommands.push(turnCommand);
 			} else
 			{
-				this.graphics.removeChild(turnCommand.commandIcon);
+				this.iconGraphics.removeChild(turnCommand.commandIcon);
 			}
 		});
 	}
@@ -108,5 +108,18 @@ export class ClientTurnSystem extends TurnsSystem
 			});
 		});
 		return turnCommands;
+	}
+
+	public getAllTurnInformation(): TurnInformation[]
+	{
+		const turnCommands: TurnCommand[] = this.getAllTurnCommands();
+		const turnInformation: TurnInformation[] = [];
+
+		turnCommands.forEach(turnCommand =>
+		{
+			turnInformation.push(turnCommand.turnInformation);
+		});
+
+		return turnInformation;
 	}
 }
