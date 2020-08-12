@@ -85,9 +85,9 @@ export class GridClient extends GridStrategy
 						{
 							uncheckedCells.Push({ hex: n, dist: current.dist + 1 });
 						}
+						n.parent = current.hex;
 						if (road.indexOf(n) === -1)
-						{
-							n.parent = current.hex;
+						{							
 							road.push(n);
 						}
 					}

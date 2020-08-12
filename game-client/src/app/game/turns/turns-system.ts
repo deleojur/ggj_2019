@@ -4,7 +4,7 @@ import { Cell } from 'src/app/game/grid/grid';
 import { Point as pPoint, Graphics } from 'pixi.js';
 import { GameManager } from '../game-manager';
 import { BehaviorInformation, Entity } from '../entities/entity';
-import { TurnInformationData, TurnCommandData } from '../states/request-data';
+import { TurnInformationData, TurnCommandData, PositionData } from '../states/request-data';
 import { ResolveTurnCommand } from './resolve-turn-command';
 import { AssetLoader } from 'src/app/asset-loader';
 import { GridStrategy } from '../grid/grid-strategy';
@@ -130,13 +130,21 @@ export abstract class TurnsSystem
 	public addTurnInformationFromCommanData(turnInformationData: TurnInformationData): TurnCommand[]
 	{
 		const turnCommands: TurnCommand[] = [];
+
 		turnInformationData.turnCommands.forEach(command => 
 		{
+			const path: Hex<Cell>[] = [];
+			command.path.forEach(position =>
+			{
+				const hex: Hex<Cell> = GameManager.instance.grid.getHex(position.x, position.y);
+				path.push(hex);
+			});
+
 			const originCell: Hex<Cell> = GameManager.instance.grid.getHex(command.originCell.x, command.originCell.y);
 			const targetCell: Hex<Cell> = GameManager.instance.grid.getHex(command.targetCell.x, command.targetCell.y);
 			const entity: Entity = GameManager.instance.gridStrategy.getEntityByGuid(command.originEntityGuid);
 			const behaviorInformation: BehaviorInformation = AssetLoader.instance.getBehaviorInformation(command.behaviorInformation);
-			const turnInformation: TurnInformation = this.generateTurnInformation(originCell, targetCell, entity, behaviorInformation);
+			const turnInformation: TurnInformation = this.generateTurnInformation(originCell, targetCell, entity, behaviorInformation, path);
 			const turnCommand: TurnCommand = this.addTurnCommand(turnInformation, command.owner);
 			turnCommand.turnInformation.targetEntity.guid = command.targetEntityGuid;
 			turnCommands.push(turnCommand);
@@ -272,6 +280,15 @@ export abstract class TurnsSystem
 				}
 			}
 
+			const path: PositionData[] = [];
+			if (turnInformation.path)
+			{
+				turnInformation.path.forEach(hex =>
+				{
+					path.push({ x: hex.x, y: hex.y });
+				});
+			}
+
 			if (!isPresent)
 			{
 				turnInformationData.turnCommands.push(
@@ -284,6 +301,7 @@ export abstract class TurnsSystem
 					originCell: { x: originCell.x, y: originCell.y },
 					targetCell: { x: targetCell.x, y: targetCell.y },
 					behaviorInformation: turnInformation.behaviorInformation.name,
+					path: path
 				});
 			}
 		});

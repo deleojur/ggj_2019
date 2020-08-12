@@ -121,7 +121,6 @@ export abstract class GridStrategy
 				}
 
 				const turns: TurnInformation[] = GameManager.instance.turnSystem.getTurnInformation(hex);
-				let render: boolean = true;
 				for (let i: number = 0; i < turns.length; i++)
 				{
 					const turnInformation: TurnInformation = turns[i];

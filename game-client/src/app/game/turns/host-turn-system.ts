@@ -9,8 +9,6 @@ import { Entity } from '../entities/entity';
 import { Resource } from '../entities/resource';
 import { ResourceManager } from '../components/resourceManager';
 import { hostState_turnResolve } from '../states/host-states/host-state_turn-resolve';
-import { Hex } from 'honeycomb-grid';
-import { Cell } from '../grid/grid';
 
 export class HostTurnSystem extends TurnsSystem
 {
@@ -134,8 +132,8 @@ export class HostTurnSystem extends TurnsSystem
 			}, false) as hostState_turnResolve;
 			turnResolve.doRequestTurnResolve(client.id, this.exportCommands(validTurnCommands), newResources.get(client.id));
 		});
-		this.hostResetTurnCommandsRender();
 		GameManager.instance.renderCellsOutline();
+		this.hostResetTurnCommandsRender();
 	}
 
 	private resolveTurnInformation(): TurnCommand[]
@@ -164,6 +162,20 @@ export class HostTurnSystem extends TurnsSystem
 		return validTurnCommands;
 	}
 
+	/**
+	 * done 1) retrieve the paths from the client
+	 *  2) if this entity is a unit, don't move it yet
+	 * 3) create a host resolve turn state
+	 * 4) this state waits for five seconds
+	 * 5) then, it symultaneously performs all build/upgrade/train commands
+	 * 6) also symultaneously, it moves all units the first hex
+	 * 7) then, ever 3 seconds, it moves units, until all moves are done
+	 * 8) when two units end at the same hex, it will generate a new turn
+	 * 	8.1) this will send a message to all clients
+	 * 	8.2) this message contains the units, their owner and the clients involved
+	 * 	8.3) the clients involved get a resolve window
+	 * 		8.3.1) this shows all units that are involved, even their own.
+	 */
 	private resolveResources(): Map<string, Resource[]>
 	{
 		const resources: Map<string, Resource[]> = new Map<string, Resource[]>();
@@ -180,6 +192,25 @@ export class HostTurnSystem extends TurnsSystem
 			resources.set(client.id, resourceManager.resourcePool);
 		});
 		return resources;
+	}
+
+	public getAllTurnInformation(): Map<string, TurnInformation[]>
+	{
+		const turnInformation: Map<string, TurnInformation[]> = new Map<string, TurnInformation[]>();
+		const allCommands = Array.from(this._turnCommands.values());
+		allCommands.forEach(turnCommandArray =>
+		{
+			turnCommandArray.forEach(turnCommand =>
+			{
+				const owner: string = turnCommand.owner;
+				if (!turnInformation.has(owner))
+				{
+					turnInformation.set(owner, []);
+				} 
+				turnInformation.get(owner).push(turnCommand.turnInformation);
+			});
+		});
+		return turnInformation;
 	}
 
 	public getAllTurnCommands(): Map<string, TurnCommand[]>

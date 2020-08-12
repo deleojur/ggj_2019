@@ -1439,7 +1439,7 @@
     <property name="entity" value="0.farm"/>
    </properties>
   </object>
-  <object id="159" x="1396.98" y="2031.59" width="96.1538" height="74.1758">
+  <object id="159" x="1362.97" y="2048.6" width="96.1538" height="74.1758">
    <properties>
     <property name="entity" value="0.town"/>
    </properties>
@@ -1474,12 +1474,12 @@
     <property name="entity" value="1.town"/>
    </properties>
   </object>
-  <object id="178" x="1219.92" y="2218.91" width="96.1538" height="74.1758">
+  <object id="178" x="956.692" y="2974.03" width="96.1538" height="74.1758">
    <properties>
     <property name="entity" value="0.monk"/>
    </properties>
   </object>
-  <object id="179" x="1355.73" y="2025.11" width="96.1538" height="74.1758">
+  <object id="179" x="2512.19" y="3022.84" width="96.1538" height="74.1758">
    <properties>
     <property name="entity" value="0.monk"/>
    </properties>

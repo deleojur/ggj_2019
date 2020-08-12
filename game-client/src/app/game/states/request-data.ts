@@ -47,7 +47,7 @@ export interface TurnCommandData
 	targetEntityGuid: number; //if a new entity is created or another entity is referenced, make sure that the same reference is used.
 	originCell: PositionData;
 	targetCell: PositionData;
-	
+	path?: PositionData[];
 	behaviorInformation: string;
 }
 
