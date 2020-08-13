@@ -1,31 +1,32 @@
 import { TurnInformation, TurnCommand } from './turn-command';
 import { BehaviorInformation, Entity } from '../entities/entity';
 import { GameManager } from '../game-manager';
+import { TurnResolve } from '../states/host-states/host-state_turn-resolve';
 
 export class ResolveTurnCommand
 {
-	public tryToResolveTurnCommand(command: TurnCommand, otherCommands: TurnInformation[]): boolean
+	public tryToResolveTurnCommand(command: TurnCommand, otherCommands: TurnInformation[], turnResolve: TurnResolve): void
 	{
 		const commandBehavior: BehaviorInformation = command.turnInformation.behaviorInformation;
+		const entities: Entity[] = GameManager.instance.gridStrategy.getEntitiesAtHex(command.turnInformation.targetCell);
 
-		for (let i = 0; i < otherCommands.length; i++) 
+		otherCommands.forEach(otherCommand =>
 		{
-			const otherCommand = otherCommands[i];
 			const otherBehavior: BehaviorInformation = otherCommand.behaviorInformation;
 
-			if (!this.isBehaviorValid(commandBehavior, otherBehavior))
-			{
-				return false;
-			}
-		}
+		});
+
+		entities.forEach(entity => 
+		{
+			
+		});
 
 		this.solidifyTurnInformation(command);
-		return true;
 	}
 
-	private isBehaviorValid(behavior: BehaviorInformation, otherBehavior: BehaviorInformation): boolean
+	private canResolve(): void
 	{
-		return true;
+
 	}
 
 	/**
@@ -63,6 +64,7 @@ export class ResolveTurnCommand
 	public solidifyTurnInformation(turnCommand: TurnCommand): void
 	{
 		const turnInformation: TurnInformation = turnCommand.turnInformation;
+		//GameManager.instance.turnSystem.displayTurnCommand(turnCommand, turnInformation.currentCell);
 		//TODO: based on the type of turnCommand, make sure it is carried out.
 		turnInformation.targetEntity = GameManager.instance.gridStrategy.createEntityFromCommand(turnCommand);		
 		if (turnInformation.behaviorInformation.type === 'train' || 'upgrade')
@@ -70,7 +72,7 @@ export class ResolveTurnCommand
 			GameManager.instance.gridStrategy.addEntity(turnInformation.targetCell, turnInformation.targetEntity);
 			if (turnInformation.behaviorInformation.type === 'upgrade')
 			{
-				GameManager.instance.gridStrategy.removeEntity(turnInformation.originCell, turnInformation.originEntity);
+				GameManager.instance.gridStrategy.removeEntity(turnInformation.currentCell, turnInformation.originEntity);
 			}
 		}
 	}

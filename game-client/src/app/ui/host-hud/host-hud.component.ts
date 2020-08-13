@@ -21,7 +21,7 @@ export class HostHudComponent implements OnInit
 
 	public startNewRound(): void
 	{
-		const source = interval(1000);		
+		const source = interval(1000);
 		this.timerSubscription = source.subscribe(val => 
 		{
 			this.time--;

@@ -104,9 +104,9 @@ export class SelectCellComponent implements OnInit, InnerWindowComponent
 					if (current.parent)
 					{
 						current = current.parent;
-					} else break;					
+					} else break;
 				} while (true);
-				GameManager.instance.createTurnCommand(this.hex, hex, this._entity, this._behavior, path);
+				GameManager.instance.createTurnCommand(this._entity, this._behavior, path);
 				GameManager.instance.windowManager.closeAllWindows();
 			}
 		});

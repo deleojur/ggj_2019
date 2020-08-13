@@ -210,15 +210,14 @@ export class GameManager
 	}
 
 	public createTurnCommand(
-		originCell: Hex<Cell>,
-		targetCell: Hex<Cell>,
 		originEntity: Entity,
 		item: BehaviorInformation,
 		path?: Hex<Cell>[]): void
 	{
 		this._resourceManager.subtractResources(item.cost);
-		const turnInformation: TurnInformation = this._turnSystem.generateTurnInformation(originCell, targetCell, originEntity, item, path);
-		this._turnSystem.addTurnCommand(turnInformation, this.clientStateHandler.clientId);
+		const turnInformation: TurnInformation = this._turnSystem.generateTurnInformation(originEntity, item, path);
+		this._turnSystem.addTurnCommand(turnInformation, turnInformation.targetCell, this.clientStateHandler.clientId);
+		this._gridStrategy.addEntity(turnInformation.targetCell, turnInformation.targetEntity);
 	}
 
 	public hexClicked(hex: Hex<Cell>): void
@@ -271,7 +270,7 @@ export class GameManager
 		{
 			this._windowManager.closeAllWindows(() =>
 			{
-				this.createTurnCommand(origin, origin, entity, item);
+				this.createTurnCommand(entity, item, [origin, origin]);
 			});
 		}
 	}

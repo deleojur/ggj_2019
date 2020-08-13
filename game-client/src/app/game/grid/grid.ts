@@ -164,7 +164,7 @@ export class GridManager
                 hex.properties.forEach(properties =>
                 {
                     if (properties.name === 'entity')
-                    {						
+                    {
 						const entityProps: string[] = properties.value.split('.');
 						const index: number = parseInt(entityProps[0]); 
 						const entityName: string = entityProps[1];

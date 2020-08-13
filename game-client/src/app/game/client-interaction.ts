@@ -31,7 +31,7 @@ export class ClientInteraction
 	public cancelAcquireItem(item: BehaviorInformation, origin: Hex<Cell>, entity: Entity): void
 	{
 		const gameManager: GameManager = GameManager.instance;
-		const turnInformation: TurnInformation = gameManager.turnSystem.removeTurnCommand(origin, item);
+		const turnInformation: TurnInformation = gameManager.turnSystem.removeBehaviorInformation(origin, item);
 		gameManager.resourceManager.addResource(turnInformation.behaviorInformation.cost);
 		if (entity === null)
 		{

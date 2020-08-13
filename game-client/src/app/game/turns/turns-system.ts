@@ -5,13 +5,11 @@ import { Point as pPoint, Graphics } from 'pixi.js';
 import { GameManager } from '../game-manager';
 import { BehaviorInformation, Entity } from '../entities/entity';
 import { TurnInformationData, TurnCommandData, PositionData } from '../states/request-data';
-import { ResolveTurnCommand } from './resolve-turn-command';
 import { AssetLoader } from 'src/app/asset-loader';
 import { GridStrategy } from '../grid/grid-strategy';
 
 export abstract class TurnsSystem
-{
-	protected _resolveTurnCommand: ResolveTurnCommand;
+{	
 	protected _turnCommands: Map<Hex<Cell>, TurnCommand[]>;
 	protected _renderCommands: TurnCommand[];
 
@@ -25,7 +23,6 @@ export abstract class TurnsSystem
 
 		this._turnCommands = new Map<Hex<Cell>, TurnCommand[]>();
 		this._renderCommands = [];
-		this._resolveTurnCommand = new ResolveTurnCommand();
 		
 		const tiles: Hex<Cell>[] = GameManager.instance.grid.getValidTiles();
 		tiles.forEach((e: Hex<Cell>) => 
@@ -115,9 +112,6 @@ export abstract class TurnsSystem
 		switch (item.type)
 		{
 			case "build":
-				const entity_b: Entity = gridStrategy.createEntity(hex, 'new entity -> no owner has been set yet.', item.creates);
-				gridStrategy.addEntity(hex, entity_b);
-				return entity_b;
 			case "upgrade":
 			case "train":
 				const entity_t: Entity = gridStrategy.createEntity(hex, 'new entity -> no owner has been set yet.', item.creates);
@@ -140,12 +134,10 @@ export abstract class TurnsSystem
 				path.push(hex);
 			});
 
-			const originCell: Hex<Cell> = GameManager.instance.grid.getHex(command.originCell.x, command.originCell.y);
-			const targetCell: Hex<Cell> = GameManager.instance.grid.getHex(command.targetCell.x, command.targetCell.y);
 			const entity: Entity = GameManager.instance.gridStrategy.getEntityByGuid(command.originEntityGuid);
 			const behaviorInformation: BehaviorInformation = AssetLoader.instance.getBehaviorInformation(command.behaviorInformation);
-			const turnInformation: TurnInformation = this.generateTurnInformation(originCell, targetCell, entity, behaviorInformation, path);
-			const turnCommand: TurnCommand = this.addTurnCommand(turnInformation, command.owner);
+			const turnInformation: TurnInformation = this.generateTurnInformation(entity, behaviorInformation, path);
+			const turnCommand: TurnCommand = this.addTurnCommand(turnInformation, turnInformation.targetCell, command.owner);
 			turnCommand.turnInformation.targetEntity.guid = command.targetEntityGuid;
 			turnCommands.push(turnCommand);
 		});
@@ -153,36 +145,36 @@ export abstract class TurnsSystem
 	}
 
 	public generateTurnInformation(
-		originCell: Hex<Cell>,
-		targetCell: Hex<Cell>,
 		originEntity: Entity,
 		item?: BehaviorInformation,
 		path?: Hex<Cell>[]): TurnInformation
 	{
+		const targetCell: Hex<Cell> = path[path.length - 1];
 		const targetEntity: Entity = this.createTargetEntity(originEntity, targetCell, item);
-		return {
-			originCell: originCell,
-			targetCell: targetCell,
-			originEntity: originEntity,
-			targetEntity: targetEntity,
-			behaviorInformation: item,
-			path: path
-		};
+		return new TurnInformation(item, originEntity, targetEntity, path);
 	}
 
-	public addTurnCommand(turnInformation: TurnInformation, owner: string): TurnCommand
+	public displayTurnCommand(command: TurnCommand, target: Hex<Cell>): void
 	{
-		const command: TurnCommand = new TurnCommand(owner, turnInformation);
-		this._turnCommands.get(turnInformation.targetCell).push(command);
-
+		const turnInformation: TurnInformation = command.turnInformation;
 		if (turnInformation.behaviorInformation.type === 'move')
 		{
-			GameManager.instance.gridStrategy.moveEntityToHex(turnInformation.targetEntity, turnInformation.originCell, turnInformation.targetCell);
+			GameManager.instance.gridStrategy.moveEntityToHex(turnInformation.targetEntity, turnInformation.currentCell, target);
 		}
 
 		this.iconGraphics.addChild(command.commandIcon);
-		this.updateCommandIcons(turnInformation.targetCell);
+		this.updateCommandIcons(target);
+	}
 
+	public addExistingCommand(hex: Hex<Cell>, turnCommand: TurnCommand): void
+	{
+		this._turnCommands.get(hex).push(turnCommand);
+	}
+
+	public addTurnCommand(turnInformation: TurnInformation, hex: Hex<Cell>, owner: string): TurnCommand
+	{
+		const command: TurnCommand = new TurnCommand(owner, turnInformation);
+		this._turnCommands.get(hex).push(command);
 		return command;
 	}
 
@@ -190,15 +182,6 @@ export abstract class TurnsSystem
 	{
 		const pos: Point = hex.toPoint().add(hex.center());
 		const turnCommands: TurnCommand[] = this._turnCommands.get(hex).slice();
-
-		for (let i: number = turnCommands.length - 1; i > -1; i--)
-		{
-			const command: TurnCommand = turnCommands[i];
-			if (command.turnInformation.targetCell !== hex)
-			{
-				turnCommands.splice(i, 1);
-			}
-		}
 
 		for (let i: number = 0; i < turnCommands.length; i++)
 		{
@@ -215,19 +198,35 @@ export abstract class TurnsSystem
 		{
 			case 'upgrade':
 			case 'train':
-				GameManager.instance.gridStrategy.addEntity(turnInformation.originCell, turnInformation.originEntity);
+				GameManager.instance.gridStrategy.addEntity(turnInformation.currentCell, turnInformation.originEntity);
 				GameManager.instance.gridStrategy.removeEntity(turnInformation.targetCell, turnInformation.targetEntity);
 				break;
 			case 'build':
 				GameManager.instance.gridStrategy.removeEntity(turnInformation.targetCell, turnInformation.targetEntity);
 				break;
 			case 'move':
-				GameManager.instance.gridStrategy.moveEntityToHex(turnInformation.originEntity, turnInformation.targetCell, turnInformation.originCell);
+				GameManager.instance.gridStrategy.moveEntityToHex(turnInformation.originEntity, turnInformation.targetCell, turnInformation.currentCell);
 				break;
 		}
 	}
 
-	public removeTurnCommand(hex: Hex<Cell>, behaviorInformation: BehaviorInformation): TurnInformation
+	public removeTurnCommand(hex: Hex<Cell>, turnCommand: TurnCommand): void
+	{
+		const turnCommands: TurnCommand[] = this._turnCommands.get(hex);
+
+		for (let i: number = turnCommands.length - 1; i > -1; i--)
+		{
+			if (turnCommand.turnInformation.originEntity === turnCommands[i].turnInformation.originEntity)
+			{
+				turnCommands.splice(i, 1);
+				this._turnCommands.set(hex, turnCommands);
+				this.iconGraphics.removeChild(turnCommand.commandIcon);	
+			}
+		}
+		this.updateCommandIcons(hex);
+	}
+
+	public removeBehaviorInformation(hex: Hex<Cell>, behaviorInformation: BehaviorInformation): TurnInformation
 	{
 		const turnCommands: TurnCommand[] = this._turnCommands.get(hex);
 		for (let i: number = 0; i < turnCommands.length; i++)
@@ -236,7 +235,7 @@ export abstract class TurnsSystem
 			const turnInformation: TurnInformation = turnCommand.turnInformation;
 			if (behaviorInformation === turnCommand.turnInformation.behaviorInformation)
 			{
-				const origin: Hex<Cell> = turnInformation.originCell;
+				const origin: Hex<Cell> = turnInformation.currentCell;
 				const target: Hex<Cell> = turnInformation.targetCell;
 
 				const originIndex: number = this._turnCommands.get(origin).indexOf(turnCommand);
@@ -259,13 +258,13 @@ export abstract class TurnsSystem
 		}
 	}
 
-	protected exportCommands(turnCommands: TurnCommand[]): TurnInformationData
+	public exportCommands(turnCommands: TurnCommand[]): TurnInformationData
 	{
 		const turnInformationData: TurnInformationData = { turnCommands: [] };
 		turnCommands.forEach(turnCommand =>
 		{
 			const turnInformation: TurnInformation = turnCommand.turnInformation;
-			const originCell: Hex<Cell> = turnInformation.originCell;
+			const originCell: Hex<Cell> = turnInformation.currentCell;
 			const targetCell: Hex<Cell> = turnInformation.targetCell;
 			const guid: number = turnCommand.turnInformation.originEntity.guid;
 			let isPresent: boolean = false;
@@ -298,8 +297,6 @@ export abstract class TurnsSystem
 					originEntityGuid: turnCommand.turnInformation.originEntity.guid,
 					targetEntityName: turnCommand.turnInformation.targetEntity.name,
 					targetEntityGuid: turnCommand.turnInformation.targetEntity.guid,
-					originCell: { x: originCell.x, y: originCell.y },
-					targetCell: { x: targetCell.x, y: targetCell.y },
 					behaviorInformation: turnInformation.behaviorInformation.name,
 					path: path
 				});

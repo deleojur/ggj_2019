@@ -3,14 +3,75 @@ import { Cell } from '../grid/grid';
 import { Entity, BehaviorInformation } from '../entities/entity';
 import { CommandIcon } from './command-icon';
 
-export interface TurnInformation
+export class TurnInformation
 {
-	behaviorInformation: BehaviorInformation,
-	originEntity: Entity; //the entity before the turn.
-	targetEntity: Entity; //the entity after the turn is played.
-	originCell: Hex<Cell>; //the cell before the turn.
-	targetCell?: Hex<Cell>; //the cell after the turn is played.
-	path?: Hex<Cell>[];
+	public get path(): Hex<Cell>[]
+	{
+		return this._path;
+	}
+
+	public get currentCell(): Hex<Cell>
+	{
+		return this._path[0];
+	}
+
+	public get targetCell(): Hex<Cell>
+	{
+		return this._path[this._path.length - 1];
+	}
+
+	public get nextCell(): Hex<Cell>
+	{
+		return this.path.length > 0 ? this._path[1] : null;
+	}
+
+	public get targetEntity(): Entity 
+	{
+		return this._targetEntity;
+	}
+
+	public get length(): number
+	{
+		return this._path.length;
+	}
+
+	public set targetEntity(value: Entity) 
+	{
+		this._targetEntity = value;
+	}
+
+	public get originEntity(): Entity 
+	{
+		return this._originEntity;
+	}
+
+	public set originEntity(value: Entity) 
+	{
+		this._originEntity = value;
+	}
+	
+	public get behaviorInformation(): BehaviorInformation 
+	{
+		return this._behaviorInformation;
+	}
+
+	public set behaviorInformation(value: BehaviorInformation) 
+	{
+		this._behaviorInformation = value;
+	}
+
+	public shift(): Hex<Cell>
+	{
+		return this._path.shift();
+	}
+	
+	constructor(
+		private _behaviorInformation: BehaviorInformation,
+		private _originEntity: Entity,
+		private _targetEntity: Entity,
+		private _path: Hex<Cell>[])
+	{
+	}
 }
 
 export class TurnCommand

@@ -19,7 +19,7 @@ export class HostGrid extends GridStrategy
 
 	protected renderCommandsByOwnerColor(): void
 	{
-		const allTurnInformation: Map<string, TurnInformation[]> = GameManager.instance.hostTurnSystem.getAllTurnInformation();
+		const allTurnInformation: Map<string, TurnInformation[]> = GameManager.instance.hostTurnSystem.getTurnInformationPerClient();
 		this.clients.forEach(client =>
 		{
 			if (allTurnInformation.has(client.id))
