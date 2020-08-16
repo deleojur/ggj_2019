@@ -16,33 +16,43 @@ export class hostState_turnResolve extends PrimaryState<RequestData>
             (verifyTurnResolve: RequestData) => this.onDataRetrieved(verifyTurnResolve));
 	}
 
-	private handleCommands(resolveTurnCommand: ResolveTurnCommand, pendingTurnCommands: TurnCommand[], resolvedTurnCommands: TurnCommand[]): TurnCommand[]
+	private handleCommands(resolveTurnCommand: ResolveTurnCommand, pendingTurnCommands: TurnCommand[], resolvedTurnCommands: Set<TurnCommand>): TurnCommand[]
 	{
 		const nextCommands: TurnCommand[] = [];
 		pendingTurnCommands.forEach(clientCommand =>
 		{
-			const turnInfo: TurnInformation = clientCommand.turnInformation;
-			
-			GameManager.instance.turnSystem.addExistingCommand(turnInfo.currentCell, clientCommand)
-			GameManager.instance.turnSystem.displayTurnCommandIcon(clientCommand, turnInfo.currentCell);
-			if (resolveTurnCommand.tryToResolveTurnCommand(clientCommand))
+			const otherCommands: TurnCommand[] = pendingTurnCommands.slice();
+			const indexOf: number = otherCommands.indexOf(clientCommand);
+			otherCommands.splice(indexOf, 1);
+
+			if (resolveTurnCommand.tryToResolveTurnCommand(clientCommand, otherCommands))
 			{
-				turnInfo.shift();
-				if (turnInfo.length > 0)
-				{
-					nextCommands.push(clientCommand);
-				} else
-				{
-					resolvedTurnCommands.push(clientCommand);
-				}
+				nextCommands.push(clientCommand);
 			}
 		});
+
+		for (let i: number = nextCommands.length - 1; i > -1; i--)
+		{
+			const turnCommand: TurnCommand = nextCommands[i];
+			const turnInfo: TurnInformation = turnCommand.turnInformation;
+
+			GameManager.instance.turnSystem.addExistingCommand(turnInfo.currentCell, turnCommand)
+			GameManager.instance.turnSystem.displayTurnCommandIcon(turnCommand, turnInfo.currentCell);
+			resolvedTurnCommands.add(turnCommand);
+			
+			turnInfo.shift();
+			if (turnInfo.length === 0)
+			{
+				nextCommands.splice(i, 1);
+			}
+		}
+
 		return nextCommands;
 	}
 
 	public handleTurns(resolveTurnCommand: ResolveTurnCommand, turnsHandled: (resolvedTurnCommands: TurnCommand[]) => void): void
 	{
-		const successfulTurnCommands: TurnCommand[] = [];
+		const successfulTurnCommands: Set<TurnCommand> = new Set<TurnCommand>();
 		let turnCommands: TurnCommand[] = GameManager.instance.hostTurnSystem.getAllTurnCommands();
 		let previousCommands: { turnCommand: TurnCommand, hex: Hex<Cell> }[] = []; //temporarily stores the 
 
@@ -73,7 +83,7 @@ export class hostState_turnResolve extends PrimaryState<RequestData>
 				if (turnCommands.length === 0)
 				{
 					secondaryWait.unsubscribe();
-					return turnsHandled(successfulTurnCommands);
+					return turnsHandled(Array.from(successfulTurnCommands));
 				}
 			});
 			initialWait.unsubscribe();

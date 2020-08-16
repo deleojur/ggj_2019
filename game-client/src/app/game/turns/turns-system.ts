@@ -245,7 +245,7 @@ export abstract class TurnsSystem
 		}
 	}
 
-	public exportCommands(turnCommands: TurnCommand[]): TurnInformationData
+	public exportCommands(turnCommands: TurnCommand[], getTurnCommandPath: (turnInformation: TurnInformation) => PositionData[]): TurnInformationData
 	{
 		const turnInformationData: TurnInformationData = { turnCommands: [] };
 		turnCommands.forEach(turnCommand =>
@@ -263,15 +263,7 @@ export abstract class TurnsSystem
 					break;
 				}
 			}
-
-			const path: PositionData[] = [];
-			if (turnInformation.originalPath)
-			{
-				turnInformation.originalPath.forEach(hex =>
-				{
-					path.push({ x: hex.x, y: hex.y });
-				});
-			}
+			const path: PositionData[] = getTurnCommandPath(turnInformation);
 
 			if (!isPresent)
 			{

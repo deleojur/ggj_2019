@@ -116,7 +116,7 @@ export class ClientTurnSystem extends TurnsSystem
 					});
 				}				
 			});
-			clientStateTurnResolve.doRequestSendTurnInformation(this.exportCommands(turnCommands));
+			clientStateTurnResolve.doRequestSendTurnInformation(this.exportCommands(turnCommands, (turnCommand: TurnInformation) => { return turnCommand.fullPathData }));
 		}, true) as clientState_turnInformation;
 	}
 

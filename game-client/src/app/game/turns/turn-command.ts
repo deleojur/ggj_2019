@@ -2,6 +2,7 @@ import { Hex } from 'honeycomb-grid';
 import { Cell } from '../grid/grid';
 import { Entity, BehaviorInformation } from '../entities/entity';
 import { CommandIcon } from './command-icon';
+import { PositionData } from '../states/request-data';
 
 export class TurnInformation
 {
@@ -10,14 +11,9 @@ export class TurnInformation
 		return this._path;
 	}
 
-	public get originalPath(): Hex<Cell>[]
-	{
-		return this._originalPath;
-	}
-
 	public get originCell(): Hex<Cell>
 	{
-		return this.originalPath[0];
+		return this._originalPath[0];
 	}
 
 	public get currentCell(): Hex<Cell>
@@ -76,12 +72,34 @@ export class TurnInformation
 	}
 
 	public shift(): Hex<Cell>
-	{
+	{		
+		this._validPath.push(this.currentCell);
 		this._previousCell = this.currentCell;
 		return this._path.shift();
 	}
-	
+
+	private getPathData(path: Hex<Cell>[]): PositionData[]
+	{
+		const pathData: PositionData[] = [];
+		path.forEach(hex =>
+		{
+			pathData.push({ x: hex.x, y: hex.y });
+		});
+		return pathData
+	}
+
+	public get validPathData(): PositionData[]
+	{
+		return this.getPathData(this._validPath);
+	}
+
+	public get fullPathData(): PositionData[]
+	{
+		return this.getPathData(this._originalPath);
+	}
+
 	private _originalPath: Hex<Cell>[];
+	private _validPath: Hex<Cell>[];
 	private _previousCell: Hex<Cell>;
 	constructor(
 		private _behaviorInformation: BehaviorInformation,
@@ -89,6 +107,7 @@ export class TurnInformation
 		private _targetEntity: Entity,
 		private _path: Hex<Cell>[])
 	{
+		this._validPath = [];
 		this._originalPath = this._path.slice();
 		this._previousCell = this.currentCell;
 	}

@@ -1,58 +1,114 @@
 import { TurnInformation, TurnCommand } from './turn-command';
-import { BehaviorInformation, Entity } from '../entities/entity';
 import { GameManager } from '../game-manager';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from '../grid/grid';
+import { Entity } from '../entities/entity';
+import { Unit } from '../entities/unit';
+import { Structure } from '../entities/structure';
 
 export class ResolveTurnCommand
 {
-	public tryToResolveTurnCommand(turnCommand: TurnCommand): boolean
+	public tryToResolveTurnCommand(turnCommand: TurnCommand, otherCommands: TurnCommand[]): boolean
 	{
 		const turnInformation: TurnInformation = turnCommand.turnInformation;
-		this.resolveTurnCommand(turnCommand, turnInformation.currentCell, turnInformation.previousCell);
-		return true;
-		/*const targetTurnInformation: TurnInformation[] = this.getOtherTurnInformation(command.turnInformation.targetCell, command);
-		const currentTurnInformation: TurnInformation[] = this.getOtherTurnInformation(command.turnInformation.targetCell, command);
+		const type: string = turnInformation.behaviorInformation.type;
+		const entities: Entity[] = this.getEntitiesWithoutCommands(turnCommand, otherCommands);
 
-		const commandBehavior: BehaviorInformation = command.turnInformation.behaviorInformation;
-		const entities: Entity[] = GameManager.instance.gridStrategy.getEntitiesAtHex(command.turnInformation.targetCell);
+		if (type === 'move')
+		{
+			return this.tryResolveMoveTurn(turnCommand, otherCommands, entities);
+		} else if (type === 'build')
+		{
+			return this.tryResolveBuildTurn(turnCommand, otherCommands, entities);
+		}
+	}
 
-		//1) a building cannot be built if another building is already in the way or would be built there (all build commands fail for that tile).
-		//2) when a unit walks somewhere where another unit walks, where 
-
+	private tryResolveMoveTurn(turnCommand: TurnCommand, otherCommands: TurnCommand[], entities: Entity[]): boolean
+	{
+		const turnInformation: TurnInformation = turnCommand.turnInformation;
+		let blaat: boolean = true;
 		otherCommands.forEach(otherCommand =>
 		{
-			const otherBehavior: BehaviorInformation = otherCommand.behaviorInformation;
-
+			const otherTurnInformation: TurnInformation = otherCommand.turnInformation;
+			if (otherTurnInformation.behaviorInformation.type === 'move')
+			{
+				if ((otherTurnInformation.currentCell === turnInformation.currentCell) || //landing on the same cell
+					(otherTurnInformation.currentCell === turnInformation.previousCell && //moving past each other
+					otherTurnInformation.previousCell === turnInformation.currentCell))
+				{
+					blaat = false;
+				}
+			}
 		});
 
 		entities.forEach(entity => 
 		{
-			
+			if (entity instanceof Unit)
+			{
+				blaat = false;
+			}
 		});
 
-		*/
+		if (!blaat)
+		{
+			console.log('a battle will be fought!');
+		} else
+		{
+			this.resolveTurnCommand(turnCommand, turnInformation.currentCell, turnInformation.previousCell);
+		}
+
+		return blaat;
 	}
 
-	private resolveBuildCommand(): boolean
+	private tryResolveBuildTurn(turnCommand: TurnCommand, otherCommands: TurnCommand[], entities: Entity[]): boolean
 	{
+		const turnInformation: TurnInformation = turnCommand.turnInformation;
+		for (let i = 0; i < otherCommands.length; i++)
+		{
+			const otherTurnInformation: TurnInformation = otherCommands[i].turnInformation;
+			if (otherTurnInformation.behaviorInformation.type === 'build')
+			{
+				if (otherTurnInformation.currentCell === turnInformation.currentCell) //building on the same cell
+				{
+					return false;
+				}
+			}
+		}
+
+		for (let i = 0; i < entities.length; i++)
+		{
+			if (entities[i] instanceof Structure)
+			{
+				return false;
+			}
+		}
+		this.resolveTurnCommand(turnCommand, turnInformation.currentCell, turnInformation.previousCell);
 		return true;
 	}
 
-	private getOtherTurnInformation(hex: Hex<Cell>, command: TurnCommand): TurnInformation[]
+	private getEntitiesWithoutCommands(turnCommand: TurnCommand, otherCommands: TurnCommand[]): Entity[]
 	{
-		const otherCommands: TurnInformation[] = GameManager.instance.hostTurnSystem.getTurnInformation(hex).slice();
-		const indexOf: number = otherCommands.indexOf(command.turnInformation);
-		otherCommands.splice(indexOf, 1);
+		const entities: Entity[] = GameManager.instance.gridStrategy.getEntitiesAtHex(turnCommand.turnInformation.currentCell).slice();
+		
+		for (let i: number = entities.length - 1; i > -1; i--)
+		{
+			const entity: Entity = entities[i];
+			const allCommands: TurnCommand[] = [turnCommand, ...otherCommands];
 
-		return otherCommands;
+			allCommands.forEach(command =>
+			{
+				if (entity === command.turnInformation.targetEntity)
+				{
+					entities.splice(i, 1);
+				}
+			});			
+		}
+		return entities;
 	}
-
 	/**
-	 * 1) clients can specify how a unit moves to a certain tile; the intermediate steps are displayed and stored.
-	 * ->	1.1) the intermediate tiles are send to the server and displayed there as well.
+	 * done 1) clients can specify how a unit moves to a certain tile; the intermediate steps are displayed and stored.
+	 * done ->	1.1) the intermediate tiles are send to the server and displayed there as well.
 	 * 2) the server checks all intermediate tiles to see where units have overlap on their journey.
-	 * 3) it prefers to collide as many units as possible.
 	 * 4) if a unit collides, survives and collides again, it will have two collisions and be weakened from the earlier encounter.
 	 * 5) at the start of each round, the health of all units is reset.
 	 * 6) design choice: 
