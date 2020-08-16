@@ -36,6 +36,45 @@ export class ClientTurnSystem extends TurnsSystem
 		});
 	}
 
+	public previewTurnCommand(turnCommand: TurnCommand): void
+	{
+		const turnInformation: TurnInformation = turnCommand.turnInformation;
+		const type: string = turnInformation.behaviorInformation.type;
+		if (type === 'build')
+		{
+			GameManager.instance.gridStrategy.addEntity(turnInformation.targetCell, turnInformation.targetEntity);
+		}
+		else if (type === 'move')
+		{
+			GameManager.instance.gridStrategy.moveEntityToHex(turnInformation.originEntity, turnInformation.currentCell, turnInformation.targetCell);
+		}
+	}
+
+	private removeTurnCommands(): void
+	{
+		const tiles: Hex<Cell>[] = GameManager.instance.grid.getValidTiles();
+		tiles.forEach((hex: Hex<Cell>) => 
+		{
+			const turnCommands: TurnCommand[] = this._turnCommands.get(hex);
+			turnCommands.forEach(turnCommand =>
+			{
+				const type: string = turnCommand.turnInformation.behaviorInformation.type;
+				const turnInformation: TurnInformation = turnCommand.turnInformation;
+				this.removeTurnCommand(hex, turnCommand);
+
+				if (type === 'build')
+				{
+					GameManager.instance.gridStrategy.removeEntity(turnCommand.turnInformation.targetCell, turnCommand.turnInformation.targetEntity);
+				}
+
+				if (type === 'move')
+				{
+					GameManager.instance.gridStrategy.moveEntityToHex(turnInformation.targetEntity, turnInformation.targetCell, turnInformation.originCell);
+				}
+			});
+		});
+	}
+
 	protected onRoundStarted(): void
 	{
 		console.log('round has started!');
@@ -45,13 +84,13 @@ export class ClientTurnSystem extends TurnsSystem
 			const clientStateTurnResolve: clientState_turnResolve = 
 			GameManager.instance.clientStateHandler.activateState(clientState_turnResolve, (turnResolveData: TurnResolveData) =>
 			{
-				//TODO: clear all the turnCommands and build/destroy/move entities.
-				this.removeAllTurnCommands();
+				this.removeTurnCommands();
 
-				const turnCommands: TurnCommand[] = this.addTurnInformationFromCommanData(turnResolveData.validTurnCommands);
+				const turnCommands: TurnCommand[] = this.addTurnInformationFromCommandData(turnResolveData.validTurnCommands);
 				turnCommands.forEach(turnCommand =>
 				{
-					//this._resolveTurnCommand.solidifyTurnInformation(turnCommand);
+					const turnInformation: TurnInformation = turnCommand.turnInformation;
+					this._resolveTurnCommand.resolveTurnCommand(turnCommand, turnInformation.targetCell, turnInformation.originCell);
 				});
 				this.clientResetTurnCommandsRender();
 				GameManager.instance.renderCellsOutline();
@@ -84,7 +123,7 @@ export class ClientTurnSystem extends TurnsSystem
 	public addTurnCommand(turnInformation: TurnInformation, hex: Hex<Cell>, owner: string): TurnCommand
 	{
 		const command: TurnCommand = super.addTurnCommand(turnInformation, hex, owner);
-		this.displayTurnCommand(command, turnInformation.targetCell);
+		this.displayTurnCommandIcon(command, turnInformation.targetCell);
 		if (turnInformation.currentCell !== turnInformation.targetCell)
 		{
 			this._turnCommands.get(turnInformation.currentCell).push(command);

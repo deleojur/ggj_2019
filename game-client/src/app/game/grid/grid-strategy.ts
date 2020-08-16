@@ -138,7 +138,7 @@ export abstract class GridStrategy
 
 	protected abstract renderCommandsByOwnerColor(): void;
 
-	protected setEntityGuid(entity: Entity, guid: number): Entity
+	public setEntityGuid(entity: Entity, guid: number): Entity
 	{
 		entity.guid = guid;
 		this._entitiesByGuids.set(guid, entity);

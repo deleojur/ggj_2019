@@ -10,6 +10,16 @@ export class TurnInformation
 		return this._path;
 	}
 
+	public get originalPath(): Hex<Cell>[]
+	{
+		return this._originalPath;
+	}
+
+	public get originCell(): Hex<Cell>
+	{
+		return this.originalPath[0];
+	}
+
 	public get currentCell(): Hex<Cell>
 	{
 		return this._path[0];
@@ -23,6 +33,11 @@ export class TurnInformation
 	public get nextCell(): Hex<Cell>
 	{
 		return this.path.length > 0 ? this._path[1] : null;
+	}
+
+	public get previousCell(): Hex<Cell>
+	{
+		return this._previousCell;
 	}
 
 	public get targetEntity(): Entity 
@@ -62,15 +77,20 @@ export class TurnInformation
 
 	public shift(): Hex<Cell>
 	{
+		this._previousCell = this.currentCell;
 		return this._path.shift();
 	}
 	
+	private _originalPath: Hex<Cell>[];
+	private _previousCell: Hex<Cell>;
 	constructor(
 		private _behaviorInformation: BehaviorInformation,
 		private _originEntity: Entity,
 		private _targetEntity: Entity,
 		private _path: Hex<Cell>[])
 	{
+		this._originalPath = this._path.slice();
+		this._previousCell = this.currentCell;
 	}
 }
 

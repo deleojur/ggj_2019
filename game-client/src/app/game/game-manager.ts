@@ -216,8 +216,8 @@ export class GameManager
 	{
 		this._resourceManager.subtractResources(item.cost);
 		const turnInformation: TurnInformation = this._turnSystem.generateTurnInformation(originEntity, item, path);
-		this._turnSystem.addTurnCommand(turnInformation, turnInformation.targetCell, this.clientStateHandler.clientId);
-		this._gridStrategy.addEntity(turnInformation.targetCell, turnInformation.targetEntity);
+		const turnCommand: TurnCommand = this._turnSystem.addTurnCommand(turnInformation, turnInformation.targetCell, this.clientStateHandler.clientId);
+		this.clientTurnSystem.previewTurnCommand(turnCommand);
 	}
 
 	public hexClicked(hex: Hex<Cell>): void

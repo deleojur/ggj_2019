@@ -66,7 +66,7 @@ export class HostTurnSystem extends TurnsSystem
 		GameManager.instance.hostStateHandler.activateState<TurnInformationData>(hostState_turnInformation, (turnInformation) =>
 		{
 			this.clientDataReceived.set(turnInformation.id, true);
-			this.addTurnInformationFromCommanData(turnInformation);
+			this.addTurnInformationFromCommandData(turnInformation);
 
 			if (this.receivedDataForAllClients)
 			{
@@ -125,13 +125,15 @@ export class HostTurnSystem extends TurnsSystem
 				this.onRoundStarted();
 			}
 		}, false) as hostState_turnResolve;
-		turnResolve.handleTurns(() =>
+		turnResolve.handleTurns(this._resolveTurnCommand, (resolvedTurnCommands) =>
 		{
+			console.log(resolvedTurnCommands);
+			this.resetTurnCommands();
 			this._clients.forEach(client =>
 			{
-				//TODO: send client the resolved, unresolved and pending commands
-				turnResolve.doRequestTurnResolve(client.id, null, resources.get(client.id));
+				turnResolve.doRequestTurnResolve(client.id, this.exportCommands(resolvedTurnCommands), resources.get(client.id));
 			});
+			GameManager.instance.renderCellsOutline();
 		});
 		GameManager.instance.renderCellsOutline();
 		this.hostResetTurnCommandsRender();

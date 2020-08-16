@@ -1,14 +1,24 @@
 import { TurnInformation, TurnCommand } from './turn-command';
 import { BehaviorInformation, Entity } from '../entities/entity';
 import { GameManager } from '../game-manager';
-import { TurnResolve } from '../states/host-states/host-state_turn-resolve';
+import { Hex } from 'honeycomb-grid';
+import { Cell } from '../grid/grid';
 
 export class ResolveTurnCommand
 {
-	public tryToResolveTurnCommand(command: TurnCommand, otherCommands: TurnInformation[], turnResolve: TurnResolve): void
+	public tryToResolveTurnCommand(turnCommand: TurnCommand): boolean
 	{
+		const turnInformation: TurnInformation = turnCommand.turnInformation;
+		this.resolveTurnCommand(turnCommand, turnInformation.currentCell, turnInformation.previousCell);
+		return true;
+		/*const targetTurnInformation: TurnInformation[] = this.getOtherTurnInformation(command.turnInformation.targetCell, command);
+		const currentTurnInformation: TurnInformation[] = this.getOtherTurnInformation(command.turnInformation.targetCell, command);
+
 		const commandBehavior: BehaviorInformation = command.turnInformation.behaviorInformation;
 		const entities: Entity[] = GameManager.instance.gridStrategy.getEntitiesAtHex(command.turnInformation.targetCell);
+
+		//1) a building cannot be built if another building is already in the way or would be built there (all build commands fail for that tile).
+		//2) when a unit walks somewhere where another unit walks, where 
 
 		otherCommands.forEach(otherCommand =>
 		{
@@ -21,12 +31,21 @@ export class ResolveTurnCommand
 			
 		});
 
-		this.solidifyTurnInformation(command);
+		*/
 	}
 
-	private canResolve(): void
+	private resolveBuildCommand(): boolean
 	{
+		return true;
+	}
 
+	private getOtherTurnInformation(hex: Hex<Cell>, command: TurnCommand): TurnInformation[]
+	{
+		const otherCommands: TurnInformation[] = GameManager.instance.hostTurnSystem.getTurnInformation(hex).slice();
+		const indexOf: number = otherCommands.indexOf(command.turnInformation);
+		otherCommands.splice(indexOf, 1);
+
+		return otherCommands;
 	}
 
 	/**
@@ -61,19 +80,24 @@ export class ResolveTurnCommand
 	 * 12) they will lose one upgrade (capital -> city, city -> village, village -> town, town does not degrade) and will go to the 
 	 * 		player that commited the most attack power to the attack.
 	*/
-	public solidifyTurnInformation(turnCommand: TurnCommand): void
+	public resolveTurnCommand(turnCommand: TurnCommand, targetCell: Hex<Cell>, originCell: Hex<Cell>): void
 	{
 		const turnInformation: TurnInformation = turnCommand.turnInformation;
-		//GameManager.instance.turnSystem.displayTurnCommand(turnCommand, turnInformation.currentCell);
-		//TODO: based on the type of turnCommand, make sure it is carried out.
-		turnInformation.targetEntity = GameManager.instance.gridStrategy.createEntityFromCommand(turnCommand);		
-		if (turnInformation.behaviorInformation.type === 'train' || 'upgrade')
+		turnInformation.targetEntity = GameManager.instance.gridStrategy.createEntityFromCommand(turnCommand);
+		const type: string = turnInformation.behaviorInformation.type;
+
+		if (type === 'train' || type === 'upgrade' || type === 'build')
 		{
-			GameManager.instance.gridStrategy.addEntity(turnInformation.targetCell, turnInformation.targetEntity);
-			if (turnInformation.behaviorInformation.type === 'upgrade')
+			GameManager.instance.gridStrategy.addEntity(targetCell, turnInformation.targetEntity);
+			if (type === 'upgrade')
 			{
-				GameManager.instance.gridStrategy.removeEntity(turnInformation.currentCell, turnInformation.originEntity);
+				GameManager.instance.gridStrategy.removeEntity(targetCell, turnInformation.originEntity);
 			}
+		}
+
+		if (type === 'move')
+		{
+			GameManager.instance.gridStrategy.moveEntityToHex(turnInformation.targetEntity, originCell, targetCell);
 		}
 	}
 }
