@@ -25,6 +25,13 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: GotischeMajuskel;
+	src: url('./assets/fonts/GotischeMajuskel.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
 .btn-parent-small
 {
     position: absolute;
@@ -58,7 +65,7 @@ html, body {
     overflow-x: hidden;
     overflow-y: hidden;
   }
-body { -webkit-user-select: none; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { -webkit-user-select: none; font-family: GotischeMajuskel, "Helvetica Neue", sans-serif; }
 
 img
 {

@@ -67,6 +67,11 @@
 		"assets/units/frames/frame_mask.png",
 		"assets/units/frames/round_frame.png",
 		"assets/units/frames/temp.png",
+		"assets/units/frames/unit_background.png",
+		"assets/units/frames/unit_mask.png",
+		"assets/units/frames/unit_health.png",
+		"assets/units/frames/unit_atk_art.png",
+		"assets/units/frames/unit_atk_dmg.png",
 
 		"assets/actions/build_town_t.png",
 		"assets/actions/upgrade_t.png",

@@ -2,6 +2,9 @@ import { Component, AfterViewInit, ViewChild, ElementRef, HostListener } from '@
 import { WindowComponent } from 'src/app/ui/window/window.component';
 import { GameManager } from '../game-manager';
 import { StateHandlerService } from '../states/state-handler.service';
+import { GridClient } from '../grid/client-grid';
+import { ClientTurnSystem } from '../turns/client-turn-system';
+import { ClientStateHandler } from '../states/client-states/client-state-handler';
 
 export interface Game
 {
@@ -27,17 +30,23 @@ export class GameComponent implements AfterViewInit
     @ViewChild('pixiContainer', {static: false}) pixiContainer: ElementRef;
     @ViewChild(WindowComponent, {static: true}) windowContainer: WindowComponent;
 
-    constructor()
+    constructor(private clientStateHandler: ClientStateHandler)
     {
 		
     }
     
     ngAfterViewInit()
     {
-		const canvas: HTMLCanvasElement = GameManager.instance.worldCanvas;
-		this.pixiContainer.nativeElement.appendChild(canvas);
-		GameManager.instance.windowManager.windowComponent = this.windowContainer;
-		GameManager.instance.startGame();
+		const clientGrid: GridClient = new GridClient(this.clientStateHandler);
+		const clientTurnSystem: ClientTurnSystem = new ClientTurnSystem();
+		GameManager.instance.init(clientGrid, clientTurnSystem, () => 
+		{
+			GameManager.instance.generateDebugClients();
+			const canvas: HTMLCanvasElement = GameManager.instance.worldCanvas;
+			this.pixiContainer.nativeElement.appendChild(canvas);
+			GameManager.instance.windowManager.windowComponent = this.windowContainer;
+			GameManager.instance.startGame();
+		});
     }
 
     @HostListener('window:resize', ['$event'])
