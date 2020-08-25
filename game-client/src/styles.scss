@@ -58,14 +58,13 @@ select:focus
     width: 80%;
 }
 
-
 .wrapper { overscroll-behavior: none }
 
 html, body {
     overflow-x: hidden;
     overflow-y: hidden;
   }
-body { -webkit-user-select: none; font-family: GotischeMajuskel, "Helvetica Neue", sans-serif; }
+body { -webkit-user-select: none; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 img
 {

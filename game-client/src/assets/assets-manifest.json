@@ -5,8 +5,6 @@
 		"assets/Terrain_Medieval/Base/hexPlains00.png",
 		"assets/Terrain_Medieval/Base/hexUnderDirt00.png",
 		"assets/Terrain_Medieval/Base/hexUnderOcean00.png",
-		"assets/Terrain_Medieval/Base/hexDesertDunes00.png",
-		"assets/Terrain_Medieval/Base/hexMountain00.png",
 
 		"assets/Terrain_Medieval/Decor/town.png",
 		"assets/Terrain_Medieval/Decor/village.png",
@@ -63,15 +61,11 @@
 		"assets/UI/button/round_mask.png",
 		"assets/UI/button/ring_frame.PNG",
 
-		"assets/units/frames/frame_foreground.png",	
-		"assets/units/frames/frame_mask.png",
 		"assets/units/frames/round_frame.png",
-		"assets/units/frames/temp.png",
 		"assets/units/frames/unit_background.png",
 		"assets/units/frames/unit_mask.png",
 		"assets/units/frames/unit_health.png",
 		"assets/units/frames/unit_atk_art.png",
-		"assets/units/frames/unit_atk_dmg.png",
 
 		"assets/actions/build_town_t.png",
 		"assets/actions/upgrade_t.png",
