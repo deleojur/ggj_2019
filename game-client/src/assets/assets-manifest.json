@@ -196,7 +196,6 @@
 	[
 		{
 			"name": "town",
-			"description": "a town.",
 			"textureUrl": "assets/Terrain_Medieval/Decor/town.png",
 			"entityType": "structure",
 			"cost": 
@@ -216,11 +215,12 @@
 				"upgrade to village",
 				"build farm",
 				"build marketplace"
-			]
+			],
+			"defense": 1,
+			"offense": 0
 		},
 		{	
 			"name": "village",
-			"description": "a village.",
 			"textureUrl": "assets/Terrain_Medieval/Decor/village.png",
 			"entityType": "structure",
 			"cost": [ 
@@ -238,11 +238,12 @@
 				"build farm",
 				"build marketplace",
 				"build monastery"
-			]
+			],
+			"defense": 2,
+			"offense": 1
 		},
 		{	
 			"name": "city",
-			"description": "a city.",
 			"textureUrl": "assets/Terrain_Medieval/Decor/city.png",
 			"entityType": "structure",
 			"cost": [ 
@@ -261,11 +262,12 @@
 				"build marketplace",
 				"build monastery",
 				"build barracks"
-			]
+			],
+			"defense": 3,
+			"offense": 2
 		},
 		{
 			"name": "capital",
-			"description": "a capital.",
 			"textureUrl": "assets/Terrain_Medieval/Decor/capital.png",
 			"entityType": "structure",
 			"cost":
@@ -285,11 +287,12 @@
 				"build marketplace",
 				"build monastery",
 				"build barracks"
-			]
+			],
+			"defense": 4,
+			"offense": 3
 		},
 		{
 			"name": "farm",
-			"description": "a farm.",
 			"textureUrl": "assets/Terrain_Medieval/Decor/farm.png",
 			"entityType": "structure",
 			"cost": 
@@ -303,7 +306,6 @@
 		},
 		{
 			"name": "monastery",
-			"description": "a monastery.",
 			"textureUrl": "assets/Terrain_Medieval/Decor/elvenLodge.png",
 			"entityType": "structure",
 			"cost": 
@@ -331,7 +333,6 @@
 		},
 		{
 			"name": "marketplace",
-			"description": "a marketplace trains merchants.",
 			"textureUrl": "assets/Terrain_Medieval/Decor/inn.png",
 			"entityType": "structure",
 			"cost":
@@ -350,7 +351,9 @@
 			"behaviors" :
 			[
 				"move"
-			]
+			],
+			"defense": 2,
+			"offense": 2
 		},
 		{
 			"name": "soldier",
@@ -359,7 +362,9 @@
 			"behaviors":
 			[
 				"move"
-			]
+			],
+			"defense": 1,
+			"offense": 1
 		},
 		{
 			"name": "merchant",
@@ -368,7 +373,9 @@
 			"behaviors":
 			[
 				"move"
-			]
+			],
+			"defense": 1,
+			"offense": 0
 		}
 	]
 }

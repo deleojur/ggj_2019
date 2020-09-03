@@ -7,7 +7,7 @@ import { GridManager, Cell } from './grid/grid';
 import { TurnCommand, TurnInformation } from './turns/turn-command';
 import { WindowManager, WindowType } from '../ui/window/window-manager';
 import { ResourceManager } from 'src/app/game/components/resourceManager';
-import { Sprite, Point, Texture, Application, Graphics, autoDetectRenderer } from 'pixi.js';
+import { Sprite, Point, Texture, Application, Graphics, autoDetectRenderer, Text } from 'pixi.js';
 import { Subject, Subscription } from 'rxjs';
 import { GridStrategy } from './grid/grid-strategy';
 import { ClientStateHandler } from './states/client-states/client-state-handler';
@@ -17,6 +17,7 @@ import { HostStateHandler } from './states/host-states/host-state-handler';
 import { HostGrid } from './grid/host-grid';
 import { HostTurnSystem } from './turns/host-turn-system';
 import { ClientTurnSystem } from './turns/client-turn-system';
+import { StateHandlerService } from './states/state-handler.service';
 
 export class GameManager
 {
@@ -283,5 +284,13 @@ export class GameManager
 		sprite.position = position;
 		sprite.anchor = new Point(0.5, 0.5);
 		return sprite;
+	}
+
+	public createText(position: Point, text: string, color: number): Text
+	{
+		const textObj: Text = new Text(text, { fontFamily: 'GotischeMajuskel', fontSize: 55, fill: color, align: 'center' });
+		textObj.position = position;
+		textObj.anchor = new Point(0.5, 0.5);
+		return textObj;
 	}
 }	

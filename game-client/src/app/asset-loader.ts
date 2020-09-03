@@ -94,7 +94,7 @@ export class AssetLoader
 			const typeName: string = e.entityType.charAt(0).toUpperCase() + e.entityType.slice(1);
 			const entityType: EntityType = (<any>EntityType)[typeName];
 			const entityPrototype: EntityPrototype = new EntityPrototype(
-				e.name, entityType, e.textureUrl, this.createEntityBehaviors(e), e.upkeep);
+				e.name, entityType, e.textureUrl, this.createEntityBehaviors(e), e.upkeep, e.defense, e.offense);
 
 			this._entityInformation.set(e.name, e);
 			this._entityPrototypes.set(e.name, entityPrototype);

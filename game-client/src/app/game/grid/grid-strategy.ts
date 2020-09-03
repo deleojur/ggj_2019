@@ -9,7 +9,7 @@ import { Point } from 'honeycomb-grid';
 import { GameManager } from '../game-manager';
 import { ClientData } from '../states/request-data';
 import { StateHandlerService } from '../states/state-handler.service';
-import { Vector } from 'vector2d';
+import { Vector, VectorConstructable } from 'vector2d';
 import { TurnCommand, TurnInformation } from '../turns/turn-command';
 
 export enum RenderType
@@ -20,8 +20,8 @@ export enum RenderType
 
 interface Outline
 {
-	corner1: Point;
-	corner2: Point;
+	corner1: Vector;
+	corner2: Vector;
 	hex: Hex<Cell>;
 }
 
@@ -34,7 +34,7 @@ export abstract class GridStrategy
 	protected graphics: Graphics;
 	protected gameManager: GameManager;
 	protected grid: GridManager;
-	protected clients: ClientData[];
+	protected _clients: ClientData[];
 	private static _autoIncrement: number = 0;
 	private _entitiesByGuids: Map<number, Entity>;
 
@@ -44,6 +44,11 @@ export abstract class GridStrategy
 	{
 		this.startEntities = new Map<number, { hex: Hex<Cell>, entityName: string }[]>();
 		this._entitiesByGuids = new Map<number, Entity>();
+	}
+
+	public get StateHandler(): StateHandlerService
+	{
+		return this.stateHandler;
 	}
 
 	public init(graphics: Graphics, pathGraphics: Graphics): void
@@ -111,7 +116,7 @@ export abstract class GridStrategy
 	{
 		this.clearSelectedCells();
 		const occupiedHexes: Map<string, Hex<Cell>[]> = this.entityManager.getAllOccupiedHexes();
-		this.clients.forEach(client =>
+		this._clients.forEach(client =>
 		{
 			const hexes: Hex<Cell>[] = occupiedHexes.get(client.id).filter(hex =>
 			{
@@ -131,7 +136,7 @@ export abstract class GridStrategy
 				}
 				return true;
 			});
-			this.renderSelectedCellsOutline(hexes, this.getColor(client.color), RenderType.StraightLine);
+			this.renderCellsOutline(hexes, this.getColor(client.color), client.startingPosition, RenderType.StraightLine);
 		});
 		this.renderCommandsByOwnerColor();
 	}
@@ -155,7 +160,7 @@ export abstract class GridStrategy
 
 	public createStartEntities(clients: ClientData[]): void
 	{
-		this.clients = clients;
+		this._clients = clients;
 		clients.forEach(client =>
 		{
 			const startPositions: { hex: Hex<Cell>, entityName: string }[] = this.startEntities.get(client.startingPosition);
@@ -200,7 +205,7 @@ export abstract class GridStrategy
 		}
 	}
 
-	private getEdgeCorners(hexagons: Hex<Cell>[]): Outline[]
+	private getEdgeCorners(hexagons: Hex<Cell>[], clientIndex: number): Outline[]
     {
         const outline: Outline[] = [];
         let neighbor: Hex<Cell> = null;
@@ -209,25 +214,36 @@ export abstract class GridStrategy
             const neighbors: Hex<Cell>[] = this.grid.getNeighbors(hex);
             for(let n = 0; n < neighbors.length; n++)
             {
-                neighbor = neighbors[n];
+				neighbor = neighbors[n];				
 				const point: Point = hex.toPoint();
+				const c: Point = hex.center().add(point);
 				const corners = hex.corners().map(corner => corner.add(point));
 				
                 if(hexagons.indexOf(neighbor) === -1)
                 {
                     const p1 = corners[n];
 					const p2 = corners[(n + 1) % 6];
-                    outline.push({ hex: hex, corner1: p1, corner2: p2 });
+
+					const center: Vector = new Vector(c.x, c.y);
+					const corner1: Vector = new Vector(p1.x, p1.y);
+					const corner2: Vector = new Vector(p2.x, p2.y);
+					const dir1: Vector = center.clone().subtract(corner1).normalise().multiplyByScalar(clientIndex * 5) as Vector;
+					const dir2: Vector = center.clone().subtract(corner2).normalise().multiplyByScalar(clientIndex * 5) as Vector;
+					
+					corner1.add(dir1);
+					corner2.add(dir2);
+
+                    outline.push({ hex: hex, corner1: corner1, corner2: corner2 });
                 }
             }
         });
         return outline;
 	}
 
-	public renderSelectedCellsOutline(selection: Hex<Cell>[], color: number, renderType: RenderType): void
+	public renderCellsOutline(selection: Hex<Cell>[], color: number, clientIndex: number, renderType: RenderType): void
 	{
 		this.selectedCellsGraphics.lineStyle(7, color, 1, 0.5);
-		const outline: Outline[] = this.getEdgeCorners(selection);
+		const outline: Outline[] = this.getEdgeCorners(selection, clientIndex);
         for (let i = 0; i < outline.length; i++)
         {
 			switch (renderType)
@@ -243,7 +259,7 @@ export abstract class GridStrategy
 		this.selectedCellsGraphics.lineStyle(0, 0);
 	}
 
-	public renderTurnCommandPath(turnInformation: TurnInformation[], color: number)
+	public renderTurnCommandPath(turnInformation: TurnInformation[], color: number, clientIndex: number)
 	{
 		this.pathGraphics.lineStyle(7, color, 1, 0.5);
 		this.pathGraphics.beginFill(color);
@@ -289,7 +305,7 @@ export abstract class GridStrategy
 
 		this.pathGraphics.lineStyle(0);
 		this.pathGraphics.endFill();
-		this.renderSelectedCellsOutline(Array.from(paths), color, RenderType.DottedLine);
+		this.renderCellsOutline(Array.from(paths), color, clientIndex, RenderType.DottedLine);
 	}
 
 	private renderStraightLine(outline: Outline): void
@@ -306,6 +322,7 @@ export abstract class GridStrategy
 
 	private renderDottedLine(outline: Outline): void
 	{
+		const steps = 4;
 		const corner1 = outline.corner1;
 		const corner2 = outline.corner2;
 		
@@ -314,14 +331,14 @@ export abstract class GridStrategy
 
 		const vdir = v2.clone().subtract(v1);
 		const dist: number = vdir.clone().magnitude();
-		const step: number = dist / 3;
+		const step: number = dist / steps;
 		const length: number = dist / 6;
 		const dif: number = (step - length) / 2;
 
 		const vdirn = vdir.clone().normalise();
 		//const vdirs: Vector = vdir.clone().multiplyByScalar(step) as Vector;
 
-		for (let j: number = 0; j < 3; j ++)
+		for (let j: number = 0; j < steps; j ++)
 		{
 			let from = v1.clone().add(vdirn.clone().multiplyByScalar(step * j + dif * j));
 			let to = from.clone().add(vdirn.clone().multiplyByScalar(length));

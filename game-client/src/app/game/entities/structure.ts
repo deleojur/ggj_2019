@@ -8,11 +8,11 @@ export class Structure extends Entity
 {
 	protected init(): void
 	{
-		const pos = this._location.center().add(this._location.toPoint());
 		const structure: Sprite = GameManager.instance.createSprite(this._prototype.textureUrl, new Point(0, 0), new Point(1, 1));
 		this.addChild(structure);
+		this.displayPowericon(GameManager.instance);
 
-		this.position = new Point(pos.x, pos.y - 64);
+		this.moveToHex(this._location);
 	}
 
 	public moveToHex(hex: Hex<Cell>): void

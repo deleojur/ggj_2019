@@ -1,5 +1,5 @@
 const rand = require('random-seed');
-const colors = ['#e6194b', '#3cb44b', '#000075', '#f58231', '#911eb4', '#4363d8', '#f58231'];
+const colors = ['#e6194b', '#000075', '#f58231', '#911eb4', '#4363d8', '#f58231'];
 listener = 
 {
     initialize(rooms)

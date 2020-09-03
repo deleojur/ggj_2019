@@ -70,11 +70,11 @@ export class ClientInteraction
 			const turnInformationArray: TurnInformation[] = gameManager.turnSystem.getTurnInformation(hex);
 			if (turnInformationArray.length > 0)
 			{
-				gridStrategy.renderTurnCommandPath(turnInformationArray, stateHandler.getColor());			
+				gridStrategy.renderTurnCommandPath(turnInformationArray, stateHandler.clientIndex, stateHandler.getColor());			
 			}
 			else
 			{
-				gridStrategy.renderSelectedCellsOutline([hex], stateHandler.getColor(), RenderType.DottedLine);
+				gridStrategy.renderCellsOutline([hex], stateHandler.getColor(), stateHandler.clientIndex, RenderType.DottedLine);
 			}			
 		}
 	}

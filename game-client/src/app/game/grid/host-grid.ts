@@ -1,9 +1,8 @@
-import { GridStrategy, RenderType } from './grid-strategy';
+import { GridStrategy } from './grid-strategy';
 import { HostStateHandler } from '../states/host-states/host-state-handler';
 import { GameManager } from '../game-manager';
-import { TurnCommand, TurnInformation } from '../turns/turn-command';
-import { Hex } from 'honeycomb-grid';
-import { Cell } from './grid';
+import { TurnInformation } from '../turns/turn-command';
+
 
 export class HostGrid extends GridStrategy
 {
@@ -20,12 +19,12 @@ export class HostGrid extends GridStrategy
 	protected renderCommandsByOwnerColor(): void
 	{
 		const allTurnInformation: Map<string, TurnInformation[]> = GameManager.instance.hostTurnSystem.getTurnInformationPerClient();
-		this.clients.forEach(client =>
+		this._clients.forEach(client =>
 		{
 			if (allTurnInformation.has(client.id))
 			{
 				const turnInformation: TurnInformation[] = allTurnInformation.get(client.id);
-				this.renderTurnCommandPath(turnInformation, this.getColor(client.color));
+				this.renderTurnCommandPath(turnInformation, client.startingPosition, this.getColor(client.color));
 			}
 		});
 	}

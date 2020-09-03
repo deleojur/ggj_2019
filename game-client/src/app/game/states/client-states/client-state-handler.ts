@@ -60,6 +60,11 @@ export class ClientStateHandler extends StateHandlerService
 		return this._clientId;
 	} 
 
+	public get clientIndex(): number
+	{
+		return this.self.startingPosition;
+	}
+
 	public getColor(): number
 	{
 		const client: ClientData = this.getClientData();

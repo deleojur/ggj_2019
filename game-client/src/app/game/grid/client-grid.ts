@@ -34,6 +34,11 @@ export class GridClient extends GridStrategy
 		return this._clientStateHandler.getColor();
 	}
 
+	private get clientIndex(): number
+	{
+		return this._clientStateHandler.clientIndex;
+	}
+
 	public init(gridGraphics: Graphics, pathGraphics: Graphics): void
 	{
 		super.init(gridGraphics, pathGraphics);
@@ -107,7 +112,7 @@ export class GridClient extends GridStrategy
 	public renderValidCells(validCells: Hex<Cell>[]): Hex<Cell>[]
 	{
 		 //= this.getValidCells(hex, type);
-		this.renderSelectedCellsOutline(validCells, 0xfada5e, RenderType.StraightLine);
+		this.renderCellsOutline(validCells, 0xfada5e, this.clientIndex, RenderType.StraightLine);
 
 		validCells.forEach(cell =>
 		{
@@ -126,7 +131,7 @@ export class GridClient extends GridStrategy
 	{
 		const color: number = this.clientColor;
 		const turnInformation: TurnInformation[] = GameManager.instance.clientTurnSystem.getAllTurnInformation();
-		this.renderTurnCommandPath(turnInformation, color);
+		this.renderTurnCommandPath(turnInformation, color, this.clientIndex);
 	}
 
 	public clearValidCells(): void
