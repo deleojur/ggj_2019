@@ -26,7 +26,7 @@ export class ResolveTurnCommand
 	private tryResolveMoveTurn(turnCommand: TurnCommand, otherCommands: TurnCommand[], entities: Entity[]): boolean
 	{
 		const turnInformation: TurnInformation = turnCommand.turnInformation;
-		let blaat: boolean = true;
+		let canMove: boolean = true;
 		otherCommands.forEach(otherCommand =>
 		{
 			const otherTurnInformation: TurnInformation = otherCommand.turnInformation;
@@ -36,7 +36,7 @@ export class ResolveTurnCommand
 					(otherTurnInformation.currentCell === turnInformation.previousCell && //moving past each other
 					otherTurnInformation.previousCell === turnInformation.currentCell))
 				{
-					blaat = false;
+					canMove = false;
 				}
 			}
 		});
@@ -45,11 +45,11 @@ export class ResolveTurnCommand
 		{
 			if (entity instanceof Unit)
 			{
-				blaat = false;
+				canMove = false;
 			}
 		});
 
-		if (!blaat)
+		if (!canMove)
 		{
 			console.log('a battle will be fought!');
 		} else
@@ -57,7 +57,7 @@ export class ResolveTurnCommand
 			this.resolveTurnCommand(turnCommand, turnInformation.currentCell, turnInformation.previousCell);
 		}
 
-		return blaat;
+		return canMove;
 	}
 
 	private tryResolveBuildTurn(turnCommand: TurnCommand, otherCommands: TurnCommand[], entities: Entity[]): boolean

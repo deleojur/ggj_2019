@@ -65,7 +65,7 @@ export class ClientStateHandler extends StateHandlerService
 		return this.self.startingPosition;
 	}
 
-	public getColor(): number
+	public getClientColor(): number
 	{
 		const client: ClientData = this.getClientData();
 		const color: string = client.color.replace('#', '0x');

@@ -466,8 +466,8 @@
                  "type":"",
                  "visible":true,
                  "width":96.1538,
-                 "x":2254.28941861281,
-                 "y":2989.31845220562
+                 "x":1357.85119525174,
+                 "y":2027.38794924273
                 }, 
                 {
                  "height":61.3246,
@@ -573,23 +573,6 @@
                 }, 
                 {
                  "height":74.1758,
-                 "id":178,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"entity",
-                         "type":"string",
-                         "value":"2.monk"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":96.1538,
-                 "x":956.69213507046,
-                 "y":2974.02831959585
-                }, 
-                {
-                 "height":74.1758,
                  "id":179,
                  "name":"",
                  "properties":[
@@ -602,8 +585,8 @@
                  "type":"",
                  "visible":true,
                  "width":96.1538,
-                 "x":1852.82401900801,
-                 "y":2402.13617223857
+                 "x":1996.0864756447,
+                 "y":2590.43308227589
                 }, 
                 {
                  "height":74.1758,
@@ -619,8 +602,42 @@
                  "type":"",
                  "visible":true,
                  "width":96.1538,
-                 "x":1264.2083233677,
-                 "y":2233.10110343643
+                 "x":1264.21,
+                 "y":2233.1
+                }, 
+                {
+                 "height":74.1758,
+                 "id":181,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"entity",
+                         "type":"string",
+                         "value":"1.soldier"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":96.1538,
+                 "x":1994.49370990585,
+                 "y":2210.149103684
+                }, 
+                {
+                 "height":74.1758,
+                 "id":182,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"entity",
+                         "type":"string",
+                         "value":"0.soldier"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":96.1538,
+                 "x":983.441724641834,
+                 "y":2578.54861248465
                 }],
          "opacity":1,
          "properties":[
@@ -635,7 +652,7 @@
          "y":0
         }],
  "nextlayerid":11,
- "nextobjectid":181,
+ "nextobjectid":183,
  "orientation":"hexagonal",
  "renderorder":"right-up",
  "staggeraxis":"y",

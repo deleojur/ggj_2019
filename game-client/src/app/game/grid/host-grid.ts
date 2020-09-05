@@ -24,7 +24,7 @@ export class HostGrid extends GridStrategy
 			if (allTurnInformation.has(client.id))
 			{
 				const turnInformation: TurnInformation[] = allTurnInformation.get(client.id);
-				this.renderTurnCommandPath(turnInformation, client.startingPosition, this.getColor(client.color));
+				this.renderTurnCommandPath(turnInformation, this.getColor(client.color), client.startingPosition);
 			}
 		});
 	}

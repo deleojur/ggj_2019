@@ -352,12 +352,12 @@
 			[
 				"move"
 			],
-			"defense": 2,
-			"offense": 2
+			"defense": 1,
+			"offense": 0
 		},
 		{
 			"name": "soldier",
-			"textureUrl": "assets/units/soldier_1.png",
+			"textureUrl": "assets/units/soldier_3.png",
 			"entityType": "unit",
 			"behaviors":
 			[

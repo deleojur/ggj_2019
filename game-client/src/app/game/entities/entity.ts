@@ -145,14 +145,14 @@ export abstract class Entity extends Container
 	{
 		if (this.defense > 0)
 		{
-			const unit_atk_art1: Sprite = game.createSprite('assets/units/frames/unit_atk_art.png', new Point(20, 110), new Point(0.4, 0.4));
-			const unit_atk_art2: Sprite = game.createSprite('assets/units/frames/unit_atk_art.png', new Point(-20, 110), new Point(0.4, 0.4));
-			const unit_health: Sprite = game.createSprite('assets/units/frames/unit_health.png', new Point(0, 120), new Point(0.34, 0.34));
-
-			const textColor: number = GameManager.instance.gridStrategy.StateHandler.getColor(this._owner);
-			const offenseText: Text = game.createText(new Point(-10, 100), this.offense.toString(), textColor);
-			const dividerText: Text = game.createText(new Point(0, 110), '/', textColor);
-			const defenseText: Text = game.createText(new Point(10, 120), this.defense.toString(), textColor);
+			const unit_atk_art1: Sprite = game.createSprite('assets/units/frames/unit_atk_art.png', new Point(20, 120), new Point(0.4, 0.4));
+			const unit_atk_art2: Sprite = game.createSprite('assets/units/frames/unit_atk_art.png', new Point(-20, 120), new Point(0.4, 0.4));
+			const unit_health: Sprite = game.createSprite('assets/units/frames/unit_health.png', new Point(0, 130), new Point(0.34, 0.34));
+			
+			const textColor: number = 0x00ff00;//GameManager.instance.gridStrategy.StateHandler.getClientColorById(this._owner);
+			const offenseText: Text = game.createText(new Point(-10, 110), this.offense.toString(), textColor);
+			const dividerText: Text = game.createText(new Point(0, 120), '/', textColor);
+			const defenseText: Text = game.createText(new Point(10, 130), this.defense.toString(), textColor);
 			
 			unit_atk_art1.angle = 45;
 			unit_atk_art2.angle = 315;

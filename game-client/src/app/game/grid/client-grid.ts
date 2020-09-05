@@ -31,7 +31,7 @@ export class GridClient extends GridStrategy
 
 	public get clientColor(): number
 	{
-		return this._clientStateHandler.getColor();
+		return this._clientStateHandler.getClientColor();
 	}
 
 	private get clientIndex(): number

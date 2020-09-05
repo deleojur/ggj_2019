@@ -75,7 +75,7 @@ export class SelectCellComponent implements OnInit, InnerWindowComponent
 		this.gridClient.clearSelectedCells();
 		if (n !== 0)
 		{
-			this.gridClient.renderCellsOutline([this.hex], this.clientStateHandler.getColor(), this.clientStateHandler.clientIndex, RenderType.StraightLine);
+			this.gridClient.renderCellsOutline([this.hex], this.clientStateHandler.getClientColor(), this.clientStateHandler.clientIndex, RenderType.StraightLine);
 		}
 	}
 

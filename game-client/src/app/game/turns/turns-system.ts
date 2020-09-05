@@ -125,7 +125,6 @@ export abstract class TurnsSystem
 				const hex: Hex<Cell> = GameManager.instance.grid.getHex(position.x, position.y);
 				path.push(hex);
 			});
-
 			const originEntity: Entity = GameManager.instance.gridStrategy.getEntityByGuid(command.originEntityGuid);
 			const behaviorInformation: BehaviorInformation = AssetLoader.instance.getBehaviorInformation(command.behaviorInformation);
 			const turnInformation: TurnInformation = this.generateTurnInformation(originEntity, behaviorInformation, path);

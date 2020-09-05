@@ -1,5 +1,5 @@
 import { Entity, } from './entity';
-import { Point, Sprite, Text } from 'pixi.js';
+import { Point, Sprite } from 'pixi.js';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from '../grid/grid';
 import { GameManager } from '../game-manager';

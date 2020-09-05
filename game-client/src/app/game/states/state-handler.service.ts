@@ -39,7 +39,7 @@ export abstract class StateHandlerService
 		return this._clients.get(id);
 	}
 
-	public getColor(id: string): number
+	public getClientColorById(id: string): number
 	{
 		const client: ClientData = this.getClient(id);
 		const color: string = client.color.replace('#', '0x');

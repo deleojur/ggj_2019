@@ -9,7 +9,7 @@ import { Point } from 'honeycomb-grid';
 import { GameManager } from '../game-manager';
 import { ClientData } from '../states/request-data';
 import { StateHandlerService } from '../states/state-handler.service';
-import { Vector, VectorConstructable } from 'vector2d';
+import { Vector } from 'vector2d';
 import { TurnCommand, TurnInformation } from '../turns/turn-command';
 
 export enum RenderType
