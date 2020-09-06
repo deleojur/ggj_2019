@@ -134,6 +134,7 @@ export class HostTurnSystem extends TurnsSystem
 				turnResolve.doRequestTurnResolve(client.id, this.exportCommands(resolvedTurnCommands,
 					(turnCommand: TurnInformation) => { return turnCommand.validPathData }), resources.get(client.id));
 			});
+			//TODO: don't redraw everything; let the command path be drawn
 			GameManager.instance.renderCellsOutline();
 		});
 		GameManager.instance.renderCellsOutline();

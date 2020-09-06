@@ -5,8 +5,8 @@
 			<div *ngFor="let merch of getEntityBehavior(entity)">
 				<app-menu-item 
 					[origin]="hex"
-					(mainButtonPressed)="merch.onClickPrimary($event)"
-					(secondaryButtonPressed)="merch.onClickSecondary($event)"
+					(mainButtonPressed)="onPrimaryButtonClicked($event)"
+					(secondaryButtonPressed)="onSecondaryButtonClicked($event)"
 					[menuItem]="merch"
 					[entity]="entity"
 					[secondaryActionImgURL]="merch.secondaryActionImgUrl">

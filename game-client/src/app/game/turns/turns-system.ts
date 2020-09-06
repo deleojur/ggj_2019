@@ -134,7 +134,7 @@ export abstract class TurnsSystem
 		});
 		return turnCommands;
 	}
-
+ 
 	public generateTurnInformation(
 		originEntity: Entity,
 		item?: BehaviorInformation,

@@ -43,11 +43,13 @@ export class MenuItemComponent implements OnInit
 
 	clickMainButton()
 	{
+		console.log('click main button');
 		this.mainButtonPressed.emit({ behavior: this.menuItem, entity: this.entity });
 	}
 
 	clickSecondaryButton()
 	{
+		console.log('click secondary button');
 		this.secondaryButtonPressed.emit({ behavior: this.menuItem, entity: this.entity });
 	}
 }

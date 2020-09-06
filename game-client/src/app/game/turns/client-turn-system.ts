@@ -46,7 +46,7 @@ export class ClientTurnSystem extends TurnsSystem
 		}
 		else if (type === 'move')
 		{
-			//GameManager.instance.gridStrategy.moveEntityToHex(turnInformation.originEntity, turnInformation.currentCell, turnInformation.targetCell);
+			GameManager.instance.gridStrategy.moveEntityToHex(turnInformation.originEntity, turnInformation.currentCell, turnInformation.targetCell);
 		}
 	}
 

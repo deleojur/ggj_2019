@@ -53,33 +53,51 @@ export class ItemOverviewWindowComponent implements OnInit, InnerWindowComponent
 		if (this.activeBehaviors.has(entity))
 		{
 			const behaviors: BehaviorInformation[] = [this.activeBehaviors.get(entity)];
-			this.setBehaviorInformation(behaviors, 'assets/UI/button/r_skull.PNG', this.displayDetailsPage.bind(this), this.cancelItem.bind(this));
+			this.setBehaviorInformation(behaviors, 'assets/UI/button/r_skull.PNG');
 			return behaviors;
 		} else
 		{
-			this.setBehaviorInformation(entity.behaviors, 'assets/UI/button/r_scroll.PNG', this.buyItem.bind(this), this.displayDetailsPage.bind(this));
+			this.setBehaviorInformation(entity.behaviors, 'assets/UI/button/r_scroll.PNG');
 			return entity.behaviors;
 		}
 	}
 
 	setBehaviorInformation(
 		behaviors: BehaviorInformation[],
-		secondaryActionImgUrl: string, 
-		onClickPrimary: (behavior: BehaviorInformation, entity: Entity) => void,
-		onClickSecondary: (behavior: BehaviorInformation, entity: Entity) => void): void
+		secondaryActionImgUrl: string): void
 	{		
 		behaviors.forEach(behavior =>
 		{
 			behavior.secondaryActionImgUrl = secondaryActionImgUrl;
-			behavior.onClickPrimary = onClickPrimary;
-			behavior.onClickSecondary = onClickSecondary;
 		});
+	}
+
+	onPrimaryButtonClicked(buttonEvent: ButtonEvent): void
+	{
+		if (this.activeBehaviors.has(buttonEvent.entity))
+		{
+			this.displayDetailsPage(buttonEvent.behavior);
+		} else
+		{
+			this.buyItem(buttonEvent);
+		}
+	}
+
+	onSecondaryButtonClicked(buttonEvent: ButtonEvent): void
+	{
+		if (this.activeBehaviors.has(buttonEvent.entity))
+		{
+			this.cancelItem(buttonEvent);
+		} else
+		{
+			this.displayDetailsPage(buttonEvent.behavior);
+		}
 	}
 
 	displayDetailsPage(behaviorInformation: BehaviorInformation)
 	{
 		GameManager.instance.windowManager.openWindow(WindowType.ItemDetail, { name: behaviorInformation.name, data: { origin: this.hex, item: behaviorInformation } });
-	}
+	}	
 
 	cancelItem(buttonEvent: ButtonEvent): void
 	{

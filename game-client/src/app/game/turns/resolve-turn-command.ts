@@ -20,6 +20,10 @@ export class ResolveTurnCommand
 		} else if (type === 'build')
 		{
 			return this.tryResolveBuildTurn(turnCommand, otherCommands, entities);
+		} else if (type === 'train' || type === 'upgrade')
+		{
+			this.resolveTurnCommand(turnCommand, turnInformation.targetCell, turnInformation.originCell);
+			return true;
 		}
 	}
 

@@ -54,7 +54,7 @@ export class hostState_turnResolve extends PrimaryState<RequestData>
 	{
 		const successfulTurnCommands: Set<TurnCommand> = new Set<TurnCommand>();
 		let turnCommands: TurnCommand[] = GameManager.instance.hostTurnSystem.getAllTurnCommands();
-		let previousCommands: { turnCommand: TurnCommand, hex: Hex<Cell> }[] = []; //temporarily stores the 
+		let previousCommands: { turnCommand: TurnCommand, hex: Hex<Cell> }[] = [];
 
 		const initialWait: Subscription = interval(500).subscribe(() => 
 		{
