@@ -164,10 +164,23 @@ export abstract class TurnsSystem
 		return command;
 	}
 
+	protected getTurnComandsAtTargetHex(hex: Hex<Cell>): TurnCommand[]
+	{
+		const turnCommands: TurnCommand[] = this._turnCommands.get(hex).slice();
+		for (let i: number = turnCommands.length - 1; i >= 0; i--)
+		{
+			if (turnCommands[i].turnInformation.targetCell !== hex)
+			{
+				turnCommands.splice(i, 1);
+			}
+		}
+		return turnCommands;
+	}
+
 	private updateCommandIcons(hex: Hex<Cell>): void
 	{
 		const pos: Point = hex.toPoint().add(hex.center());
-		const turnCommands: TurnCommand[] = this._turnCommands.get(hex).slice();
+		const turnCommands: TurnCommand[] = this.getTurnComandsAtTargetHex(hex);
 
 		for (let i: number = 0; i < turnCommands.length; i++)
 		{

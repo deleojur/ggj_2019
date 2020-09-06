@@ -8,7 +8,7 @@ import { TurnInformation, TurnCommand } from './turn-command';
 import { Entity } from '../entities/entity';
 import { Resource } from '../entities/resource';
 import { ResourceManager } from '../components/resourceManager';
-import { hostState_turnResolve } from '../states/host-states/host-state_turn-resolve';
+import { hostState_turnResolve, ResolvedTurnCommand } from '../states/host-states/host-state_turn-resolve';
 
 export class HostTurnSystem extends TurnsSystem
 {
@@ -125,13 +125,13 @@ export class HostTurnSystem extends TurnsSystem
 				this.onRoundStarted();
 			}
 		}, false) as hostState_turnResolve;
-		turnResolve.handleTurns(this._resolveTurnCommand, (resolvedTurnCommands) =>
+		turnResolve.handleTurns(this._resolveTurnCommand, (successfulTurnCommands, unsuccessfulTurnCommands) =>
 		{
-			console.log(resolvedTurnCommands);
+			console.log('successful:', successfulTurnCommands, 'unsuccessful:', unsuccessfulTurnCommands);
 			this.resetTurnCommands();
 			this._clients.forEach(client =>
 			{
-				turnResolve.doRequestTurnResolve(client.id, this.exportCommands(resolvedTurnCommands,
+				turnResolve.doRequestTurnResolve(client.id, this.exportCommands(successfulTurnCommands,
 					(turnCommand: TurnInformation) => { return turnCommand.validPathData }), resources.get(client.id));
 			});
 			//TODO: don't redraw everything; let the command path be drawn
@@ -141,19 +141,8 @@ export class HostTurnSystem extends TurnsSystem
 		this.hostResetTurnCommandsRender();
 	}
 
-	/**
-	 * done 1) retrieve the paths from the client
-	 * done 3) create a host resolve turn state
-	 * done 4) this state waits for five seconds
-	 * done 5) then, it symultaneously performs all build/upgrade/train commands
-	 * done 6) also symultaneously, it moves all units the first hex
-	 * done 7) then, ever 3 seconds, it moves units, until all moves are done
-	 * 8) when two units end at the same hex, it will generate a new turn
-	 * 	8.1) this will send a message to all clients
-	 * 	8.2) this message contains the units, their owner and the clients involved
-	 * 	8.3) the clients involved get a resolve window
-	 * 		8.3.1) this shows all units that are involved, even their own.
-	 */
+	
+
 	private resolveResources(): Map<string, Resource[]>
 	{
 		const resources: Map<string, Resource[]> = new Map<string, Resource[]>();
