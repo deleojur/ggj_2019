@@ -46,7 +46,7 @@ export class ClientTurnSystem extends TurnsSystem
 		}
 		else if (type === 'move')
 		{
-			//GameManager.instance.gridStrategy.moveEntityToHex(turnInformation.originEntity, turnInformation.currentCell, turnInformation.targetCell);
+			GameManager.instance.gridStrategy.moveEntityToHex(turnInformation.originEntity, turnInformation.currentCell, turnInformation.targetCell);
 		}
 	}
 
@@ -55,7 +55,7 @@ export class ClientTurnSystem extends TurnsSystem
 		const tiles: Hex<Cell>[] = GameManager.instance.grid.getValidTiles();
 		tiles.forEach((hex: Hex<Cell>) => 
 		{
-			const turnCommands: TurnCommand[] = this._turnCommands.get(hex);
+			const turnCommands: TurnCommand[] = this.getTurnComandsAtTargetHex(hex);
 			turnCommands.forEach(turnCommand =>
 			{
 				const type: string = turnCommand.turnInformation.behaviorInformation.type;

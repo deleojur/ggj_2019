@@ -13,11 +13,6 @@
 	</div>
 
 	<div class="row middle-container">
-		<!--<div *ngIf="displayBuyButton" class="col-2" style="padding-left: 5px" (click)="buyItem()">
-			<img class="buy-btn" src="assets/UI/button/r_bg_green.png">
-			<img class="buy-btn" src="assets/UI/button/ring_frame.PNG">
-			<img class="buy-btn" src="assets/UI/button/r_bag.PNG">
-		</div>-->
 		<div class="col-2" (click)="clickSecondaryButton()">
 			<img class="secondary-action-btn" src="assets/UI/button/r_bg_blue.png">
 			<img class="secondary-action-btn" src="assets/UI/button/ring_frame.PNG">
@@ -28,12 +23,6 @@
 	<div class="row bottom-container">
 		<div class="col-2 no-pointer"></div>
 		<div class="col-2 no-pointer"></div>
-		<!--
-		<div class="col-2">
-			<img class="buy-btn" src="assets/UI/button/r_bg_yellow.png">
-			<img class="buy-btn" src="assets/UI/button/ring_frame.PNG">
-			<img class="buy-btn" src="assets/UI/button/r_scroll.PNG">
-		</div>-->
 		
 		<div class="col-2 resourceWrapper" *ngFor="let resource of menuItem.cost">
 			<app-resource [(resource)]="resource"></app-resource>
