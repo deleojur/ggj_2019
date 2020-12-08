@@ -83,6 +83,7 @@
 
 .scrollable-menu
 {
+    will-change: transform; //make sure that the page isn't rendered every frame, only adjust the transform.
     position: absolute;
     width: 82%;
     padding: 5% 0% 0 0;

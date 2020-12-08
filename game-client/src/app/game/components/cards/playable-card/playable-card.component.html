@@ -1,0 +1,35 @@
+<!-- <div class="card-container">
+	<div class="flip-card">
+		<img src="assets/cards/card-front.png" class="card-front" />
+		<img src="assets/cards/card-cost-background.png" class="cost-background" />	
+	</div>
+	
+	<div class="row top-container">		
+	</div>
+</div> -->
+
+<div class="flip-box">
+	<div class="flip-box-inner">
+		<div class="flip-box-front">
+
+			<div class="resource-container container">
+				<div class="row justify-content-end no-gutters">
+					<div class="col-2 resource-background" *ngFor="let resource of resources">
+						<app-resource-hud [resource]="resource" ></app-resource-hud>	
+					</div>
+				</div>
+			</div>
+
+
+			<img src="assets/cards/card-front.png" class="card-front" />
+			<!-- <img src="assets/cards/card-cost-background.png" class="card-cost-bg" /> -->
+			<img src="assets/cards/types/r_sword.png" class="card-type"/>
+			<img src="assets/cards/factions/lionheart.png" class="faction"/>
+			<h2 class="card-title">Some card</h2>
+			<h5 class="card-description">Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen.</h5>			
+		</div>
+		<div class="flip-box-back">
+			<img src="assets/cards/card-back.png" class="card-back" />
+		</div>
+	</div>
+</div>

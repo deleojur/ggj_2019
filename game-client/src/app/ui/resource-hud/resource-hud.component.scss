@@ -1,0 +1,40 @@
+.background
+{
+	position: relative;
+	z-index: 3;
+	width: 80%;
+}
+
+.resource-icon
+{
+	width: 100%;
+	position: relative;
+}
+
+.resource-icon-fg
+{
+	position: absolute;
+	width: 50%;
+	left:25%;
+	top:25%;
+}
+
+.resource-amount-bg
+{
+	position:absolute;
+	width: 100%;	
+	left:0;
+	top:87%;
+}
+
+.resource-amount-fg
+{
+	position: absolute;
+    text-align: center;
+    font-weight: bold;
+    font-family: Zolof;
+    color: beige;
+	font-size: 125%;
+	width: 100%;;
+    margin-top: -10%;
+}

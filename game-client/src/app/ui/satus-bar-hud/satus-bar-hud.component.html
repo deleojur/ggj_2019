@@ -1,16 +1,11 @@
 <div class="fixed">
 	<img class="background" src="assets/UI/window/wood_plank1.svg">
-	<div class="row resource-container">
-		<div class="col-4 resource-background" *ngFor="let resource of resourcePool">
-			<div style="position: relative; z-index: 3;">
-				<img class="resource-icon" src="assets/UI/window/grid4L.svg">
-				<img class="resource-icon-fg" src="{{resource.textureUrl}}">
+	<div class="resource-container container">
+		<div class="row justify-content-center">
+			<div class="col-3 resource-background" *ngFor="let resource of resourcePool">
+				<app-resource-hud [resource]="resource" ></app-resource-hud>	
 			</div>
-			<div style="position: relative; z-index: 2;">
-				<img class="resource-amount-bg" src="assets/UI/window/banner_sale_red.svg" >
-				<h2 class="resource-amount-fg">{{resource.amount}}</h2>
-			</div>
-		</div>
+		</div>		
 		<div class="col-3">
 			<div class="confirm-btn-background">
 				<img #button src="assets/UI/window/btn_brown_normal.svg"
@@ -21,5 +16,9 @@
 				<img src="assets/UI/window/btn_c_accept.svg">
 			</div>
 		</div>
+	</div>
+	<div class="row fixed button-container">
+		<img class="background" src="assets/UI/window/wood_plank1.svg">	
+		
 	</div>
 </div>

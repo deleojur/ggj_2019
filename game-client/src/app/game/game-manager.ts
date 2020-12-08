@@ -7,7 +7,7 @@ import { GridManager, Cell } from './grid/grid';
 import { TurnCommand, TurnInformation } from './turns/turn-command';
 import { WindowManager, WindowType } from '../ui/window/window-manager';
 import { ResourceManager } from 'src/app/game/components/resourceManager';
-import { Sprite, Point, Texture, Application, Graphics, autoDetectRenderer, Text } from 'pixi.js';
+import * as PIXI from 'pixi.js';
 import { Subject, Subscription } from 'rxjs';
 import { GridStrategy } from './grid/grid-strategy';
 import { ClientStateHandler } from './states/client-states/client-state-handler';
@@ -24,7 +24,7 @@ export class GameManager
 	private isInitialized: boolean = false;
 	private _worldCanvas: HTMLCanvasElement = null;	
 
-	private pixi: Application; // this will be our pixi application
+	private pixi: PIXI.Application; // this will be our pixi application
     private _viewport: ViewportManager;
 	private _grid: GridManager;
 	private _gridStrategy: GridStrategy;
@@ -50,7 +50,7 @@ export class GameManager
 	private constructor()
 	{
 		this._resourceManager = new ResourceManager();
-		this._resourceManager.init(100, 100, 40);
+		this._resourceManager.init(100, 100, 40, 10);
 		this.initWindowManager();
 	}
 
@@ -126,13 +126,13 @@ export class GameManager
 
     private initPixi(): void
     {
-        this.pixi = new Application({ backgroundColor: 0x0 });
-        
-        autoDetectRenderer({ 
+		this.pixi = new PIXI.Application({ backgroundColor: 0x0 });        
+        PIXI.autoDetectRenderer({ 
             width: window.innerWidth,
             height: window.innerHeight, 
-            antialias: true, 
-            transparent: true});
+			antialias: true,			
+			transparent: true,
+		});
 
         this.ratio = window.innerWidth / window.innerHeight;
     } 
@@ -142,8 +142,8 @@ export class GameManager
 		this._grid = new GridManager(this._gridStrategy, this.viewport);
 		AssetLoader.instance.loadAssetsAsync().then(() => 
 		{
-			const gridGraphics: Graphics = new Graphics, commandGraphics: Graphics = new Graphics(), pathGraphics: Graphics = new Graphics();
-			const size: Point = this._grid.generateWorld();
+			const gridGraphics: PIXI.Graphics = new PIXI.Graphics, commandGraphics: PIXI.Graphics = new PIXI.Graphics(), pathGraphics: PIXI.Graphics = new PIXI.Graphics();
+			const size: PIXI.Point = this._grid.generateWorld();
 			this.viewport.initViewport(size.x, size.y);
 			this._grid.init(gridGraphics, pathGraphics);
 			this._turnSystem.init(commandGraphics);
@@ -276,21 +276,21 @@ export class GameManager
 		}
 	}
 
-	public createSprite(textureUrl: string, position: Point, scale: Point): Sprite
+	public createSprite(textureUrl: string, position: PIXI.Point, scale: PIXI.Point): PIXI.Sprite
 	{
-		const texture: Texture = AssetLoader.instance.getTexture(textureUrl);
-		const sprite: Sprite = new Sprite(texture);
+		const texture: PIXI.Texture = AssetLoader.instance.getTexture(textureUrl);
+		const sprite: PIXI.Sprite = new PIXI.Sprite(texture);
 		sprite.scale = scale;
 		sprite.position = position;
-		sprite.anchor = new Point(0.5, 0.5);
+		sprite.anchor = new PIXI.Point(0.5, 0.5);
 		return sprite;
 	}
 
-	public createText(position: Point, text: string, color: number): Text
+	public createText(position: PIXI.Point, text: string, color: number): PIXI.Text
 	{
-		const textObj: Text = new Text(text, { fontFamily: 'GotischeMajuskel', fontSize: 55, fill: color, align: 'center' });
+		const textObj: PIXI.Text = new PIXI.Text(text, { fontFamily: 'GotischeMajuskel', fontSize: 55, fill: color, align: 'center' });
 		textObj.position = position;
-		textObj.anchor = new Point(0.5, 0.5);
+		textObj.anchor = new PIXI.Point(0.5, 0.5);
 		return textObj;
 	}
 }	

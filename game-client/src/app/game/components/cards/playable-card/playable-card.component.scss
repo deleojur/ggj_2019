@@ -1,0 +1,104 @@
+/* The flip box container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-box 
+{
+	background-color: transparent;
+	width: 300px;
+	height: 200px;
+	perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-box-inner
+{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	transition: transform 0.8s;
+	transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+// .flip-box:hover .flip-box-inner 
+// {
+// 	transform: rotateY(180deg);
+// }
+
+/* Position the front and back side */
+.flip-box-front, .flip-box-back 
+{
+	width: 100%;
+	position: absolute;	
+	-webkit-backface-visibility: hidden; /* Safari */
+	backface-visibility: hidden;
+}
+
+/* Style the back side */
+.flip-box-back 
+{	
+	transform: rotateY(180deg);
+}
+
+.card-front, .card-back
+{
+	width: 100%;
+}
+
+.card-cost-bg
+{
+	position: absolute;
+    width: 89%;
+    top: 2%;
+    left: 5%;
+}
+
+.card-type
+{
+	position: absolute;
+    width: 16%;
+    top: 50%;
+    left: 78%;
+}
+
+.faction
+{
+	position: absolute;
+    width: 20%;
+    left: 40%;   
+}
+
+.resource-container
+{
+	position:absolute;
+	top:2px;
+	padding-right: 0px;
+}
+
+.resource-background
+{
+	width: 25%;
+	margin-left: -3px;
+	margin-right: -3px;
+}
+
+.card-title
+{
+	position: absolute;
+    text-align: left;
+	left: 10%;
+	top: 52%;
+    font-family: Zolof;
+    font-size: 200%;
+}
+
+.card-description
+{
+	position: absolute;
+    text-align: left;
+    left: 10%;
+    top: 65%;
+    width: 83%;
+    font-family: Zolof;
+    font-size: 125%;
+    line-height: 100%;
+}
