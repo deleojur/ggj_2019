@@ -7,6 +7,30 @@ export enum CardType
 	'Attack' = 'Attack'
 }
 
+export enum Faction
+{
+	"LionHeart",
+	"EagleEye",
+	"SunLight",
+	"DeepBlueAbyss",
+	"Carpenter"
+}
+
+export interface CardInformation
+{
+	title: string;
+	backgroundUrl: string;
+	foregroundUrl: string;
+	type: string;
+	tiers: [
+		{
+			description: string,
+			cost: Resource[]
+		}
+	]
+	faction?: string;
+}
+
 export class CardTier
 {
 	public get resources(): Resource[] 
@@ -27,17 +51,7 @@ export class CardTier
 		this._description = value;
 	}
 
-	public get title(): string 
-	{
-		return this._title;
-	}
-	public set title(value: string) 
-	{
-		this._title = value;
-	}
-
-	constructor(
-		private _title : string, 
+	constructor(		 
 		private _description: string,
 		private _resources: Resource[])
 	{
@@ -47,6 +61,15 @@ export class CardTier
 
 export class Card
 {
+	public get title(): string 
+	{
+		return this._title;
+	}
+	public set title(value: string) 
+	{
+		this._title = value;
+	}
+
 	public get tiers(): CardTier[] 
 	{
 		return this._tiers;
@@ -94,16 +117,32 @@ export class Card
 
 	public get typeImageUrl(): string
 	{
-		return CardType[this._type];
+		return 'assets/cards/types/' + this.type + '.png';
 	}
 
-	constructor(		 
-		private _backgroundUrl: string, 
-		private _foregroundUrl: string,		
-		private _type: string,
-		private _tiers: CardTier[],
-		private _faction?: string)
+	public get factionImageUrl(): string
 	{
+		return 'assets/cards/factions/' + this.faction + '.png';
+	}
 
+	private _title : string;
+	private _backgroundUrl: string;
+	private _foregroundUrl: string;		
+	private _type: string;
+	private _tiers: CardTier[];
+	private _faction?: string;
+
+	constructor(cardInformation: CardInformation)
+	{
+		this._title = cardInformation.title;
+		this._backgroundUrl = cardInformation.backgroundUrl;
+		this._foregroundUrl = cardInformation.foregroundUrl;
+		this._type = cardInformation.type;
+		this._tiers = [];
+		cardInformation.tiers.forEach(tier =>
+		{
+			this.tiers.push(new CardTier(tier.description, tier.cost));
+		});
+		this._faction = cardInformation.faction;
 	}
 }

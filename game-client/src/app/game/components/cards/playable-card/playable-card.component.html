@@ -1,33 +1,46 @@
-<!-- <div class="card-container">
-	<div class="flip-card">
-		<img src="assets/cards/card-front.png" class="card-front" />
-		<img src="assets/cards/card-cost-background.png" class="cost-background" />	
-	</div>
-	
-	<div class="row top-container">		
-	</div>
-</div> -->
-
 <div class="flip-box">
-	<div class="flip-box-inner">
+	<div class="flip-box-inner" (click)="reverseUnselectCard()">
 		<div class="flip-box-front">
-
 			<div class="resource-container container">
 				<div class="row justify-content-end no-gutters">
-					<div class="col-2 resource-background" *ngFor="let resource of resources">
+					<div class="col-2 resource-background" *ngFor="let resource of currentResources">
 						<app-resource-hud [resource]="resource" ></app-resource-hud>	
 					</div>
 				</div>
 			</div>
+			<div [style.background]="'url(' + card.backgroundUrl + ')'" class="card-inner"></div>
+			<div 
+				[style.background]="'url(' + card.foregroundUrl + ')'"
+				[style.backgroundRepeat]="'no-repeat'"
+				[style.backgroundSize]="'231px'"
+			 	class="card-inner"></div>
 
+			<img src="assets/cards/card-front.png" class="card-front"/>
+			
+			<div class="container tier-container">
+				<div class="row justify-content no-gutters" >
+					<div class="col-4 ">
+						<div *ngIf="selectedTier > 0"><img (click)="previousTier($event)" class="tier-arrow" src="assets/cards/btn_normal_left.svg"/></div>
+						<div *ngIf="selectedTier === 0"><img class="tier-arrow" src="assets/cards/btn_disabled_left.svg"/></div>
+					</div>
+					<div class="col-4 tier-text">{{tierText}}</div>
+					<div class="col-4">
+						<div *ngIf="selectedTier < 2"><img class="tier-arrow" (click)="nextTier($event)" src="assets/cards/btn_normal_right.svg"/></div>
+						<div *ngIf="selectedTier === 2"><img class="tier-arrow" src="assets/cards/btn_disabled_right.svg"/></div>
+					</div>
+				</div>
+			</div>
 
-			<img src="assets/cards/card-front.png" class="card-front" />
-			<!-- <img src="assets/cards/card-cost-background.png" class="card-cost-bg" /> -->
-			<img src="assets/cards/types/r_sword.png" class="card-type"/>
-			<img src="assets/cards/factions/lionheart.png" class="faction"/>
-			<h2 class="card-title">Some card</h2>
-			<h5 class="card-description">Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen.</h5>			
+			<img src={{card.typeImageUrl}} class="card-type"/>
+			<img src={{card.factionImageUrl}} class="faction"/>
+			<h2 class="card-title">{{card.title}}</h2>
+			<p class="card-description" #descriptionBody>{{descriptionText(descriptionBody)}}</p>			
 		</div>
+		<div *ngIf="unselectCard">
+			<div class="overlay"></div>
+			<img class="unselect-img" src="assets/cards/btn_c_cancel.svg" />
+			<h1 class="unselect-text">Discard to next player</h1>
+		</div>		
 		<div class="flip-box-back">
 			<img src="assets/cards/card-back.png" class="card-back" />
 		</div>

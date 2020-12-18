@@ -2,6 +2,7 @@ import { Loader, Texture } from 'pixi.js';
 import { EntityPrototype, EntityInformation, PrototypeInformation, BehaviorInformation, EntityType, Entity } from './game/entities/entity';
 import { WorldMap } from './game/grid/map-reader';
 import { Resource } from './game/entities/resource';
+import { Card, CardInformation } from './game/entities/card';
 
 interface CommandIconsBackground
 {
@@ -17,9 +18,10 @@ export class AssetLoader
 
 	private _entityPrototypes: Map<string, EntityPrototype>;
 	private _entityInformation: Map<string, EntityInformation>;
-	private _behaviorInformation: Map<string, BehaviorInformation>;
+	private _behaviorInformation: Map<string, BehaviorInformation>;	
 
 	private _textures: Map<string, Texture>;
+	private _cards: Map<string, Card>;
 	private _commandIconsBackgrounds: CommandIconsBackground;
 	private _worldMap: WorldMap;
 
@@ -63,7 +65,7 @@ export class AssetLoader
 		return this._behaviorInformation.get(name);
 	}
 
-	private setResourceClass(e: PrototypeInformation): void
+	private setResourceClass(e: any): void
 	{
 		[...e.cost || [], ...e.upkeep || []].forEach(res => 
 		{				
@@ -110,7 +112,7 @@ export class AssetLoader
 		});
 	}
 
-	private setBehaviorCostAndUpkeep(behaviorInformation: BehaviorInformation[]): void
+	private setCostAndUpkeep(behaviorInformation: BehaviorInformation[]): void
 	{
 		behaviorInformation.forEach(behavior =>
 		{
@@ -145,8 +147,32 @@ export class AssetLoader
 		});
 	}
 
-	public loadAssetsAsync(): Promise<void>
+	private parseCardData(cardData: CardInformation[]): void
 	{
+		this._cards = new Map<string, Card>();
+		cardData.forEach(cardInformation =>
+		{
+			cardInformation.tiers.forEach(tier =>
+			{
+				this.setResourceClass(tier);
+			});
+			const card: Card = new Card(cardInformation);
+			this._cards.set(card.title, card);
+		});		
+	}
+
+	public getCardsByName(cardNames: string[]): Card[]
+	{
+		const cards: Card[] = [];
+		cardNames.forEach(cardName =>
+		{
+			cards.push(this._cards.get(cardName));
+		});
+		return cards;
+	}
+
+	public loadAssetsAsync(): Promise<void>
+	{		
 		return new Promise(resolve => 
 		{
 			const loader: Loader = new Loader();
@@ -160,18 +186,20 @@ export class AssetLoader
 			{
 				loader.reset();
 
-				const textureUrls: string[] = resources[manifestUrl].data.textures;
-				this._commandIconsBackgrounds = resources[manifestUrl].data.commandIconsBackground;
+				const data = resources[manifestUrl].data;
+				const textureUrls: string[] = data.textures;
+				this._commandIconsBackgrounds = data.commandIconsBackground;				
+				this.parseCardData(data.cards);
 		
-				const entityInformation: EntityInformation[] = resources[manifestUrl].data.entities;
-				const behaviorInformation: BehaviorInformation[] = resources[manifestUrl].data.behaviors;
+				const entityInformation: EntityInformation[] = data.entities;
+				const behaviorInformation: BehaviorInformation[] = data.behaviors;
 				this._worldMap = resources[worldMapUrl].data;
 
 				this.loadTextures(loader, textureUrls).then(() =>
 				{
 					this.createBehaviorInformation(behaviorInformation);
 					this.createEntityPrototypes(entityInformation);
-					this.setBehaviorCostAndUpkeep(behaviorInformation);
+					this.setCostAndUpkeep(behaviorInformation);
 					resolve();
 				});
 			});

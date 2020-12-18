@@ -3,7 +3,7 @@
 {
 	background-color: transparent;
 	width: 300px;
-	height: 200px;
+	height: 440px;
 	perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
@@ -23,6 +23,36 @@
 // {
 // 	transform: rotateY(180deg);
 // }
+
+.overlay
+{
+	z-index: 2;
+	position: absolute;
+	width: 300px;
+	height: 439px;
+	background-color: black;
+	border-radius: 6%;
+	opacity: 0.75;
+}
+
+.unselect-img
+{
+	position: absolute;
+	width: 300px;
+	height: 300px;
+    left: 0px;
+    z-index: 3;
+}
+
+.unselect-text
+{
+	position: absolute;
+    width: 100%;
+    top: 300px;
+    font-family: Zolof;
+    color: beige;
+    z-index: 3;
+}
 
 /* Position the front and back side */
 .flip-box-front, .flip-box-back 
@@ -44,20 +74,46 @@
 	width: 100%;
 }
 
+.resource-background
+{
+	margin-left: -4px;
+	margin-right: -4px;
+}
+
 .card-cost-bg
 {
 	position: absolute;
     width: 89%;
-    top: 2%;
+	top: 2%;
     left: 5%;
+}
+
+.card-inner
+{
+	width: 231px;
+    top: 25.5px;
+    left: 35px;
+    height: 192px;     
+    -webkit-mask-image: url(src/assets/cards/mask.png);
+    mask-image: url(src/assets/cards/mask.png);
+	position: absolute;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-mask-size: 233px;
+    mask-size: 233px;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
 }
 
 .card-type
 {
 	position: absolute;
-    width: 16%;
-    top: 50%;
-    left: 78%;
+    width: 12%;
+    top: 51.5%;
+    left: 80%;
 }
 
 .faction
@@ -69,26 +125,44 @@
 
 .resource-container
 {
-	position:absolute;
-	top:2px;
-	padding-right: 0px;
+	z-index: 1;
+	position: absolute;
+    top: 3px;
+    padding-right: 4px;
 }
 
-.resource-background
+.tier-container
 {
-	width: 25%;
-	margin-left: -3px;
-	margin-right: -3px;
+	position: absolute;
+	top: 282px;
+}
+
+.tier-arrow
+{
+	width: 30px;
+}
+
+.tier-text
+{
+	font-family: Zolof;
+	top: 8px;
+	font-size: 125%;
+}
+
+.card-ability-bg
+{
+	position: absolute;
+	width: 75%;
 }
 
 .card-title
 {
 	position: absolute;
     text-align: left;
-	left: 10%;
-	top: 52%;
+    left: 33px;
+    top: 53%;
     font-family: Zolof;
-    font-size: 200%;
+    font-size: 150%;
 }
 
 .card-description
@@ -96,9 +170,9 @@
 	position: absolute;
     text-align: left;
     left: 10%;
-    top: 65%;
-    width: 83%;
+    top: 74%;
+    width: 80%;
     font-family: Zolof;
-    font-size: 125%;
+    font-size: 100%;
     line-height: 100%;
 }

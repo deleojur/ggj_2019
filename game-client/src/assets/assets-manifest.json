@@ -192,6 +192,115 @@
 			"range": 2
 		}
 	],
+	"cards": 
+	[
+		{
+			"title": "Lay siege",
+			"backgroundUrl": "assets/cards/background/red.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "Attack",
+			"faction": "Lionheart",
+			"tiers":
+			[
+				{ 
+					"description": "Target player's commoners ({commoner}) cannot leave their town this turn and can not collect {gold} at the end of the season.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 1 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Target player loses one commoner ({commoner}) from their town. Commoners can not leave their town and do not collect {gold} or {food} at the end of the season", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Both you and target player ", "cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}
+			]		
+		},
+		{
+			"title": "Spy",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/spy.png",
+			"type": "Attack",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "Target player's commoners ({commoner}) cannot leave their town this turn and can not collect {gold} at the end of the season.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 1 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Target player loses one commoner ({commoner}) from their town. Commoners can not leave their town and do not collect {gold} or {food} at the end of the season", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Both you and target player ", "cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}
+			]		
+		}	
+	],
 	"entities":
 	[
 		{
@@ -202,13 +311,13 @@
 			[ 
 				{ "type": "gold", "amount": 3 }, 
 				{ "type": "food", "amount": 0 }, 
-				{ "type": "population", "amount": 2 } 
+				{ "type": "lumber", "amount": 2 } 
 			],
 			"upkeep": 
 			[
 				{ "type": "gold", "amount": 3 }, 
 				{ "type": "food", "amount": -2 }, 
-				{ "type": "population", "amount": 2 }
+				{ "type": "lumber", "amount": 2 }
 			],
 			"behaviors": 
 			[
@@ -226,12 +335,12 @@
 			"cost": [ 
 				{ "type": "gold", "amount": 3 }, 
 				{ "type": "food", "amount": 0 }, 
-				{ "type": "population", "amount": 2 } 
+				{ "type": "lumber", "amount": 2 } 
 			],
 			"upkeep": [
 				{ "type": "gold", "amount": 3 }, 
 				{ "type": "food", "amount": -2 }, 
-				{ "type": "population", "amount": 2 }
+				{ "type": "lumber", "amount": 2 }
 			], "behaviors": 
 			[
 				"upgrade to city",
@@ -249,12 +358,12 @@
 			"cost": [ 
 				{ "type": "gold", "amount": 3 }, 
 				{ "type": "food", "amount": 0 }, 
-				{ "type": "population", "amount": 2 } 
+				{ "type": "lumber", "amount": 2 } 
 			],
 			"upkeep": [
 				{ "type": "gold", "amount": 3 }, 
 				{ "type": "food", "amount": -2 }, 
-				{ "type": "population", "amount": 2 }
+				{ "type": "lumber", "amount": 2 }
 			], "behaviors": 
 			[
 				"upgrade to capital",
@@ -274,7 +383,7 @@
 			[
 				{ "type": "gold", "amount": 3 }, 
 				{ "type": "food", "amount": 0 }, 
-				{ "type": "population", "amount": 2 } 
+				{ "type": "lumber", "amount": 2 } 
 			],
 			"upkeep":
 			[ 

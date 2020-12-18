@@ -26,7 +26,6 @@ import { HostHudComponent } from './ui/host-hud/host-hud.component';
 import { EndOfTurnWindowComponent } from './ui/window/end-of-turn-window/end-of-turn-window.component';
 import { PlayableCardComponent } from './game/components/cards/playable-card/playable-card.component';
 import { CardContainerComponent } from './game/components/cards/card-container/card-container.component';
-import { CardResourceComponent } from './game/components/cards/card-resource/card-resource.component';
 import { ResourceHudComponent } from './ui/resource-hud/resource-hud.component';
 
 @NgModule({
@@ -51,7 +50,6 @@ import { ResourceHudComponent } from './ui/resource-hud/resource-hud.component';
 		EndOfTurnWindowComponent,
 		PlayableCardComponent,
 		CardContainerComponent,
-		CardResourceComponent,
 		ResourceHudComponent
 	],
   	entryComponents: [

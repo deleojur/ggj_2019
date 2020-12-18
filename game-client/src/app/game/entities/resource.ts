@@ -1,3 +1,5 @@
+
+
 export class Resource
 {
 	public get textureUrl(): string

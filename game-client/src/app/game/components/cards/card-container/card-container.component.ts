@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Card, CardTier } from 'src/app/game/entities/card';
-import { Resource } from 'src/app/game/entities/resource';
-import { PlayableCardComponent } from '../playable-card/playable-card.component';
+import { AssetLoader } from 'src/app/asset-loader';
+import { Card } from 'src/app/game/entities/card';
 
 @Component({
   selector: 'app-card-container',
@@ -10,20 +9,16 @@ import { PlayableCardComponent } from '../playable-card/playable-card.component'
 })
 export class CardContainerComponent implements OnInit 
 {
-	cards: Card[] = [new Card('assets/cards/background/red.png', 'assets/cards/abilities/sword.png', 'Attack', 
-	[ 
-		new CardTier('Swordfighting', 'Fight by sword', 
-		[
-			new Resource('Food', 2),
-			new Resource('Gold', 1)
-		])
-	], 'Lionheart')];
-
+	cards: Card[];
 	blaat: number = 8;
 
 	constructor()
-	{
-
+	{		
+		AssetLoader.instance.loadAssetsAsync().then(() => 
+		{
+			this.cards = AssetLoader.instance.getCardsByName(['Lay siege', 'Spy']);
+			console.log(this.cards);
+		});
 	}
 
 	ngOnInit() 

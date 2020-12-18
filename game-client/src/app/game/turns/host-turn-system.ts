@@ -150,7 +150,7 @@ export class HostTurnSystem extends TurnsSystem
 		this._clients.forEach(client => 
 		{
 			const resourceManager: ResourceManager = new ResourceManager();
-			resourceManager.init(0, 0, 0, 0);
+			resourceManager.init(0, 0, 0, 0, 0);
 			const clientEntities: Entity[] = entities.get(client.id);
 			clientEntities.forEach(entity =>
 			{
