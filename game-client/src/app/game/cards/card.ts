@@ -1,4 +1,4 @@
-import { Resource } from './resource';
+import { Resource } from "../entities/resource";
 
 export enum CardType
 {
@@ -132,7 +132,7 @@ export class Card
 	private _tiers: CardTier[];
 	private _faction?: string;
 
-	constructor(cardInformation: CardInformation)
+	constructor(cardInformation: CardInformation, id: number)
 	{
 		this._title = cardInformation.title;
 		this._backgroundUrl = cardInformation.backgroundUrl;

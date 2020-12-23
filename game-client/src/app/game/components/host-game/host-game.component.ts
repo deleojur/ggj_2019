@@ -1,20 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Game } from '../game.component';
 import { HostStateHandler } from '../../states/host-states/host-state-handler';
 import { StateHandlerService } from '../../states/state-handler.service';
+import { RequestCardData } from '../../states/request-data';
+import { hostState_responseCard } from '../../states/host-states/host-state_response-card';
+import { GameManager } from '../../game-manager';
 
 @Component({
   selector: 'app-host-game',
   template: ''
 })
-export class HostGameComponent implements Game
+export class HostGameComponent implements Game, OnInit
 {
     constructor(
 		private hostStateHandler: HostStateHandler)
 	{
 		
 	}
+
+	ngOnInit() 
+    {		
+		/*const clientGrid: GridClient = new GridClient(this.clientStateHandler);
+		GameManager.instance.init(clientGrid, () => {});*/		
+    }
 
 	stateHandler(): StateHandlerService
 	{

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment'; 
 import * as io from 'socket.io-client';
+import { RequestData } from 'src/app/game/states/request-data';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class ConnectionService
         return this.socket.on(eventName, (data: T) => callback(data));
     }
 
-    public emitOutgoingEvent<T>(eventName: string, data?: T): void
+    public emitOutgoingEvent<T /*extends RequestData*/>(eventName: string, data?: T): void
     {
         this.socket.emit(eventName, JSON.stringify(data));
     }

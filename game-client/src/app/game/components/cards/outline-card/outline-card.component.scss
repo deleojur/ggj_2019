@@ -1,0 +1,45 @@
+$scale: .65;
+.outline
+{
+	background-color: transparent;
+	width: 375px * $scale;
+    height: 350px * $scale;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+}
+
+.border-outline
+{
+	width: 300px * $scale;
+    left: 38px * $scale;
+    top: 29px * $scale;
+    position: absolute;
+}
+
+.border-name
+{
+	top: 272px * $scale;
+}
+
+.card-title
+{
+    left: 59.25px * $scale;
+	top: 275px * $scale;
+	font-size: 40px * $scale;
+}
+
+.card-type
+{
+	left: 290px * $scale;
+	top: 278px * $scale;
+}
+
+.card-inner
+{
+	width: 276px * $scale;
+    top: 20px * $scale;
+    left: 50.6px * $scale;
+    height: 275px * $scale;
+    -webkit-mask-size: 292px * $scale;
+	mask-size: 292px * $scale;
+}

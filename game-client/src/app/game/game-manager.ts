@@ -17,7 +17,9 @@ import { HostStateHandler } from './states/host-states/host-state-handler';
 import { HostGrid } from './grid/host-grid';
 import { HostTurnSystem } from './turns/host-turn-system';
 import { ClientTurnSystem } from './turns/client-turn-system';
-import { StateHandlerService } from './states/state-handler.service';
+import { CardManager } from './cards/card-manager';
+import { ClientCardManager } from './cards/client-card-manager';
+import { HostCardManager } from './cards/host-card-manager';
 
 export class GameManager
 {
@@ -34,6 +36,7 @@ export class GameManager
 
 	private _resourceManager: ResourceManager;
 	private _windowManager: WindowManager;
+	private _cardManager: CardManager;
 
 	private _onHexClicked: Subject<Hex<Cell>> = new Subject<Hex<Cell>>();
 
@@ -49,7 +52,7 @@ export class GameManager
 
 	private constructor()
 	{
-		this._resourceManager = new ResourceManager();
+		this._resourceManager = new ResourceManager();		
 		this._resourceManager.init(100, 100, 40, 10, 10);
 		this.initWindowManager();
 	}
@@ -57,7 +60,7 @@ export class GameManager
 	public get resourceManager(): ResourceManager
 	{
 		return this._resourceManager;
-	}
+	}	
 
 	public get windowManager(): WindowManager
 	{
@@ -94,6 +97,11 @@ export class GameManager
 		return this._turnSystem as ClientTurnSystem;
 	}
 
+	public get clientCardManager(): ClientCardManager
+	{
+		return this._cardManager as ClientCardManager;
+	}
+	
 	public get hostGrid(): HostGrid
 	{
 		return this._gridStrategy as HostGrid;
@@ -108,6 +116,12 @@ export class GameManager
 	{
 		return this._turnSystem as HostTurnSystem;
 	}
+
+	public get hostCardManager(): HostCardManager
+	{
+		return this._cardManager as HostCardManager;
+	}
+
 
     public get viewport(): ViewportManager
     {
@@ -147,6 +161,7 @@ export class GameManager
 			this.viewport.initViewport(size.x, size.y);
 			this._grid.init(gridGraphics, pathGraphics);
 			this._turnSystem.init(commandGraphics);
+			this._cardManager.init();
 
 			this.viewport.addChild(gridGraphics);
 			this.viewport.addChild(commandGraphics);
@@ -181,13 +196,14 @@ export class GameManager
 		this.gridStrategy.createStartEntities(clients);
 	}
 
-    public init(gridStrategy: GridStrategy, turnSystem: TurnsSystem, cb: () => void): void
+    public init(gridStrategy: GridStrategy, turnSystem: TurnsSystem, cardManager: CardManager, cb: () => void): void
     {
 		if (!this.isInitialized)
 		{	
 			this.isInitialized = true;
 			this._gridStrategy = gridStrategy;
 			this._turnSystem = turnSystem;
+			this._cardManager = cardManager;
 			this._clientInteraction = new ClientInteraction();
 			this.generateWorld(cb);
 		}
@@ -203,6 +219,7 @@ export class GameManager
 	{
 		this.renderCellsOutline();
 		this.turnSystem.onGameStarted();
+		this._cardManager.onGameStarted();
 	}
 
 	public renderCellsOutline(): void

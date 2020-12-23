@@ -16,7 +16,7 @@ export abstract class PrimaryState<RequestData>
         this.subscribeToEvents();
 	}
 
-    public setActive(onStateDone: (data: RequestData) => void,): void
+    public setActive(onStateDone: (data: RequestData) => void): void
     {
 		this.isActiveState = true;
         

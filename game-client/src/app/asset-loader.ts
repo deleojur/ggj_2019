@@ -1,8 +1,8 @@
 import { Loader, Texture } from 'pixi.js';
-import { EntityPrototype, EntityInformation, PrototypeInformation, BehaviorInformation, EntityType, Entity } from './game/entities/entity';
+import { EntityPrototype, EntityInformation, BehaviorInformation, EntityType } from './game/entities/entity';
 import { WorldMap } from './game/grid/map-reader';
 import { Resource } from './game/entities/resource';
-import { Card, CardInformation } from './game/entities/card';
+import { Card, CardInformation } from './game/cards/card';
 
 interface CommandIconsBackground
 {
@@ -21,7 +21,7 @@ export class AssetLoader
 	private _behaviorInformation: Map<string, BehaviorInformation>;	
 
 	private _textures: Map<string, Texture>;
-	private _cards: Map<string, Card>;
+	private _cards: Card[];
 	private _commandIconsBackgrounds: CommandIconsBackground;
 	private _worldMap: WorldMap;
 
@@ -38,6 +38,11 @@ export class AssetLoader
 	public get worldMap(): WorldMap
 	{
 		return this._worldMap;
+	}
+
+	public get cards(): Card[]
+	{
+		return this._cards;
 	}
 
 	constructor()
@@ -149,26 +154,16 @@ export class AssetLoader
 
 	private parseCardData(cardData: CardInformation[]): void
 	{
-		this._cards = new Map<string, Card>();
-		cardData.forEach(cardInformation =>
+		this._cards = [];
+		cardData.forEach((cardInformation, i: number) =>
 		{
 			cardInformation.tiers.forEach(tier =>
 			{
 				this.setResourceClass(tier);
 			});
-			const card: Card = new Card(cardInformation);
-			this._cards.set(card.title, card);
+			const card: Card = new Card(cardInformation, i);
+			this._cards.push(card);
 		});		
-	}
-
-	public getCardsByName(cardNames: string[]): Card[]
-	{
-		const cards: Card[] = [];
-		cardNames.forEach(cardName =>
-		{
-			cards.push(this._cards.get(cardName));
-		});
-		return cards;
 	}
 
 	public loadAssetsAsync(): Promise<void>

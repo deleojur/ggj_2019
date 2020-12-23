@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { HTMLElementSize } from 'src/app/enums';
 import { Resource } from 'src/app/game/entities/resource';
 
 @Component({
@@ -9,8 +10,16 @@ import { Resource } from 'src/app/game/entities/resource';
 export class ResourceHudComponent implements OnInit
 {
 	@Input() resource: Resource;
-	constructor() { }
+	@Input() textSize: HTMLElementSize = HTMLElementSize.Small;
+
+
+	constructor() 
+	{
+
+	}
 	
 	ngOnInit() 
-	{}
+	{
+
+	}
 }

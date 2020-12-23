@@ -1,0 +1,38 @@
+.overlay
+{
+	z-index: 3;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.playable-card-container
+{
+	position: absolute;
+    top: 100px;
+}
+
+.btn-container
+{
+	top: 17px;
+}
+
+.btn-select-card
+{
+	position: relative;    
+}
+
+.text-select-card
+{
+	font-family: Zolof;
+    text-align: c;
+    font-size: 214%;
+    width: 100%;
+    color: beige;
+    position: absolute;
+    pointer-events: none;
+    top: 35px;
+}

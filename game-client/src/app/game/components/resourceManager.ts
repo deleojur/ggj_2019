@@ -13,9 +13,9 @@ export class ResourceManager
 		this._resourcePool = new Map<string, Resource>();
 		this._resourcePool.set("gold", new Resource("gold", gold));
 		this._resourcePool.set("food", new Resource("food", food));
-		this._resourcePool.set("lumber", new Resource("logs", lumber));
+		this._resourcePool.set("lumber", new Resource("lumber", lumber));
 		this._resourcePool.set("stone", new Resource("stone", stone));
-		this._resourcePool.set("influence", new Resource("influence", influence));		
+		this._resourcePool.set("influence", new Resource("influence", influence));
 	}
 
 	public get resourcePool(): Resource[]

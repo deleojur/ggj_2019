@@ -15,8 +15,6 @@ import { GameManager } from 'src/app/game/game-manager';
 export class ItemDetailWindowComponent implements OnInit, InnerWindowComponent
 {
 	@Input() data: any;
-	width: string = '45vh'
-	top: string = '-50px';
 
 	menuItem: BehaviorInformation;
 	private origin: Hex<Cell>;
@@ -34,12 +32,7 @@ export class ItemDetailWindowComponent implements OnInit, InnerWindowComponent
 	buyItem()
 	{
 		GameManager.instance.resourceManager.tryAcquireItem(this.menuItem, this.origin, this.entity);
-	}
-
-	goToPreviousWindow(): void
-	{
-		GameManager.instance.windowManager.goToPreviousWindow();
-	}
+	}	
 
 	beforeCloseWindow(n: number): void
 	{

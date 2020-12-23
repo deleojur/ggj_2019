@@ -1,4 +1,3 @@
-import { GridManager } from './../../grid/grid';
 import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { Vector } from 'vector2d';
 import { Game } from '../game.component';
@@ -21,7 +20,7 @@ export class ClientGameComponent implements Game, OnInit, AfterViewInit
 	ngOnInit() 
     {
 		/*const clientGrid: GridClient = new GridClient(this.clientStateHandler);
-		GameManager.instance.init(clientGrid, () => {});*/
+		GameManager.instance.init(clientGrid, () => {});*/	
     }
 
 	stateHandler(): StateHandlerService

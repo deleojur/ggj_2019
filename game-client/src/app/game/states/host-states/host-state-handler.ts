@@ -9,6 +9,7 @@ import { ClientData, RoomData } from '../request-data';
 import { hostState_turnInformation } from './host-state_turn-information';
 import { hostState_clientTurnConfirm } from './host-state_client-turn-confirm';
 import { hostState_turnResolve } from './host-state_turn-resolve';
+import { hostState_responseCard } from './host-state_response-card';
 
 @Injectable({
     providedIn: 'root'
@@ -35,6 +36,8 @@ export class HostStateHandler extends StateHandlerService
 		this._states.set(hostState_turnInformation, new hostState_turnInformation());
 		this._states.set(hostState_clientTurnConfirm, new hostState_clientTurnConfirm());
 		this._states.set(hostState_turnResolve, new hostState_turnResolve());
+
+		this._states.set(hostState_responseCard, new hostState_responseCard());
 	}
 
 	public get clientType(): string

@@ -1,12 +1,15 @@
 <div class="fixed">
 	<img class="background" src="assets/UI/window/wood_plank1.svg">
 	<div class="resource-container container">
-		<div class="row justify-content-center">
-			<div class="col-3 resource-background" *ngFor="let resource of resourcePool">
-				<app-resource-hud [resource]="resource" ></app-resource-hud>	
+		<div class="row justify-content-left no-gutters">
+			<div class="col-2 resource-background" *ngFor="let resource of resourcePool">
+				<app-resource-hud [resource]="resource" [textSize]="'large'"></app-resource-hud>	
 			</div>
-		</div>		
-		<div class="col-3">
+			<div class="col-2">
+				<img (click)="onMenuButtonClicked()" src="assets/UI/button/btn_n_menu2.svg"/>
+			</div>
+		</div>			
+		<!-- <div class="col-3">
 			<div class="confirm-btn-background">
 				<img #button src="assets/UI/window/btn_brown_normal.svg"
 				(click)="onConfirmButtonClicked($event)">
@@ -15,10 +18,9 @@
 			<div class="confirmed-checkmark" [ngClass]="{'animate-in': showCheckbox, 'animate-out': !showCheckbox}">
 				<img src="assets/UI/window/btn_c_accept.svg">
 			</div>
-		</div>
+		</div> -->
 	</div>
-	<div class="row fixed button-container">
-		<img class="background" src="assets/UI/window/wood_plank1.svg">	
-		
-	</div>
+	<!-- <div class="row fixed button-container">
+		<img class="background" src="assets/UI/window/wood_plank1.svg">
+	</div> -->
 </div>

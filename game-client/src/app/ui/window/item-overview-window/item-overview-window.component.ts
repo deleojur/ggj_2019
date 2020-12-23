@@ -20,8 +20,6 @@ export class ItemOverviewWindowComponent implements OnInit, InnerWindowComponent
 	data: any;
 	hex: Hex<Cell>;
 	entities: Entity[];
-	width: string = '45vh';
-	top: string = '-50px';
 
   	constructor()
 	{

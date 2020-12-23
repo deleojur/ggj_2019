@@ -27,6 +27,8 @@ import { EndOfTurnWindowComponent } from './ui/window/end-of-turn-window/end-of-
 import { PlayableCardComponent } from './game/components/cards/playable-card/playable-card.component';
 import { CardContainerComponent } from './game/components/cards/card-container/card-container.component';
 import { ResourceHudComponent } from './ui/resource-hud/resource-hud.component';
+import { DraftCardsWindowComponent } from './ui/window/draft-cards-window/draft-cards-window.component';
+import { OutlineCardComponent } from './game/components/cards/outline-card/outline-card.component';
 
 @NgModule({
 	declarations: [
@@ -50,12 +52,15 @@ import { ResourceHudComponent } from './ui/resource-hud/resource-hud.component';
 		EndOfTurnWindowComponent,
 		PlayableCardComponent,
 		CardContainerComponent,
-		ResourceHudComponent
+		ResourceHudComponent,
+		DraftCardsWindowComponent,
+		OutlineCardComponent
 	],
   	entryComponents: [
 		ItemOverviewWindowComponent,
 		ItemDetailWindowComponent,
-		SelectCellComponent
+		SelectCellComponent,
+		DraftCardsWindowComponent
   	],
   	imports: [
 		BrowserModule,

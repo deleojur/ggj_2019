@@ -8,8 +8,6 @@ import { InnerWindowComponent } from '../window.component';
 })
 export class EndOfTurnWindowComponent implements OnInit, InnerWindowComponent
 {
-	public width: string = '25vh';
-	public top: string = '-20px';
 	public data: any;
 
 	constructor() { }

@@ -71,6 +71,13 @@ listener =
         delete this.rooms[roomid];
         console.log('room', roomid, 'is no longer available.');
 	},
+	host_response_cards(socket, data)
+	{		
+		data = JSON.parse(data);
+		console.log('host -> request cards receieved', data);
+		const clientId = data.id;
+		this.io.to(clientId).emit('host_response_cards', data);
+	},
     listen(io, socket)
     {
         this.io = io;
@@ -79,6 +86,8 @@ listener =
 		socket.on('host_game_requestTurnInformation', () => this.host_requestTurnInformation(socket));
 		socket.on('host_game_turnsResolve', (data) => this.host_game_turnsResolve(data));
 		socket.on('host_game_nextTurn', () => this.host_game_nextTurn(socket));
+
+		socket.on('host_response_cards', (data) => { this.host_response_cards(socket, data); });
     }
 };
 module.exports = listener;

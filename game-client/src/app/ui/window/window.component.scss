@@ -2,7 +2,6 @@
 {
     position: absolute;
     display: block;
-	left: 20%;
     top: 10vh;
 }
 
@@ -10,6 +9,21 @@
 {
     display:inline-block;
     position:relative;
+}
+
+.small
+{
+	width: 35vw;
+}
+
+.medium
+{
+	width: 55vw;
+}
+
+.large
+{
+	width: 75vw;
 }
 
 .ui-container.animate-in
@@ -29,37 +43,30 @@
     width: 45vh;
 }
 
-.banner
+.banner-top
 {
     position: absolute;
     top: 18%;
-    left: 0;
-}
-
-.window-btn-bg
-{
-    position: absolute;
-    max-width: 45px;
-    min-width: 25px;
-    left: 72%;
-    top: 20%;
-}
-
-.window-btn-fg
-{
-	position: absolute;
-    max-width: 8%;
-    top: 22%;
-    left: 74%;
+	left: 0;
+	z-index: 2;
 }
 
 .window-btn
 {
     position: absolute;
     max-width: 45px;
-    min-width: 25px;
-    left: 72%;
-    top: 20%;
+    min-width: 25px;    
+    top: 21%;
+}
+
+.left-window-btn
+{
+	left: 20%;
+}
+
+.right-window-btn
+{
+	right: 20%;
 }
 
 .clickable-btn
@@ -69,7 +76,7 @@
     left: 20%;
 }
 	
-.bannerText
+.banner-text
 {
 	font-size: 200%;
 	font-weight: bold;
@@ -78,7 +85,8 @@
     font-family: Zolof;
     color: rgb(253, 234, 182);
     pointer-events: none;
-    position: absolute;
+	position: absolute;
+	z-index: 3;
 }
 
 .scrollable-menu
@@ -88,10 +96,10 @@
     width: 82%;
     padding: 5% 0% 0 0;
     left: 10%;
-    top: 35%;
+    top: 25%;
     overflow-x: hidden;
     overflow-y: scroll;
-    height: 51%;
+    height: 65%;
 }
 
 .back-btn
@@ -107,10 +115,14 @@
     left: 19%;
 }
 
+
+
 /* Handle */
-.scrollbar-ripe-malinka::-webkit-scrollbar-track {
-  background-color: #F5F5F500;
-  border-radius: 10px; }
+.scrollbar-ripe-malinka::-webkit-scrollbar-track 
+{
+  	background-color: #F5F5F500;
+	border-radius: 10px;
+}
 
   .scrollbar-ripe-malinka::-webkit-scrollbar {
   width: 12px;

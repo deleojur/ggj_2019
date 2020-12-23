@@ -1,9 +1,11 @@
+$scale: 1.25;
+
 /* The flip box container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip-box 
-{
+{	
 	background-color: transparent;
-	width: 300px;
-	height: 440px;
+	width: 300px * $scale;
+	height: 440px * $scale;
 	perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
@@ -18,18 +20,30 @@
 	transform-style: preserve-3d;
 }
 
-/* Do an horizontal flip when you move the mouse over the flip box container */
-// .flip-box:hover .flip-box-inner 
-// {
-// 	transform: rotateY(180deg);
-// }
+.flip-box.animate-in .flip-box-inner 
+{
+	transform: rotateY(0deg) scale(1);
+	transition: transform .8s cubic-bezier(.42, 0, .15, 1.25);
+}
+
+.flip-box.animate-to-inventory .flip-box-inner 
+{
+	transform: translate(210px, -400px) rotateY(180deg) scale(0.1);
+	transition: transform .8s cubic-bezier(.42, 0, .15, 1.25);
+}
+
+.flip-box.animate-out .flip-box-inner 
+{	
+	transform: rotateY(180deg) scale(0.25);
+	transition: transform .8s cubic-bezier(.85, -.25, .57, 1);
+}
 
 .overlay
 {
 	z-index: 2;
 	position: absolute;
-	width: 300px;
-	height: 439px;
+	width: 300px * $scale;
+	height: 439px * $scale;
 	background-color: black;
 	border-radius: 6%;
 	opacity: 0.75;
@@ -38,8 +52,8 @@
 .unselect-img
 {
 	position: absolute;
-	width: 300px;
-	height: 300px;
+	width: 300px * $scale;
+	height: 300px * $scale;
     left: 0px;
     z-index: 3;
 }
@@ -48,7 +62,7 @@
 {
 	position: absolute;
     width: 100%;
-    top: 300px;
+    top: 300px * $scale;
     font-family: Zolof;
     color: beige;
     z-index: 3;
@@ -76,8 +90,8 @@
 
 .resource-background
 {
-	margin-left: -4px;
-	margin-right: -4px;
+	margin-left: -4px * $scale;
+	margin-right: -4px * $scale;
 }
 
 .card-cost-bg
@@ -90,18 +104,16 @@
 
 .card-inner
 {
-	width: 231px;
-    top: 25.5px;
-    left: 35px;
-    height: 192px;     
+	width: 231px * $scale;
+    top: 6.8px * $scale;
+    left: 35px * $scale;
+	height: 230px * $scale;
+	-webkit-mask-size: 233px * $scale;
+	mask-size: 233px * $scale;
+	
     -webkit-mask-image: url(src/assets/cards/mask.png);
     mask-image: url(src/assets/cards/mask.png);
-	position: absolute;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    -webkit-mask-size: 233px;
-    mask-size: 233px;
+	position: absolute;    
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
@@ -112,8 +124,8 @@
 {
 	position: absolute;
     width: 12%;
-    top: 51.5%;
-    left: 80%;
+    top: 226px * $scale;
+    left: 240px * $scale;
 }
 
 .faction
@@ -134,18 +146,17 @@
 .tier-container
 {
 	position: absolute;
-	top: 282px;
+	top: 280px * $scale;
 }
 
 .tier-arrow
 {
-	width: 30px;
+	width: 26px * $scale;
 }
 
 .tier-text
 {
 	font-family: Zolof;
-	top: 8px;
 	font-size: 125%;
 }
 
@@ -159,8 +170,8 @@
 {
 	position: absolute;
     text-align: left;
-    left: 33px;
-    top: 53%;
+    left: 33px * $scale;
+    top: 223px * $scale;
     font-family: Zolof;
     font-size: 150%;
 }
@@ -170,9 +181,9 @@
 	position: absolute;
     text-align: left;
     left: 10%;
-    top: 74%;
+    top: 72%;
     width: 80%;
-    font-family: Zolof;
-    font-size: 100%;
+    font-family: 'Segoe UI';
+	font-size: 80% * $scale;
     line-height: 100%;
 }

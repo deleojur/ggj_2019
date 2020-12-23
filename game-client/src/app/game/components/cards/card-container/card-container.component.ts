@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AssetLoader } from 'src/app/asset-loader';
-import { Card } from 'src/app/game/entities/card';
+import { Card } from 'src/app/game/cards/card';
+import { GameManager } from 'src/app/game/game-manager';
 
 @Component({
   selector: 'app-card-container',
@@ -16,7 +17,7 @@ export class CardContainerComponent implements OnInit
 	{		
 		AssetLoader.instance.loadAssetsAsync().then(() => 
 		{
-			this.cards = AssetLoader.instance.getCardsByName(['Lay siege', 'Spy']);
+			this.cards = AssetLoader.instance.cards;
 			console.log(this.cards);
 		});
 	}

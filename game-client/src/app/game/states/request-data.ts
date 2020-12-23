@@ -1,6 +1,5 @@
 import { Cell } from '../grid/grid';
 import { Hex } from 'honeycomb-grid';
-import { BehaviorInformation } from '../entities/entity';
 import { Resource } from '../entities/resource';
 
 export interface RequestData
@@ -20,6 +19,18 @@ export interface ClientData extends RequestData
 	status: string;
 	startingPosition: number;
 };
+
+export interface RequestCardData extends RequestData
+{
+	amount: number;
+	id: string; //clientid
+} 
+
+export interface ResponseCardData extends RequestData
+{
+	cardIds: number[];
+	id: string; //clientid
+}
 
 export interface PositionData extends RequestData
 {

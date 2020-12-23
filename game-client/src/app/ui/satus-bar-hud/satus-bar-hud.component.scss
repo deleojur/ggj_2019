@@ -1,7 +1,7 @@
 .resource-container
 {
 	position: absolute;
-	margin-top: -19%;
+    top: 67px;
 }
 
 .button-container
@@ -12,10 +12,17 @@
     padding: 10px;
 }
 
+.fixed
+{
+	position: absolute;
+    width: 100%;
+    top: -5vh;
+}
+
 .resource-background
 {
-	margin-left: -10%;
 	pointer-events: none;
+
 }
 
 .confirm-btn-background

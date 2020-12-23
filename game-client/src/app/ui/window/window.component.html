@@ -1,17 +1,24 @@
-<div class="close-ui-window ui-container text-center"
+<div class="close-ui-window ui-container container text-center"
 	[ngClass]="{'animate-in': showWindow, 'animate-out': !showWindow}"
 	(transitionend)="transitionEnd($event)">
+	<div>
+		<div class="ui-parent">
+			<img class="banner-top" src="assets/UI/window/banner_red1.svg">
+			<h4 class="banner-text uiText">{{windowName}}</h4>
 
-<div>
-    <div class="ui-parent" [ngStyle]="{marginTop: top}">
-		<img class="banner" src="assets/UI/window/banner_red1.svg">
-		<h4 class="bannerText uiText">{{windowName}}</h4>
+			<img [className]="windowSize" src="assets/UI/window/side_frame1.svg">
+			<div #buttonContainer>
+				<div *ngIf="displayPrevWindowButton">
+					<img class="window-btn left-window-btn" src="assets/UI/window/btn_n_return.svg"
+					(click)="goToPreviousWindow()">
+				</div>
 
-		<img [ngStyle]="{width: width}" src="assets/UI/window/side_frame1.svg">
-		<div #buttonContainer>
-			<img class="buy-btn-fg window-btn-fg close-ui-window" src="assets/UI/window/btn_n_cancel.svg"
-			(click)="closeWindowEvent($event)">
+				<div *ngIf="displayCloseWindowButton" >
+					<img class="window-btn right-window-btn close-ui-window" src="assets/UI/window/btn_n_cancel.svg"
+					(click)="closeWindowEvent($event)">	
+				</div>							
+			</div>		
+			<ng-template window-host></ng-template>
 		</div>
-		<ng-template window-host></ng-template>
-    </div>
+	</div>
 </div>

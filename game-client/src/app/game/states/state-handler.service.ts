@@ -61,7 +61,7 @@ export abstract class StateHandlerService
         const index: number = this._activeStates.indexOf(state);
         this._activeStates.splice(index, 1);
         state.setInactive();
-    }
+	}
 
     public activateState<T extends RequestData>(
 		stateType: RequestState, 
@@ -79,8 +79,8 @@ export abstract class StateHandlerService
 			}
 		});
         return state;
-    }
-
+	}
+	
     public getState(stateType: RequestState): PrimaryState<RequestData>
     {
         const state: PrimaryState<RequestData> = this._states.get(stateType);

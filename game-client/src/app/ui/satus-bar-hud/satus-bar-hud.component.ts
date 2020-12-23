@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Resource } from 'src/app/game/entities/resource';
 import { GameManager } from 'src/app/game/game-manager';
+import { WindowType } from '../window/window-manager';
 
 @Component({
   selector: 'app-satus-bar-hud',
@@ -8,8 +9,7 @@ import { GameManager } from 'src/app/game/game-manager';
   styleUrls: ['./satus-bar-hud.component.scss', '../game-hud.scss']
 })
 export class StatusBarHudComponent implements OnInit
-{
-	showCheckbox: boolean = false;
+{	
 	resourcePool: Resource[];
 	
 	constructor()
@@ -26,9 +26,9 @@ export class StatusBarHudComponent implements OnInit
     {
 	}
 
-	onConfirmButtonClicked(): void
+	onMenuButtonClicked(): void
 	{
-		this.showCheckbox = !this.showCheckbox;
-		GameManager.instance.clientTurnSystem.sendSubmitTurn(this.showCheckbox);
+		GameManager.instance.windowManager.openWindow(WindowType.MoreOptions, { name: "Blaat", data: { option1: "blaat" } });
+		//GameManager.instance.clientTurnSystem.sendSubmitTurn(this.showCheckbox);
 	}
 }

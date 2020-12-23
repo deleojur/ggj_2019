@@ -1,0 +1,19 @@
+<div class="outline">
+	<div class="flip-box-inner" (click)="onOutlineClicked.emit(card)">
+		<div class="flip-box-front">
+			<div [style.background]="'url(' + card.backgroundUrl + ')'" class="card-inner"></div>
+			<div 
+				[style.background]="'url(' + card.foregroundUrl + ')'" class="card-inner"
+				[style.backgroundRepeat]="'no-repeat'"
+				[style.backgroundSize]="'cover'"></div>
+						
+			<img src="assets/cards/border.png" class="border-outline"/>			
+			<img src="assets/cards/border.png" class="border-outline"/>
+			<img src="assets/cards/border-name.png" class="border-outline border-name"/>
+
+			<img src={{card.typeImageUrl}} class="card-type"/>
+			<img src={{card.factionImageUrl}} class="faction"/>
+			<h2 class="card-title">{{card.title}}</h2>		
+		</div>
+	</div>
+</div>
