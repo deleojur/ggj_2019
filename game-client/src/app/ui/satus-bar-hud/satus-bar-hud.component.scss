@@ -22,43 +22,98 @@
 .resource-background
 {
 	pointer-events: none;
-
+	z-index: 2;
 }
 
-.confirm-btn-background
+.overlay
 {
-	margin-left: -86%;
-	width: 200%;
+	z-index: 1;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
 }
 
-.confirm-btn-text
+.playable-card-container
+{
+	position: absolute;
+	top: 150px;
+	z-index: 5;
+}
+
+.btn-container
+{
+	top: 17px;
+}
+
+.btn-select-card
+{
+	position: relative;    
+}
+
+.text-select-card
 {
 	font-family: Zolof;
     text-align: c;
-    font-size: 130%;
+    font-size: 214%;
     width: 100%;
-    color: #fca475;
+    color: beige;
+    position: absolute;
     pointer-events: none;
-    margin-top: -23%;
-    margin-left: 9%;
+	top: 35px;
+	text-align: center;
 }
 
-.confirmed-checkmark
+.play-card-bg
+{
+	width: 115%;
+    position: absolute;
+}
+
+.play-card-icon
 {
 	position: absolute;
-    width: 38%;
-    margin-left: 33%;
-    margin-top: -34%;
+    width: 35px;
+    top: 28%;
+    left: 36%;
 }
 
-.confirmed-checkmark.animate-in
-{
-    transition: transform .3s cubic-bezier(.85, -.25, .57, 1);
-	transform: scale(100%, 100%);
-}
+// .confirm-btn-background
+// {
+// 	margin-left: -86%;
+// 	width: 200%;
+// }
 
-.confirmed-checkmark.animate-out
-{
-    transition: transform .3s cubic-bezier(.85, -.25, .57, 1);
-	transform: scale(0, 0);
-}
+// .confirm-btn-text
+// {
+// 	font-family: Zolof;
+//     text-align: c;
+//     font-size: 130%;
+//     width: 100%;
+//     color: #fca475;
+//     pointer-events: none;
+//     margin-top: -23%;
+//     margin-left: 9%;
+// }
+
+// .confirmed-checkmark
+// {
+// 	position: absolute;
+//     width: 38%;
+//     margin-left: 33%;
+//     margin-top: -34%;
+// }
+
+// .confirmed-checkmark.animate-in
+// {
+//     transition: transform .3s cubic-bezier(.85, -.25, .57, 1);
+// 	transform: scale(100%, 100%);
+// }
+
+// .confirmed-checkmark.animate-out
+// {
+//     transition: transform .3s cubic-bezier(.85, -.25, .57, 1);
+// 	transform: scale(0, 0);
+// }

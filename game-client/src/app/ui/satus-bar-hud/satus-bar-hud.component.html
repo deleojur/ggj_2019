@@ -1,3 +1,5 @@
+<div *ngIf="inspectedCard" class="overlay" (click)="closeInspectedCard()"></div>
+
 <div class="fixed">
 	<img class="background" src="assets/UI/window/wood_plank1.svg">
 	<div class="resource-container container">
@@ -5,22 +7,24 @@
 			<div class="col-2 resource-background" *ngFor="let resource of resourcePool">
 				<app-resource-hud [resource]="resource" [textSize]="'large'"></app-resource-hud>	
 			</div>
-			<div class="col-2">
-				<img (click)="onMenuButtonClicked()" src="assets/UI/button/btn_n_menu2.svg"/>
+			<div class="col-2" (click)="openPlayCardWindow()">
+				<!-- open the 'play card' window -->
+				<img class="play-card-bg" src="assets/UI/window/grid4L.svg"/>
+				<img class="play-card-icon" src="assets/cards/card-back.png"/>
 			</div>
-		</div>			
-		<!-- <div class="col-3">
-			<div class="confirm-btn-background">
-				<img #button src="assets/UI/window/btn_brown_normal.svg"
-				(click)="onConfirmButtonClicked($event)">
-				<h1 class="confirm-btn-text">Confirm turn</h1>
-			</div>
-			<div class="confirmed-checkmark" [ngClass]="{'animate-in': showCheckbox, 'animate-out': !showCheckbox}">
-				<img src="assets/UI/window/btn_c_accept.svg">
-			</div>
-		</div> -->
+		</div>		
 	</div>
-	<!-- <div class="row fixed button-container">
-		<img class="background" src="assets/UI/window/wood_plank1.svg">
-	</div> -->
+</div>
+
+<div *ngIf="inspectedCard" (click)="closeInspectedCard()" class="container playable-card-container">
+	<div class="row justify-content-center">
+		<app-playable-card [card]="inspectedCard" [cardAnimation]="cardAnimation" (onTransitionEnd)="onCardCloseAnimationCompleted()"></app-playable-card>				
+		<div class="col-8 btn-container">
+			<div class="btn-select-card">
+				<img #button src="assets/UI/window/btn_brown_normal.svg"
+				(click)="choosePlayableCard($event)">
+				<h1 class="text-select-card">Choose "{{inspectedCard.title}}"</h1>
+			</div>
+		</div>
+	</div>
 </div>

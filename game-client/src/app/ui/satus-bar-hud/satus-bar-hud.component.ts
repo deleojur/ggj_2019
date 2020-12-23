@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Card } from 'src/app/game/cards/card';
+import { CardService } from 'src/app/game/components/cards/card.service';
+import { CardAnimation } from 'src/app/game/components/cards/playable-card/playable-card.component';
 import { Resource } from 'src/app/game/entities/resource';
 import { GameManager } from 'src/app/game/game-manager';
 import { WindowType } from '../window/window-manager';
@@ -11,10 +14,19 @@ import { WindowType } from '../window/window-manager';
 export class StatusBarHudComponent implements OnInit
 {	
 	resourcePool: Resource[];
+	cardAnimation: CardAnimation = CardAnimation.AnimateOut;
 	
-	constructor()
+	constructor(private _cardService: CardService)
 	{
-		
+		this._cardService.onInspectedCardUpdated((card: Card) =>
+		{
+			setTimeout(() => { this.cardAnimation = CardAnimation.AnimateIn; }, 0); //itty bitty hack
+		});
+	}
+
+	get inspectedCard(): Card
+	{
+		return this._cardService.inspectedCard;
 	}
 
 	ngOnInit() 
@@ -26,9 +38,34 @@ export class StatusBarHudComponent implements OnInit
     {
 	}
 
-	onMenuButtonClicked(): void
+	closeInspectedCard(): void
 	{
-		GameManager.instance.windowManager.openWindow(WindowType.MoreOptions, { name: "Blaat", data: { option1: "blaat" } });
-		//GameManager.instance.clientTurnSystem.sendSubmitTurn(this.showCheckbox);
+		this.cardAnimation = CardAnimation.AnimateOut;
+		//this._cardService.closeInspectCard();
+	}
+
+	onCardCloseAnimationCompleted(): void
+	{
+		if (this.cardAnimation === CardAnimation.AnimateOut || this.cardAnimation === CardAnimation.AnimateToInventory)
+		{
+			this._cardService.closeInspectedCard();
+		}
+		if (this.cardAnimation === CardAnimation.AnimateToInventory)
+		{
+			GameManager.instance.windowManager.closeAllWindows();
+		}
+	}
+
+	openPlayCardWindow(): void
+	{
+		console.log('play a card!');
+		const gameManager: GameManager = GameManager.instance;
+		gameManager.windowManager.openWindow(WindowType.PlayCards, { name: 'Play Cards', data: gameManager.clientCardManager.cardsInHand });
+	}
+
+	choosePlayableCard(event: MouseEvent): void
+	{
+		this.cardAnimation = CardAnimation.AnimateToInventory;
+		event.stopPropagation();
 	}
 }
