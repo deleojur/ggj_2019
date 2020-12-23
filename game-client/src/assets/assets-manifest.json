@@ -196,7 +196,7 @@
 	[
 		{
 			"title": "Lay siege",
-			"backgroundUrl": "assets/cards/background/red.png",
+			"backgroundUrl": "assets/cards/background/violet.png",
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "Attack",
 			"faction": "Lionheart",
@@ -302,7 +302,7 @@
 		},
 		{
 			"title": "Assassinate",
-			"backgroundUrl": "assets/cards/background/red.png",
+			"backgroundUrl": "assets/cards/background/violet.png",
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "Attack",
 			"faction": "Lionheart",
@@ -355,7 +355,7 @@
 		},
 		{
 			"title": "Demolish",
-			"backgroundUrl": "assets/cards/background/red.png",
+			"backgroundUrl": "assets/cards/background/violet.png",
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "Attack",
 			"faction": "Lionheart",
@@ -404,6 +404,114 @@
 						"amount": 3 
 					}]
 				}
+			]		
+		},
+		{
+			"title": "Monopoly",
+			"backgroundUrl": "assets/cards/background/orange.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "Attack",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "Target player's turn does not resolve.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "A structure becomes unavailable to other players and you may visit it with your {soldier}m even if it is outside your {influence}.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Raid",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "Attack",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "Target player's turn does not resolve.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "A structure becomes unavailable to other players and you may visit it with your {soldier}m even if it is outside your {influence}.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
 			]		
 		},
 		{
@@ -459,7 +567,169 @@
 					}]
 				}				
 			]		
-		}		
+		},
+		{
+			"title": "Trade",
+			"backgroundUrl": "assets/cards/background/orange.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "Attack",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "Target player's turn does not resolve.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "A structure becomes unavailable to other players and you may visit it with your {soldier}m even if it is outside your {influence}.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Taxes",
+			"backgroundUrl": "assets/cards/background/orange.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "Attack",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "Target player's turn does not resolve.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "A structure becomes unavailable to other players and you may visit it with your {soldier}m even if it is outside your {influence}.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Taxes",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "Attack",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "Target player's turn does not resolve.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "A structure becomes unavailable to other players and you may visit it with your {soldier}m even if it is outside your {influence}.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		}
 	],
 	"entities":
 	[

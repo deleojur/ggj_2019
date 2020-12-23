@@ -4,11 +4,11 @@ import { CardService } from 'src/app/game/components/cards/card.service';
 import { InnerWindowComponent } from '../window.component';
 
 @Component({
-  selector: 'app-play-card-window',
-  templateUrl: './play-card-window.component.html',
-  styleUrls: ['../window.component.scss', './play-card-window.component.scss']
+  selector: 'app-discard-card-window',
+  templateUrl: './discard-card-window.component.html',
+  styleUrls: ['./discard-card-window.component.scss']
 })
-export class PlayCardWindowComponent implements OnInit, InnerWindowComponent
+export class DiscardCardWindowComponent implements OnInit, InnerWindowComponent
 {
 	cards: Card[];
 	data: any;	

@@ -29,6 +29,8 @@ import { CardContainerComponent } from './game/components/cards/card-container/c
 import { ResourceHudComponent } from './ui/resource-hud/resource-hud.component';
 import { DraftCardsWindowComponent } from './ui/window/draft-cards-window/draft-cards-window.component';
 import { OutlineCardComponent } from './game/components/cards/outline-card/outline-card.component';
+import { PlayCardWindowComponent } from './ui/window/play-card-window/play-card-window.component';
+import { DiscardCardWindowComponent } from './ui/window/discard-card-window/discard-card-window.component';
 
 @NgModule({
 	declarations: [
@@ -54,13 +56,17 @@ import { OutlineCardComponent } from './game/components/cards/outline-card/outli
 		CardContainerComponent,
 		ResourceHudComponent,
 		DraftCardsWindowComponent,
-		OutlineCardComponent
+		OutlineCardComponent,
+		PlayCardWindowComponent,
+		DiscardCardWindowComponent
 	],
   	entryComponents: [
 		ItemOverviewWindowComponent,
 		ItemDetailWindowComponent,
 		SelectCellComponent,
-		DraftCardsWindowComponent
+		DraftCardsWindowComponent,
+		PlayCardWindowComponent,
+		DiscardCardWindowComponent
   	],
   	imports: [
 		BrowserModule,

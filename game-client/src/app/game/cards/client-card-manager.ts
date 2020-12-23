@@ -19,6 +19,11 @@ export class ClientCardManager extends CardManager
 		this.onHostResponseCardData = this.onHostResponseCardData.bind(this);
 	}
 
+	public get cardsInHand(): Card[]
+	{
+		return this._cardsInHand;
+	}
+
 	public onGameStarted(): void
 	{
 		this._stateRequestCards = this._clientStateHandler.activateState<ResponseCardData>(clientState_requestCards, this.onHostResponseCardData) as clientState_requestCards;

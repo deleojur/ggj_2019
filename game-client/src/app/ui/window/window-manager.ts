@@ -6,6 +6,8 @@ import { ItemDetailWindowComponent } from './item-detail-window/item-detail-wind
 import { SelectCellComponent } from './select-cell/select-cell.component';
 import { EndOfTurnWindowComponent } from './end-of-turn-window/end-of-turn-window.component';
 import { DraftCardsWindowComponent } from './draft-cards-window/draft-cards-window.component';
+import { PlayCardWindowComponent } from './play-card-window/play-card-window.component';
+import { DiscardCardWindowComponent } from './discard-card-window/discard-card-window.component';
 
 export class WindowItem
 {
@@ -54,8 +56,8 @@ export class WindowManager
 
 		//cards windows
 		this.subscribeWindow(WindowType.DraftCards, new WindowItem(DraftCardsWindowComponent));
-		//this.subscribeWindow(WindowType.EndOfTurn, new WindowItem(EndOfTurnWindowComponent));
-		//this.subscribeWindow(WindowType.EndOfTurn, new WindowItem(EndOfTurnWindowComponent));
+		this.subscribeWindow(WindowType.PlayCards, new WindowItem(PlayCardWindowComponent));
+		this.subscribeWindow(WindowType.DiscardCards, new WindowItem(DiscardCardWindowComponent));
 		//DraftCardsWindowComponent
 	}
 

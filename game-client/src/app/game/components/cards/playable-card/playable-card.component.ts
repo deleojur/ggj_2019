@@ -45,10 +45,7 @@ export class PlayableCardComponent implements OnInit, AfterViewInit
 
 	transitionEnd(e: Event): void
 	{
-		if (this.cardAnimation === CardAnimation.AnimateOut)
-		{
-			this.onTransitionEnd.emit();
-		}
+		this.onTransitionEnd.emit();
 	}
 
 	get animateIn(): boolean
