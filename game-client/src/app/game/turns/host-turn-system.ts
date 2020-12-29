@@ -8,7 +8,7 @@ import { TurnInformation, TurnCommand } from './turn-command';
 import { Entity } from '../entities/entity';
 import { Resource } from '../entities/resource';
 import { ResourceManager } from '../components/resourceManager';
-import { hostState_turnResolve, ResolvedTurnCommand } from '../states/host-states/host-state_turn-resolve';
+import { hostState_turnResolve } from '../states/host-states/host-state_turn-resolve';
 
 export class HostTurnSystem extends TurnsSystem
 {

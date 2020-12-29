@@ -8,25 +8,51 @@ $scale: .65;
 	perspective: 1000px;
 }
 
+.flip-box.neutral-left
+{
+	height: 30px * $scale;
+	transform: translateX(-300px) scale(0.5);
+}
+
+.flip-box.neutral-right
+{
+	height: 30px * $scale;
+	transform: translateX(300px) scale(0.5);
+}
+
 .flip-box.animate-in-size
 {
 	height: 30px * $scale;
-	transform: scale(0.5);
-	transition: height 0.5s ease-out, transform 0.5s ease-out;
+	transform: translateX(0px) scale(0.5);
+	transition: transform ease-out 0.25s, height ease-out 0.25s;
 }
 
-.flip-box.animate-out-left
+.flip-box.animate-out-size
 {
 	height: 30px * $scale;
-	transform: translateX(200px) rotate(360deg) scale(0.5);
-	transition: transform 0.3s ease-in 0.4s;
+	transform: translateX(0px) scale(0.5);
+	transition: transform ease-out 0.25s, height ease-out 0.25s;
 }
 
-.flip-box.animate-out-right
+.flip-box.animate-normal-size
+{
+	height: 350px * $scale;
+	transform: translateX(0px) scale(1);
+	transition: transform 0.3s ease-out 0.25s, height 0.3s ease-out 0.25s;
+}
+
+.flip-box.animate-left
 {
 	height: 30px * $scale;
-	transform: translateX(-200px) scale(0.2) rotate(359deg);
-	transition: transform 0.8s ease-out 0.5s;
+	transform: translateX(-300px) scale(0.5);
+	transition: transform 0.3s ease-in 0.15s, height 0.3s ease-in 0.15s;
+}
+
+.flip-box.animate-right
+{
+	height: 30px * $scale;
+	transform: translateX(300px) scale(0.5);
+	transition: transform 0.3s ease-in 0.15s, height 0.3s ease-in 0.15s;
 }
 
 .border-outline

@@ -2,11 +2,17 @@
 	<div class="scrollable-menu scrollbar-ripe-malinka">
 		<div style="height: 20px"></div>
 		<div class="row justify-content-center" *ngFor="let card of cards; let i = index" >
-			<app-outline-card 
+			<app-outline-card		
 				[order]="i"
 				[card]="card" 
-				[cardOutlineAnimation]="cardOutlineAnimation" 
-				(onOutlineClicked)="onCardOutlineSelected($event)"></app-outline-card>	
+				[cardOutlineAnimation]="cardOutlineAnimation"
+				[animationIn]="outlineAnimationIn"
+				[animationOut]="outlineAnimationOut"
+				(onOutlineClicked)="onCardOutlineSelected($event)"
+				(onTransitionEnd)="onTransitionEnd($event)"></app-outline-card>	
 		</div>
-	</div>
+		<div *ngIf="showWaitingForOtherPlayers" class="waiting-for-other-players">
+			<h3>Waiting for other players...</h3>
+		</div>
+	</div>	
 </div>

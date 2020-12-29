@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import { PrimaryState } from 'src/app/game/states/primary-state';
 import { RequestData } from 'src/app/game/states/request-data';
 import { ConnectionService } from '../../../services/connection.service';
@@ -34,14 +33,14 @@ export abstract class StateHandlerService
 		return Array.from(this._clients.values());
 	}
 
-	public getClient(id: string): ClientData
+	public getClientById(id: string): ClientData
 	{
 		return this._clients.get(id);
 	}
 
 	public getClientColorById(id: string): number
 	{
-		const client: ClientData = this.getClient(id);
+		const client: ClientData = this.getClientById(id);
 		const color: string = client.color.replace('#', '0x');
 		return parseInt(color);
 	}

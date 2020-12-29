@@ -10,7 +10,7 @@ import { hostState_turnInformation } from './host-state_turn-information';
 import { hostState_clientTurnConfirm } from './host-state_client-turn-confirm';
 import { hostState_turnResolve } from './host-state_turn-resolve';
 import { hostState_responseRequestCards } from './host-state_response-request-cards';
-import { hostState_responseDraftCards } from './host-state_response-draft-cards';
+import { hostState_draftCards } from './host-state_draft-cards';
 
 @Injectable({
     providedIn: 'root'
@@ -37,9 +37,8 @@ export class HostStateHandler extends StateHandlerService
 		this._states.set(hostState_turnInformation, new hostState_turnInformation());
 		this._states.set(hostState_clientTurnConfirm, new hostState_clientTurnConfirm());
 		this._states.set(hostState_turnResolve, new hostState_turnResolve());
-
 		this._states.set(hostState_responseRequestCards, new hostState_responseRequestCards());
-		this._states.set(hostState_responseDraftCards, new hostState_responseDraftCards());
+		this._states.set(hostState_draftCards, new hostState_draftCards());
 	}
 
 	public get clientType(): string

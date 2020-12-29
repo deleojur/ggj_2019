@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Game } from '../game.component';
 import { HostStateHandler } from '../../states/host-states/host-state-handler';
 import { StateHandlerService } from '../../states/state-handler.service';
+import { Router, RoutesRecognized } from '@angular/router';
+import { filter, pairwise } from 'rxjs/operators';
 
 @Component({
   selector: 'app-host-game',

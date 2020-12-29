@@ -19,20 +19,24 @@ export class StatusBarHudComponent implements OnInit
 	constructor(private _cardService: CardService)
 	{
 		this._cardService.onInspectedCardUpdated((card: Card) =>
-		{
-			
+		{			
 			setTimeout(() => { this.cardAnimation = CardAnimation.AnimateIn; }, 0); //itty bitty hack
+		});
+
+		this._cardService.onResetPlayableCardAnimation(() =>
+		{
+			this.cardAnimation = CardAnimation.AnimateOut;
 		});
 	}
 
 	get inspectedCard(): Card
 	{
-		return this._cardService.inspectedCard;
+		return this._cardService.currentCard;
 	}
 
 	ngOnInit() 
 	{
-		this.resourcePool = GameManager.instance.resourceManager.resourcePool;
+		this.resourcePool = GameManager.instance.resourceManager.resourcePool;		
 	}
 
 	ngAfterViewInit()
@@ -42,7 +46,6 @@ export class StatusBarHudComponent implements OnInit
 	closeInspectedCard(): void
 	{
 		this.cardAnimation = CardAnimation.AnimateOut;
-		//this._cardService.closeInspectCard();
 	}
 
 	onCardCloseAnimationCompleted(): void
@@ -52,8 +55,8 @@ export class StatusBarHudComponent implements OnInit
 			this._cardService.closeInspectedCard();
 		}
 		if (this.cardAnimation === CardAnimation.AnimateToInventory)
-		{
-			GameManager.instance.windowManager.closeAllWindows();
+		{			
+			this._cardService.inspectedCardAnimtationCompleted(this.cardAnimation);
 		}
 	}
 
@@ -63,9 +66,10 @@ export class StatusBarHudComponent implements OnInit
 		gameManager.windowManager.openWindow(WindowType.PlayCards, { name: 'Play Cards', data: gameManager.clientCardManager.cardsInHand });
 	}
 
-	choosePlayableCard(event: MouseEvent): void
+	pickPlayableCard(event: MouseEvent): void
 	{
 		this.cardAnimation = CardAnimation.AnimateToInventory;
+		this._cardService.pickCard();
 		event.stopPropagation();
 	}
 }

@@ -79,13 +79,12 @@ listener =
 	},
 	client_request_cards(socket, data)
 	{
-		console.log('client -> request cards receieved', data);
 		this.emit_to_host(socket, 'client_request_cards', JSON.parse(data))
 	},
-	client_request_cards(socket, data)
+	client_pick_draft_card(socket, data)
 	{
-		console.log('client -> request draft cards receieved', data);
-		this.emit_to_host(socket, 'client_request_draft_cards', JSON.parse(data))
+		console.log('client', data, 'picked' );
+		this.emit_to_host(socket, 'client_pick_draft_card', JSON.parse(data))
 	},
     listen(io, socket)
     {		
@@ -97,7 +96,7 @@ listener =
 		socket.on('client_verify_turnsResolve', () => { this.client_verify_turnResolve(socket); });
 
 		socket.on('client_request_cards', (data) => { this.client_request_cards(socket, data); });
-		socket.on('client_request_draft_cards', (data) => { this.client_request_cards(socket, data); });
+		socket.on('client_pick_draft_card', (data) => { this.client_pick_draft_card(socket, data); });
     }
 };
 module.exports = listener;

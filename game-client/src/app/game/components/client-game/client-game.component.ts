@@ -5,6 +5,8 @@ import { Game } from '../game.component';
 import { GameManager } from '../../game-manager';
 import { ClientStateHandler } from '../../states/client-states/client-state-handler';
 import { StateHandlerService } from '../../states/state-handler.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-client-game',
@@ -15,7 +17,9 @@ export class ClientGameComponent implements Game, OnInit, AfterViewInit
     private interactionStart: Vector;
 
     constructor(
-        private clientStateHandler: ClientStateHandler)	{ }
+		private clientStateHandler: ClientStateHandler)	
+		{		
+		}
 
 	ngOnInit() 
     {

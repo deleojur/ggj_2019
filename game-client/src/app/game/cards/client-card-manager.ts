@@ -2,18 +2,22 @@ import { DraftCardsWindowComponent } from 'src/app/ui/window/draft-cards-window/
 import { WindowManager, WindowType } from "src/app/ui/window/window-manager";
 import { GameManager } from "../game-manager";
 import { ClientStateHandler } from "../states/client-states/client-state-handler";
-import { clientState_draftCards } from '../states/client-states/client-state_draft-cards';
-import { clientState_requestCards } from "../states/client-states/client-state_request-cards";
-import { ResponseCardData } from "../states/request-data";
+import { clientState_draftStart } from '../states/client-states/cards/client-state_draft-card';
+import { ClientData, DraftData, RequestData } from "../states/request-data";
 import { Card } from "./card";
 import { CardManager } from "./card-manager";
+import { clientState_draftPickCard } from '../states/client-states/cards/client-state_draft-pick-card';
+import { clientState_draftCompleted } from '../states/client-states/cards/client-state_draft-completed';
 
 export class ClientCardManager extends CardManager
 {
-	private _stateRequestCards: clientState_requestCards;
-	private _stateDraftCards: clientState_draftCards;
+	private _stateRequestDraftPick: clientState_draftPickCard;
+	private _stateStartDraft: clientState_draftStart;
+	private _stateDraftCompleted: clientState_draftCompleted;
+
 	private _cardsInHand: Card[];
 	private _windowManager: WindowManager;
+	private _draftCardId = -1;
 
 	private _draftWindow: DraftCardsWindowComponent;
 
@@ -23,8 +27,8 @@ export class ClientCardManager extends CardManager
 		this._cardsInHand = [];
 
 		this._windowManager = GameManager.instance.windowManager;
-		this.onHostResponseCardData = this.onHostResponseCardData.bind(this);
-		this.onHostResponseDraftCardData = this.onHostResponseDraftCardData.bind(this); 
+		this.onHostStartDraftRound = this.onHostStartDraftRound.bind(this);
+		this.onHostRequestCardPick = this.onHostRequestCardPick.bind(this); 
 	}
 
 	public get cardsInHand(): Card[]
@@ -32,43 +36,44 @@ export class ClientCardManager extends CardManager
 		return this._cardsInHand;
 	}
 
-	public onGameStarted(): void
+	public onNewSeasonStarted(): void
 	{
-		this._stateDraftCards = this._clientStateHandler.activateState<ResponseCardData>(clientState_draftCards, this.onHostResponseCardData) as clientState_draftCards;
-		this._stateRequestCards = this._clientStateHandler.activateState<ResponseCardData>(clientState_requestCards, this.onHostResponseCardData) as clientState_requestCards;
-		this._stateDraftCards.doRequestCardData(this._clientStateHandler.clientId);
-		
-		setTimeout(() => {
-			this.openDraftWindow();	
-		}, 0);
+		this._stateStartDraft = this._clientStateHandler.activateState<DraftData>(clientState_draftStart, this.onHostStartDraftRound) as clientState_draftStart;
+		this._stateRequestDraftPick = this._clientStateHandler.activateState<RequestData>(clientState_draftPickCard, this.onHostRequestCardPick) as clientState_draftPickCard;
+		this._stateDraftCompleted = this._clientStateHandler.activateState<RequestData>(clientState_draftCompleted, () =>
+		{
+			GameManager.instance.windowManager.openWindow(WindowType.PlayCards, { name: 'Play Cards', data: this._cardsInHand });
+		}) as clientState_draftCompleted;
 	}
 
-	private openDraftWindow(): void
+	private onHostRequestCardPick(): void
 	{
-		this._windowManager.openWindow(WindowType.DraftCards, { name: "Draft Cards", data: [] });
+		const card: Card = this.getCardById(this._draftCardId);
+		this._windowManager.messageCurrentWindow('CLEAR_CONTENT', card);				
 	}
 
-	/**
-	 * 1) client -> request draft cards, open draft window
-	 * 2) host -> 	respond: send cards equal to number of players.
-	 * 3) client ->	show cards received from the host
-	 * 2) client -> when player has picked a card, send another request to host.
-	 * 3) host ->	when there are 0 cards left, send request to close the draft window and start the game.
-	 */
-	private onHostResponseDraftCardData(response: ResponseCardData): void
+	private pickCard(): void
+	{
+		this._cardsInHand.push(...this.getCardsById([this._draftCardId]));
+		this._stateRequestDraftPick.doRequestCardChoice(this._draftCardId);
+	}
+
+	private onHostStartDraftRound(response: DraftData): void
 	{
 		const cards: Card[] = [...this.getCardsById(response.cardIds)];
-		this._windowManager.updateCurrentWindowData(cards);
-
-		//GameManager.instance.windowManager.openWindow(WindowType.DraftCards, { data: this._cards });
+		const randomCardId =  Math.floor(Math.random() * response.cardIds.length); //if no card is picked by the player when the host requests a card, send a random card.
+		this._draftCardId = response.cardIds[randomCardId];
+		this._windowManager.openWindow(WindowType.DraftCards, { name: 'Draft Cards' }, () =>
+		{			
+			const from: ClientData = this._clientStateHandler.getClientById(response.getfrom);
+			const to: ClientData = this._clientStateHandler.getClientById(response.passto);
+			this._windowManager.messageCurrentWindow('UPDATE_CONTENT', { cards: cards, direction: response.direction, passto: to, getfrom: from });
+		});		
 	}
-
-	private onHostResponseCardData(response: ResponseCardData): void
+	
+	public pickDraftCard(cardId: number): void
 	{
-		this._cardsInHand.push(...this.getCardsById(response.cardIds));
-		
+		this._draftCardId = cardId;
+		this.pickCard();
 	}
-	//1) subscribe to incoming events from the host.
-	//2) when starting a game, request for a list of card indices from the host.
-
 }

@@ -1,8 +1,14 @@
 <div class="flip-box" [ngClass]="{
 	'animate-in-size': animateInSize,
-	'animate-out-left': animateOutLeft,
-	'animate-out-right': animateOutRight}"
-(transitionend)="transitionEnd($event)">
+	'animate-out-size': animateOutSize,
+	'animate-normal-size': animateNormalSize,
+	
+	'animate-left': animateOutLeft,
+	'animate-right': animateOutRight,
+	'neutral-left': neutralLeft,
+	'neutral-right': neutralRight}"
+	(transitionend)="transitionEnd($event)">
+
 	<div class="flip-box-inner" (click)="onOutlineClicked.emit(card)">
 		<div class="flip-box-front">
 			<div [style.background]="'url(' + card.backgroundUrl + ')'"

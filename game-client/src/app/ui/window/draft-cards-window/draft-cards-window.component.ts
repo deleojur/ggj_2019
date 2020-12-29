@@ -1,9 +1,10 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { Card } from 'src/app/game/cards/card';
+import { DraftDirection } from 'src/app/game/cards/card-manager';
 import { CardService } from 'src/app/game/components/cards/card.service';
 import { CardOutlineAnimation } from 'src/app/game/components/cards/outline-card/outline-card.component';
-import { CardAnimation as CardAnimation } from 'src/app/game/components/cards/playable-card/playable-card.component';
+import { GameManager } from 'src/app/game/game-manager';
+import { ClientData, DraftData } from 'src/app/game/states/request-data';
 import { InnerWindowComponent } from '../window.component';
 
 @Component({
@@ -12,11 +13,16 @@ import { InnerWindowComponent } from '../window.component';
   styleUrls: ['../window.component.scss', './draft-cards-window.component.scss']
 })
 export class DraftCardsWindowComponent implements OnInit, InnerWindowComponent
-{
+{	
 	cards: Card[];
+	pickedCard: Card;
+	direction: DraftDirection;
+	passto: ClientData;
+	getfrom: ClientData;
 	data: any;
+	animationsCompleted: number = 0;	
 	
-	cardOutlineAnimation: CardOutlineAnimation = CardOutlineAnimation.None;
+	cardOutlineAnimation: CardOutlineAnimation;
 
 	beforeCloseWindow(n: number): void
 	{
@@ -25,7 +31,22 @@ export class DraftCardsWindowComponent implements OnInit, InnerWindowComponent
 
 	beforeOpenWindow(n: number): void
 	{
-		this.cards =  this.data as Card[];
+		this.cards = this.data as Card[];				
+	}
+
+	get outlineAnimationIn(): CardOutlineAnimation
+	{
+		return this.direction === DraftDirection.Left ? CardOutlineAnimation.NeutralLeft : CardOutlineAnimation.NeutralRight;
+	}
+
+	get outlineAnimationOut(): CardOutlineAnimation
+	{
+		return this.direction === DraftDirection.Right ? CardOutlineAnimation.AnimateOutLeft : CardOutlineAnimation.AnimateOutRight;
+	}
+
+	get showWaitingForOtherPlayers(): boolean
+	{		
+		return this.cards && this.animationsCompleted === this.cards.length;
 	}
 
 	afterCloseWindow(n: number): void
@@ -35,7 +56,7 @@ export class DraftCardsWindowComponent implements OnInit, InnerWindowComponent
 
 	afterOpenWindow(n: number): void
 	{
-
+		
 	}
 
 	onCardOutlineSelected(card: Card): void
@@ -43,20 +64,65 @@ export class DraftCardsWindowComponent implements OnInit, InnerWindowComponent
 		this.cardService.inspectCard(card);
 	}
 
-	updateWindowData(data: any): void
+	onTransitionEnd(cardOutlineAnimation: CardOutlineAnimation): void
 	{
-		console.log('update data', data);
+		if (cardOutlineAnimation === CardOutlineAnimation.AnimateOutLeft || cardOutlineAnimation === CardOutlineAnimation.AnimateOutRight)		
+		{		
+			this.animationsCompleted++;
+
+			if (this.showWaitingForOtherPlayers)
+			{
+				this.cardOutlineAnimation = this.outlineAnimationIn;
+				GameManager.instance.clientCardManager.pickDraftCard(this.pickedCard.id);				
+			}
+		}
 	}
-	
+
+	updateContent(data: any): void
+	{
+		this.cardOutlineAnimation = this.cardOutlineAnimation;
+		this.cards = data.cards;
+		this.pickedCard = undefined;
+		this.direction = data.direction;
+		this.passto = data.passto;
+		this.getfrom = data.getfrom;
+		this.animationsCompleted = 0;
+
+		this.cardOutlineAnimation = this.outlineAnimationIn;
+		setTimeout(() =>
+		{
+			this.cardService.animateOutlineCards(CardOutlineAnimation.AnimateInSize);
+			this.cardService.resetPlayableCardAnimation();
+		}, 0);
+	}
+
+	sendMessage(msg: string, data?: any): void
+	{
+		if (msg === 'UPDATE_CONTENT')
+		{
+			this.updateContent(data);
+		} if (msg === 'CLEAR_CONTENT')
+		{
+			this.pickedCard = data;
+			this.cardOutlineAnimation = CardOutlineAnimation.AnimateOutSize;
+		}		
+	}	
+
 	constructor(private cardService: CardService) 
 	{
-		
+		this.sendMessage = this.sendMessage.bind(this);
 	}
 
 	ngOnInit()
 	{
-		// setTimeout(() => {
-		// 	this.cardOutlineAnimation = CardOutlineAnimation.AnimateInSize;
-		// }, 1200);
+		this.cardService.onInspectedCardPicked(card =>
+		{
+			this.pickedCard = card;
+		});
+
+		this.cardService.onInspectedCardAnimationCompleted(animation =>
+		{
+			this.cardOutlineAnimation = CardOutlineAnimation.AnimateOutSize;
+		});
 	}
 }

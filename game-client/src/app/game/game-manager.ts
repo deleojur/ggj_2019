@@ -160,8 +160,7 @@ export class GameManager
 			const size: PIXI.Point = this._grid.generateWorld();
 			this.viewport.initViewport(size.x, size.y);
 			this._grid.init(gridGraphics, pathGraphics);
-			this._turnSystem.init(commandGraphics);
-			this._cardManager.init();
+			this._turnSystem.init(commandGraphics);			
 
 			this.viewport.addChild(gridGraphics);
 			this.viewport.addChild(commandGraphics);
@@ -219,7 +218,8 @@ export class GameManager
 	{
 		this.renderCellsOutline();
 		this.turnSystem.onGameStarted();
-		this._cardManager.onGameStarted();
+		this._cardManager.init();
+		this._cardManager.onNewSeasonStarted();
 	}
 
 	public renderCellsOutline(): void

@@ -77,11 +77,21 @@ listener =
 		const clientId = data.id;
 		this.io.to(clientId).emit('host_response_cards', data);
 	},
-	host_response_draft_cards(socket, data)
-	{		
+	host_request_draft_pick(socket)
+	{
+		this.emit_to_clients(socket, 'host_request_draft_pick');
+	},
+	host_draft_cards(socket, data)
+	{
+		console.log('host draft round');
 		data = JSON.parse(data);
 		const clientId = data.id;
-		this.io.to(clientId).emit('host_response_draft_cards', data);
+		this.io.to(clientId).emit('host_draft_cards', data);
+	},
+	host_request_draft_completed(socket)
+	{
+		console.log('draft completed!');
+		this.emit_to_clients(socket, 'host_request_draft_completed');
 	},
     listen(io, socket)
     {
@@ -93,7 +103,9 @@ listener =
 		socket.on('host_game_nextTurn', () => this.host_game_nextTurn(socket));
 
 		socket.on('host_response_cards', (data) => { this.host_response_cards(socket, data); });
-		socket.on('host_response_draft_cards', (data) => { this.host_response_cards(socket, data); });
+		socket.on('host_request_draft_pick', (data) => { this.host_request_draft_pick(socket, data); });
+		socket.on('host_draft_cards', (data) => { this.host_draft_cards(socket, data); });
+		socket.on('host_request_draft_completed', () => { this.host_request_draft_completed(socket); });
     }
 };
 module.exports = listener;

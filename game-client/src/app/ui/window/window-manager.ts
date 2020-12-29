@@ -11,9 +11,14 @@ import { DiscardCardWindowComponent } from './discard-card-window/discard-card-w
 
 export class WindowItem
 {
-	constructor (public component: Type<InnerWindowComponent>)
+	constructor (public component: Type<InnerWindowComponent>, private _windowType: WindowType)
 	{
 		
+	}
+
+	public get windowType(): WindowType
+	{
+		return this._windowType;
 	}
 }
 
@@ -25,6 +30,7 @@ interface WindowData
 
 export enum WindowType
 {
+	None,
 	ItemOverview,
 	ItemDetail,
 	SelectCell,
@@ -52,15 +58,15 @@ export class WindowManager
 		this.windowTypes = new Map<WindowType, WindowItem>();
 		this._windows = new Stack<WindowData>();
 		
-		this.subscribeWindow(WindowType.ItemOverview, new WindowItem(ItemOverviewWindowComponent));
-		this.subscribeWindow(WindowType.ItemDetail, new WindowItem(ItemDetailWindowComponent));
-		this.subscribeWindow(WindowType.SelectCell, new WindowItem(SelectCellComponent));
-		this.subscribeWindow(WindowType.EndOfTurn, new WindowItem(EndOfTurnWindowComponent));
+		this.subscribeWindow(WindowType.ItemOverview, new WindowItem(ItemOverviewWindowComponent, WindowType.ItemOverview));
+		this.subscribeWindow(WindowType.ItemDetail, new WindowItem(ItemDetailWindowComponent, WindowType.ItemDetail));
+		this.subscribeWindow(WindowType.SelectCell, new WindowItem(SelectCellComponent, WindowType.SelectCell));
+		this.subscribeWindow(WindowType.EndOfTurn, new WindowItem(EndOfTurnWindowComponent, WindowType.EndOfTurn));
 
 		//cards windows
-		this.subscribeWindow(WindowType.DraftCards, new WindowItem(DraftCardsWindowComponent));
-		this.subscribeWindow(WindowType.PlayCards, new WindowItem(PlayCardWindowComponent));
-		this.subscribeWindow(WindowType.DiscardCards, new WindowItem(DiscardCardWindowComponent));
+		this.subscribeWindow(WindowType.DraftCards, new WindowItem(DraftCardsWindowComponent, WindowType.DraftCards));
+		this.subscribeWindow(WindowType.PlayCards, new WindowItem(PlayCardWindowComponent, WindowType.PlayCards));
+		this.subscribeWindow(WindowType.DiscardCards, new WindowItem(DiscardCardWindowComponent, WindowType.DiscardCards));
 		//DraftCardsWindowComponent
 	}
 
@@ -87,10 +93,10 @@ export class WindowManager
 			});
 		}
 	}
-
-	public updateCurrentWindowData(data: any): void
+	
+	public messageCurrentWindow(msg: string, data?: any): void
 	{
-		this._windowComponent.updateWindowData(data);
+		this._windowComponent.messageCurrentWindow(msg, data);
 	}
 
 	/**
@@ -113,8 +119,35 @@ export class WindowManager
 		return this._windows.size > 0;
 	}
 
+	public get currentWindowType(): WindowType
+	{
+		if (this.isWindowOpen)
+		{
+			return this.currentWindowItem.windowType;
+		}
+		return WindowType.None;
+	}
+
+	public get currentWindowItem(): WindowItem
+	{
+		if (this.isWindowOpen)
+		{
+			return this._windows.head.windowItem;
+		}
+		return undefined;
+	}
+
 	public openWindow(windowType: WindowType, windowOptions: WindowOptions, transitionEnded?: () => void): WindowItem
 	{
+		if (this.currentWindowType === windowType)
+		{
+			if (transitionEnded)
+			{
+				transitionEnded();
+			}			
+			return this.currentWindowItem;
+		}
+
 		const window: WindowItem = this.getWindow(windowType);
 		const n: number = this._windows.size;
 		if (this._windows.size > 0)

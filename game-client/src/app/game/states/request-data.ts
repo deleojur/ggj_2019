@@ -20,19 +20,26 @@ export interface ClientData extends RequestData
 	startingPosition: number;
 };
 
-export interface RequestCardData extends RequestData
+export interface PickDraftCardData extends RequestData
 {
-	amount: number;
-	id: string; //clientid
-}
-
-export interface RequestDraftCardData extends RequestData
-{
-	
+	cardid: number;
 }
 
 export interface ResponseCardData extends RequestData
 {
+	cardIds: number[]; 
+}
+
+export interface RequestCardData extends RequestData
+{
+	amount: number;
+}
+
+export interface DraftData extends RequestData
+{
+	passto: string;
+	getfrom: string;
+	direction: string;	
 	cardIds: number[];
 }
 

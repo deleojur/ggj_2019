@@ -1,5 +1,5 @@
-import { PrimaryState } from '../primary-state';
-import { RequestCardData, ResponseCardData } from '../request-data';
+import { PrimaryState } from '../../primary-state';
+import { RequestCardData, ResponseCardData } from '../../request-data';
 
 export class clientState_requestCards extends PrimaryState<ResponseCardData>
 {

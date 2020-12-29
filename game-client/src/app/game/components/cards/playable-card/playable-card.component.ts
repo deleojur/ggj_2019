@@ -34,13 +34,12 @@ export class PlayableCardComponent implements OnInit, AfterViewInit
 	}
 
 	ngOnInit()
-	{
-
+	{		
 	}
 
 	ngAfterViewInit()
 	{
-		this.setDescriptionText();		
+		this.setDescriptionText();
 	}
 
 	transitionEnd(e: Event): void

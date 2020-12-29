@@ -1,13 +1,24 @@
 import { AssetLoader } from "src/app/asset-loader";
 import { Card } from "./card";
 
+export enum DraftDirection
+{
+	Left = 'left',
+	Right = 'right'
+};
+
 export abstract class CardManager
 {
-	protected _cards: Card[];
+	protected _cardDetails: Card[];
 	
 	public init(): void
 	{
-		this._cards = AssetLoader.instance.cards;
+		this._cardDetails = AssetLoader.instance.cards;		
+	}
+
+	public getCardById(id: number): Card
+	{
+		return this._cardDetails[id];
 	}
 
 	public getCardsById(ids: number[]): Card[]
@@ -15,10 +26,10 @@ export abstract class CardManager
 		const values: Card[] = [];
 		ids.forEach(id =>
 		{
-			values.push(this._cards[id]);
+			values.push(this._cardDetails[id]);
 		});
 		return values;
 	}
 
-	public abstract onGameStarted(): void;
+	public abstract onNewSeasonStarted(): void;
 }

@@ -18,7 +18,7 @@ export interface InnerWindowComponent
 	beforeOpenWindow(n: number): void;
 	afterCloseWindow(n: number): void;
 	afterOpenWindow(n: number): void;
-	updateWindowData?(data: any): void;
+	sendMessage?(message: string, data: any): void;
 
 	data?: any;
 	closeWindowButton?: boolean;
@@ -104,12 +104,12 @@ export class WindowComponent implements OnInit, AfterViewInit
 		GameManager.instance.windowManager.goToPreviousWindow();
 	}
 
-	public updateWindowData(data: any): void
+	public messageCurrentWindow(msg: string, data?: any): void
 	{
-		const updateWindowData = this.currentComponent.updateWindowData;
-		if (updateWindowData)
+		const sendMessage = this.currentComponent.sendMessage;
+		if (sendMessage)
 		{
-			updateWindowData(data);
+			sendMessage(msg, data);
 		}
 	}
 

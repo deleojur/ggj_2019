@@ -8,8 +8,10 @@ import { Injectable } from '@angular/core';
 import { ClientData } from '../request-data';
 import { clientState_turnResolve } from './client-state_turn-resolve';
 import { clientState_advanceToNextTurn } from './client-state_advance-to-next-turn';
-import { clientState_requestCards } from './client-state_request-cards';
-import { clientState_draftCards } from './client-state_draft-cards';
+import { clientState_requestCards } from './cards/client-state_request-cards';
+import { clientState_draftStart } from './cards/client-state_draft-card';
+import { clientState_draftPickCard } from './cards/client-state_draft-pick-card';
+import { clientState_draftCompleted } from './cards/client-state_draft-completed';
 
 @Injectable({
     providedIn: 'root'
@@ -30,8 +32,11 @@ export class ClientStateHandler extends StateHandlerService
 		this._states.set(clientState_turnInformation, new clientState_turnInformation());
 		this._states.set(clientState_turnResolve, new clientState_turnResolve());
 		this._states.set(clientState_advanceToNextTurn, new clientState_advanceToNextTurn());
+		
 		this._states.set(clientState_requestCards, new clientState_requestCards());
-		this._states.set(clientState_draftCards, new clientState_draftCards());
+		this._states.set(clientState_draftStart, new clientState_draftStart());
+		this._states.set(clientState_draftPickCard, new clientState_draftPickCard());
+		this._states.set(clientState_draftCompleted, new clientState_draftCompleted());
 	}
 
 	public get clientType(): string

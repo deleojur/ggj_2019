@@ -125,6 +125,11 @@ export class Card
 		return 'assets/cards/factions/' + this.faction + '.png';
 	}
 
+	public get id(): number
+	{
+		return this._id;
+	}
+
 	private _title : string;
 	private _backgroundUrl: string;
 	private _foregroundUrl: string;		
@@ -132,7 +137,7 @@ export class Card
 	private _tiers: CardTier[];
 	private _faction?: string;
 
-	constructor(cardInformation: CardInformation, id: number)
+	constructor(cardInformation: CardInformation, private _id: number)
 	{
 		this._title = cardInformation.title;
 		this._backgroundUrl = cardInformation.backgroundUrl;
