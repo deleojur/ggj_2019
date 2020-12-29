@@ -20,6 +20,7 @@ export class StatusBarHudComponent implements OnInit
 	{
 		this._cardService.onInspectedCardUpdated((card: Card) =>
 		{
+			
 			setTimeout(() => { this.cardAnimation = CardAnimation.AnimateIn; }, 0); //itty bitty hack
 		});
 	}
@@ -58,7 +59,6 @@ export class StatusBarHudComponent implements OnInit
 
 	openPlayCardWindow(): void
 	{
-		console.log('play a card!');
 		const gameManager: GameManager = GameManager.instance;
 		gameManager.windowManager.openWindow(WindowType.PlayCards, { name: 'Play Cards', data: gameManager.clientCardManager.cardsInHand });
 	}

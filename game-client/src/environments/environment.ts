@@ -2,9 +2,11 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { ip_config } from './environment-ip';
+
 export const environment = {
   production: false,
-  ws_url: '192.168.178.150:5000'
+  ws_url: ip_config.ws_url
 };
 
 /*

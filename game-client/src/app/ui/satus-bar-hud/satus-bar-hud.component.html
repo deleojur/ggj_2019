@@ -18,7 +18,7 @@
 
 <div *ngIf="inspectedCard" (click)="closeInspectedCard()" class="container playable-card-container">
 	<div class="row justify-content-center">
-		<app-playable-card [card]="inspectedCard" [cardAnimation]="cardAnimation" (onTransitionEnd)="onCardCloseAnimationCompleted()"></app-playable-card>				
+		<app-playable-card [card]="inspectedCard" [(cardAnimation)]="cardAnimation" (onTransitionEnd)="onCardCloseAnimationCompleted()"></app-playable-card>				
 		<div class="col-8 btn-container">
 			<div class="btn-select-card">
 				<img #button src="assets/UI/window/btn_brown_normal.svg"
