@@ -1,0 +1,12 @@
+<div class="container-fluid">
+	<div class="scrollable-menu scrollbar-ripe-malinka">
+		<div style="height: 20px"></div>
+		<div class="row justify-content-center" *ngFor="let card of cards; let i = index" >
+			<app-outline-card 
+				[order]="i"
+				[card]="card" 
+				[cardOutlineAnimation]="cardOutlineAnimation" 
+				(onOutlineClicked)="onCardOutlineSelected($event)"></app-outline-card>	
+		</div>
+	</div>
+</div>

@@ -5,10 +5,16 @@ import { ItemOverviewWindowComponent } from './item-overview-window/item-overvie
 import { ItemDetailWindowComponent } from './item-detail-window/item-detail-window.component';
 import { SelectCellComponent } from './select-cell/select-cell.component';
 import { EndOfTurnWindowComponent } from './end-of-turn-window/end-of-turn-window.component';
+import { DraftCardsWindowComponent } from './draft-cards-window/draft-cards-window.component';
+import { PlayCardWindowComponent } from './play-card-window/play-card-window.component';
+import { DiscardCardWindowComponent } from './discard-card-window/discard-card-window.component';
 
 export class WindowItem
 {
-	constructor (public component: Type<InnerWindowComponent>) {}
+	constructor (public component: Type<InnerWindowComponent>)
+	{
+		
+	}
 }
 
 interface WindowData
@@ -23,6 +29,10 @@ export enum WindowType
 	ItemDetail,
 	SelectCell,
 	EndOfTurn,
+	DraftCards,
+	PlayCards,
+	DiscardCards,
+	MoreOptions,
 	Settings
 }
 
@@ -46,6 +56,12 @@ export class WindowManager
 		this.subscribeWindow(WindowType.ItemDetail, new WindowItem(ItemDetailWindowComponent));
 		this.subscribeWindow(WindowType.SelectCell, new WindowItem(SelectCellComponent));
 		this.subscribeWindow(WindowType.EndOfTurn, new WindowItem(EndOfTurnWindowComponent));
+
+		//cards windows
+		this.subscribeWindow(WindowType.DraftCards, new WindowItem(DraftCardsWindowComponent));
+		this.subscribeWindow(WindowType.PlayCards, new WindowItem(PlayCardWindowComponent));
+		this.subscribeWindow(WindowType.DiscardCards, new WindowItem(DiscardCardWindowComponent));
+		//DraftCardsWindowComponent
 	}
 
 	public set windowComponent(val: WindowComponent)
@@ -70,6 +86,11 @@ export class WindowManager
 				this._windowComponent.openWindow(prev.windowItem, prev.data, n, transitionEnded);
 			});
 		}
+	}
+
+	public updateCurrentWindowData(data: any): void
+	{
+		this._windowComponent.updateWindowData(data);
 	}
 
 	/**

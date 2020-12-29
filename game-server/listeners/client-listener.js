@@ -77,14 +77,27 @@ listener =
 	{
 		this.emit_to_host(socket, 'client_verify_turnsResolve', {});
 	},
+	client_request_cards(socket, data)
+	{
+		console.log('client -> request cards receieved', data);
+		this.emit_to_host(socket, 'client_request_cards', JSON.parse(data))
+	},
+	client_request_cards(socket, data)
+	{
+		console.log('client -> request draft cards receieved', data);
+		this.emit_to_host(socket, 'client_request_draft_cards', JSON.parse(data))
+	},
     listen(io, socket)
-    {
+    {		
         this.io = io;
         socket.on('client_room_join', (data) => { this.client_room_join(socket, data); });
         socket.on('client_room_startGame', () => { this.client_room_startGame(socket); });
 		socket.on('client_game_turnConfirm', (data) => this.client_game_turnConfirm(socket, data));
 		socket.on('client_game_sendTurnInformation', (data) => this.client_game_sendTurnInformation(socket, data));
 		socket.on('client_verify_turnsResolve', () => { this.client_verify_turnResolve(socket); });
+
+		socket.on('client_request_cards', (data) => { this.client_request_cards(socket, data); });
+		socket.on('client_request_draft_cards', (data) => { this.client_request_cards(socket, data); });
     }
 };
 module.exports = listener;

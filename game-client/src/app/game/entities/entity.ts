@@ -141,7 +141,7 @@ export abstract class Entity extends Container
 
 	protected displayPowericon(game: GameManager): void
 	{
-		if (this.defense > 0 && this.owner !== 'new entity -> no owner has been set yet.')
+		/*if (this.defense > 0 && this.owner !== 'new entity -> no owner has been set yet.')
 		{
 			const unit_atk_art1: Sprite = game.createSprite('assets/units/frames/unit_atk_art.png', new Point(20, 120), new Point(0.4, 0.4));
 			const unit_atk_art2: Sprite = game.createSprite('assets/units/frames/unit_atk_art.png', new Point(-20, 120), new Point(0.4, 0.4));
@@ -162,6 +162,6 @@ export abstract class Entity extends Container
 			this.addChild(offenseText);
 			this.addChild(dividerText);
 			this.addChild(defenseText);
-		}
+		}*/
 	}
 }

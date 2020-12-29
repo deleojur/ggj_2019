@@ -24,11 +24,17 @@ import { StatusBarHudComponent } from './ui/satus-bar-hud/satus-bar-hud.componen
 import { SelectCellComponent } from './ui/window/select-cell/select-cell.component';
 import { HostHudComponent } from './ui/host-hud/host-hud.component';
 import { EndOfTurnWindowComponent } from './ui/window/end-of-turn-window/end-of-turn-window.component';
+import { PlayableCardComponent } from './game/components/cards/playable-card/playable-card.component';
+import { CardContainerComponent } from './game/components/cards/card-container/card-container.component';
+import { ResourceHudComponent } from './ui/resource-hud/resource-hud.component';
+import { DraftCardsWindowComponent } from './ui/window/draft-cards-window/draft-cards-window.component';
+import { OutlineCardComponent } from './game/components/cards/outline-card/outline-card.component';
+import { PlayCardWindowComponent } from './ui/window/play-card-window/play-card-window.component';
+import { DiscardCardWindowComponent } from './ui/window/discard-card-window/discard-card-window.component';
 
 @NgModule({
 	declarations: [
 		WindowDirective,
-
 		AppComponent,
 		GameComponent,
 		RoomComponent,
@@ -45,12 +51,22 @@ import { EndOfTurnWindowComponent } from './ui/window/end-of-turn-window/end-of-
 		StatusBarHudComponent,
 		SelectCellComponent,
 		HostHudComponent,
-		EndOfTurnWindowComponent
+		EndOfTurnWindowComponent,
+		PlayableCardComponent,
+		CardContainerComponent,
+		ResourceHudComponent,
+		DraftCardsWindowComponent,
+		OutlineCardComponent,
+		PlayCardWindowComponent,
+		DiscardCardWindowComponent
 	],
   	entryComponents: [
 		ItemOverviewWindowComponent,
 		ItemDetailWindowComponent,
-		SelectCellComponent
+		SelectCellComponent,
+		DraftCardsWindowComponent,
+		PlayCardWindowComponent,
+		DiscardCardWindowComponent
   	],
   	imports: [
 		BrowserModule,

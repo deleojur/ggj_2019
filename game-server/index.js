@@ -13,7 +13,6 @@ const options =
     //key: fs.readFileSync('./encryption/private.key', 'utf8'),
     //cert: fs.readFileSync('./encryption/world-of-paint.crt', 'utf8')
 };
-app.use(express.static('world-of-paint/dist/world-of-paint'));
 
 /** HTTP server */
 var server = http.Server(app);

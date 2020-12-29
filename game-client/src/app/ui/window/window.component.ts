@@ -3,11 +3,13 @@ import { WindowDirective } from './window-directive';
 import { WindowItem, WindowManager } from 'src/app/ui/window/window-manager';
 import { Subject, Subscription } from 'rxjs';
 import { GameManager } from 'src/app/game/game-manager';
+import { HTMLElementSize } from 'src/app/enums';
 
 export interface WindowOptions
 {
 	name: string;
 	data?: any;
+	windowSize?: HTMLElementSize;
 }
 
 export interface InnerWindowComponent
@@ -16,10 +18,11 @@ export interface InnerWindowComponent
 	beforeOpenWindow(n: number): void;
 	afterCloseWindow(n: number): void;
 	afterOpenWindow(n: number): void;
+	updateWindowData?(data: any): void;
 
-	data: any;
-	width: string;
-	top: string;
+	data?: any;
+	closeWindowButton?: boolean;
+	prevWindowButton?: boolean;
 }
 
 @Component({
@@ -30,13 +33,14 @@ export interface InnerWindowComponent
 export class WindowComponent implements OnInit, AfterViewInit
 {
 	currentComponent: InnerWindowComponent = undefined;
+	currentWindow: WindowItem = null;
 	windowName: string = '';
 	showWindow: boolean = false;
 
-	width: string;
-	top: string;
+	windowSize: HTMLElementSize;
+	displayPrevWindowButton: boolean;
+	displayCloseWindowButton: boolean;	
 	
-	currentWindow: WindowItem = null;
 	private onTransitionEnd: Subject<null>;
 	private _windowManager: WindowManager;
 
@@ -95,6 +99,20 @@ export class WindowComponent implements OnInit, AfterViewInit
 		});
 	}
 
+	goToPreviousWindow(): void
+	{
+		GameManager.instance.windowManager.goToPreviousWindow();
+	}
+
+	public updateWindowData(data: any): void
+	{
+		const updateWindowData = this.currentComponent.updateWindowData;
+		if (updateWindowData)
+		{
+			updateWindowData(data);
+		}
+	}
+
 	public openWindow(windowItem: WindowItem, options: WindowOptions, n: number, transitionEnded?: () => void): void
 	{
 		this.windowName = options.name;
@@ -105,8 +123,9 @@ export class WindowComponent implements OnInit, AfterViewInit
 		this.currentComponent = viewContainerRef.createComponent<InnerWindowComponent>(componentFactory).instance;
 		this.currentComponent.data = options.data;
 
-		this.width = this.currentComponent.width || '45vh';
-		this.top = this.currentComponent.top || '-50px';
+		this.windowSize = options.windowSize || HTMLElementSize.Large;
+		this.displayCloseWindowButton = this.currentComponent.closeWindowButton || false;
+		this.displayPrevWindowButton = this.currentComponent.prevWindowButton || false;
 
 		this.showWindow = true;
 		this.waitForTransitionEnd(n, transitionEnded);		

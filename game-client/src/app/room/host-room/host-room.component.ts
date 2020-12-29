@@ -9,6 +9,7 @@ import { HostStateHandler } from 'src/app/game/states/host-states/host-state-han
 import { GameManager } from 'src/app/game/game-manager';
 import { HostGrid } from 'src/app/game/grid/host-grid';
 import { HostTurnSystem } from 'src/app/game/turns/host-turn-system';
+import { HostCardManager } from 'src/app/game/cards/host-card-manager';
 
 @Component({
   selector: 'app-host-room',
@@ -31,7 +32,8 @@ export class HostRoomComponent implements OnInit
     {
 		const hostGrid: HostGrid = new HostGrid(this.hostStateHandler);
 		const hostTurnSystyem: HostTurnSystem = new HostTurnSystem();
-		GameManager.instance.init(hostGrid, hostTurnSystyem, () =>
+		const hostCardManager: HostCardManager = new HostCardManager(this.hostStateHandler);		
+		GameManager.instance.init(hostGrid, hostTurnSystyem, hostCardManager, () =>
 		{
 			this.maxPlayers = GameManager.instance.gridStrategy.maxNumberOfPlayers;
 		});
@@ -44,7 +46,6 @@ export class HostRoomComponent implements OnInit
 		 * 1) wait for the roomdata request to resolve
 		 * 2) then wait for players to join (clientConnection) and for one of those players to start the gane (startGame)
 		*/
-
         const stateRequestRoom: state_requestRoom = this.hostStateHandler.activateState<RoomData>(state_requestRoom, (roomData) =>
         {
 			this.hostStateHandler.roomJoined(roomData);
@@ -58,7 +59,7 @@ export class HostRoomComponent implements OnInit
             {
 				//TODO: display player X started the game!
 				this.hostStateHandler.mapOwnerId();
-				const clients: ClientData[] = this.hostStateHandler.clients;
+				const clients: ClientData[] = this.hostStateHandler.clients;				
 				stateRequestStartGame.doRequestStartGame(clients);
 
 				GameManager.instance.gridStrategy.createStartEntities(clients);

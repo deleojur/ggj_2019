@@ -19,6 +19,13 @@
 }
 
 @font-face {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	src: url("./assets/fonts/quardratic.ttf") format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
 	font-family: Zolof;
 	src: url("./assets/fonts/Zolofbi_.ttf") format('truetype');
 	font-weight: bold;
@@ -61,8 +68,10 @@ select:focus
 .wrapper { overscroll-behavior: none }
 
 html, body {
+	max-width: 100vw;
+	max-height: 100vh;
     overflow-x: hidden;
-    overflow-y: hidden;
+	overflow-y: hidden;
   }
 body { -webkit-user-select: none; font-family: Roboto, "Helvetica Neue", sans-serif; }
 

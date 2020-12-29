@@ -192,6 +192,545 @@
 			"range": 2
 		}
 	],
+	"cards": 
+	[
+		{
+			"title": "Lay siege",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "Attack",
+			"faction": "LionHeart",
+			"tiers":
+			[
+				{ 
+					"description": "Target player's commoners ({commoner}) cannot leave their town this turn and can not collect {gold} at the end of the season.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 1 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Destroy target {commoner} in a town. {commoner} can not leave their town and do not collect {gold} or {food} at the end of the season.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Both you and target player ", "cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}
+			]		
+		},
+		{
+			"title": "Spy",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/spy.png",
+			"type": "Attack",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "Target player's commoners ({commoner}) cannot leave their town this turn and can not collect {gold} at the end of the season.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 1 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Target player loses one commoner ({commoner}) from their town. Commoners can not leave their town and do not collect {gold} or {food} at the end of the season", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Both you and target player ", "cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}
+			]		
+		},
+		{
+			"title": "Assassinate",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "Attack",
+			"faction": "LionHeart",
+			"tiers":
+			[
+				{ 
+					"description": "Destroy target commoner. Players can never have less than 4 inhabitants.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 1 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Destroy up to two target commoners divided over up to 2 players or one faction member of tier 1. Players can never have less than 4 inhabitants.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Destroy up to four target commoners divided over up to 3 players or up to two faction members of tier 2 or less. Players can never have less than 4 inhabitants.", "cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}
+			]		
+		},
+		{
+			"title": "Demolish",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "Attack",
+			"faction": "LionHeart",
+			"tiers":
+			[
+				{ 
+					"description": "Destroy target structure.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Destroy target structure. If there are any inhabitants on it, destroy one as well. A player can never have less than 4 inhabitants.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Destroy up to two target structures divided over up to two players. If there are any inhabitants on either, destroy up to two as well. A player can never have less than 4 inhabitants.", "cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}
+			]		
+		},
+		{
+			"title": "Monopoly",
+			"backgroundUrl": "assets/cards/background/orange.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "Attack",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "Target player's turn does not resolve.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "A structure becomes unavailable to other players and you may visit it with your {soldier}m even if it is outside your {influence}.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Raid",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "Attack",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "Target player's turn does not resolve.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "A structure becomes unavailable to other players and you may visit it with your {soldier}m even if it is outside your {influence}.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Infiltrate",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "Attack",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "Target player's turn does not resolve.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "A structure becomes unavailable to other players and you may visit it with your {soldier}m even if it is outside your {influence}.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Trade",
+			"backgroundUrl": "assets/cards/background/orange.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "Attack",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "Target player's turn does not resolve.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "A structure becomes unavailable to other players and you may visit it with your {soldier}m even if it is outside your {influence}.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Taxes",
+			"backgroundUrl": "assets/cards/background/orange.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "Attack",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "Target player's turn does not resolve.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "A structure becomes unavailable to other players and you may visit it with your {soldier}m even if it is outside your {influence}.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Taxes",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "Attack",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "Target player's turn does not resolve.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "A structure becomes unavailable to other players and you may visit it with your {soldier}m even if it is outside your {influence}.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		}
+	],
 	"entities":
 	[
 		{
@@ -202,13 +741,13 @@
 			[ 
 				{ "type": "gold", "amount": 3 }, 
 				{ "type": "food", "amount": 0 }, 
-				{ "type": "population", "amount": 2 } 
+				{ "type": "lumber", "amount": 2 } 
 			],
 			"upkeep": 
 			[
 				{ "type": "gold", "amount": 3 }, 
 				{ "type": "food", "amount": -2 }, 
-				{ "type": "population", "amount": 2 }
+				{ "type": "lumber", "amount": 2 }
 			],
 			"behaviors": 
 			[
@@ -226,12 +765,12 @@
 			"cost": [ 
 				{ "type": "gold", "amount": 3 }, 
 				{ "type": "food", "amount": 0 }, 
-				{ "type": "population", "amount": 2 } 
+				{ "type": "lumber", "amount": 2 } 
 			],
 			"upkeep": [
 				{ "type": "gold", "amount": 3 }, 
 				{ "type": "food", "amount": -2 }, 
-				{ "type": "population", "amount": 2 }
+				{ "type": "lumber", "amount": 2 }
 			], "behaviors": 
 			[
 				"upgrade to city",
@@ -249,12 +788,12 @@
 			"cost": [ 
 				{ "type": "gold", "amount": 3 }, 
 				{ "type": "food", "amount": 0 }, 
-				{ "type": "population", "amount": 2 } 
+				{ "type": "lumber", "amount": 2 } 
 			],
 			"upkeep": [
 				{ "type": "gold", "amount": 3 }, 
 				{ "type": "food", "amount": -2 }, 
-				{ "type": "population", "amount": 2 }
+				{ "type": "lumber", "amount": 2 }
 			], "behaviors": 
 			[
 				"upgrade to capital",
@@ -274,7 +813,7 @@
 			[
 				{ "type": "gold", "amount": 3 }, 
 				{ "type": "food", "amount": 0 }, 
-				{ "type": "population", "amount": 2 } 
+				{ "type": "lumber", "amount": 2 } 
 			],
 			"upkeep":
 			[ 

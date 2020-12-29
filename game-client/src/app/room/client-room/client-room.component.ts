@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-
 import { clientState_startGame } from '../../game/states/client-states/client-state_start-game';
-
 import { state_requestJoinRoom } from '../../game/states/client-states/state_request-join-room';
 import { ClientData, HostStartGameData } from '../../game/states/request-data';
 import { ClientStateHandler } from 'src/app/game/states/client-states/client-state-handler';
 import { GameManager } from 'src/app/game/game-manager';
 import { GridClient } from 'src/app/game/grid/client-grid';
 import { ClientTurnSystem } from 'src/app/game/turns/client-turn-system';
+import { ClientCardManager } from 'src/app/game/cards/client-card-manager';
 
 @Component({
   selector: 'app-client-room',
@@ -28,7 +27,8 @@ export class ClientRoomComponent implements OnInit
     {
 		const clientGrid: GridClient = new GridClient(this.clientStateHandler);
 		const clientTurnSystem: ClientTurnSystem = new ClientTurnSystem();
-		GameManager.instance.init(clientGrid, clientTurnSystem, () => {});
+		const clientCardManager: ClientCardManager = new ClientCardManager(this.clientStateHandler);
+		GameManager.instance.init(clientGrid, clientTurnSystem, clientCardManager, () => {});
     }
 
     joinRoom(f: NgForm): void

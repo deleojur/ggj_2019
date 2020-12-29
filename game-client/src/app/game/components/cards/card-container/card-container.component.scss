@@ -1,0 +1,19 @@
+.ui-container
+{
+    position: absolute;
+	display: block;
+	height: 100vh;
+	width: 100vw;
+    overflow-y: scroll;
+}
+
+.ui-parent
+{
+    display:inline-block;
+    position:relative;
+}
+
+.window-img
+{
+    width: 45vh;
+}
