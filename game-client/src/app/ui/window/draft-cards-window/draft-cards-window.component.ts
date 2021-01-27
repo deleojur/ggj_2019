@@ -101,10 +101,11 @@ export class DraftCardsWindowComponent implements OnInit, InnerWindowComponent
 		if (msg === 'UPDATE_CONTENT')
 		{
 			this.updateContent(data);
-		} if (msg === 'CLEAR_CONTENT')
+		} if (msg === 'PICK_CARD')
 		{
 			this.pickedCard = data;
 			this.cardOutlineAnimation = CardOutlineAnimation.AnimateOutSize;
+			this.cardService.closeInspectedCard();
 		}		
 	}	
 

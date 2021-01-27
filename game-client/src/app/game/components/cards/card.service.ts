@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Card } from '../../cards/card';
 import { Subject, Subscription } from 'rxjs';
-import { CardAnimation } from './playable-card/playable-card.component';
+import { PlayableCardAnimation as PlayableCardAnimation } from './playable-card/playable-card.component';
 import { CardOutlineAnimation } from './outline-card/outline-card.component';
 
 @Injectable
@@ -10,24 +10,26 @@ import { CardOutlineAnimation } from './outline-card/outline-card.component';
 })
 export class CardService
 {
-	private _onInspectedCardpicked: Subject<Card>;
+	private _onInspectedCardpicked: Subject<Card>;	
 	private _onInspectedCardUpdate: Subject<Card>;
-	private _onInspectedCardAnimationCompleted: Subject<CardAnimation>;
+	private _onInspectedCardAnimationCompleted: Subject<PlayableCardAnimation>;
 	private _onOutlineCardsAnimate: Subject<CardOutlineAnimation>;
+	private _onInspectedCardAnimate: Subject<PlayableCardAnimation>;
 	private _onPlayableCardReset: Subject<null>;
-
+	
 	private _inspectedCard: Card;
 	
 	constructor() 
 	{
 		this._onInspectedCardUpdate = new Subject<Card>();
 		this._onInspectedCardpicked = new Subject<Card>();
-		this._onInspectedCardAnimationCompleted = new Subject<CardAnimation>();
+		this._onInspectedCardAnimationCompleted = new Subject<PlayableCardAnimation>();
 		this._onOutlineCardsAnimate = new Subject<CardOutlineAnimation>();
+		this._onInspectedCardAnimate = new Subject<PlayableCardAnimation>();
 		this._onPlayableCardReset = new Subject<null>();
 	}
 
-	public onInspectedCardAnimationCompleted(f: (animation: CardAnimation) => void): Subscription
+	public onInspectedCardAnimationCompleted(f: (animation: PlayableCardAnimation) => void): Subscription
 	{
 		return this._onInspectedCardAnimationCompleted.subscribe(f);
 	}
@@ -47,6 +49,11 @@ export class CardService
 		return this._onOutlineCardsAnimate.subscribe(f);
 	}
 
+	public onInspectedCardAnimate(f: (cardOutlineAnimation: PlayableCardAnimation) => void): Subscription
+	{
+		return this._onInspectedCardAnimate.subscribe(f);
+	}
+
 	public onResetPlayableCardAnimation(f: () => void): Subscription
 	{
 		return this._onPlayableCardReset.subscribe(f);
@@ -63,7 +70,7 @@ export class CardService
 		this._onInspectedCardUpdate.next(card);		
 	}
 
-	public inspectedCardAnimtationCompleted(cardAnimation: CardAnimation): void
+	public inspectedCardAnimtationCompleted(cardAnimation: PlayableCardAnimation): void
 	{
 		this._onInspectedCardAnimationCompleted.next(cardAnimation);
 	}
@@ -83,8 +90,13 @@ export class CardService
 		return this._inspectedCard;
 	}
 
-	public closeInspectedCard()
+	public closeInspectedCard(): void
 	{
 		this._inspectedCard = undefined;
-	}	
+	}
+
+	public animateInspectedCard(playableCardAnimation: PlayableCardAnimation): void
+	{
+		this._onInspectedCardAnimate.next(playableCardAnimation);
+	}
 }

@@ -9,9 +9,9 @@ import { Resource } from 'src/app/game/entities/resource';
 })
 export class ResourceHudComponent implements OnInit
 {
+	@Input() drawRight: boolean;
 	@Input() resource: Resource;
 	@Input() textSize: HTMLElementSize = HTMLElementSize.Small;
-
 
 	constructor() 
 	{
@@ -20,6 +20,6 @@ export class ResourceHudComponent implements OnInit
 	
 	ngOnInit() 
 	{
-
+		console.log(this.drawRight);
 	}
 }

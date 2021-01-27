@@ -162,8 +162,9 @@ export class AssetLoader
 				this.setResourceClass(tier);
 			});
 			const card: Card = new Card(cardInformation, i);
-			this._cards.push(card);
-		});		
+			this._cards.push(card);			
+		});
+		console.log(this._cards);
 	}
 
 	public loadAssetsAsync(): Promise<void>

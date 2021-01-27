@@ -38,6 +38,25 @@
 	z-index: 5;
 }
 
+.resource-amount-fg-right
+{
+	top: 30%;
+    position: absolute;
+    left: 110%;
+}
+
+.resource-amount-bg-right
+{
+	transform: rotate(270deg);
+	-webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+	-o-transform: rotate(270deg);
+	
+	left: 75%;
+    top: 15%;
+}
+
 .small
 {
 	font-size: 80%;

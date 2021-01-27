@@ -6,10 +6,11 @@ import { GameManager } from 'src/app/game/game-manager';
 import { HTMLElementSize } from 'src/app/enums';
 
 export interface WindowOptions
-{
+{	
 	name: string;
 	data?: any;
 	windowSize?: HTMLElementSize;
+	closePreviousWindow?: boolean;
 }
 
 export interface InnerWindowComponent
@@ -37,8 +38,7 @@ export class WindowComponent implements OnInit, AfterViewInit
 	windowName: string = '';
 	showWindow: boolean = false;
 
-	windowSize: HTMLElementSize;
-	displayPrevWindowButton: boolean;
+	windowSize: HTMLElementSize;	
 	displayCloseWindowButton: boolean;	
 	
 	private onTransitionEnd: Subject<null>;
@@ -125,7 +125,6 @@ export class WindowComponent implements OnInit, AfterViewInit
 
 		this.windowSize = options.windowSize || HTMLElementSize.Large;
 		this.displayCloseWindowButton = this.currentComponent.closeWindowButton || false;
-		this.displayPrevWindowButton = this.currentComponent.prevWindowButton || false;
 
 		this.showWindow = true;
 		this.waitForTransitionEnd(n, transitionEnded);		
@@ -135,6 +134,11 @@ export class WindowComponent implements OnInit, AfterViewInit
 	{
 		this.showWindow = false;
 		this.waitForTransitionEnd(n, transitionEnded);
+	}
+
+	get displayPrevWindowButton(): boolean
+	{
+		return this._windowManager.openWindows > 1;
 	}
 
     closeWindowEvent($event): void

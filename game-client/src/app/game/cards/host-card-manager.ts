@@ -13,7 +13,7 @@ interface ClientDraft
 
 export class HostCardManager extends CardManager
 {
-	private readonly NUMBER_OF_DRAFT_CARDS: number = 3;
+	private readonly NUMBER_OF_DRAFT_CARDS: number = 6;
 	private draftRounds: number = 0;
 
 	private _draftOrder: number
@@ -82,7 +82,7 @@ export class HostCardManager extends CardManager
 
 	private startListeningForReplies(): void
 	{
-		this.hostWaitForClientReplies.start(5000, () => 
+		this.hostWaitForClientReplies.start(1200000, () => 
 		{
 			this._clientDraftListener.doRequestPickCard();
 		});
@@ -147,6 +147,7 @@ export class HostCardManager extends CardManager
 		const cards: number[] = clientDraft.draftCards;
 		const passto: string = this._draftDirection === DraftDirection.Left ? clientDraft.left : clientDraft.right;
 		const getfrom: string = this._draftDirection === DraftDirection.Right ? clientDraft.right : clientDraft.left;
+		console.log(cards);
 		this._clientDraftListener.doRequestDraft(client.id, passto, getfrom, this._draftDirection, cards);
 	}
 

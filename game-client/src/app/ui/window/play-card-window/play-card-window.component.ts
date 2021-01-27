@@ -10,8 +10,9 @@ import { InnerWindowComponent } from '../window.component';
 })
 export class PlayCardWindowComponent implements OnInit, InnerWindowComponent
 {
+	closeWindowButton: boolean = true;
 	cards: Card[];
-	data: any;	
+	data: any;
 
 	beforeCloseWindow(n: number): void
 	{

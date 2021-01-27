@@ -42,14 +42,14 @@ export class ClientCardManager extends CardManager
 		this._stateRequestDraftPick = this._clientStateHandler.activateState<RequestData>(clientState_draftPickCard, this.onHostRequestCardPick) as clientState_draftPickCard;
 		this._stateDraftCompleted = this._clientStateHandler.activateState<RequestData>(clientState_draftCompleted, () =>
 		{
-			GameManager.instance.windowManager.openWindow(WindowType.PlayCards, { name: 'Play Cards', data: this._cardsInHand });
+			GameManager.instance.windowManager.openWindow(WindowType.PlayCards, { name: 'Play Cards', data: this._cardsInHand, closePreviousWindow: true });
 		}) as clientState_draftCompleted;
 	}
 
 	private onHostRequestCardPick(): void
 	{
 		const card: Card = this.getCardById(this._draftCardId);
-		this._windowManager.messageCurrentWindow('CLEAR_CONTENT', card);				
+		this._windowManager.messageCurrentWindow('PICK_CARD', card);				
 	}
 
 	private pickCard(): void

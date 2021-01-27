@@ -1,6 +1,8 @@
 <div class="background">
-	<img class="resource-amount-bg" src="assets/UI/window/banner_sale_red.svg">
-	<h2 class="resource-amount-fg" [ngClass]="textSize">{{resource.amount}}</h2>
+	<img class="resource-amount-bg" [ngClass]="{'resource-amount-bg-right' : drawRight}" src="assets/UI/window/banner_sale_red.svg">
+	<div [ngClass]="{'resource-amount-fg-right': drawRight}">
+		<h2 class="resource-amount-fg" [ngClass]="textSize">{{resource.amount}}</h2>
+	</div>	
 	<img class="resource-icon" src="assets/UI/window/grid4L.svg">	
 	<img class="resource-icon-fg" src="{{resource.textureUrl}}">
 </div>

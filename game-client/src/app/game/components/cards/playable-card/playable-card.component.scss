@@ -135,6 +135,11 @@ $scale: 1.25;
     left: 40%;   
 }
 
+.align-resource-items
+{
+	align-items: flex-end;
+}
+
 .resource-container
 {
 	z-index: 1;

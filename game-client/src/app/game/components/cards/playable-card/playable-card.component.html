@@ -3,15 +3,15 @@
 	<div class="flip-box-inner">
 		<div class="flip-box-front">
 			<div class="resource-container container">
-				<div class="row justify-content-end no-gutters">
+				<div class="row flex-column no-gutters align-resource-items">
 					<div class="col-2 resource-background" *ngFor="let resource of currentResources">
-						<app-resource-hud [resource]="resource" [textSize]="'small'"></app-resource-hud>	
+						<app-resource-hud [drawRight]="true" [resource]="resource" [textSize]="'small'"></app-resource-hud>	
 					</div>
 				</div>
 			</div>
 			<div [style.background]="'url(' + card.backgroundUrl + ')'" class="card-inner"
 				[style.backgroundSize]="'cover'"
-			 	class="card-inner">></div>
+			 	class="card-inner"></div>
 			<div 
 				[style.background]="'url(' + card.foregroundUrl + ')'"
 				[style.backgroundSize]="'cover'"

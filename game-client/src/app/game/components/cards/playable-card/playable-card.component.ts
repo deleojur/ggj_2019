@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, OnInit, Output, ViewChild, EventEmitte
 import { Resource } from 'src/app/game/entities/resource';
 import { Card, CardTier } from '../../../cards/card';
 
-export enum CardAnimation
+export enum PlayableCardAnimation
 {
 	None = 'no-animation',
 	AnimateOut = 'animate-out',
@@ -23,7 +23,7 @@ export class PlayableCardComponent implements OnInit, AfterViewInit
 	@ViewChild('descriptionBody', { static: true }) descriptionBody;
 
 	@Input()
-	cardAnimation: CardAnimation;
+	cardAnimation: PlayableCardAnimation;
 
 	@Output()
 	onTransitionEnd: EventEmitter<null> = new EventEmitter<null>();
@@ -45,22 +45,22 @@ export class PlayableCardComponent implements OnInit, AfterViewInit
 	transitionEnd(e: Event): void
 	{
 		this.onTransitionEnd.emit();
-		this.cardAnimation = CardAnimation.None;
+		this.cardAnimation = PlayableCardAnimation.None;
 	}
 
 	get animateIn(): boolean
 	{
-		return this.cardAnimation === CardAnimation.AnimateIn;
+		return this.cardAnimation === PlayableCardAnimation.AnimateIn;
 	}
 
 	get animateOut(): boolean
 	{
-		return this.cardAnimation === CardAnimation.AnimateOut;
+		return this.cardAnimation === PlayableCardAnimation.AnimateOut;
 	}
 
 	get animateToInventory(): boolean
 	{
-		return this.cardAnimation === CardAnimation.AnimateToInventory;
+		return this.cardAnimation === PlayableCardAnimation.AnimateToInventory;
 	}
 
 	setDescriptionText(): void

@@ -114,6 +114,11 @@ export class WindowManager
 		}
 	}
 
+	public get openWindows(): number
+	{
+		return this._windows.size;
+	}
+
 	public get isWindowOpen(): boolean
 	{
 		return this._windows.size > 0;
@@ -138,7 +143,7 @@ export class WindowManager
 	}
 
 	public openWindow(windowType: WindowType, windowOptions: WindowOptions, transitionEnded?: () => void): WindowItem
-	{
+	{		
 		if (this.currentWindowType === windowType)
 		{
 			if (transitionEnded)
@@ -150,12 +155,23 @@ export class WindowManager
 
 		const window: WindowItem = this.getWindow(windowType);
 		const n: number = this._windows.size;
-		if (this._windows.size > 0)
+		if (n > 0)
 		{
-			this._windowComponent.closeWindow(n, () => 
+			let call = () => this._windowComponent.openWindow(window, windowOptions, n + 1, transitionEnded);
+
+			if (windowOptions.closePreviousWindow)
 			{
-				this._windowComponent.openWindow(window, windowOptions, n + 1, transitionEnded);
-			});
+				this.closeAllWindows(() => 
+				{
+					call();
+				});
+			} else
+			{
+				this._windowComponent.closeWindow(n, () => 
+				{
+					call();
+				});
+			}
 		} else
 		{
 			this._windowComponent.openWindow(window, windowOptions, n + 1, transitionEnded);

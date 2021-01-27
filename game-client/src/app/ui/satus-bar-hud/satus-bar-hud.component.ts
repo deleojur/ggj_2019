@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Card } from 'src/app/game/cards/card';
 import { CardService } from 'src/app/game/components/cards/card.service';
-import { CardAnimation } from 'src/app/game/components/cards/playable-card/playable-card.component';
+import { PlayableCardAnimation } from 'src/app/game/components/cards/playable-card/playable-card.component';
 import { Resource } from 'src/app/game/entities/resource';
 import { GameManager } from 'src/app/game/game-manager';
 import { WindowType } from '../window/window-manager';
@@ -14,18 +14,23 @@ import { WindowType } from '../window/window-manager';
 export class StatusBarHudComponent implements OnInit
 {	
 	resourcePool: Resource[];
-	cardAnimation: CardAnimation = CardAnimation.AnimateOut;
+	cardAnimation: PlayableCardAnimation = PlayableCardAnimation.AnimateOut;
 	
 	constructor(private _cardService: CardService)
 	{
 		this._cardService.onInspectedCardUpdated((card: Card) =>
 		{			
-			setTimeout(() => { this.cardAnimation = CardAnimation.AnimateIn; }, 0); //itty bitty hack
+			setTimeout(() => { this.cardAnimation = PlayableCardAnimation.AnimateIn; }, 0); //itty bitty hack
 		});
 
 		this._cardService.onResetPlayableCardAnimation(() =>
 		{
-			this.cardAnimation = CardAnimation.AnimateOut;
+			this.cardAnimation = PlayableCardAnimation.AnimateOut;
+		});
+
+		this._cardService.onInspectedCardAnimate(playableCardAnimation =>
+		{
+			this.cardAnimation = playableCardAnimation;
 		});
 	}
 
@@ -45,16 +50,16 @@ export class StatusBarHudComponent implements OnInit
 
 	closeInspectedCard(): void
 	{
-		this.cardAnimation = CardAnimation.AnimateOut;
+		this.cardAnimation = PlayableCardAnimation.AnimateOut;
 	}
 
 	onCardCloseAnimationCompleted(): void
 	{
-		if (this.cardAnimation === CardAnimation.AnimateOut || this.cardAnimation === CardAnimation.AnimateToInventory)
+		if (this.cardAnimation === PlayableCardAnimation.AnimateOut || this.cardAnimation === PlayableCardAnimation.AnimateToInventory)
 		{
 			this._cardService.closeInspectedCard();
 		}
-		if (this.cardAnimation === CardAnimation.AnimateToInventory)
+		if (this.cardAnimation === PlayableCardAnimation.AnimateToInventory)
 		{			
 			this._cardService.inspectedCardAnimtationCompleted(this.cardAnimation);
 		}
@@ -68,7 +73,7 @@ export class StatusBarHudComponent implements OnInit
 
 	pickPlayableCard(event: MouseEvent): void
 	{
-		this.cardAnimation = CardAnimation.AnimateToInventory;
+		this.cardAnimation = PlayableCardAnimation.AnimateToInventory;
 		this._cardService.pickCard();
 		event.stopPropagation();
 	}

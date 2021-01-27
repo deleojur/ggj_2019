@@ -195,15 +195,759 @@
 	"cards": 
 	[
 		{
+			"title": "Granary",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "construct",
+			"faction": "Carpenter",
+			"tiers":
+			[
+				{
+					"description": "During this season, every {food} you collect is increased by +1.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 2
+						},
+						{
+							"type": "gold",
+							"amount": 2
+						},
+						{
+							"type": "lumber",
+							"amount": 1
+						}
+					]
+				},
+				{
+					"description": "During this season, every {food} you collect is increased by +2.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 3
+						},
+						{
+							"type": "gold",
+							"amount": 3
+						},
+						{
+							"type": "lumber",
+							"amount": 2
+						}						
+					]
+				},
+				{
+					"description": "During this season, every {grapes} you collect is increased by +2.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 4
+						},
+						{
+							"type": "gold",
+							"amount": 5
+						},
+						{
+							"type": "lumber",
+							"amount": 4
+						}						
+					]
+				}
+			]
+		},
+		{
+			"title": "Mine",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "construct",
+			"faction": "Carpenter",
+			"tiers":
+			[
+				{
+					"description": "During this season, every second {stone} you collect is increased by +1.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 2
+						},
+						{
+							"type": "gold",
+							"amount": 2
+						},
+						{
+							"type": "lumber",
+							"amount": 1
+						},
+						{
+							"type": "stone",
+							"amount": 1
+						}
+					]
+				},
+				{
+					"description": "During this season, every {stone} you collect is increased by +1.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 3
+						},
+						{
+							"type": "gold",
+							"amount": 3
+						},
+						{
+							"type": "lumber",
+							"amount": 2
+						}						
+					]
+				},
+				{
+					"description": "During this season, every {stone} you collect is increased by +2.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 4
+						},
+						{
+							"type": "gold",
+							"amount": 5
+						},
+						{
+							"type": "lumber",
+							"amount": 4
+						}						
+					]
+				}
+			]
+		},
+		{
+			"title": "Sawmill",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "construct",
+			"faction": "Carpenter",
+			"tiers":
+			[
+				{
+					"description": "During this season, every {lumber} you collect is increased by +1.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 2
+						},
+						{
+							"type": "gold",
+							"amount": 2
+						},
+						{
+							"type": "lumber",
+							"amount": 1
+						},
+						{
+							"type": "stone",
+							"amount": 1
+						}
+					]
+				},
+				{
+					"description": "During this season, every {lumber} you collect is increased by +2.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 3
+						},
+						{
+							"type": "gold",
+							"amount": 3
+						},
+						{
+							"type": "lumber",
+							"amount": 2
+						}						
+					]
+				},
+				{
+					"description": "During this season, every {lumber} you collect is increased by +4.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 4
+						},
+						{
+							"type": "gold",
+							"amount": 5
+						},
+						{
+							"type": "lumber",
+							"amount": 4
+						}						
+					]
+				}
+			]
+		},
+		{
+			"title": "Vineyard",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "construct",
+			"faction": "Carpenter",
+			"tiers":
+			[
+				{
+					"description": "Gain 1 {grapes} for every 2 citizens on the vineyard.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 2
+						},
+						{
+							"type": "gold",
+							"amount": 2
+						},
+						{
+							"type": "lumber",
+							"amount": 1
+						},
+						{
+							"type": "stone",
+							"amount": 1
+						}
+					]
+				},
+				{
+					"description": "Gain 2 {grapes} for every 2 citizens on the vineyard.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 3
+						},
+						{
+							"type": "gold",
+							"amount": 3
+						},
+						{
+							"type": "lumber",
+							"amount": 2
+						}						
+					]
+				},
+				{
+					"description": "Gain 2 {grapes} for every citizen on the vineyard.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 4
+						},
+						{
+							"type": "gold",
+							"amount": 5
+						},
+						{
+							"type": "lumber",
+							"amount": 4
+						}						
+					]
+				}
+			]
+		},
+		{
+			"title": "Wool farm",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "construct",
+			"faction": "Carpenter",
+			"tiers":
+			[
+				{
+					"description": "Gain 1 {food} per commoner on the wool farm. The wool farm can only be used in the spring.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 2
+						},
+						{
+							"type": "gold",
+							"amount": 2
+						},
+						{
+							"type": "lumber",
+							"amount": 1
+						},
+						{
+							"type": "stone",
+							"amount": 1
+						}
+					]
+				},
+				{
+					"description": "Gain 3 {food} per commoner on the wool farm. The wool farm can only be used in the spring.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 3
+						},
+						{
+							"type": "gold",
+							"amount": 3
+						},
+						{
+							"type": "lumber",
+							"amount": 2
+						}
+					]
+				},
+				{
+					"description": "Gain 5 {food} per commoner on the wool farm. The wool farm can only be used in the spring.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 4
+						},
+						{
+							"type": "gold",
+							"amount": 5
+						},
+						{
+							"type": "lumber",
+							"amount": 4
+						}						
+					]
+				}
+			]
+		},
+		{
+			"title": "Tailor",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "construct",
+			"faction": "Carpenter",
+			"tiers":
+			[
+				{
+					"description": "Gain 1 {cloth}.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 2
+						},
+						{
+							"type": "gold",
+							"amount": 2
+						},
+						{
+							"type": "lumber",
+							"amount": 1
+						},
+						{
+							"type": "stone",
+							"amount": 1
+						}
+					]
+				},
+				{
+					"description": "Gain 2 {cloth}.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 3
+						},
+						{
+							"type": "gold",
+							"amount": 3
+						},
+						{
+							"type": "lumber",
+							"amount": 2
+						}
+					]
+				},
+				{
+					"description": "Gain 3 {cloth}.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 4
+						},
+						{
+							"type": "gold",
+							"amount": 5
+						},
+						{
+							"type": "lumber",
+							"amount": 4
+						}						
+					]
+				}
+			]
+		},
+		{
+			"title": "Workshop",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "construct",
+			"faction": "Carpenter",
+			"tiers":
+			[
+				{
+					"description": "Constructing a structure costs 1 {lumber} less to build this season.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 2
+						},
+						{
+							"type": "gold",
+							"amount": 2
+						},
+						{
+							"type": "lumber",
+							"amount": 1
+						},
+						{
+							"type": "stone",
+							"amount": 1
+						}
+					]
+				},
+				{
+					"description": "Constructing a structure costs 2 {lumber} and 1 {stone} less to build this season.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 3
+						},
+						{
+							"type": "gold",
+							"amount": 3
+						},
+						{
+							"type": "lumber",
+							"amount": 2
+						}
+					]
+				},
+				{
+					"description": "Constructing a structure costs 4 {lumber}, 2 {stone} and 2 {construction_action} less to build this season.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 4
+						},
+						{
+							"type": "gold",
+							"amount": 5
+						},
+						{
+							"type": "lumber",
+							"amount": 4
+						}						
+					]
+				}
+			]
+		},
+		{
+			"title": "Inn",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "construct",
+			"faction": "Carpenter",
+			"tiers":
+			[
+				{
+					"description": "Turn 1 commoner of another player into a drunk. They cannot move this season.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 2
+						},
+						{
+							"type": "gold",
+							"amount": 2
+						},
+						{
+							"type": "lumber",
+							"amount": 1
+						},
+						{
+							"type": "stone",
+							"amount": 1
+						}
+					]
+				},
+				{
+					"description": "Turn 1 commoner of another player into a drunk. They cannot move this season and the owner pays 3 {gold}.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 3
+						},
+						{
+							"type": "gold",
+							"amount": 3
+						},
+						{
+							"type": "lumber",
+							"amount": 2
+						}
+					]
+				},
+				{
+					"description": "for every 2 commoners in the inn, turn a commoner of another player into a drunk. They cannot move this season and the owner pays 5 {gold} per commoner.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 4
+						},
+						{
+							"type": "gold",
+							"amount": 5
+						},
+						{
+							"type": "lumber",
+							"amount": 4
+						}						
+					]
+				}
+			]
+		},
+		{
+			"title": "Jeweler",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "construct",
+			"faction": "Carpenter",
+			"tiers":
+			[
+				{
+					"description": "Pay 5 {gold} to gain 1 {gems}.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 2
+						},
+						{
+							"type": "gold",
+							"amount": 2
+						},
+						{
+							"type": "lumber",
+							"amount": 1
+						},
+						{
+							"type": "stone",
+							"amount": 1
+						}
+					]
+				},
+				{
+					"description": "Pay 3 {gold} to gain 1 {gems}.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 3
+						},
+						{
+							"type": "gold",
+							"amount": 3
+						},
+						{
+							"type": "lumber",
+							"amount": 2
+						}
+					]
+				},
+				{
+					"description": "Pay 5 {gold} to gain 3 {gems}.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 4
+						},
+						{
+							"type": "gold",
+							"amount": 5
+						},
+						{
+							"type": "lumber",
+							"amount": 4
+						}						
+					]
+				}
+			]
+		},
+		{
+			"title": "School",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "construct",
+			"faction": "Carpenter",
+			"tiers":
+			[
+				{
+					"description": "Draw 1 {card}.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 2
+						},
+						{
+							"type": "gold",
+							"amount": 2
+						},
+						{
+							"type": "lumber",
+							"amount": 1
+						},
+						{
+							"type": "stone",
+							"amount": 1
+						}
+					]
+				},
+				{
+					"description": "Draw 2 {card}.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 3
+						},
+						{
+							"type": "gold",
+							"amount": 3
+						},
+						{
+							"type": "lumber",
+							"amount": 2
+						}
+					]
+				},
+				{
+					"description": "Draw 2 {card}. At least one is a promotion card.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 4
+						},
+						{
+							"type": "gold",
+							"amount": 5
+						},
+						{
+							"type": "lumber",
+							"amount": 4
+						}						
+					]
+				}
+			]
+		},
+		{
+			"title": "City hall",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "construct",
+			"faction": "Carpenter",
+			"tiers":
+			[
+				{
+					"description": "Place 5 citizens on the city hall. A province with no allegiance pledges allegiance to you.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 2
+						},
+						{
+							"type": "gold",
+							"amount": 2
+						},
+						{
+							"type": "lumber",
+							"amount": 1
+						},
+						{
+							"type": "stone",
+							"amount": 1
+						}
+					]
+				},
+				{
+					"description": "Place 4 citizens on the city hall. Target province renounces target player. Then, if it has no allegiance, it pledges allegiance to you.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 3
+						},
+						{
+							"type": "gold",
+							"amount": 3
+						},
+						{
+							"type": "lumber",
+							"amount": 2
+						}
+					]
+				},
+				{
+					"description": "Place 3 citizens on the city hall. Renounces all allegiance of target province. Then, it pledges allegiance to you.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 4
+						},
+						{
+							"type": "gold",
+							"amount": 5
+						},
+						{
+							"type": "lumber",
+							"amount": 4
+						}						
+					]
+				}
+			]
+		},
+		{
 			"title": "Lay siege",
 			"backgroundUrl": "assets/cards/background/violet.png",
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
-			"type": "Attack",
+			"type": "action_immediate",
 			"faction": "LionHeart",
 			"tiers":
 			[
 				{ 
-					"description": "Target player's commoners ({commoner}) cannot leave their town this turn and can not collect {gold} at the end of the season.", 
+					"description": "Target player's commoners cannot leave their town this season.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -248,19 +992,19 @@
 			]		
 		},
 		{
-			"title": "Spy",
-			"backgroundUrl": "assets/cards/background/blue.png",
-			"foregroundUrl": "assets/cards/abilities/spy.png",
-			"type": "Attack",
-			"faction": "DeepBlueAbyss",
+			"title": "Demolish",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "LionHeart",
 			"tiers":
 			[
 				{ 
-					"description": "Target player's commoners ({commoner}) cannot leave their town this turn and can not collect {gold} at the end of the season.", 
+					"description": "A structure of target player cannot be used the coming two seasons.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
-						"amount": 1 
+						"amount": 2 
 					},
 					{
 						"type": "lumber", 
@@ -268,7 +1012,7 @@
 					}]
 				},
 				{ 
-					"description": "Target player loses one commoner ({commoner}) from their town. Commoners can not leave their town and do not collect {gold} or {food} at the end of the season", 
+					"description": "A structure of target player cannot be used the coming two seasons. Steal a random card from them.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -284,7 +1028,8 @@
 					}]
 				},
 				{ 
-					"description": "Both you and target player ", "cost" : [
+					"description": "A structure of target player is permanently destroyed. Steal a random card from them.", 
+					"cost" : [
 					{ 
 						"type": "gold", 
 						"amount": 3 
@@ -301,10 +1046,550 @@
 			]		
 		},
 		{
+			"title": "Occupy",
+			"backgroundUrl": "assets/cards/background/orange.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "LionHeart",
+			"tiers":
+			[
+				{ 
+					"description": "Target player cannot use a province for the rest of the year. You may use it during this time.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Target player cannot use two target provinces for the rest of the year. You may use it during this time. They discard a card.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Two provinces denounce target player(s) and pledge allegiance to you.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Wage war",
+			"backgroundUrl": "assets/cards/background/orange.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "LionHeart",
+			"tiers":
+			[
+				{ 
+					"description": "Sacrifice <i>x</i> commoners. Target player sacrifices <i>x + 1</i> commoners.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Sacrifice <i>x</i> commoners. Target player sacrifices <i>x + 3</i> commoners.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Sacrifice <i>x</i> commoners. Target player sacrifices <i>x + 1</i> commoners and two tier 2 royalty or lower.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Raid",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "LionHeart",
+			"tiers":
+			[
+				{ 
+					"description": "Target player discards a card.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Steal 1 card from target player at random. Then he/she discards a card.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Look at target player's hand. Steal one and discard the other.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Pillage",
+			"backgroundUrl": "assets/cards/background/orange.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "LionHeart",
+			"tiers":
+			[
+				{ 
+					"description": "Steal one {card} from target player at random.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Look at target player's hand. Steal 1 {card} and 10 {gold} from them.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Look at target player's hand. Steal 2 {card}, 10 {gold} and 5 of a resource of your choice from them.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Ambush",
+			"backgroundUrl": "assets/cards/background/orange.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_concealed",
+			"faction": "LionHeart",
+			"tiers":
+			[
+				{ 
+					"description": "When a player moves citizens to the same tile as your lionheart member, destroy one commoner before the move action resolves.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "When a player moves citizens to the same tile as your Lioheart guild member, destroy three commoners committed to said tile before the action resolves.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "When a player moves citizens to the same tile as your Lionheart guild member, destroy all citizens that go that said tile before the action resolves.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}
+			]		
+		},
+		{
+			"title": "Rampage",
+			"backgroundUrl": "assets/cards/background/orange.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "LionHeart",
+			"tiers":
+			[
+				{ 
+					"description": "Choose one province. Destroy one enemy commoner in all tiles of that province.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Choose one province. Destroy all enemy commoners in all tiles of that province.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Choose one province. Destroy all enemy citizens in all tiles of that province.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}
+			]		
+		},
+		{
+			"title": "Overthrow",
+			"backgroundUrl": "assets/cards/background/orange.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_concealed",
+			"faction": "LionHeart",
+			"tiers":
+			[
+				{ 
+					"description": "When target player promotes a commoner to a count, immediately destroy it.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "When target player promotes a count to a duchess, immediately destroy it.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "When target player promotes a duchess to a king, immediately destroy it.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}
+			]		
+		},
+		{
+			"title": "Spy",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/spy.png",
+			"type": "action_immediate",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "Look at target player's hand.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 1 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Look at target player's hand. Choose 1 {card} and discard it.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "BLook at target player's hand. Choose 3 {card} and discard them.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}
+			]		
+		},
+		{
+			"title": "Infiltrate",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "Target player's turn does not resolve.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Target player's turn does not resolve. //TODO.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "You decide where target player places their commoners this turn.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Abduct",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "Take 1 commoner from target player. At the end of the year, either they pay you 3 {gold}, or you gain control of that commoner.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Take 2 commoners from target player. At the end of the year, either they pay you 6 {gold}, or you gain control of those commoners. Draw a card.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Take 1 tier 2 royalty or lower from target player. At the end of the year, either they pay you 10 {gold}, or you gain control of that guild member.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
 			"title": "Assassinate",
 			"backgroundUrl": "assets/cards/background/violet.png",
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
-			"type": "Attack",
+			"type": "action_immediate",
 			"faction": "LionHeart",
 			"tiers":
 			[
@@ -354,15 +1639,15 @@
 			]		
 		},
 		{
-			"title": "Demolish",
-			"backgroundUrl": "assets/cards/background/violet.png",
+			"title": "Spy",
+			"backgroundUrl": "assets/cards/background/blue.png",
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
-			"type": "Attack",
-			"faction": "LionHeart",
+			"type": "action_immediate",
+			"faction": "DeepBlueAbyss",
 			"tiers":
 			[
 				{ 
-					"description": "Destroy target structure.", 
+					"description": "Target player's turn does not resolve.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -374,7 +1659,7 @@
 					}]
 				},
 				{ 
-					"description": "Destroy target structure. If there are any inhabitants on it, destroy one as well. A player can never have less than 4 inhabitants.", 
+					"description": "A structure becomes unavailable to other players and you may visit it with your {soldier}m even if it is outside your {influence}.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -390,7 +1675,8 @@
 					}]
 				},
 				{ 
-					"description": "Destroy up to two target structures divided over up to two players. If there are any inhabitants on either, destroy up to two as well. A player can never have less than 4 inhabitants.", "cost" : [
+					"description": "",
+					"cost" : [
 					{ 
 						"type": "gold", 
 						"amount": 3 
@@ -403,14 +1689,14 @@
 						"type": "stone", 
 						"amount": 3 
 					}]
-				}
+				}				
 			]		
 		},
 		{
 			"title": "Monopoly",
 			"backgroundUrl": "assets/cards/background/orange.png",
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
-			"type": "Attack",
+			"type": "action_immediate",
 			"faction": "DeepBlueAbyss",
 			"tiers":
 			[
@@ -459,120 +1745,12 @@
 					}]
 				}				
 			]		
-		},
-		{
-			"title": "Raid",
-			"backgroundUrl": "assets/cards/background/violet.png",
-			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
-			"type": "Attack",
-			"faction": "DeepBlueAbyss",
-			"tiers":
-			[
-				{ 
-					"description": "Target player's turn does not resolve.", 
-					"cost" : [
-					{ 
-						"type": "gold", 
-						"amount": 2 
-					},
-					{
-						"type": "lumber", 
-						"amount": 1 
-					}]
-				},
-				{ 
-					"description": "A structure becomes unavailable to other players and you may visit it with your {soldier}m even if it is outside your {influence}.", 
-					"cost" : [
-					{ 
-						"type": "gold", 
-						"amount": 2 
-					},
-					{
-						"type": "lumber", 
-						"amount": 2 
-					},
-					{
-						"type": "stone", 
-						"amount": 1 
-					}]
-				},
-				{ 
-					"description": "",
-					"cost" : [
-					{ 
-						"type": "gold", 
-						"amount": 3 
-					},
-					{
-						"type": "lumber", 
-						"amount": 3 
-					},
-					{
-						"type": "stone", 
-						"amount": 3 
-					}]
-				}				
-			]		
-		},
-		{
-			"title": "Infiltrate",
-			"backgroundUrl": "assets/cards/background/blue.png",
-			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
-			"type": "Attack",
-			"faction": "DeepBlueAbyss",
-			"tiers":
-			[
-				{ 
-					"description": "Target player's turn does not resolve.", 
-					"cost" : [
-					{ 
-						"type": "gold", 
-						"amount": 2 
-					},
-					{
-						"type": "lumber", 
-						"amount": 1 
-					}]
-				},
-				{ 
-					"description": "A structure becomes unavailable to other players and you may visit it with your {soldier}m even if it is outside your {influence}.", 
-					"cost" : [
-					{ 
-						"type": "gold", 
-						"amount": 2 
-					},
-					{
-						"type": "lumber", 
-						"amount": 2 
-					},
-					{
-						"type": "stone", 
-						"amount": 1 
-					}]
-				},
-				{ 
-					"description": "",
-					"cost" : [
-					{ 
-						"type": "gold", 
-						"amount": 3 
-					},
-					{
-						"type": "lumber", 
-						"amount": 3 
-					},
-					{
-						"type": "stone", 
-						"amount": 3 
-					}]
-				}				
-			]		
-		},
+		},		
 		{
 			"title": "Trade",
 			"backgroundUrl": "assets/cards/background/orange.png",
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
-			"type": "Attack",
+			"type": "action_immediate",
 			"faction": "DeepBlueAbyss",
 			"tiers":
 			[
@@ -626,7 +1804,7 @@
 			"title": "Taxes",
 			"backgroundUrl": "assets/cards/background/orange.png",
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
-			"type": "Attack",
+			"type": "action_immediate",
 			"faction": "DeepBlueAbyss",
 			"tiers":
 			[
@@ -680,7 +1858,7 @@
 			"title": "Taxes",
 			"backgroundUrl": "assets/cards/background/blue.png",
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
-			"type": "Attack",
+			"type": "action_immediate",
 			"faction": "DeepBlueAbyss",
 			"tiers":
 			[

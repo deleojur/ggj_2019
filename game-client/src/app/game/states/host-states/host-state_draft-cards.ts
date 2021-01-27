@@ -16,7 +16,6 @@ export class hostState_draftCards extends PrimaryState<PickDraftCardData>
 	//respond to a request with an index array.
 	public doRequestDraft(client: string, passto: string, getfrom: string, direction: DraftDirection, cards: number[]): void
 	{
-		console.log('send draft to', client);
 		this.connectionService.emitOutgoingEvent<DraftData>('host_draft_cards', { id: client, direction: direction, passto: passto, getfrom: getfrom, cardIds: cards });
 	}
 
