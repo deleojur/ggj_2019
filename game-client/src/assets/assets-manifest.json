@@ -1586,15 +1586,15 @@
 			]		
 		},
 		{
-			"title": "Assassinate",
+			"title": "Whispers",
 			"backgroundUrl": "assets/cards/background/violet.png",
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
-			"type": "action_immediate",
-			"faction": "LionHeart",
+			"type": "action_concealed",
+			"faction": "DeepBlueAbyss",
 			"tiers":
 			[
 				{ 
-					"description": "Destroy target commoner. Players can never have less than 4 inhabitants.", 
+					"description": "When a player moves their commoners to the same tile as your Dark Abyss guild member, annul their move action.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1606,7 +1606,7 @@
 					}]
 				},
 				{ 
-					"description": "Destroy up to two target commoners divided over up to 2 players or one faction member of tier 1. Players can never have less than 4 inhabitants.", 
+					"description": "When a player moves their commoners to the same tile as your Dark Abyss guild member, destroy all commoners committed to that tile. Steal a random {card}.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1622,7 +1622,8 @@
 					}]
 				},
 				{ 
-					"description": "Destroy up to four target commoners divided over up to 3 players or up to two faction members of tier 2 or less. Players can never have less than 4 inhabitants.", "cost" : [
+					"description": "When a player moves their citizens to the same tile as your Dark Abyss guild member, destroy all citizens committed to that tile. Look at their hand and steal a {card}.", 
+					"cost" : [
 					{ 
 						"type": "gold", 
 						"amount": 3 
@@ -1639,19 +1640,181 @@
 			]		
 		},
 		{
-			"title": "Spy",
-			"backgroundUrl": "assets/cards/background/blue.png",
+			"title": "Perception",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_concealed",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "The next time you are targeted by a tier 1 card, annul that card.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 1 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "The next time you are targeted by a tier 2 card, annul that card.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "The next time you are targeted by a tier 3 card, annul that card.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}
+			]		
+		},
+		{
+			"title": "Dexterity",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_concealed",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "The next time you cannot move to target tile because a player blocks you there, move to another open tile within 3 spaces (if available).", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 1 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "The next time you cannot move to target tile because a player blocks you there, separate the workers into two groups and move them to two open tiles within 5 spaces (if available).", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "The next time you cannot move to target tile because a player blocks you there, separate the workers into three groups and move them to three open tiles anywhere on the map (if available).", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}
+			]		
+		},
+		{
+			"title": "Double agent",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_concealed",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "When target player drafts a new promote card, you get to see what it is.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 1 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "When target player drafts a new promote card, you get to see what it is. Gain a copy of that card.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "When target player drafts a new promote card, steal that card.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}
+			]		
+		},
+		{
+			"title": "Secret meeting",
+			"backgroundUrl": "assets/cards/background/violet.png",
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_immediate",
 			"faction": "DeepBlueAbyss",
 			"tiers":
 			[
 				{ 
-					"description": "Target player's turn does not resolve.", 
+					"description": "See target player’s hand.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
-						"amount": 2 
+						"amount": 1 
 					},
 					{
 						"type": "lumber", 
@@ -1659,7 +1822,7 @@
 					}]
 				},
 				{ 
-					"description": "A structure becomes unavailable to other players and you may visit it with your {soldier}m even if it is outside your {influence}.", 
+					"description": "See target player’s hand. Steal 1 {card}.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1675,7 +1838,7 @@
 					}]
 				},
 				{ 
-					"description": "",
+					"description": "Choose up to two target players. See their hand. Steal up to two {card} divided among them.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1689,7 +1852,115 @@
 						"type": "stone", 
 						"amount": 3 
 					}]
-				}				
+				}
+			]		
+		},
+		{
+			"title": "Former glory",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "Look through the discard pile and take 1 {card}.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 1 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Look through the discard pile and take 2 {card}.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Look through the discard pile and take 2 {card}. Play one for free.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}
+			]		
+		},
+		{
+			"title": "Assassinate",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "DeepBlueAbyss",
+			"tiers":
+			[
+				{ 
+					"description": "Destroy target tier 1 guild member or royalty", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 1 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Destroy target tier 2 guild member or royalty.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Destroy 2 target tier 3 guild members or royalty divided as you wish among two players.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}
 			]		
 		},
 		{
@@ -1697,11 +1968,11 @@
 			"backgroundUrl": "assets/cards/background/orange.png",
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_immediate",
-			"faction": "DeepBlueAbyss",
+			"faction": "Barter",
 			"tiers":
 			[
 				{ 
-					"description": "Target player's turn does not resolve.", 
+					"description": "Name one resource. Target player gives you 2 of that resource.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1713,7 +1984,7 @@
 					}]
 				},
 				{ 
-					"description": "A structure becomes unavailable to other players and you may visit it with your {soldier}m even if it is outside your {influence}.", 
+					"description": "Name one resource. Each player gives you 2 of that resource.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1729,7 +2000,7 @@
 					}]
 				},
 				{ 
-					"description": "",
+					"description": "Name one resources. Each player gives you 5 of that resource.",
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1755,7 +2026,7 @@
 			"tiers":
 			[
 				{ 
-					"description": "Target player's turn does not resolve.", 
+					"description": "Give this card to target player. They choose a {card} and give it to you as well as 5 {gold}.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1767,7 +2038,7 @@
 					}]
 				},
 				{ 
-					"description": "A structure becomes unavailable to other players and you may visit it with your {soldier}m even if it is outside your {influence}.", 
+					"description": "Give this card to target player. Then look at their hand and take a {card} from among them as well as 5 {gold}.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1783,7 +2054,7 @@
 					}]
 				},
 				{ 
-					"description": "",
+					"description": "Give this card to target player. Then look at their hand and take two {card} from among them as well as 10 {gold}.",
 					"cost" : [
 					{ 
 						"type": "gold", 
