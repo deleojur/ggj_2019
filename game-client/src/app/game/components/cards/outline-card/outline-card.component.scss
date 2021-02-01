@@ -68,10 +68,24 @@ $scale: .65;
 	top: 272px * $scale;
 }
 
+.card-title-bg
+{
+	width: 157px;
+    height: 28px;
+    position: absolute;
+    left: 36px;
+    top: 182px;
+    display: table;
+}
+
 .card-title
 {
-    left: 59.25px * $scale;
-	top: 275px * $scale;
+	display: table-cell;
+	position: relative;
+	vertical-align: middle;
+	left: 0;
+	top: 0;
+	line-height: 16px;
 	font-size: 40px * $scale;
 }
 

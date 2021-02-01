@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Card } from 'src/app/game/cards/card';
 import { CardService } from '../card.service';
 
@@ -19,7 +19,7 @@ export enum CardOutlineAnimation
   templateUrl: './outline-card.component.html',
   styleUrls: ['../playable-card/playable-card.component.scss', './outline-card.component.scss']
 })
-export class OutlineCardComponent implements OnInit
+export class OutlineCardComponent implements OnInit, AfterViewInit
 {
 	@Input() card: Card;
 	@Input() order: number;	
@@ -30,6 +30,8 @@ export class OutlineCardComponent implements OnInit
 
 	@Input() animationIn;
 	@Input() animationOut;
+
+	@ViewChild('cardTitle', {static: true}) cardTitleElement;
 
 	constructor(private cardService: CardService) 
 	{
@@ -42,6 +44,20 @@ export class OutlineCardComponent implements OnInit
 		{
 			this.playAnimationDelayed(cardOutlineAnimation);
 		});
+	}
+	
+	ngAfterViewInit()
+	{
+		this.setTitleFontSize();
+	}
+
+	private setTitleFontSize(): void
+	{
+		const maxFontSize: number = parseInt(getComputedStyle(this.cardTitleElement.nativeElement).fontSize.match(/\d+/)[0]);
+		const textLength: number = this.card.title.length;
+		const step: number = Math.max(textLength - 15, 0);
+		const targetFontSize: number = maxFontSize - step;
+		this.cardTitleElement.nativeElement.style.setProperty('font-size', `${targetFontSize}px`);
 	}
 
 	private playAnimationDelayed(cardOutlineAnimation: CardOutlineAnimation): void

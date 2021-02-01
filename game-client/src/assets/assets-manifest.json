@@ -200,7 +200,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "construct",
 			"faction": "Carpenter",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{
 					"description": "During this season, every {food} you collect is increased by +1.",
@@ -264,7 +264,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "construct",
 			"faction": "Carpenter",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{
 					"description": "During this season, every second {stone} you collect is increased by +1.",
@@ -332,6 +332,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "construct",
 			"faction": "Carpenter",
+			"amount": 3,
 			"tiers":
 			[
 				{
@@ -400,6 +401,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "construct",
 			"faction": "Carpenter",
+			"amount": 3,
 			"tiers":
 			[
 				{
@@ -468,7 +470,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "construct",
 			"faction": "Carpenter",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{
 					"description": "Gain 1 {food} per commoner on the wool farm. The wool farm can only be used in the spring.",
@@ -536,7 +538,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "construct",
 			"faction": "Carpenter",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{
 					"description": "Gain 1 {cloth}.",
@@ -604,7 +606,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "construct",
 			"faction": "Carpenter",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{
 					"description": "Constructing a structure costs 1 {lumber} less to build this season.",
@@ -647,7 +649,7 @@
 					]
 				},
 				{
-					"description": "Constructing a structure costs 4 {lumber}, 2 {stone} and 2 {construction_action} less to build this season.",
+					"description": "Constructing a structure costs 4 {lumber}, 2 {stone} and 2 {construction} less to build this season.",
 					"cost": 
 					[
 						{
@@ -672,7 +674,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "construct",
 			"faction": "Carpenter",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{
 					"description": "Turn 1 commoner of another player into a drunk. They cannot move this season.",
@@ -740,7 +742,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "construct",
 			"faction": "Carpenter",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{
 					"description": "Pay 5 {gold} to gain 1 {gems}.",
@@ -808,7 +810,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "construct",
 			"faction": "Carpenter",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{
 					"description": "Draw 1 {card}.",
@@ -876,7 +878,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "construct",
 			"faction": "Carpenter",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{
 					"description": "Place 5 citizens on the city hall. A province with no allegiance pledges allegiance to you.",
@@ -939,12 +941,148 @@
 			]
 		},
 		{
+			"title": "Construct",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "Carpenter",
+			"amount":3,"tiers":
+			[
+				{
+					"description": "Play a structure up to tier 2 for free. You do pay the construct cost.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 2
+						},
+						{
+							"type": "gold",
+							"amount": 2
+						},
+						{
+							"type": "lumber",
+							"amount": 1
+						},
+						{
+							"type": "stone",
+							"amount": 1
+						}
+					]
+				},
+				{
+					"description": "Play a structure up to tier 3 for free. The first construct is filled.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 3
+						},
+						{
+							"type": "gold",
+							"amount": 3
+						},
+						{
+							"type": "lumber",
+							"amount": 2
+						}
+					]
+				},
+				{
+					"description": "Play a structure up to tier 3 for free. The first construct is filled. Draw a new {Carpenter} card.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 4
+						},
+						{
+							"type": "gold",
+							"amount": 5
+						},
+						{
+							"type": "lumber",
+							"amount": 4
+						}						
+					]
+				}
+			]
+		},
+		{
+			"title": "Booby-trap",
+			"backgroundUrl": "assets/cards/background/violet.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_concealed",
+			"faction": "Carpenter",
+			"amount":3,"tiers":
+			[
+				{
+					"description": "When a player moves his/her commoners to target structure, destroy up to 2 commoners.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 2
+						},
+						{
+							"type": "gold",
+							"amount": 2
+						},
+						{
+							"type": "lumber",
+							"amount": 1
+						},
+						{
+							"type": "stone",
+							"amount": 1
+						}
+					]
+				},
+				{
+					"description": "When a player moves his/her commoners to target structure, destroy up to 4 commoners.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 3
+						},
+						{
+							"type": "gold",
+							"amount": 3
+						},
+						{
+							"type": "lumber",
+							"amount": 2
+						}
+					]
+				},
+				{
+					"description": "When a player moves his/her commoners to target structure, destroy up to 2 commoners. Then draw a new {Carpenter} card.",
+					"cost": 
+					[
+						{
+							"type": "construction",
+							"amount": 4
+						},
+						{
+							"type": "gold",
+							"amount": 5
+						},
+						{
+							"type": "lumber",
+							"amount": 4
+						}						
+					]
+				}
+			]
+		},
+		{
 			"title": "Lay siege",
 			"backgroundUrl": "assets/cards/background/violet.png",
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_immediate",
 			"faction": "LionHeart",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "Target player's commoners cannot leave their town this season.", 
@@ -997,7 +1135,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_immediate",
 			"faction": "LionHeart",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "A structure of target player cannot be used the coming two seasons.", 
@@ -1051,7 +1189,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_immediate",
 			"faction": "LionHeart",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "Target player cannot use a province for the rest of the year. You may use it during this time.", 
@@ -1105,7 +1243,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_immediate",
 			"faction": "LionHeart",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "Sacrifice <i>x</i> commoners. Target player sacrifices <i>x + 1</i> commoners.", 
@@ -1159,7 +1297,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_immediate",
 			"faction": "LionHeart",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "Target player discards a card.", 
@@ -1213,7 +1351,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_immediate",
 			"faction": "LionHeart",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "Steal one {card} from target player at random.", 
@@ -1267,7 +1405,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_concealed",
 			"faction": "LionHeart",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "When a player moves citizens to the same tile as your lionheart member, destroy one commoner before the move action resolves.", 
@@ -1321,7 +1459,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_immediate",
 			"faction": "LionHeart",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "Choose one province. Destroy one enemy commoner in all tiles of that province.", 
@@ -1375,7 +1513,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_concealed",
 			"faction": "LionHeart",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "When target player promotes a commoner to a count, immediately destroy it.", 
@@ -1429,7 +1567,7 @@
 			"foregroundUrl": "assets/cards/abilities/spy.png",
 			"type": "action_immediate",
 			"faction": "DeepBlueAbyss",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "Look at target player's hand.", 
@@ -1483,7 +1621,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_immediate",
 			"faction": "DeepBlueAbyss",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "Target player's turn does not resolve.", 
@@ -1537,7 +1675,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_immediate",
 			"faction": "DeepBlueAbyss",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "Take 1 commoner from target player. At the end of the year, either they pay you 3 {gold}, or you gain control of that commoner.", 
@@ -1591,7 +1729,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_concealed",
 			"faction": "DeepBlueAbyss",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "When a player moves their commoners to the same tile as your Dark Abyss guild member, annul their move action.", 
@@ -1645,7 +1783,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_concealed",
 			"faction": "DeepBlueAbyss",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "The next time you are targeted by a tier 1 card, annul that card.", 
@@ -1699,7 +1837,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_concealed",
 			"faction": "DeepBlueAbyss",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "The next time you cannot move to target tile because a player blocks you there, move to another open tile within 3 spaces (if available).", 
@@ -1753,7 +1891,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_concealed",
 			"faction": "DeepBlueAbyss",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "When target player drafts a new promote card, you get to see what it is.", 
@@ -1807,7 +1945,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_immediate",
 			"faction": "DeepBlueAbyss",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "See target player’s hand.", 
@@ -1861,7 +1999,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_immediate",
 			"faction": "DeepBlueAbyss",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "Look through the discard pile and take 1 {card}.", 
@@ -1915,7 +2053,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_immediate",
 			"faction": "DeepBlueAbyss",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "Destroy target tier 1 guild member or royalty", 
@@ -1969,7 +2107,7 @@
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_immediate",
 			"faction": "Barter",
-			"tiers":
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "Name one resource. Target player gives you 2 of that resource.", 
@@ -2022,8 +2160,8 @@
 			"backgroundUrl": "assets/cards/background/orange.png",
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_immediate",
-			"faction": "DeepBlueAbyss",
-			"tiers":
+			"faction": "Barter",
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "Give this card to target player. They choose a {card} and give it to you as well as 5 {gold}.", 
@@ -2076,8 +2214,8 @@
 			"backgroundUrl": "assets/cards/background/orange.png",
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_immediate",
-			"faction": "DeepBlueAbyss",
-			"tiers":
+			"faction": "Barter",
+			"amount":3,"tiers":
 			[
 				{ 
 					"description": "Target player's turn does not resolve.", 
@@ -2126,15 +2264,15 @@
 			]		
 		},
 		{
-			"title": "Taxes",
+			"title": "Bribe",
 			"backgroundUrl": "assets/cards/background/blue.png",
 			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
 			"type": "action_immediate",
-			"faction": "DeepBlueAbyss",
-			"tiers":
+			"faction": "Barter",
+			"amount":3,"tiers":
 			[
 				{ 
-					"description": "Target player's turn does not resolve.", 
+					"description": "Pay target player 10 {gold} to take over a commoner. You may repeat this for up to five times (and choose additional targets).", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -2146,7 +2284,7 @@
 					}]
 				},
 				{ 
-					"description": "A structure becomes unavailable to other players and you may visit it with your {soldier}m even if it is outside your {influence}.", 
+					"description": "Pay target player 8 {gold} to take over a commoner or 12 {gold} to take over a tier 1 tier 2 citizen. You may perform this action up to five times (and choose additional targets).", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -2162,7 +2300,7 @@
 					}]
 				},
 				{ 
-					"description": "",
+					"description": "Pay target player 5 {gold} to take over a commoner, 8 {gold} to take over a tier 1 citizen or 12 {gold} to take over a tier 2 citizen. You may perform this action five times (and choose additional targets).",
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -2178,8 +2316,1084 @@
 					}]
 				}				
 			]		
+		},
+		{
+			"title": "An offer you can't refuse",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "Barter",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "Target player draws a card and pays you the tier 1 resources it would cost to play that card.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Target player draws a card and pays you the tier 2 resources it would cost to play that card.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Target player draws a card and pays you the tier 3 resources it would cost to play that card.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Loan",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "Barter",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "Give target player 5 {gold}. Over the next 3 turns, they pay you back 3 {gold} each turn.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Give target player 10 {gold}. Over the next 3 turns, the pay you back 6 {gold} each turn.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Give target player a card. Over the next 3 turns, they randomly give you 1 card each turn.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Prosperity",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "Barter",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "Gain 5 {gold} and draw a {card}.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Gain 10 {gold}, 5 {food} and draw a {card}.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Gain 15 {gold}, 5 {food}, 3 {grapes} and draw 2 {card}.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "First come, first serve",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "Barter",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "The coming two seasons, your win all draws for tiles with other players.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "The coming year, you win all draws for tiles with other players.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "The coming year, a single commoner is enough to win tile superiority.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Investment",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "Barter",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "The next 2 seasons, all {gold} income is doubled.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "The next year, all {gold} income is doubled.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "The coming year, all {gold}, {gems} and {grapes} income is doubled.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Feed the poor",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "Ethereal",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "Gain 5 {food}.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Gain 7 {food} and 2 {grapes}", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Gain 10 {food}, 4 {grapes} and 3 {cloth}.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Indoctrinate",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_concealed",
+			"faction": "Ethereal",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "Name a province. After one year, gain control of 1 commoner in every tile of that province.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Name a province. After one year, gain control of all commoners in every tile of that province.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Name a province. After one year, gain control of all citizens in every tile of that province.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Go forth and multiply",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "Ethereal",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "Create one commoner.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Create one commoner for every two commoners under your control.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Create 1 tier 1 citizen for every two citizens under your control.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Reincarnation",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_concealed",
+			"faction": "Ethereal",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "When you lose one or more commoners, return up to 2 to your town at the start of the next season.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "When any commoners are destroyed, return up to 3 to your town at the start of the next season.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "When any commoners and/or citizens are destroyed, return up to 5 to your town at the start of the next season.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "God's will",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_concealed",
+			"faction": "Ethereal",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "After the next draft, create a copy of one random card you drafted.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "After the next draft, pick one card you drafted and create a copy of it.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "After the next draft, pick one card you drafted and create a copy of it. Also, take a copy of your promote card.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Devotion",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "Ethereal",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "Sacrifice a commoner. Destroy 2 commoners of target player.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Sacrifice a commoner. Destroy 3 commoners of target player. Draw an {Ethereal} card.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Sacrifice a commoner. Destroy 2 commoners and one tier 2 or lower citizen of target player. Draw an {Ethereal} card.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Tolerance",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "Ethereal",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "For every commoner that is bounced during the next season, gain 3 {gold}", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "For every commoner that is bounced during the next 2 seasons, gain 4 {gold}.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "For every commoner that is bounced during the next 2 seasons, gain an {Ethereal} card.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Collection plate",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "Ethereal",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "Target player pays you 6 {gold}.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Target player pays you 6 {gold}. Gain an {ethereal} card.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Two target players pay you 8 {gold} each. Gain two {Ethereal} cards.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Sunday prayer",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "action_immediate",
+			"faction": "Ethereal",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "Return up to 2 commoners to your town.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Return all commoners to your town. Draw an {Ethereal} card.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "Return all commoners to your town. Promote a commoner to monk.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Great leader",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "promote",
+			"faction": "Promote",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "At least three provinces must have pledged allegiance to you.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "At least seven provinces must have pledged allegiance to you.", 
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 2 
+					},
+					{
+						"type": "lumber", 
+						"amount": 2 
+					},
+					{
+						"type": "stone", 
+						"amount": 1 
+					}]
+				},
+				{ 
+					"description": "At least twelve provinces must have pledged allegiance to you.",
+					"cost" : [
+					{ 
+						"type": "gold", 
+						"amount": 3 
+					},
+					{
+						"type": "lumber", 
+						"amount": 3 
+					},
+					{
+						"type": "stone", 
+						"amount": 3 
+					}]
+				}				
+			]		
+		},
+		{
+			"title": "Trader",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "promote",
+			"faction": "Promote",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "At least two provinces must have pledged their allegiance with you with whom you can trade different goods."
+				},
+				{ 
+					"description": "At least four provinces must have pledged their allegiance with you with whom you can trade different goods."					
+				},
+				{ 
+					"description": "At least six provinces must have pledged their allegiance with you with whom you can trade different goods."
+				}			
+			]		
+		},
+		{
+			"title": "Generous leader",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "promote",
+			"faction": "Promote",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "You must have at least 25 {gold} and 5 {cloth}."
+				},
+				{ 
+					"description": "You must have at least 35 {gold} and 7 {cloth}."					
+				},
+				{ 
+					"description": "You must have at least 50 {gold}, 10 {cloth} and 5 {gems}."
+				}			
+			]		
+		},
+		{
+			"title": "Provider",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "promote",
+			"faction": "Promote",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "You must have at least 15 {food} and 2 {grapes}."
+				},
+				{ 
+					"description": "You must have at least 25 {food} and 5 {grapes}."
+				},
+				{ 
+					"description": "You must have at least 35 {food}, 12 {grapes} and 5 {cloth}."
+				}				
+			]		
+		},
+		{
+			"title": "Society",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "promote",
+			"faction": "Promote",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "You must have at least 1 type of citizen."
+				},
+				{ 
+					"description": "You must have at least 3 types of citizen."					
+				},
+				{ 
+					"description": "YOu must have at least 5 types of citizen."
+				}				
+			]		
+		},
+		{
+			"title": "Fertile leader",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "promote",
+			"faction": "Promote",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "You must have at least 7 commoners."
+				},
+				{ 
+					"description": "You must have at least 12 commoners."
+				},
+				{ 
+					"description": "You must have at least 18 commoners."
+				}
+			]		
+		},
+		{
+			"title": "Builder",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "promote",
+			"faction": "Promote",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "You must have at least 1 structure."
+				},
+				{ 
+					"description": "You must have at least 3 structures."
+				},
+				{ 
+					"description": "You must have at least 5 structures."
+				}
+			]		
+		},
+		{
+			"title": "Contingent leader",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "promote",
+			"faction": "Promote",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "Flip a coin. If heads: promote your commoner."
+				},
+				{ 
+					"description": "Throw a 10-sided die. 8, 9 or 10: promote your citizen."
+				},
+				{ 
+					"description": "Throw a 20-sided die. 17, 18, 19 or 20: promote your citizen."
+				}
+			]		
+		},
+		{
+			"title": "Biding leader",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "promote",
+			"faction": "Promote",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "You must have at least 6 cards in hand."
+				},
+				{ 
+					"description": "You must have at least 10 cards in hand."
+				},
+				{ 
+					"description": "You must have at least 15 cards in hand."
+				}
+			]		
+		},
+		{
+			"title": "Laboring leader",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "promote",
+			"faction": "Promote",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "You must have at least 3 {wood} and 2 {stone}."
+				},
+				{ 
+					"description": "You must have at least 6 {wood} and 5 {stone}"
+				},
+				{ 
+					"description": "You must have at least 11 {wood} and 9 {stone}."
+				}
+			]		
+		},
+		{
+			"title": "Faithful leader",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "promote",
+			"faction": "Promote",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "You must have at least 1 monk."
+				},
+				{ 
+					"description": "You must have at least 1 priestess and 1 monk."
+				},
+				{ 
+					"description": "YOu must have at least 1 zealot and 1 priestess."
+				}
+			]		
+		},
+		{
+			"title": "Strong leader",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "promote",
+			"faction": "Promote",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "You must have at least 1 soldier."
+				},
+				{ 
+					"description": "You must have at least 1 lieutenant and 1 soldier."
+				},
+				{ 
+					"description": "YOu must have at least 1 general and 1 lieutenant."
+				}
+			]		
+		},
+		{
+			"title": "Secretive leader",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "promote",
+			"faction": "Promote",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "You must have at least 1 agent."
+				},
+				{ 
+					"description": "You must have at least 1 spy and 1 agent."
+				},
+				{ 
+					"description": "YOu must have at least 1 assassin and 1 spy."
+				}
+			]		
+		},
+		{
+			"title": "Negotiating leader",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "promote",
+			"faction": "Promote",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "You must have at least 1 shopkeeper."
+				},
+				{ 
+					"description": "You must have at least 1 salesman and 1 shopkeeper."
+				},
+				{ 
+					"description": "You must have at least 1 merchant and 1 salesman."
+				}
+			]		
+		},
+		{
+			"title": "Constructing leader",
+			"backgroundUrl": "assets/cards/background/blue.png",
+			"foregroundUrl": "assets/cards/abilities/lay-siege.png",
+			"type": "promote",
+			"faction": "Promote",
+			"amount":3,"tiers":
+			[
+				{ 
+					"description": "At least two provinces must have pledged their allegiance with you with whom you can trade different goods."
+				},
+				{ 
+					"description": "At least four provinces must have pledged their allegiance with you with whom you can trade different goods."					
+				},
+				{ 
+					"description": "At least six provinces must have pledged their allegiance with you with whom you can trade different goods."
+				}
+			]		
 		}
-	],
+	],	
 	"entities":
 	[
 		{

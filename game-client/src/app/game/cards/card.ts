@@ -22,6 +22,7 @@ export interface CardInformation
 	backgroundUrl: string;
 	foregroundUrl: string;
 	type: string;
+	amount: number;
 	tiers: [
 		{
 			description: string,
@@ -130,10 +131,16 @@ export class Card
 		return this._id;
 	}
 
+	public get amount(): number
+	{
+		return this._amount;
+	}
+
 	private _title : string;
 	private _backgroundUrl: string;
 	private _foregroundUrl: string;		
 	private _type: string;
+	private _amount: number;
 	private _tiers: CardTier[];
 	private _faction?: string;
 
@@ -143,6 +150,7 @@ export class Card
 		this._backgroundUrl = cardInformation.backgroundUrl;
 		this._foregroundUrl = cardInformation.foregroundUrl;
 		this._type = cardInformation.type;
+		this._amount = cardInformation.amount;
 		this._tiers = [];
 		cardInformation.tiers.forEach(tier =>
 		{

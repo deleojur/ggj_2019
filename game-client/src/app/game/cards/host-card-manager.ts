@@ -2,6 +2,7 @@ import { HostStateHandler } from "../states/host-states/host-state-handler";
 import { hostState_draftCards } from '../states/host-states/host-state_draft-cards';
 import { HostWaitForClientReplies } from "../states/host-wait-for-clients-reply";
 import { ClientData, DraftData, PickDraftCardData, RequestCardData } from "../states/request-data";
+import { Card } from "./card";
 import { CardManager, DraftDirection } from "./card-manager";
 
 interface ClientDraft
@@ -16,7 +17,7 @@ export class HostCardManager extends CardManager
 	private readonly NUMBER_OF_DRAFT_CARDS: number = 6;
 	private draftRounds: number = 0;
 
-	private _draftOrder: number
+	private _draftOrder: number;
 
 	private _shuffledDeck: number[];
 	private _discardPile: number[];
@@ -49,7 +50,7 @@ export class HostCardManager extends CardManager
 		
 		this._clients.forEach((client, i) =>
 		{
-			//TODO: shuffle.
+			//TODO: shuffle clients and change left and right every season.
 			const left: number = this.roundModulo(i - 1, this._clients.length);
 			const right: number = this.roundModulo(i + 1, this._clients.length);			
 			this._clientDraftDetails.set(client.id, { draftCards: [], left: this._clients[left].id, right: this._clients[right].id });			
@@ -59,7 +60,14 @@ export class HostCardManager extends CardManager
 
 	private initDeck(): void
 	{
-		this._shuffledDeck = [...Array(this._cardDetails.length).keys()];	
+		this._shuffledDeck = [];
+		this._cardDetails.forEach((card: Card) =>
+		{
+			for (let i: number = 0; i < card.amount; i++)
+			{
+				this._shuffledDeck.push(card.id);
+			}
+		});
 		let m: number = this._shuffledDeck.length;
 		
 		// While there remain elements to shuffle…

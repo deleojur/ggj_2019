@@ -125,7 +125,7 @@ $scale: 1.25;
 	position: absolute;
     width: 12%;
     top: 226px * $scale;
-    left: 240px * $scale;
+    left: 233px * $scale;
 }
 
 .faction
@@ -176,9 +176,9 @@ $scale: 1.25;
 	position: absolute;
     text-align: left;
     left: 33px * $scale;
-    top: 223px * $scale;
+    top: 232px * $scale;
     font-family: Zolof;
-    font-size: 150%;
+    font-size: 22.4px * $scale;
 }
 
 .card-description
