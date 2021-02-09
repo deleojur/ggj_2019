@@ -903,7 +903,7 @@
 					]
 				},
 				{
-					"description": "Place 4 citizens on the city hall. Target province renounces target player. Then, if it has no allegiance, it pledges allegiance to you.",
+					"description": "Place 4 citizens on the city hall. Target province may renounce target player. Then, if it has no allegiance, it pledges allegiance to you.",
 					"cost": 
 					[
 						{
@@ -1057,7 +1057,7 @@
 					]
 				},
 				{
-					"description": "When a player moves his/her commoners to target structure, destroy up to 2 commoners. Then draw a new {Carpenter} card.",
+					"description": "When a player moves his/her commoners to target structure, destroy up to 4 commoners. Then draw a new {Carpenter} card.",
 					"cost": 
 					[
 						{
@@ -1097,7 +1097,7 @@
 					}]
 				},
 				{ 
-					"description": "Destroy target {commoner} in a town. {commoner} can not leave their town and do not collect {gold} or {food} at the end of the season.", 
+					"description": "Destroy target {commoner} in a town. {commoner} can not leave their town and cannot collect {food} at the end of the year.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1113,7 +1113,7 @@
 					}]
 				},
 				{ 
-					"description": "Both you and target player ", "cost" : [
+					"description": "Destroy target {commoner} in a town. {commoner} can not leave their town and do not collect {gold} or {food} at the end of the year. Draw 1 {LionHeart} card.", "cost" : [
 					{ 
 						"type": "gold", 
 						"amount": 3 
@@ -1166,7 +1166,7 @@
 					}]
 				},
 				{ 
-					"description": "A structure of target player is permanently destroyed. Steal a random card from them.", 
+					"description": "A structure of target player is permanently destroyed. See their hand. Steal a card from them.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
