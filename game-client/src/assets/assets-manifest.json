@@ -3269,13 +3269,13 @@
 			"amount":3,"tiers":
 			[
 				{ 
-					"description": "You must have at least 6 cards in hand."
+					"description": "You must have at least 2 promote in hand."
 				},
 				{ 
-					"description": "You must have at least 10 cards in hand."
+					"description": "You must have at least 4 promote cards in hand."
 				},
 				{ 
-					"description": "You must have at least 15 cards in hand."
+					"description": "You must have at least 7 promote cards in hand."
 				}
 			]		
 		},

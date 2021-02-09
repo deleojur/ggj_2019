@@ -19,8 +19,8 @@ export class HostCardManager extends CardManager
 
 	private _draftOrder: number;
 
-	private _shuffledDeck: number[];
-	private _discardPile: number[];
+	private _shuffledDeck: Map<string, number[]>;
+	private _discardPile: Map<string, number[]>;
 	
 	private _clientDraftListener: hostState_draftCards;
 
@@ -41,8 +41,8 @@ export class HostCardManager extends CardManager
 	public init(): void
 	{
 		super.init();		
-		this._shuffledDeck = [];
-		this._discardPile = [];
+		this._shuffledDeck = new Map<string, number[]>();
+		this._discardPile = new Map<string, number[]>();
 		this._clients = this._hostStateHandler.clients;
 		this.hostWaitForClientReplies = new HostWaitForClientReplies<PickDraftCardData>(this._clients);
 		this.onReceivedAllCardPicks = this.onReceivedAllCardPicks.bind(this);
@@ -60,15 +60,27 @@ export class HostCardManager extends CardManager
 
 	private initDeck(): void
 	{
-		this._shuffledDeck = [];
 		this._cardDetails.forEach((card: Card) =>
 		{
 			for (let i: number = 0; i < card.amount; i++)
 			{
-				this._shuffledDeck.push(card.id);
+				if (!this._shuffledDeck.has(card.faction))
+				{
+					this._shuffledDeck.set(card.faction, []);
+				}
+				this._shuffledDeck.get(card.faction).push(card.id);
 			}
 		});
-		let m: number = this._shuffledDeck.length;
+
+		this._shuffledDeck.forEach((cards, faction) => 
+		{
+			this.shuffleDeck(cards);
+		});
+	}
+
+	private shuffleDeck(cards: number[]): void
+	{
+		let m: number = cards.length;
 		
 		// While there remain elements to shuffle…
 		while (m > 0)
@@ -77,15 +89,21 @@ export class HostCardManager extends CardManager
 			const i: number = Math.floor(Math.random() * m--);
 		
 			// And swap it with the current element.
-			const temp: number = this._shuffledDeck[m];
-			this._shuffledDeck[m] = this._shuffledDeck[i];
-			this._shuffledDeck[i] = temp;
+			const temp: number = cards[m];
+			cards[m] = cards[i];
+			cards[i] = temp;
 		}
 	}
 
-	private getNextCards(amount: number): number[]
+	private getNextCards(factions: string[], amount: number): number[]
 	{
-		return this._shuffledDeck.splice(0, amount);
+		const cardIds: number[] = [];
+		for (let i: number = 0; i < amount; i++)
+		{
+			const factionId: number = Math.floor(Math.random() * factions.length);
+		    cardIds.push(...this._shuffledDeck.get(factions[factionId]).splice(0, 1));
+		}
+		return cardIds;
 	}
 
 	private startListeningForReplies(): void
@@ -102,12 +120,15 @@ export class HostCardManager extends CardManager
 		this.draftRounds = 0;
 		
 		this._clients.forEach(client =>
-		{			
-			this._clientDraftDetails.get(client.id).draftCards = this.getNextCards(this.NUMBER_OF_DRAFT_CARDS);
+		{
+			debugger;
+			const promoteCard: number[] = this.getNextCards(['Promote'], 1);
+			const draftCards: number[] = this.getNextCards(['Barter', 'Carpenter', 'DeepBlueAbyss', 'Ethereal', 'LionHeart'], this.NUMBER_OF_DRAFT_CARDS);
+			this._clientDraftDetails.get(client.id).draftCards = [...promoteCard, ...draftCards];
 			this.emitDraftRequest(client);
 		});
 		this.startListeningForReplies();
-		//this._draftDirection = this.flipDraftDirection(this._draftDirection);
+		this._draftDirection = this.flipDraftDirection(this._draftDirection);
 	}
 
 	private onReceivedAllCardPicks(responses: Map<string, PickDraftCardData>): void
@@ -171,7 +192,7 @@ export class HostCardManager extends CardManager
 
 	private onClientRequestCardData(request: RequestCardData): void
 	{
-		const cards: number[] = this.getNextCards(request.amount);
+		//const cards: number[] = this.getNextCards(request.amount);
 		
 	}
 
