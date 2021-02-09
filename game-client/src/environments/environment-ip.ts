@@ -1,1 +1,0 @@
-export const ip_config = { ws_url: 'http://192.168.178.17:5000' }
