@@ -1,5 +1,5 @@
 import { Resource } from 'src/app/game/entities/resource';
-import { Container, Sprite, Point, Text } from 'pixi.js';
+import { Container } from 'pixi.js';
 import { Hex } from 'honeycomb-grid';
 import { Cell } from '../grid/grid';
 import { GameManager } from '../game-manager';

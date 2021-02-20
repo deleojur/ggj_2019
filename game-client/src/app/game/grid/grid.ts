@@ -1,10 +1,11 @@
-import { MapReader, TileProperty, Object, WorldMap } from './map-reader';
+import { MapReader, TileProperty, Object, WorldMap, Entity } from './map-reader';
 import { Vector } from 'vector2d/src/Vec2D';
 import { defineGrid, GridFactory, Hex, Point, Grid, PointLike } from 'honeycomb-grid';
 import { Graphics, Sprite, Point as pPoint, Polygon } from 'pixi.js';
 import { ViewportManager } from '../render/viewport';
 import { AssetLoader } from 'src/app/asset-loader';
 import { GridStrategy } from './grid-strategy';
+import { Entity as TileEntity } from '../entities/tile-entities/entity';
 
 export interface Cell
 {
@@ -36,7 +37,6 @@ export class GridManager
     {
 		this.gridFactory = defineGrid();
 		const worldMap: WorldMap = AssetLoader.instance.worldMap;
-		
 		this.grid = this.gridFactory.rectangle({ width: worldMap.width, height: worldMap.height });
 
 		this.grid.forEach(hex =>
@@ -64,7 +64,7 @@ export class GridManager
 		this.initObjectLayer(this.mapReader.hexUnderLayer);
 		this.initTileLayer();
 		this.gridStrategy.init(gridGraphics, pathGraphics);
-		this.initObjectLayer(this.mapReader.entities);
+		this.initEntityLayer(this.mapReader.entities);
 		this.mapRoad();
 	}
 
@@ -128,6 +128,17 @@ export class GridManager
 				}
 			});
         });
+	}
+
+	private initEntityLayer(entities: Entity[]): void
+	{
+		entities.forEach(entity =>
+		{
+			const hexCoordinates = this.gridFactory.pointToHex([entity.x / this.tileWidth, entity.y / this.tileHeight]);
+            const hex: Hex<Cell> = this.grid.get(hexCoordinates);
+			const tileEntity: TileEntity = new TileEntity(entity.name, hex);
+			this.viewport.addChild(tileEntity);
+		});
 	}
 	
 	public getValidTiles(): Hex<Cell>[]

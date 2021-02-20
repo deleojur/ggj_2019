@@ -7,6 +7,9 @@ import { ClientStateHandler } from '../../states/client-states/client-state-hand
 import { StateHandlerService } from '../../states/state-handler.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { ClientCardManager } from '../../cards/client-card-manager';
+import { GridClient } from '../../grid/client-grid';
+import { ClientTurnSystem } from '../../turns/client-turn-system';
 
 @Component({
   selector: 'app-client-game',
@@ -19,6 +22,10 @@ export class ClientGameComponent implements Game, OnInit, AfterViewInit
     constructor(
 		private clientStateHandler: ClientStateHandler)	
 		{		
+			const clientGrid: GridClient = new GridClient(this.clientStateHandler);
+			const clientTurnSystem: ClientTurnSystem = new ClientTurnSystem();
+			const clientCardManager: ClientCardManager = new ClientCardManager(this.clientStateHandler);
+			GameManager.instance.init(clientGrid, clientTurnSystem, clientCardManager, () => {});
 		}
 
 	ngOnInit() 

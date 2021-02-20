@@ -5,10 +5,17 @@ import { AssetLoader } from 'src/app/asset-loader';
 import { Structure } from './structure';
 import { Unit } from './unit';
 import { GameManager } from '../game-manager';
+import { Entity as TileEntity } from '../entities/tile-entities/entity';
 
 export class EntityManager
 {
 	private _entities: Map<Hex<Cell>, Entity[]>;
+
+	public createTileEntity(hex: Hex<Cell>, entityName): TileEntity
+	{
+		const entity: TileEntity = new TileEntity(entityName, hex);
+		return entity;
+	}
 
 	public createEntity(hex: Hex<Cell>, owner: string, entityName: string): Entity
 	{

@@ -4,7 +4,7 @@
      "export":
         {
          "format":"json",
-         "target":"map_1.json"
+         "target":"playtest_1.json"
         }
     },
  "height":19,
@@ -377,7 +377,7 @@
                  "y":1358
                 }, 
                 {
-                 "gid":80,
+                 "gid":79,
                  "height":192,
                  "id":183,
                  "name":"",
@@ -508,8 +508,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2807.64,
-                 "y":2270.06
+                 "x":2807.636,
+                 "y":2270.061
                 }, 
                 {
                  "height":0,
@@ -773,7 +773,7 @@
                  "visible":true,
                  "width":0,
                  "x":3704,
-                 "y":504
+                 "y":456
                 }, 
                 {
                  "height":0,
@@ -784,8 +784,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":4348,
-                 "y":724
+                 "x":4336,
+                 "y":672
                 }, 
                 {
                  "height":0,
@@ -881,7 +881,7 @@
                  "visible":true,
                  "width":0,
                  "x":4616,
-                 "y":2217
+                 "y":2216
                 }, 
                 {
                  "height":0,
@@ -1474,7 +1474,7 @@
                 {
                  "height":0,
                  "id":281,
-                 "name":"construction",
+                 "name":"structure",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -1486,7 +1486,7 @@
                 {
                  "height":0,
                  "id":282,
-                 "name":"construction",
+                 "name":"structure",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -1498,19 +1498,19 @@
                 {
                  "height":0,
                  "id":283,
-                 "name":"construction",
+                 "name":"structure",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":4492,
-                 "y":2080
+                 "x":4840,
+                 "y":2240
                 }, 
                 {
                  "height":0,
                  "id":284,
-                 "name":"construction",
+                 "name":"structure",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -1522,7 +1522,7 @@
                 {
                  "height":0,
                  "id":285,
-                 "name":"construction",
+                 "name":"structure",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -1534,7 +1534,7 @@
                 {
                  "height":0,
                  "id":286,
-                 "name":"construction",
+                 "name":"structure",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -1546,7 +1546,7 @@
                 {
                  "height":0,
                  "id":287,
-                 "name":"construction",
+                 "name":"structure",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -1558,7 +1558,7 @@
                 {
                  "height":0,
                  "id":288,
-                 "name":"construction",
+                 "name":"structure",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -1570,7 +1570,7 @@
                 {
                  "height":0,
                  "id":289,
-                 "name":"construction",
+                 "name":"structure",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -1582,7 +1582,7 @@
                 {
                  "height":0,
                  "id":290,
-                 "name":"construction",
+                 "name":"structure",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -1594,7 +1594,7 @@
                 {
                  "height":0,
                  "id":291,
-                 "name":"construction",
+                 "name":"structure",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -1606,7 +1606,7 @@
                 {
                  "height":0,
                  "id":292,
-                 "name":"construction",
+                 "name":"structure",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -1625,7 +1625,7 @@
                  "visible":true,
                  "width":0,
                  "x":4100,
-                 "y":3415.15
+                 "y":3415.15151515152
                 }, 
                 {
                  "height":0,
@@ -2182,7 +2182,7 @@
                 {
                  "height":0,
                  "id":342,
-                 "name":"grapes",
+                 "name":"luxury_food",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -2194,7 +2194,7 @@
                 {
                  "height":0,
                  "id":343,
-                 "name":"grapes",
+                 "name":"luxury_food",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -2206,7 +2206,7 @@
                 {
                  "height":0,
                  "id":344,
-                 "name":"grapes",
+                 "name":"luxury_food",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -2218,7 +2218,7 @@
                 {
                  "height":0,
                  "id":345,
-                 "name":"grapes",
+                 "name":"luxury_food",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -2230,7 +2230,7 @@
                 {
                  "height":0,
                  "id":346,
-                 "name":"grapes",
+                 "name":"luxury_food",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -2242,7 +2242,7 @@
                 {
                  "height":0,
                  "id":347,
-                 "name":"grapes",
+                 "name":"luxury_food",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -2254,7 +2254,7 @@
                 {
                  "height":0,
                  "id":348,
-                 "name":"grapes",
+                 "name":"luxury_food",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -2266,7 +2266,7 @@
                 {
                  "height":0,
                  "id":349,
-                 "name":"grapes",
+                 "name":"luxury_food",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -2409,403 +2409,403 @@
          "tiles":[
                 {
                  "id":0,
-                 "image":"Terrain_Cold\/Tiles\/hexDirtCold00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexDirtCold00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":1,
-                 "image":"Terrain_Cold\/Tiles\/hexDirtCold01.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexDirtCold01.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":2,
-                 "image":"Terrain_Cold\/Tiles\/hexDirtCold02.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexDirtCold02.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":3,
-                 "image":"Terrain_Cold\/Tiles\/hexDirtCold03.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexDirtCold03.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":4,
-                 "image":"Terrain_Cold\/Tiles\/hexForestPine00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexForestPine00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":5,
-                 "image":"Terrain_Cold\/Tiles\/hexForestPine01.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexForestPine01.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":6,
-                 "image":"Terrain_Cold\/Tiles\/hexForestPine02.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexForestPine02.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":7,
-                 "image":"Terrain_Cold\/Tiles\/hexForestPine03.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexForestPine03.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":8,
-                 "image":"Terrain_Cold\/Tiles\/hexForestPineClearing00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexForestPineClearing00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":9,
-                 "image":"Terrain_Cold\/Tiles\/hexForestPineSnowCovered00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexForestPineSnowCovered00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":10,
-                 "image":"Terrain_Cold\/Tiles\/hexForestPineSnowCovered01.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexForestPineSnowCovered01.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":11,
-                 "image":"Terrain_Cold\/Tiles\/hexForestPineSnowCovered02.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexForestPineSnowCovered02.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":12,
-                 "image":"Terrain_Cold\/Tiles\/hexForestPineSnowCovered03.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexForestPineSnowCovered03.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":13,
-                 "image":"Terrain_Cold\/Tiles\/hexForestPineSnowCoveredClearing00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexForestPineSnowCoveredClearing00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":14,
-                 "image":"Terrain_Cold\/Tiles\/hexForestPineSnowTransition00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexForestPineSnowTransition00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":15,
-                 "image":"Terrain_Cold\/Tiles\/hexForestPineSnowTransition01.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexForestPineSnowTransition01.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":16,
-                 "image":"Terrain_Cold\/Tiles\/hexForestPineSnowTransition02.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexForestPineSnowTransition02.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":17,
-                 "image":"Terrain_Cold\/Tiles\/hexForestPineSnowTransition03.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexForestPineSnowTransition03.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":18,
-                 "image":"Terrain_Cold\/Tiles\/hexForestPineSnowTransitionClearing00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexForestPineSnowTransitionClearing00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":19,
-                 "image":"Terrain_Cold\/Tiles\/hexHillsCold00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexHillsCold00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":20,
-                 "image":"Terrain_Cold\/Tiles\/hexHillsCold01.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexHillsCold01.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":21,
-                 "image":"Terrain_Cold\/Tiles\/hexHillsCold02.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexHillsCold02.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":22,
-                 "image":"Terrain_Cold\/Tiles\/hexHillsCold03.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexHillsCold03.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":23,
-                 "image":"Terrain_Cold\/Tiles\/hexHillsColdCave00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexHillsColdCave00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":24,
-                 "image":"Terrain_Cold\/Tiles\/hexHillsColdSnowCovered00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexHillsColdSnowCovered00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":25,
-                 "image":"Terrain_Cold\/Tiles\/hexHillsColdSnowCovered01.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexHillsColdSnowCovered01.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":26,
-                 "image":"Terrain_Cold\/Tiles\/hexHillsColdSnowCovered02.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexHillsColdSnowCovered02.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":27,
-                 "image":"Terrain_Cold\/Tiles\/hexHillsColdSnowCovered03.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexHillsColdSnowCovered03.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":28,
-                 "image":"Terrain_Cold\/Tiles\/hexHillsColdSnowCoveredCave00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexHillsColdSnowCoveredCave00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":29,
-                 "image":"Terrain_Cold\/Tiles\/hexHillsColdSnowTransition00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexHillsColdSnowTransition00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":30,
-                 "image":"Terrain_Cold\/Tiles\/hexHillsColdSnowTransition01.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexHillsColdSnowTransition01.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":31,
-                 "image":"Terrain_Cold\/Tiles\/hexHillsColdSnowTransition02.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexHillsColdSnowTransition02.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":32,
-                 "image":"Terrain_Cold\/Tiles\/hexHillsColdSnowTransition03.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexHillsColdSnowTransition03.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":33,
-                 "image":"Terrain_Cold\/Tiles\/hexHillsColdSnowTransitionCave00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexHillsColdSnowTransitionCave00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":34,
-                 "image":"Terrain_Cold\/Tiles\/hexMountainSnow00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexMountainSnow00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":35,
-                 "image":"Terrain_Cold\/Tiles\/hexMountainSnow01.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexMountainSnow01.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":36,
-                 "image":"Terrain_Cold\/Tiles\/hexMountainSnow02.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexMountainSnow02.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":37,
-                 "image":"Terrain_Cold\/Tiles\/hexMountainSnow03.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexMountainSnow03.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":38,
-                 "image":"Terrain_Cold\/Tiles\/hexMountainSnowCave00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexMountainSnowCave00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":39,
-                 "image":"Terrain_Cold\/Tiles\/hexMountainSnowCave01.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexMountainSnowCave01.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":40,
-                 "image":"Terrain_Cold\/Tiles\/hexMountainSnowCave02.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexMountainSnowCave02.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":41,
-                 "image":"Terrain_Cold\/Tiles\/hexMountainSnowCave03.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexMountainSnowCave03.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":42,
-                 "image":"Terrain_Cold\/Tiles\/hexOceanIceBergs00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexOceanIceBergs00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":43,
-                 "image":"Terrain_Cold\/Tiles\/hexOceanIceBergs01.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexOceanIceBergs01.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":44,
-                 "image":"Terrain_Cold\/Tiles\/hexOceanIceBergs02.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexOceanIceBergs02.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":45,
-                 "image":"Terrain_Cold\/Tiles\/hexOceanIceBergs03.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexOceanIceBergs03.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":46,
-                 "image":"Terrain_Cold\/Tiles\/hexPlainsCold00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexPlainsCold00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":47,
-                 "image":"Terrain_Cold\/Tiles\/hexPlainsCold01.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexPlainsCold01.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":48,
-                 "image":"Terrain_Cold\/Tiles\/hexPlainsCold02.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexPlainsCold02.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":49,
-                 "image":"Terrain_Cold\/Tiles\/hexPlainsCold03.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexPlainsCold03.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":50,
-                 "image":"Terrain_Cold\/Tiles\/hexPlainsColdPond00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexPlainsColdPond00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":51,
-                 "image":"Terrain_Cold\/Tiles\/hexPlainsColdSnowCovered00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexPlainsColdSnowCovered00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":52,
-                 "image":"Terrain_Cold\/Tiles\/hexPlainsColdSnowCovered01.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexPlainsColdSnowCovered01.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":53,
-                 "image":"Terrain_Cold\/Tiles\/hexPlainsColdSnowCovered02.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexPlainsColdSnowCovered02.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":54,
-                 "image":"Terrain_Cold\/Tiles\/hexPlainsColdSnowCovered03.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexPlainsColdSnowCovered03.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":55,
-                 "image":"Terrain_Cold\/Tiles\/hexPlainsColdSnowCoveredPond00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexPlainsColdSnowCoveredPond00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":56,
-                 "image":"Terrain_Cold\/Tiles\/hexPlainsColdSnowTransition00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexPlainsColdSnowTransition00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":57,
-                 "image":"Terrain_Cold\/Tiles\/hexPlainsColdSnowTransition01.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexPlainsColdSnowTransition01.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":58,
-                 "image":"Terrain_Cold\/Tiles\/hexPlainsColdSnowTransition02.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexPlainsColdSnowTransition02.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":59,
-                 "image":"Terrain_Cold\/Tiles\/hexPlainsColdSnowTransition03.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexPlainsColdSnowTransition03.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":60,
-                 "image":"Terrain_Cold\/Tiles\/hexPlainsColdSnowTransitionPond00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexPlainsColdSnowTransitionPond00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":61,
-                 "image":"Terrain_Cold\/Tiles\/hexSnowField00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexSnowField00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":62,
-                 "image":"Terrain_Cold\/Tiles\/hexSnowField01.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexSnowField01.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":63,
-                 "image":"Terrain_Cold\/Tiles\/hexSnowField02.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexSnowField02.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":64,
-                 "image":"Terrain_Cold\/Tiles\/hexSnowField03.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexSnowField03.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":65,
-                 "image":"Terrain_Cold\/Tiles\/hexUnderDirt00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexUnderDirt00.png",
                  "imageheight":192,
                  "imagewidth":256
                 }, 
                 {
                  "id":66,
-                 "image":"Terrain_Cold\/Tiles\/hexUnderOcean00.png",
+                 "image":"..\/maps\/Terrain_Cold\/Tiles\/hexUnderOcean00.png",
                  "imageheight":192,
                  "imagewidth":256
                 }],
@@ -2833,56 +2833,56 @@
          "tiles":[
                 {
                  "id":0,
-                 "image":"Terrain_Medieval\/Base\/hexBase00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Base\/hexBase00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":1,
-                 "image":"Terrain_Medieval\/Base\/hexDesertDunes00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Base\/hexDesertDunes00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":2,
-                 "image":"Terrain_Medieval\/Base\/hexDirt00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Base\/hexDirt00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "terrain":[0, 0, 0, 0]
                 }, 
                 {
                  "id":3,
-                 "image":"Terrain_Medieval\/Base\/hexForestBroadleaf00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Base\/hexForestBroadleaf00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":4,
-                 "image":"Terrain_Medieval\/Base\/hexHighlands00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Base\/hexHighlands00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":5,
-                 "image":"Terrain_Medieval\/Base\/hexHills00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Base\/hexHills00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":6,
-                 "image":"Terrain_Medieval\/Base\/hexMarsh00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Base\/hexMarsh00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":7,
-                 "image":"Terrain_Medieval\/Base\/hexMountain00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Base\/hexMountain00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":8,
-                 "image":"Terrain_Medieval\/Base\/hexOcean00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Base\/hexOcean00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -2900,7 +2900,7 @@
                 }, 
                 {
                  "id":9,
-                 "image":"Terrain_Medieval\/Base\/hexPlains00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Base\/hexPlains00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -2917,157 +2917,157 @@
                 }, 
                 {
                  "id":10,
-                 "image":"Terrain_Medieval\/Base\/hexScrublands00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Base\/hexScrublands00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":11,
-                 "image":"Terrain_Medieval\/Base\/hexUnderDirt00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Base\/hexUnderDirt00.png",
                  "imageheight":192,
                  "imagewidth":256
                 }, 
                 {
                  "id":12,
-                 "image":"Terrain_Medieval\/Base\/hexUnderOcean00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Base\/hexUnderOcean00.png",
                  "imageheight":192,
                  "imagewidth":256
                 }, 
                 {
                  "id":13,
-                 "image":"Terrain_Medieval\/Base\/hexUnderVoid00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Base\/hexUnderVoid00.png",
                  "imageheight":192,
                  "imagewidth":256
                 }, 
                 {
                  "id":14,
-                 "image":"Terrain_Medieval\/Base\/hexVoid00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Base\/hexVoid00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":15,
-                 "image":"Terrain_Medieval\/Base\/hexWoodlands00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Base\/hexWoodlands00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":30,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Cold Lands\/hexForestPineSnowCovered00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Cold Lands\/hexForestPineSnowCovered00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":31,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Cold Lands\/hexMountainSnow00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Cold Lands\/hexMountainSnow00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":32,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Cold Lands\/hexPlainsColdSnowTransitionPond00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Cold Lands\/hexPlainsColdSnowTransitionPond00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":33,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Cold Lands\/hexSnowField00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Cold Lands\/hexSnowField00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":34,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Deserts\/hexDesertRedDirt00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Deserts\/hexDesertRedDirt00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":35,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Deserts\/hexDesertRedGrass00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Deserts\/hexDesertRedGrass00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":36,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Deserts\/hexDesertRedMesaLarge00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Deserts\/hexDesertRedMesaLarge00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":37,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Deserts\/hexDesertYellowCactiForest00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Deserts\/hexDesertYellowCactiForest00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":38,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Deserts\/hexDesertYellowHillsOasis00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Deserts\/hexDesertYellowHillsOasis00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":39,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Deserts\/hexDesertYellowMesas00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Deserts\/hexDesertYellowMesas00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":40,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Tropics and Wetlands\/hexBog00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Tropics and Wetlands\/hexBog00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":41,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Tropics and Wetlands\/hexJungle00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Tropics and Wetlands\/hexJungle00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":42,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Tropics and Wetlands\/hexSandPalms00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Tropics and Wetlands\/hexSandPalms00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":43,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Tropics and Wetlands\/hexWetlands00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Tropics and Wetlands\/hexWetlands00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":44,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Volcanic Wastes\/burnedTree00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Volcanic Wastes\/burnedTree00.png",
                  "imageheight":60,
                  "imagewidth":42
                 }, 
                 {
                  "id":45,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Volcanic Wastes\/hexAshPlains00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Volcanic Wastes\/hexAshPlains00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":46,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Volcanic Wastes\/hexForestBurnedDirt00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Volcanic Wastes\/hexForestBurnedDirt00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":47,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Volcanic Wastes\/hexLavaField00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Volcanic Wastes\/hexLavaField00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":48,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Volcanic Wastes\/hexVolcanoActive00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Volcanic Wastes\/hexVolcanoActive00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":49,
-                 "image":"Terrain_Medieval\/Samples\/Terrain Hexes Volcanic Wastes\/lavaCone00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Samples\/Terrain Hexes Volcanic Wastes\/lavaCone00.png",
                  "imageheight":56,
                  "imagewidth":75
                 }],
@@ -3090,703 +3090,703 @@
          "tiles":[
                 {
                  "id":0,
-                 "image":"Terrain_Medieval\/Decor\/castle.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/castle.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":1,
-                 "image":"Terrain_Medieval\/Decor\/castle2.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/castle2.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":2,
-                 "image":"Terrain_Medieval\/Decor\/castle3.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/castle3.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":3,
-                 "image":"Terrain_Medieval\/Decor\/castleRuinDirt.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/castleRuinDirt.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":4,
-                 "image":"Terrain_Medieval\/Decor\/castleRuinForest.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/castleRuinForest.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":5,
-                 "image":"Terrain_Medieval\/Decor\/castleRuinMarsh.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/castleRuinMarsh.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":6,
-                 "image":"Terrain_Medieval\/Decor\/corral00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/corral00.png",
                  "imageheight":89,
                  "imagewidth":102
                 }, 
                 {
                  "id":7,
-                 "image":"Terrain_Medieval\/Decor\/corral01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/corral01.png",
                  "imageheight":93,
                  "imagewidth":160
                 }, 
                 {
                  "id":8,
-                 "image":"Terrain_Medieval\/Decor\/corral02.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/corral02.png",
                  "imageheight":78,
                  "imagewidth":153
                 }, 
                 {
                  "id":9,
-                 "image":"Terrain_Medieval\/Decor\/desertRuins00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/desertRuins00.png",
                  "imageheight":52,
                  "imagewidth":79
                 }, 
                 {
                  "id":10,
-                 "image":"Terrain_Medieval\/Decor\/desertRuins01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/desertRuins01.png",
                  "imageheight":76,
                  "imagewidth":88
                 }, 
                 {
                  "id":11,
-                 "image":"Terrain_Medieval\/Decor\/desertRuins02.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/desertRuins02.png",
                  "imageheight":101,
                  "imagewidth":128
                 }, 
                 {
                  "id":12,
-                 "image":"Terrain_Medieval\/Decor\/desertRuins03.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/desertRuins03.png",
                  "imageheight":109,
                  "imagewidth":137
                 }, 
                 {
                  "id":13,
-                 "image":"Terrain_Medieval\/Decor\/desertRuins04.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/desertRuins04.png",
                  "imageheight":80,
                  "imagewidth":123
                 }, 
                 {
                  "id":14,
-                 "image":"Terrain_Medieval\/Decor\/dwarfFortress.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/dwarfFortress.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":15,
-                 "image":"Terrain_Medieval\/Decor\/elvenLodge.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/elvenLodge.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":16,
-                 "image":"Terrain_Medieval\/Decor\/farm00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/farm00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":17,
-                 "image":"Terrain_Medieval\/Decor\/farm01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/farm01.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":18,
-                 "image":"Terrain_Medieval\/Decor\/farm02.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/farm02.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":19,
-                 "image":"Terrain_Medieval\/Decor\/farm03.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/farm03.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":20,
-                 "image":"Terrain_Medieval\/Decor\/field00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/field00.png",
                  "imageheight":84,
                  "imagewidth":129
                 }, 
                 {
                  "id":21,
-                 "image":"Terrain_Medieval\/Decor\/field01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/field01.png",
                  "imageheight":93,
                  "imagewidth":106
                 }, 
                 {
                  "id":22,
-                 "image":"Terrain_Medieval\/Decor\/field02.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/field02.png",
                  "imageheight":65,
                  "imagewidth":129
                 }, 
                 {
                  "id":23,
-                 "image":"Terrain_Medieval\/Decor\/field03.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/field03.png",
                  "imageheight":138,
                  "imagewidth":135
                 }, 
                 {
                  "id":24,
-                 "image":"Terrain_Medieval\/Decor\/field04.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/field04.png",
                  "imageheight":110,
                  "imagewidth":107
                 }, 
                 {
                  "id":25,
-                 "image":"Terrain_Medieval\/Decor\/field05.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/field05.png",
                  "imageheight":79,
                  "imagewidth":107
                 }, 
                 {
                  "id":26,
-                 "image":"Terrain_Medieval\/Decor\/field06.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/field06.png",
                  "imageheight":132,
                  "imagewidth":133
                 }, 
                 {
                  "id":27,
-                 "image":"Terrain_Medieval\/Decor\/field07.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/field07.png",
                  "imageheight":103,
                  "imagewidth":143
                 }, 
                 {
                  "id":28,
-                 "image":"Terrain_Medieval\/Decor\/field08.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/field08.png",
                  "imageheight":112,
                  "imagewidth":187
                 }, 
                 {
                  "id":29,
-                 "image":"Terrain_Medieval\/Decor\/field09.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/field09.png",
                  "imageheight":96,
                  "imagewidth":95
                 }, 
                 {
                  "id":30,
-                 "image":"Terrain_Medieval\/Decor\/field10.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/field10.png",
                  "imageheight":69,
                  "imagewidth":88
                 }, 
                 {
                  "id":31,
-                 "image":"Terrain_Medieval\/Decor\/field11.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/field11.png",
                  "imageheight":70,
                  "imagewidth":124
                 }, 
                 {
                  "id":32,
-                 "image":"Terrain_Medieval\/Decor\/field12.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/field12.png",
                  "imageheight":74,
                  "imagewidth":148
                 }, 
                 {
                  "id":33,
-                 "image":"Terrain_Medieval\/Decor\/field13.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/field13.png",
                  "imageheight":121,
                  "imagewidth":114
                 }, 
                 {
                  "id":34,
-                 "image":"Terrain_Medieval\/Decor\/field14.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/field14.png",
                  "imageheight":173,
                  "imagewidth":217
                 }, 
                 {
                  "id":35,
-                 "image":"Terrain_Medieval\/Decor\/forester_hut00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/forester_hut00.png",
                  "imageheight":87,
                  "imagewidth":90
                 }, 
                 {
                  "id":36,
-                 "image":"Terrain_Medieval\/Decor\/forester_hut01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/forester_hut01.png",
                  "imageheight":83,
                  "imagewidth":72
                 }, 
                 {
                  "id":37,
-                 "image":"Terrain_Medieval\/Decor\/forester_hut02.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/forester_hut02.png",
                  "imageheight":100,
                  "imagewidth":124
                 }, 
                 {
                  "id":38,
-                 "image":"Terrain_Medieval\/Decor\/forester_shed00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/forester_shed00.png",
                  "imageheight":67,
                  "imagewidth":101
                 }, 
                 {
                  "id":39,
-                 "image":"Terrain_Medieval\/Decor\/forester_stumps00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/forester_stumps00.png",
                  "imageheight":57,
                  "imagewidth":57
                 }, 
                 {
                  "id":40,
-                 "image":"Terrain_Medieval\/Decor\/forester_stumps01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/forester_stumps01.png",
                  "imageheight":39,
                  "imagewidth":51
                 }, 
                 {
                  "id":41,
-                 "image":"Terrain_Medieval\/Decor\/graveyard00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/graveyard00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":42,
-                 "image":"Terrain_Medieval\/Decor\/halfling_village00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/halfling_village00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":43,
-                 "image":"Terrain_Medieval\/Decor\/halflingHouse00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/halflingHouse00.png",
                  "imageheight":92,
                  "imagewidth":127
                 }, 
                 {
                  "id":44,
-                 "image":"Terrain_Medieval\/Decor\/halflingHouse01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/halflingHouse01.png",
                  "imageheight":79,
                  "imagewidth":93
                 }, 
                 {
                  "id":45,
-                 "image":"Terrain_Medieval\/Decor\/halflingHouse02.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/halflingHouse02.png",
                  "imageheight":74,
                  "imagewidth":102
                 }, 
                 {
                  "id":46,
-                 "image":"Terrain_Medieval\/Decor\/halflingHouse03.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/halflingHouse03.png",
                  "imageheight":86,
                  "imagewidth":118
                 }, 
                 {
                  "id":47,
-                 "image":"Terrain_Medieval\/Decor\/halflingHouse04.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/halflingHouse04.png",
                  "imageheight":73,
                  "imagewidth":83
                 }, 
                 {
                  "id":48,
-                 "image":"Terrain_Medieval\/Decor\/halflingHouse05.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/halflingHouse05.png",
                  "imageheight":74,
                  "imagewidth":72
                 }, 
                 {
                  "id":49,
-                 "image":"Terrain_Medieval\/Decor\/house00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/house00.png",
                  "imageheight":56,
                  "imagewidth":55
                 }, 
                 {
                  "id":50,
-                 "image":"Terrain_Medieval\/Decor\/house01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/house01.png",
                  "imageheight":78,
                  "imagewidth":69
                 }, 
                 {
                  "id":51,
-                 "image":"Terrain_Medieval\/Decor\/house02.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/house02.png",
                  "imageheight":76,
                  "imagewidth":67
                 }, 
                 {
                  "id":52,
-                 "image":"Terrain_Medieval\/Decor\/house03.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/house03.png",
                  "imageheight":76,
                  "imagewidth":72
                 }, 
                 {
                  "id":53,
-                 "image":"Terrain_Medieval\/Decor\/house04.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/house04.png",
                  "imageheight":97,
                  "imagewidth":70
                 }, 
                 {
                  "id":54,
-                 "image":"Terrain_Medieval\/Decor\/house05.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/house05.png",
                  "imageheight":67,
                  "imagewidth":72
                 }, 
                 {
                  "id":55,
-                 "image":"Terrain_Medieval\/Decor\/house06.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/house06.png",
                  "imageheight":109,
                  "imagewidth":100
                 }, 
                 {
                  "id":56,
-                 "image":"Terrain_Medieval\/Decor\/house07.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/house07.png",
                  "imageheight":99,
                  "imagewidth":70
                 }, 
                 {
                  "id":57,
-                 "image":"Terrain_Medieval\/Decor\/house08.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/house08.png",
                  "imageheight":91,
                  "imagewidth":104
                 }, 
                 {
                  "id":58,
-                 "image":"Terrain_Medieval\/Decor\/house09.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/house09.png",
                  "imageheight":83,
                  "imagewidth":100
                 }, 
                 {
                  "id":59,
-                 "image":"Terrain_Medieval\/Decor\/house10.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/house10.png",
                  "imageheight":85,
                  "imagewidth":76
                 }, 
                 {
                  "id":60,
-                 "image":"Terrain_Medieval\/Decor\/house11.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/house11.png",
                  "imageheight":79,
                  "imagewidth":65
                 }, 
                 {
                  "id":61,
-                 "image":"Terrain_Medieval\/Decor\/house12.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/house12.png",
                  "imageheight":67,
                  "imagewidth":57
                 }, 
                 {
                  "id":62,
-                 "image":"Terrain_Medieval\/Decor\/house13.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/house13.png",
                  "imageheight":61,
                  "imagewidth":65
                 }, 
                 {
                  "id":63,
-                 "image":"Terrain_Medieval\/Decor\/house14.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/house14.png",
                  "imageheight":67,
                  "imagewidth":79
                 }, 
                 {
                  "id":64,
-                 "image":"Terrain_Medieval\/Decor\/house15.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/house15.png",
                  "imageheight":66,
                  "imagewidth":74
                 }, 
                 {
                  "id":65,
-                 "image":"Terrain_Medieval\/Decor\/inn.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/inn.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":66,
-                 "image":"Terrain_Medieval\/Decor\/innMossy.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/innMossy.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":67,
-                 "image":"Terrain_Medieval\/Decor\/mine00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/mine00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":68,
-                 "image":"Terrain_Medieval\/Decor\/mine01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/mine01.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":69,
-                 "image":"Terrain_Medieval\/Decor\/mine02.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/mine02.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":70,
-                 "image":"Terrain_Medieval\/Decor\/mine03.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/mine03.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":71,
-                 "image":"Terrain_Medieval\/Decor\/mines00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/mines00.png",
                  "imageheight":87,
                  "imagewidth":99
                 }, 
                 {
                  "id":72,
-                 "image":"Terrain_Medieval\/Decor\/mines01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/mines01.png",
                  "imageheight":64,
                  "imagewidth":81
                 }, 
                 {
                  "id":73,
-                 "image":"Terrain_Medieval\/Decor\/mines02.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/mines02.png",
                  "imageheight":129,
                  "imagewidth":114
                 }, 
                 {
                  "id":74,
-                 "image":"Terrain_Medieval\/Decor\/mines03.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/mines03.png",
                  "imageheight":94,
                  "imagewidth":105
                 }, 
                 {
                  "id":75,
-                 "image":"Terrain_Medieval\/Decor\/mines04.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/mines04.png",
                  "imageheight":201,
                  "imagewidth":208
                 }, 
                 {
                  "id":76,
-                 "image":"Terrain_Medieval\/Decor\/mines05.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/mines05.png",
                  "imageheight":158,
                  "imagewidth":166
                 }, 
                 {
                  "id":77,
-                 "image":"Terrain_Medieval\/Decor\/mountainCastle00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/mountainCastle00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":78,
-                 "image":"Terrain_Medieval\/Decor\/mountainFortress.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/mountainFortress.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":79,
-                 "image":"Terrain_Medieval\/Decor\/necroCastle.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/necroCastle.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":80,
-                 "image":"Terrain_Medieval\/Decor\/oasis00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/oasis00.png",
                  "imageheight":151,
                  "imagewidth":157
                 }, 
                 {
                  "id":81,
-                 "image":"Terrain_Medieval\/Decor\/oasis01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/oasis01.png",
                  "imageheight":153,
                  "imagewidth":168
                 }, 
                 {
                  "id":82,
-                 "image":"Terrain_Medieval\/Decor\/obelisk00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/obelisk00.png",
                  "imageheight":111,
                  "imagewidth":85
                 }, 
                 {
                  "id":83,
-                 "image":"Terrain_Medieval\/Decor\/pyramid00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/pyramid00.png",
                  "imageheight":202,
                  "imagewidth":264
                 }, 
                 {
                  "id":84,
-                 "image":"Terrain_Medieval\/Decor\/pyramidSmall00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/pyramidSmall00.png",
                  "imageheight":65,
                  "imagewidth":92
                 }, 
                 {
                  "id":85,
-                 "image":"Terrain_Medieval\/Decor\/pyramidSmall01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/pyramidSmall01.png",
                  "imageheight":81,
                  "imagewidth":79
                 }, 
                 {
                  "id":86,
-                 "image":"Terrain_Medieval\/Decor\/sign00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/sign00.png",
                  "imageheight":85,
                  "imagewidth":70
                 }, 
                 {
                  "id":87,
-                 "image":"Terrain_Medieval\/Decor\/sign01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/sign01.png",
                  "imageheight":84,
                  "imagewidth":80
                 }, 
                 {
                  "id":88,
-                 "image":"Terrain_Medieval\/Decor\/smithy.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/smithy.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":89,
-                 "image":"Terrain_Medieval\/Decor\/standingStones.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/standingStones.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":90,
-                 "image":"Terrain_Medieval\/Decor\/standingStonesMossy.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/standingStonesMossy.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":91,
-                 "image":"Terrain_Medieval\/Decor\/temple.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/temple.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":92,
-                 "image":"Terrain_Medieval\/Decor\/templeRuins.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/templeRuins.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":93,
-                 "image":"Terrain_Medieval\/Decor\/treeA00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/treeA00.png",
                  "imageheight":50,
                  "imagewidth":48
                 }, 
                 {
                  "id":94,
-                 "image":"Terrain_Medieval\/Decor\/treeA01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/treeA01.png",
                  "imageheight":38,
                  "imagewidth":50
                 }, 
                 {
                  "id":95,
-                 "image":"Terrain_Medieval\/Decor\/treeA02.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/treeA02.png",
                  "imageheight":58,
                  "imagewidth":43
                 }, 
                 {
                  "id":96,
-                 "image":"Terrain_Medieval\/Decor\/treesA_cluster00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/treesA_cluster00.png",
                  "imageheight":71,
                  "imagewidth":95
                 }, 
                 {
                  "id":97,
-                 "image":"Terrain_Medieval\/Decor\/treesA_cluster01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/treesA_cluster01.png",
                  "imageheight":89,
                  "imagewidth":66
                 }, 
                 {
                  "id":98,
-                 "image":"Terrain_Medieval\/Decor\/treesA_line00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/treesA_line00.png",
                  "imageheight":56,
                  "imagewidth":99
                 }, 
                 {
                  "id":99,
-                 "image":"Terrain_Medieval\/Decor\/treesA_line01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/treesA_line01.png",
                  "imageheight":48,
                  "imagewidth":114
                 }, 
                 {
                  "id":100,
-                 "image":"Terrain_Medieval\/Decor\/treesA_line02.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/treesA_line02.png",
                  "imageheight":63,
                  "imagewidth":71
                 }, 
                 {
                  "id":101,
-                 "image":"Terrain_Medieval\/Decor\/treesA_line03.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/treesA_line03.png",
                  "imageheight":67,
                  "imagewidth":75
                 }, 
                 {
                  "id":102,
-                 "image":"Terrain_Medieval\/Decor\/treesA_line04.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/treesA_line04.png",
                  "imageheight":58,
                  "imagewidth":101
                 }, 
                 {
                  "id":103,
-                 "image":"Terrain_Medieval\/Decor\/treesA_line05.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/treesA_line05.png",
                  "imageheight":72,
                  "imagewidth":103
                 }, 
                 {
                  "id":104,
-                 "image":"Terrain_Medieval\/Decor\/village00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/village00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":105,
-                 "image":"Terrain_Medieval\/Decor\/village01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/village01.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":106,
-                 "image":"Terrain_Medieval\/Decor\/village02.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/village02.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":107,
-                 "image":"Terrain_Medieval\/Decor\/village03.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/village03.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":108,
-                 "image":"Terrain_Medieval\/Decor\/villageSmall00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/villageSmall00.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":109,
-                 "image":"Terrain_Medieval\/Decor\/villageSmall01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/villageSmall01.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":110,
-                 "image":"Terrain_Medieval\/Decor\/villageSmall02.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/villageSmall02.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":111,
-                 "image":"Terrain_Medieval\/Decor\/villageSmall03.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/villageSmall03.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":112,
-                 "image":"Terrain_Medieval\/Decor\/volcanoCave.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/volcanoCave.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":113,
-                 "image":"Terrain_Medieval\/Decor\/walledCity.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/walledCity.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":114,
-                 "image":"Terrain_Medieval\/Decor\/walledCityMossy.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/walledCityMossy.png",
                  "imageheight":384,
                  "imagewidth":256
                 }, 
                 {
                  "id":115,
-                 "image":"Terrain_Medieval\/Decor\/well00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/well00.png",
                  "imageheight":44,
                  "imagewidth":44
                 }, 
                 {
                  "id":116,
-                 "image":"Terrain_Medieval\/Decor\/well01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Decor\/well01.png",
                  "imageheight":54,
                  "imagewidth":70
                 }],
@@ -3809,7 +3809,7 @@
          "tiles":[
                 {
                  "id":0,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-000001-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-000001-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -3821,7 +3821,7 @@
                 }, 
                 {
                  "id":1,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-000001-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-000001-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -3833,7 +3833,7 @@
                 }, 
                 {
                  "id":2,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-000010-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-000010-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -3845,7 +3845,7 @@
                 }, 
                 {
                  "id":3,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-000010-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-000010-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -3857,7 +3857,7 @@
                 }, 
                 {
                  "id":4,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-000011-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-000011-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -3869,7 +3869,7 @@
                 }, 
                 {
                  "id":5,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-000011-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-000011-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -3881,7 +3881,7 @@
                 }, 
                 {
                  "id":6,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-000100-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-000100-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -3893,7 +3893,7 @@
                 }, 
                 {
                  "id":7,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-000100-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-000100-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -3905,7 +3905,7 @@
                 }, 
                 {
                  "id":8,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-000101-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-000101-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -3917,7 +3917,7 @@
                 }, 
                 {
                  "id":9,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-000101-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-000101-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -3929,7 +3929,7 @@
                 }, 
                 {
                  "id":10,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-000110-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-000110-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -3941,7 +3941,7 @@
                 }, 
                 {
                  "id":11,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-000110-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-000110-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -3953,7 +3953,7 @@
                 }, 
                 {
                  "id":12,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-000111-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-000111-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -3965,7 +3965,7 @@
                 }, 
                 {
                  "id":13,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-001000-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-001000-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -3977,7 +3977,7 @@
                 }, 
                 {
                  "id":14,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-001000-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-001000-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -3989,7 +3989,7 @@
                 }, 
                 {
                  "id":15,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-001001-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-001001-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4001,7 +4001,7 @@
                 }, 
                 {
                  "id":16,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-001001-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-001001-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4013,7 +4013,7 @@
                 }, 
                 {
                  "id":17,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-001010-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-001010-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4025,7 +4025,7 @@
                 }, 
                 {
                  "id":18,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-001010-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-001010-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4037,7 +4037,7 @@
                 }, 
                 {
                  "id":19,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-001011-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-001011-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4049,7 +4049,7 @@
                 }, 
                 {
                  "id":20,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-001100-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-001100-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4061,7 +4061,7 @@
                 }, 
                 {
                  "id":21,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-001100-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-001100-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4073,7 +4073,7 @@
                 }, 
                 {
                  "id":22,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-001101-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-001101-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4085,7 +4085,7 @@
                 }, 
                 {
                  "id":23,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-001110-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-001110-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4097,7 +4097,7 @@
                 }, 
                 {
                  "id":24,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-001111-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-001111-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4109,7 +4109,7 @@
                 }, 
                 {
                  "id":25,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-010000-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-010000-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4121,7 +4121,7 @@
                 }, 
                 {
                  "id":26,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-010000-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-010000-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4133,7 +4133,7 @@
                 }, 
                 {
                  "id":27,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-010001-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-010001-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4145,7 +4145,7 @@
                 }, 
                 {
                  "id":28,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-010001-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-010001-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4157,7 +4157,7 @@
                 }, 
                 {
                  "id":29,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-010010-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-010010-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4169,7 +4169,7 @@
                 }, 
                 {
                  "id":30,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-010010-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-010010-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4181,7 +4181,7 @@
                 }, 
                 {
                  "id":31,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-010011-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-010011-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4193,7 +4193,7 @@
                 }, 
                 {
                  "id":32,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-010100-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-010100-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4205,7 +4205,7 @@
                 }, 
                 {
                  "id":33,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-010100-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-010100-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4217,7 +4217,7 @@
                 }, 
                 {
                  "id":34,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-010101-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-010101-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4229,7 +4229,7 @@
                 }, 
                 {
                  "id":35,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-010110-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-010110-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4241,7 +4241,7 @@
                 }, 
                 {
                  "id":36,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-010111-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-010111-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4253,7 +4253,7 @@
                 }, 
                 {
                  "id":37,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-011000-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-011000-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4265,7 +4265,7 @@
                 }, 
                 {
                  "id":38,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-011000-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-011000-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4277,7 +4277,7 @@
                 }, 
                 {
                  "id":39,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-011001-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-011001-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4289,7 +4289,7 @@
                 }, 
                 {
                  "id":40,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-011010-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-011010-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4301,7 +4301,7 @@
                 }, 
                 {
                  "id":41,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-011011-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-011011-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4313,7 +4313,7 @@
                 }, 
                 {
                  "id":42,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-011100-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-011100-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4325,7 +4325,7 @@
                 }, 
                 {
                  "id":43,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-011101-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-011101-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4337,7 +4337,7 @@
                 }, 
                 {
                  "id":44,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-011110-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-011110-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4349,7 +4349,7 @@
                 }, 
                 {
                  "id":45,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-011111-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-011111-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4361,7 +4361,7 @@
                 }, 
                 {
                  "id":46,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-100000-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-100000-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4373,7 +4373,7 @@
                 }, 
                 {
                  "id":47,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-100000-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-100000-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4385,7 +4385,7 @@
                 }, 
                 {
                  "id":48,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-100001-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-100001-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4397,7 +4397,7 @@
                 }, 
                 {
                  "id":49,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-100001-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-100001-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4409,7 +4409,7 @@
                 }, 
                 {
                  "id":50,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-100010-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-100010-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4421,7 +4421,7 @@
                 }, 
                 {
                  "id":51,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-100010-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-100010-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4433,7 +4433,7 @@
                 }, 
                 {
                  "id":52,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-100011-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-100011-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4445,7 +4445,7 @@
                 }, 
                 {
                  "id":53,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-100100-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-100100-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4457,7 +4457,7 @@
                 }, 
                 {
                  "id":54,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-100100-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-100100-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4469,7 +4469,7 @@
                 }, 
                 {
                  "id":55,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-100101-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-100101-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4481,7 +4481,7 @@
                 }, 
                 {
                  "id":56,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-100110-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-100110-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4493,7 +4493,7 @@
                 }, 
                 {
                  "id":57,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-100111-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-100111-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4505,7 +4505,7 @@
                 }, 
                 {
                  "id":58,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-101000-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-101000-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4517,7 +4517,7 @@
                 }, 
                 {
                  "id":59,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-101000-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-101000-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4529,7 +4529,7 @@
                 }, 
                 {
                  "id":60,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-101001-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-101001-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4541,7 +4541,7 @@
                 }, 
                 {
                  "id":61,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-101010-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-101010-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4553,7 +4553,7 @@
                 }, 
                 {
                  "id":62,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-101011-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-101011-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4565,7 +4565,7 @@
                 }, 
                 {
                  "id":63,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-101100-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-101100-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4577,7 +4577,7 @@
                 }, 
                 {
                  "id":64,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-101101-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-101101-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4589,7 +4589,7 @@
                 }, 
                 {
                  "id":65,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-101110-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-101110-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4601,7 +4601,7 @@
                 }, 
                 {
                  "id":66,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-101111-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-101111-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4613,7 +4613,7 @@
                 }, 
                 {
                  "id":67,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-110000-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-110000-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4625,7 +4625,7 @@
                 }, 
                 {
                  "id":68,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-110000-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-110000-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4637,7 +4637,7 @@
                 }, 
                 {
                  "id":69,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-110001-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-110001-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4649,7 +4649,7 @@
                 }, 
                 {
                  "id":70,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-110010-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-110010-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4661,7 +4661,7 @@
                 }, 
                 {
                  "id":71,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-110011-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-110011-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4673,7 +4673,7 @@
                 }, 
                 {
                  "id":72,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-110100-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-110100-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4685,7 +4685,7 @@
                 }, 
                 {
                  "id":73,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-110101-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-110101-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4697,7 +4697,7 @@
                 }, 
                 {
                  "id":74,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-110110-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-110110-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4709,7 +4709,7 @@
                 }, 
                 {
                  "id":75,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-110111-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-110111-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4721,7 +4721,7 @@
                 }, 
                 {
                  "id":76,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-111000-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-111000-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4733,7 +4733,7 @@
                 }, 
                 {
                  "id":77,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-111001-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-111001-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4745,7 +4745,7 @@
                 }, 
                 {
                  "id":78,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-111010-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-111010-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4757,7 +4757,7 @@
                 }, 
                 {
                  "id":79,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-111011-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-111011-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4769,7 +4769,7 @@
                 }, 
                 {
                  "id":80,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-111100-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-111100-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4781,7 +4781,7 @@
                 }, 
                 {
                  "id":81,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-111101-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-111101-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4793,7 +4793,7 @@
                 }, 
                 {
                  "id":82,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-111110-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-111110-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4805,7 +4805,7 @@
                 }, 
                 {
                  "id":83,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-111111-00.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-111111-00.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4817,7 +4817,7 @@
                 }, 
                 {
                  "id":84,
-                 "image":"Terrain_Medieval\/Roads\/hexRoad-111111-01.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Roads\/hexRoad-111111-01.png",
                  "imageheight":384,
                  "imagewidth":256,
                  "properties":[
@@ -4846,289 +4846,289 @@
          "tiles":[
                 {
                  "id":48,
-                 "image":"Icons\/aluminum_ingots.png",
+                 "image":"..\/maps\/Icons\/aluminum_ingots.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":49,
-                 "image":"Icons\/apples.png",
+                 "image":"..\/maps\/Icons\/apples.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":50,
-                 "image":"Icons\/barrel.png",
+                 "image":"..\/maps\/Icons\/barrel.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":51,
-                 "image":"Icons\/beer_mug.png",
+                 "image":"..\/maps\/Icons\/beer_mug.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":52,
-                 "image":"Icons\/bread.png",
+                 "image":"..\/maps\/Icons\/bread.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":53,
-                 "image":"Icons\/bricks.png",
+                 "image":"..\/maps\/Icons\/bricks.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":54,
-                 "image":"Icons\/bucket_of_water.png",
+                 "image":"..\/maps\/Icons\/bucket_of_water.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":55,
-                 "image":"Icons\/chicken_raw.png",
+                 "image":"..\/maps\/Icons\/chicken_raw.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":56,
-                 "image":"Icons\/chicken.png",
+                 "image":"..\/maps\/Icons\/chicken.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":57,
-                 "image":"Icons\/clay.png",
+                 "image":"..\/maps\/Icons\/clay.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":58,
-                 "image":"Icons\/coal.png",
+                 "image":"..\/maps\/Icons\/coal.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":59,
-                 "image":"Icons\/copper_ingots.png",
+                 "image":"..\/maps\/Icons\/copper_ingots.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":60,
-                 "image":"Icons\/copper_ore.png",
+                 "image":"..\/maps\/Icons\/copper_ore.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":61,
-                 "image":"Icons\/cotton.png",
+                 "image":"..\/maps\/Icons\/cotton.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":62,
-                 "image":"Icons\/deer.png",
+                 "image":"..\/maps\/Icons\/deer.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":63,
-                 "image":"Icons\/fish.png",
+                 "image":"..\/maps\/Icons\/fish.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":64,
-                 "image":"Icons\/furs.png",
+                 "image":"..\/maps\/Icons\/furs.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":65,
-                 "image":"Icons\/gold_coins.png",
+                 "image":"..\/maps\/Icons\/gold_coins.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":66,
-                 "image":"Icons\/gold_ingots.png",
+                 "image":"..\/maps\/Icons\/gold_ingots.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":67,
-                 "image":"Icons\/grapes.png",
+                 "image":"..\/maps\/Icons\/grapes.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":68,
-                 "image":"Icons\/iron_ingots.png",
+                 "image":"..\/maps\/Icons\/iron_ingots.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":69,
-                 "image":"Icons\/iron_ore.png",
+                 "image":"..\/maps\/Icons\/iron_ore.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":70,
-                 "image":"Icons\/ivory.png",
+                 "image":"..\/maps\/Icons\/ivory.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":71,
-                 "image":"Icons\/leeks.png",
+                 "image":"..\/maps\/Icons\/leeks.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":72,
-                 "image":"Icons\/limestone.png",
+                 "image":"..\/maps\/Icons\/limestone.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":73,
-                 "image":"Icons\/logs.png",
+                 "image":"..\/maps\/Icons\/logs.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":74,
-                 "image":"Icons\/marble.png",
+                 "image":"..\/maps\/Icons\/marble.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":75,
-                 "image":"Icons\/nitre.png",
+                 "image":"..\/maps\/Icons\/nitre.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":76,
-                 "image":"Icons\/oil_barrel.png",
+                 "image":"..\/maps\/Icons\/oil_barrel.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":77,
-                 "image":"Icons\/oil_raw.png",
+                 "image":"..\/maps\/Icons\/oil_raw.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":78,
-                 "image":"Icons\/planks.png",
+                 "image":"..\/maps\/Icons\/planks.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":79,
-                 "image":"Icons\/pottery.png",
+                 "image":"..\/maps\/Icons\/pottery.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":80,
-                 "image":"Icons\/rice.png",
+                 "image":"..\/maps\/Icons\/rice.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":81,
-                 "image":"Icons\/salmon_steak.png",
+                 "image":"..\/maps\/Icons\/salmon_steak.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":82,
-                 "image":"Icons\/salt.png",
+                 "image":"..\/maps\/Icons\/salt.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":83,
-                 "image":"Icons\/sapphire_raw.png",
+                 "image":"..\/maps\/Icons\/sapphire_raw.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":84,
-                 "image":"Icons\/sheep.png",
+                 "image":"..\/maps\/Icons\/sheep.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":85,
-                 "image":"Icons\/silver_ingots.png",
+                 "image":"..\/maps\/Icons\/silver_ingots.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":86,
-                 "image":"Icons\/steel.png",
+                 "image":"..\/maps\/Icons\/steel.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":87,
-                 "image":"Icons\/stone.png",
+                 "image":"..\/maps\/Icons\/stone.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":88,
-                 "image":"Icons\/sulphur.png",
+                 "image":"..\/maps\/Icons\/sulphur.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":89,
-                 "image":"Icons\/tobacco.png",
+                 "image":"..\/maps\/Icons\/tobacco.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":90,
-                 "image":"Icons\/uranium_ingot.png",
+                 "image":"..\/maps\/Icons\/uranium_ingot.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":91,
-                 "image":"Icons\/uranium_ore.png",
+                 "image":"..\/maps\/Icons\/uranium_ore.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":92,
-                 "image":"Icons\/venison.png",
+                 "image":"..\/maps\/Icons\/venison.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":93,
-                 "image":"Icons\/whale.png",
+                 "image":"..\/maps\/Icons\/whale.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":94,
-                 "image":"Icons\/wheat.png",
+                 "image":"..\/maps\/Icons\/wheat.png",
                  "imageheight":128,
                  "imagewidth":128
                 }, 
                 {
                  "id":95,
-                 "image":"Icons\/wine_bottle.png",
+                 "image":"..\/maps\/Icons\/wine_bottle.png",
                  "imageheight":128,
                  "imagewidth":128
                 }],
@@ -5151,7 +5151,7 @@
          "tiles":[
                 {
                  "id":0,
-                 "image":"Terrain_Medieval\/Sprites\/town.png",
+                 "image":"..\/maps\/Terrain_Medieval\/Sprites\/town.png",
                  "imageheight":384,
                  "imagewidth":256
                 }],

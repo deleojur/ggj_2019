@@ -17,9 +17,17 @@ interface Tile
 	properties?: TileProperty[];
 };
 
+export interface Entity
+{
+	id: number;
+	name: string;
+	x: number;
+	y: number;
+}
+
 export interface Object
 {
-    gid: number;
+    gid: number;	
     x: number;
     y: number;
 
@@ -39,11 +47,11 @@ export class MapReader
 {
     private worldMap: WorldMap;
     private tileLayers: number[][] = [];
-    private entityLayer: Object[] = [];
+    private entityLayer: Entity[] = [];
     private hexArtLayer: Object[] = [];
 	private worldTiles: Map<number, Tile> = new Map<number, Tile>();
 
-    public get entities(): Object[]
+    public get entities(): Entity[]
     {
         return this.entityLayer;
     }
@@ -65,6 +73,27 @@ export class MapReader
 		this.mapGrid(grid);
     }
 
+	private parseTileLayer(layer: any, uniqueTileIds: Set<number>): void
+	{
+		this.tileLayers.push([]);
+		const index = this.tileLayers.length - 1;
+		layer.data.forEach(id => 
+		{
+			this.tileLayers[index].push(id);
+		});
+
+		const imageIds: number[] = [...new Set<number>(layer.data)];
+		imageIds.forEach(id =>
+		{
+			uniqueTileIds.add(id);
+		});
+	}
+
+	private parseObjectLayer(layer: any, uniqueTileIds: Set<number>): void
+	{
+
+	}
+
     private parseLayers(): Set<number>
     {
 		this.worldMap = AssetLoader.instance.worldMap;
@@ -74,27 +103,15 @@ export class MapReader
         {
             if (layer.type === 'tilelayer')
             {
-                this.tileLayers.push([]);
-                const index = this.tileLayers.length - 1;
-                layer.data.forEach(id => 
-                {
-                    this.tileLayers[index].push(id);
-                });
-
-                const imageIds: number[] = [...new Set<number>(layer.data)];
-                imageIds.forEach(id =>
-                {
-                    uniqueTileIds.add(id);
-                });
+                this.parseTileLayer(layer, uniqueTileIds);
             } else if (layer.type === 'objectgroup')
-            {                
+            {	          
                 layer.objects.forEach(obj =>
                 {
-                    uniqueTileIds.add(obj.gid);
-                    
                     if (layer.name === 'Hex Under Layer')
                     {
                         this.hexArtLayer.push(obj);
+						uniqueTileIds.add(obj.gid);
                     } else if (layer.name === 'Entity Layer')
                     {
                         this.entityLayer.push(obj);
@@ -149,7 +166,15 @@ export class MapReader
         }
     }
 
-    private mapObjectLayers(layer: Object[]): void
+	private mapEntityLayer(layer: Entity[]): void
+	{
+		layer.forEach(entity =>
+		{
+			
+		});
+	}
+
+    private mapObjectLayer(layer: Object[]): void
     {
         layer.forEach(obj =>
         {
@@ -169,8 +194,8 @@ export class MapReader
 
     private mapGrid(grid: Grid<Hex<Cell>>): void
     {
-        this.mapTileLayers(grid);
-        this.mapObjectLayers(this.entityLayer);
-        this.mapObjectLayers(this.hexArtLayer);
+        this.mapTileLayers(grid);        
+        this.mapObjectLayer(this.hexArtLayer);
+		this.mapEntityLayer(this.entityLayer);
     }
 }

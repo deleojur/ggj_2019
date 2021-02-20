@@ -5,6 +5,54 @@
 		"assets/Terrain_Medieval/Base/hexPlains00.png",
 		"assets/Terrain_Medieval/Base/hexUnderDirt00.png",
 		"assets/Terrain_Medieval/Base/hexUnderOcean00.png",
+		"assets/Terrain_Medieval/Base/hexWoodlands00.png",
+		"assets/Terrain_Medieval/Base/hexDesertDunes00.png",
+		"assets/Terrain_Medieval/Base/hexDirt00.png",
+		"assets/Terrain_Medieval/Base/hexScrublands00.png",
+		"assets/Terrain_Medieval/Samples/Terrain Hexes Deserts/hexDesertRedDirt00.png",
+		"assets/Terrain_Medieval/Samples/Terrain Hexes Deserts/hexDesertRedGrass00.png",
+		"assets/Terrain_Medieval/Samples/Terrain Hexes Deserts/hexDesertYellowCactiForest00.png",
+		"assets/Terrain_Medieval/Samples/Terrain Hexes Tropics and Wetlands/hexBog00.png",
+		"assets/Terrain_Medieval/Samples/Terrain Hexes Tropics and Wetlands/hexWetlands00.png",
+		"assets/Terrain_Medieval/Samples/Terrain Hexes Volcanic Wastes/hexForestBurnedDirt00.png",
+		"assets/Terrain_Medieval/Samples/Terrain Hexes Volcanic Wastes/hexLavaField00.png",
+
+		"assets/Terrain_Cold/Tiles/hexDirtCold00.png",
+		"assets/Terrain_Cold/Tiles/hexDirtCold01.png",
+		"assets/Terrain_Cold/Tiles/hexDirtCold02.png",
+		"assets/Terrain_Cold/Tiles/hexDirtCold03.png",
+		"assets/Terrain_Cold/Tiles/hexPlainsCold00.png",
+		"assets/Terrain_Cold/Tiles/hexPlainsCold03.png",
+		"assets/Terrain_Cold/Tiles/hexPlainsColdSnowCovered00.png",
+		"assets/Terrain_Cold/Tiles/hexPlainsColdSnowCovered01.png",
+		"assets/Terrain_Cold/Tiles/hexPlainsColdSnowCovered02.png",
+		"assets/Terrain_Cold/Tiles/hexPlainsColdSnowTransition00.png",
+		
+		"assets/Tile_Entities/cloth.png",
+		"assets/Tile_Entities/commoner.png",
+		"assets/Tile_Entities/townhall.png",
+		"assets/Tile_Entities/construction.png",
+		"assets/Tile_Entities/food.png",
+		"assets/Tile_Entities/gems.png",
+		"assets/Tile_Entities/gold.png",
+		"assets/Tile_Entities/grapes.png",
+		"assets/Tile_Entities/lumber.png",
+		"assets/Tile_Entities/gain_card.png",
+		"assets/Tile_Entities/buy_card.png",
+		"assets/Tile_Entities/construct.png",
+
+		"assets/resources/cloth.png",
+		"assets/resources/commoner.png",
+		"assets/resources/townhall.png",
+		"assets/resources/construction.png",
+		"assets/resources/food.png",
+		"assets/resources/gems.png",
+		"assets/resources/gold.png",
+		"assets/resources/grapes.png",
+		"assets/resources/lumber.png",
+		"assets/resources/gain_card.png",
+		"assets/resources/buy_card.png",
+		"assets/resources/construct.png",
 
 		"assets/Terrain_Medieval/Decor/town.png",
 		"assets/Terrain_Medieval/Decor/village.png",
@@ -921,7 +969,7 @@
 					]
 				},
 				{
-					"description": "Place 3 citizens on the city hall. Renounces all allegiance of target province. Then, it pledges allegiance to you.",
+					"description": "Place 3 citizens on the city hall. Target province renounces all allegiances. Then, it pledges allegiance to you.",
 					"cost": 
 					[
 						{
@@ -1220,7 +1268,7 @@
 					}]
 				},
 				{ 
-					"description": "Two provinces denounce target player(s) and pledge allegiance to you.",
+					"description": "Target province denounces all player(s) and pledges allegiance to you. All players deounced this way discard a card.",
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1246,7 +1294,7 @@
 			"amount":3,"tiers":
 			[
 				{ 
-					"description": "Sacrifice <i>x</i> commoners. Target player sacrifices <i>x + 1</i> commoners.", 
+					"description": "Sacrifice <i>x</i> commoners. Target player also sacrifices <i>x</i> commoners.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1258,7 +1306,7 @@
 					}]
 				},
 				{ 
-					"description": "Sacrifice <i>x</i> commoners. Target player sacrifices <i>x + 3</i> commoners.", 
+					"description": "Sacrifice <i>x</i> commoners. Target player sacrifices <i>x + 1</i> commoners.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1274,7 +1322,7 @@
 					}]
 				},
 				{ 
-					"description": "Sacrifice <i>x</i> commoners. Target player sacrifices <i>x + 1</i> commoners and two tier 2 royalty or lower.",
+					"description": "Sacrifice <i>x</i> commoners. Target player sacrifices <i>x + 1</i> commoners and a tier 2 royalty or lower.",
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1366,7 +1414,7 @@
 					}]
 				},
 				{ 
-					"description": "Look at target player's hand. Steal 1 {card} and 10 {gold} from them.", 
+					"description": "Look at target player's hand. Steal 1 {card} and 5 {gold} from them.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1382,7 +1430,7 @@
 					}]
 				},
 				{ 
-					"description": "Look at target player's hand. Steal 2 {card}, 10 {gold} and 5 of a resource of your choice from them.",
+					"description": "Look at target player's hand. Steal 2 {card} and 10 {gold} from them.",
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1420,7 +1468,7 @@
 					}]
 				},
 				{ 
-					"description": "When a player moves citizens to the same tile as your Lioheart guild member, destroy three commoners committed to said tile before the action resolves.", 
+					"description": "When a player moves citizens to the same tile as your Lioheart guild member, destroy three commoners before the move action resolves.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1436,7 +1484,7 @@
 					}]
 				},
 				{ 
-					"description": "When a player moves citizens to the same tile as your Lionheart guild member, destroy all citizens that go that said tile before the action resolves.",
+					"description": "When a player moves citizens to the same tile as your Lionheart guild member, destroy all citizens before the move action resolves.",
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1516,7 +1564,7 @@
 			"amount":3,"tiers":
 			[
 				{ 
-					"description": "When target player promotes a commoner to a count, immediately destroy it.", 
+					"description": "When a player promotes a commoner to a count, immediately destroy it.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1528,7 +1576,7 @@
 					}]
 				},
 				{ 
-					"description": "When target player promotes a count to a duchess, immediately destroy it.", 
+					"description": "When a player promotes a count to a duchess, immediately destroy it.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1544,7 +1592,7 @@
 					}]
 				},
 				{ 
-					"description": "When target player promotes a duchess to a king, immediately destroy it.",
+					"description": "When a player promotes a duchess to a king, immediately destroy it.",
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1582,7 +1630,7 @@
 					}]
 				},
 				{ 
-					"description": "Look at target player's hand. Choose 1 {card} and discard it.", 
+					"description": "Look at target player's hand. Discard 1 {card}.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1598,7 +1646,7 @@
 					}]
 				},
 				{ 
-					"description": "BLook at target player's hand. Choose 3 {card} and discard them.",
+					"description": "BLook at target player's hand. Steal 1 {card} and discard another.",
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1636,7 +1684,7 @@
 					}]
 				},
 				{ 
-					"description": "Target player's turn does not resolve. //TODO.", 
+					"description": "Target player's turn does not resolve. Draw a {DeepBlueAbyss} card.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1652,7 +1700,7 @@
 					}]
 				},
 				{ 
-					"description": "You decide where target player places their commoners this turn.",
+					"description": "Target player's turn does not resolve. Look at their hand and steal a card. Draw a {DeepBlueAbyss} card.",
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1690,7 +1738,7 @@
 					}]
 				},
 				{ 
-					"description": "Take 2 commoners from target player. At the end of the year, either they pay you 6 {gold}, or you gain control of those commoners. Draw a card.", 
+					"description": "Take 2 commoners from target player. At the end of the year, either they pay you 6 {gold}, or you gain control of those commoners. Draw a {DarkBlueAbyss} card.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1706,7 +1754,7 @@
 					}]
 				},
 				{ 
-					"description": "Take 1 tier 2 royalty or lower from target player. At the end of the year, either they pay you 10 {gold}, or you gain control of that guild member.",
+					"description": "Take 1 tier 3 royalty or lower from target player. At the end of the year, either they pay you 10 {gold}, or you gain control of that royalty. Draw a {DarkBlueAbyss} card.",
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -1744,7 +1792,7 @@
 					}]
 				},
 				{ 
-					"description": "When a player moves their commoners to the same tile as your Dark Abyss guild member, destroy all commoners committed to that tile. Steal a random {card}.", 
+					"description": "When a player moves their commoners to the same tile as your Dark Abyss guild member, destroy all commoners committed to that tile.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -2084,7 +2132,7 @@
 					}]
 				},
 				{ 
-					"description": "Destroy 2 target tier 3 guild members or royalty divided as you wish among two players.", 
+					"description": "Destroy 2 target tier 3 guild members or royalty divided among two target players.", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -2110,7 +2158,7 @@
 			"amount":3,"tiers":
 			[
 				{ 
-					"description": "Name one resource. Target player gives you 2 of that resource.", 
+					"description": "Name one resource. Target player gives you 2 of that resource (or up to the amount they have).", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -2122,7 +2170,7 @@
 					}]
 				},
 				{ 
-					"description": "Name one resource. Each player gives you 2 of that resource.", 
+					"description": "Name one resource. Each player gives you 2 of that resource (or up to the amount they have).", 
 					"cost" : [
 					{ 
 						"type": "gold", 
@@ -2138,7 +2186,7 @@
 					}]
 				},
 				{ 
-					"description": "Name one resources. Each player gives you 5 of that resource.",
+					"description": "Name one resources. Each player gives you 5 of that resource (or up to the amount they have).",
 					"cost" : [
 					{ 
 						"type": "gold", 

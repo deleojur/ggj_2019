@@ -224,7 +224,7 @@ export class GameManager
 
 	public renderCellsOutline(): void
 	{
-		this.gridStrategy.renderEntitiesByOwnerColor();
+		//this.gridStrategy.renderEntitiesByOwnerColor();
 	}
 
 	public createTurnCommand(
