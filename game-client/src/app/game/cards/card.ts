@@ -9,11 +9,11 @@ export enum CardType
 
 export enum Faction
 {
-	"LionHeart",
+	"Battle",
 	"EagleEye",
 	"SunLight",
-	"DeepBlueAbyss",
-	"Carpenter"
+	"Espionage",
+	"Science"
 }
 
 export interface CardInformation
@@ -22,14 +22,16 @@ export interface CardInformation
 	backgroundUrl: string;
 	foregroundUrl: string;
 	type: string;
-	amount: number;
-	tiers: [
+	amount: number;	
+	tiers: 
+	[
 		{
 			description: string,
 			cost: Resource[]
 		}
 	]
-	faction?: string;
+	faction?: string[];
+	description?: string;
 }
 
 export class CardTier
@@ -89,13 +91,18 @@ export class Card
 		this._type = value;
 	}
 
-	public get faction(): string 
+	public get factions(): string[]
 	{
-		return this._faction;
+		return this._factions;
 	}
-	public set faction(value: string) 
+	public set factions(value: string[]) 
 	{
-		this._faction = value;
+		this._factions = value;
+	}
+
+	public get description(): string
+	{
+		return this._description;
 	}
 
 	public get foregroundUrl(): string 
@@ -121,9 +128,14 @@ export class Card
 		return 'assets/cards/types/' + this.type + '.png';
 	}
 
-	public get factionImageUrl(): string
+	public get factionImageUrls(): string[]
 	{
-		return 'assets/cards/factions/' + this.faction + '.png';
+		const urls: string[] = [];
+		this.factions.forEach(faction =>
+		{
+			urls.push(`assets/cards/factions/${faction}.png`);
+		});
+		return urls;
 	}
 
 	public get id(): number
@@ -142,7 +154,8 @@ export class Card
 	private _type: string;
 	private _amount: number;
 	private _tiers: CardTier[];
-	private _faction?: string;
+	private _factions?: string[];
+	private _description: string;
 
 	constructor(cardInformation: CardInformation, private _id: number)
 	{
@@ -152,10 +165,11 @@ export class Card
 		this._type = cardInformation.type;
 		this._amount = cardInformation.amount;
 		this._tiers = [];
+		this._description = cardInformation.description;
 		cardInformation.tiers.forEach(tier =>
 		{
 			this.tiers.push(new CardTier(tier.description, tier.cost));
 		});
-		this._faction = cardInformation.faction;
+		this._factions = cardInformation.faction;
 	}
 }

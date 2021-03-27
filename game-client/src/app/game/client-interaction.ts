@@ -74,7 +74,7 @@ export class ClientInteraction
 			}
 			else
 			{
-				gridStrategy.renderCellsOutline([hex], stateHandler.getClientColor(), stateHandler.clientIndex, RenderType.DottedLine);
+				gridStrategy.renderCellsOutline([hex], stateHandler.getClientColor(), RenderType.DottedLine);
 			}			
 		}
 	}

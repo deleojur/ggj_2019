@@ -63,56 +63,12 @@ export class GridClient extends GridStrategy
 			}
 		});
 		return validCells;
-	}
-
-	public getWalkableCells(hex: Hex<Cell>, radius: number): Hex<Cell>[]
-	{
-		const checkedCells: Hex<Cell>[] = [];
-		const uncheckedCells: Queue<Path> = new Queue<Path>();
-		const road: Hex<Cell>[] = this.grid.getWalkableNeighbors(hex);
-		road.forEach(node =>
-		{
-			node.parent = hex;
-		});
-		
-		let current: Path = { hex: hex, dist: 0 };
-		do
-		{
-			const neighbors: Hex<Cell>[] = this.grid.getRoadNeighbors(current.hex);
-			neighbors.forEach(n =>
-			{
-				if (checkedCells.indexOf(n) === -1)
-				{
-					checkedCells.push(n);
-					if (current.dist + 1 <= radius)
-					{
-						//if (!this.isStructure(n))
-						{
-							uncheckedCells.Push({ hex: n, dist: current.dist + 1 });
-						}
-						n.parent = current.hex;
-						if (road.indexOf(n) === -1)
-						{							
-							road.push(n);
-						}
-					}
-				}
-			});
-			checkedCells.push(current.hex);
-			if (uncheckedCells.Size() === 0)
-			{
-				break;
-			}
-			current = uncheckedCells.Front();
-			uncheckedCells.Pop();
-		} while (true);
-		return road;
-	}
+	}	
 
 	public renderValidCells(validCells: Hex<Cell>[]): Hex<Cell>[]
 	{
 		 //= this.getValidCells(hex, type);
-		this.renderCellsOutline(validCells, 0xfada5e, this.clientIndex, RenderType.StraightLine);
+		this.renderCellsOutline(validCells, 0xfada5e, RenderType.StraightLine);
 
 		validCells.forEach(cell =>
 		{

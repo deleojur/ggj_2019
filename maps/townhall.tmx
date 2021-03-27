@@ -1,0 +1,1367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.3" orientation="hexagonal" renderorder="right-up" width="1" height="1" tilewidth="256" tileheight="388" infinite="0" hexsidelength="0" staggeraxis="y" staggerindex="odd" nextlayerid="12" nextobjectid="618">
+ <editorsettings>
+  <export format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" name="Coldlands" tilewidth="256" tileheight="384" tilecount="67" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexDirtCold00.png"/>
+  </tile>
+  <tile id="1">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexDirtCold01.png"/>
+  </tile>
+  <tile id="2">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexDirtCold02.png"/>
+  </tile>
+  <tile id="3">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexDirtCold03.png"/>
+  </tile>
+  <tile id="4">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexForestPine00.png"/>
+  </tile>
+  <tile id="5">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexForestPine01.png"/>
+  </tile>
+  <tile id="6">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexForestPine02.png"/>
+  </tile>
+  <tile id="7">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexForestPine03.png"/>
+  </tile>
+  <tile id="8">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexForestPineClearing00.png"/>
+  </tile>
+  <tile id="9">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexForestPineSnowCovered00.png"/>
+  </tile>
+  <tile id="10">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexForestPineSnowCovered01.png"/>
+  </tile>
+  <tile id="11">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexForestPineSnowCovered02.png"/>
+  </tile>
+  <tile id="12">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexForestPineSnowCovered03.png"/>
+  </tile>
+  <tile id="13">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexForestPineSnowCoveredClearing00.png"/>
+  </tile>
+  <tile id="14">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexForestPineSnowTransition00.png"/>
+  </tile>
+  <tile id="15">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexForestPineSnowTransition01.png"/>
+  </tile>
+  <tile id="16">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexForestPineSnowTransition02.png"/>
+  </tile>
+  <tile id="17">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexForestPineSnowTransition03.png"/>
+  </tile>
+  <tile id="18">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexForestPineSnowTransitionClearing00.png"/>
+  </tile>
+  <tile id="19">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexHillsCold00.png"/>
+  </tile>
+  <tile id="20">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexHillsCold01.png"/>
+  </tile>
+  <tile id="21">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexHillsCold02.png"/>
+  </tile>
+  <tile id="22">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexHillsCold03.png"/>
+  </tile>
+  <tile id="23">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexHillsColdCave00.png"/>
+  </tile>
+  <tile id="24">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexHillsColdSnowCovered00.png"/>
+  </tile>
+  <tile id="25">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexHillsColdSnowCovered01.png"/>
+  </tile>
+  <tile id="26">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexHillsColdSnowCovered02.png"/>
+  </tile>
+  <tile id="27">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexHillsColdSnowCovered03.png"/>
+  </tile>
+  <tile id="28">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexHillsColdSnowCoveredCave00.png"/>
+  </tile>
+  <tile id="29">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexHillsColdSnowTransition00.png"/>
+  </tile>
+  <tile id="30">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexHillsColdSnowTransition01.png"/>
+  </tile>
+  <tile id="31">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexHillsColdSnowTransition02.png"/>
+  </tile>
+  <tile id="32">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexHillsColdSnowTransition03.png"/>
+  </tile>
+  <tile id="33">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexHillsColdSnowTransitionCave00.png"/>
+  </tile>
+  <tile id="34">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexMountainSnow00.png"/>
+  </tile>
+  <tile id="35">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexMountainSnow01.png"/>
+  </tile>
+  <tile id="36">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexMountainSnow02.png"/>
+  </tile>
+  <tile id="37">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexMountainSnow03.png"/>
+  </tile>
+  <tile id="38">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexMountainSnowCave00.png"/>
+  </tile>
+  <tile id="39">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexMountainSnowCave01.png"/>
+  </tile>
+  <tile id="40">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexMountainSnowCave02.png"/>
+  </tile>
+  <tile id="41">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexMountainSnowCave03.png"/>
+  </tile>
+  <tile id="42">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexOceanIceBergs00.png"/>
+  </tile>
+  <tile id="43">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexOceanIceBergs01.png"/>
+  </tile>
+  <tile id="44">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexOceanIceBergs02.png"/>
+  </tile>
+  <tile id="45">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexOceanIceBergs03.png"/>
+  </tile>
+  <tile id="46">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexPlainsCold00.png"/>
+  </tile>
+  <tile id="47">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexPlainsCold01.png"/>
+  </tile>
+  <tile id="48">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexPlainsCold02.png"/>
+  </tile>
+  <tile id="49">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexPlainsCold03.png"/>
+  </tile>
+  <tile id="50">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexPlainsColdPond00.png"/>
+  </tile>
+  <tile id="51">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexPlainsColdSnowCovered00.png"/>
+  </tile>
+  <tile id="52">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexPlainsColdSnowCovered01.png"/>
+  </tile>
+  <tile id="53">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexPlainsColdSnowCovered02.png"/>
+  </tile>
+  <tile id="54">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexPlainsColdSnowCovered03.png"/>
+  </tile>
+  <tile id="55">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexPlainsColdSnowCoveredPond00.png"/>
+  </tile>
+  <tile id="56">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexPlainsColdSnowTransition00.png"/>
+  </tile>
+  <tile id="57">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexPlainsColdSnowTransition01.png"/>
+  </tile>
+  <tile id="58">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexPlainsColdSnowTransition02.png"/>
+  </tile>
+  <tile id="59">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexPlainsColdSnowTransition03.png"/>
+  </tile>
+  <tile id="60">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexPlainsColdSnowTransitionPond00.png"/>
+  </tile>
+  <tile id="61">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexSnowField00.png"/>
+  </tile>
+  <tile id="62">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexSnowField01.png"/>
+  </tile>
+  <tile id="63">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexSnowField02.png"/>
+  </tile>
+  <tile id="64">
+   <image width="256" height="384" source="Terrain_Cold/Tiles/hexSnowField03.png"/>
+  </tile>
+  <tile id="65">
+   <image width="256" height="192" source="Terrain_Cold/Tiles/hexUnderDirt00.png"/>
+  </tile>
+  <tile id="66">
+   <image width="256" height="192" source="Terrain_Cold/Tiles/hexUnderOcean00.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="68" name="Base" tilewidth="256" tileheight="384" tilecount="36" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <terraintypes>
+   <terrain name="New Terrain" tile="0"/>
+  </terraintypes>
+  <tile id="0">
+   <image width="256" height="384" source="Terrain_Medieval/Base/hexBase00.png"/>
+  </tile>
+  <tile id="1">
+   <image width="256" height="384" source="Terrain_Medieval/Base/hexDesertDunes00.png"/>
+  </tile>
+  <tile id="2" terrain="0,0,0,0">
+   <image width="256" height="384" source="Terrain_Medieval/Base/hexDirt00.png"/>
+  </tile>
+  <tile id="3">
+   <image width="256" height="384" source="Terrain_Medieval/Base/hexForestBroadleaf00.png"/>
+  </tile>
+  <tile id="4">
+   <image width="256" height="384" source="Terrain_Medieval/Base/hexHighlands00.png"/>
+  </tile>
+  <tile id="5">
+   <image width="256" height="384" source="Terrain_Medieval/Base/hexHills00.png"/>
+  </tile>
+  <tile id="6">
+   <image width="256" height="384" source="Terrain_Medieval/Base/hexMarsh00.png"/>
+  </tile>
+  <tile id="7">
+   <image width="256" height="384" source="Terrain_Medieval/Base/hexMountain00.png"/>
+  </tile>
+  <tile id="8" terrain=",,0,">
+   <properties>
+    <property name="buildable" type="bool" value="false"/>
+    <property name="walkable" type="bool" value="false"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Base/hexOcean00.png"/>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="buildable" type="bool" value="true"/>
+    <property name="walkable" type="bool" value="true"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Base/hexPlains00.png"/>
+  </tile>
+  <tile id="10">
+   <image width="256" height="384" source="Terrain_Medieval/Base/hexScrublands00.png"/>
+  </tile>
+  <tile id="11">
+   <image width="256" height="192" source="Terrain_Medieval/Base/hexUnderDirt00.png"/>
+  </tile>
+  <tile id="12">
+   <image width="256" height="192" source="Terrain_Medieval/Base/hexUnderOcean00.png"/>
+  </tile>
+  <tile id="13">
+   <image width="256" height="192" source="Terrain_Medieval/Base/hexUnderVoid00.png"/>
+  </tile>
+  <tile id="14">
+   <image width="256" height="384" source="Terrain_Medieval/Base/hexVoid00.png"/>
+  </tile>
+  <tile id="15">
+   <image width="256" height="384" source="Terrain_Medieval/Base/hexWoodlands00.png"/>
+  </tile>
+  <tile id="30">
+   <image width="256" height="384" source="Terrain_Medieval/Samples/Terrain Hexes Cold Lands/hexForestPineSnowCovered00.png"/>
+  </tile>
+  <tile id="31">
+   <image width="256" height="384" source="Terrain_Medieval/Samples/Terrain Hexes Cold Lands/hexMountainSnow00.png"/>
+  </tile>
+  <tile id="32">
+   <image width="256" height="384" source="Terrain_Medieval/Samples/Terrain Hexes Cold Lands/hexPlainsColdSnowTransitionPond00.png"/>
+  </tile>
+  <tile id="33">
+   <image width="256" height="384" source="Terrain_Medieval/Samples/Terrain Hexes Cold Lands/hexSnowField00.png"/>
+  </tile>
+  <tile id="34">
+   <image width="256" height="384" source="Terrain_Medieval/Samples/Terrain Hexes Deserts/hexDesertRedDirt00.png"/>
+  </tile>
+  <tile id="35">
+   <image width="256" height="384" source="Terrain_Medieval/Samples/Terrain Hexes Deserts/hexDesertRedGrass00.png"/>
+  </tile>
+  <tile id="36">
+   <image width="256" height="384" source="Terrain_Medieval/Samples/Terrain Hexes Deserts/hexDesertRedMesaLarge00.png"/>
+  </tile>
+  <tile id="37">
+   <image width="256" height="384" source="Terrain_Medieval/Samples/Terrain Hexes Deserts/hexDesertYellowCactiForest00.png"/>
+  </tile>
+  <tile id="38">
+   <image width="256" height="384" source="Terrain_Medieval/Samples/Terrain Hexes Deserts/hexDesertYellowHillsOasis00.png"/>
+  </tile>
+  <tile id="39">
+   <image width="256" height="384" source="Terrain_Medieval/Samples/Terrain Hexes Deserts/hexDesertYellowMesas00.png"/>
+  </tile>
+  <tile id="40">
+   <image width="256" height="384" source="Terrain_Medieval/Samples/Terrain Hexes Tropics and Wetlands/hexBog00.png"/>
+  </tile>
+  <tile id="41">
+   <image width="256" height="384" source="Terrain_Medieval/Samples/Terrain Hexes Tropics and Wetlands/hexJungle00.png"/>
+  </tile>
+  <tile id="42">
+   <image width="256" height="384" source="Terrain_Medieval/Samples/Terrain Hexes Tropics and Wetlands/hexSandPalms00.png"/>
+  </tile>
+  <tile id="43">
+   <image width="256" height="384" source="Terrain_Medieval/Samples/Terrain Hexes Tropics and Wetlands/hexWetlands00.png"/>
+  </tile>
+  <tile id="44">
+   <image width="42" height="60" source="Terrain_Medieval/Samples/Terrain Hexes Volcanic Wastes/burnedTree00.png"/>
+  </tile>
+  <tile id="45">
+   <image width="256" height="384" source="Terrain_Medieval/Samples/Terrain Hexes Volcanic Wastes/hexAshPlains00.png"/>
+  </tile>
+  <tile id="46">
+   <image width="256" height="384" source="Terrain_Medieval/Samples/Terrain Hexes Volcanic Wastes/hexForestBurnedDirt00.png"/>
+  </tile>
+  <tile id="47">
+   <image width="256" height="384" source="Terrain_Medieval/Samples/Terrain Hexes Volcanic Wastes/hexLavaField00.png"/>
+  </tile>
+  <tile id="48">
+   <image width="256" height="384" source="Terrain_Medieval/Samples/Terrain Hexes Volcanic Wastes/hexVolcanoActive00.png"/>
+  </tile>
+  <tile id="49">
+   <image width="75" height="56" source="Terrain_Medieval/Samples/Terrain Hexes Volcanic Wastes/lavaCone00.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="118" name="Decor" tilewidth="264" tileheight="384" tilecount="117" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/castle.png"/>
+  </tile>
+  <tile id="1">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/castle2.png"/>
+  </tile>
+  <tile id="2">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/castle3.png"/>
+  </tile>
+  <tile id="3">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/castleRuinDirt.png"/>
+  </tile>
+  <tile id="4">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/castleRuinForest.png"/>
+  </tile>
+  <tile id="5">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/castleRuinMarsh.png"/>
+  </tile>
+  <tile id="6">
+   <image width="102" height="89" source="Terrain_Medieval/Decor/corral00.png"/>
+  </tile>
+  <tile id="7">
+   <image width="160" height="93" source="Terrain_Medieval/Decor/corral01.png"/>
+  </tile>
+  <tile id="8">
+   <image width="153" height="78" source="Terrain_Medieval/Decor/corral02.png"/>
+  </tile>
+  <tile id="9">
+   <image width="79" height="52" source="Terrain_Medieval/Decor/desertRuins00.png"/>
+  </tile>
+  <tile id="10">
+   <image width="88" height="76" source="Terrain_Medieval/Decor/desertRuins01.png"/>
+  </tile>
+  <tile id="11">
+   <image width="128" height="101" source="Terrain_Medieval/Decor/desertRuins02.png"/>
+  </tile>
+  <tile id="12">
+   <image width="137" height="109" source="Terrain_Medieval/Decor/desertRuins03.png"/>
+  </tile>
+  <tile id="13">
+   <image width="123" height="80" source="Terrain_Medieval/Decor/desertRuins04.png"/>
+  </tile>
+  <tile id="14">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/dwarfFortress.png"/>
+  </tile>
+  <tile id="15">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/elvenLodge.png"/>
+  </tile>
+  <tile id="16">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/farm00.png"/>
+  </tile>
+  <tile id="17">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/farm01.png"/>
+  </tile>
+  <tile id="18">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/farm02.png"/>
+  </tile>
+  <tile id="19">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/farm03.png"/>
+  </tile>
+  <tile id="20">
+   <image width="129" height="84" source="Terrain_Medieval/Decor/field00.png"/>
+  </tile>
+  <tile id="21">
+   <image width="106" height="93" source="Terrain_Medieval/Decor/field01.png"/>
+  </tile>
+  <tile id="22">
+   <image width="129" height="65" source="Terrain_Medieval/Decor/field02.png"/>
+  </tile>
+  <tile id="23">
+   <image width="135" height="138" source="Terrain_Medieval/Decor/field03.png"/>
+  </tile>
+  <tile id="24">
+   <image width="107" height="110" source="Terrain_Medieval/Decor/field04.png"/>
+  </tile>
+  <tile id="25">
+   <image width="107" height="79" source="Terrain_Medieval/Decor/field05.png"/>
+  </tile>
+  <tile id="26">
+   <image width="133" height="132" source="Terrain_Medieval/Decor/field06.png"/>
+  </tile>
+  <tile id="27">
+   <image width="143" height="103" source="Terrain_Medieval/Decor/field07.png"/>
+  </tile>
+  <tile id="28">
+   <image width="187" height="112" source="Terrain_Medieval/Decor/field08.png"/>
+  </tile>
+  <tile id="29">
+   <image width="95" height="96" source="Terrain_Medieval/Decor/field09.png"/>
+  </tile>
+  <tile id="30">
+   <image width="88" height="69" source="Terrain_Medieval/Decor/field10.png"/>
+  </tile>
+  <tile id="31">
+   <image width="124" height="70" source="Terrain_Medieval/Decor/field11.png"/>
+  </tile>
+  <tile id="32">
+   <image width="148" height="74" source="Terrain_Medieval/Decor/field12.png"/>
+  </tile>
+  <tile id="33">
+   <image width="114" height="121" source="Terrain_Medieval/Decor/field13.png"/>
+  </tile>
+  <tile id="34">
+   <image width="217" height="173" source="Terrain_Medieval/Decor/field14.png"/>
+  </tile>
+  <tile id="35">
+   <image width="90" height="87" source="Terrain_Medieval/Decor/forester_hut00.png"/>
+  </tile>
+  <tile id="36">
+   <image width="72" height="83" source="Terrain_Medieval/Decor/forester_hut01.png"/>
+  </tile>
+  <tile id="37">
+   <image width="124" height="100" source="Terrain_Medieval/Decor/forester_hut02.png"/>
+  </tile>
+  <tile id="38">
+   <image width="101" height="67" source="Terrain_Medieval/Decor/forester_shed00.png"/>
+  </tile>
+  <tile id="39">
+   <image width="57" height="57" source="Terrain_Medieval/Decor/forester_stumps00.png"/>
+  </tile>
+  <tile id="40">
+   <image width="51" height="39" source="Terrain_Medieval/Decor/forester_stumps01.png"/>
+  </tile>
+  <tile id="41">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/graveyard00.png"/>
+  </tile>
+  <tile id="42">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/halfling_village00.png"/>
+  </tile>
+  <tile id="43">
+   <image width="127" height="92" source="Terrain_Medieval/Decor/halflingHouse00.png"/>
+  </tile>
+  <tile id="44">
+   <image width="93" height="79" source="Terrain_Medieval/Decor/halflingHouse01.png"/>
+  </tile>
+  <tile id="45">
+   <image width="102" height="74" source="Terrain_Medieval/Decor/halflingHouse02.png"/>
+  </tile>
+  <tile id="46">
+   <image width="118" height="86" source="Terrain_Medieval/Decor/halflingHouse03.png"/>
+  </tile>
+  <tile id="47">
+   <image width="83" height="73" source="Terrain_Medieval/Decor/halflingHouse04.png"/>
+  </tile>
+  <tile id="48">
+   <image width="72" height="74" source="Terrain_Medieval/Decor/halflingHouse05.png"/>
+  </tile>
+  <tile id="49">
+   <image width="55" height="56" source="Terrain_Medieval/Decor/house00.png"/>
+  </tile>
+  <tile id="50">
+   <image width="69" height="78" source="Terrain_Medieval/Decor/house01.png"/>
+  </tile>
+  <tile id="51">
+   <image width="67" height="76" source="Terrain_Medieval/Decor/house02.png"/>
+  </tile>
+  <tile id="52">
+   <image width="72" height="76" source="Terrain_Medieval/Decor/house03.png"/>
+  </tile>
+  <tile id="53">
+   <image width="70" height="97" source="Terrain_Medieval/Decor/house04.png"/>
+  </tile>
+  <tile id="54">
+   <image width="72" height="67" source="Terrain_Medieval/Decor/house05.png"/>
+  </tile>
+  <tile id="55">
+   <image width="100" height="109" source="Terrain_Medieval/Decor/house06.png"/>
+  </tile>
+  <tile id="56">
+   <image width="70" height="99" source="Terrain_Medieval/Decor/house07.png"/>
+  </tile>
+  <tile id="57">
+   <image width="104" height="91" source="Terrain_Medieval/Decor/house08.png"/>
+  </tile>
+  <tile id="58">
+   <image width="100" height="83" source="Terrain_Medieval/Decor/house09.png"/>
+  </tile>
+  <tile id="59">
+   <image width="76" height="85" source="Terrain_Medieval/Decor/house10.png"/>
+  </tile>
+  <tile id="60">
+   <image width="65" height="79" source="Terrain_Medieval/Decor/house11.png"/>
+  </tile>
+  <tile id="61">
+   <image width="57" height="67" source="Terrain_Medieval/Decor/house12.png"/>
+  </tile>
+  <tile id="62">
+   <image width="65" height="61" source="Terrain_Medieval/Decor/house13.png"/>
+  </tile>
+  <tile id="63">
+   <image width="79" height="67" source="Terrain_Medieval/Decor/house14.png"/>
+  </tile>
+  <tile id="64">
+   <image width="74" height="66" source="Terrain_Medieval/Decor/house15.png"/>
+  </tile>
+  <tile id="65">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/inn.png"/>
+  </tile>
+  <tile id="66">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/innMossy.png"/>
+  </tile>
+  <tile id="67">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/mine00.png"/>
+  </tile>
+  <tile id="68">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/mine01.png"/>
+  </tile>
+  <tile id="69">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/mine02.png"/>
+  </tile>
+  <tile id="70">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/mine03.png"/>
+  </tile>
+  <tile id="71">
+   <image width="99" height="87" source="Terrain_Medieval/Decor/mines00.png"/>
+  </tile>
+  <tile id="72">
+   <image width="81" height="64" source="Terrain_Medieval/Decor/mines01.png"/>
+  </tile>
+  <tile id="73">
+   <image width="114" height="129" source="Terrain_Medieval/Decor/mines02.png"/>
+  </tile>
+  <tile id="74">
+   <image width="105" height="94" source="Terrain_Medieval/Decor/mines03.png"/>
+  </tile>
+  <tile id="75">
+   <image width="208" height="201" source="Terrain_Medieval/Decor/mines04.png"/>
+  </tile>
+  <tile id="76">
+   <image width="166" height="158" source="Terrain_Medieval/Decor/mines05.png"/>
+  </tile>
+  <tile id="77">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/mountainCastle00.png"/>
+  </tile>
+  <tile id="78">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/mountainFortress.png"/>
+  </tile>
+  <tile id="79">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/necroCastle.png"/>
+  </tile>
+  <tile id="80">
+   <image width="157" height="151" source="Terrain_Medieval/Decor/oasis00.png"/>
+  </tile>
+  <tile id="81">
+   <image width="168" height="153" source="Terrain_Medieval/Decor/oasis01.png"/>
+  </tile>
+  <tile id="82">
+   <image width="85" height="111" source="Terrain_Medieval/Decor/obelisk00.png"/>
+  </tile>
+  <tile id="83">
+   <image width="264" height="202" source="Terrain_Medieval/Decor/pyramid00.png"/>
+  </tile>
+  <tile id="84">
+   <image width="92" height="65" source="Terrain_Medieval/Decor/pyramidSmall00.png"/>
+  </tile>
+  <tile id="85">
+   <image width="79" height="81" source="Terrain_Medieval/Decor/pyramidSmall01.png"/>
+  </tile>
+  <tile id="86">
+   <image width="70" height="85" source="Terrain_Medieval/Decor/sign00.png"/>
+  </tile>
+  <tile id="87">
+   <image width="80" height="84" source="Terrain_Medieval/Decor/sign01.png"/>
+  </tile>
+  <tile id="88">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/smithy.png"/>
+  </tile>
+  <tile id="89">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/standingStones.png"/>
+  </tile>
+  <tile id="90">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/standingStonesMossy.png"/>
+  </tile>
+  <tile id="91">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/temple.png"/>
+  </tile>
+  <tile id="92">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/templeRuins.png"/>
+  </tile>
+  <tile id="93">
+   <image width="48" height="50" source="Terrain_Medieval/Decor/treeA00.png"/>
+  </tile>
+  <tile id="94">
+   <image width="50" height="38" source="Terrain_Medieval/Decor/treeA01.png"/>
+  </tile>
+  <tile id="95">
+   <image width="43" height="58" source="Terrain_Medieval/Decor/treeA02.png"/>
+  </tile>
+  <tile id="96">
+   <image width="95" height="71" source="Terrain_Medieval/Decor/treesA_cluster00.png"/>
+  </tile>
+  <tile id="97">
+   <image width="66" height="89" source="Terrain_Medieval/Decor/treesA_cluster01.png"/>
+  </tile>
+  <tile id="98">
+   <image width="99" height="56" source="Terrain_Medieval/Decor/treesA_line00.png"/>
+  </tile>
+  <tile id="99">
+   <image width="114" height="48" source="Terrain_Medieval/Decor/treesA_line01.png"/>
+  </tile>
+  <tile id="100">
+   <image width="71" height="63" source="Terrain_Medieval/Decor/treesA_line02.png"/>
+  </tile>
+  <tile id="101">
+   <image width="75" height="67" source="Terrain_Medieval/Decor/treesA_line03.png"/>
+  </tile>
+  <tile id="102">
+   <image width="101" height="58" source="Terrain_Medieval/Decor/treesA_line04.png"/>
+  </tile>
+  <tile id="103">
+   <image width="103" height="72" source="Terrain_Medieval/Decor/treesA_line05.png"/>
+  </tile>
+  <tile id="104">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/village00.png"/>
+  </tile>
+  <tile id="105">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/village01.png"/>
+  </tile>
+  <tile id="106">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/village02.png"/>
+  </tile>
+  <tile id="107">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/village03.png"/>
+  </tile>
+  <tile id="108">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/villageSmall00.png"/>
+  </tile>
+  <tile id="109">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/villageSmall01.png"/>
+  </tile>
+  <tile id="110">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/villageSmall02.png"/>
+  </tile>
+  <tile id="111">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/villageSmall03.png"/>
+  </tile>
+  <tile id="112">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/volcanoCave.png"/>
+  </tile>
+  <tile id="113">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/walledCity.png"/>
+  </tile>
+  <tile id="114">
+   <image width="256" height="384" source="Terrain_Medieval/Decor/walledCityMossy.png"/>
+  </tile>
+  <tile id="115">
+   <image width="44" height="44" source="Terrain_Medieval/Decor/well00.png"/>
+  </tile>
+  <tile id="116">
+   <image width="70" height="54" source="Terrain_Medieval/Decor/well01.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="235" name="Roads" tilewidth="256" tileheight="384" tilecount="85" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <properties>
+    <property name="tileType" value="road:[4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000001-00.png"/>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="tileType" value="road:[4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000001-01.png"/>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="tileType" value="road:[3]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000010-00.png"/>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="tileType" value="road:[3]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000010-01.png"/>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="tileType" value="road:[3,4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000011-00.png"/>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="tileType" value="road:[3,4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000011-01.png"/>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="tileType" value="road:[2]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000100-00.png"/>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="tileType" value="road:[2]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000100-01.png"/>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="tileType" value="road:[2,4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000101-00.png"/>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="tileType" value="road:[2,4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000101-01.png"/>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="tileType" value="road:[2,3]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000110-00.png"/>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="tileType" value="road:[2,3]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000110-01.png"/>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="tileType" value="road:[2,3,4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-000111-00.png"/>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="tileType" value="road:[1]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001000-00.png"/>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="tileType" value="road:[1]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001000-01.png"/>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="tileType" value="road:[1,4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001001-00.png"/>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="tileType" value="road:[1,4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001001-01.png"/>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="tileType" value="road:[1,3]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001010-00.png"/>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="tileType" value="road:[1,3]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001010-01.png"/>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="tileType" value="road:[1,3,4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001011-00.png"/>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="tileType" value="road:[1,2]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001100-00.png"/>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="tileType" value="road:[1,2]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001100-01.png"/>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="tileType" value="road:[1,2,4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001101-00.png"/>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="tileType" value="road:[1,2,3]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001110-00.png"/>
+  </tile>
+  <tile id="24">
+   <properties>
+    <property name="tileType" value="road:[1,2,3,4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-001111-00.png"/>
+  </tile>
+  <tile id="25">
+   <properties>
+    <property name="tileType" value="road:[0]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010000-00.png"/>
+  </tile>
+  <tile id="26">
+   <properties>
+    <property name="tileType" value="road:[0]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010000-01.png"/>
+  </tile>
+  <tile id="27">
+   <properties>
+    <property name="tileType" value="road:[0,4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010001-00.png"/>
+  </tile>
+  <tile id="28">
+   <properties>
+    <property name="tileType" value="road:[0,4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010001-01.png"/>
+  </tile>
+  <tile id="29">
+   <properties>
+    <property name="tileType" value="road:[0,3]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010010-00.png"/>
+  </tile>
+  <tile id="30">
+   <properties>
+    <property name="tileType" value="road:[0,3]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010010-01.png"/>
+  </tile>
+  <tile id="31">
+   <properties>
+    <property name="tileType" value="road:[0,3,4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010011-00.png"/>
+  </tile>
+  <tile id="32">
+   <properties>
+    <property name="tileType" value="road:[0,2]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010100-00.png"/>
+  </tile>
+  <tile id="33">
+   <properties>
+    <property name="tileType" value="road:[0,2]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010100-01.png"/>
+  </tile>
+  <tile id="34">
+   <properties>
+    <property name="tileType" value="road:[0,2,4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010101-00.png"/>
+  </tile>
+  <tile id="35">
+   <properties>
+    <property name="tileType" value="road:[0,2,3]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010110-00.png"/>
+  </tile>
+  <tile id="36">
+   <properties>
+    <property name="tileType" value="road:[0,2,3,4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-010111-00.png"/>
+  </tile>
+  <tile id="37">
+   <properties>
+    <property name="tileType" value="road:[0,1]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-011000-00.png"/>
+  </tile>
+  <tile id="38">
+   <properties>
+    <property name="tileType" value="road:[0,1]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-011000-01.png"/>
+  </tile>
+  <tile id="39">
+   <properties>
+    <property name="tileType" value="road:[0,1,4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-011001-00.png"/>
+  </tile>
+  <tile id="40">
+   <properties>
+    <property name="tileType" value="road:[0,1,3]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-011010-00.png"/>
+  </tile>
+  <tile id="41">
+   <properties>
+    <property name="tileType" value="road:[0,1,3,4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-011011-00.png"/>
+  </tile>
+  <tile id="42">
+   <properties>
+    <property name="tileType" value="road:[0,1,2]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-011100-00.png"/>
+  </tile>
+  <tile id="43">
+   <properties>
+    <property name="tileType" value="road:[0,1,2,4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-011101-00.png"/>
+  </tile>
+  <tile id="44">
+   <properties>
+    <property name="tileType" value="road:[0,1,2,3]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-011110-00.png"/>
+  </tile>
+  <tile id="45">
+   <properties>
+    <property name="tileType" value="road:[0,1,2,3,4]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-011111-00.png"/>
+  </tile>
+  <tile id="46">
+   <properties>
+    <property name="tileType" value="road:[5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100000-00.png"/>
+  </tile>
+  <tile id="47">
+   <properties>
+    <property name="tileType" value="road:[5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100000-01.png"/>
+  </tile>
+  <tile id="48">
+   <properties>
+    <property name="tileType" value="road:[4,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100001-00.png"/>
+  </tile>
+  <tile id="49">
+   <properties>
+    <property name="tileType" value="road:[4,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100001-01.png"/>
+  </tile>
+  <tile id="50">
+   <properties>
+    <property name="tileType" value="road:[3,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100010-00.png"/>
+  </tile>
+  <tile id="51">
+   <properties>
+    <property name="tileType" value="road:[3,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100010-01.png"/>
+  </tile>
+  <tile id="52">
+   <properties>
+    <property name="tileType" value="road:[3,4,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100011-00.png"/>
+  </tile>
+  <tile id="53">
+   <properties>
+    <property name="tileType" value="road:[2,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100100-00.png"/>
+  </tile>
+  <tile id="54">
+   <properties>
+    <property name="tileType" value="road:[2,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100100-01.png"/>
+  </tile>
+  <tile id="55">
+   <properties>
+    <property name="tileType" value="road:[2,4,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100101-00.png"/>
+  </tile>
+  <tile id="56">
+   <properties>
+    <property name="tileType" value="road:[2,3,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100110-00.png"/>
+  </tile>
+  <tile id="57">
+   <properties>
+    <property name="tileType" value="road:[2,3,4,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-100111-00.png"/>
+  </tile>
+  <tile id="58">
+   <properties>
+    <property name="tileType" value="road:[1,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-101000-00.png"/>
+  </tile>
+  <tile id="59">
+   <properties>
+    <property name="tileType" value="road:[1,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-101000-01.png"/>
+  </tile>
+  <tile id="60">
+   <properties>
+    <property name="tileType" value="road:[1,4,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-101001-00.png"/>
+  </tile>
+  <tile id="61">
+   <properties>
+    <property name="tileType" value="road:[1,3,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-101010-00.png"/>
+  </tile>
+  <tile id="62">
+   <properties>
+    <property name="tileType" value="road:[1,3,4,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-101011-00.png"/>
+  </tile>
+  <tile id="63">
+   <properties>
+    <property name="tileType" value="road:[1,2,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-101100-00.png"/>
+  </tile>
+  <tile id="64">
+   <properties>
+    <property name="tileType" value="road:[1,2,4,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-101101-00.png"/>
+  </tile>
+  <tile id="65">
+   <properties>
+    <property name="tileType" value="road:[1,2,3,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-101110-00.png"/>
+  </tile>
+  <tile id="66">
+   <properties>
+    <property name="tileType" value="road:[1,2,3,4,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-101111-00.png"/>
+  </tile>
+  <tile id="67">
+   <properties>
+    <property name="tileType" value="road:[0,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-110000-00.png"/>
+  </tile>
+  <tile id="68">
+   <properties>
+    <property name="tileType" value="road:[0,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-110000-01.png"/>
+  </tile>
+  <tile id="69">
+   <properties>
+    <property name="tileType" value="road:[0,4,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-110001-00.png"/>
+  </tile>
+  <tile id="70">
+   <properties>
+    <property name="tileType" value="road:[0,3,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-110010-00.png"/>
+  </tile>
+  <tile id="71">
+   <properties>
+    <property name="tileType" value="road:[0,3,4,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-110011-00.png"/>
+  </tile>
+  <tile id="72">
+   <properties>
+    <property name="tileType" value="road:[0,2,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-110100-00.png"/>
+  </tile>
+  <tile id="73">
+   <properties>
+    <property name="tileType" value="road:[0,2,4,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-110101-00.png"/>
+  </tile>
+  <tile id="74">
+   <properties>
+    <property name="tileType" value="road:[0,2,3,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-110110-00.png"/>
+  </tile>
+  <tile id="75">
+   <properties>
+    <property name="tileType" value="road:[0,2,3,4,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-110111-00.png"/>
+  </tile>
+  <tile id="76">
+   <properties>
+    <property name="tileType" value="road:[0,1,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-111000-00.png"/>
+  </tile>
+  <tile id="77">
+   <properties>
+    <property name="tileType" value="road:[0,1,4,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-111001-00.png"/>
+  </tile>
+  <tile id="78">
+   <properties>
+    <property name="tileType" value="road:[0,1,3,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-111010-00.png"/>
+  </tile>
+  <tile id="79">
+   <properties>
+    <property name="tileType" value="road:[0,1,3,4,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-111011-00.png"/>
+  </tile>
+  <tile id="80">
+   <properties>
+    <property name="tileType" value="road:[0,1,2,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-111100-00.png"/>
+  </tile>
+  <tile id="81">
+   <properties>
+    <property name="tileType" value="road:[0,1,2,4,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-111101-00.png"/>
+  </tile>
+  <tile id="82">
+   <properties>
+    <property name="tileType" value="road:[0,1,2,3,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-111110-00.png"/>
+  </tile>
+  <tile id="83">
+   <properties>
+    <property name="tileType" value="road:[0,1,2,3,4,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-111111-00.png"/>
+  </tile>
+  <tile id="84">
+   <properties>
+    <property name="tileType" value="road:[0,1,2,3,4,5]"/>
+   </properties>
+   <image width="256" height="384" source="Terrain_Medieval/Roads/hexRoad-111111-01.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="320" name="Icons" tilewidth="128" tileheight="128" tilecount="48" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="48">
+   <image width="128" height="128" source="Icons/aluminum_ingots.png"/>
+  </tile>
+  <tile id="49">
+   <image width="128" height="128" source="Icons/apples.png"/>
+  </tile>
+  <tile id="50">
+   <image width="128" height="128" source="Icons/barrel.png"/>
+  </tile>
+  <tile id="51">
+   <image width="128" height="128" source="Icons/beer_mug.png"/>
+  </tile>
+  <tile id="52">
+   <image width="128" height="128" source="Icons/bread.png"/>
+  </tile>
+  <tile id="53">
+   <image width="128" height="128" source="Icons/bricks.png"/>
+  </tile>
+  <tile id="54">
+   <image width="128" height="128" source="Icons/bucket_of_water.png"/>
+  </tile>
+  <tile id="55">
+   <image width="128" height="128" source="Icons/chicken_raw.png"/>
+  </tile>
+  <tile id="56">
+   <image width="128" height="128" source="Icons/chicken.png"/>
+  </tile>
+  <tile id="57">
+   <image width="128" height="128" source="Icons/clay.png"/>
+  </tile>
+  <tile id="58">
+   <image width="128" height="128" source="Icons/coal.png"/>
+  </tile>
+  <tile id="59">
+   <image width="128" height="128" source="Icons/copper_ingots.png"/>
+  </tile>
+  <tile id="60">
+   <image width="128" height="128" source="Icons/copper_ore.png"/>
+  </tile>
+  <tile id="61">
+   <image width="128" height="128" source="Icons/cotton.png"/>
+  </tile>
+  <tile id="62">
+   <image width="128" height="128" source="Icons/deer.png"/>
+  </tile>
+  <tile id="63">
+   <image width="128" height="128" source="Icons/fish.png"/>
+  </tile>
+  <tile id="64">
+   <image width="128" height="128" source="Icons/furs.png"/>
+  </tile>
+  <tile id="65">
+   <image width="128" height="128" source="Icons/gold_coins.png"/>
+  </tile>
+  <tile id="66">
+   <image width="128" height="128" source="Icons/gold_ingots.png"/>
+  </tile>
+  <tile id="67">
+   <image width="128" height="128" source="Icons/grapes.png"/>
+  </tile>
+  <tile id="68">
+   <image width="128" height="128" source="Icons/iron_ingots.png"/>
+  </tile>
+  <tile id="69">
+   <image width="128" height="128" source="Icons/iron_ore.png"/>
+  </tile>
+  <tile id="70">
+   <image width="128" height="128" source="Icons/ivory.png"/>
+  </tile>
+  <tile id="71">
+   <image width="128" height="128" source="Icons/leeks.png"/>
+  </tile>
+  <tile id="72">
+   <image width="128" height="128" source="Icons/limestone.png"/>
+  </tile>
+  <tile id="73">
+   <image width="128" height="128" source="Icons/logs.png"/>
+  </tile>
+  <tile id="74">
+   <image width="128" height="128" source="Icons/marble.png"/>
+  </tile>
+  <tile id="75">
+   <image width="128" height="128" source="Icons/nitre.png"/>
+  </tile>
+  <tile id="76">
+   <image width="128" height="128" source="Icons/oil_barrel.png"/>
+  </tile>
+  <tile id="77">
+   <image width="128" height="128" source="Icons/oil_raw.png"/>
+  </tile>
+  <tile id="78">
+   <image width="128" height="128" source="Icons/planks.png"/>
+  </tile>
+  <tile id="79">
+   <image width="128" height="128" source="Icons/pottery.png"/>
+  </tile>
+  <tile id="80">
+   <image width="128" height="128" source="Icons/rice.png"/>
+  </tile>
+  <tile id="81">
+   <image width="128" height="128" source="Icons/salmon_steak.png"/>
+  </tile>
+  <tile id="82">
+   <image width="128" height="128" source="Icons/salt.png"/>
+  </tile>
+  <tile id="83">
+   <image width="128" height="128" source="Icons/sapphire_raw.png"/>
+  </tile>
+  <tile id="84">
+   <image width="128" height="128" source="Icons/sheep.png"/>
+  </tile>
+  <tile id="85">
+   <image width="128" height="128" source="Icons/silver_ingots.png"/>
+  </tile>
+  <tile id="86">
+   <image width="128" height="128" source="Icons/steel.png"/>
+  </tile>
+  <tile id="87">
+   <image width="128" height="128" source="Icons/stone.png"/>
+  </tile>
+  <tile id="88">
+   <image width="128" height="128" source="Icons/sulphur.png"/>
+  </tile>
+  <tile id="89">
+   <image width="128" height="128" source="Icons/tobacco.png"/>
+  </tile>
+  <tile id="90">
+   <image width="128" height="128" source="Icons/uranium_ingot.png"/>
+  </tile>
+  <tile id="91">
+   <image width="128" height="128" source="Icons/uranium_ore.png"/>
+  </tile>
+  <tile id="92">
+   <image width="128" height="128" source="Icons/venison.png"/>
+  </tile>
+  <tile id="93">
+   <image width="128" height="128" source="Icons/whale.png"/>
+  </tile>
+  <tile id="94">
+   <image width="128" height="128" source="Icons/wheat.png"/>
+  </tile>
+  <tile id="95">
+   <image width="128" height="128" source="Icons/wine_bottle.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="416" name="Sprites" tilewidth="256" tileheight="384" tilecount="1" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="256" height="384" source="Terrain_Medieval/Sprites/town.png"/>
+  </tile>
+ </tileset>
+ <objectgroup id="11" name="overlay" offsetx="4.66667" offsety="240.667">
+  <object id="600" gid="174" x="93" y="116" width="70" height="99"/>
+  <object id="601" gid="218" x="185.667" y="108" width="71" height="63"/>
+  <object id="604" gid="219" x="31" y="125.333" width="75" height="67"/>
+  <object id="605" gid="215" x="48.3333" y="107" width="66" height="89"/>
+  <object id="606" gid="215" x="66.3333" y="95" width="66" height="89"/>
+  <object id="607" gid="214" x="90.3333" y="68" width="95" height="71"/>
+  <object id="608" gid="214" x="133.667" y="100.667" width="95" height="71"/>
+  <object id="609" gid="221" x="39.6667" y="91.3333" width="103" height="72"/>
+  <object id="610" gid="221" x="-0.333333" y="96.6667" width="103" height="72"/>
+  <object id="612" gid="125" x="-1.42109e-14" y="208.333" width="160" height="93"/>
+  <object id="615" gid="167" x="147.667" y="128" width="55" height="56"/>
+  <object id="616" gid="170" x="176.667" y="152.667" width="72" height="76"/>
+  <object id="617" gid="171" x="88.3333" y="253" width="70" height="97"/>
+ </objectgroup>
+</map>

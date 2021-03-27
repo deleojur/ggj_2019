@@ -128,11 +128,24 @@ $scale: 1.25;
     left: 233px * $scale;
 }
 
-.faction
+.faction-container
 {
 	position: absolute;
-    width: 20%;
-    left: 40%;   
+	top: 3px;
+	width: 100%;
+	margin: auto;
+}
+
+.faction
+{
+	width: 65%;
+	position: relative;
+}
+
+.facxtion-parent
+{
+	padding-right:0 !important;
+    padding-left:0 !important;
 }
 
 .align-resource-items
@@ -185,10 +198,10 @@ $scale: 1.25;
 {
 	position: absolute;
     text-align: left;
-    left: 10%;
-    top: 72%;
-    width: 80%;
-    font-family: 'Segoe UI';
-	font-size: 80% * $scale;
-    line-height: 100%;
+    left: 12%;
+    top: 65%;
+    width: 75%;
+    font-family: Zolof;
+    font-size: 120% * $scale;
+    line-height: 85%;
 }

@@ -303,9 +303,9 @@ export class GameManager
 		return sprite;
 	}
 
-	public createText(position: PIXI.Point, text: string, color: number): PIXI.Text
+	public createText(position: PIXI.Point, fontSize: number, text: string, color: number): PIXI.Text
 	{
-		const textObj: PIXI.Text = new PIXI.Text(text, { fontFamily: 'GotischeMajuskel', fontSize: 55, fill: color, align: 'center' });
+		const textObj: PIXI.Text = new PIXI.Text(text, { fontFamily: 'GotischeMajuskel', fontSize: fontSize, fill: color, align: 'center' });
 		textObj.position = position;
 		textObj.anchor = new PIXI.Point(0.5, 0.5);
 		return textObj;

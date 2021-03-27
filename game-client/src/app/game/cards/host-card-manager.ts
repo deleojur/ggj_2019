@@ -64,11 +64,11 @@ export class HostCardManager extends CardManager
 		{
 			for (let i: number = 0; i < card.amount; i++)
 			{
-				if (!this._shuffledDeck.has(card.faction))
-				{
-					this._shuffledDeck.set(card.faction, []);
-				}
-				this._shuffledDeck.get(card.faction).push(card.id);
+				// if (!this._shuffledDeck.has(card.faction))
+				// {
+				// 	this._shuffledDeck.set(card.faction, []);
+				// }
+				// this._shuffledDeck.get(card.faction).push(card.id);
 			}
 		});
 
@@ -123,7 +123,7 @@ export class HostCardManager extends CardManager
 		{
 			debugger;
 			const promoteCard: number[] = this.getNextCards(['Promote'], 1);
-			const draftCards: number[] = this.getNextCards(['Barter', 'Carpenter', 'DeepBlueAbyss', 'Ethereal', 'LionHeart'], this.NUMBER_OF_DRAFT_CARDS);
+			const draftCards: number[] = this.getNextCards(['Barter', 'Science', 'Espionage', 'Celestial', 'Battle'], this.NUMBER_OF_DRAFT_CARDS);
 			this._clientDraftDetails.get(client.id).draftCards = [...promoteCard, ...draftCards];
 			this.emitDraftRequest(client);
 		});

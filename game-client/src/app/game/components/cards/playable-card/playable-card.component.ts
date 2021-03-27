@@ -22,6 +22,8 @@ export class PlayableCardComponent implements OnInit, AfterViewInit
 
 	@ViewChild('descriptionBody', { static: true }) descriptionBody;
 
+	@ViewChild('parentdiv', {static: true}) parentdiv;
+
 	@Input()
 	cardAnimation: PlayableCardAnimation;
 
@@ -30,7 +32,6 @@ export class PlayableCardComponent implements OnInit, AfterViewInit
 
 	constructor()
 	{
-		
 	}
 
 	ngOnInit()
@@ -74,8 +75,8 @@ export class PlayableCardComponent implements OnInit, AfterViewInit
 			if (m) 
 			{
 				const icon = `<i style="display: inline-block;
-				width: 15px;
-				height: 15px;   
+				width: 25px;
+				height: 25px;   
 				background-image: url('${'assets/resources/' + m[1].replaceAll(/[{}]/g, '') + '.png'}');
 				background-size: cover;
 				background-position: 0 0;"></i>`;
@@ -97,7 +98,8 @@ export class PlayableCardComponent implements OnInit, AfterViewInit
 
 	get currentDescription(): string
 	{
-		return this.currentTier.description;
+		return this.card.description;
+		//return this.currentTier.description;
 	}
 
 	get currentResources(): Resource[]

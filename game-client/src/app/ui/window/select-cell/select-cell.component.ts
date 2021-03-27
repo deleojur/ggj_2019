@@ -51,7 +51,6 @@ export class SelectCellComponent implements OnInit, InnerWindowComponent
 				this._validCells = this.gridClient.renderValidCells(this.gridClient.getBuildableCells(origin));
 				break;
 			case "move":				
-				this._validCells = this.gridClient.renderValidCells(this.gridClient.getWalkableCells(origin, 3));
 				break;
 		}
 		
@@ -75,7 +74,7 @@ export class SelectCellComponent implements OnInit, InnerWindowComponent
 		this.gridClient.clearSelectedCells();
 		if (n !== 0)
 		{
-			this.gridClient.renderCellsOutline([this.hex], this.clientStateHandler.getClientColor(), this.clientStateHandler.clientIndex, RenderType.StraightLine);
+			this.gridClient.renderCellsOutline([this.hex], this.clientStateHandler.getClientColor(), RenderType.StraightLine);
 		}
 	}
 

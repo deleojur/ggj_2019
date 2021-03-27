@@ -17,8 +17,18 @@ interface Tile
 	properties?: TileProperty[];
 };
 
+export interface HexID
+{
+	name: string;
+	id: number;
+	x: number;
+	y: number;
+}
+
 export interface Entity
 {
+	amount?: number;
+	allegiances?: number;
 	id: number;
 	name: string;
 	x: number;
@@ -47,19 +57,26 @@ export class MapReader
 {
     private worldMap: WorldMap;
     private tileLayers: number[][] = [];
-    private entityLayer: Entity[] = [];
-    private hexArtLayer: Object[] = [];
+    private _entityLayer: Entity[] = [];
+	private _hexIdLayer: HexID[] = [];
+    private _hexUnderLayer: Object[] = [];	
+	
 	private worldTiles: Map<number, Tile> = new Map<number, Tile>();
 
     public get entities(): Entity[]
     {
-        return this.entityLayer;
+        return this._entityLayer;
     }
 
     public get hexUnderLayer(): Object[]
     {
-        return this.hexArtLayer;
+        return this._hexUnderLayer;
     }
+
+	public get hexIdLayer(): HexID[]
+	{
+		return this._hexIdLayer;
+	}
 
     constructor()
     {
@@ -110,18 +127,46 @@ export class MapReader
                 {
                     if (layer.name === 'Hex Under Layer')
                     {
-                        this.hexArtLayer.push(obj);
+                        this._hexUnderLayer.push(obj);
 						uniqueTileIds.add(obj.gid);
                     } else if (layer.name === 'Entity Layer')
                     {
-                        this.entityLayer.push(obj);
-                    }
+						const amount: number = this.getPropertyValueAsNumber(obj, 'amount');
+						obj.amount = amount;
+						const allegiances: number = this.getPropertyValueAsNumber(obj, 'allegiances');
+						obj.allegiances = allegiances;
+                        this._entityLayer.push(obj);
+                    } else if (layer.name === 'Hex ID Layer')
+					{
+						const id: number = this.getPropertyValueAsNumber(obj, 'id');
+						const hexId: HexID = { x: obj.x, y: obj.y, id: id, name: obj.name };						
+						this._hexIdLayer.push(hexId);
+					}
                 });
             }
         });
         
         return uniqueTileIds;
     }
+
+	private getPropertyValueAsNumber(obj, propertyName: string): number
+	{
+		if (obj.properties)
+		{
+			const properties: any = obj.properties.find((obj) => 
+			{ 
+				const keys = Object.keys(obj);
+				const val = obj['name'];
+				return val === propertyName;
+			});
+			if (!properties)
+			{
+				return -1;
+			}
+			return properties.value;
+		}
+		return -1;
+	}
 
     private parseTilesets(uniqueTileIds: Set<number>): void
     {        
@@ -195,7 +240,7 @@ export class MapReader
     private mapGrid(grid: Grid<Hex<Cell>>): void
     {
         this.mapTileLayers(grid);        
-        this.mapObjectLayer(this.hexArtLayer);
-		this.mapEntityLayer(this.entityLayer);
+        this.mapObjectLayer(this._hexUnderLayer);
+		this.mapEntityLayer(this._entityLayer);
     }
 }

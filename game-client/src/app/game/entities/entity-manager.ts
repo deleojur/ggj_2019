@@ -5,7 +5,7 @@ import { AssetLoader } from 'src/app/asset-loader';
 import { Structure } from './structure';
 import { Unit } from './unit';
 import { GameManager } from '../game-manager';
-import { Entity as TileEntity } from '../entities/tile-entities/entity';
+import { TileEntity } from './tile-entities/tile-entity';
 
 export class EntityManager
 {

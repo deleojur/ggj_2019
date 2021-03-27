@@ -1,11 +1,11 @@
-import { MapReader, TileProperty, Object, WorldMap, Entity } from './map-reader';
+import { MapReader, TileProperty, Object, WorldMap, Entity, HexID } from './map-reader';
 import { Vector } from 'vector2d/src/Vec2D';
 import { defineGrid, GridFactory, Hex, Point, Grid, PointLike } from 'honeycomb-grid';
 import { Graphics, Sprite, Point as pPoint, Polygon } from 'pixi.js';
 import { ViewportManager } from '../render/viewport';
 import { AssetLoader } from 'src/app/asset-loader';
-import { GridStrategy } from './grid-strategy';
-import { Entity as TileEntity } from '../entities/tile-entities/entity';
+import { GridStrategy, RenderType } from './grid-strategy';
+import { TileEntity } from '../entities/tile-entities/tile-entity';
 
 export interface Cell
 {
@@ -20,10 +20,12 @@ export interface Cell
 }
 
 export class GridManager
-{
-	private roadMap: Map<number, PointLike[]>;
+{	
     private gridFactory: GridFactory<Hex<Cell>>;
     private grid: Grid<Hex<Cell>>;
+
+	private _provinces: Map<number, Hex<Cell>[]>;
+	private _playerStartPositions: Hex<Cell>[];
     private tileWidth: number = 147.75;
     private tileHeight: number = 129.5;
 	private mapReader: MapReader;
@@ -31,6 +33,8 @@ export class GridManager
     constructor(private gridStrategy: GridStrategy, private viewport: ViewportManager)
     {
 		this.mapReader = new MapReader();
+		this._provinces = new Map<number, Hex<Cell>[]>();
+		this._playerStartPositions = [];
 	}
 
     private initHexagonalGrid(): pPoint
@@ -64,36 +68,10 @@ export class GridManager
 		this.initObjectLayer(this.mapReader.hexUnderLayer);
 		this.initTileLayer();
 		this.gridStrategy.init(gridGraphics, pathGraphics);
+		this.initLocationLayer(this.mapReader.hexIdLayer);
 		this.initEntityLayer(this.mapReader.entities);
-		this.mapRoad();
-	}
-
-	private mapRoad(): void
-	{
-		this.roadMap = new Map<number, PointLike[]>();
-		this.roadMap.set(0, [{x: 0, y: -1}, {x: 1, y: -1}]);
-		this.roadMap.set(1, [{x: 1, y: 0}, {x: 1, y: 0}]);
-		this.roadMap.set(2, [{x: 0, y: 1}, {x: 1, y: 1}]);
-		this.roadMap.set(3, [{x: -1, y: 1}, {x: 0, y: 1}]);
-		this.roadMap.set(4, [{x: -1, y: 0}, {x: -1, y: 0}]);
-		this.roadMap.set(5, [{x: -1, y: -1}, {x: 0, y: -1}]);
 	}
 	
-	public getRoadNeighbors(hex: Hex<Cell>): Hex<Cell>[]
-	{
-		const neighbors: Hex<Cell>[] = [];
-		hex.road.forEach((road: number) =>
-		{
-			const index: number = hex.y % 2;
-			const mapCoordinates: PointLike = this.roadMap.get(road)[index];
-			const hexCoordinates: PointLike = hex.coordinates();
-			const coordinates: PointLike = { x: hexCoordinates.x + mapCoordinates.x, y: hexCoordinates.y + mapCoordinates.y };
-			
-			neighbors.push(this.grid.get(coordinates));
-		});
-		return neighbors;
-	}
-
     private initTileLayer(): void
     {
         this.grid.forEach((hex: Hex<Cell>) =>
@@ -130,13 +108,57 @@ export class GridManager
         });
 	}
 
+	private initLocationLayer(hexIds: HexID[]): void
+	{
+		hexIds.forEach(hexId =>
+		{
+			const hex = this.getHexFromAbsoluteCoordinates(hexId.x, hexId.y);
+			if (hexId.name === 'province')
+			{
+				if (!this._provinces.has(hexId.id))
+				{
+					this._provinces.set(hexId.id, []);
+				} 
+				this._provinces.get(hexId.id).push(hex);
+			}
+		});
+
+		this._provinces.forEach((val, key) => 
+		{
+			switch (key)
+			{
+				case 0:
+					this.gridStrategy.renderCellsOutline(val, 0xff0000, RenderType.StraightLine);
+					break;
+				case 1:
+					this.gridStrategy.renderCellsOutline(val, 0xff00ff, RenderType.StraightLine);
+					break;
+				case 2:
+					this.gridStrategy.renderCellsOutline(val, 0x00ff00, RenderType.StraightLine);
+					break;
+				case 3:
+					this.gridStrategy.renderCellsOutline(val, 0xffff00, RenderType.StraightLine);
+					break;
+				case 4:
+					this.gridStrategy.renderCellsOutline(val, 0x00ffff, RenderType.StraightLine);
+					break;
+				case 5:
+					this.gridStrategy.renderCellsOutline(val, 0xff8888, RenderType.StraightLine);
+					break;
+				case 6:
+					this.gridStrategy.renderCellsOutline(val, 0x8888ff, RenderType.StraightLine);
+					break;
+			}
+				
+		});
+	}
+
 	private initEntityLayer(entities: Entity[]): void
 	{
 		entities.forEach(entity =>
 		{
-			const hexCoordinates = this.gridFactory.pointToHex([entity.x / this.tileWidth, entity.y / this.tileHeight]);
-            const hex: Hex<Cell> = this.grid.get(hexCoordinates);
-			const tileEntity: TileEntity = new TileEntity(entity.name, hex);
+			const hex = this.getHexFromAbsoluteCoordinates(entity.x, entity.y);
+			const tileEntity: TileEntity = new TileEntity(entity, hex);
 			this.viewport.addChild(tileEntity);
 		});
 	}
@@ -215,6 +237,13 @@ export class GridManager
         const hex: Hex<Cell> = this.grid.get(hexCoordinates);
         return hex;
     }
+
+	public getHexFromAbsoluteCoordinates(x: number, y: number): Hex<Cell>
+	{
+		const hexCoordinates = this.gridFactory.pointToHex(x / this.tileWidth, y / this.tileHeight);
+        const hex: Hex<Cell> = this.grid.get(hexCoordinates);
+		return hex;
+	}
 
     public getHex(x: number, y: number): Hex<Cell>
     {

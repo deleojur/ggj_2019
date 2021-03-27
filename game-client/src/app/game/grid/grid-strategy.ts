@@ -136,7 +136,7 @@ export abstract class GridStrategy
 				}
 				return true;
 			});
-			this.renderCellsOutline(hexes, this.getColor(client.color), client.startingPosition, RenderType.StraightLine);
+			this.renderCellsOutline(hexes, this.getColor(client.color), RenderType.StraightLine);
 		});
 		this.renderCommandsByOwnerColor();
 	}
@@ -205,7 +205,7 @@ export abstract class GridStrategy
 		}
 	}
 
-	private getEdgeCorners(hexagons: Hex<Cell>[], clientIndex: number): Outline[]
+	private getEdgeCorners(hexagons: Hex<Cell>[]): Outline[]
     {
         const outline: Outline[] = [];
         let neighbor: Hex<Cell> = null;
@@ -227,8 +227,8 @@ export abstract class GridStrategy
 					const center: Vector = new Vector(c.x, c.y);
 					const corner1: Vector = new Vector(p1.x, p1.y);
 					const corner2: Vector = new Vector(p2.x, p2.y);
-					const dir1: Vector = center.clone().subtract(corner1).normalise().multiplyByScalar(clientIndex * 5) as Vector;
-					const dir2: Vector = center.clone().subtract(corner2).normalise().multiplyByScalar(clientIndex * 5) as Vector;
+					const dir1: Vector = center.clone().subtract(corner1).normalise() as Vector;
+					const dir2: Vector = center.clone().subtract(corner2).normalise() as Vector;
 					
 					corner1.add(dir1);
 					corner2.add(dir2);
@@ -240,10 +240,10 @@ export abstract class GridStrategy
         return outline;
 	}
 
-	public renderCellsOutline(selection: Hex<Cell>[], color: number, clientIndex: number, renderType: RenderType): void
+	public renderCellsOutline(selection: Hex<Cell>[], color: number, renderType: RenderType): void
 	{
-		this.selectedCellsGraphics.lineStyle(7, color, 1, 0.5);
-		const outline: Outline[] = this.getEdgeCorners(selection, clientIndex);
+		this.selectedCellsGraphics.lineStyle(6, color, 1, 0);
+		const outline: Outline[] = this.getEdgeCorners(selection);
         for (let i = 0; i < outline.length; i++)
         {
 			switch (renderType)
@@ -305,7 +305,7 @@ export abstract class GridStrategy
 
 		this.pathGraphics.lineStyle(0);
 		this.pathGraphics.endFill();
-		this.renderCellsOutline(Array.from(paths), color, clientIndex, RenderType.DottedLine);
+		this.renderCellsOutline(Array.from(paths), color, RenderType.DottedLine);
 	}
 
 	private renderStraightLine(outline: Outline): void

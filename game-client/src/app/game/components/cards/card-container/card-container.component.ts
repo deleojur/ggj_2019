@@ -18,7 +18,6 @@ export class CardContainerComponent implements OnInit
 		AssetLoader.instance.loadAssetsAsync().then(() => 
 		{
 			this.cards = AssetLoader.instance.cards;
-			console.log(this.cards);
 		});
 	}
 
