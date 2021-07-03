@@ -20,6 +20,6 @@ export class ResourceHudComponent implements OnInit
 	
 	ngOnInit() 
 	{
-		console.log(this.drawRight);
+		
 	}
 }

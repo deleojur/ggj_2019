@@ -157,10 +157,7 @@ export class AssetLoader
 		this._cards = [];
 		cardData.forEach((cardInformation, i: number) =>
 		{
-			cardInformation.tiers.forEach(tier =>
-			{
-				this.setResourceClass(tier);
-			});
+			this.setResourceClass(cardInformation);
 			const card: Card = new Card(cardInformation, i);
 			this._cards.push(card);			
 		});

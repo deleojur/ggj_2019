@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="hexagonal" renderorder="right-up" width="8" height="9" tilewidth="256" tileheight="388" infinite="0" hexsidelength="0" staggeraxis="y" staggerindex="odd" nextlayerid="12" nextobjectid="643">
+<map version="1.5" tiledversion="1.7.0" orientation="hexagonal" renderorder="right-up" width="12" height="15" tilewidth="256" tileheight="388" infinite="0" hexsidelength="0" staggeraxis="y" staggerindex="odd" nextlayerid="23" nextobjectid="678">
  <editorsettings>
   <export target="../maps/map_1.json" format="json"/>
  </editorsettings>
@@ -207,18 +207,15 @@
    <image width="256" height="192" source="../maps/Terrain_Cold/Tiles/hexUnderOcean00.png"/>
   </tile>
  </tileset>
- <tileset firstgid="68" name="Base" tilewidth="256" tileheight="384" tilecount="36" columns="0">
+ <tileset firstgid="71" name="Base" tilewidth="256" tileheight="384" tilecount="36" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
-  <terraintypes>
-   <terrain name="New Terrain" tile="0"/>
-  </terraintypes>
   <tile id="0">
    <image width="256" height="384" source="../maps/Terrain_Medieval/Base/hexBase00.png"/>
   </tile>
   <tile id="1">
    <image width="256" height="384" source="../maps/Terrain_Medieval/Base/hexDesertDunes00.png"/>
   </tile>
-  <tile id="2" terrain="0,0,0,0">
+  <tile id="2">
    <image width="256" height="384" source="../maps/Terrain_Medieval/Base/hexDirt00.png"/>
   </tile>
   <tile id="3">
@@ -236,7 +233,7 @@
   <tile id="7">
    <image width="256" height="384" source="../maps/Terrain_Medieval/Base/hexMountain00.png"/>
   </tile>
-  <tile id="8" terrain=",,0,">
+  <tile id="8">
    <properties>
     <property name="buildable" type="bool" value="false"/>
     <property name="walkable" type="bool" value="false"/>
@@ -328,8 +325,15 @@
   <tile id="49">
    <image width="75" height="56" source="../maps/Terrain_Medieval/Samples/Terrain Hexes Volcanic Wastes/lavaCone00.png"/>
   </tile>
+  <wangsets>
+   <wangset name="Terreinen" type="corner" tile="-1">
+    <wangcolor name="New Terrain" color="#ff0000" tile="0" probability="1"/>
+    <wangtile tileid="2" wangid="0,1,0,1,0,1,0,1"/>
+    <wangtile tileid="8" wangid="0,0,0,0,0,1,0,0"/>
+   </wangset>
+  </wangsets>
  </tileset>
- <tileset firstgid="118" name="Decor" tilewidth="264" tileheight="384" tilecount="117" columns="0">
+ <tileset firstgid="121" name="Decor" tilewidth="264" tileheight="384" tilecount="159" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <image width="256" height="384" source="../maps/Terrain_Medieval/Decor/castle.png"/>
@@ -682,8 +686,134 @@
   <tile id="116">
    <image width="70" height="54" source="../maps/Terrain_Medieval/Decor/well01.png"/>
   </tile>
+  <tile id="199">
+   <image width="127" height="119" source="../maps/Terrain_Coasts/Decor/islandRocky04.png"/>
+  </tile>
+  <tile id="200">
+   <image width="54" height="51" source="../maps/Terrain_Coasts/Decor/islandRocky05.png"/>
+  </tile>
+  <tile id="201">
+   <image width="63" height="68" source="../maps/Terrain_Coasts/Decor/islandRocky06.png"/>
+  </tile>
+  <tile id="202">
+   <image width="207" height="215" source="../maps/Terrain_Coasts/Decor/islandSandy00.png"/>
+  </tile>
+  <tile id="203">
+   <image width="165" height="112" source="../maps/Terrain_Coasts/Decor/islandSandy01.png"/>
+  </tile>
+  <tile id="204">
+   <image width="219" height="143" source="../maps/Terrain_Coasts/Decor/islandSandy02.png"/>
+  </tile>
+  <tile id="205">
+   <image width="149" height="122" source="../maps/Terrain_Coasts/Decor/lakeSmall00.png"/>
+  </tile>
+  <tile id="206">
+   <image width="177" height="155" source="../maps/Terrain_Coasts/Decor/lakeSmall01.png"/>
+  </tile>
+  <tile id="207">
+   <image width="126" height="68" source="../maps/Terrain_Coasts/Decor/lakeSmall02.png"/>
+  </tile>
+  <tile id="208">
+   <image width="99" height="70" source="../maps/Terrain_Coasts/Decor/lakeSmall03.png"/>
+  </tile>
+  <tile id="209">
+   <image width="77" height="67" source="../maps/Terrain_Coasts/Decor/rowboat00.png"/>
+  </tile>
+  <tile id="210">
+   <image width="74" height="58" source="../maps/Terrain_Coasts/Decor/rowboat01.png"/>
+  </tile>
+  <tile id="211">
+   <image width="123" height="111" source="../maps/Terrain_Coasts/Decor/shellBuilding00.png"/>
+  </tile>
+  <tile id="212">
+   <image width="95" height="111" source="../maps/Terrain_Coasts/Decor/shellBuilding01.png"/>
+  </tile>
+  <tile id="213">
+   <image width="58" height="57" source="../maps/Terrain_Coasts/Decor/shellBuilding02.png"/>
+  </tile>
+  <tile id="214">
+   <image width="55" height="46" source="../maps/Terrain_Coasts/Decor/shellBuilding03.png"/>
+  </tile>
+  <tile id="215">
+   <image width="54" height="62" source="../maps/Terrain_Coasts/Decor/shellBuilding04.png"/>
+  </tile>
+  <tile id="216">
+   <image width="103" height="89" source="../maps/Terrain_Coasts/Decor/shellBuilding05.png"/>
+  </tile>
+  <tile id="217">
+   <image width="142" height="108" source="../maps/Terrain_Coasts/Decor/shellBuilding06.png"/>
+  </tile>
+  <tile id="218">
+   <image width="82" height="156" source="../maps/Terrain_Coasts/Decor/shellBuilding07.png"/>
+  </tile>
+  <tile id="219">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Decor/shellVillage00.png"/>
+  </tile>
+  <tile id="220">
+   <image width="164" height="194" source="../maps/Terrain_Coasts/Decor/ship00.png"/>
+  </tile>
+  <tile id="221">
+   <image width="203" height="205" source="../maps/Terrain_Coasts/Decor/shipWreck00.png"/>
+  </tile>
+  <tile id="222">
+   <image width="227" height="188" source="../maps/Terrain_Coasts/Decor/whirlpool00.png"/>
+  </tile>
+  <tile id="223">
+   <image width="94" height="56" source="../maps/Terrain_Coasts/Decor/bridgeEW00.png"/>
+  </tile>
+  <tile id="224">
+   <image width="52" height="94" source="../maps/Terrain_Coasts/Decor/bridgeNS00.png"/>
+  </tile>
+  <tile id="225">
+   <image width="125" height="105" source="../maps/Terrain_Coasts/Decor/bridgeNW-SE00.png"/>
+  </tile>
+  <tile id="226">
+   <image width="124" height="105" source="../maps/Terrain_Coasts/Decor/bridgeSW-NE00.png"/>
+  </tile>
+  <tile id="227">
+   <image width="82" height="57" source="../maps/Terrain_Coasts/Decor/canou00.png"/>
+  </tile>
+  <tile id="228">
+   <image width="96" height="56" source="../maps/Terrain_Coasts/Decor/dockE00.png"/>
+  </tile>
+  <tile id="229">
+   <image width="111" height="80" source="../maps/Terrain_Coasts/Decor/dockNE00.png"/>
+  </tile>
+  <tile id="230">
+   <image width="77" height="102" source="../maps/Terrain_Coasts/Decor/dockNW00.png"/>
+  </tile>
+  <tile id="231">
+   <image width="76" height="92" source="../maps/Terrain_Coasts/Decor/dockSE.png"/>
+  </tile>
+  <tile id="232">
+   <image width="103" height="80" source="../maps/Terrain_Coasts/Decor/dockSW00.png"/>
+  </tile>
+  <tile id="233">
+   <image width="89" height="80" source="../maps/Terrain_Coasts/Decor/dockW00.png"/>
+  </tile>
+  <tile id="234">
+   <image width="80" height="197" source="../maps/Terrain_Coasts/Decor/harbor_crane.png"/>
+  </tile>
+  <tile id="235">
+   <image width="154" height="208" source="../maps/Terrain_Coasts/Decor/harbor_whale.png"/>
+  </tile>
+  <tile id="236">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Decor/harborWhalingDecor00.png"/>
+  </tile>
+  <tile id="237">
+   <image width="214" height="208" source="../maps/Terrain_Coasts/Decor/islandRocky00.png"/>
+  </tile>
+  <tile id="238">
+   <image width="170" height="130" source="../maps/Terrain_Coasts/Decor/islandRocky01.png"/>
+  </tile>
+  <tile id="239">
+   <image width="102" height="113" source="../maps/Terrain_Coasts/Decor/islandRocky02.png"/>
+  </tile>
+  <tile id="240">
+   <image width="105" height="110" source="../maps/Terrain_Coasts/Decor/islandRocky03.png"/>
+  </tile>
  </tileset>
- <tileset firstgid="235" name="Roads" tilewidth="256" tileheight="384" tilecount="85" columns="0">
+ <tileset firstgid="362" name="Roads" tilewidth="256" tileheight="384" tilecount="85" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <properties>
@@ -1196,7 +1326,7 @@
    <image width="256" height="384" source="../maps/Terrain_Medieval/Roads/hexRoad-111111-01.png"/>
   </tile>
  </tileset>
- <tileset firstgid="320" name="Icons" tilewidth="128" tileheight="128" tilecount="48" columns="0">
+ <tileset firstgid="447" name="Icons" tilewidth="128" tileheight="128" tilecount="54" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="48">
    <image width="128" height="128" source="../maps/Icons/aluminum_ingots.png"/>
@@ -1342,70 +1472,829 @@
   <tile id="95">
    <image width="128" height="128" source="../maps/Icons/wine_bottle.png"/>
   </tile>
+  <tile id="96">
+   <image width="128" height="128" source="../maps/Icons/norman_kite_shield.png"/>
+  </tile>
+  <tile id="97">
+   <image width="128" height="128" source="../maps/Icons/round_shield.png"/>
+  </tile>
+  <tile id="98">
+   <image width="128" height="128" source="../maps/Icons/heater_shield.png"/>
+  </tile>
+  <tile id="99">
+   <image width="128" height="128" source="../maps/Icons/kite_shield.png"/>
+  </tile>
+  <tile id="100">
+   <image width="128" height="128" source="../maps/Icons/kite_shield_eagle.png"/>
+  </tile>
+  <tile id="101">
+   <image width="128" height="128" source="../maps/Icons/kite_shield_lion.png"/>
+  </tile>
  </tileset>
- <tileset firstgid="416" name="Sprites" tilewidth="256" tileheight="384" tilecount="1" columns="0">
+ <tileset firstgid="549" name="Sprites" tilewidth="256" tileheight="384" tilecount="1" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <image width="256" height="384" source="../maps/Terrain_Medieval/Sprites/town.png"/>
   </tile>
  </tileset>
- <objectgroup id="8" name="Hex Under Layer">
-  <object id="528" gid="80" x="0" y="388" width="256" height="192"/>
-  <object id="529" gid="80" x="0" y="776" width="256" height="192"/>
-  <object id="530" gid="80" x="0" y="1164" width="256" height="192"/>
-  <object id="531" gid="80" x="0" y="1552" width="256" height="192"/>
-  <object id="532" gid="80" x="0" y="1940" width="256" height="192"/>
-  <object id="542" gid="80" x="1920" y="1746" width="256" height="192"/>
-  <object id="543" gid="80" x="1920" y="1358" width="256" height="192"/>
-  <object id="544" gid="80" x="1920" y="970" width="256" height="192"/>
-  <object id="545" gid="80" x="1920" y="582" width="256" height="192"/>
-  <object id="636" gid="80" x="256" y="1940" width="256" height="192"/>
-  <object id="637" gid="80" x="512" y="1940" width="256" height="192"/>
-  <object id="638" gid="80" x="1024" y="1940" width="256" height="192"/>
-  <object id="639" gid="80" x="768" y="1940" width="256" height="192"/>
-  <object id="640" gid="80" x="1280" y="1940" width="256" height="192"/>
-  <object id="641" gid="80" x="1536" y="1940" width="256" height="192"/>
-  <object id="642" gid="80" x="1792" y="1940" width="256" height="192"/>
- </objectgroup>
- <layer id="9" name="Tile Layer 1" width="8" height="9" offsetx="0" offsety="-130">
+ <tileset firstgid="550" name="Coasts" tilewidth="256" tileheight="384" tilecount="126" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="126">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast000010-00.png"/>
+  </tile>
+  <tile id="127">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast000010-01.png"/>
+  </tile>
+  <tile id="128">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast000011-00.png"/>
+  </tile>
+  <tile id="129">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast000011-01.png"/>
+  </tile>
+  <tile id="130">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast000100-00.png"/>
+  </tile>
+  <tile id="131">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast000100-01.png"/>
+  </tile>
+  <tile id="132">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast000101-00.png"/>
+  </tile>
+  <tile id="133">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast000101-01.png"/>
+  </tile>
+  <tile id="134">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast000110-00.png"/>
+  </tile>
+  <tile id="135">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast000110-01.png"/>
+  </tile>
+  <tile id="136">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast000111-00.png"/>
+  </tile>
+  <tile id="137">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast000111-01.png"/>
+  </tile>
+  <tile id="138">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast001000-00.png"/>
+  </tile>
+  <tile id="139">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast001000-01.png"/>
+  </tile>
+  <tile id="140">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast001001-00.png"/>
+  </tile>
+  <tile id="141">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast001001-01.png"/>
+  </tile>
+  <tile id="142">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast001010-00.png"/>
+  </tile>
+  <tile id="143">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast001010-01.png"/>
+  </tile>
+  <tile id="144">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast001011-00.png"/>
+  </tile>
+  <tile id="145">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast001011-01.png"/>
+  </tile>
+  <tile id="146">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast001100-00.png"/>
+  </tile>
+  <tile id="147">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast001100-01.png"/>
+  </tile>
+  <tile id="148">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast001101-00.png"/>
+  </tile>
+  <tile id="149">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast001101-01.png"/>
+  </tile>
+  <tile id="150">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast001110-00.png"/>
+  </tile>
+  <tile id="151">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast001110-01.png"/>
+  </tile>
+  <tile id="152">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast001111-00.png"/>
+  </tile>
+  <tile id="153">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast001111-01.png"/>
+  </tile>
+  <tile id="154">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast010000-00.png"/>
+  </tile>
+  <tile id="155">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast010000-01.png"/>
+  </tile>
+  <tile id="156">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast010001-00.png"/>
+  </tile>
+  <tile id="157">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast010001-01.png"/>
+  </tile>
+  <tile id="158">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast010010-00.png"/>
+  </tile>
+  <tile id="159">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast010010-01.png"/>
+  </tile>
+  <tile id="160">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast010011-00.png"/>
+  </tile>
+  <tile id="161">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast010011-01.png"/>
+  </tile>
+  <tile id="162">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast010100-00.png"/>
+  </tile>
+  <tile id="163">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast010100-01.png"/>
+  </tile>
+  <tile id="164">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast010101-00.png"/>
+  </tile>
+  <tile id="165">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast010101-01.png"/>
+  </tile>
+  <tile id="166">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast010110-00.png"/>
+  </tile>
+  <tile id="167">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast010110-01.png"/>
+  </tile>
+  <tile id="168">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast010111-00.png"/>
+  </tile>
+  <tile id="169">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast010111-01.png"/>
+  </tile>
+  <tile id="170">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast011000-00.png"/>
+  </tile>
+  <tile id="171">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast011000-01.png"/>
+  </tile>
+  <tile id="172">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast011001-00.png"/>
+  </tile>
+  <tile id="173">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast011001-01.png"/>
+  </tile>
+  <tile id="174">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast011010-00.png"/>
+  </tile>
+  <tile id="175">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast011010-01.png"/>
+  </tile>
+  <tile id="176">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast011011-00.png"/>
+  </tile>
+  <tile id="177">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast011011-01.png"/>
+  </tile>
+  <tile id="178">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast011100-00.png"/>
+  </tile>
+  <tile id="179">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast011100-01.png"/>
+  </tile>
+  <tile id="180">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast011101-00.png"/>
+  </tile>
+  <tile id="181">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast011101-01.png"/>
+  </tile>
+  <tile id="182">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast011110-00.png"/>
+  </tile>
+  <tile id="183">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast011110-01.png"/>
+  </tile>
+  <tile id="184">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast011111-00.png"/>
+  </tile>
+  <tile id="185">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast011111-01.png"/>
+  </tile>
+  <tile id="186">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast100000-00.png"/>
+  </tile>
+  <tile id="187">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast100000-01.png"/>
+  </tile>
+  <tile id="188">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast100001-00.png"/>
+  </tile>
+  <tile id="189">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast100001-01.png"/>
+  </tile>
+  <tile id="190">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast100010-00.png"/>
+  </tile>
+  <tile id="191">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast100010-01.png"/>
+  </tile>
+  <tile id="192">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast100011-00.png"/>
+  </tile>
+  <tile id="193">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast100011-01.png"/>
+  </tile>
+  <tile id="194">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast100100-00.png"/>
+  </tile>
+  <tile id="195">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast100100-01.png"/>
+  </tile>
+  <tile id="196">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast100101-00.png"/>
+  </tile>
+  <tile id="197">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast100101-01.png"/>
+  </tile>
+  <tile id="198">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast100110-00.png"/>
+  </tile>
+  <tile id="199">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast100110-01.png"/>
+  </tile>
+  <tile id="200">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast100111-00.png"/>
+  </tile>
+  <tile id="201">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast100111-01.png"/>
+  </tile>
+  <tile id="202">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast101000-00.png"/>
+  </tile>
+  <tile id="203">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast101000-01.png"/>
+  </tile>
+  <tile id="204">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast101001-00.png"/>
+  </tile>
+  <tile id="205">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast101001-01.png"/>
+  </tile>
+  <tile id="206">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast101010-00.png"/>
+  </tile>
+  <tile id="207">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast101010-01.png"/>
+  </tile>
+  <tile id="208">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast101011-00.png"/>
+  </tile>
+  <tile id="209">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast101011-01.png"/>
+  </tile>
+  <tile id="210">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast101100-00.png"/>
+  </tile>
+  <tile id="211">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast101100-01.png"/>
+  </tile>
+  <tile id="212">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast101101-00.png"/>
+  </tile>
+  <tile id="213">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast101101-01.png"/>
+  </tile>
+  <tile id="214">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast101110-00.png"/>
+  </tile>
+  <tile id="215">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast101110-01.png"/>
+  </tile>
+  <tile id="216">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast101111-00.png"/>
+  </tile>
+  <tile id="217">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast101111-01.png"/>
+  </tile>
+  <tile id="218">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast110000-00.png"/>
+  </tile>
+  <tile id="219">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast110000-01.png"/>
+  </tile>
+  <tile id="220">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast110001-00.png"/>
+  </tile>
+  <tile id="221">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast110001-01.png"/>
+  </tile>
+  <tile id="222">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast110010-00.png"/>
+  </tile>
+  <tile id="223">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast110010-01.png"/>
+  </tile>
+  <tile id="224">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast110011-00.png"/>
+  </tile>
+  <tile id="225">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast110011-01.png"/>
+  </tile>
+  <tile id="226">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast110100-00.png"/>
+  </tile>
+  <tile id="227">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast110100-01.png"/>
+  </tile>
+  <tile id="228">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast110101-00.png"/>
+  </tile>
+  <tile id="229">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast110101-01.png"/>
+  </tile>
+  <tile id="230">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast110110-00.png"/>
+  </tile>
+  <tile id="231">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast110110-01.png"/>
+  </tile>
+  <tile id="232">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast110111-00.png"/>
+  </tile>
+  <tile id="233">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast110111-01.png"/>
+  </tile>
+  <tile id="234">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast111000-00.png"/>
+  </tile>
+  <tile id="235">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast111000-01.png"/>
+  </tile>
+  <tile id="236">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast111001-00.png"/>
+  </tile>
+  <tile id="237">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast111001-01.png"/>
+  </tile>
+  <tile id="238">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast111010-00.png"/>
+  </tile>
+  <tile id="239">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast111010-01.png"/>
+  </tile>
+  <tile id="240">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast111011-00.png"/>
+  </tile>
+  <tile id="241">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast111011-01.png"/>
+  </tile>
+  <tile id="242">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast111100-00.png"/>
+  </tile>
+  <tile id="243">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast111100-01.png"/>
+  </tile>
+  <tile id="244">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast111101-00.png"/>
+  </tile>
+  <tile id="245">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast111101-01.png"/>
+  </tile>
+  <tile id="246">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast111110-00.png"/>
+  </tile>
+  <tile id="247">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast111110-01.png"/>
+  </tile>
+  <tile id="248">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast111111-00.png"/>
+  </tile>
+  <tile id="249">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast111111-01.png"/>
+  </tile>
+  <tile id="250">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast000001-00.png"/>
+  </tile>
+  <tile id="251">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast000001-01.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="802" name="Rivers" tilewidth="256" tileheight="384" tilecount="89" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="92">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver100100-01.png"/>
+  </tile>
+  <tile id="93">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver100100-02.png"/>
+  </tile>
+  <tile id="94">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver100101-00.png"/>
+  </tile>
+  <tile id="95">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver100110-00.png"/>
+  </tile>
+  <tile id="96">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver100111-00.png"/>
+  </tile>
+  <tile id="97">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver101000-00.png"/>
+  </tile>
+  <tile id="98">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver101001-00.png"/>
+  </tile>
+  <tile id="99">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver101010-00.png"/>
+  </tile>
+  <tile id="100">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver101011-00.png"/>
+  </tile>
+  <tile id="101">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver101100-00.png"/>
+  </tile>
+  <tile id="102">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver101101-00.png"/>
+  </tile>
+  <tile id="103">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver101110-00.png"/>
+  </tile>
+  <tile id="104">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver101111-00.png"/>
+  </tile>
+  <tile id="105">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver110000-00.png"/>
+  </tile>
+  <tile id="106">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver110000-01.png"/>
+  </tile>
+  <tile id="107">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver110001-00.png"/>
+  </tile>
+  <tile id="108">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver110010-00.png"/>
+  </tile>
+  <tile id="109">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver110011-00.png"/>
+  </tile>
+  <tile id="110">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver110100-00.png"/>
+  </tile>
+  <tile id="111">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver110101-00.png"/>
+  </tile>
+  <tile id="112">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver110110-00.png"/>
+  </tile>
+  <tile id="113">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver110111-00.png"/>
+  </tile>
+  <tile id="114">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver111000-00.png"/>
+  </tile>
+  <tile id="115">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver111001-00.png"/>
+  </tile>
+  <tile id="116">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver111010-00.png"/>
+  </tile>
+  <tile id="117">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver111011-00.png"/>
+  </tile>
+  <tile id="118">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver111100-00.png"/>
+  </tile>
+  <tile id="119">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver111101-00.png"/>
+  </tile>
+  <tile id="120">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver111110-00.png"/>
+  </tile>
+  <tile id="121">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver111111-00.png"/>
+  </tile>
+  <tile id="122">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver000000-00.png"/>
+  </tile>
+  <tile id="123">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver000001-00.png"/>
+  </tile>
+  <tile id="124">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver000010-00.png"/>
+  </tile>
+  <tile id="125">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver000011-00.png"/>
+  </tile>
+  <tile id="126">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver000011-01.png"/>
+  </tile>
+  <tile id="127">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver000011-02.png"/>
+  </tile>
+  <tile id="128">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver000100-00.png"/>
+  </tile>
+  <tile id="129">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver000101-00.png"/>
+  </tile>
+  <tile id="130">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver000101-01.png"/>
+  </tile>
+  <tile id="131">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver000110-00.png"/>
+  </tile>
+  <tile id="132">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver000110-01.png"/>
+  </tile>
+  <tile id="133">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver000111-00.png"/>
+  </tile>
+  <tile id="134">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver001000-00.png"/>
+  </tile>
+  <tile id="135">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver001001-00.png"/>
+  </tile>
+  <tile id="136">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver001001-01.png"/>
+  </tile>
+  <tile id="137">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver001001-02.png"/>
+  </tile>
+  <tile id="138">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver001010-00.png"/>
+  </tile>
+  <tile id="139">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver001010-01.png"/>
+  </tile>
+  <tile id="140">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver001011-00.png"/>
+  </tile>
+  <tile id="141">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver001100-00.png"/>
+  </tile>
+  <tile id="142">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver001101-00.png"/>
+  </tile>
+  <tile id="143">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver001110-00.png"/>
+  </tile>
+  <tile id="144">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver001111-00.png"/>
+  </tile>
+  <tile id="145">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver010000-00.png"/>
+  </tile>
+  <tile id="146">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver010001-00.png"/>
+  </tile>
+  <tile id="147">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver010010-00.png"/>
+  </tile>
+  <tile id="148">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver010010-01.png"/>
+  </tile>
+  <tile id="149">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver010011-00.png"/>
+  </tile>
+  <tile id="150">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver010100-00.png"/>
+  </tile>
+  <tile id="151">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver010100-01.png"/>
+  </tile>
+  <tile id="152">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver010101-00.png"/>
+  </tile>
+  <tile id="153">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver010110-00.png"/>
+  </tile>
+  <tile id="154">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver010111-00.png"/>
+  </tile>
+  <tile id="155">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver011000-00.png"/>
+  </tile>
+  <tile id="156">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver011000-01.png"/>
+  </tile>
+  <tile id="157">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver011001-00.png"/>
+  </tile>
+  <tile id="158">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver011010-00.png"/>
+  </tile>
+  <tile id="159">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver011011-00.png"/>
+  </tile>
+  <tile id="160">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver011100-00.png"/>
+  </tile>
+  <tile id="161">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver011101-00.png"/>
+  </tile>
+  <tile id="162">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver011110-00.png"/>
+  </tile>
+  <tile id="163">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver011111-00.png"/>
+  </tile>
+  <tile id="164">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver100000-00.png"/>
+  </tile>
+  <tile id="165">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver100001-00.png"/>
+  </tile>
+  <tile id="166">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver100010-00.png"/>
+  </tile>
+  <tile id="167">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver100011-00.png"/>
+  </tile>
+  <tile id="168">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver100100-00.png"/>
+  </tile>
+  <tile id="169">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/River Mouths/hexRiverMouth000010-01.png"/>
+  </tile>
+  <tile id="170">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/River Mouths/hexRiverMouth000100-00.png"/>
+  </tile>
+  <tile id="171">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/River Mouths/hexRiverMouth000100-01.png"/>
+  </tile>
+  <tile id="172">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/River Mouths/hexRiverMouth001000-00.png"/>
+  </tile>
+  <tile id="173">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/River Mouths/hexRiverMouth001000-01.png"/>
+  </tile>
+  <tile id="174">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/River Mouths/hexRiverMouth010000-00.png"/>
+  </tile>
+  <tile id="175">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/River Mouths/hexRiverMouth010000-01.png"/>
+  </tile>
+  <tile id="176">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/River Mouths/hexRiverMouth100000-00.png"/>
+  </tile>
+  <tile id="177">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/River Mouths/hexRiverMouth100000-01.png"/>
+  </tile>
+  <tile id="178">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/River Mouths/hexRiverMouth000001-00.png"/>
+  </tile>
+  <tile id="179">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/River Mouths/hexRiverMouth000001-01.png"/>
+  </tile>
+  <tile id="180">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/River Mouths/hexRiverMouth000010-00.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="983" name="Coastlands" tilewidth="256" tileheight="384" tilecount="20" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="42">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexIslandRockyHouse00.png"/>
+  </tile>
+  <tile id="43">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexIslandRockyTower00.png"/>
+  </tile>
+  <tile id="44">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexIslandSandy00.png"/>
+  </tile>
+  <tile id="45">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexIslandSandy01.png"/>
+  </tile>
+  <tile id="46">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexIslandSandyShipWreck00.png"/>
+  </tile>
+  <tile id="47">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexIslandSandyTemple00.png"/>
+  </tile>
+  <tile id="48">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexLake00.png"/>
+  </tile>
+  <tile id="49">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexLake01.png"/>
+  </tile>
+  <tile id="50">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexLake02.png"/>
+  </tile>
+  <tile id="51">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexLake03.png"/>
+  </tile>
+  <tile id="52">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexOceanCalm00.png"/>
+  </tile>
+  <tile id="53">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexOceanCalm01.png"/>
+  </tile>
+  <tile id="54">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexOceanCalm02.png"/>
+  </tile>
+  <tile id="55">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexOceanCalm03.png"/>
+  </tile>
+  <tile id="56">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexOceanHarborWhaling00.png"/>
+  </tile>
+  <tile id="57">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexOceanShellVillage00.png"/>
+  </tile>
+  <tile id="58">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexOceanShipWreck00.png"/>
+  </tile>
+  <tile id="59">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexOceanWhirlpool00.png"/>
+  </tile>
+  <tile id="60">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexIslandRocky00.png"/>
+  </tile>
+  <tile id="61">
+   <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexIslandRocky01.png"/>
+  </tile>
+ </tileset>
+ <objectgroup id="8" name="Hex Under Layer"/>
+ <layer id="9" name="Tile Layer 1" width="12" height="15" offsetx="0" offsety="-130">
   <data encoding="csv">
-76,76,76,76,76,76,76,76,
-76,76,76,78,77,77,76,76,
-76,76,77,77,77,77,78,76,
-76,78,77,77,77,77,76,76,
-76,76,77,77,77,77,77,76,
-76,76,78,77,77,78,76,76,
-76,76,77,77,77,77,76,76,
-76,77,77,78,77,76,76,76,
-76,76,76,76,76,76,76,76
+79,79,79,79,79,79,79,79,79,79,79,79,
+79,79,79,79,79,79,79,79,79,79,79,79,
+79,79,79,79,79,79,79,79,79,79,79,79,
+79,79,79,80,80,80,80,80,79,79,79,79,
+79,79,79,80,80,80,80,80,79,79,79,79,
+79,79,79,80,80,80,80,79,79,79,79,79,
+79,79,79,80,80,80,80,80,79,79,79,79,
+79,79,79,80,80,80,80,79,79,79,79,79,
+79,79,79,80,80,80,80,80,79,79,79,79,
+79,79,80,80,80,80,80,79,79,79,79,79,
+79,79,79,80,80,80,80,80,79,79,79,79,
+79,79,79,80,79,79,79,79,79,79,79,79,
+79,79,79,79,79,79,79,79,79,79,79,79,
+79,79,79,79,79,79,79,79,79,79,79,79,
+79,79,79,79,79,79,79,79,79,79,79,79
+</data>
+ </layer>
+ <layer id="12" name="Tile Layer 2" width="12" height="15" offsetx="0" offsety="-130">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,971,0,0,0,0,0,
+0,0,0,0,0,949,0,0,0,0,0,0,
+0,0,0,0,0,955,0,0,0,0,0,0,
+0,0,975,937,954,901,939,981,0,0,0,0,
+0,0,0,0,0,910,0,0,0,0,0,0,
+0,0,973,0,953,0,0,0,0,0,0,0,
+0,0,0,895,0,901,939,938,980,0,0,0,
+0,0,0,899,954,0,0,0,0,0,0,0,
+0,0,0,0,0,895,0,0,0,0,0,0,
+0,0,0,0,0,979,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="22" name="Tile Layer 3" width="12" height="15" offsetx="0" offsety="-130">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,549,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,549,0,0,549,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,549,0,0,0,549,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,549,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <objectgroup id="7" name="Entity Layer">
-  <object id="552" name="townhall" x="1409.09" y="1321.21">
+  <object id="552" name="townhall" x="1687.88" y="2060.6">
    <properties>
     <property name="allegiances" type="int" value="3"/>
    </properties>
    <point/>
   </object>
-  <object id="553" name="townhall" x="648.485" y="1278.79">
+  <object id="553" name="townhall" x="1775.76" y="1487.88">
    <properties>
     <property name="allegiances" type="int" value="3"/>
    </properties>
    <point/>
   </object>
-  <object id="554" name="townhall" x="1015.15" y="1087.88">
+  <object id="554" name="townhall" x="1033.33" y="703.032">
    <properties>
     <property name="allegiances" type="int" value="2"/>
    </properties>
    <point/>
   </object>
-  <object id="555" name="townhall" x="621.212" y="530.303">
+  <object id="555" name="townhall" x="875.757" y="2066.67">
    <properties>
     <property name="allegiances" type="int" value="3"/>
    </properties>
    <point/>
   </object>
-  <object id="556" name="townhall" x="1154.55" y="490.909">
+  <object id="556" name="townhall" x="1148.49" y="1315.15">
    <properties>
     <property name="allegiances" type="int" value="2"/>
    </properties>
@@ -1417,271 +2306,99 @@
    </properties>
    <point/>
   </object>
-  <object id="558" name="gain_card" x="1269.7" y="745.45">
+  <object id="558" name="gain_card" x="1036.37" y="2251.51">
    <point/>
   </object>
-  <object id="559" name="construction" x="903.03" y="500">
+  <object id="559" name="construction" x="1151.51" y="2066.67">
    <point/>
   </object>
-  <object id="560" name="construction" x="1263.64" y="1127.27">
+  <object id="560" name="construction" x="1781.82" y="1878.79">
    <point/>
   </object>
-  <object id="561" name="construction" x="896.97" y="1284.85">
+  <object id="561" name="construction" x="918.182" y="1275.76">
    <point/>
   </object>
-  <object id="562" name="construction" x="1148.49" y="927.27">
+  <object id="562" name="construction" x="1281.82" y="709.088">
    <point/>
   </object>
-  <object id="631" name="construction" x="1592" y="334">
+  <object id="631" name="construction" x="2037.45" y="712.788">
    <point/>
   </object>
-  <object id="563" name="sheep" x="1057.45" y="719.09">
+  <object id="563" name="sheep" x="1178.66" y="879.696">
    <properties>
     <property name="amount" type="int" value="2"/>
    </properties>
    <point/>
   </object>
-  <object id="564" name="sheep" x="496.31" y="1544.18">
+  <object id="564" name="sheep" x="1917.52" y="1310.85">
    <properties>
     <property name="amount" type="int" value="2"/>
    </properties>
    <point/>
   </object>
-  <object id="565" name="food" x="1232.91" y="1519.52">
+  <object id="565" name="food" x="1157.15" y="1668">
    <properties>
     <property name="amount" type="int" value="2"/>
    </properties>
    <point/>
   </object>
-  <object id="567" name="food" x="1427.27" y="939.39">
+  <object id="567" name="food" x="1539.39" y="1490.91">
    <properties>
     <property name="amount" type="int" value="2"/>
    </properties>
    <point/>
   </object>
-  <object id="568" name="food" x="624.243" y="912.12">
+  <object id="568" name="food" x="1775.76" y="721.211">
    <properties>
     <property name="amount" type="int" value="2"/>
    </properties>
    <point/>
   </object>
-  <object id="569" name="gold" x="1243.09" y="360.3">
+  <object id="569" name="gold" x="773.393" y="1893.63">
    <properties>
     <property name="amount" type="int" value="4"/>
    </properties>
    <point/>
   </object>
-  <object id="570" name="gold" x="765.88" y="748.06">
+  <object id="570" name="gold" x="1005.27" y="1487.45">
    <properties>
     <property name="amount" type="int" value="3"/>
    </properties>
    <point/>
   </object>
-  <object id="571" name="gold" x="1114.12" y="1326.79">
+  <object id="571" name="gold" x="1926.24" y="2072.24">
    <properties>
     <property name="amount" type="int" value="3"/>
    </properties>
    <point/>
   </object>
-  <object id="572" name="gems" x="844.846" y="924.06">
+  <object id="572" name="gems" x="911.513" y="890.727">
    <properties>
     <property name="amount" type="int" value="1"/>
    </properties>
    <point/>
   </object>
-  <object id="573" name="sheep" x="1554.54" y="733.33">
+  <object id="573" name="sheep" x="1545.45" y="1881.81">
    <properties>
     <property name="amount" type="int" value="1"/>
    </properties>
    <point/>
   </object>
-  <object id="627" name="gain_card" x="784.485" y="1524.36">
+  <object id="627" name="gain_card" x="1654.18" y="1318.3">
    <point/>
   </object>
-  <object id="632" name="gain_card" x="1349.76" y="521.455">
+  <object id="632" name="gain_card" x="1922.49" y="912.364">
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="11" name="Hex ID Layer">
-  <object id="600" name="province" x="845.94" y="535.938">
-   <properties>
-    <property name="id" type="int" value="5"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="601" name="province" x="1003.51" y="699.58">
-   <properties>
-    <property name="id" type="int" value="5"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="602" name="province" x="818.667" y="711.7">
-   <properties>
-    <property name="id" type="int" value="5"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="603" name="province" x="700.485" y="541.998">
-   <properties>
-    <property name="id" type="int" value="5"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="604" name="province" x="1309.58" y="396.544">
-   <properties>
-    <property name="id" type="int" value="4"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="605" name="province" x="1536.85" y="366.241">
-   <properties>
-    <property name="id" type="int" value="4"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="606" name="province" x="1427.76" y="535.938">
-   <properties>
-    <property name="id" type="int" value="4"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="607" name="province" x="1170.19" y="560.18">
-   <properties>
-    <property name="id" type="int" value="4"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="608" name="province" x="1497.46" y="705.64">
-   <properties>
-    <property name="id" type="int" value="3"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="609" name="province" x="1324.73" y="745.03">
-   <properties>
-    <property name="id" type="int" value="3"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="610" name="province" x="1633.94" y="903.58">
-   <properties>
-    <property name="id" type="int" value="3"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="611" name="province" x="1320.06" y="1081.76">
-   <properties>
-    <property name="id" type="int" value="2"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="612" name="province" x="1345.46" y="1320.79">
-   <properties>
-    <property name="id" type="int" value="2"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="614" name="province" x="1206.55" y="1320.79">
-   <properties>
-    <property name="id" type="int" value="2"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="615" name="province" x="791.394" y="1487.46">
-   <properties>
-    <property name="id" type="int" value="1"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="616" name="province" x="897.455" y="1326.85">
-   <properties>
-    <property name="id" type="int" value="1"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="617" name="province" x="586.061" y="1309.7">
-   <properties>
-    <property name="id" type="int" value="1"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="618" name="province" x="592.728" y="1450.55">
-   <properties>
-    <property name="id" type="int" value="1"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="619" name="province" x="941.58" y="1097.64">
-   <properties>
-    <property name="id" type="int" value="0"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="620" name="province" x="1205.03" y="893.7">
-   <properties>
-    <property name="id" type="int" value="0"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="621" name="province" x="918.667" y="905.64">
-   <properties>
-    <property name="id" type="int" value="0"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="622" name="player" x="1034.18" y="328.3">
-   <properties>
-    <property name="id" type="int" value="4"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="623" name="player" x="769.7" y="1142.3">
-   <properties>
-    <property name="id" type="int" value="3"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="624" name="player" x="1652.06" y="540.422">
-   <properties>
-    <property name="id" type="int" value="2"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="625" name="player" x="1522.21" y="1128.55">
-   <properties>
-    <property name="id" type="int" value="1"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="635" name="player" x="506.061" y="705.94">
-   <properties>
-    <property name="id" type="int" value="0"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="626" name="player" x="1011.52" y="1524.55">
-   <properties>
-    <property name="id" type="int" value="0"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="628" name="province" x="1437.33" y="882.67">
-   <properties>
-    <property name="id" type="int" value="3"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="629" name="province" x="1280" y="1458">
-   <properties>
-    <property name="id" type="int" value="2"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="630" name="province" x="666" y="892">
-   <properties>
-    <property name="id" type="int" value="0"/>
-   </properties>
-   <point/>
-  </object>
+ <objectgroup id="16" name="Hex Over Layer">
+  <object id="658" gid="330" x="501.394" y="1173.39" width="77" height="67"/>
+  <object id="659" gid="331" x="472.091" y="1068.39" width="74" height="58"/>
+  <object id="663" gid="545" x="1845.88" y="1724.7" width="128" height="128"/>
+  <object id="664" gid="544" x="951.364" y="1165.55" width="128" height="128"/>
+  <object id="665" gid="543" x="1448.36" y="773.061" width="128" height="128"/>
+  <object id="666" gid="547" x="825.667" y="1752.73" width="128" height="128"/>
+  <object id="667" gid="548" x="1710.15" y="1176.12" width="128" height="128"/>
+  <object id="668" gid="546" x="1339.88" y="2128.61" width="128" height="128"/>
  </objectgroup>
 </map>

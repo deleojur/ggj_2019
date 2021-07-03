@@ -23,43 +23,10 @@ export interface CardInformation
 	foregroundUrl: string;
 	type: string;
 	amount: number;	
-	tiers: 
-	[
-		{
-			description: string,
-			cost: Resource[]
-		}
-	]
+	cost: Resource[];
+	tier?: number;
 	faction?: string[];
 	description?: string;
-}
-
-export class CardTier
-{
-	public get resources(): Resource[] 
-	{
-		return this._resources;
-	}
-	public set resources(value: Resource[]) 
-	{
-		this._resources = value;
-	}
-
-	public get description(): string 
-	{
-		return this._description;
-	}
-	public set description(value: string) 
-	{
-		this._description = value;
-	}
-
-	constructor(		 
-		private _description: string,
-		private _resources: Resource[])
-	{
-
-	}
 }
 
 export class Card
@@ -71,15 +38,6 @@ export class Card
 	public set title(value: string) 
 	{
 		this._title = value;
-	}
-
-	public get tiers(): CardTier[] 
-	{
-		return this._tiers;
-	}
-	public set tiers(value: CardTier[]) 
-	{
-		this._tiers = value;
 	}
 
 	public get type(): string 
@@ -105,6 +63,20 @@ export class Card
 		return this._description;
 	}
 
+	public get resources(): Resource[] 
+	{
+		return this._resources;
+	}
+	public set resources(value: Resource[]) 
+	{
+		this._resources = value;
+	}
+
+	public get tier(): number
+	{
+		return this._tier;
+	}
+
 	public get foregroundUrl(): string 
 	{
 		return this._foregroundUrl;
@@ -125,7 +97,7 @@ export class Card
 
 	public get typeImageUrl(): string
 	{
-		return 'assets/cards/types/' + this.type + '.png';
+		return `assets/cards/types/${this.type}.png`;
 	}
 
 	public get factionImageUrls(): string[]
@@ -153,7 +125,8 @@ export class Card
 	private _foregroundUrl: string;		
 	private _type: string;
 	private _amount: number;
-	private _tiers: CardTier[];
+	private _resources: Resource[];
+	private _tier?: number;
 	private _factions?: string[];
 	private _description: string;
 
@@ -164,12 +137,9 @@ export class Card
 		this._foregroundUrl = cardInformation.foregroundUrl;
 		this._type = cardInformation.type;
 		this._amount = cardInformation.amount;
-		this._tiers = [];
+		this.resources = cardInformation.cost;
+		this._tier = cardInformation.tier;
 		this._description = cardInformation.description;
-		cardInformation.tiers.forEach(tier =>
-		{
-			this.tiers.push(new CardTier(tier.description, tier.cost));
-		});
 		this._factions = cardInformation.faction;
 	}
 }

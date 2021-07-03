@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { Resource } from 'src/app/game/entities/resource';
-import { Card, CardTier } from '../../../cards/card';
+import { Card } from '../../../cards/card';
 
 export enum PlayableCardAnimation
 {
@@ -67,16 +67,16 @@ export class PlayableCardComponent implements OnInit, AfterViewInit
 	setDescriptionText(): void
 	{
 		const iconTag = /(?=\{)(.*?)(?<=\})/g;
-		let newString = this.currentDescription;
+		let newString = this.card.description;
 		let m;
 		do 
 		{
-			m = iconTag.exec(this.currentDescription);
+			m = iconTag.exec(this.card.description);
 			if (m) 
 			{
 				const icon = `<i style="display: inline-block;
-				width: 25px;
-				height: 25px;   
+				width: 20px;
+				height: 20px;   
 				background-image: url('${'assets/resources/' + m[1].replaceAll(/[{}]/g, '') + '.png'}');
 				background-size: cover;
 				background-position: 0 0;"></i>`;
@@ -84,40 +84,5 @@ export class PlayableCardComponent implements OnInit, AfterViewInit
 			}
 		} while (m);
 		this.descriptionBody.nativeElement.innerHTML = newString;
-	}
-
-	get tierText(): string
-	{
-		return 'Tier ' + (this.selectedTier + 1).toString();
-	}
-
-	get currentTier(): CardTier
-	{
-		return this.card.tiers[this.selectedTier];
-	}
-
-	get currentDescription(): string
-	{
-		return this.card.description;
-		//return this.currentTier.description;
-	}
-
-	get currentResources(): Resource[]
-	{
-		return this.currentTier.resources;
-	}
-
-	nextTier(target: MouseEvent): void
-	{
-		this.selectedTier++;
-		this.setDescriptionText();
-		target.stopPropagation();
-	}
-
-	previousTier(target: MouseEvent): void
-	{
-		this.selectedTier--;
-		this.setDescriptionText();
-		target.stopPropagation();
 	}
 }

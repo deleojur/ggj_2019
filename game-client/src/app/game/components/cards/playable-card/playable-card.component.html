@@ -2,13 +2,13 @@
 (transitionend)="transitionEnd($event)">
 	<div class="flip-box-inner" >
 		<div class="flip-box-front">
-			<!-- <div class="resource-container container">
+			<div class="resource-container container">
 				<div class="row flex-column no-gutters align-resource-items">
-					<div class="col-2 resource-background" *ngFor="let resource of currentResources">
+					<div class="col-2 resource-background" *ngFor="let resource of card.resources">
 						<app-resource-hud [drawRight]="true" [resource]="resource" [textSize]="'small'"></app-resource-hud>	
 					</div>
 				</div>
-			</div> -->
+			</div>
 			<div [style.background]="'url(' + card.backgroundUrl + ')'" class="card-inner"
 				[style.backgroundSize]="'cover'"
 			 	class="card-inner"></div>
@@ -16,20 +16,14 @@
 				[style.background]="'url(' + card.foregroundUrl + ')'"
 				[style.backgroundSize]="'cover'"
 			 	class="card-inner"></div> -->
+			
+			<div *ngIf="card.tier">
+				<img class="tier-background" src="assets/cards/background/tier_background.png"/>
+				<h2 class="tier-text">{{card.tier}}</h2>
+			</div>
 
 			<img src="assets/cards/card-front.png" class="card-front"/>
 			
-			<!-- <div class="container tier-container">
-				<div class="row justify-content no-gutters" >
-					<div class="col-4 ">
-						<div *ngIf="selectedTier > 0"><img (click)="previousTier($event)" class="tier-arrow" src="assets/cards/btn_normal_left.svg"/></div>
-					</div>
-					<div class="col-4 tier-text">{{tierText}}</div>
-					<div class="col-4">
-						<div *ngIf="selectedTier < 2"><img class="tier-arrow" (click)="nextTier($event)" src="assets/cards/btn_normal_right.svg"/></div>
-					</div>
-				</div>
-			</div>		 -->
 
 			<img src={{card.typeImageUrl}} class="card-type"/>
 

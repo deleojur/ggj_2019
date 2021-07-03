@@ -59,7 +59,8 @@ export class MapReader
     private tileLayers: number[][] = [];
     private _entityLayer: Entity[] = [];
 	private _hexIdLayer: HexID[] = [];
-    private _hexUnderLayer: Object[] = [];	
+    private _hexUnderLayer: Object[] = [];
+	private _hexOverLayer: Object[] = [];
 	
 	private worldTiles: Map<number, Tile> = new Map<number, Tile>();
 
@@ -72,6 +73,11 @@ export class MapReader
     {
         return this._hexUnderLayer;
     }
+
+	public get hexOverLayer(): Object[]
+	{
+		return this._hexOverLayer;
+	}
 
 	public get hexIdLayer(): HexID[]
 	{
@@ -117,7 +123,7 @@ export class MapReader
         const layers = this.worldMap.layers;
         const uniqueTileIds: Set<number> = new Set<number>();
         layers.forEach(layer => 
-        {
+        {			
             if (layer.type === 'tilelayer')
             {
                 this.parseTileLayer(layer, uniqueTileIds);
@@ -129,6 +135,10 @@ export class MapReader
                     {
                         this._hexUnderLayer.push(obj);
 						uniqueTileIds.add(obj.gid);
+                    } else if (layer.name === 'Hex Over Layer')
+                    {
+                        this._hexOverLayer.push(obj);
+						uniqueTileIds.add(obj.gid);
                     } else if (layer.name === 'Entity Layer')
                     {
 						const amount: number = this.getPropertyValueAsNumber(obj, 'amount');
@@ -137,7 +147,7 @@ export class MapReader
 						obj.allegiances = allegiances;
                         this._entityLayer.push(obj);
                     } else if (layer.name === 'Hex ID Layer')
-					{
+					{						
 						const id: number = this.getPropertyValueAsNumber(obj, 'id');
 						const hexId: HexID = { x: obj.x, y: obj.y, id: id, name: obj.name };						
 						this._hexIdLayer.push(hexId);
@@ -201,7 +211,7 @@ export class MapReader
                 {
                     const sprite: PIXI.Sprite = new PIXI.Sprite(tile.texture);
     
-                    grid[j].sprites.push(sprite);
+                    grid[j].sprites.push({sprite: sprite, zIndex: i});
                     tile.properties.forEach((property: TileProperty) =>
                     {
 						grid[j].properties.push(property);
@@ -242,5 +252,6 @@ export class MapReader
         this.mapTileLayers(grid);        
         this.mapObjectLayer(this._hexUnderLayer);
 		this.mapEntityLayer(this._entityLayer);
+		this.mapObjectLayer(this._hexOverLayer);
     }
 }

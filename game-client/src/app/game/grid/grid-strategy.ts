@@ -69,7 +69,7 @@ export abstract class GridStrategy
 	}
 
 	private setZIndex(hex: Hex<Cell>, entity: Entity): void
-	{
+	{		
 		entity.zIndex = hex.y;
 		if (entity instanceof Unit)
 		{

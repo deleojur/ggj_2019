@@ -18,6 +18,7 @@ export class CardContainerComponent implements OnInit
 		AssetLoader.instance.loadAssetsAsync().then(() => 
 		{
 			this.cards = AssetLoader.instance.cards;
+			//this.cards.splice(0, 65);
 		});
 	}
 

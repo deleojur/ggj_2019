@@ -12,6 +12,7 @@ const tileIds = parseLayers();
 const tiles = parseTilesets(tileIds);
 tiles.forEach(tile =>
 {
+	console.log(tile.imageUrl);
     fs.copySync(path.resolve(__dirname, tile.imageUrl), path.join(__dirname, '../game-client/src/assets', tile.imageUrl));
 });
 fs.copySync(path.resolve(__dirname, fileName), path.join(__dirname, '../game-client/src/assets', fileName));
