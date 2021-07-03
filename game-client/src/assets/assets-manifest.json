@@ -50,6 +50,14 @@
 		"assets/Terrain_Coasts/Coasts/hexCoast110000-00.png",
 		"assets/Terrain_Coasts/Coasts/hexCoast110000-01.png",
 
+		"assets/Terrain_Coasts/Coasts/hexCoast000010-01.png",
+		"assets/Terrain_Coasts/Coasts/hexCoast001000-01.png",
+		"assets/Terrain_Coasts/Coasts/hexCoast001100-01.png",
+		"assets/Terrain_Coasts/Coasts/hexCoast011000-01.png",
+		"assets/Terrain_Coasts/Coasts/hexCoast011100-01.png",
+		"assets/Terrain_Coasts/Coasts/hexCoast100011-00.png",
+		"assets/Terrain_Coasts/Coasts/hexCoast110001-00.png",
+
 		"assets/Terrain_Coasts/Rivers/hexRiver001001-00.png",
 		"assets/Terrain_Coasts/Rivers/hexRiver001001-01.png",
 		"assets/Terrain_Coasts/Rivers/hexRiver001001-02.png",
@@ -79,9 +87,13 @@
 		"assets/Terrain_Coasts/Tiles/hexIslandSandy00.png",
 		"assets/Terrain_Coasts/Tiles/hexIslandSandy01.png",
 		"assets/Terrain_Coasts/Tiles/hexIslandSandyShipWreck00.png",
+		"assets/Terrain_Coasts/Tiles/hexIslandRocky01.png",
+		"assets/Terrain_Coasts/Tiles/hexOceanWhirlpool00.png",
 
 		"assets/Terrain_Coasts/Decor/rowboat00.png",
 		"assets/Terrain_Coasts/Decor/rowboat01.png",
+		"assets/Terrain_Coasts/Decor/ship00.png",
+
 		"assets/Icons/heater_shield.png",
 		"assets/Icons/kite_shield_eagle.png",
 		"assets/Icons/kite_shield_lion.png",
@@ -116,6 +128,18 @@
 		"assets/resources/gain_card.png",
 		"assets/resources/buy_card.png",
 		"assets/resources/construct.png",
+
+		"assets/Terrain_Medieval/Decor/house01.png",
+		"assets/Terrain_Medieval/Decor/house02.png",
+		"assets/Terrain_Medieval/Decor/house04.png",
+		"assets/Terrain_Medieval/Decor/house11.png",
+		"assets/Terrain_Medieval/Decor/house12.png",
+		"assets/Terrain_Medieval/Decor/house13.png",
+		"assets/Terrain_Medieval/Decor/house14.png",
+		"assets/Terrain_Medieval/Decor/house15.png",
+		"assets/Terrain_Medieval/Decor/treesA_cluster01.png",
+
+
 
 		"assets/Terrain_Medieval/Decor/village00.png",
 		"assets/Terrain_Medieval/Decor/village01.png",
