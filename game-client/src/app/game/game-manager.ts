@@ -160,9 +160,8 @@ export class GameManager
 			const size: PIXI.Point = this._grid.generateWorld();
 			this.viewport.initViewport(size.x, size.y);
 			this._grid.init(gridGraphics, pathGraphics);
-			this._turnSystem.init(commandGraphics);			
-
-			this.viewport.addChild(gridGraphics);
+			this._turnSystem.init(commandGraphics);
+			
 			this.viewport.addChild(commandGraphics);
 			this.viewport.addChild(pathGraphics);
 			return cb();

@@ -4,8 +4,7 @@ import { Hex } from 'honeycomb-grid';
 import { Cell } from './grid';
 import { Entity } from '../entities/entity';
 import { Graphics, Polygon } from 'pixi.js';
-import { Queue } from 'simple-fifo-queue';
-import { TurnCommand, TurnInformation } from '../turns/turn-command';
+import { TurnInformation } from '../turns/turn-command';
 import { GameManager } from '../game-manager';
 
 interface Path

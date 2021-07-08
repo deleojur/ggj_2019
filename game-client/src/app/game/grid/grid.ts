@@ -6,7 +6,6 @@ import { ViewportManager } from '../render/viewport';
 import { AssetLoader } from 'src/app/asset-loader';
 import { GridStrategy, RenderType } from './grid-strategy';
 import { TileEntity } from '../entities/tile-entities/tile-entity';
-import { zIndex } from 'html2canvas/dist/types/css/property-descriptors/z-index';
 
 export interface Cell
 {
@@ -29,7 +28,7 @@ export class GridManager
 	private _provinces: Map<number, Hex<Cell>[]>;
 	private _playerStartPositions: Hex<Cell>[];
     private tileWidth: number = 147.75;
-    private tileHeight: number = 129.5;
+    private tileHeight: number = 128;
 	private mapReader: MapReader;
 
     constructor(private gridStrategy: GridStrategy, private viewport: ViewportManager)
@@ -70,11 +69,12 @@ export class GridManager
     public init(gridGraphics: Graphics, pathGraphics: Graphics): void
     {
 		this.initObjectLayer(this.mapReader.hexUnderLayer);
+		this.gridStrategy.init(gridGraphics, pathGraphics);		
 		this.initTileLayer();
-		this.gridStrategy.init(gridGraphics, pathGraphics);
-		this.initLocationLayer(this.mapReader.hexIdLayer);
-		this.initEntityLayer(this.mapReader.entities);
+		this.initLocationLayer(this.mapReader.hexIdLayer);		
+		this.initEntityLayer(this.mapReader.entities);		
 		this.initObjectLayer(this.mapReader.hexOverLayer);
+		this.viewport.addChild(gridGraphics);		
 	}
 	
     private initTileLayer(): void
@@ -87,7 +87,6 @@ export class GridManager
             
             hex.sprites.forEach((s: { sprite: Sprite, zIndex: number }) =>
             {
-				console.log(s.zIndex);
 				const sprite: Sprite = s.sprite;
                 sprite.x = point.x;
                 sprite.y = point.y - 128;
@@ -116,27 +115,43 @@ export class GridManager
 		{
 			switch (key)
 			{
-				case 0:
-					this.gridStrategy.renderCellsOutline(val, 0xff0000, RenderType.StraightLine);
-					break;
 				case 1:
-					this.gridStrategy.renderCellsOutline(val, 0xff00ff, RenderType.StraightLine);
+					this.gridStrategy.renderCellsOutline(val, 0xff0018, RenderType.StraightLine);
 					break;
 				case 2:
-					this.gridStrategy.renderCellsOutline(val, 0x00ff00, RenderType.StraightLine);
+					this.gridStrategy.renderCellsOutline(val, 0xffa52c, RenderType.StraightLine);
 					break;
 				case 3:
-					this.gridStrategy.renderCellsOutline(val, 0xffff00, RenderType.StraightLine);
+					this.gridStrategy.renderCellsOutline(val, 0xffff41, RenderType.StraightLine);
 					break;
 				case 4:
-					this.gridStrategy.renderCellsOutline(val, 0x00ffff, RenderType.StraightLine);
+					this.gridStrategy.renderCellsOutline(val, 0x00f01f, RenderType.StraightLine);
 					break;
 				case 5:
-					this.gridStrategy.renderCellsOutline(val, 0xff8888, RenderType.StraightLine);
+					this.gridStrategy.renderCellsOutline(val, 0x0000f9, RenderType.StraightLine);
 					break;
 				case 6:
-					this.gridStrategy.renderCellsOutline(val, 0x8888ff, RenderType.StraightLine);
+					this.gridStrategy.renderCellsOutline(val, 0x86007d, RenderType.StraightLine);
 					break;
+
+				/*case 11:
+					this.gridStrategy.renderCellsOutline(val, 0xeeed41, RenderType.StraightLine);
+					break;
+				case 12:
+					this.gridStrategy.renderCellsOutline(val, 0xc0c0c0, RenderType.StraightLine);
+					break;
+				case 13:
+					this.gridStrategy.renderCellsOutline(val, 0xe12120, RenderType.StraightLine);
+					break;
+				case 14:
+				this.gridStrategy.renderCellsOutline(val, 0x0492c2, RenderType.StraightLine);
+					break;
+				case 15:
+					this.gridStrategy.renderCellsOutline(val, 0x3cb043, RenderType.StraightLine);
+					break;
+				case 16:
+					this.gridStrategy.renderCellsOutline(val, 0x1b1e23, RenderType.StraightLine);
+					break;*/
 			}
 				
 		});
@@ -148,7 +163,8 @@ export class GridManager
 		{
 			const hex = this.getHexFromAbsoluteCoordinates(entity.x, entity.y);
 			const tileEntity: TileEntity = new TileEntity(entity, hex);
-			this.viewport.addChild(tileEntity);
+			tileEntity.zIndex = 1000 + entity.y;
+			this._tilesContainer.addChild(tileEntity);
 		});
 	}
 	
@@ -174,11 +190,11 @@ export class GridManager
             if (sprite)
             {
                 sprite.x = object.x;
-                sprite.y = object.y;
+                sprite.y = object.y / 129.5 * 128;
                 sprite.anchor.set(0, 1);
                 this.viewport.addChild(sprite);
             }
-            if (object.properties)
+            /*if (object.properties)
             {
                 const hexCoordinates = this.gridFactory.pointToHex([object.x / this.tileWidth, object.y / this.tileHeight]);
                 const hex: Hex<Cell> = this.grid.get(hexCoordinates);
@@ -193,7 +209,7 @@ export class GridManager
 						this.gridStrategy.addStartEntityPrototype(index, hex, entityName);
 					}
                 });
-            }
+            }*/
 		});
 	}
 

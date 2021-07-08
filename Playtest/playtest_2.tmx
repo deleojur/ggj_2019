@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.0" orientation="hexagonal" renderorder="right-up" width="12" height="15" tilewidth="256" tileheight="388" infinite="0" hexsidelength="0" staggeraxis="y" staggerindex="odd" nextlayerid="24" nextobjectid="691">
+<map version="1.5" tiledversion="1.7.0" orientation="hexagonal" renderorder="right-up" width="12" height="15" tilewidth="256" tileheight="388" infinite="0" hexsidelength="0" staggeraxis="y" staggerindex="odd" nextlayerid="26" nextobjectid="797">
  <editorsettings>
   <export target="../maps/map_1.json" format="json"/>
  </editorsettings>
@@ -207,7 +207,7 @@
    <image width="256" height="192" source="../maps/Terrain_Cold/Tiles/hexUnderOcean00.png"/>
   </tile>
  </tileset>
- <tileset firstgid="71" name="Base" tilewidth="256" tileheight="384" tilecount="36" columns="0">
+ <tileset firstgid="68" name="Base" tilewidth="256" tileheight="384" tilecount="37" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <image width="256" height="384" source="../maps/Terrain_Medieval/Base/hexBase00.png"/>
@@ -325,6 +325,9 @@
   <tile id="49">
    <image width="75" height="56" source="../maps/Terrain_Medieval/Samples/Terrain Hexes Volcanic Wastes/lavaCone00.png"/>
   </tile>
+  <tile id="50">
+   <image width="256" height="384" source="../maps/Terrain_Medieval/Base/hexOcean01.png"/>
+  </tile>
   <wangsets>
    <wangset name="Terreinen" type="corner" tile="-1">
     <wangcolor name="New Terrain" color="#ff0000" tile="0" probability="1"/>
@@ -333,7 +336,7 @@
    </wangset>
   </wangsets>
  </tileset>
- <tileset firstgid="121" name="Decor" tilewidth="264" tileheight="384" tilecount="159" columns="0">
+ <tileset firstgid="119" name="Decor" tilewidth="264" tileheight="384" tilecount="159" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <image width="256" height="384" source="../maps/Terrain_Medieval/Decor/castle.png"/>
@@ -813,7 +816,7 @@
    <image width="105" height="110" source="../maps/Terrain_Coasts/Decor/islandRocky03.png"/>
   </tile>
  </tileset>
- <tileset firstgid="362" name="Roads" tilewidth="256" tileheight="384" tilecount="85" columns="0">
+ <tileset firstgid="360" name="Roads" tilewidth="256" tileheight="384" tilecount="85" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <properties>
@@ -1326,7 +1329,7 @@
    <image width="256" height="384" source="../maps/Terrain_Medieval/Roads/hexRoad-111111-01.png"/>
   </tile>
  </tileset>
- <tileset firstgid="447" name="Icons" tilewidth="128" tileheight="128" tilecount="54" columns="0">
+ <tileset firstgid="445" name="Icons" tilewidth="128" tileheight="128" tilecount="54" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="48">
    <image width="128" height="128" source="../maps/Icons/aluminum_ingots.png"/>
@@ -1491,13 +1494,13 @@
    <image width="128" height="128" source="../maps/Icons/kite_shield_lion.png"/>
   </tile>
  </tileset>
- <tileset firstgid="549" name="Sprites" tilewidth="256" tileheight="384" tilecount="1" columns="0">
+ <tileset firstgid="547" name="Sprites" tilewidth="256" tileheight="384" tilecount="1" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <image width="256" height="384" source="../maps/Terrain_Medieval/Sprites/town.png"/>
   </tile>
  </tileset>
- <tileset firstgid="550" name="Coasts" tilewidth="256" tileheight="384" tilecount="126" columns="0">
+ <tileset firstgid="548" name="Coasts" tilewidth="256" tileheight="384" tilecount="126" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="126">
    <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast000010-00.png"/>
@@ -1878,7 +1881,7 @@
    <image width="256" height="384" source="../maps/Terrain_Coasts/Coasts/hexCoast000001-01.png"/>
   </tile>
  </tileset>
- <tileset firstgid="802" name="Rivers" tilewidth="256" tileheight="384" tilecount="89" columns="0">
+ <tileset firstgid="800" name="Rivers" tilewidth="256" tileheight="384" tilecount="89" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="92">
    <image width="256" height="384" source="../maps/Terrain_Coasts/Rivers/hexRiver100100-01.png"/>
@@ -2148,7 +2151,7 @@
    <image width="256" height="384" source="../maps/Terrain_Coasts/River Mouths/hexRiverMouth000010-00.png"/>
   </tile>
  </tileset>
- <tileset firstgid="983" name="Coastlands" tilewidth="256" tileheight="384" tilecount="20" columns="0">
+ <tileset firstgid="981" name="Coastlands" tilewidth="256" tileheight="384" tilecount="20" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="42">
    <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexIslandRockyHouse00.png"/>
@@ -2211,77 +2214,87 @@
    <image width="256" height="384" source="../maps/Terrain_Coasts/Tiles/hexIslandRocky01.png"/>
   </tile>
  </tileset>
- <objectgroup id="8" name="Hex Under Layer"/>
+ <tileset firstgid="1043" name="Shields" tilewidth="1024" tileheight="1024" tilecount="6" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="1024" height="1024" source="../../Unity Projects/Icons/Assets/fantasy_buttons/ring/bg/r_bg5.png"/>
+  </tile>
+  <tile id="1">
+   <image width="1024" height="1024" source="../../Unity Projects/Icons/Assets/fantasy_buttons/ring/bg/r_bg1.png"/>
+  </tile>
+  <tile id="2">
+   <image width="1024" height="1024" source="../../Unity Projects/Icons/Assets/fantasy_buttons/ring/bg/r_bg2.png"/>
+  </tile>
+  <tile id="3">
+   <image width="1024" height="1024" source="../../Unity Projects/Icons/Assets/fantasy_buttons/ring/bg/r_bg3.png"/>
+  </tile>
+  <tile id="4">
+   <image width="1024" height="1024" source="../../Unity Projects/Icons/Assets/fantasy_buttons/ring/bg/r_bg4.png"/>
+  </tile>
+  <tile id="5">
+   <image width="1024" height="1024" source="../../Unity Projects/Icons/Assets/fantasy_buttons/ring/frame/ring_frame.PNG"/>
+  </tile>
+ </tileset>
+ <objectgroup id="8" name="Hex Under Layer">
+  <object id="761" gid="80" x="0" y="388" width="256" height="192"/>
+  <object id="762" gid="80" x="0" y="776" width="256" height="192"/>
+  <object id="763" gid="80" x="0" y="1164" width="256" height="192"/>
+  <object id="764" gid="80" x="0" y="1552" width="256" height="192"/>
+  <object id="765" gid="80" x="0" y="1940" width="256" height="192"/>
+  <object id="766" gid="80" x="0" y="2328" width="256" height="192"/>
+  <object id="767" gid="80" x="0" y="2716" width="256" height="192"/>
+  <object id="768" gid="80" x="0" y="3104" width="256" height="192"/>
+  <object id="769" gid="80" x="256" y="3104" width="256" height="192"/>
+  <object id="770" gid="80" x="512" y="3104" width="256" height="192"/>
+  <object id="771" gid="80" x="768" y="3104" width="256" height="192"/>
+  <object id="772" gid="80" x="1024" y="3104" width="256" height="192"/>
+  <object id="773" gid="80" x="1280" y="3104" width="256" height="192"/>
+  <object id="774" gid="80" x="1536" y="3104" width="256" height="192"/>
+  <object id="775" gid="80" x="1792" y="3104" width="256" height="192"/>
+  <object id="776" gid="80" x="2048" y="3104" width="256" height="192"/>
+  <object id="777" gid="80" x="2304" y="3104" width="256" height="192"/>
+  <object id="778" gid="80" x="2560" y="3104" width="256" height="192"/>
+  <object id="779" gid="80" x="2816" y="3104" width="256" height="192"/>
+  <object id="780" gid="80" x="2944" y="2910" width="256" height="192"/>
+  <object id="781" gid="80" x="2944" y="2522" width="256" height="192"/>
+  <object id="782" gid="80" x="2944" y="2134" width="256" height="192"/>
+  <object id="783" gid="80" x="2944" y="1746" width="256" height="192"/>
+  <object id="784" gid="80" x="2944" y="1358" width="256" height="192"/>
+  <object id="786" gid="80" x="2944" y="970" width="256" height="192"/>
+  <object id="789" gid="80" x="2944" y="582" width="256" height="192"/>
+ </objectgroup>
  <layer id="9" name="Tile Layer 1" width="12" height="15" offsetx="0" offsety="-130">
   <data encoding="csv">
-1038,1038,1038,1038,1038,1038,1038,1038,1038,1038,1038,1038,
-1038,1038,1038,1038,1027,1038,1038,1038,1038,1038,1038,1038,
-1038,1038,1038,79,79,79,79,79,79,1038,1038,1038,
-1038,1038,79,80,80,80,80,80,79,1038,1038,1038,
-1038,1038,79,80,80,80,80,80,79,1038,1028,1038,
-1038,1025,79,80,80,80,80,79,1038,1038,1038,1038,
-1038,1038,79,80,80,80,80,80,79,1038,1038,1038,
-1038,1038,79,80,80,80,80,79,1038,1038,1038,1038,
-1038,1038,79,80,80,80,80,80,79,1038,1038,1038,
-1038,79,80,80,80,80,80,79,1029,1038,1038,1038,
-1038,1042,79,80,80,80,80,80,79,1038,1038,1038,
-1038,1038,79,80,79,79,79,79,1038,1038,1038,1038,
-1038,1038,1038,79,79,1038,1038,1038,1038,1038,1038,1038,
-1038,1038,1038,1038,1038,1038,1044,1038,1038,1038,1038,1038,
-1038,1038,1038,1038,1038,1038,1038,1038,1038,1038,1038,1038
+1036,1036,1036,1036,1036,1036,1036,1036,1036,1036,1036,1036,
+1036,1026,1036,1036,1033,1036,1036,1036,1036,1034,1036,1036,
+1036,1035,1036,1034,1036,76,76,118,118,1036,1041,1036,
+1036,1036,1036,76,76,77,77,77,118,1036,1036,1036,
+1036,1036,1036,76,77,77,77,77,77,118,1036,1036,
+1036,1036,76,77,77,77,77,77,118,1036,1036,1036,
+1036,1036,1023,76,77,77,77,77,77,118,1034,1036,
+1036,1036,1036,76,77,77,77,77,118,1036,1034,1036,
+1036,1036,1036,76,77,77,77,77,118,1036,1036,1035,
+1036,1036,76,77,77,77,77,118,1027,1034,1036,1035,
+1036,1034,1036,76,76,76,118,118,1036,1034,1036,1036,
+1035,1034,1036,1036,1036,1036,1036,1036,1036,1035,1035,1036,
+1036,1036,1034,1034,1034,1036,1036,1034,1036,1036,1035,1036,
+1036,1036,1036,1034,1036,1036,1042,1035,1036,1036,1036,1036,
+1036,1036,1036,1036,1036,1036,1036,1036,1036,1036,1035,1036
 </data>
  </layer>
  <layer id="23" name="Coasts" width="12" height="15" offsetx="0" offsety="-130">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,680,685,684,685,684,677,0,0,0,
-0,0,697,0,0,0,0,0,800,0,0,0,
-0,0,689,0,0,0,0,0,739,0,0,0,
-0,0,729,0,0,0,0,743,0,0,0,0,
-0,0,688,0,0,0,0,0,801,0,0,0,
-0,0,728,0,0,0,0,742,0,0,0,0,
-0,0,696,0,0,0,0,0,800,0,0,0,
-0,688,0,0,0,0,0,743,0,0,0,0,
-0,0,720,0,0,0,0,0,800,0,0,0,
-0,0,721,0,770,768,769,737,0,0,0,0,
-0,0,0,705,737,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="12" name="Tile Layer 2" width="12" height="15" offsetx="0" offsety="-130">
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,971,0,0,0,0,0,
-0,0,0,0,0,949,0,0,0,0,0,0,
-0,0,0,0,0,955,0,0,0,0,0,0,
-0,0,975,937,954,901,939,981,0,0,0,0,
-0,0,0,0,0,910,0,0,0,0,0,0,
-0,0,973,0,953,0,0,0,0,0,0,0,
-0,0,0,895,0,901,939,938,980,0,0,0,
-0,0,0,899,954,0,0,0,0,0,0,0,
-0,0,0,0,0,895,0,0,0,0,0,0,
-0,0,0,0,0,979,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer id="22" name="Tile Layer 3" width="12" height="15" offsetx="0" offsety="-130">
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,678,682,683,675,0,0,0,
+0,0,0,678,699,0,0,0,676,0,0,0,
+0,0,0,695,0,0,0,0,0,798,0,0,
+0,0,687,0,0,0,0,0,740,0,0,0,
+0,0,0,718,0,0,0,0,0,799,0,0,
+0,0,0,726,0,0,0,0,737,0,0,0,
+0,0,0,694,0,0,0,0,736,0,0,0,
+0,0,687,0,0,0,0,737,0,0,0,0,
+0,0,0,702,767,766,767,735,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,
@@ -2289,148 +2302,332 @@
 </data>
  </layer>
  <objectgroup id="7" name="Entity Layer">
-  <object id="552" name="townhall" x="1687.88" y="2060.6">
+  <object id="552" name="townhall" x="2114" y="1317.02">
    <properties>
     <property name="allegiances" type="int" value="3"/>
    </properties>
    <point/>
   </object>
-  <object id="553" name="townhall" x="1775.76" y="1487.88">
+  <object id="553" name="townhall" x="1905.7" y="1673.15">
    <properties>
     <property name="allegiances" type="int" value="3"/>
    </properties>
    <point/>
   </object>
-  <object id="554" name="townhall" x="1033.33" y="703.032">
+  <object id="554" name="townhall" x="1117.94" y="1654.3">
    <properties>
     <property name="allegiances" type="int" value="2"/>
    </properties>
    <point/>
   </object>
-  <object id="555" name="townhall" x="875.757" y="2066.67">
+  <object id="555" name="townhall" x="1655.7" y="899.09">
    <properties>
     <property name="allegiances" type="int" value="3"/>
    </properties>
    <point/>
   </object>
-  <object id="556" name="townhall" x="1148.49" y="1315.15">
+  <object id="556" name="townhall" x="1512.13" y="1490.91">
    <properties>
     <property name="allegiances" type="int" value="2"/>
    </properties>
    <point/>
   </object>
-  <object id="557" name="townhall" x="1667.51" y="900.97">
+  <object id="557" name="townhall" x="1196.18" y="937.637">
    <properties>
     <property name="allegiances" type="int" value="2"/>
    </properties>
    <point/>
   </object>
-  <object id="558" name="gain_card" x="1036.37" y="2251.51">
+  <object id="558" name="gain_card" x="1090.67" y="1855.76">
    <point/>
   </object>
-  <object id="559" name="construction" x="1151.51" y="2066.67">
+  <object id="559" name="construction" x="1412.12" y="1681.82">
    <point/>
   </object>
-  <object id="560" name="construction" x="1781.82" y="1878.79">
+  <object id="560" name="gems" x="1792.56" y="1478.26">
+   <properties>
+    <property name="amount" type="int" value="1"/>
+   </properties>
    <point/>
   </object>
-  <object id="561" name="construction" x="918.182" y="1275.76">
+  <object id="561" name="construction" x="1630.3" y="1309.09">
    <point/>
   </object>
-  <object id="562" name="construction" x="1281.82" y="709.088">
+  <object id="562" name="construction" x="1400" y="896.967">
    <point/>
   </object>
   <object id="631" name="construction" x="2037.45" y="712.788">
    <point/>
   </object>
-  <object id="563" name="sheep" x="1178.66" y="879.696">
+  <object id="563" name="sheep" x="1521.08" y="1085.76">
    <properties>
     <property name="amount" type="int" value="2"/>
    </properties>
    <point/>
   </object>
-  <object id="564" name="sheep" x="1917.52" y="1310.85">
+  <object id="564" name="sheep" x="2044.79" y="1129.03">
    <properties>
     <property name="amount" type="int" value="2"/>
    </properties>
    <point/>
   </object>
-  <object id="565" name="food" x="1157.15" y="1668">
+  <object id="565" name="food" x="1166.24" y="1322.55">
    <properties>
     <property name="amount" type="int" value="2"/>
    </properties>
    <point/>
   </object>
-  <object id="567" name="food" x="1539.39" y="1490.91">
+  <object id="567" name="food" x="1357.69" y="1870.48">
    <properties>
     <property name="amount" type="int" value="2"/>
    </properties>
    <point/>
   </object>
-  <object id="568" name="food" x="1775.76" y="721.211">
+  <object id="568" name="food" x="1737.76" y="763.211">
    <properties>
     <property name="amount" type="int" value="2"/>
    </properties>
    <point/>
   </object>
-  <object id="569" name="gold" x="773.393" y="1893.63">
+  <object id="569" name="gold" x="1776.43" y="1880.9">
    <properties>
     <property name="amount" type="int" value="4"/>
    </properties>
    <point/>
   </object>
-  <object id="570" name="gold" x="1005.27" y="1487.45">
+  <object id="570" name="gold" x="1405.27" y="1314.72">
    <properties>
     <property name="amount" type="int" value="3"/>
    </properties>
    <point/>
   </object>
-  <object id="571" name="gold" x="1926.24" y="2072.24">
+  <object id="571" name="gold" x="1905.27" y="1305.69">
    <properties>
     <property name="amount" type="int" value="3"/>
    </properties>
    <point/>
   </object>
-  <object id="572" name="gems" x="911.513" y="890.727">
+  <object id="572" name="gems" x="1272.12" y="1093.76">
    <properties>
     <property name="amount" type="int" value="1"/>
    </properties>
    <point/>
   </object>
-  <object id="573" name="sheep" x="1545.45" y="1881.81">
+  <object id="573" name="sheep" x="1700.66" y="1704.11">
    <properties>
     <property name="amount" type="int" value="1"/>
    </properties>
    <point/>
   </object>
-  <object id="627" name="gain_card" x="1654.18" y="1318.3">
+  <object id="627" name="gain_card" x="1787.51" y="1142.54">
    <point/>
   </object>
-  <object id="632" name="gain_card" x="1922.49" y="912.364">
+  <object id="632" name="gain_card" x="1952.49" y="914.364">
+   <point/>
+  </object>
+  <object id="790" name="player2" x="1570" y="670">
+   <point/>
+  </object>
+  <object id="792" name="player4" x="1062" y="1072">
+   <point/>
+  </object>
+  <object id="793" name="player3" x="2214" y="890">
+   <point/>
+  </object>
+  <object id="794" name="player1" x="2040" y="1470">
+   <point/>
+  </object>
+  <object id="795" name="player2" x="1516" y="1820">
+   <point/>
+  </object>
+  <object id="796" name="player1" x="1332" y="1424">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="24" name="Hex ID Layer">
+  <object id="694" name="province" x="1808.97" y="727.758">
+   <properties>
+    <property name="id" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="707" name="province" x="2025.58" y="766.606">
+   <properties>
+    <property name="id" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="708" name="province" x="1741.09" y="950.606">
+   <properties>
+    <property name="id" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="709" name="province" x="1873.03" y="950.667">
+   <properties>
+    <property name="id" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="710" name="province" x="1513.21" y="1103.39">
+   <properties>
+    <property name="id" type="int" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="711" name="province" x="1384.97" y="914.303">
+   <properties>
+    <property name="id" type="int" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="712" name="province" x="1170.67" y="903.394">
+   <properties>
+    <property name="id" type="int" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="713" name="province" x="1304" y="1117.45">
+   <properties>
+    <property name="id" type="int" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="714" name="province" x="1664.61" y="1328.85">
+   <properties>
+    <property name="id" type="int" value="3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="715" name="province" x="1128" y="1360">
+   <properties>
+    <property name="id" type="int" value="3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="716" name="province" x="1408.97" y="1330.42">
+   <properties>
+    <property name="id" type="int" value="3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="717" name="province" x="1528.97" y="1513.21">
+   <properties>
+    <property name="id" type="int" value="3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="718" name="province" x="1976.36" y="1353.45">
+   <properties>
+    <property name="id" type="int" value="4"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="719" name="province" x="2190.18" y="1327.39">
+   <properties>
+    <property name="id" type="int" value="4"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="720" name="province" x="2035.88" y="1132.12">
+   <properties>
+    <property name="id" type="int" value="4"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="721" name="province" x="1805.09" y="1143.15">
+   <properties>
+    <property name="id" type="int" value="4"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="722" name="province" x="1237.94" y="1886.79">
+   <properties>
+    <property name="id" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="723" name="province" x="1399.64" y="1698.06">
+   <properties>
+    <property name="id" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="724" name="province" x="1189.82" y="1726.3">
+   <properties>
+    <property name="id" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="725" name="province" x="1013.45" y="1917.33">
+   <properties>
+    <property name="id" type="int" value="5"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="726" name="province" x="1659.64" y="1699.39">
+   <properties>
+    <property name="id" type="int" value="6"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="727" name="province" x="1964.3" y="1712.61">
+   <properties>
+    <property name="id" type="int" value="6"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="728" name="province" x="1822.67" y="1872.85">
+   <properties>
+    <property name="id" type="int" value="6"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="729" name="province" x="1811.15" y="1532.24">
+   <properties>
+    <property name="id" type="int" value="6"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="755" name="province" x="2158" y="970">
+   <properties>
+    <property name="id" type="int" value="11"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="756" name="province" x="1526" y="774">
+   <properties>
+    <property name="id" type="int" value="12"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="757" name="province" x="1012" y="1164">
+   <properties>
+    <property name="id" type="int" value="13"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="758" name="province" x="1272" y="1554">
+   <properties>
+    <property name="id" type="int" value="14"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="759" name="province" x="1522" y="1930">
+   <properties>
+    <property name="id" type="int" value="15"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="760" name="province" x="2062" y="1554">
+   <properties>
+    <property name="id" type="int" value="16"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>
  <objectgroup id="16" name="Hex Over Layer">
-  <object id="658" gid="330" x="719.576" y="1167.33" width="77" height="67"/>
-  <object id="659" gid="331" x="690.273" y="1077.48" width="74" height="58"/>
-  <object id="663" gid="545" x="1845.88" y="1724.7" width="128" height="128"/>
-  <object id="664" gid="544" x="951.364" y="1165.55" width="128" height="128"/>
-  <object id="665" gid="543" x="1457.36" y="804.061" width="128" height="128"/>
-  <object id="666" gid="547" x="825.667" y="1752.73" width="128" height="128"/>
-  <object id="667" gid="548" x="1710.15" y="1176.12" width="128" height="128"/>
-  <object id="668" gid="546" x="1339.88" y="2128.61" width="128" height="128"/>
-  <object id="678" gid="341" x="2342" y="1365" width="164" height="194"/>
-  <object id="679" gid="184" x="1593" y="684" width="79" height="67"/>
-  <object id="680" gid="218" x="1609" y="761" width="66" height="89"/>
-  <object id="681" gid="218" x="1585" y="809" width="66" height="89"/>
-  <object id="682" gid="183" x="1523" y="655" width="65" height="61"/>
-  <object id="683" gid="183" x="1415" y="694" width="65" height="61"/>
-  <object id="684" gid="181" x="1449" y="677" width="65" height="79"/>
-  <object id="685" gid="172" x="1474" y="706" width="67" height="76"/>
-  <object id="686" gid="174" x="1408" y="781" width="70" height="97"/>
-  <object id="687" gid="171" x="1442" y="743" width="69" height="78"/>
-  <object id="688" gid="185" x="1563" y="725" width="74" height="66"/>
-  <object id="689" gid="182" x="1550" y="800" width="57" height="67"/>
-  <object id="690" gid="181" x="1546" y="763" width="65" height="79"/>
+  <object id="658" gid="328" x="871.091" y="1364.3" width="77" height="67"/>
+  <object id="659" gid="329" x="841.788" y="1262.33" width="74" height="58"/>
  </objectgroup>
 </map>

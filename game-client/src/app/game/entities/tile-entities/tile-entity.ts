@@ -19,19 +19,23 @@ export class TileEntity extends Container
 		icon.mask = iconMask;
 		
 		this.addChild(sprite);
-		this.addChild(iconMask);
-		this.addChild(frameBg);
-		this.addChild(icon);
-		this.addChild(frameFg);	
 
-		if (entity.amount != -1)
+		if (entity.name !== 'player1' && entity.name !== 'player2' && entity.name !== 'player3' && entity.name !== 'player4')
 		{
-			this.addAmount(entity.amount);
-		}
+			this.addChild(iconMask);
+			this.addChild(frameBg);
+			this.addChild(icon);
+			this.addChild(frameFg);
 
-		if (entity.allegiances != -1)
-		{
-			this.addAllegiances(entity.allegiances);
+			if (entity.amount != -1)
+			{
+				this.addAmount(entity.amount);
+			}
+
+			if (entity.allegiances != -1)
+			{
+				this.addAllegiances(entity.allegiances);
+			}
 		}
 	}
 
@@ -43,7 +47,7 @@ export class TileEntity extends Container
 
 		this.addChild(background);
 		this.addChild(foreground);
-		this.addChild(amountText);
+		//this.addChild(amountText);
 	}
 
 	private addAllegiances(allegiances: number): void

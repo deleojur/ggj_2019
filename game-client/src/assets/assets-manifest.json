@@ -2,6 +2,7 @@
 	"textures": 
 	[
 		"assets/Terrain_Medieval/Base/hexOcean00.png",
+		"assets/Terrain_Medieval/Base/hexOcean01.png",
 		"assets/Terrain_Medieval/Base/hexPlains00.png",
 		"assets/Terrain_Medieval/Base/hexUnderDirt00.png",
 		"assets/Terrain_Medieval/Base/hexUnderOcean00.png",
@@ -40,6 +41,7 @@
 		"assets/Terrain_Coasts/Coasts/hexCoast001000-00.png",
 		"assets/Terrain_Coasts/Coasts/hexCoast001100-00.png",
 		"assets/Terrain_Coasts/Coasts/hexCoast001110-00.png",
+		"assets/Terrain_Coasts/Coasts/hexCoast010000-00.png",
 		"assets/Terrain_Coasts/Coasts/hexCoast010000-01.png",
 		"assets/Terrain_Coasts/Coasts/hexCoast011000-00.png",
 		"assets/Terrain_Coasts/Coasts/hexCoast011100-00.png",
@@ -49,6 +51,7 @@
 		"assets/Terrain_Coasts/Coasts/hexCoast100011-01.png",
 		"assets/Terrain_Coasts/Coasts/hexCoast110000-00.png",
 		"assets/Terrain_Coasts/Coasts/hexCoast110000-01.png",
+		"assets/Terrain_Coasts/Coasts/hexCoast001110-01.png",		
 
 		"assets/Terrain_Coasts/Coasts/hexCoast000010-01.png",
 		"assets/Terrain_Coasts/Coasts/hexCoast001000-01.png",
@@ -87,7 +90,8 @@
 		"assets/Terrain_Coasts/Tiles/hexIslandSandy00.png",
 		"assets/Terrain_Coasts/Tiles/hexIslandSandy01.png",
 		"assets/Terrain_Coasts/Tiles/hexIslandSandyShipWreck00.png",
-		"assets/Terrain_Coasts/Tiles/hexIslandRocky01.png",
+		"assets/Terrain_Coasts/Tiles/hexIslandRocky00.png",
+		"assets/Terrain_Coasts/Tiles/hexIslandRocky01.png",		
 		"assets/Terrain_Coasts/Tiles/hexOceanWhirlpool00.png",
 
 		"assets/Terrain_Coasts/Decor/rowboat00.png",
@@ -101,6 +105,10 @@
 		"assets/Icons/norman_kite_shield.png",
 		"assets/Icons/round_shield.png",
 		
+		"assets/Tile_Entities/player1.png",
+		"assets/Tile_Entities/player2.png",
+		"assets/Tile_Entities/player3.png",
+		"assets/Tile_Entities/player4.png",
 		"assets/Tile_Entities/cloth.png",
 		"assets/Tile_Entities/commoner.png",
 		"assets/Tile_Entities/townhall.png",
